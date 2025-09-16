@@ -1,8 +1,9 @@
 package pe.edu.pucp.campusstore.modelo.temporal;
 
-import pe.edu.pucp.campusstore.modelo.Registro;
+import pe.edu.pucp.campusstore.modelo.Descuento;
+import pe.edu.pucp.campusstore.modelo.Producto;
 
-public class ProductosDescuento extends Registro{
+public class ProductosDescuento{
     private Producto producto;
     private Descuento descuento;
     
