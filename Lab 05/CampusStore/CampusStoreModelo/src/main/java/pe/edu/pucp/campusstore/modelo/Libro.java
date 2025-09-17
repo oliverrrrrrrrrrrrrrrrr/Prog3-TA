@@ -12,6 +12,7 @@ import java.util.List;
  * @author Brayan
  */
 public class Libro extends Producto{
+    private Integer idLibro;
     private String titulo;
     private String isbn;
     private GeneroLibro genero;
@@ -23,6 +24,7 @@ public class Libro extends Producto{
     
     public Libro() {
         super();
+        this.idLibro = null;
         this.titulo = null;
         this.isbn = null;
         this.genero = null;
@@ -33,8 +35,9 @@ public class Libro extends Producto{
         this.autores = null;
     }
 
-    public Libro(String titulo, String isbn, GeneroLibro genero, Date fechaPublicacion, Formato formato, String sinopsis, Editorial editorial, List<Autor> autores, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, List<Reseña> reseñas) {
-        super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion, reseñas);
+    public Libro(Integer idLibro, String titulo, String isbn, GeneroLibro genero, Date fechaPublicacion, Formato formato, String sinopsis, Editorial editorial, List<Autor> autores, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, Descuento descuento, List<Reseña> reseñas) {
+        super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion, descuento, reseñas);
+        this.idLibro = idLibro;
         this.titulo = titulo;
         this.isbn = isbn;
         this.genero = genero;
@@ -43,6 +46,14 @@ public class Libro extends Producto{
         this.sinopsis = sinopsis;
         this.editorial = editorial;
         this.autores = autores;
+    }
+
+    public Integer getIdLibro() {
+        return idLibro;
+    }
+
+    public void setIdLibro(Integer idLibro) {
+        this.idLibro = idLibro;
     }
 
     public String getTitulo() {
@@ -108,6 +119,7 @@ public class Libro extends Producto{
     public void setAutores(List<Autor> autores) {
         this.autores = autores;
     }
+    
     
     
 }

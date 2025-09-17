@@ -19,16 +19,18 @@ public abstract class Producto{
         this.stockVirtual = null;
         this.nombre = null;
         this.descripcion = null;
+        this.descuento = null;
         this.reseñas = null;
     }
 
-    public Producto(Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, List<Reseña> reseñas) {
+    public Producto(Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, Descuento descuento, List<Reseña> reseñas) {
         this.precio = precio;
         this.precioDescuento = precioDescuento;
         this.stockReal = stockReal;
         this.stockVirtual = stockVirtual;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.descuento = descuento;
         this.reseñas = reseñas;
     }
 
@@ -48,12 +50,12 @@ public abstract class Producto{
         this.precioDescuento = precioDescuento;
     }
 
-    public List<Reseña> getReseñas() {
-        return reseñas;
+    public Integer getStockReal() {
+        return stockReal;
     }
 
-    public void setReseñas(List<Reseña> reseñas) {
-        this.reseñas = reseñas;
+    public void setStockReal(Integer stockReal) {
+        this.stockReal = stockReal;
     }
 
     public Integer getStockVirtual() {
@@ -62,14 +64,6 @@ public abstract class Producto{
 
     public void setStockVirtual(Integer stockVirtual) {
         this.stockVirtual = stockVirtual;
-    }
-
-    public Integer getStockReal() {
-        return stockReal;
-    }
-
-    public void setStockReal(Integer stockReal) {
-        this.stockReal = stockReal;
     }
 
     public String getNombre() {
@@ -87,7 +81,22 @@ public abstract class Producto{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
+    public Descuento getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(Descuento descuento) {
+        this.descuento = descuento;
+    }
+
+    public List<Reseña> getReseñas() {
+        return reseñas;
+    }
+
+    public void setReseñas(List<Reseña> reseñas) {
+        this.reseñas = reseñas;
+    }
     
     
 }
