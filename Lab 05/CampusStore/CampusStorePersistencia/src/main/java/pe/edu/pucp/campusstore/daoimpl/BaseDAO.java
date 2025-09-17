@@ -1,5 +1,6 @@
 package pe.edu.pucp.campusstore.daoimpl;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,9 +55,18 @@ public abstract class BaseDAO<T> implements Persistible<T, Integer> {
                 if (cmd.executeUpdate() == 0) {
                     return null;
                 }
-                try (ResultSet rs = cmd.getGeneratedKeys()) {
-                    return rs.next() ? rs.getInt(1) : null;
+                
+                if (cmd instanceof CallableStatement callableCmd) {
+                    return callableCmd.getInt("p_id");
                 }
+                
+                try (ResultSet rs = cmd.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        return rs.getInt(1);
+                    }
+                }
+                
+                return null;
             }
         });
     }

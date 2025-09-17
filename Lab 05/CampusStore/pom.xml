@@ -9,6 +9,7 @@
         <module>CampusStoreDBManager</module>
         <module>CampusStoreModelo</module>
         <module>CampusStorePersistencia</module>
+        <module>CampusStorePruebas</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
