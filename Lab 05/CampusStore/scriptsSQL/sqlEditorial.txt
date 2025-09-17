@@ -1,0 +1,117 @@
+
+
+DROP PROCEDURE IF EXISTS insertarEditorial;
+DROP PROCEDURE IF EXISTS modificarEditorial;
+DROP PROCEDURE IF EXISTS eliminarEditorial;
+DROP PROCEDURE IF EXISTS buscarEditorialPorId;
+DROP PROCEDURE IF EXISTS listarEditoriales;
+
+DELIMITER //
+
+CREATE PROCEDURE insertarEditorial(
+    IN p_idEditorial INT,
+    IN p_nombre VARCHAR(45),
+    IN p_direccion VARCHAR(45),
+    IN p_telefono VARCHAR(45),
+    IN p_cif VARCHAR(45),
+    IN p_email VARCHAR(45),
+    IN p_sitioWeb VARCHAR(45),
+    IN p_fechaFundacion DATETIME,
+    OUT p_id INT
+)
+BEGIN
+    INSERT INTO EDITORIAL (
+        idEditorial,
+        nombre,
+        direccion,
+        telefono,
+        cif,
+        email,
+        sitioWeb,
+        fechaFundacion
+    ) VALUES (
+        p_idEditorial,
+        p_nombre,
+        p_direccion,
+        p_telefono,
+        p_cif,
+        p_email,
+        p_sitioWeb,
+        p_fechaFundacion
+    );
+    
+    SET p_id = LAST_INSERT_ID();
+END //
+
+CREATE PROCEDURE modificarEditorial(
+    IN p_id INT,
+    IN p_nombre VARCHAR(45),
+    IN p_direccion VARCHAR(45),
+    IN p_telefono VARCHAR(45),
+    IN p_cif VARCHAR(45),
+    IN p_email VARCHAR(45),
+    IN p_sitioWeb VARCHAR(45),
+    IN p_fechaFundacion DATETIME
+)
+BEGIN
+    UPDATE EDITORIAL
+    SET 
+        nombre = p_nombre,
+        direccion = p_direccion,
+        telefono = p_telefono,
+        cif = p_cif,
+        email = p_email,
+        sitioWeb = p_sitioWeb,
+        fechaFundacion = p_fechaFundacion
+    WHERE idEditorial = p_id;
+END //
+
+CREATE PROCEDURE eliminarEditorial(IN p_id INT)
+BEGIN
+    DELETE FROM EDITORIAL WHERE idEditorial = p_id;
+END //
+
+CREATE PROCEDURE buscarEditorialPorId(IN p_id INT)
+BEGIN
+    SELECT * FROM EDITORIAL WHERE idEditorial = p_id;
+END //
+
+CREATE PROCEDURE listarEditoriales()
+BEGIN
+    SELECT * FROM EDITORIAL;
+END //
+
+
+SET @new_id = 0;
+CALL insertarEditorial(
+    NULL,  -- Use NULL to let AUTO_INCREMENT work, or provide a unique ID
+    'New Horizon Publishing',
+    'Av. Central 505',
+    '987654321',
+    'G98765432',
+    'info@newhorizon.com',
+    'www.newhorizon.com',
+    '2022-01-15 00:00:00',
+    @new_id
+);
+
+CALL listarEditoriales;
+
+-- Assuming a new editorial with ID 3 was just created.
+CALL modificarEditorial(
+    3,
+    'Horizon Publishing Co.',
+    'Av. Principal 101',
+    '912345678',
+    'H12345678',
+    'contact@horizonpub.com',
+    'www.horizonpub.com',
+    '2022-01-15 00:00:00'
+);
+
+CALL eliminarEditorial(4);
+CALL eliminarEditorial(5);
+CALL eliminarEditorial(6);
+
+-- Searches for the editorial with ID 1.
+CALL buscarEditorialPorId(1);
