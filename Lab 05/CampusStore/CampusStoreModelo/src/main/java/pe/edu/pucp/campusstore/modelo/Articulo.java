@@ -4,21 +4,21 @@ import java.util.List;
 
 public class Articulo extends Producto{
     private Integer idArticulo;
-    private String especificación;
+    private String especificacion;
     private TipoArticulo tipoArticulo;
     
     public Articulo() {
         super();
         this.idArticulo = null;
-        this.especificación = null;
+        this.especificacion = null;
         this.tipoArticulo = null;
     }
 
 
-    public Articulo(Integer idArticulo, String especificación, TipoArticulo tipoArticulo, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, Descuento descuento, List<Reseña> reseñas) {
+    public Articulo(Integer idArticulo, String especificacion, TipoArticulo tipoArticulo, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, Descuento descuento, List<Reseña> reseñas) {
         super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion, descuento, reseñas);
         this.idArticulo = idArticulo;
-        this.especificación = especificación;
+        this.especificacion = especificacion;
         this.tipoArticulo = tipoArticulo;
     }
 
@@ -30,12 +30,12 @@ public class Articulo extends Producto{
         this.idArticulo = idArticulo;
     }
 
-    public String getEspecificación() {
-        return especificación;
+    public String getEspecificacion() {
+        return especificacion;
     }
 
-    public void setEspecificación(String especificación) {
-        this.especificación = especificación;
+    public void setEspecificacion(String especificacion) {
+        this.especificacion = especificacion;
     }
 
     public TipoArticulo getTipoArticulo() {

@@ -28,7 +28,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
         cmd.setDouble("p_precio", modelo.getPrecio());
         cmd.setDouble("p_precioDescuento", modelo.getPrecioDescuento());
         cmd.setInt("p_stockReal", modelo.getStockReal());
-        cmd.setInt("p_stockvirtual", modelo.getStockVirtual());
+        cmd.setInt("p_stockVirtual", modelo.getStockVirtual());
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_descripcion", modelo.getDescripcion());
         cmd.setString("p_titulo", modelo.getTitulo());
@@ -37,8 +37,8 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
         cmd.setDate("p_fechaPublicacion", new Date(modelo.getFechaPublicacion().getTime()));
         cmd.setString("p_formato", modelo.getFormato().toString());
         cmd.setString("p_sinopsis", modelo.getSinopsis());
-        cmd.setInt("p_sinopsis", modelo.getEditorial().getIdEditorial());
-        cmd.setInt("p_descuento", modelo.getDescuento().getIdDescuento());
+        cmd.setInt("p_idEditorial", modelo.getEditorial().getIdEditorial());
+        cmd.setInt("p_idDescuento", modelo.getDescuento().getIdDescuento());
         cmd.registerOutParameter("p_id", Types.INTEGER);
         
         return cmd;
@@ -48,14 +48,14 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
     protected PreparedStatement comandoActualizar(Connection conn, 
             Libro modelo) throws SQLException {
         
-        String sql = "{call modificarLibro(?, ?, ?, ? ,?)}";
+        String sql = "{call modificarLibro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.registerOutParameter("p_id", Types.INTEGER);
+        cmd.setInt("p_id", modelo.getIdLibro());
         cmd.setDouble("p_precio", modelo.getPrecio());
         cmd.setDouble("p_precioDescuento", modelo.getPrecioDescuento());
         cmd.setInt("p_stockReal", modelo.getStockReal());
-        cmd.setInt("p_stockvirtual", modelo.getStockVirtual());
+        cmd.setInt("p_stockVirtual", modelo.getStockVirtual());
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_descripcion", modelo.getDescripcion());
         cmd.setString("p_titulo", modelo.getTitulo());
@@ -64,8 +64,8 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
         cmd.setDate("p_fechaPublicacion", new Date(modelo.getFechaPublicacion().getTime()));
         cmd.setString("p_formato", modelo.getFormato().toString());
         cmd.setString("p_sinopsis", modelo.getSinopsis());
-        cmd.setInt("p_sinopsis", modelo.getEditorial().getIdEditorial());
-        cmd.setInt("p_descuento", modelo.getDescuento().getIdDescuento());
+        cmd.setInt("p_idEditorial", modelo.getEditorial().getIdEditorial());
+        cmd.setInt("p_idDescuento", modelo.getDescuento().getIdDescuento());
         
         return cmd;
     }
@@ -74,7 +74,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
     protected PreparedStatement comandoEliminar(Connection conn, 
             Integer id) throws SQLException {
         
-        String sql = "{call eliminarDescuento(?)}";
+        String sql = "{call eliminarLibro(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_id", id);
         
@@ -85,7 +85,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
     protected PreparedStatement comandoLeer(Connection conn, 
             Integer id) throws SQLException {
         
-        String sql = "{call buscarDescuentoPorId(?)}";
+        String sql = "{call buscarLibroPorId(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_id", id);
         
@@ -96,7 +96,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
     protected PreparedStatement comandoLeerTodos(
             Connection conn) throws SQLException {
         
-        String sql = "{call listarDescuentos()}";
+        String sql = "{call listarLibros()}";
         CallableStatement cmd = conn.prepareCall(sql);
         
         return cmd;

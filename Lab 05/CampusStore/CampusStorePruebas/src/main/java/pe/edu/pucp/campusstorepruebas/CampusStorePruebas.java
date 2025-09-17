@@ -2,16 +2,28 @@ package pe.edu.pucp.campusstorepruebas;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
+import pe.edu.pucp.campusstore.dao.ArticuloDAO;
 import pe.edu.pucp.campusstore.modelo.Autor;
 import pe.edu.pucp.campusstore.dao.AutorDAO;
 import pe.edu.pucp.campusstore.dao.EditorialDAO;
 import pe.edu.pucp.campusstore.dao.EmpleadoDAO;
+import pe.edu.pucp.campusstore.dao.temporal.LibroDAO;
+import pe.edu.pucp.campusstore.daoimpl.ArticuloDAOImpl;
 import pe.edu.pucp.campusstore.daoimpl.AutorDAOImpl;
 import pe.edu.pucp.campusstore.daoimpl.EditorialDAOImpl;
 import pe.edu.pucp.campusstore.daoimpl.EmpleadoDAOImpl;
+import pe.edu.pucp.campusstore.daoimpl.LibroDAOImpl;
+import pe.edu.pucp.campusstore.modelo.Articulo;
+import pe.edu.pucp.campusstore.modelo.Descuento;
 import pe.edu.pucp.campusstore.modelo.Editorial;
 import pe.edu.pucp.campusstore.modelo.Empleado;
+import pe.edu.pucp.campusstore.modelo.Formato;
+import pe.edu.pucp.campusstore.modelo.GeneroLibro;
+import pe.edu.pucp.campusstore.modelo.Libro;
+import pe.edu.pucp.campusstore.modelo.Reseña;
 import pe.edu.pucp.campusstore.modelo.Rol;
+import pe.edu.pucp.campusstore.modelo.TipoArticulo;
 
 /**
  *
@@ -117,9 +129,95 @@ public class CampusStorePruebas {
         }
     }
     
+    static void probarLibro() {
+        Libro libro = new Libro();
+        libro.setDescripcion("Mein Kampf");
+        libro.setIsbn("King");
+        libro.setPrecio(50.5);
+        libro.setPrecioDescuento(0.0);
+        libro.setTitulo(null);
+        libro.setGenero(GeneroLibro.NOVELA);
+        libro.setFechaPublicacion(new Date(System.currentTimeMillis()));
+        libro.setFormato(Formato.TAPA_DURA);
+        libro.setSinopsis(null);
+        Editorial editorial_aux = new Editorial();
+        editorial_aux.setIdEditorial(2);
+        libro.setEditorial(editorial_aux);
+        libro.setStockReal(0);
+        libro.setStockVirtual(0);
+        libro.setNombre(null);
+        Descuento descuento_aux = new Descuento();
+        descuento_aux.setIdDescuento(3);
+        libro.setDescuento(descuento_aux);
+        libro.setReseñas(null);
+        
+        LibroDAO libroDao = new LibroDAOImpl();
+        int id = libroDao.crear(libro);
+        libro.setIdLibro(id);
+
+        libro.setDescripcion("Stephen Edwin12321");
+        libroDao.actualizar(libro);
+        
+        libro = libroDao.leer(id);
+        if (libro != null) {
+            System.out.println(libro);
+        }
+        
+        List<Libro> libros = libroDao.leerTodos();
+        for (Libro a : libros) {
+            System.out.println(a);
+        }
+        
+        if (libro != null) {
+            libroDao.eliminar(libro.getIdLibro());
+        }
+    }
+    
+    static void probarArticulo() {
+        Articulo articulo= new Articulo();
+        articulo.setDescripcion("Stephen");
+        
+        Descuento desc= new Descuento();
+        desc.setIdDescuento(1);
+        articulo.setDescuento(desc);
+        articulo.setEspecificacion("aa");
+        articulo.setNombre("aa1");
+        articulo.setPrecio(50.5);
+        articulo.setPrecioDescuento(50.1);
+        
+        articulo.setReseñas(null);
+        articulo.setStockReal(100);
+        articulo.setStockVirtual(109);
+        TipoArticulo tipo = TipoArticulo.LAPICERO;
+        articulo.setTipoArticulo(tipo);
+        
+        ArticuloDAO articuloDAO = new ArticuloDAOImpl();
+        int id = articuloDAO.crear(articulo);
+        articulo.setIdArticulo(id);
+
+        articulo.setDescripcion("Stephen Edwin1222321");
+        articuloDAO.actualizar(articulo);
+        
+        articulo = articuloDAO.leer(id);
+        if (articulo != null) {
+            System.out.println(articulo);
+        }
+        
+        List<Articulo> articulos = articuloDAO.leerTodos();
+        for (Articulo a : articulos) {
+            System.out.println(a);
+        }
+        
+        if (articulos != null) {
+            articuloDAO.eliminar(articulo.getIdArticulo());
+        }
+    }
+    
     public static void main(String[] args) {
         probarAutor();
         probarEditorial();
         probarEmpleado();
+        probarLibro();
+        probarArticulo();
     }
 }
