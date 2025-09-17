@@ -2,13 +2,14 @@ package pe.edu.pucp.campusstore.modelo;
 
 import java.util.Date;
 
-public class Descuento{
+public class Descuento {
+
     private Integer idDescuento;
     private String descripcion;
     private Double valorDescuento;
     private Date fechaCaducidad;
     private Boolean activo;
-    
+
     public Descuento() {
         this.idDescuento = null;
         this.descripcion = null;
