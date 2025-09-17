@@ -74,7 +74,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
     protected PreparedStatement comandoEliminar(Connection conn, 
             Integer id) throws SQLException {
         
-        String sql = "{call eliminarDescuento(?)}";
+        String sql = "{call eliminarLibro(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_id", id);
         
@@ -85,7 +85,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
     protected PreparedStatement comandoLeer(Connection conn, 
             Integer id) throws SQLException {
         
-        String sql = "{call buscarDescuentoPorId(?)}";
+        String sql = "{call buscarLibroPorId(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_id", id);
         
@@ -96,7 +96,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
     protected PreparedStatement comandoLeerTodos(
             Connection conn) throws SQLException {
         
-        String sql = "{call listarDescuentos()}";
+        String sql = "{call listarLibros()}";
         CallableStatement cmd = conn.prepareCall(sql);
         
         return cmd;
