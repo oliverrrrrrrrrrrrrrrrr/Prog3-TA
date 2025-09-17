@@ -22,12 +22,12 @@ public class EmpleadoDAOImpl extends BaseDAO<Empleado> implements EmpleadoDAO {
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_contraseña", modelo.getContraseña());
-        cmd.setString("p_nombreUsuario", modelo.getUsername());
+        cmd.setString("p_nombreUsuario", modelo.getNombreUsuario());
         cmd.setString("p_correo", modelo.getCorreo());
         cmd.setString("p_telefono", modelo.getTelefono());
         cmd.setBoolean("p_activo", modelo.getActivo());
         cmd.setDouble("p_sueldo",modelo.getSueldo());
-        cmd.setInt("p_idRol", modelo.getCargo().getIdRol());
+        cmd.setInt("p_idRol", modelo.getRol().getIdRol());
         cmd.registerOutParameter("p_id", Types.INTEGER);
         
         return cmd;
@@ -40,15 +40,15 @@ public class EmpleadoDAOImpl extends BaseDAO<Empleado> implements EmpleadoDAO {
         String sql = "{call modificarEmpleado(?, ?, ?, ? ,?, ?, ?, ?, ?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_idEmpleado", modelo.getIdUsuario());
+        cmd.setInt("p_idEmpleado", modelo.getIdEmpleado());
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_contraseña", modelo.getContraseña());
-        cmd.setString("p_nombreUsuario", modelo.getUsername());
+        cmd.setString("p_nombreUsuario", modelo.getNombreUsuario());
         cmd.setString("p_correo", modelo.getCorreo());
         cmd.setString("p_telefono", modelo.getTelefono());
         cmd.setBoolean("p_activo", modelo.getActivo());
         cmd.setDouble("p_sueldo",modelo.getSueldo());
-        cmd.setInt("p_idRol", modelo.getCargo().getIdRol());
+        cmd.setInt("p_idRol", modelo.getRol().getIdRol());
 
         
         return cmd;
@@ -89,17 +89,17 @@ public class EmpleadoDAOImpl extends BaseDAO<Empleado> implements EmpleadoDAO {
     @Override
     protected Empleado mapearModelo(ResultSet rs) throws SQLException {
         Empleado modelo = new Empleado();
-        modelo.setIdUsuario(rs.getInt("idEmpleado"));
+        modelo.setIdEmpleado(rs.getInt("idEmpleado"));
         modelo.setNombre(rs.getString("nombre"));
         modelo.setContraseña(rs.getString("contraseña"));
-        modelo.setUsername(rs.getString("nombreUsuario"));
+        modelo.setNombreUsuario(rs.getString("nombreUsuario"));
         modelo.setCorreo(rs.getString("correo"));
         modelo.setTelefono(rs.getString("telefono"));
         modelo.setActivo(rs.getBoolean("activo"));
         modelo.setSueldo(rs.getDouble("sueldo"));
         Rol rol_aux = new Rol();
         rol_aux.setIdRol(rs.getInt("idRol"));
-        modelo.setCargo(rol_aux);
+        modelo.setRol(rol_aux);
         
         
         return modelo;

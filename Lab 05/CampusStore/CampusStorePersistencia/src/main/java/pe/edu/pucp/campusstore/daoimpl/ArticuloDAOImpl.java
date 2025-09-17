@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import pe.edu.pucp.campusstore.dao.ArticuloDAO;
 import pe.edu.pucp.campusstore.modelo.Articulo;
+import pe.edu.pucp.campusstore.modelo.Descuento;
 import pe.edu.pucp.campusstore.modelo.TipoArticulo;
 
 /**
@@ -52,7 +53,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         cmd.setInt("p_stockReal", modelo.getStockReal());
         cmd.setInt("p_stockVirtual", modelo.getStockVirtual());
         cmd.setString("p_tipoArticulo", modelo.getTipoArticulo().toString());
-        cmd.setInt("p_id", modelo.getId());
+        cmd.setInt("p_id", modelo.getIdArticulo());
         
         return cmd;
     }
@@ -93,7 +94,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
     protected Articulo mapearModelo(ResultSet rs) throws SQLException {
         Articulo modelo = new Articulo();
         
-        modelo.setId(rs.getInt("idArticulo"));
+        modelo.setIdArticulo(rs.getInt("idArticulo"));
         modelo.setPrecio(rs.getDouble("precio"));
         modelo.setStockReal(rs.getInt("stockReal"));
         modelo.setStockVirtual(rs.getInt("stockVirtual"));
@@ -102,7 +103,9 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         modelo.setEspecificación(rs.getString("especificacion"));
         
         modelo.setTipoArticulo(TipoArticulo.valueOf("tipoArticulo"));
-        modelo.setId(rs.getInt("idDescuento"));
+        Descuento desc_aux = new Descuento();
+        desc_aux.setIdDescuento(rs.getInt("idDescuento"));
+        modelo.setDescuento(desc_aux);
         
         /*modelo.setId(rs.getInt("id"));
         modelo.setNombre(rs.getString("nombre"));
