@@ -3,6 +3,11 @@ package pe.edu.pucp.campusstore.modelo;
 public class AutoresLibro {
     private Autor autor;
     private Libro libro;
+    
+    public AutoresLibro() {
+        this.autor = null;
+        this.libro = null;
+    }
 
     public AutoresLibro(Autor autor, Libro libro) {
         this.autor = autor;

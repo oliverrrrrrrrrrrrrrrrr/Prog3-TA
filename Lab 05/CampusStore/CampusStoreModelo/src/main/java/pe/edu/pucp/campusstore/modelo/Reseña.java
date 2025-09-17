@@ -11,6 +11,11 @@ package pe.edu.pucp.campusstore.modelo;
 public class Reseña {
     private Double calificacion;
     private String reseña;
+    
+    public Reseña() {
+        this.calificacion = null;
+        this.reseña = null;
+    }
 
     public Reseña(Double calificacion, String reseña) {
         this.calificacion = calificacion;

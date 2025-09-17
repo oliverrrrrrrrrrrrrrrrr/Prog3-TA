@@ -13,6 +13,13 @@ public class LineaCarrito {
     private Integer cantidad;
     private Double precioUnitario;
     private Double subtotal;
+    
+    public LineaCarrito() {
+        this.carrito = null;
+        this.cantidad = null;
+        this.precioUnitario = null;
+        this.subtotal = null;
+    }
 
     public LineaCarrito(Carrito carrito, Integer cantidad, Double precioUnitario, Double subtotal) {
         this.carrito = carrito;

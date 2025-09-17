@@ -15,11 +15,21 @@ public class Empleado extends Usuario{
     private Rol rol;
 
     public Empleado() {
+        super();
+        this.idEmpleado = null;
+        this.activo = null;
+        this.sueldo = null;
+        this.rol = null;
     }
 
-    public Empleado(String dni, String nombre, String contraseña, String nombreUsuario, String correo, Integer telefono) {
+    public Empleado(Integer idEmpleado, Boolean activo, Double sueldo, Rol rol, String dni, String nombre, String contraseña, String nombreUsuario, String correo, String telefono) {
         super(dni, nombre, contraseña, nombreUsuario, correo, telefono);
+        this.idEmpleado = idEmpleado;
+        this.activo = activo;
+        this.sueldo = sueldo;
+        this.rol = rol;
     }
+
 
     public Integer getIdEmpleado() {
         return idEmpleado;

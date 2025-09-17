@@ -12,6 +12,12 @@ public class Permiso {
     private Integer idPermiso;
     private String nombre;
     private String descripcion;
+    
+    public Permiso() {
+        this.idPermiso = null;
+        this.nombre = null;
+        this.descripcion = null;
+    }
 
     public Permiso(Integer idPermiso, String nombre, String descripcion) {
         this.idPermiso = idPermiso;

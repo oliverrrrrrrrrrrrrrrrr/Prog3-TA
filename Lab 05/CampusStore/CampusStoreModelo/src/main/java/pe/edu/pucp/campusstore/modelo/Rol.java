@@ -12,6 +12,12 @@ public class Rol {
     private Integer idRol;
     private String nombre;
     private String descripcion;
+    
+    public Rol() {
+        this.idRol = null;
+        this.nombre = null;
+        this.descripcion = null;
+    }
 
     public Rol(Integer idRol, String nombre, String descripcion) {
         this.idRol = idRol;

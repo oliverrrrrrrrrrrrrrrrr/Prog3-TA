@@ -8,6 +8,22 @@ public class Descuento{
     private Double valorDescuento;
     private Date fechaCaducidad;
     private Boolean activo;
+    
+    public Descuento() {
+        this.idDescuento = null;
+        this.descripcion = null;
+        this.valorDescuento = null;
+        this.fechaCaducidad = null;
+        this.activo = null;
+    }
+
+    public Descuento(Integer idDescuento, String descripcion, Double valorDescuento, Date fechaCaducidad, Boolean activo) {
+        this.idDescuento = idDescuento;
+        this.descripcion = descripcion;
+        this.valorDescuento = valorDescuento;
+        this.fechaCaducidad = fechaCaducidad;
+        this.activo = activo;
+    }
 
     public String getDescripcion() {
         return descripcion;

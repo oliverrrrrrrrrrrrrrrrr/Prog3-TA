@@ -19,6 +19,17 @@ public class Editorial {
     private String email;
     private String sitioWeb;
     private Date fechaFundacion;
+    
+    public Editorial() {
+        this.idEditorial = null;
+        this.nombre = null;
+        this.direccion = null;
+        this.telefono = null;
+        this.cif = null;
+        this.email = null;
+        this.sitioWeb = null;
+        this.fechaFundacion = null;
+    }
 
     public Editorial(Integer idEditorial, String nombre, String direccion, Integer telefono, String cif, String email, String sitioWeb, Date fechaFundacion) {
         this.idEditorial = idEditorial;

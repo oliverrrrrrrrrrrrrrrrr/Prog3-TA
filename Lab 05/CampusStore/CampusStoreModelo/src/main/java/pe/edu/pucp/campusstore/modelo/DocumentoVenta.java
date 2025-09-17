@@ -7,6 +7,12 @@ public class DocumentoVenta{
     private Integer idDocumentoVenta;
     private Date fechaEmision;
     private OrdenCompra ordenCompra;
+    
+    public DocumentoVenta() {
+        this.idDocumentoVenta = null;
+        this.fechaEmision = null;
+        this.ordenCompra = null;
+    }
 
     public DocumentoVenta(Integer idDocumentoVenta, Date fechaEmision, OrdenCompra ordenCompra) {
         this.idDocumentoVenta = idDocumentoVenta;

@@ -13,15 +13,19 @@ import java.util.List;
 public class Cliente extends Usuario{
     private Integer idCliente;
     private List<Cupon> cuponesUsados;
-
+    
     public Cliente() {
+        super();
+        this.idCliente = null;
+        this.cuponesUsados = null;
     }
 
-    public Cliente(String dni, String nombre, String contraseña, String nombreUsuario, String correo, Integer telefono) {
+    public Cliente(Integer idCliente, List<Cupon> cuponesUsados, String dni, String nombre, String contraseña, String nombreUsuario, String correo, String telefono) {
         super(dni, nombre, contraseña, nombreUsuario, correo, telefono);
+        this.idCliente = idCliente;
+        this.cuponesUsados = cuponesUsados;
     }
-    
-    
+
 
     public Integer getIdCliente() {
         return idCliente;

@@ -10,6 +10,10 @@ package pe.edu.pucp.campusstore.modelo;
  */
 public class LineaCarritoLibro {
     private Libro libro;
+    
+    public LineaCarritoLibro() {
+        this.libro = null;
+    }
 
     public LineaCarritoLibro(Libro libro) {
         this.libro = libro;

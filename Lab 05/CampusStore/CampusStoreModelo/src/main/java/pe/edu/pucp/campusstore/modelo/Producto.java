@@ -11,6 +11,16 @@ public abstract class Producto{
     private String descripcion;
     private Descuento descuento;
     private List<Reseña> reseñas;
+    
+    public Producto() {
+        this.precio = null;
+        this.precioDescuento = null;
+        this.stockReal = null;
+        this.stockVirtual = null;
+        this.nombre = null;
+        this.descripcion = null;
+        this.reseñas = null;
+    }
 
     public Producto(Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, List<Reseña> reseñas) {
         this.precio = precio;

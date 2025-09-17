@@ -20,6 +20,18 @@ public class Libro extends Producto{
     private String sinopsis;
     private Editorial editorial;
     private List<Autor> autores;
+    
+    public Libro() {
+        super();
+        this.titulo = null;
+        this.isbn = null;
+        this.genero = null;
+        this.fechaPublicacion = null;
+        this.formato = null;
+        this.sinopsis = null;
+        this.editorial = null;
+        this.autores = null;
+    }
 
     public Libro(String titulo, String isbn, GeneroLibro genero, Date fechaPublicacion, Formato formato, String sinopsis, Editorial editorial, List<Autor> autores, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, List<Reseña> reseñas) {
         super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion, reseñas);

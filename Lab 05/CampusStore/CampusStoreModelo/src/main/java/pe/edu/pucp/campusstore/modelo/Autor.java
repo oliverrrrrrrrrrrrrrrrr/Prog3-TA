@@ -13,6 +13,13 @@ public class Autor {
     private String nombre;
     private String apellidos;
     private String alias;
+    
+    public Autor() {
+        this.idAutor = null;
+        this.nombre = null;
+        this.apellidos = null;
+        this.alias = null;
+    }
 
     public Autor(Integer idAutor, String nombre, String apellidos, String alias) {
         this.idAutor = idAutor;

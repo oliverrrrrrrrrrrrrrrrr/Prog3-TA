@@ -21,6 +21,18 @@ public class OrdenCompra {
     private Carrito carrito;
     private Cliente cliente;
     private List<LineaCarrito> lineas;
+    
+    public OrdenCompra() {
+        this.idOrdenCompra = null;
+        this.fechaCreacion = null;
+        this.limitePago = null;
+        this.total = null;
+        this.totalDescontado = null;
+        this.estado = null;
+        this.carrito = null;
+        this.cliente = null;
+        this.lineas = null;
+    }
 
     public OrdenCompra(Integer idOrdenCompra, Date fechaCreacion, Date limitePago, Double total, Double totalDescontado, EstadoOrden estado, Carrito carrito, Cliente cliente, List<LineaCarrito> lineas) {
         this.idOrdenCompra = idOrdenCompra;

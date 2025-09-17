@@ -18,6 +18,15 @@ public class Carrito {
     private Cliente cliente;
     private Cupon cupon;
     private List<LineaCarrito> lineas;
+    
+    public Carrito() {
+        this.idCarrito = null;
+        this.completado = null;
+        this.fechaCreacion = null;
+        this.cliente = null;
+        this.cupon = null;
+        this.lineas = null;
+    }
 
     public Carrito(Integer idCarrito, Boolean completado, Date fechaCreacion, Cliente cliente, Cupon cupon, List<LineaCarrito> lineas) {
         this.idCarrito = idCarrito;

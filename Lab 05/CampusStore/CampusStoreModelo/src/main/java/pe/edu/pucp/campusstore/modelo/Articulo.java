@@ -6,6 +6,13 @@ public class Articulo extends Producto{
     private Integer idArticulo;
     private String especificación;
     private TipoArticulo tipoArticulo;
+    
+    public Articulo() {
+        super();
+        this.idArticulo = null;
+        this.especificación = null;
+        this.tipoArticulo = null;
+    }
 
     public Articulo(Integer idArticulo, String especificación, TipoArticulo tipoArticulo, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, List<Reseña> reseñas) {
         super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion, reseñas);

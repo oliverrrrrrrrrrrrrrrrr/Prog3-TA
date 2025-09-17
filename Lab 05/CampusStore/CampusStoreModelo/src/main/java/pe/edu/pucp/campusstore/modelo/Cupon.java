@@ -8,6 +8,14 @@ public class Cupon{
     private Double descuento;
     private Date fechaCaducidad;
     private Boolean activo;
+    
+    public Cupon() {
+        this.idCupon = null;
+        this.codigo = null;
+        this.descuento = null;
+        this.fechaCaducidad = null;
+        this.activo = null;
+    }
 
     public Cupon(Integer idCupon, String codigo, Double descuento, Date fechaCaducidad, Boolean activo) {
         this.idCupon = idCupon;

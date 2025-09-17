@@ -12,6 +12,13 @@ public class ReseñaLibro extends Reseña{
     private Integer idReseñaLibro;
     private Libro libro;
     private Cliente cliente;
+    
+    public ReseñaLibro() {
+        super();
+        this.idReseñaLibro = null;
+        this.libro = null;
+        this.cliente = null;
+    }
 
     public ReseñaLibro(Integer idReseñaLibro, Libro libro, Cliente cliente, Double calificacion, String reseña) {
         super(calificacion, reseña);

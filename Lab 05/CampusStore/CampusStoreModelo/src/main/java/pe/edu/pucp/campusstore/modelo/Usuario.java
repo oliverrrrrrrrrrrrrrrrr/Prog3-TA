@@ -6,7 +6,7 @@ public abstract class Usuario {
     private String contraseña;
     private String nombreUsuario;
     private String correo;
-    private Integer telefono;
+    private String telefono;
     
     public Usuario() {
         this.dni = null;
@@ -17,7 +17,7 @@ public abstract class Usuario {
         this.telefono = null;
     }
 
-    public Usuario(String dni, String nombre, String contraseña, String nombreUsuario, String correo, Integer telefono) {
+    public Usuario(String dni, String nombre, String contraseña, String nombreUsuario, String correo, String telefono) {
         this.dni = dni;
         this.nombre = nombre;
         this.contraseña = contraseña;
@@ -99,14 +99,14 @@ public abstract class Usuario {
     /**
      * @return the telefono
      */
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
     /**
      * @param telefono the telefono to set
      */
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
     
