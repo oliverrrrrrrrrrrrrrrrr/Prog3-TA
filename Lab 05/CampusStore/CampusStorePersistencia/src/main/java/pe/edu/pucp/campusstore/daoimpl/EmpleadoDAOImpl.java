@@ -18,7 +18,7 @@ public class EmpleadoDAOImpl extends BaseDAO<Empleado> implements EmpleadoDAO {
     protected PreparedStatement comandoCrear(Connection conn, 
             Empleado modelo) throws SQLException {
         
-        String sql = "{call insertarEmpleado(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call insertarEmpleado(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_contraseña", modelo.getContraseña());
@@ -40,7 +40,7 @@ public class EmpleadoDAOImpl extends BaseDAO<Empleado> implements EmpleadoDAO {
         String sql = "{call modificarEmpleado(?, ?, ?, ? ,?, ?, ?, ?, ?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_idEmpleado", modelo.getIdEmpleado());
+        cmd.setInt("p_id", modelo.getIdEmpleado());
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_contraseña", modelo.getContraseña());
         cmd.setString("p_nombreUsuario", modelo.getNombreUsuario());
