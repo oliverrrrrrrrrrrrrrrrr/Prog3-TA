@@ -57,8 +57,11 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
     protected PreparedStatement comandoEliminar(Connection conn, 
             Integer id) throws SQLException {
         
+<<<<<<< Updated upstream
         String sql = "{call eliminarOrdenCompra(?)}";
+=======
         String sql = "{call eliminarDescuento(?)}";
+>>>>>>> Stashed changes
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_id", id);
         
@@ -69,8 +72,11 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
     protected PreparedStatement comandoLeer(Connection conn, 
             Integer id) throws SQLException {
         
+<<<<<<< Updated upstream
         String sql = "{call buscarOrdenCompraPorId(?)}";
+=======
         String sql = "{call buscarDescuentoPorId(?)}";
+>>>>>>> Stashed changes
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_id", id);
         
@@ -81,8 +87,11 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
     protected PreparedStatement comandoLeerTodos(
             Connection conn) throws SQLException {
         
+<<<<<<< Updated upstream
         String sql = "{call listarOrdenesCompra()}";
+=======
         String sql = "{call listarDescuentos()}";
+>>>>>>> Stashed changes
         CallableStatement cmd = conn.prepareCall(sql);
         
         return cmd;

@@ -64,4 +64,8 @@ public class Descuento{
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
