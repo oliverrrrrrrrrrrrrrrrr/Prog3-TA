@@ -8,10 +8,6 @@ import pe.edu.pucp.campusstore.modelo.TipoArticulo;
  *
  * @author AXEL
  */
-public interface ArticuloDAO {
-    Articulo buscarArticuloPorId(Integer id) throws SQLException; 
-    void eliminarArticulo(Integer id)throws SQLException;
-    List<Articulo> listarArticulos()throws SQLException;
-    Articulo modificarArticulo(Articulo articulo)throws SQLException;
-    Articulo insertarArticulo(Articulo articulo)throws SQLException;
+public interface ArticuloDAO extends Persistible<Articulo, Integer> {
+    
 }
