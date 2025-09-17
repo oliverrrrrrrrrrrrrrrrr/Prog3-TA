@@ -8,7 +8,7 @@ public class Descuento{
     private Double valorDescuento;
     private Date fechaCaducidad;
     private Boolean activo;
-    
+
     public Descuento() {
         this.idDescuento = null;
         this.descripcion = null;

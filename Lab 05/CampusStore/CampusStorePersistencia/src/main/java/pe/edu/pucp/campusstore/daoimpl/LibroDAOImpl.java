@@ -51,7 +51,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
         String sql = "{call modificarLibro(?, ?, ?, ? ,?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.registerOutParameter("p_id", Types.INTEGER);
+        cmd.setInt("p_id", modelo.getIdLibro());
         cmd.setDouble("p_precio", modelo.getPrecio());
         cmd.setDouble("p_precioDescuento", modelo.getPrecioDescuento());
         cmd.setInt("p_stockReal", modelo.getStockReal());

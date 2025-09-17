@@ -58,6 +58,7 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
             Integer id) throws SQLException {
         
         String sql = "{call eliminarOrdenCompra(?)}";
+        String sql = "{call eliminarDescuento(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_id", id);
         
@@ -69,6 +70,7 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
             Integer id) throws SQLException {
         
         String sql = "{call buscarOrdenCompraPorId(?)}";
+        String sql = "{call buscarDescuentoPorId(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_id", id);
         
@@ -80,6 +82,7 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
             Connection conn) throws SQLException {
         
         String sql = "{call listarOrdenesCompra()}";
+        String sql = "{call listarDescuentos()}";
         CallableStatement cmd = conn.prepareCall(sql);
         
         return cmd;
