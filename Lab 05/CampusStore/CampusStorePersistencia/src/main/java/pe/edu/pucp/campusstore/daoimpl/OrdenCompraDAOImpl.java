@@ -57,7 +57,6 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
     protected PreparedStatement comandoEliminar(Connection conn, 
             Integer id) throws SQLException {
         String sql = "{call eliminarOrdenCompra(?)}";
-        String sql = "{call eliminarDescuento(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_id", id);
         
