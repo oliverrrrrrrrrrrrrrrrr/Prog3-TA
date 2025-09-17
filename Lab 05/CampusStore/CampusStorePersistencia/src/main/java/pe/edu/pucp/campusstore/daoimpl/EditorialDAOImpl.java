@@ -6,6 +6,7 @@ package pe.edu.pucp.campusstore.daoimpl;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,9 +21,14 @@ public class EditorialDAOImpl extends BaseDAO<Editorial> implements EditorialDAO
         
         String sql = "{call insertarEditorial(?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        /*cmd.setString("p_nombre", modelo.getNombre());
-        cmd.setBoolean("p_activo", modelo.isActivo());
-        cmd.registerOutParameter("p_id", Types.INTEGER);*/
+        cmd.setString("p_nombre", modelo.getNombre());
+        cmd.setString("p_direccion", modelo.getDireccion());
+        cmd.setInt("p_telefono", modelo.getTelefono());
+        cmd.setString("p_cif", modelo.getCif());
+        cmd.setString("p_email", modelo.getEmail());
+        cmd.setString("p_sitioWeb", modelo.getSitioWeb());
+        cmd.setDate("p_fechaFundacion", new Date(modelo.getFechaFundacion().getTime()));
+        cmd.registerOutParameter("p_id", Types.INTEGER);
         
         return cmd;
     }
@@ -34,9 +40,14 @@ public class EditorialDAOImpl extends BaseDAO<Editorial> implements EditorialDAO
         String sql = "{call modificarEditorial(?, ?, ?, ?, ?, ?, ?, ?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
-        /*cmd.setString("p_nombre", modelo.getNombre());
-        cmd.setBoolean("p_activo", modelo.isActivo());
-        cmd.setInt("p_id", modelo.getId());*/
+        cmd.setString("p_nombre", modelo.getNombre());
+        cmd.setString("p_direccion", modelo.getDireccion());
+        cmd.setInt("p_telefono", modelo.getTelefono());
+        cmd.setString("p_cif", modelo.getCif());
+        cmd.setString("p_email", modelo.getEmail());
+        cmd.setString("p_sitioWeb", modelo.getSitioWeb());
+        cmd.setDate("p_fechaFundacion", new Date(modelo.getFechaFundacion().getTime()));
+        cmd.setInt("p_id", modelo.getIdEditorial());
         
         return cmd;
     }
@@ -77,9 +88,14 @@ public class EditorialDAOImpl extends BaseDAO<Editorial> implements EditorialDAO
     protected Editorial mapearModelo(ResultSet rs) throws SQLException {
         Editorial modelo = new Editorial();
         
-        /*modelo.setId(rs.getInt("id"));
+        modelo.setIdEditorial(rs.getInt("idEditorial"));
         modelo.setNombre(rs.getString("nombre"));
-        modelo.setActivo(rs.getBoolean("activo"));*/
+        modelo.setDireccion(rs.getString("direccion"));
+        modelo.setTelefono(rs.getInt("telefono"));
+        modelo.setCif(rs.getString("cif"));
+        modelo.setEmail(rs.getString("email"));
+        modelo.setSitioWeb(rs.getString("sitioWeb"));
+        modelo.setFechaFundacion(rs.getDate("fechaFundacion"));
         
         return modelo;
     }

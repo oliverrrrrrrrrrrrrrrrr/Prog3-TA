@@ -6,6 +6,7 @@ package pe.edu.pucp.campusstore.daoimpl;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,9 +21,11 @@ public class DescuentoDAOImpl extends BaseDAO<Descuento> implements DescuentoDAO
         
         String sql = "{call insertarDescuento(?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        /*cmd.setString("p_nombre", modelo.getNombre());
-        cmd.setBoolean("p_activo", modelo.isActivo());
-        cmd.registerOutParameter("p_id", Types.INTEGER);*/
+        cmd.setString("p_descripcion", modelo.getDescripcion());
+        cmd.setDouble("p_valorDescuento", modelo.getValorDescuento());
+        cmd.setDate("p_fechaCaducidad", new Date(modelo.getFechaCaducidad().getTime()));
+        cmd.setBoolean("p_activo", modelo.getActivo());
+        cmd.registerOutParameter("p_id", Types.INTEGER);
         
         return cmd;
     }
@@ -34,9 +37,11 @@ public class DescuentoDAOImpl extends BaseDAO<Descuento> implements DescuentoDAO
         String sql = "{call modificarDescuento(?, ?, ?, ? ,?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
-        /*cmd.setString("p_nombre", modelo.getNombre());
-        cmd.setBoolean("p_activo", modelo.isActivo());
-        cmd.setInt("p_id", modelo.getId());*/
+        cmd.setString("p_descripcion", modelo.getDescripcion());
+        cmd.setDouble("p_valorDescuento", modelo.getValorDescuento());
+        cmd.setDate("p_fechaCaducidad", new Date(modelo.getFechaCaducidad().getTime()));
+        cmd.setBoolean("p_activo", modelo.getActivo());
+        cmd.setInt("p_id", modelo.getIdDescuento());
         
         return cmd;
     }
@@ -77,9 +82,11 @@ public class DescuentoDAOImpl extends BaseDAO<Descuento> implements DescuentoDAO
     protected Descuento mapearModelo(ResultSet rs) throws SQLException {
         Descuento modelo = new Descuento();
         
-        /*modelo.setId(rs.getInt("id"));
-        modelo.setNombre(rs.getString("nombre"));
-        modelo.setActivo(rs.getBoolean("activo"));*/
+        modelo.setIdDescuento(rs.getInt("idDescuento"));
+        modelo.setDescripcion(rs.getString("descripcion"));
+        modelo.setActivo(rs.getBoolean("activo"));
+        modelo.setValorDescuento(rs.getDouble("valorDescuento"));
+        modelo.setFechaCaducidad(rs.getDate("fechaCaducidad"));
         
         return modelo;
     }
