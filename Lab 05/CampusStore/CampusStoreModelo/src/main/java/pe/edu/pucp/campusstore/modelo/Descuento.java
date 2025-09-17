@@ -65,13 +65,7 @@ public class Descuento{
         this.activo = activo;
     }
 
-    public Integer getIdDescuento() {
-        return idDescuento;
-    }
 
-    public void setIdDescuento(Integer idDescuento) {
-        this.idDescuento = idDescuento;
-    }
     
     
     
