@@ -1,0 +1,116 @@
+-- Reordenar los DROP PROCEDURE para evitar errores de creación
+DROP PROCEDURE IF EXISTS insertarDescuento;
+DROP PROCEDURE IF EXISTS modificarDescuento;
+DROP PROCEDURE IF EXISTS eliminarDescuento;
+DROP PROCEDURE IF EXISTS buscarDescuentoPorId;
+DROP PROCEDURE IF EXISTS listarDescuentos;
+
+DELIMITER //
+
+CREATE PROCEDURE insertarDescuento(
+    IN p_descripcion VARCHAR(255),
+    IN p_valorDescuento DECIMAL(10,2),
+    IN p_fechaCaducidad DATETIME,
+    IN p_activo TINYINT,
+    OUT p_id INT
+)
+BEGIN
+    INSERT INTO DESCUENTO (
+        descripcion,
+        valorDescuento,
+        fechaCaducidad,
+        activo
+    ) VALUES (
+        p_descripcion,
+        p_valorDescuento,
+        p_fechaCaducidad,
+        p_activo
+    );
+    
+    SET p_id = LAST_INSERT_ID();
+END //
+
+
+CREATE PROCEDURE modificarDescuento(
+    IN p_id INT,
+    IN p_descripcion VARCHAR(255),
+    IN p_valorDescuento DECIMAL(10,2),
+    IN p_fechaCaducidad DATETIME,
+    IN p_activo TINYINT
+)
+BEGIN
+    UPDATE DESCUENTO
+    SET 
+        descripcion = p_descripcion,
+        valorDescuento = p_valorDescuento,
+        fechaCaducidad = p_fechaCaducidad,
+        activo = p_activo
+    WHERE idDescuento = p_id;
+END //
+
+
+CREATE PROCEDURE eliminarDescuento(IN p_id INT)
+BEGIN
+    DELETE FROM DESCUENTO WHERE idDescuento = p_id;
+END //
+
+CREATE PROCEDURE buscarDescuentoPorId(IN p_id INT)
+BEGIN
+    SELECT * FROM DESCUENTO WHERE idDescuento = p_id;
+END //
+
+CREATE PROCEDURE listarDescuentos()
+BEGIN
+    SELECT * FROM DESCUENTO;
+END //
+
+DELIMITER ;
+
+
+
+### Llamadas de Prueba (Calls)
+SET @new_descuento_id = 0;
+CALL insertarDescuento(
+    'Descuento de fin de año',    -- p_descripcion
+    0.20,                         -- p_valorDescuento (20%)
+    '2026-12-31 23:59:59',        -- p_fechaCaducidad
+    1,                            -- p_activo (1 = activo)
+    @new_descuento_id
+);
+SELECT @new_descuento_id AS 'Nuevo ID de Descuento';
+
+---
+
+-- 2. Listar todos los descuentos para verificar la inserción
+-- Muestra la lista completa de descuentos, incluyendo el recién insertado.
+CALL listarDescuentos();
+
+---
+
+-- 3. Modificar el descuento recién insertado
+-- Cambia la descripción y el valor del descuento.
+CALL modificarDescuento(
+    @new_descuento_id,              -- ID del descuento a modificar
+    'Descuento de Black Friday',    -- nueva descripción
+    0.30,                           -- nuevo valorDescuento (30%)
+    '2026-11-29 23:59:59',          -- nueva fecha de caducidad
+    1                               -- estado activo
+);
+
+---
+
+-- 4. Buscar el descuento modificado por su ID
+-- Muestra solo el descuento que se acaba de modificar, confirmando los cambios.
+CALL buscarDescuentoPorId(@new_descuento_id);
+
+---
+
+-- 5. Eliminar el descuento creado
+-- Borra el descuento de la base de datos usando su ID.
+CALL eliminarDescuento(@new_descuento_id);
+
+---
+
+-- 6. Listar todos los descuentos para verificar la eliminación
+-- Muestra la lista final de descuentos, confirmando que el descuento eliminado ya no está presente.
+CALL listarDescuentos();

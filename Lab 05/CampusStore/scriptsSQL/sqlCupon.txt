@@ -1,0 +1,81 @@
+
+
+DROP PROCEDURE IF EXISTS insertarCupon;
+DROP PROCEDURE IF EXISTS modificarCupon;
+DROP PROCEDURE IF EXISTS eliminarCupon;
+DROP PROCEDURE IF EXISTS buscarCuponPorId;
+DROP PROCEDURE IF EXISTS listarCupones;
+
+DELIMITER //
+
+CREATE PROCEDURE insertarCupon(
+    IN p_nombre VARCHAR(45),
+    IN p_descuento DOUBLE,
+    IN p_fechaCaducidad DATETIME,
+    IN p_activo TINYINT,
+    OUT p_id INT
+)
+BEGIN
+    INSERT INTO CUPON (
+        codigo,
+        descuento,
+        fechaCaducidad,
+        activo
+    ) VALUES (
+        p_nombre,
+        p_descuento,
+        p_fechaCaducidad,
+        p_activo
+    );
+    
+    SET p_id = LAST_INSERT_ID();
+END //
+
+CREATE PROCEDURE modificarCupon(
+    IN p_id_cupon INT,
+    IN p_nombre VARCHAR(45),
+    IN p_descuento DOUBLE,
+    IN p_fechaCaducidad DATETIME,
+    IN p_activo TINYINT
+)
+BEGIN
+    UPDATE CUPON
+    SET 
+        nombre = p_nombre,
+        descuento = p_descuento,
+        fechaCaducidad = p_fechaCaducidad,
+        activo = p_activo
+    WHERE idCupon = p_id_cupon;
+END //
+
+CREATE PROCEDURE eliminarCupon(IN p_id_cupon INT)
+BEGIN
+    DELETE FROM CUPON WHERE idCupon = p_id_cupon;
+END //
+
+
+CREATE PROCEDURE buscarCuponPorId(IN p_id_cupon INT)
+BEGIN
+    SELECT * FROM CUPON WHERE idCupon = p_id_cupon;
+END //
+
+
+
+CREATE PROCEDURE listarCupones()
+BEGIN
+    SELECT * FROM CUPON;
+END //
+
+DELIMITER ;
+
+SET @new_cupon_id = 0;
+CALL insertarCupon(
+    'CUPON_NAVIDAD2026',
+    15.55,
+    '2025-12-25 23:59:59',
+    1,
+    @new_cupon_id
+);
+SELECT @new_cupon_id AS 'Nuevo ID de cupón';
+
+CALL listarCupones;

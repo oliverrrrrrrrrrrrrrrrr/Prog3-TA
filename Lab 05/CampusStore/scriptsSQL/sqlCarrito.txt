@@ -1,0 +1,90 @@
+
+
+DROP PROCEDURE IF EXISTS insertarCarrito;
+DROP PROCEDURE IF EXISTS modificarCarrito;
+DROP PROCEDURE IF EXISTS eliminarCarrito;
+DROP PROCEDURE IF EXISTS buscarCarritoPorId;
+DROP PROCEDURE IF EXISTS listarCarritos;
+
+DELIMITER //
+
+CREATE PROCEDURE insertarCarrito(
+    IN p_idCupon INT,
+    IN p_idCliente INT,
+    OUT p_id INT
+)
+BEGIN
+    INSERT INTO CARRITO (
+        completado,
+        idCupon,
+        idCliente
+    ) VALUES (
+        0,                 -- Por defecto, un carrito nuevo no está completado
+        p_idCupon,
+        p_idCliente
+    );
+    
+    -- Se asigna el ID generado automáticamente al parámetro de salida
+    SET p_id = LAST_INSERT_ID();
+END //
+
+DELIMITER ;
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE modificarCarrito(
+    IN p_id_carrito INT,
+    IN p_completado TINYINT,
+    IN p_id_cupon INT,
+    IN p_id_cliente INT
+)
+BEGIN
+    UPDATE CARRITO
+    SET 
+        completado = p_completado,
+        idCupon = p_id_cupon,
+        idCliente = p_id_cliente
+    WHERE idCarrito = p_id_carrito;
+END //
+
+
+
+
+CREATE PROCEDURE buscarCarritoPorId(IN p_id_carrito INT)
+BEGIN
+    SELECT * FROM CARRITO WHERE idCarrito = p_id_carrito;
+END //
+
+
+
+CREATE PROCEDURE listarCarritos()
+BEGIN
+    SELECT * FROM CARRITO;
+END //
+
+DELIMITER ;
+
+SET @nuevo_carrito_id = 0;
+
+CALL insertarCarrito(
+    NULL, -- p_idCupon (se puede pasar un ID de cupón o NULL)
+    1,    -- p_idCliente (suponiendo que existe un cliente con ID 1)
+    @nuevo_carrito_id
+);
+
+
+
+CALL listarCarritos;
+-- Busca y muestra la información del carrito con ID 1.
+CALL buscarCarritoPorId(1);
+
+
+-- Suponiendo que el carrito con ID 1 ya existe.
+CALL modificarCarrito(
+    1,          -- p_id_carrito
+    1,          -- p_completado (1 significa completado)
+    2,          -- p_id_cupon (ID de un cupón existente)
+    1           -- p_id_cliente (ID del cliente propietario)
+);
