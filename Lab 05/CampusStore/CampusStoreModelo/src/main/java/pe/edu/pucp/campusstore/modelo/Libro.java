@@ -11,15 +11,27 @@ import java.util.List;
  *
  * @author Brayan
  */
-public class Libro {
+public class Libro extends Producto{
     private String titulo;
-    private List<Autor> autores;
     private String isbn;
-    private Editorial editorial;
     private GeneroLibro genero;
     private Date fechaPublicacion;
     private Formato formato;
     private String sinopsis;
+    private Editorial editorial;
+    private List<Autor> autores;
+
+    public Libro(String titulo, String isbn, GeneroLibro genero, Date fechaPublicacion, Formato formato, String sinopsis, Editorial editorial, List<Autor> autores, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, List<Reseña> reseñas) {
+        super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion, reseñas);
+        this.titulo = titulo;
+        this.isbn = isbn;
+        this.genero = genero;
+        this.fechaPublicacion = fechaPublicacion;
+        this.formato = formato;
+        this.sinopsis = sinopsis;
+        this.editorial = editorial;
+        this.autores = autores;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -29,28 +41,12 @@ public class Libro {
         this.titulo = titulo;
     }
 
-    public List<Autor> getAutores() {
-        return autores;
-    }
-
-    public void setAutores(List<Autor> autores) {
-        this.autores = autores;
-    }
-
     public String getIsbn() {
         return isbn;
     }
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
-    }
-
-    public Editorial getEditorial() {
-        return editorial;
-    }
-
-    public void setEditorial(Editorial editorial) {
-        this.editorial = editorial;
     }
 
     public GeneroLibro getGenero() {
@@ -83,6 +79,22 @@ public class Libro {
 
     public void setSinopsis(String sinopsis) {
         this.sinopsis = sinopsis;
+    }
+
+    public Editorial getEditorial() {
+        return editorial;
+    }
+
+    public void setEditorial(Editorial editorial) {
+        this.editorial = editorial;
+    }
+
+    public List<Autor> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<Autor> autores) {
+        this.autores = autores;
     }
     
     

@@ -9,12 +9,25 @@ package pe.edu.pucp.campusstore.modelo;
  * @author Brayan
  */
 public class LineaCarrito {
+    private Carrito carrito;
     private Integer cantidad;
     private Double precioUnitario;
-    private Double precioDescontado;
     private Double subtotal;
-    private Double subtotalDesc;
-    private Producto producto;
+
+    public LineaCarrito(Carrito carrito, Integer cantidad, Double precioUnitario, Double subtotal) {
+        this.carrito = carrito;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+        this.subtotal = subtotal;
+    }
+
+    public Carrito getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
+    }
 
     public Integer getCantidad() {
         return cantidad;
@@ -32,14 +45,6 @@ public class LineaCarrito {
         this.precioUnitario = precioUnitario;
     }
 
-    public Double getPrecioDescontado() {
-        return precioDescontado;
-    }
-
-    public void setPrecioDescontado(Double precioDescontado) {
-        this.precioDescontado = precioDescontado;
-    }
-
     public Double getSubtotal() {
         return subtotal;
     }
@@ -47,21 +52,7 @@ public class LineaCarrito {
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
     }
-
-    public Double getSubtotalDesc() {
-        return subtotalDesc;
-    }
-
-    public void setSubtotalDesc(Double subtotalDesc) {
-        this.subtotalDesc = subtotalDesc;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
+    
+    
     
 }

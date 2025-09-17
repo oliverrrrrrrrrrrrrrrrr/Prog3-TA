@@ -12,6 +12,11 @@ public class Reseña {
     private Double calificacion;
     private String reseña;
 
+    public Reseña(Double calificacion, String reseña) {
+        this.calificacion = calificacion;
+        this.reseña = reseña;
+    }
+
     public double getCalificacion() {
         return calificacion;
     }

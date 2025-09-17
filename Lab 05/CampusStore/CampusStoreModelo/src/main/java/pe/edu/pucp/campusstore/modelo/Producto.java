@@ -5,11 +5,22 @@ import java.util.List;
 public abstract class Producto{
     private Double precio;
     private Double precioDescuento;
-    private List<Reseña> reseñas;
-    private Integer stockVirtual;
     private Integer stockReal;
+    private Integer stockVirtual;
     private String nombre;
     private String descripcion;
+    private Descuento descuento;
+    private List<Reseña> reseñas;
+
+    public Producto(Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, List<Reseña> reseñas) {
+        this.precio = precio;
+        this.precioDescuento = precioDescuento;
+        this.stockReal = stockReal;
+        this.stockVirtual = stockVirtual;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.reseñas = reseñas;
+    }
 
     public Double getPrecio() {
         return precio;

@@ -9,9 +9,25 @@ package pe.edu.pucp.campusstore.modelo;
  * @author Brayan
  */
 public class Empleado extends Usuario{
+    private Integer idEmpleado;
     private Boolean activo;
     private Double sueldo;
-    private Rol cargo;
+    private Rol rol;
+
+    public Empleado() {
+    }
+
+    public Empleado(String dni, String nombre, String contraseña, String nombreUsuario, String correo, Integer telefono) {
+        super(dni, nombre, contraseña, nombreUsuario, correo, telefono);
+    }
+
+    public Integer getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(Integer idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
 
     public Boolean getActivo() {
         return activo;
@@ -29,11 +45,13 @@ public class Empleado extends Usuario{
         this.sueldo = sueldo;
     }
 
-    public Rol getCargo() {
-        return cargo;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setCargo(Rol cargo) {
-        this.cargo = cargo;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
+    
+    
 }

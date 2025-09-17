@@ -11,6 +11,7 @@ import java.util.Date;
  * @author Brayan
  */
 public class Editorial {
+    private Integer idEditorial;
     private String nombre;
     private String direccion;
     private Integer telefono;
@@ -18,6 +19,25 @@ public class Editorial {
     private String email;
     private String sitioWeb;
     private Date fechaFundacion;
+
+    public Editorial(Integer idEditorial, String nombre, String direccion, Integer telefono, String cif, String email, String sitioWeb, Date fechaFundacion) {
+        this.idEditorial = idEditorial;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.cif = cif;
+        this.email = email;
+        this.sitioWeb = sitioWeb;
+        this.fechaFundacion = fechaFundacion;
+    }
+
+    public Integer getIdEditorial() {
+        return idEditorial;
+    }
+
+    public void setIdEditorial(Integer idEditorial) {
+        this.idEditorial = idEditorial;
+    }
 
     public String getNombre() {
         return nombre;

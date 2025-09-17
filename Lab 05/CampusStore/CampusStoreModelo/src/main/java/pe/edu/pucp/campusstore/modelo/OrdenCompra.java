@@ -12,13 +12,35 @@ import java.util.List;
  * @author Brayan
  */
 public class OrdenCompra {
+    private Integer idOrdenCompra;
     private Date fechaCreacion;
     private Date limitePago;
     private Double total;
+    private Double totalDescontado;
     private EstadoOrden estado;
-    private Double descuentoTotal;
-    private Double totalConDescuento;
+    private Carrito carrito;
+    private Cliente cliente;
     private List<LineaCarrito> lineas;
+
+    public OrdenCompra(Integer idOrdenCompra, Date fechaCreacion, Date limitePago, Double total, Double totalDescontado, EstadoOrden estado, Carrito carrito, Cliente cliente, List<LineaCarrito> lineas) {
+        this.idOrdenCompra = idOrdenCompra;
+        this.fechaCreacion = fechaCreacion;
+        this.limitePago = limitePago;
+        this.total = total;
+        this.totalDescontado = totalDescontado;
+        this.estado = estado;
+        this.carrito = carrito;
+        this.cliente = cliente;
+        this.lineas = lineas;
+    }
+
+    public Integer getIdOrdenCompra() {
+        return idOrdenCompra;
+    }
+
+    public void setIdOrdenCompra(Integer idOrdenCompra) {
+        this.idOrdenCompra = idOrdenCompra;
+    }
 
     public Date getFechaCreacion() {
         return fechaCreacion;
@@ -44,6 +66,14 @@ public class OrdenCompra {
         this.total = total;
     }
 
+    public Double getTotalDescontado() {
+        return totalDescontado;
+    }
+
+    public void setTotalDescontado(Double totalDescontado) {
+        this.totalDescontado = totalDescontado;
+    }
+
     public EstadoOrden getEstado() {
         return estado;
     }
@@ -52,20 +82,20 @@ public class OrdenCompra {
         this.estado = estado;
     }
 
-    public Double getDescuentoTotal() {
-        return descuentoTotal;
+    public Carrito getCarrito() {
+        return carrito;
     }
 
-    public void setDescuentoTotal(Double descuentoTotal) {
-        this.descuentoTotal = descuentoTotal;
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
     }
 
-    public Double getTotalConDescuento() {
-        return totalConDescuento;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setTotalConDescuento(Double totalConDescuento) {
-        this.totalConDescuento = totalConDescuento;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public List<LineaCarrito> getLineas() {

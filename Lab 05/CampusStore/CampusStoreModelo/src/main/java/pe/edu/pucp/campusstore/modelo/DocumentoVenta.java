@@ -4,60 +4,40 @@ import java.util.Date;
 import java.util.List;
 
 public class DocumentoVenta{
-    private Date fechaCreacion;
-    private Double total;
-    private Double descuentoTotal;
-    private Double totalConDescuento;
-    private List<LineaCarrito> lineas;
-    private Cupon cupon;
+    private Integer idDocumentoVenta;
+    private Date fechaEmision;
+    private OrdenCompra ordenCompra;
 
-    public Date getFechaCreacion() {
-        return fechaCreacion;
+    public DocumentoVenta(Integer idDocumentoVenta, Date fechaEmision, OrdenCompra ordenCompra) {
+        this.idDocumentoVenta = idDocumentoVenta;
+        this.fechaEmision = fechaEmision;
+        this.ordenCompra = ordenCompra;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public Integer getIdDocumentoVenta() {
+        return idDocumentoVenta;
     }
 
-    public Double getTotal() {
-        return total;
+    public void setIdDocumentoVenta(Integer idDocumentoVenta) {
+        this.idDocumentoVenta = idDocumentoVenta;
     }
 
-    public void setTotal(Double total) {
-        this.total = total;
+    public Date getFechaEmision() {
+        return fechaEmision;
     }
 
-    public Double getDescuentoTotal() {
-        return descuentoTotal;
+    public void setFechaEmision(Date fechaEmision) {
+        this.fechaEmision = fechaEmision;
     }
 
-    public void setDescuentoTotal(Double descuentoTotal) {
-        this.descuentoTotal = descuentoTotal;
+    public OrdenCompra getOrdenCompra() {
+        return ordenCompra;
     }
 
-    public Double getTotalConDescuento() {
-        return totalConDescuento;
+    public void setOrdenCompra(OrdenCompra ordenCompra) {
+        this.ordenCompra = ordenCompra;
     }
-
-    public void setTotalConDescuento(Double totalConDescuento) {
-        this.totalConDescuento = totalConDescuento;
-    }
-
-    public List<LineaCarrito> getLineas() {
-        return lineas;
-    }
-
-    public void setLineas(List<LineaCarrito> lineas) {
-        this.lineas = lineas;
-    }
-
-    public Cupon getCupon() {
-        return cupon;
-    }
-
-    public void setCupon(Cupon cupon) {
-        this.cupon = cupon;
-    }
+    
     
     
 }
