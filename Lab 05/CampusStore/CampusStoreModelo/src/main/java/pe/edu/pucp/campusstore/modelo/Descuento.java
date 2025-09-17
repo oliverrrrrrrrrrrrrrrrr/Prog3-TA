@@ -2,7 +2,8 @@ package pe.edu.pucp.campusstore.modelo;
 
 import java.util.Date;
 
-public class Descuento{
+public class Descuento {
+
     private Integer idDescuento;
     private String descripcion;
     private Double valorDescuento;
@@ -64,8 +65,4 @@ public class Descuento{
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
