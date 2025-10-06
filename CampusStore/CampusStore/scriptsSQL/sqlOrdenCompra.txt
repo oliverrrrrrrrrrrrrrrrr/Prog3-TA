@@ -1,0 +1,101 @@
+
+-- Eliminar los procedimientos almacenados si existen
+DROP PROCEDURE IF EXISTS insertarOrdenCompra;
+DROP PROCEDURE IF EXISTS modificarOrdenCompra;
+DROP PROCEDURE IF EXISTS eliminarOrdenCompra;
+DROP PROCEDURE IF EXISTS buscarOrdenCompraPorId;
+DROP PROCEDURE IF EXISTS listarOrdenesCompra;
+
+DELIMITER //
+
+CREATE PROCEDURE insertarOrdenCompra(
+    IN p_limitePago DATETIME,
+    IN p_total DECIMAL(10,2),
+    IN p_totalDescontado DECIMAL(10,2),
+    IN p_estado ENUM('NO_PAGADO', 'PAGADO', 'ENTREGADO'),
+    IN p_idCarrito INT,
+    IN p_idCliente INT,
+    OUT p_id INT
+)
+BEGIN
+    INSERT INTO ORDEN_COMPRA (
+        limitePago,
+        total,
+        totalDescontado,
+        estado,
+        idCarrito,
+        idCliente
+    ) VALUES (
+        p_limitePago,
+        p_total,
+        p_totalDescontado,
+        p_estado,
+        p_idCarrito,
+        p_idCliente
+    );
+    
+    SET p_id = LAST_INSERT_ID();
+END //
+
+CREATE PROCEDURE modificarOrdenCompra(
+    IN p_id INT,
+    IN p_limitePago DATETIME,
+    IN p_total DECIMAL(10,2),
+    IN p_totalDescontado DECIMAL(10,2),
+    IN p_estado ENUM('NO_PAGADO', 'PAGADO', 'ENTREGADO'),
+    IN p_idCarrito INT,
+    IN p_idCliente INT
+)
+BEGIN
+    UPDATE ORDEN_COMPRA
+    SET 
+        limitePago = p_limitePago,
+        total = p_total,
+        totalDescontado = p_totalDescontado,
+        estado = p_estado,
+        idCarrito = p_idCarrito,
+        idCliente = p_idCliente
+    WHERE idOrdenCompra = p_id;
+END //
+
+CREATE PROCEDURE eliminarOrdenCompra(IN p_id INT)
+BEGIN
+    DELETE FROM ORDEN_COMPRA WHERE idOrdenCompra = p_id;
+END //
+
+CREATE PROCEDURE buscarOrdenCompraPorId(IN p_id INT)
+BEGIN
+    SELECT * FROM ORDEN_COMPRA WHERE idOrdenCompra = p_id;
+END //
+
+CREATE PROCEDURE listarOrdenesCompra()
+BEGIN
+    SELECT * FROM ORDEN_COMPRA;
+END //
+
+DELIMITER ;
+
+
+
+### Llamadas de Prueba (Calls)
+
+SET @new_orden_id = 0;
+CALL insertarOrdenCompra(
+    '2025-10-15 12:00:00',          -- p_limitePago
+    36.00,                          -- p_total
+    32.40,                          -- p_totalDescontado (10% de descuento)
+    'NO_PAGADO',                    -- p_estado
+    1,                              -- p_idCarrito (asumiendo que el carrito 1 existe y no ha sido usado)
+    1,                              -- p_idCliente (asumiendo que el cliente 1 existe)
+    @new_orden_id
+);
+SELECT @new_orden_id AS 'Nuevo ID de Orden de Compra';
+
+---
+
+-- 2. Listar todas las órdenes de compra para verificar la inserción
+CALL listarOrdenesCompra();
+
+---
+
+--

@@ -1,0 +1,116 @@
+DROP PROCEDURE IF EXISTS insertarResenhaLibro;
+DROP PROCEDURE IF EXISTS modificarResenhaLibro;
+DROP PROCEDURE IF EXISTS eliminarResenhaLibro;
+DROP PROCEDURE IF EXISTS buscarResenhaLibroPorId;
+DROP PROCEDURE IF EXISTS listarResenhasLibro;
+DELIMITER //
+
+-- Procedimiento para insertar una nueva reseña de libro
+CREATE PROCEDURE insertarResenhaLibro(
+    IN p_calificacion DECIMAL(3, 2),
+    IN p_resenha TEXT,
+    IN p_idLibro INT,
+    IN p_idCliente INT,
+    OUT p_id INT
+)
+BEGIN
+    INSERT INTO RESENHA_LIBRO (
+        calificacion,
+        resenha,
+        idLibro,
+        idCliente
+    ) VALUES (
+        p_calificacion,
+        p_resenha,
+        p_idLibro,
+        p_idCliente
+    );
+    SET p_id = LAST_INSERT_ID();
+END //
+
+-- Procedimiento para modificar una reseña de libro existente
+CREATE PROCEDURE modificarResenhaLibro(
+    IN p_id INT,
+    IN p_calificacion DECIMAL(3, 2),
+    IN p_resenha TEXT
+)
+BEGIN
+    UPDATE RESENHA_LIBRO
+    SET 
+        calificacion = p_calificacion,
+        resenha = p_resenha
+    WHERE idResenha = p_id;
+END //
+
+-- Procedimiento para eliminar una reseña de libro por su ID
+CREATE PROCEDURE eliminarResenhaLibro(IN p_id INT)
+BEGIN
+    DELETE FROM RESENHA_LIBRO WHERE idResenha = p_id;
+END //
+
+-- Procedimiento para buscar una reseña de libro por su ID
+CREATE PROCEDURE buscarResenhaLibroPorId(IN p_id INT)
+BEGIN
+    SELECT * FROM RESENHA_LIBRO WHERE idResenha = p_id;
+END //
+
+-- Procedimiento para listar todas las reseñas de libro
+CREATE PROCEDURE listarResenhasLibro()
+BEGIN
+    SELECT * FROM RESENHA_LIBRO;
+END //
+
+DELIMITER ;
+
+-- 1. Insertar una nueva reseña de libro
+-- Se inserta una reseña para el libro con ID 1, hecha por el cliente con ID 1.
+SET @new_review_id = 0;
+CALL insertarResenhaLibro(
+    4.5,                                      -- calificacion
+    '¡Una lectura obligada! Totalmente recomendado.', -- reseña
+    1,                                        -- idLibro (asumiendo que el libro 1 existe)
+    1,                                        -- idCliente (asumiendo que el cliente 1 existe)
+    @new_review_id
+);
+SELECT @new_review_id AS 'Nuevo ID de Reseña de Libro';
+
+---
+
+-- 2. Listar todas las reseñas de libro antes de la modificación
+-- Muestra todas las reseñas, incluyendo la recién insertada.
+CALL listarResenhasLibro;
+
+---
+
+-- 3. Modificar la reseña recién insertada
+-- Se modifica la reseña usando el ID que obtuvimos en el primer CALL.
+CALL modificarResenhaLibro(
+    @new_review_id,                           -- ID de la reseña a modificar
+    4.8,                                      -- nueva calificación
+    'Actualización: Una obra maestra. Mejor de lo que recordaba.' -- nueva reseña
+);
+
+---
+
+-- 4. Listar todas las reseñas de libro para ver la modificación
+-- Muestra la lista para confirmar que la reseña fue actualizada correctamente.
+CALL listarResenhasLibro;
+
+---
+
+-- 5. Eliminar la reseña que acabamos de modificar
+-- Se elimina la reseña usando el ID que almacenamos.
+CALL eliminarResenhaLibro(@new_review_id);
+
+---
+
+-- 6. Listar todas las reseñas de libro después de la eliminación
+-- Muestra la lista final para confirmar que la reseña fue eliminada.
+CALL listarResenhasLibro;
+
+---
+
+-- 7. Buscar una reseña que no existe
+-- Se intenta buscar la reseña eliminada para confirmar que ya no está en la tabla.
+CALL buscarResenhaLibroPorId(@new_review_id);
+
