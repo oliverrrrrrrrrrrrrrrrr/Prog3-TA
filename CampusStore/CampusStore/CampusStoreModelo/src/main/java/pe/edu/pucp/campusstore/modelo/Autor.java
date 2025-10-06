@@ -1,9 +1,5 @@
 package pe.edu.pucp.campusstore.modelo;
 
-/**
- *
- * @author Brayan
- */
 public class Autor {
     private Integer idAutor;
     private String nombre;

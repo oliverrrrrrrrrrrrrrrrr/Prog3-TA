@@ -9,6 +9,7 @@ import java.sql.Types;
 import pe.edu.pucp.campusstore.dao.ArticuloDAO;
 import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Descuento;
+import pe.edu.pucp.campusstore.modelo.DescuentoArticulo;
 import pe.edu.pucp.campusstore.modelo.TipoArticulo;
 
 /**
@@ -20,17 +21,16 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
     protected PreparedStatement comandoCrear(Connection conn, 
             Articulo modelo) throws SQLException {
         
-        String sql = "{call insertarArticulo(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call insertarArticulo(?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_descripcion", modelo.getDescripcion());
-        cmd.setString("p_especificacion", modelo.getEspecificacion());
         cmd.setDouble("p_precio", modelo.getPrecio());
         cmd.setDouble("p_precioDescuento", modelo.getPrecioDescuento());
         cmd.setInt("p_stockReal", modelo.getStockReal());
         cmd.setInt("p_stockVirtual", modelo.getStockVirtual());
         cmd.setString("p_tipoArticulo", modelo.getTipoArticulo().toString());
-        cmd.registerOutParameter("p_id", Types.INTEGER);
+        cmd.registerOutParameter("p_idArticulo", Types.INTEGER);
 
         return cmd;
     }
@@ -39,18 +39,17 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
     protected PreparedStatement comandoActualizar(Connection conn, 
             Articulo modelo) throws SQLException {
         
-        String sql = "{call modificarArticulo(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call modificarArticulo(?, ?, ?, ?, ?, ?, ?, ?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_descripcion", modelo.getDescripcion());
-        cmd.setString("p_especificacion", modelo.getEspecificacion());
         cmd.setDouble("p_precio", modelo.getPrecio());
         cmd.setDouble("p_precioDescuento", modelo.getPrecioDescuento());
         cmd.setInt("p_stockReal", modelo.getStockReal());
         cmd.setInt("p_stockVirtual", modelo.getStockVirtual());
         cmd.setString("p_tipoArticulo", modelo.getTipoArticulo().toString());
-        cmd.setInt("p_id", modelo.getIdArticulo());
+        cmd.setInt("p_idArticulo", modelo.getIdArticulo());
         
         return cmd;
     }
@@ -61,7 +60,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         
         String sql = "{call eliminarArticulo(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_id", id);
+        cmd.setInt("p_idArticulo", id);
         
         return cmd;
     }
@@ -72,7 +71,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         
         String sql = "{call buscarArticuloPorId(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_id", id);
+        cmd.setInt("p_idArticulo", id);
         
         return cmd;
     }
@@ -97,16 +96,14 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         modelo.setStockVirtual(rs.getInt("stockVirtual"));
         modelo.setNombre(rs.getString("nombre"));
         modelo.setDescripcion(rs.getString("descripcion"));
-        modelo.setEspecificacion(rs.getString("especificacion"));
         
         modelo.setTipoArticulo(TipoArticulo.valueOf(rs.getString("tipoArticulo")));
-        Descuento desc_aux = new Descuento();
+        
+        /*
+        Descuento desc_aux = new DescuentoArticulo();
         desc_aux.setIdDescuento(rs.getInt("idDescuento"));
         modelo.setDescuento(desc_aux);
-        
-        /*modelo.setId(rs.getInt("id"));
-        modelo.setNombre(rs.getString("nombre"));
-        modelo.setActivo(rs.getBoolean("activo"));*/
+        */
         
         return modelo;
     }

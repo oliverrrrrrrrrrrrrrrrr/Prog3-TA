@@ -14,10 +14,6 @@ import pe.edu.pucp.campusstore.dao.CarritoDAO;
 import pe.edu.pucp.campusstore.modelo.Cliente;
 import pe.edu.pucp.campusstore.modelo.Cupon;
 
-/**
- *
- * @author User
- */
 public class CarritoDAOImpl extends BaseDAO<Carrito> implements CarritoDAO {
     
     @Override
@@ -28,7 +24,7 @@ public class CarritoDAOImpl extends BaseDAO<Carrito> implements CarritoDAO {
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_cupon", modelo.getCupon().getIdCupon());
         cmd.setInt("p_cliente", modelo.getCliente().getIdCliente());
-        cmd.registerOutParameter("p_id", Types.INTEGER);
+        cmd.registerOutParameter("p_idCarrito", Types.INTEGER);
         
         return cmd;
     }
@@ -43,7 +39,7 @@ public class CarritoDAOImpl extends BaseDAO<Carrito> implements CarritoDAO {
         cmd.setBoolean("p_completado", modelo.getCompletado());
         cmd.setInt("p_cupon", modelo.getCupon().getIdCupon());
         cmd.setInt("p_cliente", modelo.getCliente().getIdCliente());
-        cmd.setInt("p_id", modelo.getIdCarrito());
+        cmd.setInt("p_idCarrito", modelo.getIdCarrito());
         return cmd;
     }
     
@@ -53,7 +49,7 @@ public class CarritoDAOImpl extends BaseDAO<Carrito> implements CarritoDAO {
         
         String sql = "{call eliminarCarrito(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_id", id);
+        cmd.setInt("p_idCarrito", id);
         
         return cmd;
     }
@@ -64,7 +60,7 @@ public class CarritoDAOImpl extends BaseDAO<Carrito> implements CarritoDAO {
         
         String sql = "{call buscarCarritoPorId(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_id_carrito", id);
+        cmd.setInt("p_idCarrito", id);
         
         return cmd;
     }
@@ -85,9 +81,13 @@ public class CarritoDAOImpl extends BaseDAO<Carrito> implements CarritoDAO {
         
         modelo.setIdCarrito(rs.getInt("idCarrito"));
         modelo.setCompletado(rs.getBoolean("completado"));
+        
+        //cambiar según la asesoría
+        
         Cupon cupon_aux = new Cupon();
         cupon_aux.setIdCupon(rs.getInt("idCupon"));
         modelo.setCupon(cupon_aux);
+        
         Cliente cliente_aux = new Cliente();
         cliente_aux.setIdCliente(rs.getInt("idCliente"));
         modelo.setCliente(cliente_aux);

@@ -3,10 +3,6 @@ package pe.edu.pucp.campusstore.modelo;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author Brayan
- */
 public class Carrito {
     private Integer idCarrito;
     private Boolean completado;
