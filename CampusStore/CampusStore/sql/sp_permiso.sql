@@ -1,0 +1,99 @@
+-- -----------------------------------------------------
+-- procedure buscarPermisoPorId
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP procedure IF EXISTS `buscarPermisoPorId`;
+
+DELIMITER //
+USE `libreria`//
+CREATE PROCEDURE `buscarPermisoPorId`(IN p_idPermiso INT)
+BEGIN
+    SELECT * FROM PERMISO WHERE idPermiso = p_idPermiso;
+END//
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure eliminarPermiso
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP procedure IF EXISTS `eliminarPermiso`;
+
+DELIMITER //
+USE `libreria`//
+CREATE PROCEDURE `eliminarPermiso`(IN p_idPermiso INT)
+BEGIN
+    DELETE FROM PERMISO WHERE idPermiso = p_idPermiso;
+END//
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure insertarPermiso
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP procedure IF EXISTS `insertarPermiso`;
+
+DELIMITER //
+USE `libreria`//
+CREATE PROCEDURE `insertarPermiso`(
+    IN p_nombre VARCHAR(45),
+    IN p_descripcion VARCHAR(255),
+    OUT p_idPermiso INT
+)
+BEGIN
+    INSERT INTO PERMISO (
+        nombre,
+        descripcion
+    ) VALUES (
+        p_nombre,
+        p_descripcion
+    );
+    
+    SET p_idPermiso = LAST_INSERT_ID();
+END//
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure listarPermisos
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP procedure IF EXISTS `listarPermisos`;
+
+DELIMITER //
+USE `libreria`//
+CREATE PROCEDURE `listarPermisos`()
+BEGIN
+    SELECT * FROM PERMISO;
+END//
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure modificarPermiso
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP procedure IF EXISTS `modificarPermiso`;
+
+DELIMITER //
+USE `libreria`//
+CREATE PROCEDURE `modificarPermiso`(
+    IN p_idPermiso INT,
+    IN p_nombre VARCHAR(45),
+    IN p_descripcion VARCHAR(255)
+)
+BEGIN
+    UPDATE PERMISO
+    SET 
+        nombre = p_nombre,
+        descripcion = p_descripcion
+    WHERE idPermiso = p_idPermiso;
+END//
+
+DELIMITER ;
