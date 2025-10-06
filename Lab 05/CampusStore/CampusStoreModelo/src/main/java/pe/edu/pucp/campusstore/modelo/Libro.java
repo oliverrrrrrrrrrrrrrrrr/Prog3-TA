@@ -1,19 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.campusstore.modelo;
 
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author Brayan
- */
-public class Libro extends Producto{
+public class Libro extends Producto {
     private Integer idLibro;
-    private String titulo;
     private String isbn;
     private GeneroLibro genero;
     private Date fechaPublicacion;
@@ -25,7 +16,6 @@ public class Libro extends Producto{
     public Libro() {
         super();
         this.idLibro = null;
-        this.titulo = null;
         this.isbn = null;
         this.genero = null;
         this.fechaPublicacion = null;
@@ -35,10 +25,9 @@ public class Libro extends Producto{
         this.autores = null;
     }
 
-    public Libro(Integer idLibro, String titulo, String isbn, GeneroLibro genero, Date fechaPublicacion, Formato formato, String sinopsis, Editorial editorial, List<Autor> autores, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, Descuento descuento, List<Reseña> reseñas) {
+    public Libro(Integer idLibro, String isbn, GeneroLibro genero, Date fechaPublicacion, Formato formato, String sinopsis, Editorial editorial, List<Autor> autores, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, Descuento descuento, List<Reseña> reseñas) {
         super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion, descuento, reseñas);
         this.idLibro = idLibro;
-        this.titulo = titulo;
         this.isbn = isbn;
         this.genero = genero;
         this.fechaPublicacion = fechaPublicacion;
@@ -54,14 +43,6 @@ public class Libro extends Producto{
 
     public void setIdLibro(Integer idLibro) {
         this.idLibro = idLibro;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
     }
 
     public String getIsbn() {

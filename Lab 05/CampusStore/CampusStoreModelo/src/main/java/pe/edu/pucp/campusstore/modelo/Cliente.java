@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.campusstore.modelo;
 
 import java.util.List;
@@ -20,8 +16,8 @@ public class Cliente extends Usuario{
         this.cuponesUsados = null;
     }
 
-    public Cliente(Integer idCliente, List<Cupon> cuponesUsados, String dni, String nombre, String contraseña, String nombreUsuario, String correo, String telefono) {
-        super(dni, nombre, contraseña, nombreUsuario, correo, telefono);
+    public Cliente(Integer idCliente, List<Cupon> cuponesUsados, String nombre, String contraseña, String nombreUsuario, String correo, String telefono) {
+        super(nombre, contraseña, nombreUsuario, correo, telefono);
         this.idCliente = idCliente;
         this.cuponesUsados = cuponesUsados;
     }

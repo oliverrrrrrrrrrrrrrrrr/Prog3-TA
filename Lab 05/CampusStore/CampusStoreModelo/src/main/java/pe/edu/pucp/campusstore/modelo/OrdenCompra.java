@@ -1,16 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.campusstore.modelo;
 
 import java.util.Date;
-import java.util.List;
 
-/**
- *
- * @author Brayan
- */
 public class OrdenCompra {
     private Integer idOrdenCompra;
     private Date fechaCreacion;
@@ -20,7 +11,6 @@ public class OrdenCompra {
     private EstadoOrden estado;
     private Carrito carrito;
     private Cliente cliente;
-    private List<LineaCarrito> lineas;
     
     public OrdenCompra() {
         this.idOrdenCompra = null;
@@ -31,10 +21,9 @@ public class OrdenCompra {
         this.estado = null;
         this.carrito = null;
         this.cliente = null;
-        this.lineas = null;
     }
 
-    public OrdenCompra(Integer idOrdenCompra, Date fechaCreacion, Date limitePago, Double total, Double totalDescontado, EstadoOrden estado, Carrito carrito, Cliente cliente, List<LineaCarrito> lineas) {
+    public OrdenCompra(Integer idOrdenCompra, Date fechaCreacion, Date limitePago, Double total, Double totalDescontado, EstadoOrden estado, Carrito carrito, Cliente cliente) {
         this.idOrdenCompra = idOrdenCompra;
         this.fechaCreacion = fechaCreacion;
         this.limitePago = limitePago;
@@ -43,7 +32,6 @@ public class OrdenCompra {
         this.estado = estado;
         this.carrito = carrito;
         this.cliente = cliente;
-        this.lineas = lineas;
     }
 
     public Integer getIdOrdenCompra() {
@@ -108,15 +96,6 @@ public class OrdenCompra {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public List<LineaCarrito> getLineas() {
-        return lineas;
-    }
-
-    public void setLineas(List<LineaCarrito> lineas) {
-        this.lineas = lineas;
-    }
-    
+    } 
     
 }

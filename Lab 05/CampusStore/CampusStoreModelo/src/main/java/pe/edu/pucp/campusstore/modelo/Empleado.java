@@ -1,14 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.campusstore.modelo;
 
 /**
  *
  * @author Brayan
  */
-public class Empleado extends Usuario{
+
+public class Empleado extends Usuario {
     private Integer idEmpleado;
     private Boolean activo;
     private Double sueldo;
@@ -22,8 +19,8 @@ public class Empleado extends Usuario{
         this.rol = null;
     }
 
-    public Empleado(Integer idEmpleado, Boolean activo, Double sueldo, Rol rol, String dni, String nombre, String contraseña, String nombreUsuario, String correo, String telefono) {
-        super(dni, nombre, contraseña, nombreUsuario, correo, telefono);
+    public Empleado(Integer idEmpleado, Boolean activo, Double sueldo, Rol rol, String nombre, String contraseña, String nombreUsuario, String correo, String telefono) {
+        super(nombre, contraseña, nombreUsuario, correo, telefono);
         this.idEmpleado = idEmpleado;
         this.activo = activo;
         this.sueldo = sueldo;

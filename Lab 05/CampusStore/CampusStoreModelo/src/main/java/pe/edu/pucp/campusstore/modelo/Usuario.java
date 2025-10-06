@@ -1,7 +1,6 @@
 package pe.edu.pucp.campusstore.modelo;
 
 public abstract class Usuario {
-    private String dni;
     private String nombre;
     private String contraseña;
     private String nombreUsuario;
@@ -9,7 +8,6 @@ public abstract class Usuario {
     private String telefono;
     
     public Usuario() {
-        this.dni = null;
         this.nombre = null;
         this.contraseña = null;
         this.nombreUsuario = null;
@@ -17,8 +15,7 @@ public abstract class Usuario {
         this.telefono = null;
     }
 
-    public Usuario(String dni, String nombre, String contraseña, String nombreUsuario, String correo, String telefono) {
-        this.dni = dni;
+    public Usuario(String nombre, String contraseña, String nombreUsuario, String correo, String telefono) {
         this.nombre = nombre;
         this.contraseña = contraseña;
         this.nombreUsuario = nombreUsuario;
@@ -26,19 +23,6 @@ public abstract class Usuario {
         this.telefono = telefono;
     }
 
-    /**
-     * @return the dni
-     */
-    public String getDni() {
-        return dni;
-    }
-
-    /**
-     * @param dni the dni to set
-     */
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
 
     /**
      * @return the nombre

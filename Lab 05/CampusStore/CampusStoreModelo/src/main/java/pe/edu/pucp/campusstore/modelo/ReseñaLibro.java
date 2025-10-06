@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.campusstore.modelo;
 
-/**
- *
- * @author Brayan
- */
 public class ReseñaLibro extends Reseña{
     private Integer idReseñaLibro;
     private Libro libro;
@@ -20,8 +12,8 @@ public class ReseñaLibro extends Reseña{
         this.cliente = null;
     }
 
-    public ReseñaLibro(Integer idReseñaLibro, Libro libro, Cliente cliente, Double calificacion, String reseña) {
-        super(calificacion, reseña);
+    public ReseñaLibro(Integer idReseñaLibro, Libro libro, Cliente cliente, Double calificacion, String reseña, TipoProducto tipoProducto) {
+        super(calificacion, reseña, tipoProducto);
         this.idReseñaLibro = idReseñaLibro;
         this.libro = libro;
         this.cliente = cliente;
@@ -50,6 +42,5 @@ public class ReseñaLibro extends Reseña{
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
     
 }

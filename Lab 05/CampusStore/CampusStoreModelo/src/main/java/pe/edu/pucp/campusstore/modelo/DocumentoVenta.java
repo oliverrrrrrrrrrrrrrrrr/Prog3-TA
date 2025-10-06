@@ -1,7 +1,6 @@
 package pe.edu.pucp.campusstore.modelo;
 
 import java.util.Date;
-import java.util.List;
 
 public class DocumentoVenta{
     private Integer idDocumentoVenta;

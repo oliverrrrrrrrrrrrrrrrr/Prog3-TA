@@ -2,13 +2,14 @@ package pe.edu.pucp.campusstore.modelo;
 
 import java.util.Date;
 
-public class Descuento {
+public abstract class Descuento {
 
     private Integer idDescuento;
     private String descripcion;
     private Double valorDescuento;
     private Date fechaCaducidad;
     private Boolean activo;
+    private TipoProducto tipoProducto;
 
     public Descuento() {
         this.idDescuento = null;
@@ -16,14 +17,16 @@ public class Descuento {
         this.valorDescuento = null;
         this.fechaCaducidad = null;
         this.activo = null;
+        this.tipoProducto = null;
     }
 
-    public Descuento(Integer idDescuento, String descripcion, Double valorDescuento, Date fechaCaducidad, Boolean activo) {
+    public Descuento(Integer idDescuento, String descripcion, Double valorDescuento, Date fechaCaducidad, Boolean activo, TipoProducto tipoProducto) {
         this.idDescuento = idDescuento;
         this.descripcion = descripcion;
         this.valorDescuento = valorDescuento;
         this.fechaCaducidad = fechaCaducidad;
         this.activo = activo;
+        this.tipoProducto = tipoProducto;
     }
 
     public Integer getIdDescuento() {
@@ -65,4 +68,13 @@ public class Descuento {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
+    
+    public TipoProducto getTipoProducto() {
+        return tipoProducto;
+    }
+
+    public void setTipoProducto(TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
+    }
+    
 }

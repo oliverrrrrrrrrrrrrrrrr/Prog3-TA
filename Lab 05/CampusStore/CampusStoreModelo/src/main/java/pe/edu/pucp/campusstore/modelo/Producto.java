@@ -2,7 +2,7 @@ package pe.edu.pucp.campusstore.modelo;
 
 import java.util.List;
 
-public abstract class Producto{
+public abstract class Producto {
     private Double precio;
     private Double precioDescuento;
     private Integer stockReal;
