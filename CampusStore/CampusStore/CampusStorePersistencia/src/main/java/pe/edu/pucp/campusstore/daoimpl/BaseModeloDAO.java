@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package pe.edu.pucp.campusstore.daoimpl;
 
 import java.sql.CallableStatement;
@@ -7,11 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import pe.edu.pucp.campusstore.dao.Persistible;
+import pe.edu.pucp.campusstore.dao.ModeloPersistible;
 import pe.edu.pucp.campusstore.db.DBFactoryProvider;
 import pe.edu.pucp.campusstore.db.DBManager;
 
-public abstract class BaseDAO<T> implements Persistible<T, Integer> {    
+public abstract class BaseModeloDAO<T> implements ModeloPersistible<T, Integer>{
+
     protected abstract PreparedStatement comandoCrear(Connection conn, 
             T modelo) throws SQLException;
     
@@ -19,15 +24,17 @@ public abstract class BaseDAO<T> implements Persistible<T, Integer> {
             T modelo) throws SQLException;
     
     protected abstract PreparedStatement comandoEliminar(Connection conn, 
-            Integer id) throws SQLException;
+            T modelo) throws SQLException;
     
     protected abstract PreparedStatement comandoLeer(Connection conn, 
-            Integer id) throws SQLException;
+            T modelo) throws SQLException;
     
-    protected abstract PreparedStatement comandoLeerTodos(Connection conn) 
-            throws SQLException;
+    protected abstract PreparedStatement comandoLeerTodos(Connection conn,
+            T modelo) throws SQLException;
     
     protected abstract T mapearModelo(ResultSet rs) throws SQLException;
+    
+    protected abstract String getNombreParametroId() throws SQLException;
     
     protected <R> R ejecutarComando(ComandoDAO<R> command) {
         DBManager dbManager = DBFactoryProvider.getManager();
@@ -53,7 +60,7 @@ public abstract class BaseDAO<T> implements Persistible<T, Integer> {
                 }
                 
                 if (cmd instanceof CallableStatement callableCmd) {
-                    return callableCmd.getInt("p_id");
+                    return callableCmd.getInt(getNombreParametroId());
                 }
                 
                 try (ResultSet rs = cmd.getGeneratedKeys()) {
@@ -77,23 +84,22 @@ public abstract class BaseDAO<T> implements Persistible<T, Integer> {
     }
     
     @Override
-    public boolean eliminar(Integer id) {
+    public boolean eliminar(T modelo) {
         return ejecutarComando(conn -> {
-            try (PreparedStatement cmd = this.comandoEliminar(conn, id)) {
+            try (PreparedStatement cmd = this.comandoEliminar(conn, modelo)) {
                 return cmd.executeUpdate() > 0;
             }
         });
     }
     
     @Override
-    public T leer(Integer id) {
+    public T leer(T modelo) {
         return ejecutarComando(conn -> {
-            try (PreparedStatement cmd = this.comandoLeer(conn, id)) {
+            try (PreparedStatement cmd = this.comandoLeer(conn, modelo)) {
                 ResultSet rs = cmd.executeQuery();
 
                 if (!rs.next()) {
-                    System.err.println("No se encontro el registro con "
-                            + "id: " + id);
+                    System.err.println("No se encontro el registro ");
                     return null;
                 }
 
@@ -103,9 +109,9 @@ public abstract class BaseDAO<T> implements Persistible<T, Integer> {
     }
     
     @Override
-    public List<T> leerTodos() {
+    public List<T> leerTodos(T modelo) {
         return ejecutarComando(conn -> {
-            try (PreparedStatement cmd = this.comandoLeerTodos(conn)) {
+            try (PreparedStatement cmd = this.comandoLeerTodos(conn, modelo)) {
                 ResultSet rs = cmd.executeQuery();
 
                 List<T> modelos = new ArrayList<>();
@@ -117,4 +123,5 @@ public abstract class BaseDAO<T> implements Persistible<T, Integer> {
             }
         });
     }
+    
 }

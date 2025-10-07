@@ -9,6 +9,7 @@ public class Cupon{
     private Date fechaCaducidad;
     private Boolean activo;
     private Integer usosRestantes;
+    private Cliente cliente;
     
     public Cupon() {
         this.idCupon = null;
@@ -17,15 +18,17 @@ public class Cupon{
         this.fechaCaducidad = null;
         this.activo = null;
         this.usosRestantes = null;
+        this.cliente = null;
     }
 
-    public Cupon(Integer idCupon, String codigo, Double descuento, Date fechaCaducidad, Boolean activo, Integer usosRestantes) {
+    public Cupon(Integer idCupon, String codigo, Double descuento, Date fechaCaducidad, Boolean activo, Integer usosRestantes, Cliente cliente) {
         this.idCupon = idCupon;
         this.codigo = codigo;
         this.descuento = descuento;
         this.fechaCaducidad = fechaCaducidad;
         this.activo = activo;
         this.usosRestantes = usosRestantes;
+        this.cliente = cliente;
     }
 
     public Integer getIdCupon() {
@@ -74,6 +77,14 @@ public class Cupon{
 
     public void setUsosRestantes(Integer usosRestantes) {
         this.usosRestantes = usosRestantes;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
     
 }

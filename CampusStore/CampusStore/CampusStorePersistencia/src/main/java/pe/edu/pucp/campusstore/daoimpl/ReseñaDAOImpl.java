@@ -2,39 +2,38 @@ package pe.edu.pucp.campusstore.daoimpl;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import pe.edu.pucp.campusstore.dao.ArticuloDAO;
-import pe.edu.pucp.campusstore.dao.DescuentoDAO;
+import pe.edu.pucp.campusstore.dao.ReseñaDAO;
 import pe.edu.pucp.campusstore.dao.temporal.LibroDAO;
 import pe.edu.pucp.campusstore.modelo.Articulo;
-import pe.edu.pucp.campusstore.modelo.Descuento;
+import pe.edu.pucp.campusstore.modelo.Cliente;
 import pe.edu.pucp.campusstore.modelo.Libro;
+import pe.edu.pucp.campusstore.modelo.Reseña;
 import pe.edu.pucp.campusstore.modelo.TipoProducto;
 
-public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements DescuentoDAO {
-    
+public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO{
     private ArticuloDAO articuloDAO;
     private LibroDAO libroDAO;
     
-    public DescuentoDAOImpl(){
+    public ReseñaDAOImpl(){
         this.articuloDAO = new ArticuloDAOImpl();
         this.libroDAO = new LibroDAOImpl();
     }
     
     @Override
     protected String getNombreParametroId() throws SQLException {
-        return "p_idDescuento";
+        return "p_idReseña";
     }
     
     @Override
     protected PreparedStatement comandoCrear(Connection conn, 
-            Descuento modelo) throws SQLException {
+            Reseña modelo) throws SQLException {
         
-        String sql = "{call insertarDescuento(?, ?, ?, ?, ?, ?)}";
+        String sql = "{call insertarReseña(?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
@@ -45,61 +44,59 @@ public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements Descue
             default -> throw new SQLException("Tipo de producto no válido");
         }
         
-        cmd.setDouble("p_valorDescuento", modelo.getValorDescuento());
-        cmd.setDate("p_fechaCaducidad", new Date(modelo.getFechaCaducidad().getTime()));
-        cmd.setBoolean("p_activo", modelo.getActivo());
+        cmd.setDouble("p_calificacion", modelo.getCalificacion());
+        cmd.setString("p_reseña", modelo.getReseña());
         
-        cmd.registerOutParameter("p_idDescuento", Types.INTEGER);
+        cmd.registerOutParameter("p_idReseña", Types.INTEGER);
         
         return cmd;
     }
 
     @Override
     protected PreparedStatement comandoActualizar(Connection conn, 
-            Descuento modelo) throws SQLException {
+            Reseña modelo) throws SQLException {
         
-        String sql = "{call modificarDescuento(?, ?, ?, ? ,?)}";
+        String sql = "{call modificarReseña(?, ?, ? ,?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
         
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
-        cmd.setDouble("p_valorDescuento", modelo.getValorDescuento());
-        cmd.setDate("p_fechaCaducidad", new Date(modelo.getFechaCaducidad().getTime()));
-        cmd.setBoolean("p_activo", modelo.getActivo());
-        cmd.setInt("p_idDescuento", modelo.getIdDescuento());
+        cmd.setDouble("p_calificacion", modelo.getCalificacion());
+        cmd.setString("p_reseña", modelo.getReseña());
+        cmd.setInt("p_idReseña", modelo.getIdReseña());
         
         return cmd;
     }
 
     @Override
     protected PreparedStatement comandoEliminar(Connection conn, 
-            Descuento modelo) throws SQLException {
+            Reseña modelo) throws SQLException {
         
-        String sql = "{call eliminarDescuento(? ,?)}";
+        String sql = "{call eliminarReseña(? ,?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
-        cmd.setInt("p_idDescuento", modelo.getIdDescuento());
+        cmd.setInt("p_idReseña", modelo.getIdReseña());
         
         return cmd;
     }
 
     @Override
     protected PreparedStatement comandoLeer(Connection conn, 
-            Descuento modelo) throws SQLException {
+            Reseña modelo) throws SQLException {
         
-        String sql = "{call buscarDescuentoPorId(?, ?)}";
+        String sql = "{call buscarReseñaPorId(?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
-        cmd.setInt("p_idDescuento", modelo.getIdDescuento());
+        cmd.setInt("p_idReseña", modelo.getIdReseña());
         
         return cmd;
     }
 
     @Override
     protected PreparedStatement comandoLeerTodos(
-            Connection conn, Descuento modelo) throws SQLException {
+            Connection conn, Reseña modelo) throws SQLException {
         
-        String sql = "{call listarDescuentos(?)}";
+        String sql = "{call listarReseñas(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
         
@@ -107,15 +104,14 @@ public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements Descue
     }
 
     @Override
-    protected Descuento mapearModelo(ResultSet rs) throws SQLException {
+    protected Reseña mapearModelo(ResultSet rs) throws SQLException {
         
         
-        Descuento modelo = new Descuento();
+        Reseña modelo = new Reseña();
         
-        modelo.setIdDescuento(rs.getInt("idDescuento"));
-        modelo.setActivo(rs.getBoolean("activo"));
-        modelo.setValorDescuento(rs.getDouble("valorDescuento"));
-        modelo.setFechaCaducidad(rs.getDate("fechaCaducidad"));
+        modelo.setIdReseña(rs.getInt("idReseña"));
+        modelo.setCalificacion(rs.getDouble("calificacion"));
+        modelo.setReseña(rs.getString("reseña"));
         
         TipoProducto tipo = TipoProducto.valueOf(rs.getString("tipoProducto"));
         modelo.setTipoProducto(tipo);
@@ -130,6 +126,10 @@ public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements Descue
             Libro libro = libroDAO.leer(idLibro);
             modelo.setProducto(libro);
         }
+        
+        Cliente cliente = new Cliente();
+        
+        cliente.setIdCliente(rs.getInt("idCliente"));
         
         return modelo;
     }
