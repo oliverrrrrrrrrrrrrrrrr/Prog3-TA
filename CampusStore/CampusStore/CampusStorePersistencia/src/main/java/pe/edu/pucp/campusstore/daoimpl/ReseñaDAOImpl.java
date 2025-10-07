@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import pe.edu.pucp.campusstore.dao.ArticuloDAO;
 import pe.edu.pucp.campusstore.dao.ReseñaDAO;
-import pe.edu.pucp.campusstore.dao.temporal.LibroDAO;
+import pe.edu.pucp.campusstore.dao.LibroDAO;
 import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Cliente;
 import pe.edu.pucp.campusstore.modelo.Libro;
