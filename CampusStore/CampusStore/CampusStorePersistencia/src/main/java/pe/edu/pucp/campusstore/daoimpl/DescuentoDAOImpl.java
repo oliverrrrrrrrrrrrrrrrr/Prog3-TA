@@ -26,11 +26,6 @@ public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements Descue
     }
     
     @Override
-    protected String getNombreParametroId() throws SQLException {
-        return "p_idDescuento";
-    }
-    
-    @Override
     protected PreparedStatement comandoCrear(Connection conn, 
             Descuento modelo) throws SQLException {
         

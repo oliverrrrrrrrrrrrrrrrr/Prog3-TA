@@ -34,8 +34,6 @@ public abstract class BaseModeloDAO<T> implements ModeloPersistible<T, Integer>{
     
     protected abstract T mapearModelo(ResultSet rs) throws SQLException;
     
-    protected abstract String getNombreParametroId() throws SQLException;
-    
     protected <R> R ejecutarComando(ComandoDAO<R> command) {
         DBManager dbManager = DBFactoryProvider.getManager();
         try (Connection conn = dbManager.getConnection()) {
@@ -60,7 +58,7 @@ public abstract class BaseModeloDAO<T> implements ModeloPersistible<T, Integer>{
                 }
                 
                 if (cmd instanceof CallableStatement callableCmd) {
-                    return callableCmd.getInt(getNombreParametroId());
+                    return callableCmd.getInt("p_id");
                 }
                 
                 try (ResultSet rs = cmd.getGeneratedKeys()) {

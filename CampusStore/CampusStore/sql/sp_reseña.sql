@@ -4,7 +4,6 @@
 
 USE `libreria`;
 DROP PROCEDURE IF EXISTS `buscarReseñaPorId`;
-
 DELIMITER //
 CREATE PROCEDURE `buscarReseñaPorId`(
     IN p_tipo VARCHAR(10),
@@ -12,21 +11,27 @@ CREATE PROCEDURE `buscarReseñaPorId`(
 )
 BEGIN
     IF p_tipo = 'LIBRO' THEN
-        SELECT idReseñaLibro   AS idReseña,
-               calificacion,
-               reseña,
-               LIBRO_idLibro   AS idLibro
-        FROM RESEÑA_LIBRO
-        WHERE idReseñaLibro = p_idReseña;
-
+        SELECT 
+            rl.idReseñaLibro AS idReseña,
+            rl.calificacion,
+            rl.reseña,
+            'LIBRO' AS tipoProducto,
+            rl.LIBRO_idLibro AS idLibro,
+            rl.cliente_idCliente AS idCliente
+        FROM RESEÑA_LIBRO rl
+        WHERE rl.idReseñaLibro = p_idReseña;
+        
     ELSEIF p_tipo = 'ARTICULO' THEN
-        SELECT idReseñaArticulo AS idReseña,
-               calificacion,
-               reseña,
-               ARTICULO_idArticulo AS idArticulo
-        FROM RESEÑA_ARTICULO
-        WHERE idReseñaArticulo = p_idReseña;
-
+        SELECT 
+            ra.idReseñaArticulo AS idReseña,
+            ra.calificacion,
+            ra.reseña,
+            'ARTICULO' AS tipoProducto,
+            ra.ARTICULO_idArticulo AS idArticulo,
+            ra.cliente_idCliente AS idCliente
+        FROM RESEÑA_ARTICULO ra
+        WHERE ra.idReseñaArticulo = p_idReseña;
+        
     ELSE
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Tipo no válido: debe ser LIBRO o ARTICULO';
@@ -66,25 +71,28 @@ DELIMITER ;
 -- procedure insertarReseña
 -- -----------------------------------------------------
 
+USE `libreria`;
+DROP PROCEDURE IF EXISTS `insertarReseña`;
 DELIMITER //
 CREATE PROCEDURE `insertarReseña`(
     IN p_tipo VARCHAR(10),
     IN p_calificacion INT,
     IN p_reseña VARCHAR(500),
-    IN p_idReferencia INT, -- idLibro o idArticulo según corresponda
+    IN p_idReferencia INT,
+    IN p_idCliente INT,
     OUT p_idReseña INT
 )
 BEGIN
     IF p_tipo = 'LIBRO' THEN
-        INSERT INTO RESEÑA_LIBRO (calificacion, reseña, LIBRO_idLibro)
-        VALUES (p_calificacion, p_reseña, p_idReferencia);
+        INSERT INTO RESEÑA_LIBRO (calificacion, reseña, LIBRO_idLibro, cliente_idCliente)
+        VALUES (p_calificacion, p_reseña, p_idReferencia, p_idCliente);
         SET p_idReseña = LAST_INSERT_ID();
-
+        
     ELSEIF p_tipo = 'ARTICULO' THEN
-        INSERT INTO RESEÑA_ARTICULO (calificacion, reseña, ARTICULO_idArticulo)
-        VALUES (p_calificacion, p_reseña, p_idReferencia);
+        INSERT INTO RESEÑA_ARTICULO (calificacion, reseña, ARTICULO_idArticulo, cliente_idCliente)
+        VALUES (p_calificacion, p_reseña, p_idReferencia, p_idCliente);
         SET p_idReseña = LAST_INSERT_ID();
-
+        
     ELSE
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Tipo no válido: debe ser LIBRO o ARTICULO';
@@ -98,43 +106,54 @@ DELIMITER ;
 
 USE `libreria`;
 DROP PROCEDURE IF EXISTS `listarReseñas`;
-
 DELIMITER //
 CREATE PROCEDURE `listarReseñas`(
     IN p_tipo VARCHAR(10)
 )
 BEGIN
     IF p_tipo = 'LIBRO' THEN
-        SELECT idReseñaLibro AS idReseña,
-               calificacion,
-               reseña,
-               LIBRO_idLibro AS idReferencia,
-               'LIBRO' AS tipo
-        FROM RESEÑA_LIBRO;
-
+        SELECT 
+            rl.idReseñaLibro AS idReseña,
+            rl.calificacion,
+            rl.reseña,
+            'LIBRO' AS tipoProducto,
+            rl.LIBRO_idLibro AS idLibro,
+            rl.cliente_idCliente AS idCliente
+        FROM RESEÑA_LIBRO rl;
+        
     ELSEIF p_tipo = 'ARTICULO' THEN
-        SELECT idReseñaArticulo AS idReseña,
-               calificacion,
-               reseña,
-               ARTICULO_idArticulo AS idReferencia,
-               'ARTICULO' AS tipo
-        FROM RESEÑA_ARTICULO;
-
+        SELECT 
+            ra.idReseñaArticulo AS idReseña,
+            ra.calificacion,
+            ra.reseña,
+            'ARTICULO' AS tipoProducto,
+            ra.ARTICULO_idArticulo AS idArticulo,
+            ra.cliente_idCliente AS idCliente
+        FROM RESEÑA_ARTICULO ra;
+        
     ELSEIF p_tipo IS NULL OR p_tipo = 'TODOS' THEN
-        SELECT idReseñaLibro AS idReseña,
-               calificacion,
-               reseña,
-               LIBRO_idLibro AS idReferencia,
-               'LIBRO' AS tipo
-        FROM RESEÑA_LIBRO
+        SELECT 
+            rl.idReseñaLibro AS idReseña,
+            rl.calificacion,
+            rl.reseña,
+            'LIBRO' AS tipoProducto,
+            rl.LIBRO_idLibro AS idLibro,
+            NULL AS idArticulo,
+            rl.cliente_idCliente AS idCliente
+        FROM RESEÑA_LIBRO rl
+        
         UNION ALL
-        SELECT idReseñaArticulo AS idReseña,
-               calificacion,
-               reseña,
-               ARTICULO_idArticulo AS idReferencia,
-               'ARTICULO' AS tipo
-        FROM RESEÑA_ARTICULO;
-
+        
+        SELECT 
+            ra.idReseñaArticulo AS idReseña,
+            ra.calificacion,
+            ra.reseña,
+            'ARTICULO' AS tipoProducto,
+            NULL AS idLibro,
+            ra.ARTICULO_idArticulo AS idArticulo,
+            ra.cliente_idCliente AS idCliente
+        FROM RESEÑA_ARTICULO ra;
+        
     ELSE
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Tipo no válido: debe ser LIBRO, ARTICULO o NULL/TODOS';

@@ -26,7 +26,7 @@ public class Libro extends Producto {
     }
 
     public Libro(Integer idLibro, String isbn, GeneroLibro genero, Date fechaPublicacion, Formato formato, String sinopsis, Editorial editorial, List<Autor> autores, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, Descuento descuento, List<Reseña> reseñas) {
-        super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion/*, descuento*/, reseñas);
+        super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion, descuento, reseñas);
         this.idLibro = idLibro;
         this.isbn = isbn;
         this.genero = genero;

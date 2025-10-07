@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import pe.edu.pucp.campusstore.dao.ArticuloDAO;
+import pe.edu.pucp.campusstore.dao.ClienteDAO;
 import pe.edu.pucp.campusstore.dao.ReseñaDAO;
 import pe.edu.pucp.campusstore.dao.LibroDAO;
 import pe.edu.pucp.campusstore.modelo.Articulo;
@@ -18,22 +19,19 @@ import pe.edu.pucp.campusstore.modelo.TipoProducto;
 public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO{
     private ArticuloDAO articuloDAO;
     private LibroDAO libroDAO;
+    private ClienteDAO clienteDAO;
     
     public ReseñaDAOImpl(){
         this.articuloDAO = new ArticuloDAOImpl();
         this.libroDAO = new LibroDAOImpl();
-    }
-    
-    @Override
-    protected String getNombreParametroId() throws SQLException {
-        return "p_idReseña";
+        this.clienteDAO = new ClienteDAOImpl();
     }
     
     @Override
     protected PreparedStatement comandoCrear(Connection conn, 
             Reseña modelo) throws SQLException {
         
-        String sql = "{call insertarReseña(?, ?, ?, ?, ?)}";
+        String sql = "{call insertarReseña(?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
@@ -46,6 +44,7 @@ public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO
         
         cmd.setDouble("p_calificacion", modelo.getCalificacion());
         cmd.setString("p_reseña", modelo.getReseña());
+        cmd.setInt("p_idCliente", modelo.getCliente().getIdCliente());
         
         cmd.registerOutParameter("p_idReseña", Types.INTEGER);
         
@@ -127,9 +126,9 @@ public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO
             modelo.setProducto(libro);
         }
         
-        Cliente cliente = new Cliente();
-        
-        cliente.setIdCliente(rs.getInt("idCliente"));
+        int idCliente = rs.getInt("idCliente");
+        Cliente cliente = clienteDAO.leer(idCliente);
+        modelo.setCliente(cliente);
         
         return modelo;
     }
