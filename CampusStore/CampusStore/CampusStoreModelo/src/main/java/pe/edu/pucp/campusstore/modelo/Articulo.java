@@ -14,7 +14,7 @@ public class Articulo extends Producto {
 
 
     public Articulo(Integer idArticulo, TipoArticulo tipoArticulo, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, Descuento descuento, List<Reseña> reseñas) {
-        super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion/*, descuento*/, reseñas);
+        super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion, descuento, reseñas);
         this.idArticulo = idArticulo;
         this.tipoArticulo = tipoArticulo;
     }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.campusstore.daoimpl;
 
 import java.sql.CallableStatement;
@@ -11,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import pe.edu.pucp.campusstore.dao.temporal.LibroDAO;
+import pe.edu.pucp.campusstore.dao.LibroDAO;
 import pe.edu.pucp.campusstore.modelo.Descuento;
 import pe.edu.pucp.campusstore.modelo.Editorial;
 import pe.edu.pucp.campusstore.modelo.Formato;
@@ -23,15 +19,15 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
     protected PreparedStatement comandoCrear(Connection conn, 
             Libro modelo) throws SQLException {
         
-        String sql = "{call insertarLibro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call insertarLibro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
+        
         cmd.setDouble("p_precio", modelo.getPrecio());
         cmd.setDouble("p_precioDescuento", modelo.getPrecioDescuento());
         cmd.setInt("p_stockReal", modelo.getStockReal());
         cmd.setInt("p_stockVirtual", modelo.getStockVirtual());
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_descripcion", modelo.getDescripcion());
-        cmd.setString("p_titulo", modelo.getTitulo());
         cmd.setString("p_isbn", modelo.getIsbn());
         cmd.setString("p_generoLibro", modelo.getGenero().toString());
         cmd.setDate("p_fechaPublicacion", new Date(modelo.getFechaPublicacion().getTime()));
@@ -58,7 +54,6 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
         cmd.setInt("p_stockVirtual", modelo.getStockVirtual());
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_descripcion", modelo.getDescripcion());
-        cmd.setString("p_titulo", modelo.getTitulo());
         cmd.setString("p_isbn", modelo.getIsbn());
         cmd.setString("p_generoLibro", modelo.getGenero().toString());
         cmd.setDate("p_fechaPublicacion", new Date(modelo.getFechaPublicacion().getTime()));
@@ -113,7 +108,6 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
         modelo.setStockVirtual(rs.getInt("stockVirtual"));
         modelo.setNombre(rs.getString("nombre"));
         modelo.setDescripcion(rs.getString("descripcion"));
-        modelo.setTitulo(rs.getString("titulo"));
         modelo.setIsbn(rs.getString("isbn"));
         modelo.setGenero(GeneroLibro.valueOf(rs.getString("generoLibro")));
         modelo.setFechaPublicacion(rs.getDate("fechaPublicacion"));
@@ -122,7 +116,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
         Editorial editorialAux=new Editorial();
         editorialAux.setIdEditorial(rs.getInt("idEditorial"));
         modelo.setEditorial(editorialAux);
-        Descuento descuentoAux=new Descuento();
+        Descuento descuentoAux = new Descuento();
         descuentoAux.setIdDescuento(rs.getInt("idDescuento"));
         modelo.setDescuento(descuentoAux);
         return modelo;

@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import pe.edu.pucp.campusstore.dao.temporal.OrdenCompraDAO;
+import pe.edu.pucp.campusstore.dao.OrdenCompraDAO;
 import pe.edu.pucp.campusstore.modelo.Carrito;
 import pe.edu.pucp.campusstore.modelo.Cliente;
 import pe.edu.pucp.campusstore.modelo.EstadoOrden;

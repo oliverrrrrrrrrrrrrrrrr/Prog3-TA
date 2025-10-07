@@ -93,7 +93,6 @@ public class DescuentoDAOImpl extends BaseDAO<Descuento> implements DescuentoDAO
     @Override
     protected Descuento mapearModelo(ResultSet rs) throws SQLException {
         
-        
         Descuento modelo = new Descuento();
         
         modelo.setIdDescuento(rs.getInt("idDescuento"));

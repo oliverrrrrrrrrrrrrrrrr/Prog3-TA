@@ -9,7 +9,7 @@ public abstract class Producto {
     private Integer stockVirtual;
     private String nombre;
     private String descripcion;
-    //private Descuento descuento;
+    private Descuento descuento;
     private List<Reseña> reseñas;
     
     public Producto() {
@@ -19,18 +19,18 @@ public abstract class Producto {
         this.stockVirtual = null;
         this.nombre = null;
         this.descripcion = null;
-        //this.descuento = null;
+        this.descuento = null;
         this.reseñas = null;
     }
 
-    public Producto(Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion/*, Descuento descuento*/, List<Reseña> reseñas) {
+    public Producto(Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, Descuento descuento, List<Reseña> reseñas) {
         this.precio = precio;
         this.precioDescuento = precioDescuento;
         this.stockReal = stockReal;
         this.stockVirtual = stockVirtual;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        //this.descuento = descuento;
+        this.descuento = descuento;
         this.reseñas = reseñas;
     }
 
@@ -82,13 +82,13 @@ public abstract class Producto {
         this.descripcion = descripcion;
     }
 
-    /*public Descuento getDescuento() {
+    public Descuento getDescuento() {
         return descuento;
     }
 
     public void setDescuento(Descuento descuento) {
         this.descuento = descuento;
-    }*/
+    }
 
     public List<Reseña> getReseñas() {
         return reseñas;

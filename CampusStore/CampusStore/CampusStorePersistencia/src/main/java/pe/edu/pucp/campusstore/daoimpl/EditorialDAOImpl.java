@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.campusstore.daoimpl;
 
 import java.sql.CallableStatement;
@@ -19,7 +15,7 @@ public class EditorialDAOImpl extends BaseDAO<Editorial> implements EditorialDAO
     protected PreparedStatement comandoCrear(Connection conn, 
             Editorial modelo) throws SQLException {
         
-        String sql = "{call insertarEditorial(?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call insertarEditorial(?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_direccion", modelo.getDireccion());
@@ -27,7 +23,6 @@ public class EditorialDAOImpl extends BaseDAO<Editorial> implements EditorialDAO
         cmd.setString("p_cif", modelo.getCif());
         cmd.setString("p_email", modelo.getEmail());
         cmd.setString("p_sitioWeb", modelo.getSitioWeb());
-        cmd.setDate("p_fechaFundacion", new Date(modelo.getFechaFundacion().getTime()));
         cmd.registerOutParameter("p_id", Types.INTEGER);
         
         return cmd;
@@ -37,7 +32,7 @@ public class EditorialDAOImpl extends BaseDAO<Editorial> implements EditorialDAO
     protected PreparedStatement comandoActualizar(Connection conn, 
             Editorial modelo) throws SQLException {
         
-        String sql = "{call modificarEditorial(?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call modificarEditorial(?, ?, ?, ?, ?, ?, ?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_nombre", modelo.getNombre());
@@ -46,7 +41,6 @@ public class EditorialDAOImpl extends BaseDAO<Editorial> implements EditorialDAO
         cmd.setString("p_cif", modelo.getCif());
         cmd.setString("p_email", modelo.getEmail());
         cmd.setString("p_sitioWeb", modelo.getSitioWeb());
-        cmd.setDate("p_fechaFundacion", new Date(modelo.getFechaFundacion().getTime()));
         cmd.setInt("p_id", modelo.getIdEditorial());
         
         return cmd;
@@ -95,7 +89,6 @@ public class EditorialDAOImpl extends BaseDAO<Editorial> implements EditorialDAO
         modelo.setCif(rs.getString("cif"));
         modelo.setEmail(rs.getString("email"));
         modelo.setSitioWeb(rs.getString("sitioWeb"));
-        modelo.setFechaFundacion(rs.getDate("fechaFundacion"));
         
         return modelo;
     }

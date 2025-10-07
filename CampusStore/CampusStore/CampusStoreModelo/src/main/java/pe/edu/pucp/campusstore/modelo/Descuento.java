@@ -2,7 +2,7 @@ package pe.edu.pucp.campusstore.modelo;
 
 import java.util.Date;
 
-public abstract class Descuento {
+public class Descuento {
 
     private Integer idDescuento;
     private String descripcion;
