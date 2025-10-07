@@ -1,4 +1,4 @@
-package pe.edu.pucp.campusstore.dao;
+package pe.edu.pucp.campusstore.interfaces.dao;
 
 import java.util.List;
 

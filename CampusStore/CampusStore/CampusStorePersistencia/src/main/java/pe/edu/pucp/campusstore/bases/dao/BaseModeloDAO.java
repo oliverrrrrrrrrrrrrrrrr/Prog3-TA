@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package pe.edu.pucp.campusstore.daoimpl;
+package pe.edu.pucp.campusstore.bases.dao;
 
+import pe.edu.pucp.campusstore.interfaces.dao.ModeloPersistible;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import pe.edu.pucp.campusstore.dao.ModeloPersistible;
+import pe.edu.pucp.campusstore.interfaces.dao.ComandoDAO;
 import pe.edu.pucp.campusstore.db.DBFactoryProvider;
 import pe.edu.pucp.campusstore.db.DBManager;
 

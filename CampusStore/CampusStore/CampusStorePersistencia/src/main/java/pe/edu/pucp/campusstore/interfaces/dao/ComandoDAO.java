@@ -1,4 +1,4 @@
-package pe.edu.pucp.campusstore.daoimpl;
+package pe.edu.pucp.campusstore.interfaces.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;

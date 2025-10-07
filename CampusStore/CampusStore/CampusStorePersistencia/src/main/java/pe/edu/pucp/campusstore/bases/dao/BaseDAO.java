@@ -1,5 +1,6 @@
-package pe.edu.pucp.campusstore.daoimpl;
+package pe.edu.pucp.campusstore.bases.dao;
 
+import pe.edu.pucp.campusstore.interfaces.dao.Persistible;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import pe.edu.pucp.campusstore.dao.Persistible;
+import pe.edu.pucp.campusstore.interfaces.dao.ComandoDAO;
 import pe.edu.pucp.campusstore.db.DBFactoryProvider;
 import pe.edu.pucp.campusstore.db.DBManager;
 
