@@ -13,6 +13,7 @@ import pe.edu.pucp.campusstore.dao.OrdenCompraDAO;
 
 public class DocumentoVentaDAOImpl extends BaseDAO<DocumentoVenta> implements DocumentoVentaDAO{
 
+    //Hola
     private OrdenCompraDAO ordenCompraDAO;
 
     public DocumentoVentaDAOImpl() {
