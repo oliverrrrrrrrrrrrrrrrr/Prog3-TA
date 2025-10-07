@@ -9,13 +9,8 @@ import java.sql.Types;
 import pe.edu.pucp.campusstore.dao.ArticuloDAO;
 import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Descuento;
-import pe.edu.pucp.campusstore.modelo.DescuentoArticulo;
 import pe.edu.pucp.campusstore.modelo.TipoArticulo;
 
-/**
- *
- * @author AXEL
- */
 public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
       @Override
     protected PreparedStatement comandoCrear(Connection conn, 

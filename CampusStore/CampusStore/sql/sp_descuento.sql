@@ -4,7 +4,6 @@
 
 USE `libreria`;
 DROP PROCEDURE IF EXISTS `buscarDescuentoPorId`;
-
 DELIMITER //
 CREATE PROCEDURE `buscarDescuentoPorId`(
     IN p_tipo VARCHAR(10),
@@ -12,20 +11,35 @@ CREATE PROCEDURE `buscarDescuentoPorId`(
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
-        SELECT *
-        FROM DESCUENTO_ARTICULO
-        WHERE idDescuentoArticulo = p_idDescuento;
+        SELECT 
+            da.idDescuentoArticulo AS idDescuento,
+            da.valorDescuento,
+            da.fechaCaducidad,
+            da.activo,
+            'ARTICULO' AS tipoProducto,
+            a.idArticulo
+        FROM DESCUENTO_ARTICULO da
+        INNER JOIN ARTICULO a ON da.ARTICULO_idArticulo = a.idArticulo
+        WHERE da.idDescuentoArticulo = p_idDescuento;
+        
     ELSEIF p_tipo = 'LIBRO' THEN
-        SELECT *
-        FROM DESCUENTO_LIBRO
-        WHERE idDescuentoLibro = p_idDescuento;
+        SELECT 
+            dl.idDescuentoLibro AS idDescuento,
+            dl.valorDescuento,
+            dl.fechaCaducidad,
+            dl.activo,
+            'LIBRO' AS tipoProducto,
+            l.idLibro
+        FROM DESCUENTO_LIBRO dl
+        INNER JOIN LIBRO l ON dl.LIBRO_idLibro = l.idLibro
+        WHERE dl.idDescuentoLibro = p_idDescuento;
+        
     ELSE
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Tipo no válido: debe ser ARTICULO o LIBRO';
     END IF;
 END//
 DELIMITER ;
-
 
 -- -----------------------------------------------------
 -- procedure eliminarDescuento
@@ -92,47 +106,55 @@ DELIMITER ;
 
 USE `libreria`;
 DROP PROCEDURE IF EXISTS `listarDescuentos`;
-
 DELIMITER //
 CREATE PROCEDURE `listarDescuentos`(
     IN p_tipo VARCHAR(10)
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
-        SELECT idDescuentoArticulo AS idDescuento,
-               valorDescuento,
-               fechaCaducidad,
-               activo,
-               ARTICULO_idArticulo AS idReferencia,
-               'ARTICULO' AS tipo
-        FROM DESCUENTO_ARTICULO;
-
+        SELECT 
+            da.idDescuentoArticulo AS idDescuento,
+            da.valorDescuento,
+            da.fechaCaducidad,
+            da.activo,
+            'ARTICULO' AS tipoProducto,
+            a.idArticulo
+        FROM DESCUENTO_ARTICULO da
+        INNER JOIN ARTICULO a ON da.ARTICULO_idArticulo = a.idArticulo;
+        
     ELSEIF p_tipo = 'LIBRO' THEN
-        SELECT idDescuentoLibro AS idDescuento,
-               valorDescuento,
-               fechaCaducidad,
-               activo,
-               LIBRO_idLibro AS idReferencia,
-               'LIBRO' AS tipo
-        FROM DESCUENTO_LIBRO;
-
+        SELECT 
+            dl.idDescuentoLibro AS idDescuento,
+            dl.valorDescuento,
+            dl.fechaCaducidad,
+            dl.activo,
+            'LIBRO' AS tipoProducto,
+            l.idLibro
+        FROM DESCUENTO_LIBRO dl
+        INNER JOIN LIBRO l ON dl.LIBRO_idLibro = l.idLibro;
+        
     ELSEIF p_tipo IS NULL OR p_tipo = 'TODOS' THEN
-        SELECT idDescuentoArticulo AS idDescuento,
-               valorDescuento,
-               fechaCaducidad,
-               activo,
-               ARTICULO_idArticulo AS idReferencia,
-               'ARTICULO' AS tipo
-        FROM DESCUENTO_ARTICULO
+        SELECT 
+            da.idDescuentoArticulo AS idDescuento,
+            da.valorDescuento,
+            da.fechaCaducidad,
+            da.activo,
+            'ARTICULO' AS tipoProducto,
+            a.idArticulo
+        FROM DESCUENTO_ARTICULO da
+        INNER JOIN ARTICULO a ON da.ARTICULO_idArticulo = a.idArticulo
+        
         UNION ALL
-        SELECT idDescuentoLibro AS idDescuento,
-               valorDescuento,
-               fechaCaducidad,
-               activo,
-               LIBRO_idLibro AS idReferencia,
-               'LIBRO' AS tipo
-        FROM DESCUENTO_LIBRO;
-
+        
+        SELECT 
+            dl.idDescuentoLibro AS idDescuento,
+            dl.valorDescuento,
+            dl.fechaCaducidad,
+            dl.activo,
+            'LIBRO' AS tipoProducto,
+            l.idLibro
+        FROM DESCUENTO_LIBRO dl
+        INNER JOIN LIBRO l ON dl.LIBRO_idLibro = l.idLibro;
     ELSE
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Tipo no válido: debe ser ARTICULO, LIBRO o NULL/TODOS';

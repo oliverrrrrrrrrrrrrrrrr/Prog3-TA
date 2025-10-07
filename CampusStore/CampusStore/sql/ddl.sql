@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `nombreUsuario` VARCHAR(25) NOT NULL,
   `correo` VARCHAR(100) NOT NULL,
   `telefono` VARCHAR(20) NULL DEFAULT NULL,
+  `CuponUsado_idCuponUsado` INT NOT NULL,
   PRIMARY KEY (`idCliente`),
   UNIQUE INDEX `correo` (`correo` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -78,8 +79,15 @@ CREATE TABLE IF NOT EXISTS `cupon` (
   `fechaCaducidad` DATETIME NOT NULL,
   `activo` TINYINT NOT NULL DEFAULT '1',
   `usosRestantes` INT NULL DEFAULT NULL,
+  `cliente_idCliente` INT NOT NULL,
   PRIMARY KEY (`idCupon`),
-  UNIQUE INDEX `codigo` (`codigo` ASC) VISIBLE)
+  UNIQUE INDEX `codigo` (`codigo` ASC) VISIBLE,
+  INDEX `fk_cupon_cliente1_idx` (`cliente_idCliente` ASC) VISIBLE,
+  CONSTRAINT `fk_cupon_cliente1`
+    FOREIGN KEY (`cliente_idCliente`)
+    REFERENCES `cliente` (`idCliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -403,11 +411,18 @@ CREATE TABLE IF NOT EXISTS `reseña_articulo` (
   `calificacion` INT NOT NULL,
   `reseña` VARCHAR(500) NULL DEFAULT NULL,
   `ARTICULO_idArticulo` INT NOT NULL,
+  `cliente_idCliente` INT NOT NULL,
   PRIMARY KEY (`idReseñaArticulo`),
   INDEX `fk_RESEÑA_ARTICULO1_idx` (`ARTICULO_idArticulo` ASC) VISIBLE,
+  INDEX `fk_reseña_articulo_cliente1_idx` (`cliente_idCliente` ASC) VISIBLE,
   CONSTRAINT `fk_RESEÑA_ARTICULO1`
     FOREIGN KEY (`ARTICULO_idArticulo`)
-    REFERENCES `articulo` (`idArticulo`))
+    REFERENCES `articulo` (`idArticulo`),
+  CONSTRAINT `fk_reseña_articulo_cliente1`
+    FOREIGN KEY (`cliente_idCliente`)
+    REFERENCES `cliente` (`idCliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -423,11 +438,18 @@ CREATE TABLE IF NOT EXISTS `reseña_libro` (
   `calificacion` INT NOT NULL,
   `reseña` VARCHAR(500) NULL DEFAULT NULL,
   `LIBRO_idLibro` INT NOT NULL,
+  `cliente_idCliente` INT NOT NULL,
   PRIMARY KEY (`idReseñaLibro`),
   INDEX `fk_RESEÑA_copy1_LIBRO1_idx` (`LIBRO_idLibro` ASC) VISIBLE,
+  INDEX `fk_reseña_libro_cliente1_idx` (`cliente_idCliente` ASC) VISIBLE,
   CONSTRAINT `fk_RESEÑA_copy1_LIBRO1`
     FOREIGN KEY (`LIBRO_idLibro`)
-    REFERENCES `libro` (`idLibro`))
+    REFERENCES `libro` (`idLibro`),
+  CONSTRAINT `fk_reseña_libro_cliente1`
+    FOREIGN KEY (`cliente_idCliente`)
+    REFERENCES `cliente` (`idCliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
