@@ -4,21 +4,44 @@
 
 USE `libreria`;
 DROP PROCEDURE IF EXISTS `buscarLineaCarritoPorId`;
-
 DELIMITER //
 CREATE PROCEDURE `buscarLineaCarritoPorId`(
+    IN p_tipo VARCHAR(10),
     IN p_idLineaCarrito INT
 )
 BEGIN
-    SELECT idLineaCarrito,
-           cantidad,
-           precioUnitario,
-           subtotal,
-           precioConDescuento,
-           subtotalConDescuento,
-           CARRITO_idCarrito
-    FROM LINEA_CARRITO
-    WHERE idLineaCarrito = p_idLineaCarrito;
+    IF p_tipo = 'ARTICULO' THEN
+        SELECT 
+            lca.idLineaCarrito,
+            lca.cantidad,
+            lca.precioUnitario,
+            lca.subtotal,
+            lca.precioConDescuento,
+            lca.subtotalConDescuento,
+            lca.CARRITO_idCarrito,
+            'ARTICULO' AS tipoProducto,
+            lca.articulo_idArticulo AS idArticulo
+        FROM LINEA_CARRITO_ARTICULO lca
+        WHERE lca.idLineaCarrito = p_idLineaCarrito;
+        
+    ELSEIF p_tipo = 'LIBRO' THEN
+        SELECT 
+            lcl.idLineaCarrito,
+            lcl.cantidad,
+            lcl.precioUnitario,
+            lcl.subtotal,
+            lcl.precioConDescuento,
+            lcl.subtotalConDescuento,
+            lcl.CARRITO_idCarrito,
+            'LIBRO' AS tipoProducto,
+            lcl.libro_idLibro AS idLibro
+        FROM LINEA_CARRITO_LIBRO lcl
+        WHERE lcl.idLineaCarrito = p_idLineaCarrito;
+        
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Tipo no válido: debe ser ARTICULO o LIBRO';
+    END IF;
 END//
 DELIMITER ;
 
@@ -28,14 +51,24 @@ DELIMITER ;
 
 USE `libreria`;
 DROP PROCEDURE IF EXISTS `eliminarLineaCarrito`;
-
 DELIMITER //
 CREATE PROCEDURE `eliminarLineaCarrito`(
+    IN p_tipo VARCHAR(10),
     IN p_idLineaCarrito INT
 )
 BEGIN
-    DELETE FROM LINEA_CARRITO
-    WHERE idLineaCarrito = p_idLineaCarrito;
+    IF p_tipo = 'ARTICULO' THEN
+        DELETE FROM LINEA_CARRITO_ARTICULO
+        WHERE idLineaCarrito = p_idLineaCarrito;
+        
+    ELSEIF p_tipo = 'LIBRO' THEN
+        DELETE FROM LINEA_CARRITO_LIBRO
+        WHERE idLineaCarrito = p_idLineaCarrito;
+        
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Tipo no válido: debe ser ARTICULO o LIBRO';
+    END IF;
 END//
 DELIMITER ;
 
@@ -45,33 +78,65 @@ DELIMITER ;
 
 USE `libreria`;
 DROP PROCEDURE IF EXISTS `insertarLineaCarrito`;
-
 DELIMITER //
 CREATE PROCEDURE `insertarLineaCarrito`(
+    IN p_tipo VARCHAR(10),           -- 'ARTICULO' o 'LIBRO'
     IN p_cantidad INT,
     IN p_precioUnitario DECIMAL(10,2),
     IN p_subtotal DECIMAL(10,2),
     IN p_precioConDescuento DECIMAL(10,2),
     IN p_subtotalConDescuento DECIMAL(10,2),
-    IN p_idCarrito INT
+    IN p_idCarrito INT,
+    IN p_idReferencia INT,           -- idArticulo o idLibro según corresponda
+    OUT p_idLineaCarrito INT
 )
 BEGIN
-    INSERT INTO LINEA_CARRITO(
-        cantidad,
-        precioUnitario,
-        subtotal,
-        precioConDescuento,
-        subtotalConDescuento,
-        CARRITO_idCarrito
-    )
-    VALUES (
-        p_cantidad,
-        p_precioUnitario,
-        p_subtotal,
-        p_precioConDescuento,
-        p_subtotalConDescuento,
-        p_idCarrito
-    );
+    IF p_tipo = 'ARTICULO' THEN
+        INSERT INTO LINEA_CARRITO_ARTICULO(
+            cantidad,
+            precioUnitario,
+            subtotal,
+            precioConDescuento,
+            subtotalConDescuento,
+            CARRITO_idCarrito,
+            articulo_idArticulo
+        )
+        VALUES (
+            p_cantidad,
+            p_precioUnitario,
+            p_subtotal,
+            p_precioConDescuento,
+            p_subtotalConDescuento,
+            p_idCarrito,
+            p_idReferencia
+        );
+        SET p_idLineaCarrito = LAST_INSERT_ID();
+        
+    ELSEIF p_tipo = 'LIBRO' THEN
+        INSERT INTO LINEA_CARRITO_LIBRO(
+            cantidad,
+            precioUnitario,
+            subtotal,
+            precioConDescuento,
+            subtotalConDescuento,
+            CARRITO_idCarrito,
+            libro_idLibro
+        )
+        VALUES (
+            p_cantidad,
+            p_precioUnitario,
+            p_subtotal,
+            p_precioConDescuento,
+            p_subtotalConDescuento,
+            p_idCarrito,
+            p_idReferencia
+        );
+        SET p_idLineaCarrito = LAST_INSERT_ID();
+        
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Tipo no válido: debe ser ARTICULO o LIBRO';
+    END IF;
 END//
 DELIMITER ;
 
@@ -81,19 +146,71 @@ DELIMITER ;
 
 USE `libreria`;
 DROP PROCEDURE IF EXISTS `listarLineasCarrito`;
-
 DELIMITER //
-CREATE PROCEDURE `listarLineasCarrito`()
+CREATE PROCEDURE `listarLineasCarrito`(
+    IN p_tipo VARCHAR(10)
+)
 BEGIN
-    SELECT 
-        idLineaCarrito,
-        cantidad,
-        precioUnitario,
-        subtotal,
-        precioConDescuento,
-        subtotalConDescuento,
-        CARRITO_idCarrito
-    FROM LINEA_CARRITO;
+    IF p_tipo = 'ARTICULO' THEN
+        SELECT 
+            lca.idLineaCarrito,
+            lca.cantidad,
+            lca.precioUnitario,
+            lca.subtotal,
+            lca.precioConDescuento,
+            lca.subtotalConDescuento,
+            lca.CARRITO_idCarrito,
+            'ARTICULO' AS tipoProducto,
+            lca.articulo_idArticulo AS idArticulo
+        FROM LINEA_CARRITO_ARTICULO lca;
+        
+    ELSEIF p_tipo = 'LIBRO' THEN
+        SELECT 
+            lcl.idLineaCarrito,
+            lcl.cantidad,
+            lcl.precioUnitario,
+            lcl.subtotal,
+            lcl.precioConDescuento,
+            lcl.subtotalConDescuento,
+            lcl.CARRITO_idCarrito,
+            'LIBRO' AS tipoProducto,
+            lcl.libro_idLibro AS idLibro
+        FROM LINEA_CARRITO_LIBRO lcl;
+        
+    ELSEIF p_tipo IS NULL OR p_tipo = 'TODOS' THEN
+        -- Todas las líneas (artículos y libros)
+        SELECT 
+            lca.idLineaCarrito,
+            lca.cantidad,
+            lca.precioUnitario,
+            lca.subtotal,
+            lca.precioConDescuento,
+            lca.subtotalConDescuento,
+            lca.CARRITO_idCarrito,
+            'ARTICULO' AS tipoProducto,
+            lca.articulo_idArticulo AS idArticulo,
+            NULL AS idLibro
+        FROM LINEA_CARRITO_ARTICULO lca
+        
+        UNION ALL
+        
+        SELECT 
+            lcl.idLineaCarrito,
+            lcl.cantidad,
+            lcl.precioUnitario,
+            lcl.subtotal,
+            lcl.precioConDescuento,
+            lcl.subtotalConDescuento,
+            lcl.CARRITO_idCarrito,
+            'LIBRO' AS tipoProducto,
+            NULL AS idArticulo,
+            lcl.libro_idLibro AS idLibro
+        FROM LINEA_CARRITO_LIBRO lcl;
+        
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Tipo no válido: debe ser ARTICULO, LIBRO o NULL/TODOS';
+    END IF;
 END//
 DELIMITER ;
 
@@ -103,26 +220,40 @@ DELIMITER ;
 
 USE `libreria`;
 DROP PROCEDURE IF EXISTS `modificarLineaCarrito`;
-
 DELIMITER //
 CREATE PROCEDURE `modificarLineaCarrito`(
+    IN p_tipo VARCHAR(10),
     IN p_idLineaCarrito INT,
     IN p_cantidad INT,
     IN p_precioUnitario DECIMAL(10,2),
     IN p_subtotal DECIMAL(10,2),
     IN p_precioConDescuento DECIMAL(10,2),
-    IN p_subtotalConDescuento DECIMAL(10,2),
-    IN p_idCarrito INT
+    IN p_subtotalConDescuento DECIMAL(10,2)
 )
 BEGIN
-    UPDATE LINEA_CARRITO
-    SET 
-        cantidad = p_cantidad,
-        precioUnitario = p_precioUnitario,
-        subtotal = p_subtotal,
-        precioConDescuento = p_precioConDescuento,
-        subtotalConDescuento = p_subtotalConDescuento,
-        CARRITO_idCarrito = p_idCarrito
-    WHERE idLineaCarrito = p_idLineaCarrito;
+    IF p_tipo = 'ARTICULO' THEN
+        UPDATE LINEA_CARRITO_ARTICULO
+        SET 
+            cantidad = p_cantidad,
+            precioUnitario = p_precioUnitario,
+            subtotal = p_subtotal,
+            precioConDescuento = p_precioConDescuento,
+            subtotalConDescuento = p_subtotalConDescuento
+        WHERE idLineaCarrito = p_idLineaCarrito;
+        
+    ELSEIF p_tipo = 'LIBRO' THEN
+        UPDATE LINEA_CARRITO_LIBRO
+        SET 
+            cantidad = p_cantidad,
+            precioUnitario = p_precioUnitario,
+            subtotal = p_subtotal,
+            precioConDescuento = p_precioConDescuento,
+            subtotalConDescuento = p_subtotalConDescuento
+        WHERE idLineaCarrito = p_idLineaCarrito;
+        
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Tipo no válido: debe ser ARTICULO o LIBRO';
+    END IF;
 END//
 DELIMITER ;
