@@ -9,7 +9,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `buscarLibroPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM LIBRO WHERE idLibro = p_id;
+    SELECT * FROM libro WHERE idLibro = p_id;
 END//
 
 DELIMITER ;
@@ -25,7 +25,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `eliminarLibro`(IN p_id INT)
 BEGIN
-    DELETE FROM LIBRO WHERE idLibro = p_id;
+    DELETE FROM libro WHERE idLibro = p_id;
 END//
 
 DELIMITER ;
@@ -55,7 +55,7 @@ CREATE PROCEDURE `insertarLibro`(
     OUT p_id INT
 )
 BEGIN
-    INSERT INTO LIBRO (
+    INSERT INTO libro (
         precio,
         precioDescuento,
         stockReal,
@@ -99,7 +99,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `listarLibros`()
 BEGIN
-    SELECT * FROM LIBRO;
+    SELECT * FROM libro;
 END//
 
 DELIMITER ;
@@ -129,7 +129,7 @@ CREATE PROCEDURE `modificarLibro`(
     IN p_idEditorial INT
 )
 BEGIN
-    UPDATE LIBRO
+    UPDATE libro
     SET 
         precio = p_precio,
         precioDescuento = p_precioDescuento,

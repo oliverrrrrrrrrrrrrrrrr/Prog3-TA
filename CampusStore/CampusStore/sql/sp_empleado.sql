@@ -9,7 +9,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `buscarEmpleadoPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM EMPLEADO WHERE idEmpleado = p_id;
+    SELECT * FROM empleado WHERE idEmpleado = p_id;
 END//
 
 DELIMITER ;
@@ -25,7 +25,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `eliminarEmpleado`(IN p_id INT)
 BEGIN
-    DELETE FROM EMPLEADO WHERE idEmpleado = p_id;
+    DELETE FROM empleado WHERE idEmpleado = p_id;
 END//
 
 DELIMITER ;
@@ -52,7 +52,7 @@ CREATE PROCEDURE `insertarEmpleado`(
     OUT p_id    INT
 )
 BEGIN
-    INSERT INTO EMPLEADO (
+    INSERT INTO empleado (
 		nombre, 
 		contraseña, 
 		nombreUsuario, 
@@ -88,7 +88,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `listarEmpleados`()
 BEGIN
-    SELECT * FROM EMPLEADO;
+    SELECT * FROM empleado;
 END//
 
 DELIMITER ;
@@ -114,7 +114,7 @@ CREATE PROCEDURE `modificarEmpleado`(
     IN p_idRol         INT
 )
 BEGIN
-    UPDATE EMPLEADO
+    UPDATE empleado
        SET nombre        = p_nombre,
            contraseña    = p_contraseña,
            nombreUsuario = p_nombreUsuario,

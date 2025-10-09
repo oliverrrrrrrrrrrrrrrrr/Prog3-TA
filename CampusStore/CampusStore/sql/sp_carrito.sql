@@ -9,7 +9,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `buscarCarritoPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM CARRITO WHERE idCarrito = p_id;
+    SELECT * FROM carrito WHERE idCarrito = p_id;
 END//
 
 DELIMITER ;
@@ -29,7 +29,7 @@ CREATE PROCEDURE `insertarCarrito`(
     OUT p_id INT
 )
 BEGIN
-    INSERT INTO CARRITO (
+    INSERT INTO carrito (
         completado,
         CUPON_idCupon,
         CLIENTE_idCliente
@@ -56,7 +56,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `listarCarritos`()
 BEGIN
-    SELECT * FROM CARRITO;
+    SELECT * FROM carrito;
 END//
 
 DELIMITER ;
@@ -77,7 +77,7 @@ CREATE PROCEDURE `modificarCarrito`(
     IN p_id_cliente INT
 )
 BEGIN
-    UPDATE CARRITO
+    UPDATE carrito
     SET 
         completado = p_completado,
         CUPON_idCupon = p_id_cupon,

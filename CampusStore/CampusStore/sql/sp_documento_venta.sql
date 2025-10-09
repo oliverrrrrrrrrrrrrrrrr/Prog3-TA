@@ -13,7 +13,7 @@ BEGIN
     SELECT idDocumentoVenta,
            fechaEmision,
            ORDEN_COMPRA_idOrdenCompra
-    FROM DOCUMENTO_VENTA
+    FROM documento_venta
     WHERE idDocumentoVenta = p_id;
 END//
 DELIMITER ;
@@ -30,7 +30,7 @@ CREATE PROCEDURE `eliminarDocumentoVenta`(
     IN p_id INT
 )
 BEGIN
-    DELETE FROM DOCUMENTO_VENTA
+    DELETE FROM documento_venta
     WHERE idDocumentoVenta = p_id;
 END//
 DELIMITER ;
@@ -48,7 +48,7 @@ CREATE PROCEDURE `insertarDocumentoVenta`(
     OUT p_id INT
 )
 BEGIN
-    INSERT INTO DOCUMENTO_VENTA (
+    INSERT INTO documento_venta (
         ORDEN_COMPRA_idOrdenCompra
     ) VALUES (
         p_idOrdenCompra
@@ -72,7 +72,7 @@ BEGIN
         idDocumentoVenta,
         fechaEmision,
         ORDEN_COMPRA_idOrdenCompra
-    FROM DOCUMENTO_VENTA;
+    FROM documento_venta;
 END//
 DELIMITER ;
 
@@ -89,7 +89,7 @@ CREATE PROCEDURE `modificarDocumentoVenta`(
     IN p_idOrdenCompra INT
 )
 BEGIN
-    UPDATE DOCUMENTO_VENTA
+    UPDATE documento_venta
     SET 
         ORDEN_COMPRA_idOrdenCompra = p_idOrdenCompra
     WHERE idDocumentoVenta = p_id;

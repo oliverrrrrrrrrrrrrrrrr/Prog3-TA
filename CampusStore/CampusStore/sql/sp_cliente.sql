@@ -9,7 +9,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `buscarClientePorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM CLIENTE WHERE idCliente = p_id;
+    SELECT * FROM cliente WHERE idCliente = p_id;
 END//
 
 DELIMITER ;
@@ -25,7 +25,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `eliminarCliente`(IN p_id INT)
 BEGIN
-    DELETE FROM CLIENTE WHERE idCliente = p_id;
+    DELETE FROM cliente WHERE idCliente = p_id;
 END//
 
 DELIMITER ;
@@ -48,7 +48,7 @@ CREATE PROCEDURE `insertarCliente`(
     OUT p_id INT
 )
 BEGIN
-    INSERT INTO CLIENTE (
+    INSERT INTO cliente (
         nombre,
         contraseña,
         nombreUsuario,
@@ -79,7 +79,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `listarClientes`()
 BEGIN
-    SELECT * FROM CLIENTE;
+    SELECT * FROM cliente;
 END//
 
 DELIMITER ;
@@ -103,7 +103,7 @@ CREATE PROCEDURE `modificarCliente`(
     IN p_telefono VARCHAR(20)
 )
 BEGIN
-    UPDATE CLIENTE
+    UPDATE cliente
     SET 
         nombre = p_nombre,
         contraseña = p_contraseña,

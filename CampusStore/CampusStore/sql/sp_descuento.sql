@@ -18,7 +18,7 @@ BEGIN
             da.activo,
             'ARTICULO' AS tipoProducto,
             a.idArticulo
-        FROM DESCUENTO_ARTICULO da
+        FROM descuento_articulo da
         INNER JOIN ARTICULO a ON da.ARTICULO_idArticulo = a.idArticulo
         WHERE da.idDescuentoArticulo = p_id;
         
@@ -30,7 +30,7 @@ BEGIN
             dl.activo,
             'LIBRO' AS tipoProducto,
             l.idLibro
-        FROM DESCUENTO_LIBRO dl
+        FROM descuento_libro dl
         INNER JOIN LIBRO l ON dl.LIBRO_idLibro = l.idLibro
         WHERE dl.idDescuentoLibro = p_id;
         
@@ -55,10 +55,10 @@ CREATE PROCEDURE `eliminarDescuento`(
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
-        DELETE FROM DESCUENTO_ARTICULO
+        DELETE FROM descuento_articulo
         WHERE idDescuentoArticulo = p_id;
     ELSEIF p_tipo = 'LIBRO' THEN
-        DELETE FROM DESCUENTO_LIBRO
+        DELETE FROM descuento_libro
         WHERE idDescuentoLibro = p_id;
     ELSE
         SIGNAL SQLSTATE '45000'
@@ -85,11 +85,11 @@ CREATE PROCEDURE `insertarDescuento`(
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
-        INSERT INTO DESCUENTO_ARTICULO (valorDescuento, fechaCaducidad, activo, ARTICULO_idArticulo)
+        INSERT INTO descuento_articulo (valorDescuento, fechaCaducidad, activo, ARTICULO_idArticulo)
         VALUES (p_valorDescuento, p_fechaCaducidad, p_activo, p_idReferencia);
         SET p_id = LAST_INSERT_ID();
     ELSEIF p_tipo = 'LIBRO' THEN
-        INSERT INTO DESCUENTO_LIBRO (valorDescuento, fechaCaducidad, activo, LIBRO_idLibro)
+        INSERT INTO descuento_libro (valorDescuento, fechaCaducidad, activo, LIBRO_idLibro)
         VALUES (p_valorDescuento, p_fechaCaducidad, p_activo, p_idReferencia);
         SET p_id = LAST_INSERT_ID();
     ELSE
@@ -119,7 +119,7 @@ BEGIN
             da.activo,
             'ARTICULO' AS tipoProducto,
             a.idArticulo
-        FROM DESCUENTO_ARTICULO da
+        FROM descuento_articulo da
         INNER JOIN ARTICULO a ON da.ARTICULO_idArticulo = a.idArticulo;
         
     ELSEIF p_tipo = 'LIBRO' THEN
@@ -130,7 +130,7 @@ BEGIN
             dl.activo,
             'LIBRO' AS tipoProducto,
             l.idLibro
-        FROM DESCUENTO_LIBRO dl
+        FROM descuento_libro dl
         INNER JOIN LIBRO l ON dl.LIBRO_idLibro = l.idLibro;
         
     ELSEIF p_tipo IS NULL OR p_tipo = 'TODOS' THEN
@@ -141,7 +141,7 @@ BEGIN
             da.activo,
             'ARTICULO' AS tipoProducto,
             a.idArticulo
-        FROM DESCUENTO_ARTICULO da
+        FROM descuento_articulo da
         INNER JOIN ARTICULO a ON da.ARTICULO_idArticulo = a.idArticulo
         
         UNION ALL
@@ -153,7 +153,7 @@ BEGIN
             dl.activo,
             'LIBRO' AS tipoProducto,
             l.idLibro
-        FROM DESCUENTO_LIBRO dl
+        FROM descuento_libro dl
         INNER JOIN LIBRO l ON dl.LIBRO_idLibro = l.idLibro;
     ELSE
         SIGNAL SQLSTATE '45000'
@@ -179,13 +179,13 @@ CREATE PROCEDURE `modificarDescuento`(
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
-        UPDATE DESCUENTO_ARTICULO
+        UPDATE descuento_articulo
         SET valorDescuento = p_valorDescuento,
             fechaCaducidad = p_fechaCaducidad,
             activo = p_activo
         WHERE idDescuentoArticulo = p_id;
     ELSEIF p_tipo = 'LIBRO' THEN
-        UPDATE DESCUENTO_LIBRO
+        UPDATE descuento_libro
         SET valorDescuento = p_valorDescuento,
             fechaCaducidad = p_fechaCaducidad,
             activo = p_activo

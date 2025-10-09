@@ -21,7 +21,7 @@ BEGIN
             lca.CARRITO_idCarrito,
             'ARTICULO' AS tipoProducto,
             lca.articulo_idArticulo AS idArticulo
-        FROM LINEA_CARRITO_ARTICULO lca
+        FROM linea_carrito_articulo lca
         WHERE lca.idLineaCarrito = p_id;
         
     ELSEIF p_tipo = 'LIBRO' THEN
@@ -35,7 +35,7 @@ BEGIN
             lcl.CARRITO_idCarrito,
             'LIBRO' AS tipoProducto,
             lcl.libro_idLibro AS idLibro
-        FROM LINEA_CARRITO_LIBRO lcl
+        FROM linea_carrito_libro lcl
         WHERE lcl.idLineaCarrito = p_id;
         
     ELSE
@@ -58,11 +58,11 @@ CREATE PROCEDURE `eliminarLineaCarrito`(
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
-        DELETE FROM LINEA_CARRITO_ARTICULO
+        DELETE FROM linea_carrito_articulo
         WHERE idLineaCarrito = p_id;
         
     ELSEIF p_tipo = 'LIBRO' THEN
-        DELETE FROM LINEA_CARRITO_LIBRO
+        DELETE FROM linea_carrito_libro
         WHERE idLineaCarrito = p_id;
         
     ELSE
@@ -92,7 +92,7 @@ CREATE PROCEDURE `insertarLineaCarrito`(
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
-        INSERT INTO LINEA_CARRITO_ARTICULO(
+        INSERT INTO linea_carrito_articulo(
             cantidad,
             precioUnitario,
             subtotal,
@@ -113,7 +113,7 @@ BEGIN
         SET p_id = LAST_INSERT_ID();
         
     ELSEIF p_tipo = 'LIBRO' THEN
-        INSERT INTO LINEA_CARRITO_LIBRO(
+        INSERT INTO linea_carrito_libro(
             cantidad,
             precioUnitario,
             subtotal,
@@ -162,7 +162,7 @@ BEGIN
             lca.CARRITO_idCarrito,
             'ARTICULO' AS tipoProducto,
             lca.articulo_idArticulo AS idArticulo
-        FROM LINEA_CARRITO_ARTICULO lca;
+        FROM linea_carrito_articulo lca;
         
     ELSEIF p_tipo = 'LIBRO' THEN
         SELECT 
@@ -175,7 +175,7 @@ BEGIN
             lcl.CARRITO_idCarrito,
             'LIBRO' AS tipoProducto,
             lcl.libro_idLibro AS idLibro
-        FROM LINEA_CARRITO_LIBRO lcl;
+        FROM linea_carrito_libro lcl;
         
     ELSEIF p_tipo IS NULL OR p_tipo = 'TODOS' THEN
         -- Todas las líneas (artículos y libros)
@@ -190,7 +190,7 @@ BEGIN
             'ARTICULO' AS tipoProducto,
             lca.articulo_idArticulo AS idArticulo,
             NULL AS idLibro
-        FROM LINEA_CARRITO_ARTICULO lca
+        FROM linea_carrito_articulo lca
         
         UNION ALL
         
@@ -205,7 +205,7 @@ BEGIN
             'LIBRO' AS tipoProducto,
             NULL AS idArticulo,
             lcl.libro_idLibro AS idLibro
-        FROM LINEA_CARRITO_LIBRO lcl;
+        FROM linea_carrito_libro lcl;
         
     ELSE
         SIGNAL SQLSTATE '45000'
@@ -232,7 +232,7 @@ CREATE PROCEDURE `modificarLineaCarrito`(
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
-        UPDATE LINEA_CARRITO_ARTICULO
+        UPDATE linea_carrito_articulo
         SET 
             cantidad = p_cantidad,
             precioUnitario = p_precioUnitario,
@@ -242,7 +242,7 @@ BEGIN
         WHERE idLineaCarrito = p_id;
         
     ELSEIF p_tipo = 'LIBRO' THEN
-        UPDATE LINEA_CARRITO_LIBRO
+        UPDATE linea_carrito_libro
         SET 
             cantidad = p_cantidad,
             precioUnitario = p_precioUnitario,

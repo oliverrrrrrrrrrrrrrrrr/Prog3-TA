@@ -9,7 +9,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `buscarEditorialPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM EDITORIAL WHERE idEditorial = p_id;
+    SELECT * FROM editorial WHERE idEditorial = p_id;
 END//
 
 DELIMITER ;
@@ -25,7 +25,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `eliminarEditorial`(IN p_id INT)
 BEGIN
-    DELETE FROM EDITORIAL WHERE idEditorial = p_id;
+    DELETE FROM editorial WHERE idEditorial = p_id;
 END//
 
 DELIMITER ;
@@ -49,7 +49,7 @@ CREATE PROCEDURE `insertarEditorial`(
     OUT p_id INT
 )
 BEGIN
-    INSERT INTO EDITORIAL (
+    INSERT INTO editorial (
         nombre,
         direccion,
         telefono,
@@ -81,7 +81,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `listarEditoriales`()
 BEGIN
-    SELECT * FROM EDITORIAL;
+    SELECT * FROM editorial;
 END//
 
 DELIMITER ;
@@ -105,7 +105,7 @@ CREATE PROCEDURE `modificarEditorial`(
     IN p_sitioWeb VARCHAR(100)
 )
 BEGIN
-    UPDATE EDITORIAL
+    UPDATE editorial
     SET 
         nombre = p_nombre,
         direccion = p_direccion,

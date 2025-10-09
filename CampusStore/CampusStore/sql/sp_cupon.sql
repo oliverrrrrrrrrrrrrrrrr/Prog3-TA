@@ -9,7 +9,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `buscarCuponPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM CUPON WHERE idCupon = p_id;
+    SELECT * FROM cupon WHERE idCupon = p_id;
 END//
 
 DELIMITER ;
@@ -25,7 +25,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `eliminarCupon`(IN p_id INT)
 BEGIN
-    DELETE FROM CUPON WHERE idCupon = p_id;
+    DELETE FROM cupon WHERE idCupon = p_id;
 END//
 
 DELIMITER ;
@@ -48,7 +48,7 @@ CREATE PROCEDURE `insertarCupon`(
     OUT p_id INT
 )
 BEGIN
-    INSERT INTO CUPON (
+    INSERT INTO cupon (
         codigo,
         descuento,
         fechaCaducidad,
@@ -78,7 +78,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `listarCupones`()
 BEGIN
-    SELECT * FROM CUPON;
+    SELECT * FROM cupon;
 END//
 
 DELIMITER ;
@@ -101,7 +101,7 @@ CREATE PROCEDURE `modificarCupon`(
     IN p_usosRestantes INT
 )
 BEGIN
-    UPDATE CUPON
+    UPDATE cupon
     SET 
         codigo = p_codigo,
         descuento = p_descuento,

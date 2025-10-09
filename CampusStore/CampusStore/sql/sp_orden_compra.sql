@@ -9,7 +9,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `buscarOrdenCompraPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM ORDEN_COMPRA WHERE idOrdenCompra = p_id;
+    SELECT * FROM orden_compra WHERE idOrdenCompra = p_id;
 END//
 
 DELIMITER ;
@@ -25,7 +25,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `eliminarOrdenCompra`(IN p_id INT)
 BEGIN
-    DELETE FROM ORDEN_COMPRA WHERE idOrdenCompra = p_id;
+    DELETE FROM orden_compra WHERE idOrdenCompra = p_id;
 END//
 
 DELIMITER ;
@@ -55,12 +55,12 @@ BEGIN
     END IF;
 
     -- Verificar que no exista ya una orden para el carrito
-    IF EXISTS (SELECT 1 FROM ORDEN_COMPRA WHERE CARRITO_idCarrito = p_idCarrito) THEN
+    IF EXISTS (SELECT 1 FROM orden_compra WHERE CARRITO_idCarrito = p_idCarrito) THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'El carrito ya tiene una orden asociada';
     END IF;
 
-    INSERT INTO ORDEN_COMPRA (
+    INSERT INTO orden_compra (
         fechaLimitePago,
         total,
         totalConDescuento,
@@ -92,7 +92,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `listarOrdenCompra`()
 BEGIN
-    SELECT * FROM ORDEN_COMPRA;
+    SELECT * FROM orden_compra;
 END//
 
 DELIMITER ;
@@ -120,7 +120,7 @@ BEGIN
         SET MESSAGE_TEXT = 'Estado inválido. Valores permitidos: NO_PAGADO, PAGADO, ENTREGADO';
     END IF;
 
-    UPDATE ORDEN_COMPRA
+    UPDATE orden_compra
     SET 
         fechaLimitePago = p_fechaLimitePago,
         total = p_total,

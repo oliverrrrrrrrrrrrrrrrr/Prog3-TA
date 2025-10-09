@@ -9,7 +9,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `buscarAutorPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM AUTOR WHERE idAutor = p_id;
+    SELECT * FROM autor WHERE idAutor = p_id;
 END//
 
 DELIMITER ;
@@ -25,7 +25,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `eliminarAutor`(IN p_id INT)
 BEGIN
-    DELETE FROM AUTOR WHERE idAutor = p_id;
+    DELETE FROM autor WHERE idAutor = p_id;
 END//
 
 DELIMITER ;
@@ -46,7 +46,7 @@ CREATE PROCEDURE `insertarAutor`(
     OUT p_id INT
 )
 BEGIN
-    INSERT INTO AUTOR (
+    INSERT INTO autor (
         nombre,
         apellidos,
         alias
@@ -72,7 +72,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `listarAutores`()
 BEGIN
-    SELECT * FROM AUTOR;
+    SELECT * FROM autor;
 END//
 
 DELIMITER ;
@@ -93,7 +93,7 @@ CREATE PROCEDURE `modificarAutor`(
     IN p_alias VARCHAR(45)
 )
 BEGIN
-    UPDATE AUTOR
+    UPDATE autor
     SET 
         nombre = p_nombre,
         apellidos = p_apellidos,

@@ -9,7 +9,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `buscarRolPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM ROL WHERE idRol = p_id;
+    SELECT * FROM rol WHERE idRol = p_id;
 END//
 
 DELIMITER ;
@@ -25,7 +25,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `eliminarRol`(IN p_id INT)
 BEGIN
-    DELETE FROM ROL WHERE idRol = p_id;
+    DELETE FROM rol WHERE idRol = p_id;
 END//
 
 DELIMITER ;
@@ -45,7 +45,7 @@ CREATE PROCEDURE `insertarRol`(
     OUT p_id INT
 )
 BEGIN
-    INSERT INTO ROL (
+    INSERT INTO rol (
         nombre,
         descripcion
     ) VALUES (
@@ -69,7 +69,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `listarRoles`()
 BEGIN
-    SELECT * FROM ROL;
+    SELECT * FROM rol;
 END//
 
 DELIMITER ;
@@ -89,7 +89,7 @@ CREATE PROCEDURE `modificarRol`(
     IN p_descripcion VARCHAR(255)
 )
 BEGIN
-    UPDATE PERMISO
+    UPDATE rol
     SET 
         nombre = p_nombre,
         descripcion = p_descripcion

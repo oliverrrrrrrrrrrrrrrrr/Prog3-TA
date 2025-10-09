@@ -18,7 +18,7 @@ BEGIN
             'LIBRO' AS tipoProducto,
             rl.LIBRO_idLibro AS idLibro,
             rl.cliente_idCliente AS idCliente
-        FROM RESEÑA_LIBRO rl
+        FROM reseña_libro rl
         WHERE rl.idReseñaLibro = p_id;
         
     ELSEIF p_tipo = 'ARTICULO' THEN
@@ -29,7 +29,7 @@ BEGIN
             'ARTICULO' AS tipoProducto,
             ra.ARTICULO_idArticulo AS idArticulo,
             ra.cliente_idCliente AS idCliente
-        FROM RESEÑA_ARTICULO ra
+        FROM reseña_articulo ra
         WHERE ra.idReseñaArticulo = p_id;
         
     ELSE
@@ -53,11 +53,11 @@ CREATE PROCEDURE `eliminarReseña`(
 )
 BEGIN
     IF p_tipo = 'LIBRO' THEN
-        DELETE FROM RESEÑA_LIBRO
+        DELETE FROM reseña_libro
         WHERE idReseñaLibro = p_id;
 
     ELSEIF p_tipo = 'ARTICULO' THEN
-        DELETE FROM RESEÑA_ARTICULO
+        DELETE FROM reseña_articulo
         WHERE idReseñaArticulo = p_id;
 
     ELSE
@@ -84,12 +84,12 @@ CREATE PROCEDURE `insertarReseña`(
 )
 BEGIN
     IF p_tipo = 'LIBRO' THEN
-        INSERT INTO RESEÑA_LIBRO (calificacion, reseña, LIBRO_idLibro, cliente_idCliente)
+        INSERT INTO reseña_libro (calificacion, reseña, LIBRO_idLibro, cliente_idCliente)
         VALUES (p_calificacion, p_reseña, p_idReferencia, p_idCliente);
         SET p_id = LAST_INSERT_ID();
         
     ELSEIF p_tipo = 'ARTICULO' THEN
-        INSERT INTO RESEÑA_ARTICULO (calificacion, reseña, ARTICULO_idArticulo, cliente_idCliente)
+        INSERT INTO reseña_articulo (calificacion, reseña, ARTICULO_idArticulo, cliente_idCliente)
         VALUES (p_calificacion, p_reseña, p_idReferencia, p_idCliente);
         SET p_id = LAST_INSERT_ID();
         
@@ -119,7 +119,7 @@ BEGIN
             'LIBRO' AS tipoProducto,
             rl.LIBRO_idLibro AS idLibro,
             rl.cliente_idCliente AS idCliente
-        FROM RESEÑA_LIBRO rl;
+        FROM reseña_libro rl;
         
     ELSEIF p_tipo = 'ARTICULO' THEN
         SELECT 
@@ -129,7 +129,7 @@ BEGIN
             'ARTICULO' AS tipoProducto,
             ra.ARTICULO_idArticulo AS idArticulo,
             ra.cliente_idCliente AS idCliente
-        FROM RESEÑA_ARTICULO ra;
+        FROM reseña_articulo ra;
         
     ELSEIF p_tipo IS NULL OR p_tipo = 'TODOS' THEN
         SELECT 
@@ -140,7 +140,7 @@ BEGIN
             rl.LIBRO_idLibro AS idLibro,
             NULL AS idArticulo,
             rl.cliente_idCliente AS idCliente
-        FROM RESEÑA_LIBRO rl
+        FROM reseña_libro rl
         
         UNION ALL
         
@@ -152,7 +152,7 @@ BEGIN
             NULL AS idLibro,
             ra.ARTICULO_idArticulo AS idArticulo,
             ra.cliente_idCliente AS idCliente
-        FROM RESEÑA_ARTICULO ra;
+        FROM reseña_articulo ra;
         
     ELSE
         SIGNAL SQLSTATE '45000'
@@ -177,13 +177,13 @@ CREATE PROCEDURE `modificarReseña`(
 )
 BEGIN
     IF p_tipo = 'LIBRO' THEN
-        UPDATE RESEÑA_LIBRO
+        UPDATE reseña_libro
         SET calificacion = p_calificacion,
             reseña = p_reseña
         WHERE idReseñaLibro = p_id;
 
     ELSEIF p_tipo = 'ARTICULO' THEN
-        UPDATE RESEÑA_ARTICULO
+        UPDATE reseña_articulo
         SET calificacion = p_calificacion,
             reseña = p_reseña
         WHERE idReseñaArticulo = p_id;
