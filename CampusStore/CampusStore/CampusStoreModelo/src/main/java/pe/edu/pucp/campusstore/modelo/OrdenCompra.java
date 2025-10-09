@@ -1,5 +1,6 @@
 package pe.edu.pucp.campusstore.modelo;
 
+import pe.edu.pucp.campusstore.modelo.enums.EstadoOrden;
 import java.util.Date;
 
 public class OrdenCompra {

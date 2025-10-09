@@ -1,5 +1,7 @@
 package pe.edu.pucp.campusstore.modelo;
 
+import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
+
 public class LineaCarrito {
     private Integer idLineaCarrito;
     private Carrito carrito;

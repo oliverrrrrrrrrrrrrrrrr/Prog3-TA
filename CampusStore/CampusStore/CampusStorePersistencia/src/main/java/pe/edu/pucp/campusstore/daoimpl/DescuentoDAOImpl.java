@@ -12,7 +12,7 @@ import pe.edu.pucp.campusstore.dao.DescuentoDAO;
 import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Descuento;
 import pe.edu.pucp.campusstore.modelo.Libro;
-import pe.edu.pucp.campusstore.modelo.TipoProducto;
+import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
 public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements DescuentoDAO {
     

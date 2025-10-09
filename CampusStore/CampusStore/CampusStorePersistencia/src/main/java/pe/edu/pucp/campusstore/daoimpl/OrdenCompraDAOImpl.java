@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import pe.edu.pucp.campusstore.dao.OrdenCompraDAO;
-import pe.edu.pucp.campusstore.modelo.EstadoOrden;
+import pe.edu.pucp.campusstore.modelo.enums.EstadoOrden;
 import pe.edu.pucp.campusstore.modelo.OrdenCompra;
 
 public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCompraDAO {

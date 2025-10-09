@@ -18,12 +18,12 @@ import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Descuento;
 import pe.edu.pucp.campusstore.modelo.Editorial;
 import pe.edu.pucp.campusstore.modelo.Empleado;
-import pe.edu.pucp.campusstore.modelo.Formato;
-import pe.edu.pucp.campusstore.modelo.GeneroLibro;
+import pe.edu.pucp.campusstore.modelo.enums.Formato;
+import pe.edu.pucp.campusstore.modelo.enums.GeneroLibro;
 import pe.edu.pucp.campusstore.modelo.Libro;
 import pe.edu.pucp.campusstore.modelo.Reseña;
 import pe.edu.pucp.campusstore.modelo.Rol;
-import pe.edu.pucp.campusstore.modelo.TipoArticulo;
+import pe.edu.pucp.campusstore.modelo.enums.TipoArticulo;
 
 /**
  *

@@ -1,9 +1,5 @@
-package pe.edu.pucp.campusstore.modelo;
+package pe.edu.pucp.campusstore.modelo.enums;
 
-/**
- *
- * @author Brayan
- */
 public enum GeneroLibro {
     DRAMA, FANTASIA, NOVELA, NARRATIVO, AVENTURA, CIENCIA_FICCION
 }

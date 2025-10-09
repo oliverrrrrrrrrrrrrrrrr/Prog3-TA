@@ -15,7 +15,7 @@ import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Cliente;
 import pe.edu.pucp.campusstore.modelo.Libro;
 import pe.edu.pucp.campusstore.modelo.Reseña;
-import pe.edu.pucp.campusstore.modelo.TipoProducto;
+import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
 public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO{
     private ArticuloDAO articuloDAO;

@@ -11,7 +11,7 @@ import pe.edu.pucp.campusstore.dao.LineaCarritoDAO;
 import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Libro;
 import pe.edu.pucp.campusstore.modelo.LineaCarrito;
-import pe.edu.pucp.campusstore.modelo.TipoProducto;
+import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
 public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito> implements LineaCarritoDAO{
     @Override

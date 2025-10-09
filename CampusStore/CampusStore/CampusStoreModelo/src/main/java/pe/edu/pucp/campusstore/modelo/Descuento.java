@@ -1,5 +1,6 @@
 package pe.edu.pucp.campusstore.modelo;
 
+import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 import java.util.Date;
 
 public class Descuento {

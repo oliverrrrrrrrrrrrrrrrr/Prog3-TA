@@ -1,5 +1,7 @@
 package pe.edu.pucp.campusstore.modelo;
 
+import pe.edu.pucp.campusstore.modelo.enums.GeneroLibro;
+import pe.edu.pucp.campusstore.modelo.enums.Formato;
 import java.util.Date;
 import java.util.List;
 

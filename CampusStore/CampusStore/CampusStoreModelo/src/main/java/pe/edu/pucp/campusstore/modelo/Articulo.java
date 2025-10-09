@@ -1,5 +1,6 @@
 package pe.edu.pucp.campusstore.modelo;
 
+import pe.edu.pucp.campusstore.modelo.enums.TipoArticulo;
 import java.util.List;
 
 public class Articulo extends Producto {

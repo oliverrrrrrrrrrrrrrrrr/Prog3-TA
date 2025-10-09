@@ -1,5 +1,7 @@
 package pe.edu.pucp.campusstore.modelo;
 
+import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
+
 public class Reseña {
     private Integer idReseña;
     private Double calificacion;

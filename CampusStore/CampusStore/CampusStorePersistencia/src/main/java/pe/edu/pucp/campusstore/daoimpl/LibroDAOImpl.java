@@ -11,8 +11,8 @@ import java.sql.Types;
 import pe.edu.pucp.campusstore.dao.LibroDAO;
 import pe.edu.pucp.campusstore.modelo.Descuento;
 import pe.edu.pucp.campusstore.modelo.Editorial;
-import pe.edu.pucp.campusstore.modelo.Formato;
-import pe.edu.pucp.campusstore.modelo.GeneroLibro;
+import pe.edu.pucp.campusstore.modelo.enums.Formato;
+import pe.edu.pucp.campusstore.modelo.enums.GeneroLibro;
 import pe.edu.pucp.campusstore.modelo.Libro;
 
 public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {

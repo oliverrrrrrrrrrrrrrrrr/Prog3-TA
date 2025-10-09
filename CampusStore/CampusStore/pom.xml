@@ -10,6 +10,7 @@
         <module>CampusStorePersistencia</module>
         <module>CampusStorePruebas</module>
         <module>CampusStoreDBManager</module>
+        <module>CampusStoreNegocio</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -18,7 +18,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestInstance;
 import pe.edu.pucp.campusstore.daoimpl.ArticuloDAOImpl;
 import pe.edu.pucp.campusstore.modelo.Articulo;
-import pe.edu.pucp.campusstore.modelo.TipoArticulo;
+import pe.edu.pucp.campusstore.modelo.enums.TipoArticulo;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
