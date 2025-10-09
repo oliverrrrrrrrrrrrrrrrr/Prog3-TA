@@ -47,7 +47,7 @@ public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO
         cmd.setString("p_reseña", modelo.getReseña());
         cmd.setInt("p_idCliente", modelo.getCliente().getIdCliente());
         
-        cmd.registerOutParameter("p_idReseña", Types.INTEGER);
+        cmd.registerOutParameter("p_id", Types.INTEGER);
         
         return cmd;
     }
@@ -63,7 +63,7 @@ public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
         cmd.setDouble("p_calificacion", modelo.getCalificacion());
         cmd.setString("p_reseña", modelo.getReseña());
-        cmd.setInt("p_idReseña", modelo.getIdReseña());
+        cmd.setInt("p_id", modelo.getIdReseña());
         
         return cmd;
     }
@@ -75,7 +75,7 @@ public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO
         String sql = "{call eliminarReseña(? ,?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
-        cmd.setInt("p_idReseña", modelo.getIdReseña());
+        cmd.setInt("p_id", modelo.getIdReseña());
         
         return cmd;
     }
@@ -87,7 +87,7 @@ public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO
         String sql = "{call buscarReseñaPorId(?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
-        cmd.setInt("p_idReseña", modelo.getIdReseña());
+        cmd.setInt("p_id", modelo.getIdReseña());
         
         return cmd;
     }
@@ -117,19 +117,21 @@ public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO
         modelo.setTipoProducto(tipo);
         
         if (tipo == TipoProducto.ARTICULO) {
-            int idArticulo = rs.getInt("idArticulo");
-            Articulo articulo = articuloDAO.leer(idArticulo);
-            modelo.setProducto(articulo);
-            
+            Integer idArticulo = rs.getInt("idArticulo");
+            if(!rs.wasNull()){
+                modelo.setProducto(new ArticuloDAOImpl().leer(idArticulo));
+            }
         } else if (tipo == TipoProducto.LIBRO) {
-            int idLibro = rs.getInt("idLibro");
-            Libro libro = libroDAO.leer(idLibro);
-            modelo.setProducto(libro);
+            Integer idLibro = rs.getInt("idLibro");
+            if(!rs.wasNull()){
+                modelo.setProducto(new LibroDAOImpl().leer(idLibro));
+            }
         }
         
-        int idCliente = rs.getInt("idCliente");
-        Cliente cliente = clienteDAO.leer(idCliente);
-        modelo.setCliente(cliente);
+        Integer idCliente = rs.getInt("idCliente");
+        if(!rs.wasNull()){
+            modelo.setCliente(new ClienteDAOImpl().leer(idCliente));
+        }
         
         return modelo;
     }

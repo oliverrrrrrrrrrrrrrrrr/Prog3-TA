@@ -7,9 +7,9 @@ DROP procedure IF EXISTS `buscarClientePorId`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `buscarClientePorId`(IN p_idCliente INT)
+CREATE PROCEDURE `buscarClientePorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM CLIENTE WHERE idCliente = p_idCliente;
+    SELECT * FROM CLIENTE WHERE idCliente = p_id;
 END//
 
 DELIMITER ;
@@ -23,9 +23,9 @@ DROP procedure IF EXISTS `eliminarCliente`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `eliminarCliente`(IN p_idCliente INT)
+CREATE PROCEDURE `eliminarCliente`(IN p_id INT)
 BEGIN
-    DELETE FROM CLIENTE WHERE idCliente = p_idCliente;
+    DELETE FROM CLIENTE WHERE idCliente = p_id;
 END//
 
 DELIMITER ;
@@ -45,7 +45,7 @@ CREATE PROCEDURE `insertarCliente`(
     IN p_nombreUsuario VARCHAR(25),
     IN p_correo VARCHAR(100),
     IN p_telefono VARCHAR(20),
-    OUT p_idCliente INT
+    OUT p_id INT
 )
 BEGIN
     INSERT INTO CLIENTE (
@@ -63,7 +63,7 @@ BEGIN
         p_telefono
     );
     
-    SET p_idCliente = LAST_INSERT_ID();
+    SET p_id = LAST_INSERT_ID();
 END//
 
 DELIMITER ;
@@ -95,7 +95,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `modificarCliente`(
    
-    IN p_idCliente INT,
+    IN p_id INT,
     IN p_nombre VARCHAR(100),
     IN p_contraseña VARCHAR(50),
     IN p_nombreUsuario VARCHAR(25),
@@ -110,7 +110,7 @@ BEGIN
         nombreUsuario = p_nombreUsuario,
         correo = p_correo,
         telefono = p_telefono
-    WHERE idCliente = p_idCliente;
+    WHERE idCliente = p_id;
 END//
 
 DELIMITER ;

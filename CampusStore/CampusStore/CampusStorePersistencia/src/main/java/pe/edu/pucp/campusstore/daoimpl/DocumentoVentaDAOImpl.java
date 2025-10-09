@@ -9,17 +9,8 @@ import java.sql.SQLException;
 import java.sql.Types;
 import pe.edu.pucp.campusstore.modelo.DocumentoVenta;
 import pe.edu.pucp.campusstore.dao.DocumentoVentaDAO;
-import pe.edu.pucp.campusstore.modelo.OrdenCompra;
-import pe.edu.pucp.campusstore.dao.OrdenCompraDAO;
 
 public class DocumentoVentaDAOImpl extends BaseDAO<DocumentoVenta> implements DocumentoVentaDAO{
-
-    //Hola
-    private OrdenCompraDAO ordenCompraDAO;
-
-    public DocumentoVentaDAOImpl() {
-        this.ordenCompraDAO = new OrdenCompraDAOImpl();
-    }
     
     @Override
     protected PreparedStatement comandoCrear(Connection conn, DocumentoVenta modelo) throws SQLException {
@@ -76,9 +67,10 @@ public class DocumentoVentaDAOImpl extends BaseDAO<DocumentoVenta> implements Do
         modelo.setIdDocumentoVenta(rs.getInt("idDocumentoVenta"));
         modelo.setFechaEmision(rs.getDate("fechaEmision"));
 
-        int idOrdenCompra = rs.getInt("ORDEN_COMPRA_idOrdenCompra");
-        OrdenCompra ordenCompra = ordenCompraDAO.leer(idOrdenCompra);
-        modelo.setOrdenCompra(ordenCompra);
+        Integer idOrdenCompra = rs.getInt("ORDEN_COMPRA_idOrdenCompra");
+        if(!rs.wasNull()){
+            modelo.setOrdenCompra(new OrdenCompraDAOImpl().leer(idOrdenCompra));
+        }
         
         return modelo;
     }

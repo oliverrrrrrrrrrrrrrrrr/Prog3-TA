@@ -114,12 +114,18 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
         modelo.setFechaPublicacion(rs.getDate("fechaPublicacion"));
         modelo.setFormato(Formato.valueOf(rs.getString("formato")));
         modelo.setSinopsis(rs.getString("sinopsis"));
-        Editorial editorialAux=new Editorial();
-        editorialAux.setIdEditorial(rs.getInt("idEditorial"));
-        modelo.setEditorial(editorialAux);
-        Descuento descuentoAux = new Descuento();
-        descuentoAux.setIdDescuento(rs.getInt("idDescuento"));
-        modelo.setDescuento(descuentoAux);
+        
+        Integer idEditorial = rs.getInt("idEditorial");
+        if(!rs.wasNull()){
+            modelo.setEditorial(new EditorialDAOImpl().leer(idEditorial));
+        }
+        
+        Descuento descuento = new Descuento();
+        descuento.setIdDescuento(rs.getInt("idDescuento"));
+        if(!rs.wasNull()){
+            modelo.setDescuento(new DescuentoDAOImpl().leer(descuento));
+        }
+        
         return modelo;
     }
 }

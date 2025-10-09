@@ -7,9 +7,9 @@ DROP procedure IF EXISTS `buscarEditorialPorId`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `buscarEditorialPorId`(IN p_idEditorial INT)
+CREATE PROCEDURE `buscarEditorialPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM EDITORIAL WHERE idEditorial = p_idEditorial;
+    SELECT * FROM EDITORIAL WHERE idEditorial = p_id;
 END//
 
 DELIMITER ;
@@ -23,9 +23,9 @@ DROP procedure IF EXISTS `eliminarEditorial`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `eliminarEditorial`(IN p_idEditorial INT)
+CREATE PROCEDURE `eliminarEditorial`(IN p_id INT)
 BEGIN
-    DELETE FROM EDITORIAL WHERE idEditorial = p_idEditorial;
+    DELETE FROM EDITORIAL WHERE idEditorial = p_id;
 END//
 
 DELIMITER ;
@@ -46,7 +46,7 @@ CREATE PROCEDURE `insertarEditorial`(
     IN p_cif VARCHAR(20),
     IN p_email VARCHAR(100),
     IN p_sitioWeb VARCHAR(100),
-    OUT p_idEditorial INT
+    OUT p_id INT
 )
 BEGIN
     INSERT INTO EDITORIAL (
@@ -65,7 +65,7 @@ BEGIN
         p_sitioWeb
     );
     
-    SET p_idEditorial = LAST_INSERT_ID();
+    SET p_id = LAST_INSERT_ID();
 END//
 
 DELIMITER ;
@@ -96,7 +96,7 @@ DROP procedure IF EXISTS `modificarEditorial`;
 DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `modificarEditorial`(
-    IN p_idEditorial INT,
+    IN p_id INT,
     IN p_nombre VARCHAR(100),
     IN p_direccion VARCHAR(255),
     IN p_telefono VARCHAR(20),
@@ -113,7 +113,7 @@ BEGIN
         cif = p_cif,
         email = p_email,
         sitioWeb = p_sitioWeb
-    WHERE idEditorial = p_idEditorial;
+    WHERE idEditorial = p_id;
 END//
 
 DELIMITER ;

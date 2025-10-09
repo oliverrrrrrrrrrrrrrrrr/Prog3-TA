@@ -7,9 +7,9 @@ DROP procedure IF EXISTS `buscarAutorPorId`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `buscarAutorPorId`(IN p_idAutor INT)
+CREATE PROCEDURE `buscarAutorPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM AUTOR WHERE idAutor = p_idAutor;
+    SELECT * FROM AUTOR WHERE idAutor = p_id;
 END//
 
 DELIMITER ;
@@ -23,9 +23,9 @@ DROP procedure IF EXISTS `eliminarAutor`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `eliminarAutor`(IN p_idAutor INT)
+CREATE PROCEDURE `eliminarAutor`(IN p_id INT)
 BEGIN
-    DELETE FROM AUTOR WHERE idAutor = p_idAutor;
+    DELETE FROM AUTOR WHERE idAutor = p_id;
 END//
 
 DELIMITER ;
@@ -43,7 +43,7 @@ CREATE PROCEDURE `insertarAutor`(
     IN p_nombre VARCHAR(100),
     IN p_apellidos VARCHAR(100),
     IN p_alias VARCHAR(45),
-    OUT p_idAutor INT
+    OUT p_id INT
 )
 BEGIN
     INSERT INTO AUTOR (
@@ -56,7 +56,7 @@ BEGIN
         p_alias
     );
     
-    SET p_idAutor = LAST_INSERT_ID();
+    SET p_id = LAST_INSERT_ID();
 END//
 
 DELIMITER ;
@@ -87,7 +87,7 @@ DROP procedure IF EXISTS `modificarAutor`;
 DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `modificarAutor`(
-    IN p_idAutor INT,
+    IN p_id INT,
     IN p_nombre VARCHAR(100),
     IN p_apellidos VARCHAR(100),
     IN p_alias VARCHAR(45)
@@ -98,7 +98,7 @@ BEGIN
         nombre = p_nombre,
         apellidos = p_apellidos,
         alias = p_alias
-    WHERE idAutor = p_idAutor;
+    WHERE idAutor = p_id;
 END//
 
 DELIMITER ;

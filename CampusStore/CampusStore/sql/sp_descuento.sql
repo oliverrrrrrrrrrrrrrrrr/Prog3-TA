@@ -7,7 +7,7 @@ DROP PROCEDURE IF EXISTS `buscarDescuentoPorId`;
 DELIMITER //
 CREATE PROCEDURE `buscarDescuentoPorId`(
     IN p_tipo VARCHAR(10),
-    IN p_idDescuento INT
+    IN p_id INT
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
@@ -20,7 +20,7 @@ BEGIN
             a.idArticulo
         FROM DESCUENTO_ARTICULO da
         INNER JOIN ARTICULO a ON da.ARTICULO_idArticulo = a.idArticulo
-        WHERE da.idDescuentoArticulo = p_idDescuento;
+        WHERE da.idDescuentoArticulo = p_id;
         
     ELSEIF p_tipo = 'LIBRO' THEN
         SELECT 
@@ -32,7 +32,7 @@ BEGIN
             l.idLibro
         FROM DESCUENTO_LIBRO dl
         INNER JOIN LIBRO l ON dl.LIBRO_idLibro = l.idLibro
-        WHERE dl.idDescuentoLibro = p_idDescuento;
+        WHERE dl.idDescuentoLibro = p_id;
         
     ELSE
         SIGNAL SQLSTATE '45000'
@@ -51,15 +51,15 @@ DROP PROCEDURE IF EXISTS `eliminarDescuento`;
 DELIMITER //
 CREATE PROCEDURE `eliminarDescuento`(
     IN p_tipo VARCHAR(10),
-    IN p_idDescuento INT
+    IN p_id INT
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
         DELETE FROM DESCUENTO_ARTICULO
-        WHERE idDescuentoArticulo = p_idDescuento;
+        WHERE idDescuentoArticulo = p_id;
     ELSEIF p_tipo = 'LIBRO' THEN
         DELETE FROM DESCUENTO_LIBRO
-        WHERE idDescuentoLibro = p_idDescuento;
+        WHERE idDescuentoLibro = p_id;
     ELSE
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Tipo no válido: debe ser ARTICULO o LIBRO';
@@ -81,17 +81,17 @@ CREATE PROCEDURE `insertarDescuento`(
     IN p_valorDescuento DECIMAL(10,2),
     IN p_fechaCaducidad DATETIME,
     IN p_activo TINYINT,
-    OUT p_idDescuento INT
+    OUT p_id INT
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
         INSERT INTO DESCUENTO_ARTICULO (valorDescuento, fechaCaducidad, activo, ARTICULO_idArticulo)
         VALUES (p_valorDescuento, p_fechaCaducidad, p_activo, p_idReferencia);
-        SET p_idDescuento = LAST_INSERT_ID();
+        SET p_id = LAST_INSERT_ID();
     ELSEIF p_tipo = 'LIBRO' THEN
         INSERT INTO DESCUENTO_LIBRO (valorDescuento, fechaCaducidad, activo, LIBRO_idLibro)
         VALUES (p_valorDescuento, p_fechaCaducidad, p_activo, p_idReferencia);
-        SET p_idDescuento = LAST_INSERT_ID();
+        SET p_id = LAST_INSERT_ID();
     ELSE
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Tipo no válido: debe ser ARTICULO o LIBRO';
@@ -172,7 +172,7 @@ DROP PROCEDURE IF EXISTS `modificarDescuento`;
 DELIMITER //
 CREATE PROCEDURE `modificarDescuento`(
     IN p_tipo VARCHAR(10),
-    IN p_idDescuento INT,
+    IN p_id INT,
     IN p_valorDescuento DECIMAL(10,2),
     IN p_fechaCaducidad DATETIME,
     IN p_activo TINYINT
@@ -183,13 +183,13 @@ BEGIN
         SET valorDescuento = p_valorDescuento,
             fechaCaducidad = p_fechaCaducidad,
             activo = p_activo
-        WHERE idDescuentoArticulo = p_idDescuento;
+        WHERE idDescuentoArticulo = p_id;
     ELSEIF p_tipo = 'LIBRO' THEN
         UPDATE DESCUENTO_LIBRO
         SET valorDescuento = p_valorDescuento,
             fechaCaducidad = p_fechaCaducidad,
             activo = p_activo
-        WHERE idDescuentoLibro = p_idDescuento;
+        WHERE idDescuentoLibro = p_id;
     ELSE
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Tipo no válido: debe ser ARTICULO o LIBRO';

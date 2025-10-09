@@ -7,7 +7,7 @@ DROP PROCEDURE IF EXISTS `buscarLineaCarritoPorId`;
 DELIMITER //
 CREATE PROCEDURE `buscarLineaCarritoPorId`(
     IN p_tipo VARCHAR(10),
-    IN p_idLineaCarrito INT
+    IN p_id INT
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
@@ -22,7 +22,7 @@ BEGIN
             'ARTICULO' AS tipoProducto,
             lca.articulo_idArticulo AS idArticulo
         FROM LINEA_CARRITO_ARTICULO lca
-        WHERE lca.idLineaCarrito = p_idLineaCarrito;
+        WHERE lca.idLineaCarrito = p_id;
         
     ELSEIF p_tipo = 'LIBRO' THEN
         SELECT 
@@ -36,7 +36,7 @@ BEGIN
             'LIBRO' AS tipoProducto,
             lcl.libro_idLibro AS idLibro
         FROM LINEA_CARRITO_LIBRO lcl
-        WHERE lcl.idLineaCarrito = p_idLineaCarrito;
+        WHERE lcl.idLineaCarrito = p_id;
         
     ELSE
         SIGNAL SQLSTATE '45000'
@@ -54,16 +54,16 @@ DROP PROCEDURE IF EXISTS `eliminarLineaCarrito`;
 DELIMITER //
 CREATE PROCEDURE `eliminarLineaCarrito`(
     IN p_tipo VARCHAR(10),
-    IN p_idLineaCarrito INT
+    IN p_id INT
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
         DELETE FROM LINEA_CARRITO_ARTICULO
-        WHERE idLineaCarrito = p_idLineaCarrito;
+        WHERE idLineaCarrito = p_id;
         
     ELSEIF p_tipo = 'LIBRO' THEN
         DELETE FROM LINEA_CARRITO_LIBRO
-        WHERE idLineaCarrito = p_idLineaCarrito;
+        WHERE idLineaCarrito = p_id;
         
     ELSE
         SIGNAL SQLSTATE '45000'
@@ -88,7 +88,7 @@ CREATE PROCEDURE `insertarLineaCarrito`(
     IN p_subtotalConDescuento DECIMAL(10,2),
     IN p_idCarrito INT,
     IN p_idReferencia INT,           -- idArticulo o idLibro según corresponda
-    OUT p_idLineaCarrito INT
+    OUT p_id INT
 )
 BEGIN
     IF p_tipo = 'ARTICULO' THEN
@@ -110,7 +110,7 @@ BEGIN
             p_idCarrito,
             p_idReferencia
         );
-        SET p_idLineaCarrito = LAST_INSERT_ID();
+        SET p_id = LAST_INSERT_ID();
         
     ELSEIF p_tipo = 'LIBRO' THEN
         INSERT INTO LINEA_CARRITO_LIBRO(
@@ -131,7 +131,7 @@ BEGIN
             p_idCarrito,
             p_idReferencia
         );
-        SET p_idLineaCarrito = LAST_INSERT_ID();
+        SET p_id = LAST_INSERT_ID();
         
     ELSE
         SIGNAL SQLSTATE '45000'
@@ -223,7 +223,7 @@ DROP PROCEDURE IF EXISTS `modificarLineaCarrito`;
 DELIMITER //
 CREATE PROCEDURE `modificarLineaCarrito`(
     IN p_tipo VARCHAR(10),
-    IN p_idLineaCarrito INT,
+    IN p_id INT,
     IN p_cantidad INT,
     IN p_precioUnitario DECIMAL(10,2),
     IN p_subtotal DECIMAL(10,2),
@@ -239,7 +239,7 @@ BEGIN
             subtotal = p_subtotal,
             precioConDescuento = p_precioConDescuento,
             subtotalConDescuento = p_subtotalConDescuento
-        WHERE idLineaCarrito = p_idLineaCarrito;
+        WHERE idLineaCarrito = p_id;
         
     ELSEIF p_tipo = 'LIBRO' THEN
         UPDATE LINEA_CARRITO_LIBRO
@@ -249,7 +249,7 @@ BEGIN
             subtotal = p_subtotal,
             precioConDescuento = p_precioConDescuento,
             subtotalConDescuento = p_subtotalConDescuento
-        WHERE idLineaCarrito = p_idLineaCarrito;
+        WHERE idLineaCarrito = p_id;
         
     ELSE
         SIGNAL SQLSTATE '45000'

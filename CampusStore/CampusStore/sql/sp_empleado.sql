@@ -7,9 +7,9 @@ DROP procedure IF EXISTS `buscarEmpleadoPorId`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `buscarEmpleadoPorId`(IN p_idEmpleado INT)
+CREATE PROCEDURE `buscarEmpleadoPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM EMPLEADO WHERE idEmpleado = p_idEmpleado;
+    SELECT * FROM EMPLEADO WHERE idEmpleado = p_id;
 END//
 
 DELIMITER ;
@@ -23,9 +23,9 @@ DROP procedure IF EXISTS `eliminarEmpleado`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `eliminarEmpleado`(IN p_idEmpleado INT)
+CREATE PROCEDURE `eliminarEmpleado`(IN p_id INT)
 BEGIN
-    DELETE FROM EMPLEADO WHERE idEmpleado = p_idEmpleado;
+    DELETE FROM EMPLEADO WHERE idEmpleado = p_id;
 END//
 
 DELIMITER ;
@@ -49,7 +49,7 @@ CREATE PROCEDURE `insertarEmpleado`(
     IN  p_activo        TINYINT,
     IN  p_sueldo        DECIMAL(10,2),
     IN  p_idRol         INT,
-    OUT p_idEmpleado    INT
+    OUT p_id    INT
 )
 BEGIN
     INSERT INTO EMPLEADO (
@@ -72,7 +72,7 @@ BEGIN
 		p_idRol
     );
 
-    SET p_idEmpleado = LAST_INSERT_ID();
+    SET p_id = LAST_INSERT_ID();
 END//
 
 DELIMITER ;
@@ -103,7 +103,7 @@ DROP procedure IF EXISTS `modificarEmpleado`;
 DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `modificarEmpleado`(
-    IN p_idEmpleado    INT,
+    IN p_id    INT,
     IN p_nombre        VARCHAR(100),
     IN p_contraseña    VARCHAR(50),
     IN p_nombreUsuario VARCHAR(25),
@@ -123,7 +123,7 @@ BEGIN
            activo        = p_activo,
            sueldo        = p_sueldo,
            ROL_idRol     = p_idRol
-     WHERE idEmpleado    = p_idEmpleado;
+     WHERE idEmpleado    = p_id;
 END//
 
 DELIMITER ;

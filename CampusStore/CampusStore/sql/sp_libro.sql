@@ -7,9 +7,9 @@ DROP procedure IF EXISTS `buscarLibroPorId`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `buscarLibroPorId`(IN p_idLibro INT)
+CREATE PROCEDURE `buscarLibroPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM LIBRO WHERE idLibro = p_idLibro;
+    SELECT * FROM LIBRO WHERE idLibro = p_id;
 END//
 
 DELIMITER ;
@@ -23,9 +23,9 @@ DROP procedure IF EXISTS `eliminarLibro`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `eliminarLibro`(IN p_idLibro INT)
+CREATE PROCEDURE `eliminarLibro`(IN p_id INT)
 BEGIN
-    DELETE FROM LIBRO WHERE idLibro = p_idLibro;
+    DELETE FROM LIBRO WHERE idLibro = p_id;
 END//
 
 DELIMITER ;
@@ -52,7 +52,7 @@ CREATE PROCEDURE `insertarLibro`(
     IN p_formato ENUM('TAPA_DURA', 'TAPA_BLANDA', 'COLECCIONISTA'),
     IN p_sinopsis VARCHAR(1000),
     IN p_idEditorial INT,
-    OUT p_idLibro INT
+    OUT p_id INT
 )
 BEGIN
     INSERT INTO LIBRO (
@@ -83,7 +83,7 @@ BEGIN
         p_idEditorial
     );
     
-    SET p_idLibro = LAST_INSERT_ID();
+    SET p_id = LAST_INSERT_ID();
 END//
 
 DELIMITER ;
@@ -114,7 +114,7 @@ DROP procedure IF EXISTS `modificarLibro`;
 DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `modificarLibro`(
-    IN p_idLibro INT,
+    IN p_id INT,
     IN p_precio DECIMAL(10,2),
     IN p_precioDescuento DECIMAL(10,2),
     IN p_stockReal INT,
@@ -143,7 +143,7 @@ BEGIN
         formato = p_formato,
         sinopsis = p_sinopsis,
         EDITORIAL_idEditorial = p_idEditorial
-    WHERE idLibro = p_idLibro;
+    WHERE idLibro = p_id;
 END//
 
 DELIMITER ;

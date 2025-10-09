@@ -8,23 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import pe.edu.pucp.campusstore.dao.ArticuloDAO;
 import pe.edu.pucp.campusstore.dao.DescuentoDAO;
-import pe.edu.pucp.campusstore.dao.LibroDAO;
 import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Descuento;
 import pe.edu.pucp.campusstore.modelo.Libro;
 import pe.edu.pucp.campusstore.modelo.TipoProducto;
 
 public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements DescuentoDAO {
-    
-    private ArticuloDAO articuloDAO;
-    private LibroDAO libroDAO;
-    
-    public DescuentoDAOImpl(){
-        this.articuloDAO = new ArticuloDAOImpl();
-        this.libroDAO = new LibroDAOImpl();
-    }
     
     @Override
     protected PreparedStatement comandoCrear(Connection conn, 
@@ -45,7 +35,7 @@ public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements Descue
         cmd.setDate("p_fechaCaducidad", new Date(modelo.getFechaCaducidad().getTime()));
         cmd.setBoolean("p_activo", modelo.getActivo());
         
-        cmd.registerOutParameter("p_idDescuento", Types.INTEGER);
+        cmd.registerOutParameter("p_id", Types.INTEGER);
         
         return cmd;
     }
@@ -62,7 +52,7 @@ public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements Descue
         cmd.setDouble("p_valorDescuento", modelo.getValorDescuento());
         cmd.setDate("p_fechaCaducidad", new Date(modelo.getFechaCaducidad().getTime()));
         cmd.setBoolean("p_activo", modelo.getActivo());
-        cmd.setInt("p_idDescuento", modelo.getIdDescuento());
+        cmd.setInt("p_id", modelo.getIdDescuento());
         
         return cmd;
     }
@@ -74,7 +64,7 @@ public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements Descue
         String sql = "{call eliminarDescuento(? ,?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
-        cmd.setInt("p_idDescuento", modelo.getIdDescuento());
+        cmd.setInt("p_id", modelo.getIdDescuento());
         
         return cmd;
     }
@@ -83,10 +73,10 @@ public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements Descue
     protected PreparedStatement comandoLeer(Connection conn, 
             Descuento modelo) throws SQLException {
         
-        String sql = "{call buscarDescuentoPorId(?, ?)}";
+        String sql = "{call buscarDescuentoPorIdModelo(?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
-        cmd.setInt("p_idDescuento", modelo.getIdDescuento());
+        cmd.setInt("p_id", modelo.getIdDescuento());
         
         return cmd;
     }
@@ -116,14 +106,15 @@ public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements Descue
         modelo.setTipoProducto(tipo);
         
         if (tipo == TipoProducto.ARTICULO) {
-            int idArticulo = rs.getInt("idArticulo");
-            Articulo articulo = articuloDAO.leer(idArticulo);
-            modelo.setProducto(articulo);
-            
+            Integer idArticulo = rs.getInt("idArticulo");
+            if(!rs.wasNull()){
+                modelo.setProducto(new ArticuloDAOImpl().leer(idArticulo));
+            }
         } else if (tipo == TipoProducto.LIBRO) {
-            int idLibro = rs.getInt("idLibro");
-            Libro libro = libroDAO.leer(idLibro);
-            modelo.setProducto(libro);
+            Integer idLibro = rs.getInt("idLibro");
+            if(!rs.wasNull()){
+                modelo.setProducto(new LibroDAOImpl().leer(idLibro));
+            }
         }
         
         return modelo;

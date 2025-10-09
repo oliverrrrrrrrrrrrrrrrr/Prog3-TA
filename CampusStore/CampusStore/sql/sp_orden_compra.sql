@@ -7,9 +7,9 @@ DROP procedure IF EXISTS `buscarOrdenCompraPorId`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `buscarOrdenCompraPorId`(IN p_idOrdenCompra INT)
+CREATE PROCEDURE `buscarOrdenCompraPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM ORDEN_COMPRA WHERE idOrdenCompra = p_idOrdenCompra;
+    SELECT * FROM ORDEN_COMPRA WHERE idOrdenCompra = p_id;
 END//
 
 DELIMITER ;
@@ -23,9 +23,9 @@ DROP procedure IF EXISTS `eliminarOrdenCompra`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `eliminarOrdenCompra`(IN p_idOrdenCompra INT)
+CREATE PROCEDURE `eliminarOrdenCompra`(IN p_id INT)
 BEGIN
-    DELETE FROM ORDEN_COMPRA WHERE idOrdenCompra = p_idOrdenCompra;
+    DELETE FROM ORDEN_COMPRA WHERE idOrdenCompra = p_id;
 END//
 
 DELIMITER ;
@@ -45,7 +45,7 @@ CREATE PROCEDURE `insertarOrdenCompra`(
     IN p_estado VARCHAR(20),
     IN p_idCarrito INT,
     IN p_idCliente INT,
-    OUT p_idOrdenCompra INT
+    OUT p_id INT
 )
 BEGIN
     -- Validar estado
@@ -76,7 +76,7 @@ BEGIN
         p_idCliente
     );
 
-    SET p_idOrdenCompra = LAST_INSERT_ID();
+    SET p_id = LAST_INSERT_ID();
 END//
 DELIMITER ;
 
@@ -106,7 +106,7 @@ DROP procedure IF EXISTS `modificarOrdenCompra`;
 
 DELIMITER //
 CREATE PROCEDURE `modificarOrdenCompra`(
-    IN p_idOrdenCompra INT,
+    IN p_id INT,
     IN p_fechaLimitePago DATETIME,
     IN p_total DECIMAL(10,2),
     IN p_totalConDescuento DECIMAL(10,2),
@@ -127,6 +127,6 @@ BEGIN
         totalConDescuento = p_totalConDescuento,
         estado = p_estado,
         CLIENTE_idCliente = p_idCliente
-    WHERE idOrdenCompra = p_idOrdenCompra;
+    WHERE idOrdenCompra = p_id;
 END//
 DELIMITER ;

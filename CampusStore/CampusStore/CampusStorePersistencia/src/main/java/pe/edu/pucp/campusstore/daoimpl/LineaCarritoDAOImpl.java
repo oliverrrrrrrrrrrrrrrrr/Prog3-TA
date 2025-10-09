@@ -39,7 +39,7 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
             default -> throw new SQLException("Tipo de producto no válido");
         }
         
-        cmd.registerOutParameter("p_idLineaCarrito", Types.INTEGER);
+        cmd.registerOutParameter("p_id", Types.INTEGER);
         
         return cmd;
     }
@@ -52,7 +52,7 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
         
         CallableStatement cmd = conn.prepareCall(sql);
         
-        cmd.setInt("p_idLineaCarrito", modelo.getIdLineaCarrito());
+        cmd.setInt("p_id", modelo.getIdLineaCarrito());
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
         cmd.setInt("p_cantidad", modelo.getCantidad());
         cmd.setDouble("p_precioUnitario", modelo.getPrecioUnitario());
@@ -70,7 +70,7 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
         String sql = "{call eliminarLineaCarrito(?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
-        cmd.setInt("p_idCarrito", modelo.getIdLineaCarrito());
+        cmd.setInt("p_id", modelo.getIdLineaCarrito());
         
         return cmd;
     }
@@ -82,7 +82,7 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
         String sql = "{call buscarLineaCarritoPorId(?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
-        cmd.setInt("p_idCarrito", modelo.getIdLineaCarrito());
+        cmd.setInt("p_id", modelo.getIdLineaCarrito());
         
         return cmd;
     }
@@ -114,11 +114,14 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
         
         if (tipo == TipoProducto.ARTICULO) {
             Integer idArticulo = rs.getInt("idArticulo");
-            modelo.setProducto(new ArticuloDAOImpl().leer(idArticulo));
-            
+            if(!rs.wasNull()){
+                modelo.setProducto(new ArticuloDAOImpl().leer(idArticulo));
+            }
         } else if (tipo == TipoProducto.LIBRO) {
             Integer idLibro = rs.getInt("idLibro");
-            modelo.setProducto(new LibroDAOImpl().leer(idLibro));
+            if(!rs.wasNull()){
+                modelo.setProducto(new LibroDAOImpl().leer(idLibro));
+            }
         }
         
         Integer idCarrito = rs.getInt("idCarrito");

@@ -22,7 +22,7 @@ public class AutorDAOImpl extends BaseDAO<Autor> implements AutorDAO {
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_apellidos", modelo.getApellidos());
         cmd.setString("p_alias", modelo.getAlias());
-        cmd.registerOutParameter("p_idAutor", Types.INTEGER);
+        cmd.registerOutParameter("p_id", Types.INTEGER);
         
         return cmd;
     }
@@ -37,7 +37,7 @@ public class AutorDAOImpl extends BaseDAO<Autor> implements AutorDAO {
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_apellidos", modelo.getApellidos());
         cmd.setString("p_alias", modelo.getAlias());
-        cmd.setInt("p_idAutor", modelo.getIdAutor());
+        cmd.setInt("p_id", modelo.getIdAutor());
         return cmd;
     }
     
@@ -47,7 +47,7 @@ public class AutorDAOImpl extends BaseDAO<Autor> implements AutorDAO {
         
         String sql = "{call eliminarAutor(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_idAutor", id);
+        cmd.setInt("p_id", id);
         
         return cmd;
     }
@@ -58,7 +58,7 @@ public class AutorDAOImpl extends BaseDAO<Autor> implements AutorDAO {
         
         String sql = "{call buscarAutorPorId(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_idAutor", id);
+        cmd.setInt("p_id", id);
         
         return cmd;
     }

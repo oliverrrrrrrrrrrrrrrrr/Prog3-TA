@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.campusstore.daoimpl;
 
 import pe.edu.pucp.campusstore.bases.dao.BaseDAO;
@@ -13,8 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import pe.edu.pucp.campusstore.dao.OrdenCompraDAO;
-import pe.edu.pucp.campusstore.modelo.Carrito;
-import pe.edu.pucp.campusstore.modelo.Cliente;
 import pe.edu.pucp.campusstore.modelo.EstadoOrden;
 import pe.edu.pucp.campusstore.modelo.OrdenCompra;
 
@@ -92,11 +86,17 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
         modelo.setTotal(rs.getDouble("total"));
         modelo.setTotalDescontado(rs.getDouble("totalDescontado"));
         modelo.setEstado(EstadoOrden.valueOf(rs.getString("estado")));
-        Carrito carritoAux=new Carrito();
-        carritoAux.setIdCarrito(rs.getInt("idCarrito"));
-        Cliente cliente=new Cliente();
-        cliente.setIdCliente(rs.getInt("idCliente"));
-        carritoAux.setCliente(cliente);
+        
+        Integer idCarrito = rs.getInt("idCarrito");
+        if(!rs.wasNull()){
+            modelo.setCarrito(new CarritoDAOImpl().leer(idCarrito));
+        }
+        
+        Integer idCliente = rs.getInt("idCliente");
+        if(!rs.wasNull()){
+            modelo.setCliente(new ClienteDAOImpl().leer(idCliente));
+        }
+        
         return modelo;
     }
 }

@@ -7,9 +7,9 @@ DROP procedure IF EXISTS `buscarCarritoPorId`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `buscarCarritoPorId`(IN p_idCarrito INT)
+CREATE PROCEDURE `buscarCarritoPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM CARRITO WHERE idCarrito = p_idCarrito;
+    SELECT * FROM CARRITO WHERE idCarrito = p_id;
 END//
 
 DELIMITER ;
@@ -26,7 +26,7 @@ USE `libreria`//
 CREATE PROCEDURE `insertarCarrito`(
     IN p_idCupon INT,
     IN p_idCliente INT,
-    OUT p_idCarrito INT
+    OUT p_id INT
 )
 BEGIN
     INSERT INTO CARRITO (
@@ -40,7 +40,7 @@ BEGIN
     );
     
     -- Se asigna el ID generado automáticamente al parámetro de salida
-    SET p_idCarrito = LAST_INSERT_ID();
+    SET p_id = LAST_INSERT_ID();
 END//
 
 DELIMITER ;
@@ -71,7 +71,7 @@ DROP procedure IF EXISTS `modificarCarrito`;
 DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `modificarCarrito`(
-    IN p_idCarrito INT,
+    IN p_id INT,
     IN p_completado TINYINT,
     IN p_id_cupon INT,
     IN p_id_cliente INT
@@ -82,7 +82,7 @@ BEGIN
         completado = p_completado,
         CUPON_idCupon = p_id_cupon,
         CLIENTE_idCliente = p_id_cliente
-    WHERE idCarrito = p_idCarrito;
+    WHERE idCarrito = p_id;
 END//
 
 DELIMITER ;

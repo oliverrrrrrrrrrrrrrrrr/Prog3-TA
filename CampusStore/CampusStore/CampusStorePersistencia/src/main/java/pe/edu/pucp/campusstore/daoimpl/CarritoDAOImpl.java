@@ -25,7 +25,7 @@ public class CarritoDAOImpl extends TransaccionalBaseDAO<Carrito> implements Car
         }else{
             cmd.setNull("p_idCliente", Types.INTEGER);
         }
-        cmd.registerOutParameter("p_idCarrito", Types.INTEGER);
+        cmd.registerOutParameter("p_id", Types.INTEGER);
         
         return cmd;
     }
@@ -44,7 +44,7 @@ public class CarritoDAOImpl extends TransaccionalBaseDAO<Carrito> implements Car
         }else{
             cmd.setNull("p_idCliente", Types.INTEGER);
         }
-        cmd.setInt("p_idCarrito", modelo.getIdCarrito());
+        cmd.setInt("p_id", modelo.getIdCarrito());
         return cmd;
     }
     
@@ -54,7 +54,7 @@ public class CarritoDAOImpl extends TransaccionalBaseDAO<Carrito> implements Car
         
         String sql = "{call eliminarCarrito(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_idCarrito", id);
+        cmd.setInt("p_id", id);
         
         return cmd;
     }
@@ -65,7 +65,7 @@ public class CarritoDAOImpl extends TransaccionalBaseDAO<Carrito> implements Car
         
         String sql = "{call buscarCarritoPorId(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_idCarrito", id);
+        cmd.setInt("p_id", id);
         
         return cmd;
     }

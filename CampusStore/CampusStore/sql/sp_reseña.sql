@@ -7,7 +7,7 @@ DROP PROCEDURE IF EXISTS `buscarReseñaPorId`;
 DELIMITER //
 CREATE PROCEDURE `buscarReseñaPorId`(
     IN p_tipo VARCHAR(10),
-    IN p_idReseña INT
+    IN p_id INT
 )
 BEGIN
     IF p_tipo = 'LIBRO' THEN
@@ -19,7 +19,7 @@ BEGIN
             rl.LIBRO_idLibro AS idLibro,
             rl.cliente_idCliente AS idCliente
         FROM RESEÑA_LIBRO rl
-        WHERE rl.idReseñaLibro = p_idReseña;
+        WHERE rl.idReseñaLibro = p_id;
         
     ELSEIF p_tipo = 'ARTICULO' THEN
         SELECT 
@@ -30,7 +30,7 @@ BEGIN
             ra.ARTICULO_idArticulo AS idArticulo,
             ra.cliente_idCliente AS idCliente
         FROM RESEÑA_ARTICULO ra
-        WHERE ra.idReseñaArticulo = p_idReseña;
+        WHERE ra.idReseñaArticulo = p_id;
         
     ELSE
         SIGNAL SQLSTATE '45000'
@@ -49,16 +49,16 @@ DROP PROCEDURE IF EXISTS `eliminarReseña`;
 DELIMITER //
 CREATE PROCEDURE `eliminarReseña`(
     IN p_tipo VARCHAR(10),
-    IN p_idReseña INT
+    IN p_id INT
 )
 BEGIN
     IF p_tipo = 'LIBRO' THEN
         DELETE FROM RESEÑA_LIBRO
-        WHERE idReseñaLibro = p_idReseña;
+        WHERE idReseñaLibro = p_id;
 
     ELSEIF p_tipo = 'ARTICULO' THEN
         DELETE FROM RESEÑA_ARTICULO
-        WHERE idReseñaArticulo = p_idReseña;
+        WHERE idReseñaArticulo = p_id;
 
     ELSE
         SIGNAL SQLSTATE '45000'
@@ -80,18 +80,18 @@ CREATE PROCEDURE `insertarReseña`(
     IN p_reseña VARCHAR(500),
     IN p_idReferencia INT,
     IN p_idCliente INT,
-    OUT p_idReseña INT
+    OUT p_id INT
 )
 BEGIN
     IF p_tipo = 'LIBRO' THEN
         INSERT INTO RESEÑA_LIBRO (calificacion, reseña, LIBRO_idLibro, cliente_idCliente)
         VALUES (p_calificacion, p_reseña, p_idReferencia, p_idCliente);
-        SET p_idReseña = LAST_INSERT_ID();
+        SET p_id = LAST_INSERT_ID();
         
     ELSEIF p_tipo = 'ARTICULO' THEN
         INSERT INTO RESEÑA_ARTICULO (calificacion, reseña, ARTICULO_idArticulo, cliente_idCliente)
         VALUES (p_calificacion, p_reseña, p_idReferencia, p_idCliente);
-        SET p_idReseña = LAST_INSERT_ID();
+        SET p_id = LAST_INSERT_ID();
         
     ELSE
         SIGNAL SQLSTATE '45000'
@@ -171,7 +171,7 @@ DROP PROCEDURE IF EXISTS `modificarReseña`;
 DELIMITER //
 CREATE PROCEDURE `modificarReseña`(
     IN p_tipo VARCHAR(10),
-    IN p_idReseña INT,
+    IN p_id INT,
     IN p_calificacion INT,
     IN p_reseña VARCHAR(500)
 )
@@ -180,13 +180,13 @@ BEGIN
         UPDATE RESEÑA_LIBRO
         SET calificacion = p_calificacion,
             reseña = p_reseña
-        WHERE idReseñaLibro = p_idReseña;
+        WHERE idReseñaLibro = p_id;
 
     ELSEIF p_tipo = 'ARTICULO' THEN
         UPDATE RESEÑA_ARTICULO
         SET calificacion = p_calificacion,
             reseña = p_reseña
-        WHERE idReseñaArticulo = p_idReseña;
+        WHERE idReseñaArticulo = p_id;
 
     ELSE
         SIGNAL SQLSTATE '45000'

@@ -7,9 +7,9 @@ DROP procedure IF EXISTS `buscarArticuloPorId`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `buscarArticuloPorId`(IN p_idArticulo INT)
+CREATE PROCEDURE `buscarArticuloPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM ARTICULO WHERE idArticulo = p_idArticulo;
+    SELECT * FROM ARTICULO WHERE idArticulo = p_id;
 END//
 
 DELIMITER ;
@@ -23,9 +23,9 @@ DROP procedure IF EXISTS `eliminarArticulo`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `eliminarArticulo`(IN p_idArticulo INT)
+CREATE PROCEDURE `eliminarArticulo`(IN p_id INT)
 BEGIN
-    DELETE FROM ARTICULO WHERE idArticulo = p_idArticulo;
+    DELETE FROM ARTICULO WHERE idArticulo = p_id;
 END//
 
 DELIMITER ;
@@ -47,7 +47,7 @@ CREATE PROCEDURE `insertarArticulo`(
     IN p_stockReal        INT,
     IN p_stockVirtual     INT,
     IN p_tipoArticulo     VARCHAR(45),
-    OUT p_idArticulo      INT
+    OUT p_id      INT
 )
 BEGIN
     INSERT INTO ARTICULO (
@@ -68,7 +68,7 @@ BEGIN
         p_tipoArticulo
     );
 
-    SET p_idArticulo = LAST_INSERT_ID();
+    SET p_id = LAST_INSERT_ID();
 END//
 
 DELIMITER ;
@@ -106,7 +106,7 @@ CREATE PROCEDURE `modificarArticulo`(
     IN p_stockReal        INT,
     IN p_stockVirtual     INT,
     IN p_tipoArticulo     VARCHAR(45),
-    IN p_idArticulo       INT
+    IN p_id       INT
 )
 BEGIN
     UPDATE ARTICULO
@@ -117,7 +117,7 @@ BEGIN
            stockReal       = p_stockReal,
            stockVirtual    = p_stockVirtual,
            tipoArticulo    = p_tipoArticulo
-     WHERE idArticulo = p_idArticulo;
+     WHERE idArticulo = p_id;
 END//
 
 DELIMITER ;

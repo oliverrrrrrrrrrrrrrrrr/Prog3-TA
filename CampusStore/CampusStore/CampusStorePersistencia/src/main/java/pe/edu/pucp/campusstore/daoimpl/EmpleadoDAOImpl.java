@@ -9,11 +9,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import pe.edu.pucp.campusstore.dao.EmpleadoDAO;
 import pe.edu.pucp.campusstore.modelo.Empleado;
-import pe.edu.pucp.campusstore.modelo.Rol;
-/**
- *
- * @author AXEL
- */
+
 public class EmpleadoDAOImpl extends BaseDAO<Empleado> implements EmpleadoDAO {
       @Override
     protected PreparedStatement comandoCrear(Connection conn, 
@@ -98,10 +94,11 @@ public class EmpleadoDAOImpl extends BaseDAO<Empleado> implements EmpleadoDAO {
         modelo.setTelefono(rs.getString("telefono"));
         modelo.setActivo(rs.getBoolean("activo"));
         modelo.setSueldo(rs.getDouble("sueldo"));
-        Rol rol_aux = new Rol();
-        rol_aux.setIdRol(rs.getInt("idRol"));
-        modelo.setRol(rol_aux);
         
+        Integer idRol = rs.getInt("idRol");
+        if(!rs.wasNull()){
+            modelo.setRol(new RolDAOImpl().leer(idRol));
+        }
         
         return modelo;
     }

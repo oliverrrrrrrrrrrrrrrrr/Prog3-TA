@@ -7,9 +7,9 @@ DROP procedure IF EXISTS `buscarPermisoPorId`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `buscarPermisoPorId`(IN p_idPermiso INT)
+CREATE PROCEDURE `buscarPermisoPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM PERMISO WHERE idPermiso = p_idPermiso;
+    SELECT * FROM PERMISO WHERE idPermiso = p_id;
 END//
 
 DELIMITER ;
@@ -23,9 +23,9 @@ DROP procedure IF EXISTS `eliminarPermiso`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `eliminarPermiso`(IN p_idPermiso INT)
+CREATE PROCEDURE `eliminarPermiso`(IN p_id INT)
 BEGIN
-    DELETE FROM PERMISO WHERE idPermiso = p_idPermiso;
+    DELETE FROM PERMISO WHERE idPermiso = p_id;
 END//
 
 DELIMITER ;
@@ -42,7 +42,7 @@ USE `libreria`//
 CREATE PROCEDURE `insertarPermiso`(
     IN p_nombre VARCHAR(45),
     IN p_descripcion VARCHAR(255),
-    OUT p_idPermiso INT
+    OUT p_id INT
 )
 BEGIN
     INSERT INTO PERMISO (
@@ -53,7 +53,7 @@ BEGIN
         p_descripcion
     );
     
-    SET p_idPermiso = LAST_INSERT_ID();
+    SET p_id = LAST_INSERT_ID();
 END//
 
 DELIMITER ;
@@ -84,7 +84,7 @@ DROP procedure IF EXISTS `modificarPermiso`;
 DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `modificarPermiso`(
-    IN p_idPermiso INT,
+    IN p_id INT,
     IN p_nombre VARCHAR(45),
     IN p_descripcion VARCHAR(255)
 )
@@ -93,7 +93,7 @@ BEGIN
     SET 
         nombre = p_nombre,
         descripcion = p_descripcion
-    WHERE idPermiso = p_idPermiso;
+    WHERE idPermiso = p_id;
 END//
 
 DELIMITER ;

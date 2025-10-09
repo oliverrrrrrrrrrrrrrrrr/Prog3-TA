@@ -7,9 +7,9 @@ DROP procedure IF EXISTS `buscarRolPorId`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `buscarRolPorId`(IN p_idRol INT)
+CREATE PROCEDURE `buscarRolPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM ROL WHERE idRol = p_idRol;
+    SELECT * FROM ROL WHERE idRol = p_id;
 END//
 
 DELIMITER ;
@@ -23,9 +23,9 @@ DROP procedure IF EXISTS `eliminarRol`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `eliminarRol`(IN p_idRol INT)
+CREATE PROCEDURE `eliminarRol`(IN p_id INT)
 BEGIN
-    DELETE FROM ROL WHERE idRol = p_idRol;
+    DELETE FROM ROL WHERE idRol = p_id;
 END//
 
 DELIMITER ;
@@ -42,7 +42,7 @@ USE `libreria`//
 CREATE PROCEDURE `insertarRol`(
     IN p_nombre VARCHAR(45),
     IN p_descripcion VARCHAR(255),
-    OUT p_idRol INT
+    OUT p_id INT
 )
 BEGIN
     INSERT INTO ROL (
@@ -53,7 +53,7 @@ BEGIN
         p_descripcion
     );
     
-    SET p_idRol = LAST_INSERT_ID();
+    SET p_id = LAST_INSERT_ID();
 END//
 
 DELIMITER ;
@@ -84,7 +84,7 @@ DROP procedure IF EXISTS `modificarRol`;
 DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `modificarRol`(
-    IN p_idRol INT,
+    IN p_id INT,
     IN p_nombre VARCHAR(45),
     IN p_descripcion VARCHAR(255)
 )
@@ -93,7 +93,7 @@ BEGIN
     SET 
         nombre = p_nombre,
         descripcion = p_descripcion
-    WHERE idRol = p_idRol;
+    WHERE idRol = p_id;
 END//
 
 DELIMITER ;

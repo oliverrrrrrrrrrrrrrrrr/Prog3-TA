@@ -26,7 +26,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         cmd.setInt("p_stockReal", modelo.getStockReal());
         cmd.setInt("p_stockVirtual", modelo.getStockVirtual());
         cmd.setString("p_tipoArticulo", modelo.getTipoArticulo().toString());
-        cmd.registerOutParameter("p_idArticulo", Types.INTEGER);
+        cmd.registerOutParameter("p_id", Types.INTEGER);
 
         return cmd;
     }
@@ -45,7 +45,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         cmd.setInt("p_stockReal", modelo.getStockReal());
         cmd.setInt("p_stockVirtual", modelo.getStockVirtual());
         cmd.setString("p_tipoArticulo", modelo.getTipoArticulo().toString());
-        cmd.setInt("p_idArticulo", modelo.getIdArticulo());
+        cmd.setInt("p_id", modelo.getIdArticulo());
         
         return cmd;
     }
@@ -56,7 +56,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         
         String sql = "{call eliminarArticulo(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_idArticulo", id);
+        cmd.setInt("p_id", id);
         
         return cmd;
     }
@@ -67,7 +67,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         
         String sql = "{call buscarArticuloPorId(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_idArticulo", id);
+        cmd.setInt("p_id", id);
         
         return cmd;
     }
@@ -95,11 +95,12 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         
         modelo.setTipoArticulo(TipoArticulo.valueOf(rs.getString("tipoArticulo")));
         
-        /*
-        Descuento desc_aux = new DescuentoArticulo();
-        desc_aux.setIdDescuento(rs.getInt("idDescuento"));
-        modelo.setDescuento(desc_aux);
-        */
+        Integer idDescuento = rs.getInt("idDescuento");
+        Descuento descuento = new Descuento();
+        descuento.setIdDescuento(idDescuento);
+        if(!rs.wasNull()){
+            modelo.setDescuento(new DescuentoDAOImpl().leer(descuento));
+        }
         
         return modelo;
     }
