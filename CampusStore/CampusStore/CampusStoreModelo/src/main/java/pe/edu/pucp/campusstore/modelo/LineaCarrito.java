@@ -8,6 +8,7 @@ public class LineaCarrito {
     private Double subtotal;
     private Double precioConDescuento;
     private Double subTotalConDescuento;
+    private TipoProducto tipoProducto;
     private Producto producto;
     
     public LineaCarrito() {
@@ -18,10 +19,11 @@ public class LineaCarrito {
         this.subtotal = null;
         this.precioConDescuento = null;
         this.subTotalConDescuento = null;
+        this.tipoProducto = null;
         this.producto = null;
     }
 
-    public LineaCarrito(Integer idLineaCarrito, Carrito carrito, Integer cantidad, Double precioUnitario, Double precioConDescuento, Double subTotalConDescuento, Double subtotal, Producto producto) {
+    public LineaCarrito(Integer idLineaCarrito, Carrito carrito, Integer cantidad, Double precioUnitario, Double precioConDescuento, Double subTotalConDescuento, Double subtotal, TipoProducto tipoProducto, Producto producto) {
         this.idLineaCarrito = idLineaCarrito;
         this.carrito = carrito;
         this.cantidad = cantidad;
@@ -29,6 +31,7 @@ public class LineaCarrito {
         this.subtotal = subtotal;
         this.precioConDescuento = precioConDescuento;
         this.subTotalConDescuento = subTotalConDescuento;
+        this.tipoProducto = tipoProducto;
         this.producto = producto;
     }
 
@@ -94,6 +97,14 @@ public class LineaCarrito {
 
     public void setSubTotalConDescuento(Double subTotalConDescuento) {
         this.subTotalConDescuento = subTotalConDescuento;
+    }
+
+    public TipoProducto getTipoProducto() {
+        return tipoProducto;
+    }
+
+    public void setTipoProducto(TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
     }
     
 }

@@ -1,21 +1,17 @@
 
 package pe.edu.pucp.campusstore.daoimpl;
 
-import pe.edu.pucp.campusstore.bases.dao.BaseDAO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-
+import pe.edu.pucp.campusstore.bases.dao.TransaccionalBaseDAO;
 import pe.edu.pucp.campusstore.modelo.Carrito;
 import pe.edu.pucp.campusstore.dao.CarritoDAO;
-import pe.edu.pucp.campusstore.modelo.Cliente;
-import pe.edu.pucp.campusstore.modelo.Cupon;
 
-public class CarritoDAOImpl extends BaseDAO<Carrito> implements CarritoDAO {
+public class CarritoDAOImpl extends TransaccionalBaseDAO<Carrito> implements CarritoDAO {
     
     @Override
     protected PreparedStatement comandoCrear(Connection conn, 
@@ -24,7 +20,11 @@ public class CarritoDAOImpl extends BaseDAO<Carrito> implements CarritoDAO {
         String sql = "{call insertarCarrito(?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_cupon", modelo.getCupon().getIdCupon());
-        cmd.setInt("p_cliente", modelo.getCliente().getIdCliente());
+        if(modelo.getCliente() != null){
+                cmd.setInt("p_idCliente", modelo.getCliente().getIdCliente());
+        }else{
+            cmd.setNull("p_idCliente", Types.INTEGER);
+        }
         cmd.registerOutParameter("p_idCarrito", Types.INTEGER);
         
         return cmd;
@@ -39,7 +39,11 @@ public class CarritoDAOImpl extends BaseDAO<Carrito> implements CarritoDAO {
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setBoolean("p_completado", modelo.getCompletado());
         cmd.setInt("p_cupon", modelo.getCupon().getIdCupon());
-        cmd.setInt("p_cliente", modelo.getCliente().getIdCliente());
+        if(modelo.getCliente() != null){
+                cmd.setInt("p_idCliente", modelo.getCliente().getIdCliente());
+        }else{
+            cmd.setNull("p_idCliente", Types.INTEGER);
+        }
         cmd.setInt("p_idCarrito", modelo.getIdCarrito());
         return cmd;
     }
@@ -82,16 +86,17 @@ public class CarritoDAOImpl extends BaseDAO<Carrito> implements CarritoDAO {
         
         modelo.setIdCarrito(rs.getInt("idCarrito"));
         modelo.setCompletado(rs.getBoolean("completado"));
+        modelo.setFechaCreacion(rs.getDate("fechaCreacion"));
         
-        //cambiar según la asesoría
+        Integer idCupon = rs.getInt("idCupon");
+        if(!rs.wasNull()){
+            modelo.setCupon(new CuponDAOImpl().leer(idCupon));
+        }
         
-        Cupon cupon_aux = new Cupon();
-        cupon_aux.setIdCupon(rs.getInt("idCupon"));
-        modelo.setCupon(cupon_aux);
-        
-        Cliente cliente_aux = new Cliente();
-        cliente_aux.setIdCliente(rs.getInt("idCliente"));
-        modelo.setCliente(cliente_aux);
+        Integer idCliente = rs.getInt("idCliente");
+        if(!rs.wasNull()){
+            modelo.setCliente(new ClienteDAOImpl().leer(idCliente));
+        }
         
         return modelo;
     }
