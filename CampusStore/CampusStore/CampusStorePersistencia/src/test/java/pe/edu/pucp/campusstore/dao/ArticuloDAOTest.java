@@ -156,5 +156,4 @@ public class ArticuloDAOTest implements PersistibleProbable{
         boolean elimino = articuloDAO.eliminar(this.testId);
         assertTrue(elimino);
     }
-    
 }
