@@ -66,9 +66,9 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `nombreUsuario` VARCHAR(25) NOT NULL,
   `correo` VARCHAR(100) NOT NULL,
   `telefono` VARCHAR(20) NULL DEFAULT NULL,
-  `CuponUsado_idCuponUsado` INT NOT NULL,
   PRIMARY KEY (`idCliente`),
-  UNIQUE INDEX `correo` (`correo` ASC) VISIBLE)
+  UNIQUE INDEX `correo` (`correo` ASC) VISIBLE,
+  UNIQUE INDEX `nombreUsuario_UNIQUE` (`nombreUsuario` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -86,15 +86,8 @@ CREATE TABLE IF NOT EXISTS `cupon` (
   `fechaCaducidad` DATETIME NOT NULL,
   `activo` TINYINT NOT NULL DEFAULT '1',
   `usosRestantes` INT NULL DEFAULT NULL,
-  `cliente_idCliente` INT NOT NULL,
   PRIMARY KEY (`idCupon`),
-  UNIQUE INDEX `codigo` (`codigo` ASC) VISIBLE,
-  INDEX `fk_cupon_cliente1_idx` (`cliente_idCliente` ASC) VISIBLE,
-  CONSTRAINT `fk_cupon_cliente1`
-    FOREIGN KEY (`cliente_idCliente`)
-    REFERENCES `cliente` (`idCliente`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  UNIQUE INDEX `codigo` (`codigo` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -295,6 +288,7 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   PRIMARY KEY (`idEmpleado`),
   UNIQUE INDEX `correo` (`correo` ASC) VISIBLE,
   INDEX `fk_EMPLEADO_ROL1_idx` (`ROL_idRol` ASC) VISIBLE,
+  UNIQUE INDEX `nombreUsuario_UNIQUE` (`nombreUsuario` ASC) VISIBLE,
   CONSTRAINT `fk_EMPLEADO_ROL1`
     FOREIGN KEY (`ROL_idRol`)
     REFERENCES `rol` (`idRol`))
@@ -471,6 +465,32 @@ CREATE TABLE IF NOT EXISTS `linea_carrito_libro` (
   CONSTRAINT `fk_linea_carrito_libro_libro1`
     FOREIGN KEY (`libro_idLibro`)
     REFERENCES `libro` (`idLibro`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `cupon_has_cliente`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `cupon_has_cliente` ;
+
+CREATE TABLE IF NOT EXISTS `cupon_has_cliente` (
+  `cupon_idCupon` INT NOT NULL,
+  `cliente_idCliente` INT NOT NULL,
+  PRIMARY KEY (`cupon_idCupon`, `cliente_idCliente`),
+  INDEX `fk_cupon_has_cliente_cliente1_idx` (`cliente_idCliente` ASC) VISIBLE,
+  INDEX `fk_cupon_has_cliente_cupon1_idx` (`cupon_idCupon` ASC) VISIBLE,
+  CONSTRAINT `fk_cupon_has_cliente_cupon1`
+    FOREIGN KEY (`cupon_idCupon`)
+    REFERENCES `cupon` (`idCupon`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cupon_has_cliente_cliente1`
+    FOREIGN KEY (`cliente_idCliente`)
+    REFERENCES `cliente` (`idCliente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
