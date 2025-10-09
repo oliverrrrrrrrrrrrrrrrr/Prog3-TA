@@ -9,7 +9,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `buscarArticuloPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM ARTICULO WHERE idArticulo = p_id;
+    SELECT * FROM articulo WHERE idArticulo = p_id;
 END//
 
 DELIMITER ;
@@ -25,7 +25,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `eliminarArticulo`(IN p_id INT)
 BEGIN
-    DELETE FROM ARTICULO WHERE idArticulo = p_id;
+    DELETE FROM articulo WHERE idArticulo = p_id;
 END//
 
 DELIMITER ;
@@ -50,7 +50,7 @@ CREATE PROCEDURE `insertarArticulo`(
     OUT p_id      INT
 )
 BEGIN
-    INSERT INTO ARTICULO (
+    INSERT INTO articulo (
         nombre,
         descripcion,
         precio,
@@ -84,7 +84,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `listarArticulos`()
 BEGIN
-    SELECT * FROM ARTICULO;
+    SELECT * FROM articulo;
 END//
 
 DELIMITER ;
@@ -109,7 +109,7 @@ CREATE PROCEDURE `modificarArticulo`(
     IN p_id       INT
 )
 BEGIN
-    UPDATE ARTICULO
+    UPDATE articulo
        SET nombre          = p_nombre,
            descripcion     = p_descripcion,
            precio          = p_precio,

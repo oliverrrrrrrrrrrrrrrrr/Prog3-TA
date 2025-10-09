@@ -18,6 +18,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestInstance;
 import pe.edu.pucp.campusstore.daoimpl.ArticuloDAOImpl;
 import pe.edu.pucp.campusstore.modelo.Articulo;
+import pe.edu.pucp.campusstore.modelo.TipoArticulo;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -44,12 +45,13 @@ public class ArticuloDAOTest implements PersistibleProbable{
         Articulo articulo = new Articulo();
         articulo.setNombre("Articulo de prueba");
         articulo.setPrecio(10.0);
-        articulo.setPrecioDescuento(null);
+        articulo.setPrecioDescuento(0.0);
         articulo.setStockReal(10);
         articulo.setStockVirtual(10);
-        articulo.setDescripcion(null);
+        articulo.setDescripcion("");
         articulo.setDescuento(null);
         articulo.setReseñas(null);
+        articulo.setTipoArticulo(TipoArticulo.LAPICERO);
         
         this.testId = articuloDAO.crear(articulo);
         assertTrue(this.testId > 0);
@@ -65,10 +67,11 @@ public class ArticuloDAOTest implements PersistibleProbable{
         articulo.setIdArticulo(this.testId);
         articulo.setNombre("Articulo de prueba modificado");
         articulo.setPrecio(20.0);
-        articulo.setPrecioDescuento(null);
+        articulo.setPrecioDescuento(0.0);
         articulo.setStockReal(20);
         articulo.setStockVirtual(20);
         articulo.setDescripcion("Descripcion modificada");
+        articulo.setTipoArticulo(TipoArticulo.LAPICERO);
         articulo.setDescuento(null);
         articulo.setReseñas(null);
         
@@ -81,6 +84,7 @@ public class ArticuloDAOTest implements PersistibleProbable{
         assertEquals(articuloModificado.getPrecioDescuento(), null);
         assertEquals(articuloModificado.getStockReal(), 20);
         assertEquals(articuloModificado.getStockVirtual(), 20);
+        assertEquals(articuloModificado.getTipoArticulo(), TipoArticulo.LAPICERO);
         assertEquals(articuloModificado.getDescripcion(), "Descripcion modificada");
     }
     
@@ -88,42 +92,69 @@ public class ArticuloDAOTest implements PersistibleProbable{
     @Order(3)
     @Override
     public void noDebeActualizarSiIdNoExiste() {
+        ArticuloDAO articuloDAO = new ArticuloDAOImpl();
         
+        Articulo articulo = new Articulo();
+        articulo.setIdArticulo(this.idIncorrecto);
+        articulo.setNombre("Articulo de prueba modificado");
+        articulo.setPrecio(20.0);
+        articulo.setPrecioDescuento(0.0);
+        articulo.setStockReal(20);
+        articulo.setStockVirtual(20);
+        articulo.setDescripcion("Descripcion modificada");
+        articulo.setTipoArticulo(TipoArticulo.LAPICERO);
+        articulo.setDescuento(null);
+        articulo.setReseñas(null);
+        
+        boolean modifico = articuloDAO.actualizar(articulo);
+        assertFalse(modifico);
     }
     
     @Test
     @Order(4)
     @Override
     public void noDebeEliminarSiIdNoExiste() {
-        
+        ArticuloDAO articuloDAO = new ArticuloDAOImpl();
+        boolean elimino = articuloDAO.eliminar(this.idIncorrecto);
+        assertFalse(elimino);
     }
     
     @Test
     @Order(5)
     @Override
     public void debeLeerSiIdExiste() {
-        
+        ArticuloDAO articuloDAO = new ArticuloDAOImpl();
+        Articulo articulo = articuloDAO.leer(this.testId);
+        assertNotNull(articulo);
     }
     
     @Test
     @Order(6)
     @Override
     public void noDebeLeerSiIdNoExiste() {
-        
+        ArticuloDAO articuloDAO = new ArticuloDAOImpl();
+        Articulo articulo = articuloDAO.leer(this.idIncorrecto);
+        assertNull(articulo);
     }
     
     @Test
     @Order(7)
     @Override
     public void debeLeerTodos() {
+        ArticuloDAO articuloDAO = new ArticuloDAOImpl();
+        List<Articulo> articulos = articuloDAO.leerTodos();
         
+        assertNotNull(articulos);
+        assertFalse(articulos.isEmpty());
     }
     
     @Test
     @Order(8)
     @Override
     public void debeEliminarSiIdExiste() {
-        
+        ArticuloDAO articuloDAO = new ArticuloDAOImpl();
+        boolean elimino = articuloDAO.eliminar(this.testId);
+        assertTrue(elimino);
     }
     
 }

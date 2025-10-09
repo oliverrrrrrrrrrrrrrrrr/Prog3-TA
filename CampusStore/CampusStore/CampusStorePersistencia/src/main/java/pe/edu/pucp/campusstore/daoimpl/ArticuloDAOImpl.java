@@ -95,12 +95,17 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         
         modelo.setTipoArticulo(TipoArticulo.valueOf(rs.getString("tipoArticulo")));
         
+        /*
         Integer idDescuento = rs.getInt("idDescuento");
-        Descuento descuento = new Descuento();
-        descuento.setIdDescuento(idDescuento);
+        
         if(!rs.wasNull()){
+            Descuento descuento = new Descuento();
+            descuento.setIdDescuento(idDescuento);
             modelo.setDescuento(new DescuentoDAOImpl().leer(descuento));
+        } else{
+            modelo.setDescuento(null);
         }
+        */
         
         return modelo;
     }

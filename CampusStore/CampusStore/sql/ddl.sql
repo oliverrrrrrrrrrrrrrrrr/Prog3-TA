@@ -10,6 +10,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema libreria
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `libreria` ;
+
+-- -----------------------------------------------------
+-- Schema libreria
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `libreria` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `libreria` ;
 
 -- -----------------------------------------------------
 -- Table `articulo`
@@ -319,11 +326,11 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `linea_carrito`
+-- Table `linea_carrito_articulo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `linea_carrito` ;
+DROP TABLE IF EXISTS `linea_carrito_articulo` ;
 
-CREATE TABLE IF NOT EXISTS `linea_carrito` (
+CREATE TABLE IF NOT EXISTS `linea_carrito_articulo` (
   `idLineaCarrito` INT NOT NULL AUTO_INCREMENT,
   `cantidad` INT NOT NULL,
   `precioUnitario` DECIMAL(10,2) NOT NULL,
@@ -331,56 +338,19 @@ CREATE TABLE IF NOT EXISTS `linea_carrito` (
   `precioConDescuento` DECIMAL(10,2) NULL DEFAULT NULL,
   `subtotalConDescuento` DECIMAL(10,2) NULL DEFAULT NULL,
   `CARRITO_idCarrito` INT NOT NULL,
+  `articulo_idArticulo` INT NOT NULL,
   PRIMARY KEY (`idLineaCarrito`),
   INDEX `fk_LINEA_CARRITO_CARRITO1_idx` (`CARRITO_idCarrito` ASC) VISIBLE,
+  INDEX `fk_linea_carrito_articulo_articulo1_idx` (`articulo_idArticulo` ASC) VISIBLE,
   CONSTRAINT `fk_LINEA_CARRITO_CARRITO1`
     FOREIGN KEY (`CARRITO_idCarrito`)
     REFERENCES `carrito` (`idCarrito`)
-    ON DELETE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `linea_carrito_has_articulo`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `linea_carrito_has_articulo` ;
-
-CREATE TABLE IF NOT EXISTS `linea_carrito_has_articulo` (
-  `LINEA_CARRITO_idLineaCarrito` INT NOT NULL,
-  `ARTICULO_idArticulo` INT NOT NULL,
-  PRIMARY KEY (`LINEA_CARRITO_idLineaCarrito`, `ARTICULO_idArticulo`),
-  INDEX `fk_LINEA_CARRITO_has_ARTICULO_ARTICULO1_idx` (`ARTICULO_idArticulo` ASC) VISIBLE,
-  INDEX `fk_LINEA_CARRITO_has_ARTICULO_LINEA_CARRITO1_idx` (`LINEA_CARRITO_idLineaCarrito` ASC) VISIBLE,
-  CONSTRAINT `fk_LINEA_CARRITO_has_ARTICULO_ARTICULO1`
-    FOREIGN KEY (`ARTICULO_idArticulo`)
-    REFERENCES `articulo` (`idArticulo`),
-  CONSTRAINT `fk_LINEA_CARRITO_has_ARTICULO_LINEA_CARRITO1`
-    FOREIGN KEY (`LINEA_CARRITO_idLineaCarrito`)
-    REFERENCES `linea_carrito` (`idLineaCarrito`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `linea_carrito_has_libro`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `linea_carrito_has_libro` ;
-
-CREATE TABLE IF NOT EXISTS `linea_carrito_has_libro` (
-  `LINEA_CARRITO_idLineaCarrito` INT NOT NULL,
-  `LIBRO_idLibro` INT NOT NULL,
-  PRIMARY KEY (`LINEA_CARRITO_idLineaCarrito`, `LIBRO_idLibro`),
-  INDEX `fk_LINEA_CARRITO_has_LIBRO_LIBRO1_idx` (`LIBRO_idLibro` ASC) VISIBLE,
-  INDEX `fk_LINEA_CARRITO_has_LIBRO_LINEA_CARRITO1_idx` (`LINEA_CARRITO_idLineaCarrito` ASC) VISIBLE,
-  CONSTRAINT `fk_LINEA_CARRITO_has_LIBRO_LIBRO1`
-    FOREIGN KEY (`LIBRO_idLibro`)
-    REFERENCES `libro` (`idLibro`),
-  CONSTRAINT `fk_LINEA_CARRITO_has_LIBRO_LINEA_CARRITO1`
-    FOREIGN KEY (`LINEA_CARRITO_idLineaCarrito`)
-    REFERENCES `linea_carrito` (`idLineaCarrito`))
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_linea_carrito_articulo_articulo1`
+    FOREIGN KEY (`articulo_idArticulo`)
+    REFERENCES `articulo` (`idArticulo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -472,6 +442,37 @@ CREATE TABLE IF NOT EXISTS `rol_has_permiso` (
   CONSTRAINT `fk_ROL_has_PERMISO_ROL1`
     FOREIGN KEY (`ROL_idRol`)
     REFERENCES `rol` (`idRol`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `linea_carrito_libro`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `linea_carrito_libro` ;
+
+CREATE TABLE IF NOT EXISTS `linea_carrito_libro` (
+  `idLineaCarrito` INT NOT NULL AUTO_INCREMENT,
+  `cantidad` INT NOT NULL,
+  `precioUnitario` DECIMAL(10,2) NOT NULL,
+  `subtotal` DECIMAL(10,2) NOT NULL,
+  `precioConDescuento` DECIMAL(10,2) NULL DEFAULT NULL,
+  `subtotalConDescuento` DECIMAL(10,2) NULL DEFAULT NULL,
+  `CARRITO_idCarrito` INT NOT NULL,
+  `libro_idLibro` INT NOT NULL,
+  PRIMARY KEY (`idLineaCarrito`),
+  INDEX `fk_LINEA_CARRITO_CARRITO1_idx` (`CARRITO_idCarrito` ASC) VISIBLE,
+  INDEX `fk_linea_carrito_libro_libro1_idx` (`libro_idLibro` ASC) VISIBLE,
+  CONSTRAINT `fk_LINEA_CARRITO_CARRITO10`
+    FOREIGN KEY (`CARRITO_idCarrito`)
+    REFERENCES `carrito` (`idCarrito`)
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_linea_carrito_libro_libro1`
+    FOREIGN KEY (`libro_idLibro`)
+    REFERENCES `libro` (`idLibro`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
