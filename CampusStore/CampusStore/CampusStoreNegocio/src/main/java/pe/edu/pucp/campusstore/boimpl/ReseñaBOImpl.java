@@ -2,29 +2,40 @@ package pe.edu.pucp.campusstore.boimpl;
 
 import java.util.List;
 import pe.edu.pucp.campusstore.bo.ReseñaBO;
+import pe.edu.pucp.campusstore.dao.ReseñaDAO;
+import pe.edu.pucp.campusstore.daoimpl.ReseñaDAOImpl;
 import pe.edu.pucp.campusstore.modelo.Reseña;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
 
 public class ReseñaBOImpl implements ReseñaBO{
+    private final ReseñaDAO reseñaDAO;
 
-    @Override
-    public List<Reseña> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ReseñaBOImpl() {
+        this.reseñaDAO = new ReseñaDAOImpl();
     }
 
     @Override
-    public Reseña obtener(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Reseña> listar(Reseña modelo) {
+        return reseñaDAO.leerTodos(modelo);
     }
 
     @Override
-    public void eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Reseña obtener(Reseña modelo) {
+        return reseñaDAO.leer(modelo);
+    }
+
+    @Override
+    public void eliminar(Reseña modelo) {
+        reseñaDAO.eliminar(modelo);
     }
 
     @Override
     public void guardar(Reseña modelo, Estado estado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (estado == Estado.Nuevo) {
+            this.reseñaDAO.crear(modelo);
+        } else {
+            this.reseñaDAO.actualizar(modelo);
+        }
     }
     
 }
