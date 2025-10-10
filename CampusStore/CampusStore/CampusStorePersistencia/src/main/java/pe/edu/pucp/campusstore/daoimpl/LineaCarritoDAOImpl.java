@@ -18,7 +18,7 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
     protected PreparedStatement comandoCrear(Connection conn, 
             LineaCarrito modelo) throws SQLException {
         
-        String sql = "{call insertarCarrito(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call insertarLineaCarrito(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
         cmd.setInt("p_cantidad", modelo.getCantidad());
@@ -48,7 +48,7 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
     protected PreparedStatement comandoActualizar(Connection conn, 
             LineaCarrito modelo) throws SQLException {
         
-        String sql = "{call modificarCarrito(?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call modificarLineaCarrito(?, ?, ?, ?, ?, ?, ?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
         
@@ -91,7 +91,7 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
     protected PreparedStatement comandoLeerTodos(
             Connection conn, LineaCarrito modelo) throws SQLException {
         
-        String sql = "{call listarLineasCarritos(?)}";
+        String sql = "{call listarLineasCarrito(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
         
@@ -124,7 +124,7 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
             }
         }
         
-        Integer idCarrito = rs.getInt("idCarrito");
+        Integer idCarrito = rs.getInt("CARRITO_idCarrito");
         if(!rs.wasNull()){
             modelo.setCarrito(new CarritoDAOImpl().leer(idCarrito));
         }
@@ -132,3 +132,5 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
         return modelo;
     }
 }
+
+

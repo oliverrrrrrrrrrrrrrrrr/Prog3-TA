@@ -1,4 +1,3 @@
-
 package pe.edu.pucp.campusstore.dao;
 
 import java.util.List;
@@ -15,31 +14,26 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestInstance;
-
-
 import pe.edu.pucp.campusstore.daoimpl.EditorialDAOImpl;
 import pe.edu.pucp.campusstore.modelo.Editorial;
 
-
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-/**
- *
- * @author AXEL
- */
 public class EditorialDAOTest implements PersistibleProbable{
-        private int testId;
+    
+    private int testId;
     private final int idIncorrecto = 99999;
-
+    
     @BeforeAll
     public void inicializar() {
         
     }
-
+    
     @AfterAll
     public void limpiar() {
         
     }
+    
     @Test
     @Order(1)
     @Override
@@ -47,16 +41,17 @@ public class EditorialDAOTest implements PersistibleProbable{
         EditorialDAO editorialDAO = new EditorialDAOImpl();
         
         Editorial editorial = new Editorial();
-        editorial.setCif("123456");
-        editorial.setDireccion("Direccion Jiron Apurimac");
-        editorial.setEmail("correo@pucpo.edu.pe");
-        editorial.setNombre("Peter");
-        editorial.setSitioWeb("www.google.com");
-        editorial.setTelefono(946481514);
+        editorial.setNombre("Editorial de prueba");
+        editorial.setDireccion("Dirección de prueba 123");
+        editorial.setTelefono(987654321);
+        editorial.setCif("CIF123456789");
+        editorial.setEmail("editorial@prueba.com");
+        editorial.setSitioWeb("www.editorialprueba.com");
+        
         this.testId = editorialDAO.crear(editorial);
         assertTrue(this.testId > 0);
     }
-
+    
     @Test
     @Order(2)
     @Override
@@ -65,26 +60,25 @@ public class EditorialDAOTest implements PersistibleProbable{
         
         Editorial editorial = new Editorial();
         editorial.setIdEditorial(this.testId);
-        editorial.setCif("123458");
-        editorial.setDireccion("Direccion Jiron Lince");
-        editorial.setEmail("example@pucpo.edu.pe");
-        editorial.setNombre("Griffin");
-        editorial.setSitioWeb("www.yahoo.com");
-        editorial.setTelefono(946481515);
+        editorial.setNombre("Editorial de prueba modificada");
+        editorial.setDireccion("Dirección modificada 456");
+        editorial.setTelefono(912345678);
+        editorial.setCif("CIF987654321");
+        editorial.setEmail("editorial.modificada@prueba.com");
+        editorial.setSitioWeb("www.editorialmodificada.com");
         
         boolean modifico = editorialDAO.actualizar(editorial);
         assertTrue(modifico);
         
-        Editorial editorialModificado = editorialDAO.leer(this.testId);
-        assertEquals(editorialModificado.getCif(),"123458");
-        assertEquals(editorialModificado.getDireccion(), "Direccion Jiron Linc");
-        assertEquals(editorialModificado.getEmail(), "example@pucpo.edu.pe");
-        assertEquals(editorialModificado.getNombre(), "Griffin");
-        assertEquals(editorialModificado.getSitioWeb(), "www.yahoo.com");
-        assertEquals(editorialModificado.getTelefono(), 946481515);
-        
+        Editorial editorialModificada = editorialDAO.leer(this.testId);
+        assertEquals(editorialModificada.getNombre(), "Editorial de prueba modificada");
+        assertEquals(editorialModificada.getDireccion(), "Dirección modificada 456");
+        assertEquals(editorialModificada.getTelefono(), 912345678);
+        assertEquals(editorialModificada.getCif(), "CIF987654321");
+        assertEquals(editorialModificada.getEmail(), "editorial.modificada@prueba.com");
+        assertEquals(editorialModificada.getSitioWeb(), "www.editorialmodificada.com");
     }
-
+    
     @Test
     @Order(3)
     @Override
@@ -93,16 +87,17 @@ public class EditorialDAOTest implements PersistibleProbable{
         
         Editorial editorial = new Editorial();
         editorial.setIdEditorial(this.idIncorrecto);
-        editorial.setCif("123458");
-        editorial.setDireccion("Direccion Jiron Lince");
-        editorial.setEmail("example@pucpo.edu.pe");
-        editorial.setNombre("Griffin");
-        editorial.setSitioWeb("www.yahoo.com");
-        editorial.setTelefono(946481515);
+        editorial.setNombre("Editorial inexistente");
+        editorial.setDireccion("Dirección inexistente");
+        editorial.setTelefono(999999999);
+        editorial.setCif("CIF000000000");
+        editorial.setEmail("inexistente@prueba.com");
+        editorial.setSitioWeb("www.inexistente.com");
+        
         boolean modifico = editorialDAO.actualizar(editorial);
         assertFalse(modifico);
     }
-
+    
     @Test
     @Order(4)
     @Override
@@ -111,7 +106,7 @@ public class EditorialDAOTest implements PersistibleProbable{
         boolean elimino = editorialDAO.eliminar(this.idIncorrecto);
         assertFalse(elimino);
     }
-
+    
     @Test
     @Order(5)
     @Override
@@ -120,7 +115,7 @@ public class EditorialDAOTest implements PersistibleProbable{
         Editorial editorial = editorialDAO.leer(this.testId);
         assertNotNull(editorial);
     }
-
+    
     @Test
     @Order(6)
     @Override
@@ -129,7 +124,7 @@ public class EditorialDAOTest implements PersistibleProbable{
         Editorial editorial = editorialDAO.leer(this.idIncorrecto);
         assertNull(editorial);
     }
-
+    
     @Test
     @Order(7)
     @Override
@@ -139,9 +134,8 @@ public class EditorialDAOTest implements PersistibleProbable{
         
         assertNotNull(editoriales);
         assertFalse(editoriales.isEmpty());
-        
     }
-
+    
     @Test
     @Order(8)
     @Override
@@ -151,5 +145,5 @@ public class EditorialDAOTest implements PersistibleProbable{
         assertTrue(elimino);
     }
     
-    
 }
+
