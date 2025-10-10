@@ -9,7 +9,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `buscarPermisoPorId`(IN p_id INT)
 BEGIN
-    SELECT * FROM permisso WHERE idPermiso = p_id;
+    SELECT * FROM permiso WHERE idPermiso = p_id;
 END//
 
 DELIMITER ;
@@ -25,7 +25,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `eliminarPermiso`(IN p_id INT)
 BEGIN
-    DELETE FROM permisso WHERE idPermiso = p_id;
+    DELETE FROM permiso WHERE idPermiso = p_id;
 END//
 
 DELIMITER ;
@@ -45,7 +45,7 @@ CREATE PROCEDURE `insertarPermiso`(
     OUT p_id INT
 )
 BEGIN
-    INSERT INTO permisso (
+    INSERT INTO permiso (
         nombre,
         descripcion
     ) VALUES (
@@ -69,7 +69,7 @@ DELIMITER //
 USE `libreria`//
 CREATE PROCEDURE `listarPermisos`()
 BEGIN
-    SELECT * FROM permisso;
+    SELECT * FROM permiso;
 END//
 
 DELIMITER ;
@@ -89,7 +89,7 @@ CREATE PROCEDURE `modificarPermiso`(
     IN p_descripcion VARCHAR(255)
 )
 BEGIN
-    UPDATE permisso
+    UPDATE permiso
     SET 
         nombre = p_nombre,
         descripcion = p_descripcion
