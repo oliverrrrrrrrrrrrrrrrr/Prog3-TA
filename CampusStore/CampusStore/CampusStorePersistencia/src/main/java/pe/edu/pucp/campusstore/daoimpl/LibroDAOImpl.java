@@ -20,7 +20,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
     protected PreparedStatement comandoCrear(Connection conn, 
             Libro modelo) throws SQLException {
         
-        String sql = "{call insertarLibro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call insertarLibro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         
         cmd.setDouble("p_precio", modelo.getPrecio());
@@ -35,7 +35,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
         cmd.setString("p_formato", modelo.getFormato().toString());
         cmd.setString("p_sinopsis", modelo.getSinopsis());
         cmd.setInt("p_idEditorial", modelo.getEditorial().getIdEditorial());
-        cmd.setInt("p_idDescuento", modelo.getDescuento().getIdDescuento());
+        //cmd.setInt("p_idDescuento", modelo.getDescuento().getIdDescuento());
         cmd.registerOutParameter("p_id", Types.INTEGER);
         
         return cmd;
@@ -45,7 +45,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
     protected PreparedStatement comandoActualizar(Connection conn, 
             Libro modelo) throws SQLException {
         
-        String sql = "{call modificarLibro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call modificarLibro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_id", modelo.getIdLibro());
@@ -61,7 +61,7 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
         cmd.setString("p_formato", modelo.getFormato().toString());
         cmd.setString("p_sinopsis", modelo.getSinopsis());
         cmd.setInt("p_idEditorial", modelo.getEditorial().getIdEditorial());
-        cmd.setInt("p_idDescuento", modelo.getDescuento().getIdDescuento());
+        //cmd.setInt("p_idDescuento", modelo.getDescuento().getIdDescuento());
         
         return cmd;
     }
@@ -115,17 +115,17 @@ public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
         modelo.setFormato(Formato.valueOf(rs.getString("formato")));
         modelo.setSinopsis(rs.getString("sinopsis"));
         
-        Integer idEditorial = rs.getInt("idEditorial");
+        Integer idEditorial = rs.getInt("EDITORIAL_idEditorial");
         if(!rs.wasNull()){
             modelo.setEditorial(new EditorialDAOImpl().leer(idEditorial));
         }
-        
+        /*
         Descuento descuento = new Descuento();
         descuento.setIdDescuento(rs.getInt("idDescuento"));
         if(!rs.wasNull()){
             modelo.setDescuento(new DescuentoDAOImpl().leer(descuento));
         }
-        
+        */
         return modelo;
     }
 }

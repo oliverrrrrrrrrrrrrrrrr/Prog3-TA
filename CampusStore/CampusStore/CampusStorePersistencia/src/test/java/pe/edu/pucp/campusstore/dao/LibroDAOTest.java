@@ -17,40 +17,66 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestInstance;
 import pe.edu.pucp.campusstore.daoimpl.ClienteDAOImpl;
+import pe.edu.pucp.campusstore.daoimpl.EditorialDAOImpl;
+import pe.edu.pucp.campusstore.daoimpl.LibroDAOImpl;
 import pe.edu.pucp.campusstore.modelo.Cliente;
+import pe.edu.pucp.campusstore.modelo.Editorial;
+import pe.edu.pucp.campusstore.modelo.Libro;
+import pe.edu.pucp.campusstore.modelo.enums.Formato;
+import pe.edu.pucp.campusstore.modelo.enums.GeneroLibro;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class LibroDAOTest implements PersistibleProbable{
     
     private int testId;
+    private int testEditorialId;
     private final int idIncorrecto = 99999;
     
     @BeforeAll
     public void inicializar() {
+        EditorialDAO editorialDAO = new EditorialDAOImpl();
         
+        Editorial editorial = new Editorial();
+        editorial.setCif("123456");
+        editorial.setDireccion("Direccion Jiron Apurimac");
+        editorial.setEmail("correo@pucpo.edu.pe");
+        editorial.setNombre("Peter");
+        editorial.setSitioWeb("www.google.com");
+        editorial.setTelefono(946481514);
+        this.testEditorialId = editorialDAO.crear(editorial);
     }
     
     @AfterAll
     public void limpiar() {
-        
+        EditorialDAO editorialDAO = new EditorialDAOImpl();
+        editorialDAO.eliminar(this.testEditorialId);
     }
     
     @Test
     @Order(1)
     @Override
     public void debeCrear() {
-        ClienteDAO clienteDAO = new ClienteDAOImpl();
+        LibroDAO libroDAO = new LibroDAOImpl();
         
-        Cliente cliente = new Cliente();
-        cliente.setNombre("Cliente de prueba");
-        cliente.setContraseña("Contraseña de prueba");
-        cliente.setNombreUsuario("Username de prueba");
-        cliente.setCorreo("Correo de prueba");
-        cliente.setTelefono("Teléfono de prueba");
-        cliente.setCuponesUsados(null);
+        Libro libro = new Libro();
+        libro.setPrecio(100.0);
+        libro.setPrecioDescuento(100.0);
+        libro.setStockReal(100);
+        libro.setStockVirtual(100);
+        libro.setNombre("Libro prueba");
+        libro.setDescripcion("Descripcion prueba");
+        libro.setDescuento(null);
+        libro.setReseñas(null);
+        libro.setIsbn("test");
+        libro.setGenero(GeneroLibro.NOVELA);
+        libro.setFechaPublicacion(new GregorianCalendar(2025,Calendar.OCTOBER,10).getTime());
+        libro.setFormato(Formato.TAPA_DURA);
+        libro.setSinopsis("Sinopsis prueba");
+        libro.setEditorial(new EditorialDAOImpl().leer(this.testEditorialId));
+        libro.setAutores(null);
         
-        this.testId = clienteDAO.crear(cliente);
+        this.testId = libroDAO.crear(libro);
         assertTrue(this.testId > 0);
     }
     
@@ -58,45 +84,61 @@ public class LibroDAOTest implements PersistibleProbable{
     @Order(2)
     @Override
     public void debeActualizarSiIdExiste() {
-        ClienteDAO clienteDAO = new ClienteDAOImpl();
+        LibroDAO libroDAO = new LibroDAOImpl();
         
-        Cliente cliente = new Cliente();
-        cliente.setIdCliente(this.testId);
-        cliente.setNombre("Cliente modificado");
-        cliente.setContraseña("Contraseña modificado");
-        cliente.setNombreUsuario("Username modificado");
-        cliente.setCorreo("Correo modificado");
-        cliente.setTelefono("Teléfono modificado");
-        cliente.setCuponesUsados(null);
+        Libro libro = new Libro();
+        libro.setIdLibro(this.testId);
+        libro.setPrecio(100.0);
+        libro.setPrecioDescuento(100.0);
+        libro.setStockReal(100);
+        libro.setStockVirtual(100);
+        libro.setNombre("Libro modificado");
+        libro.setDescripcion("Descripcion modificada");
+        libro.setDescuento(null);
+        libro.setReseñas(null);
+        libro.setIsbn("Modificado");
+        libro.setGenero(GeneroLibro.NOVELA);
+        libro.setFechaPublicacion(new GregorianCalendar(2025,Calendar.OCTOBER,10).getTime());
+        libro.setFormato(Formato.TAPA_DURA);
+        libro.setSinopsis("Sinopsis modificada");
+        libro.setEditorial(new EditorialDAOImpl().leer(this.testEditorialId));
+        libro.setAutores(null);
         
-        boolean modifico = clienteDAO.actualizar(cliente);
+        boolean modifico = libroDAO.actualizar(libro);
         assertTrue(modifico);
         
-        Cliente clienteModificado = clienteDAO.leer(this.testId);
-        assertEquals(clienteModificado.getNombre(), "Cliente modificado");
-        assertEquals(clienteModificado.getContraseña(), "Contraseña modificado");
-        assertEquals(clienteModificado.getNombreUsuario(), "Username modificado");
-        assertEquals(clienteModificado.getCorreo(), "Correo modificado");
-        assertEquals(clienteModificado.getTelefono(), "Teléfono modificado");
-        assertEquals(clienteModificado.getCuponesUsados(), null);
+        Libro libroModificado = libroDAO.leer(this.testId);
+        assertEquals(libroModificado.getNombre(), "Libro modificado");
+        assertEquals(libroModificado.getDescripcion(), "Descripcion modificada");
+        assertEquals(libroModificado.getIsbn(), "Modificado");
+        assertEquals(libroModificado.getSinopsis(), "Sinopsis modificada");
     }
     
     @Test
     @Order(3)
     @Override
     public void noDebeActualizarSiIdNoExiste() {
-        ClienteDAO clienteDAO = new ClienteDAOImpl();
+        LibroDAO libroDAO = new LibroDAOImpl();
         
-        Cliente cliente = new Cliente();
-        cliente.setIdCliente(this.idIncorrecto);
-        cliente.setNombre("Cliente modificado");
-        cliente.setContraseña("Contraseña modificado");
-        cliente.setNombreUsuario("Username modificado");
-        cliente.setCorreo("Correo modificado");
-        cliente.setTelefono("Teléfono modificado");
-        cliente.setCuponesUsados(null);
+        Libro libro = new Libro();
+        libro.setIdLibro(this.idIncorrecto);
+        libro.setPrecio(100.0);
+        libro.setPrecioDescuento(100.0);
+        libro.setStockReal(100);
+        libro.setStockVirtual(100);
+        libro.setNombre("Libro modificado");
+        libro.setDescripcion("Descripcion modificada");
+        libro.setDescuento(null);
+        libro.setReseñas(null);
+        libro.setIsbn("Modificado");
+        libro.setGenero(GeneroLibro.NOVELA);
+        libro.setFechaPublicacion(new GregorianCalendar(2025,Calendar.OCTOBER,10).getTime());
+        libro.setFormato(Formato.TAPA_DURA);
+        libro.setSinopsis("Sinopsis modificada");
+        libro.setEditorial(new EditorialDAOImpl().leer(this.testEditorialId));
+        libro.setAutores(null);
         
-        boolean modifico = clienteDAO.actualizar(cliente);
+        boolean modifico = libroDAO.actualizar(libro);
         assertFalse(modifico);
     }
     
@@ -104,8 +146,8 @@ public class LibroDAOTest implements PersistibleProbable{
     @Order(4)
     @Override
     public void noDebeEliminarSiIdNoExiste() {
-        ClienteDAO clienteDAO = new ClienteDAOImpl();
-        boolean elimino = clienteDAO.eliminar(this.idIncorrecto);
+        LibroDAO libroDAO = new LibroDAOImpl();
+        boolean elimino = libroDAO.eliminar(this.idIncorrecto);
         assertFalse(elimino);
     }
     
@@ -113,37 +155,37 @@ public class LibroDAOTest implements PersistibleProbable{
     @Order(5)
     @Override
     public void debeLeerSiIdExiste() {
-        ClienteDAO clienteDAO = new ClienteDAOImpl();
-        Cliente cliente = clienteDAO.leer(this.testId);
-        assertNotNull(cliente);
+        LibroDAO libroDAO = new LibroDAOImpl();
+        Libro libro = libroDAO.leer(this.testId);
+        assertNotNull(libro);
     }
     
     @Test
     @Order(6)
     @Override
     public void noDebeLeerSiIdNoExiste() {
-        ClienteDAO clienteDAO = new ClienteDAOImpl();
-        Cliente cliente = clienteDAO.leer(this.idIncorrecto);
-        assertNull(cliente);
+        LibroDAO libroDAO = new LibroDAOImpl();
+        Libro libro = libroDAO.leer(this.idIncorrecto);
+        assertNull(libro);
     }
     
     @Test
     @Order(7)
     @Override
     public void debeLeerTodos() {
-        ClienteDAO clienteDAO = new ClienteDAOImpl();
-        List<Cliente> clientes = clienteDAO.leerTodos();
+        LibroDAO libroDAO = new LibroDAOImpl();
+        List<Libro> libros = libroDAO.leerTodos();
         
-        assertNotNull(clientes);
-        assertFalse(clientes.isEmpty());
+        assertNotNull(libros);
+        assertFalse(libros.isEmpty());
     }
     
     @Test
     @Order(8)
     @Override
     public void debeEliminarSiIdExiste() {
-        ClienteDAO clienteDAO = new ClienteDAOImpl();
-        boolean elimino = clienteDAO.eliminar(this.testId);
+        LibroDAO libroDAO = new LibroDAOImpl();
+        boolean elimino = libroDAO.eliminar(this.testId);
         assertTrue(elimino);
     }
 }
