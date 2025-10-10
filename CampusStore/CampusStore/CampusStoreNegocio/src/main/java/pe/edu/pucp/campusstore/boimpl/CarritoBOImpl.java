@@ -2,29 +2,40 @@ package pe.edu.pucp.campusstore.boimpl;
 
 import java.util.List;
 import pe.edu.pucp.campusstore.bo.Gestionable;
+import pe.edu.pucp.campusstore.dao.CarritoDAO;
+import pe.edu.pucp.campusstore.daoimpl.CarritoDAOImpl;
 import pe.edu.pucp.campusstore.modelo.Carrito;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
 
 public class CarritoBOImpl implements Gestionable<Carrito>{
+    private final CarritoDAO carritoDAO;
+
+    public CarritoBOImpl() {
+        this.carritoDAO = new CarritoDAOImpl();
+    }
 
     @Override
     public List<Carrito> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return carritoDAO.leerTodos();
     }
 
     @Override
     public Carrito obtener(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return carritoDAO.leer(id);
     }
 
     @Override
     public void eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        carritoDAO.eliminar(id);
     }
 
     @Override
     public void guardar(Carrito modelo, Estado estado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (estado == Estado.Nuevo) {
+            this.carritoDAO.crear(modelo);
+        } else {
+            this.carritoDAO.actualizar(modelo);
+        }
     }
 
     
