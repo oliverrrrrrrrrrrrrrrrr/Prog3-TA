@@ -8,7 +8,6 @@
     <modules>
         <module>CampusStoreModelo</module>
         <module>CampusStorePersistencia</module>
-        <module>CampusStorePruebas</module>
         <module>CampusStoreDBManager</module>
         <module>CampusStoreNegocio</module>
     </modules>

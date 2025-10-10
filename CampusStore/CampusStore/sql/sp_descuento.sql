@@ -1,11 +1,11 @@
 -- -----------------------------------------------------
--- procedure buscarDescuentoPorId
+-- procedure buscarDescuentoPorIdModelo
 -- -----------------------------------------------------
 
 USE `libreria`;
-DROP PROCEDURE IF EXISTS `buscarDescuentoPorId`;
+DROP PROCEDURE IF EXISTS `buscarDescuentoPorIdModelo`;
 DELIMITER //
-CREATE PROCEDURE `buscarDescuentoPorId`(
+CREATE PROCEDURE `buscarDescuentoPorIdModelo`(
     IN p_tipo VARCHAR(10),
     IN p_id INT
 )
@@ -19,7 +19,7 @@ BEGIN
             'ARTICULO' AS tipoProducto,
             a.idArticulo
         FROM descuento_articulo da
-        INNER JOIN ARTICULO a ON da.ARTICULO_idArticulo = a.idArticulo
+        INNER JOIN articulo a ON da.ARTICULO_idArticulo = a.idArticulo
         WHERE da.idDescuentoArticulo = p_id;
         
     ELSEIF p_tipo = 'LIBRO' THEN
@@ -31,7 +31,7 @@ BEGIN
             'LIBRO' AS tipoProducto,
             l.idLibro
         FROM descuento_libro dl
-        INNER JOIN LIBRO l ON dl.LIBRO_idLibro = l.idLibro
+        INNER JOIN libro l ON dl.LIBRO_idLibro = l.idLibro
         WHERE dl.idDescuentoLibro = p_id;
         
     ELSE
@@ -120,7 +120,7 @@ BEGIN
             'ARTICULO' AS tipoProducto,
             a.idArticulo
         FROM descuento_articulo da
-        INNER JOIN ARTICULO a ON da.ARTICULO_idArticulo = a.idArticulo;
+        INNER JOIN articulo a ON da.ARTICULO_idArticulo = a.idArticulo;
         
     ELSEIF p_tipo = 'LIBRO' THEN
         SELECT 
@@ -131,7 +131,7 @@ BEGIN
             'LIBRO' AS tipoProducto,
             l.idLibro
         FROM descuento_libro dl
-        INNER JOIN LIBRO l ON dl.LIBRO_idLibro = l.idLibro;
+        INNER JOIN libro l ON dl.LIBRO_idLibro = l.idLibro;
         
     ELSEIF p_tipo IS NULL OR p_tipo = 'TODOS' THEN
         SELECT 
@@ -142,7 +142,7 @@ BEGIN
             'ARTICULO' AS tipoProducto,
             a.idArticulo
         FROM descuento_articulo da
-        INNER JOIN ARTICULO a ON da.ARTICULO_idArticulo = a.idArticulo
+        INNER JOIN articulo a ON da.ARTICULO_idArticulo = a.idArticulo
         
         UNION ALL
         
@@ -154,7 +154,7 @@ BEGIN
             'LIBRO' AS tipoProducto,
             l.idLibro
         FROM descuento_libro dl
-        INNER JOIN LIBRO l ON dl.LIBRO_idLibro = l.idLibro;
+        INNER JOIN libro l ON dl.LIBRO_idLibro = l.idLibro;
     ELSE
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Tipo no válido: debe ser ARTICULO, LIBRO o NULL/TODOS';
