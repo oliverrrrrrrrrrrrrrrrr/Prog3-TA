@@ -90,7 +90,7 @@ DROP procedure IF EXISTS `listarOrdenCompra`;
 
 DELIMITER //
 USE `libreria`//
-CREATE PROCEDURE `listarOrdenCompra`()
+CREATE PROCEDURE `listarOrdenesCompra`()
 BEGIN
     SELECT * FROM orden_compra;
 END//

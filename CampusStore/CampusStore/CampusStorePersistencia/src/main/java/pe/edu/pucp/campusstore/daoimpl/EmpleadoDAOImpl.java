@@ -95,7 +95,7 @@ public class EmpleadoDAOImpl extends BaseDAO<Empleado> implements EmpleadoDAO {
         modelo.setActivo(rs.getBoolean("activo"));
         modelo.setSueldo(rs.getDouble("sueldo"));
         
-        Integer idRol = rs.getInt("idRol");
+        Integer idRol = rs.getInt("ROL_idRol");
         if(!rs.wasNull()){
             modelo.setRol(new RolDAOImpl().leer(idRol));
         }
