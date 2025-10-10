@@ -2,29 +2,40 @@ package pe.edu.pucp.campusstore.boimpl;
 
 import java.util.List;
 import pe.edu.pucp.campusstore.bo.CuponBO;
+import pe.edu.pucp.campusstore.dao.CuponDAO;
+import pe.edu.pucp.campusstore.daoimpl.CuponDAOImpl;
 import pe.edu.pucp.campusstore.modelo.Cupon;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
 
 public class CuponBOImpl implements CuponBO{
 
+    private final CuponDAO cuponDAO;
+    
+    public CuponBOImpl() {
+        cuponDAO = new CuponDAOImpl();
+    }
+    
     @Override
     public List<Cupon> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.cuponDAO.leerTodos();
     }
 
     @Override
     public Cupon obtener(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.cuponDAO.leer(id);
     }
 
     @Override
     public void eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.cuponDAO.eliminar(id);
     }
 
     @Override
     public void guardar(Cupon modelo, Estado estado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (estado == Estado.Nuevo) {
+            this.cuponDAO.crear(modelo);
+        } else {
+            this.cuponDAO.actualizar(modelo);
+        }    
     }
-    
 }
