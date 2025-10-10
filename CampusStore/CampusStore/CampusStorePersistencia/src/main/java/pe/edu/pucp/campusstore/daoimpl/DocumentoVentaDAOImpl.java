@@ -54,7 +54,7 @@ public class DocumentoVentaDAOImpl extends BaseDAO<DocumentoVenta> implements Do
 
     @Override
     protected PreparedStatement comandoLeerTodos(Connection conn) throws SQLException {
-        String sql = "{call buscarDocumentoVentaPorId()}";
+        String sql = "{call listarDocumentosVenta()}";
         CallableStatement cmd = conn.prepareCall(sql); 
         
         return cmd;
