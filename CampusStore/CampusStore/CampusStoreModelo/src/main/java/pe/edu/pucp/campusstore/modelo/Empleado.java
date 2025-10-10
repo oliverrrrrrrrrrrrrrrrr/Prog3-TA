@@ -1,10 +1,5 @@
 package pe.edu.pucp.campusstore.modelo;
 
-/**
- *
- * @author Brayan
- */
-
 public class Empleado extends Usuario {
     private Integer idEmpleado;
     private Boolean activo;
@@ -59,6 +54,5 @@ public class Empleado extends Usuario {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-    
     
 }

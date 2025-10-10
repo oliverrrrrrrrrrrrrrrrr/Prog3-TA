@@ -19,9 +19,9 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
         
         String sql = "{call insertarOrdenCompra(?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setDate("p_limitePago", new Date(modelo.getLimitePago().getTime()));
+        cmd.setDate("p_fechaLimitePago", new Date(modelo.getLimitePago().getTime()));
         cmd.setDouble("p_total", modelo.getTotal());
-        cmd.setDouble("p_totalDescontado", modelo.getTotalDescontado());
+        cmd.setDouble("p_totalConDescuento", modelo.getTotalDescontado());
         cmd.setString("p_estado", modelo.getEstado().toString());
         cmd.setInt("p_idCarrito", modelo.getCarrito().getIdCarrito());
         cmd.setInt("p_idCliente", modelo.getCliente().getIdCliente());
@@ -34,15 +34,14 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
     protected PreparedStatement comandoActualizar(Connection conn, 
             OrdenCompra modelo) throws SQLException {
         
-        String sql = "{call modificarOrdenCompra(?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call modificarOrdenCompra(?, ?, ?, ?, ?, ?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_id", modelo.getIdOrdenCompra());
-        cmd.setDate("p_limitePago", new Date(modelo.getLimitePago().getTime()));
+        cmd.setDate("p_fechaLimitePago", new Date(modelo.getLimitePago().getTime()));
         cmd.setDouble("p_total", modelo.getTotal());
-        cmd.setDouble("p_totalDescontado", modelo.getTotalDescontado());
+        cmd.setDouble("p_totalConDescuento", modelo.getTotalDescontado());
         cmd.setString("p_estado", modelo.getEstado().toString());
-        cmd.setInt("p_idCarrito", modelo.getCarrito().getIdCarrito());
         cmd.setInt("p_idCliente", modelo.getCliente().getIdCliente());
         
         return cmd;
@@ -82,17 +81,17 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
         OrdenCompra modelo = new OrdenCompra();
         
         modelo.setIdOrdenCompra(rs.getInt("idOrdenCompra"));
-        modelo.setLimitePago(rs.getDate("limitePago"));
+        modelo.setLimitePago(rs.getDate("fechaLimitePago"));
         modelo.setTotal(rs.getDouble("total"));
-        modelo.setTotalDescontado(rs.getDouble("totalDescontado"));
+        modelo.setTotalDescontado(rs.getDouble("totalConDescuento"));
         modelo.setEstado(EstadoOrden.valueOf(rs.getString("estado")));
         
-        Integer idCarrito = rs.getInt("idCarrito");
+        Integer idCarrito = rs.getInt("CARRITO_idCarrito");
         if(!rs.wasNull()){
             modelo.setCarrito(new CarritoDAOImpl().leer(idCarrito));
         }
         
-        Integer idCliente = rs.getInt("idCliente");
+        Integer idCliente = rs.getInt("CLIENTE_idCliente");
         if(!rs.wasNull()){
             modelo.setCliente(new ClienteDAOImpl().leer(idCliente));
         }

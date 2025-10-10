@@ -66,7 +66,7 @@ public class RolDAOImpl extends BaseDAO<Rol> implements RolDAO {
     protected Rol mapearModelo(ResultSet rs) throws SQLException {
         Rol modelo = new Rol();
         
-        modelo.setIdRol(rs.getInt("idPermiso"));
+        modelo.setIdRol(rs.getInt("idRol"));
         modelo.setNombre(rs.getString("nombre"));
         modelo.setDescripcion(rs.getString("descripcion"));
         
