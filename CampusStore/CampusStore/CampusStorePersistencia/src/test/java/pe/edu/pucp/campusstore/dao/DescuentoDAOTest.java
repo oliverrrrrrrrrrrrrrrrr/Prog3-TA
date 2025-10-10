@@ -16,12 +16,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestInstance;
-
-
 import pe.edu.pucp.campusstore.daoimpl.DescuentoDAOImpl;
+import pe.edu.pucp.campusstore.daoimpl.EditorialDAOImpl;
 import pe.edu.pucp.campusstore.daoimpl.LibroDAOImpl;
 import pe.edu.pucp.campusstore.modelo.Descuento;
-import pe.edu.pucp.campusstore.modelo.Producto;
+import pe.edu.pucp.campusstore.modelo.Editorial;
+import pe.edu.pucp.campusstore.modelo.Libro;
+import pe.edu.pucp.campusstore.modelo.enums.Formato;
+import pe.edu.pucp.campusstore.modelo.enums.GeneroLibro;
 
 import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
@@ -36,16 +38,50 @@ import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 public class DescuentoDAOTest implements PersistibleProbable{
     private int testId;
     private final int idIncorrecto = 99999;
-    private int testIdProducto;
+    private int testLibroId;
+    private int testEditorialId;
     @BeforeAll
     public void inicializar() {
+        EditorialDAO editorialDAO = new EditorialDAOImpl();
         
+        Editorial editorial = new Editorial();
+        editorial.setCif("123456");
+        editorial.setDireccion("Direccion Jiron Apurimac");
+        editorial.setEmail("correo@pucpo.edu.pe");
+        editorial.setNombre("Peter");
+        editorial.setSitioWeb("www.google.com");
+        editorial.setTelefono(946481514);
+        this.testEditorialId = editorialDAO.crear(editorial);
+        
+        LibroDAO libroDAO = new LibroDAOImpl();
+        
+        Libro libro = new Libro();
+        libro.setPrecio(100.0);
+        libro.setPrecioDescuento(100.0);
+        libro.setStockReal(100);
+        libro.setStockVirtual(100);
+        libro.setNombre("Libro prueba");
+        libro.setDescripcion("Descripcion prueba");
+        libro.setDescuento(null);
+        libro.setReseñas(null);
+        libro.setIsbn("test");
+        libro.setGenero(GeneroLibro.NOVELA);
+        libro.setFechaPublicacion(new GregorianCalendar(2025,Calendar.OCTOBER,10).getTime());
+        libro.setFormato(Formato.TAPA_DURA);
+        libro.setSinopsis("Sinopsis prueba");
+        libro.setEditorial(new EditorialDAOImpl().leer(this.testEditorialId));
+        libro.setAutores(null);
+        this.testLibroId = libroDAO.crear(libro);
     }
 
     @AfterAll
     public void limpiar() {
-        
+        LibroDAO libroDAO = new LibroDAOImpl();
+        libroDAO.eliminar(this.testLibroId);
+        EditorialDAO editorialDAO = new EditorialDAOImpl();
+        editorialDAO.eliminar(this.testEditorialId);
     }
+    
     @Test
     @Order(1)
     @Override
@@ -57,7 +93,7 @@ public class DescuentoDAOTest implements PersistibleProbable{
         descuento.setFechaCaducidad(new GregorianCalendar(2025,Calendar.DECEMBER,25).getTime());
         descuento.setValorDescuento(25.00);
         descuento.setTipoProducto(TipoProducto.LIBRO);
-        descuento.setProducto(null);
+        descuento.setProducto(new LibroDAOImpl().leer(this.testLibroId));
         this.testId = descuentoDAO.crear(descuento);
         assertTrue(this.testId > 0);
     }
@@ -70,17 +106,20 @@ public class DescuentoDAOTest implements PersistibleProbable{
         
         Descuento descuento = new Descuento();
         descuento.setIdDescuento(this.testId);
-        descuento.setActivo(Boolean.FALSE);
+        descuento.setActivo(Boolean.TRUE);
 
         descuento.setFechaCaducidad(new GregorianCalendar(2025,Calendar.DECEMBER,20).getTime());
         descuento.setValorDescuento(22.00);
+        
+        descuento.setTipoProducto(TipoProducto.LIBRO);
+        descuento.setProducto(new LibroDAOImpl().leer(this.testLibroId));
         
         boolean modifico = descuentoDAO.actualizar(descuento);
         assertTrue(modifico);
         
         Descuento descuentoModificado = descuentoDAO.leer(descuento);
         assertEquals(descuentoModificado.getActivo(), Boolean.TRUE);
-        assertEquals(descuentoModificado.getFechaCaducidad(), new GregorianCalendar(2025,Calendar.DECEMBER,20).getTime());
+        assertEquals(descuentoModificado.getFechaCaducidad().getTime(), new GregorianCalendar(2025,Calendar.DECEMBER,20).getTime().getTime());
         assertEquals(descuentoModificado.getValorDescuento(), 22.00);
     }
 
@@ -95,6 +134,9 @@ public class DescuentoDAOTest implements PersistibleProbable{
         descuento.setActivo(Boolean.FALSE);
         descuento.setFechaCaducidad(new GregorianCalendar(2025,Calendar.DECEMBER,20).getTime());
         descuento.setValorDescuento(22.00);
+        
+        descuento.setTipoProducto(TipoProducto.LIBRO);
+        descuento.setProducto(new LibroDAOImpl().leer(this.testLibroId));
 
         boolean modifico = descuentoDAO.actualizar(descuento);
         assertFalse(modifico);
@@ -106,6 +148,8 @@ public class DescuentoDAOTest implements PersistibleProbable{
     public void noDebeEliminarSiIdNoExiste() {
         DescuentoDAO descuentoDAO = new DescuentoDAOImpl();
         Descuento descuento = new Descuento();
+        descuento.setTipoProducto(TipoProducto.LIBRO);
+        
         descuento.setIdDescuento(this.idIncorrecto);
         boolean elimino = descuentoDAO.eliminar(descuento);
         assertFalse(elimino);
@@ -116,9 +160,10 @@ public class DescuentoDAOTest implements PersistibleProbable{
     @Override
     public void debeLeerSiIdExiste() {
         DescuentoDAO descuentoDAO = new DescuentoDAOImpl();
-        Descuento discount = new Descuento();
-        discount.setIdDescuento(this.testId);
-        Descuento descuento = descuentoDAO.leer(discount);
+        Descuento descuento = new Descuento();
+        descuento.setTipoProducto(TipoProducto.LIBRO);
+        descuento.setIdDescuento(this.testId);
+        descuento = descuentoDAO.leer(descuento);
         assertNotNull(descuento);
     }
 
@@ -127,9 +172,10 @@ public class DescuentoDAOTest implements PersistibleProbable{
     @Override
     public void noDebeLeerSiIdNoExiste() {
         DescuentoDAO descuentoDAO = new DescuentoDAOImpl();
-        Descuento discount = new Descuento();
-        discount.setIdDescuento(this.idIncorrecto);
-        Descuento descuento = descuentoDAO.leer(discount);
+        Descuento descuento = new Descuento();
+        descuento.setTipoProducto(TipoProducto.LIBRO);
+        descuento.setIdDescuento(this.idIncorrecto);
+        descuento = descuentoDAO.leer(descuento);
         assertNull(descuento);
     }
 
@@ -138,9 +184,10 @@ public class DescuentoDAOTest implements PersistibleProbable{
     @Override
     public void debeLeerTodos() {
         DescuentoDAO descuentoDAO = new DescuentoDAOImpl();
-        Descuento discount = new Descuento();
-        discount.setIdDescuento(this.testId);
-        List<Descuento> descuentos = descuentoDAO.leerTodos(discount);
+        Descuento descuento = new Descuento();
+        descuento.setTipoProducto(TipoProducto.LIBRO);
+        descuento.setIdDescuento(this.testId);
+        List<Descuento> descuentos = descuentoDAO.leerTodos(descuento);
         
         assertNotNull(descuentos);
         assertFalse(descuentos.isEmpty());
@@ -152,9 +199,16 @@ public class DescuentoDAOTest implements PersistibleProbable{
     @Override
     public void debeEliminarSiIdExiste() {
         DescuentoDAO descuentoDAO = new DescuentoDAOImpl();
-        Descuento discount = new Descuento();
-        discount.setIdDescuento(this.testId);
-        boolean elimino = descuentoDAO.eliminar(discount);
+        Descuento descuento = new Descuento();
+        descuento.setIdDescuento(this.testId);
+        descuento.setTipoProducto(TipoProducto.LIBRO);
+        boolean elimino = descuentoDAO.eliminar(descuento);
+        
+        LibroDAO libroDAO = new LibroDAOImpl();
+        libroDAO.eliminar(this.testLibroId);
+        EditorialDAO editorialDAO = new EditorialDAOImpl();
+        editorialDAO.eliminar(this.testEditorialId);
+        
         assertTrue(elimino);
     }
     
