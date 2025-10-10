@@ -19,7 +19,7 @@ public class CarritoDAOImpl extends TransaccionalBaseDAO<Carrito> implements Car
         
         String sql = "{call insertarCarrito(?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_cupon", modelo.getCupon().getIdCupon());
+        cmd.setInt("p_idCupon", modelo.getCupon().getIdCupon());
         if(modelo.getCliente() != null){
                 cmd.setInt("p_idCliente", modelo.getCliente().getIdCliente());
         }else{
@@ -38,7 +38,7 @@ public class CarritoDAOImpl extends TransaccionalBaseDAO<Carrito> implements Car
         
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setBoolean("p_completado", modelo.getCompletado());
-        cmd.setInt("p_cupon", modelo.getCupon().getIdCupon());
+        cmd.setInt("p_idCupon", modelo.getCupon().getIdCupon());
         if(modelo.getCliente() != null){
                 cmd.setInt("p_idCliente", modelo.getCliente().getIdCliente());
         }else{
@@ -88,12 +88,12 @@ public class CarritoDAOImpl extends TransaccionalBaseDAO<Carrito> implements Car
         modelo.setCompletado(rs.getBoolean("completado"));
         modelo.setFechaCreacion(rs.getDate("fechaCreacion"));
         
-        Integer idCupon = rs.getInt("idCupon");
+        Integer idCupon = rs.getInt("CUPON_idCupon");
         if(!rs.wasNull()){
             modelo.setCupon(new CuponDAOImpl().leer(idCupon));
         }
         
-        Integer idCliente = rs.getInt("idCliente");
+        Integer idCliente = rs.getInt("CLIENTE_idCliente");
         if(!rs.wasNull()){
             modelo.setCliente(new ClienteDAOImpl().leer(idCliente));
         }

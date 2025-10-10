@@ -73,15 +73,15 @@ USE `libreria`//
 CREATE PROCEDURE `modificarCarrito`(
     IN p_id INT,
     IN p_completado TINYINT,
-    IN p_id_cupon INT,
-    IN p_id_cliente INT
+    IN p_idCupon INT,
+    IN p_idCliente INT
 )
 BEGIN
     UPDATE carrito
     SET 
         completado = p_completado,
-        CUPON_idCupon = p_id_cupon,
-        CLIENTE_idCliente = p_id_cliente
+        CUPON_idCupon = p_idCupon,
+        CLIENTE_idCliente = p_idCliente
     WHERE idCarrito = p_id;
 END//
 
