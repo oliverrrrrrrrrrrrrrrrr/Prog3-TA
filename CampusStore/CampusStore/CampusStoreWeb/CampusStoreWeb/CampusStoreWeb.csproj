@@ -70,9 +70,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\carrito.png" />
+    <Content Include="Images\diarioGreg.png" />
     <Content Include="Images\libro.png" />
+    <Content Include="Images\libroTroll.jpg" />
     <Content Include="Images\perritoLobotomizado.png" />
     <Content Include="Images\ralseiPeluche.jpg" />
+    <Content Include="Images\thegreft.png" />
+    <Content Include="Images\undertale.png" />
     <Content Include="Shop_Page.aspx" />
     <Content Include="testMaster.aspx" />
     <Content Include="Web.config" />
@@ -107,6 +111,8 @@
   <ItemGroup>
     <Content Include="Images\lupa.webp" />
     <Content Include="Images\user.webp" />
+    <Content Include="Images\libroSISOPS.webp" />
+    <Content Include="Images\PythnForDummies.webp" />
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <None Include="Web.Debug.config">

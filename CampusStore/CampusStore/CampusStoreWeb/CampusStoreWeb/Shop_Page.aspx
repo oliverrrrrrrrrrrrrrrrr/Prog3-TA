@@ -99,13 +99,26 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100 product-card">
                             <div class="card-img-container">
-                                <span class="product-tag tag-hot">HOT</span>
                                 <a href="ProductoDetalle.aspx?id=1">
-                                    <img class="card-img-top" src="https://via.placeholder.com/400x600/28a745/ffffff?text=Fórmula" alt="Undertale ArtBook">
+                                    <img class="card-img-top" src="Images/undertale.png" alt="Undertale">
                                 </a>
                             </div>
+                            <div class="product-actions">
+                                <!-- Botón 1: Agregar al Carrito (Blanco) -->
+                                <a href="Carrito.aspx?accion=agregar&id=7" class="action-btn" title="Agregar al Carrito">
+                                    <!-- Icono SVG de Carrito -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
+                                </a>
+                
+                                <!-- Botón 2: Vista Rápida (Naranja) -->
+                                <a href="#" class="action-btn action-btn-orange" title="Vista Rápida">
+                                    <!-- Icono SVG de Ojo -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"/></svg>
+                                </a>
+                            </div>
+
                             <div class="card-body">
-                                <h5 class="card-title"><a href="ProductoDetalle.aspx?id=1">Formula Emprendedor</a></h5>
+                                <h5 class="card-title"><a href="ProductoDetalle.aspx?id=1">Undertale Art Book</a></h5>
                                 <div class="card-rating">★★★★☆ (738)</div>
                                 <p class="card-text price">$70</p>
                             </div>
@@ -117,11 +130,11 @@
                         <div class="card h-100 product-card">
                              <div class="card-img-container">
                                 <a href="ProductoDetalle.aspx?id=2">
-                                    <img class="card-img-top" src="https://via.placeholder.com/400x600/6f42c1/ffffff?text=Meditaciones" alt="Meditaciones">
+                                    <img class="card-img-top"  src="Images/libroSISOPS.webp" alt="Libro MOS">
                                 </a>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title"><a href="ProductoDetalle.aspx?id=2">Meditaciones</a></h5>
+                                <h5 class="card-title"><a href="ProductoDetalle.aspx?id=2">Libro Modern Operating Systems De Andrew Tanenbaum; Herbert Bos</a></h5>
                                 <div class="card-rating">★★★★☆ (536)</div>
                                 <p class="card-text price">$2,300</p>
                             </div>
@@ -134,11 +147,11 @@
                             <div class="card-img-container">
                                 <span class="product-tag tag-bestdeals">BEST DEALS</span>
                                 <a href="ProductoDetalle.aspx?id=3">
-                                    <img class="card-img-top" src="https://via.placeholder.com/400x600/ffc107/000000?text=Chimoc" alt="Chimoc y la Pata Leta">
+                                    <img class="card-img-top" src="Images/libroTroll.jpg" alt="Libro Troll">
                                 </a>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title"><a href="ProductoDetalle.aspx?id=3">Chimoc y la Pata Leta</a></h5>
+                                <h5 class="card-title"><a href="ProductoDetalle.aspx?id=3">Libro Troll</a></h5>
                                 <div class="card-rating">★★★☆☆ (423)</div>
                                 <p class="card-text price">$360</p>
                             </div>

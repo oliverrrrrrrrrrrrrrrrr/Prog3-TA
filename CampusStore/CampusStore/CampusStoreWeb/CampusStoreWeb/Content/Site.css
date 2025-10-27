@@ -118,3 +118,103 @@
     border: 1px solid #dee2e6;
     border-radius: 5px;
 }
+/* ================================================= */
+/*          CSS PARA EFECTO HOVER EN PRODUCTOS       */
+/* ================================================= */
+
+/* 1. El contenedor de la imagen debe ser el punto de anclaje */
+.card-img-container {
+    position: relative; /* CRUCIAL: para que los botones se posicionen dentro de él */
+    overflow: hidden; /* Oculta cualquier cosa que se salga de los bordes */
+    aspect-ratio: 2 / 3;
+    background-color: #f8f9fa;
+}
+
+    .card-img-container .card-img-top {
+        width: 100%;
+        height: 100%; /* La imagen debe intentar llenar el contenedor al 100% */
+        /* ESTA ES LA PROPIEDAD CLAVE */
+        /* 'cover' -> Zoom y recorta para rellenar, sin distorsionar */
+        /* 'contain' -> La imagen completa cabe, dejando barras si es necesario */
+        object-fit: cover;
+    }
+/* 2. La capa de acciones (inicialmente invisible) */
+.product-actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Centramos los botones con Flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Espacio entre los botones */
+    /* Estado inicial: transparente y fuera de la vista */
+    opacity: 0;
+    transform: translateY(20px); /* Empieza un poco abajo para un efecto de subida */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 2; /* Asegura que esté por encima de la imagen y del overlay */
+}
+
+/* 3. El overlay oscuro que aparece sobre la imagen */
+.card-img-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Negro semitransparente */
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 0.3s ease;
+    z-index: 1; /* Detrás de los botones, pero sobre la imagen */
+}
+
+
+/* 4. LA MAGIA: El estado cuando pasas el ratón por la tarjeta */
+.product-card:hover .product-actions {
+    opacity: 1; /* Se vuelve visible */
+    transform: translateY(0); /* Sube a su posición original */
+}
+
+.product-card:hover .card-img-container::before {
+    opacity: 1; /* El overlay oscuro se vuelve visible */
+}
+
+
+/* 5. Estilo de los botones circulares */
+.action-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+    border-radius: 50%; /* Esto los hace redondos */
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+    .action-btn:hover {
+        background-color: #f0f0f0;
+        transform: scale(1.1); /* Ligeramente más grande al pasar el mouse */
+        color: #000;
+    }
+
+.action-btn-orange {
+    background-color: #ff6600; /* Color naranja de la imagen */
+    color: #ffffff;
+}
+
+    .action-btn-orange:hover {
+        background-color: #e65c00; /* Naranja un poco más oscuro */
+        color: #ffffff;
+    }
+
+/* Ajuste del tamaño del icono SVG dentro del botón */
+.action-btn svg {
+    width: 24px;
+    height: 24px;
+}
