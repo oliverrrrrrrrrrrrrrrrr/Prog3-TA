@@ -14,3 +14,4 @@ obj
 *.user
 packages
 */packages/*
+/CampusStore/CampusStore/CampusStorePersistencia/nbproject/
