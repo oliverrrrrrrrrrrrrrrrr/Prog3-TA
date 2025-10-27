@@ -241,24 +241,7 @@
             </div>
         </header>
         
-        <!-- Navigation -->
-        <nav class="main-nav">
-            <div class="container">
-                <div class="dropdown-categories" data-bs-toggle="dropdown">
-                    <i class="bi bi-list"></i>
-                    <span>Todas las categorías</span>
-                    <i class="bi bi-chevron-down"></i>
-                </div>
-                <ul class="dropdown-menu">
-                    <li><asp:HyperLink ID="lnkLibros" runat="server" NavigateUrl="~/Libros.aspx" CssClass="dropdown-item">Libros</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="lnkMochilas" runat="server" NavigateUrl="~/Mochilas.aspx" CssClass="dropdown-item">Mochilas</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="lnkCuadernos" runat="server" NavigateUrl="~/Cuadernos.aspx" CssClass="dropdown-item">Cuadernos</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="lnkTomatelodos" runat="server" NavigateUrl="~/Tomatelodos.aspx" CssClass="dropdown-item">Tomatelodos</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="lnkPeluches" runat="server" NavigateUrl="~/Peluches.aspx" CssClass="dropdown-item">Peluches</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="lnkUtiles" runat="server" NavigateUrl="~/Utiles.aspx" CssClass="dropdown-item">Útiles</asp:HyperLink></li>
-                </ul>
-            </div>
-        </nav>
+        
         
         <!-- Main Content Area -->
         <main class="container my-5">
