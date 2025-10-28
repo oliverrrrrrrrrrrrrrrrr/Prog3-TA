@@ -69,6 +69,12 @@
   <ItemGroup>
     <Content Include="Catalogo.aspx" />
     <Content Include="Content\Site.css" />
+    <Content Include="GenerarReportes.aspx" />
+    <Content Include="GestionarArticulos.aspx" />
+    <Content Include="GestionarClientes.aspx" />
+    <Content Include="GestionarEmpleados.aspx" />
+    <Content Include="GestionarLibros.aspx" />
+    <Content Include="GestionarPedidos.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\carrito.png" />
     <Content Include="Images\diarioGreg.png" />
@@ -89,6 +95,48 @@
     </Compile>
     <Compile Include="Catalogo.aspx.designer.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GenerarReportes.aspx.cs">
+      <DependentUpon>GenerarReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GenerarReportes.aspx.designer.cs">
+      <DependentUpon>GenerarReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionarArticulos.aspx.cs">
+      <DependentUpon>GestionarArticulos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionarArticulos.aspx.designer.cs">
+      <DependentUpon>GestionarArticulos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionarClientes.aspx.cs">
+      <DependentUpon>GestionarClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionarClientes.aspx.designer.cs">
+      <DependentUpon>GestionarClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionarEmpleados.aspx.cs">
+      <DependentUpon>GestionarEmpleados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionarEmpleados.aspx.designer.cs">
+      <DependentUpon>GestionarEmpleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionarLibros.aspx.cs">
+      <DependentUpon>GestionarLibros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionarLibros.aspx.designer.cs">
+      <DependentUpon>GestionarLibros.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionarPedidos.aspx.cs">
+      <DependentUpon>GestionarPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionarPedidos.aspx.designer.cs">
+      <DependentUpon>GestionarPedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

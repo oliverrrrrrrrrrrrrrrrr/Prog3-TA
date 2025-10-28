@@ -172,12 +172,38 @@
                     </div>
                     
                     <!-- Search Bar -->
-                    <div class="col">
-                        <div class="search-bar d-flex">
-                            <asp:TextBox ID="txtBusqueda" runat="server" CssClass="form-control" placeholder="Busca productos, autores y más..."></asp:TextBox>
-                            <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-search" Text="Agregar Lupa img" />
-                        </div>
+                    <div class="search-bar d-flex">
+                        <asp:TextBox ID="txtBusqueda" runat="server" CssClass="form-control" placeholder="Busca productos, autores y más..."></asp:TextBox>
+                        <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-search" OnClick="btnBuscar_Click">
+                            <i class="bi bi-search"></i>
+                        </asp:LinkButton>
                     </div>
+
+                    <style>
+                        .search-bar input {
+                            border-radius: 4px 0 0 4px;
+                            border: none;
+                            padding: 10px 15px;
+                        }
+    
+                        .btn-search {
+                            border-radius: 0 4px 4px 0;
+                            border: none;
+                            background-color: white;
+                            padding: 10px 15px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            text-decoration: none;
+                            color: #1e5a7d;
+                            font-size: 18px;
+                        }
+    
+                        .btn-search:hover {
+                            background-color: #f0f0f0;
+                            color: #1e5a7d;
+                        }
+                    </style>
                     
                     <!-- Icons -->
                     <div class="col-auto">
@@ -257,7 +283,53 @@
         
         <!-- Footer -->
         <footer class="main-footer">
-            <!-- Contenido del footer sin cambios -->
+            <div class="container">
+                <div class="row">
+                    <!-- Logo and Info -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <a href="~/" class="footer-logo" runat="server">
+                            <div class="logo-icon">
+                                <div class="logo-icon-inner"></div>
+                            </div>
+                            CAMPUS_STORE
+                        </a>
+                        <div class="footer-info mt-3">
+                            <p>Avenida Siempre viva 123</p>
+                            <p>Lima - Perú</p>
+                            <p>info@kinbo.com</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Top Category -->
+                    <div class="col-lg-3 col-md-6 mb-4 footer-section">
+                        <h5>Top Category</h5>
+                        <ul>
+                            <li><asp:HyperLink ID="lnkFooterPeluches" runat="server" NavigateUrl="~/Peluches.aspx">Peluches</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterTomatelodos" runat="server" NavigateUrl="~/Tomatelodos.aspx">Tomatelodos</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterUtiles" runat="server" NavigateUrl="~/Utiles.aspx">Útiles</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterLibros" runat="server" NavigateUrl="~/Libros.aspx">Libros</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterCuadernos" runat="server" NavigateUrl="~/Cuadernos.aspx">Cuadernos</asp:HyperLink></li>
+                        </ul>
+                        <asp:HyperLink ID="lnkBrowseAll" runat="server" NavigateUrl="~/Productos.aspx" CssClass="footer-browse-all">
+                            Browse All Product <i class="bi bi-arrow-right"></i>
+                        </asp:HyperLink>
+                    </div>
+                    
+                    <!-- Quick Links -->
+                    <div class="col-lg-3 col-md-6 mb-4 footer-section">
+                        <h5>Quick Links</h5>
+                        <ul>
+                            <li><asp:HyperLink ID="lnkShopProduct" runat="server" NavigateUrl="~/Productos.aspx">Shop Product</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkShoppingCart" runat="server" NavigateUrl="~/Carrito.aspx">Shoping Cart</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkAboutUs" runat="server" NavigateUrl="~/Nosotros.aspx">About Us</asp:HyperLink></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Empty Column for spacing -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                    </div>
+                </div>
+            </div>
         </footer>
         
     </form>

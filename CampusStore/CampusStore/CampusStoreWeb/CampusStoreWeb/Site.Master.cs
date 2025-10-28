@@ -13,5 +13,12 @@ namespace CampusStoreWeb
         {
 
         }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string busqueda = txtBusqueda.Text;
+            // Tu lógica de búsqueda aquí
+            Response.Redirect($"~/Busqueda.aspx?q={Server.UrlEncode(busqueda)}");
+        }
     }
 }
