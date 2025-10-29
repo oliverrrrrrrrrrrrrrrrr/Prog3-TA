@@ -310,12 +310,11 @@
 
                 <div class="product-price-block" id="price-block"></div>
 
-                <!-- ESTA ES LA PARTE CLAVE QUE FALTABA VISUALMENTE -->
                 <div class="action-buttons-container">
                     <div class="qty-selector">
-                        <button type="button">-</button>
-                        <input type="text" value="01">
-                        <button type="button">+</button>
+                        <button type="button" id="qty-minus">-</button>
+                        <input type="text" value="1" id="qty-input" readonly>
+                        <button type="button" id="qty-plus">+</button>
                     </div>
                     <button class="btn btn-orange-solid">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
@@ -331,11 +330,11 @@
             <div class="col-12">
                  <div class="custom-tabs">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                       <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#desc-pane">DESCRIPTION</button></li>
-                       <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#info-pane">ADDITIONAL INFORMATION</button></li>
-                       <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#spec-pane">SPECIFICATION</button></li>
-                       <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#review-pane">REVIEW</button></li>
-                   </ul>
+                       <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#desc-pane" type="button">DESCRIPTION</button></li>
+                       <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#info-pane" type="button">ADDITIONAL INFORMATION</button></li>
+                       <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#spec-pane" type="button">SPECIFICATION</button></li>
+                       <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#review-pane" type="button">REVIEW</button></li>
+                    </ul>
                    <div class="tab-content" id="myTabContent">
                        <div class="tab-pane fade show active" id="desc-pane"><div id="content-desc">...</div></div>
                        <div class="tab-pane fade" id="info-pane"><div id="content-info">...</div></div>
@@ -447,6 +446,28 @@
         document.querySelector('.next-arrow').addEventListener('click', () => {
             document.getElementById('thumbs-container').scrollBy({ left: 100, behavior: 'smooth' });
         });
+
+        const minusBtn = document.getElementById('qty-minus');
+        const plusBtn = document.getElementById('qty-plus');
+        const qtyInput = document.getElementById('qty-input');
+
+        // Verificamos que los elementos existan antes de añadir eventos
+        if (minusBtn && plusBtn && qtyInput) {
+
+            // Evento para el botón de restar (-)
+            minusBtn.addEventListener('click', () => {
+                let currentValue = parseInt(qtyInput.value, 10);
+                if (currentValue > 1) {
+                    qtyInput.value = currentValue - 1;
+                }
+            });
+
+            // Evento para el botón de sumar (+)
+            plusBtn.addEventListener('click', () => {
+                let currentValue = parseInt(qtyInput.value, 10);
+                qtyInput.value = currentValue + 1;
+            });
+        }
     });
 </script>
 

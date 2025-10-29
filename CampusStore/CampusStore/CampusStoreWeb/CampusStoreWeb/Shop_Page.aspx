@@ -93,7 +93,7 @@
                 <!-- Cuadrícula de productos -->
                 <div class="row">
                     
-                    <!-- Producto 1 (Ejemplo) -->
+                    <!-- Producto 1 -->
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                         <div class="card h-100 product-card">
                             <div class="card-img-container">
@@ -123,7 +123,7 @@
                         </div>
                     </div>
 
-                    <!-- Producto 2 (Ejemplo) -->
+                    <!-- Producto 2 -->
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                         <div class="card h-100 product-card">
                              <div class="card-img-container">
@@ -152,7 +152,7 @@
                         </div>
                     </div>
 
-                    <!-- Producto 3 (Ejemplo) -->
+                    <!-- Producto 3 -->
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                          <div class="card h-100 product-card">
                             <div class="card-img-container">    
@@ -181,7 +181,7 @@
                         </div>
                     </div>
 
-                    <!-- ... puedes copiar y pegar más bloques de producto aquí para llenar la cuadrícula ... -->
+                   
                     <!-- Producto 4 -->
                      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                          <div class="card h-100 product-card">

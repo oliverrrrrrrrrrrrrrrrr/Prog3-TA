@@ -91,6 +91,7 @@
     <Content Include="Product_detail.aspx" />
     <Content Include="Reset_Password.aspx" />
     <Content Include="Settings.aspx" />
+    <Content Include="Shopping_Car.aspx" />
     <Content Include="Shop_Page.aspx" />
     <Content Include="SignIn.aspx" />
     <Content Include="testMaster.aspx" />
@@ -193,6 +194,13 @@
     <Compile Include="Settings.aspx.designer.cs">
       <DependentUpon>Settings.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Shopping_Car.aspx.cs">
+      <DependentUpon>Shopping_Car.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shopping_Car.aspx.designer.cs">
+      <DependentUpon>Shopping_Car.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Shop_Page.aspx.cs">
       <DependentUpon>Shop_Page.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -234,6 +242,7 @@
     <Content Include="Images\user.webp" />
     <Content Include="Images\libroSISOPS.webp" />
     <Content Include="Images\PythnForDummies.webp" />
+    <Content Include="Images\tomatodo.webp" />
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <None Include="Web.Debug.config">
