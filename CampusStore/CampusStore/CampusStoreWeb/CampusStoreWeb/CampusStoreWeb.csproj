@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Catalogo.aspx" />
+    <Content Include="Content\Site.css" />
     <Content Include="Forget_Password.aspx" />
     <Content Include="GenerarReportes.aspx" />
     <Content Include="GestionarArticulos.aspx" />
@@ -76,6 +77,14 @@
     <Content Include="GestionarLibros.aspx" />
     <Content Include="GestionarPedidos.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\carrito.png" />
+    <Content Include="Images\diarioGreg.png" />
+    <Content Include="Images\libro.png" />
+    <Content Include="Images\libroTroll.jpg" />
+    <Content Include="Images\perritoLobotomizado.png" />
+    <Content Include="Images\ralseiPeluche.jpg" />
+    <Content Include="Images\thegreft.png" />
+    <Content Include="Images\undertale.png" />
     <Content Include="Reset_Password.aspx" />
     <Content Include="Shop_Page.aspx" />
     <Content Include="SignIn.aspx" />
