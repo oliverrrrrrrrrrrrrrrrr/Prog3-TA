@@ -196,7 +196,7 @@
                         <i class="bi bi-box-seam"></i>
                         Order History
                     </a>
-                    <a href="#" class="sidebar-menu-item">
+                    <a href="Shopping_Car.aspx" class="sidebar-menu-item">
                         <i class="bi bi-cart3"></i>
                         Shopping Cart
                     </a>

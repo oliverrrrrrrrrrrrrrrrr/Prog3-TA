@@ -165,7 +165,7 @@
                 <div class="row align-items:center">
                     <!-- Logo -->
                     <div class="col-auto">
-                        <a href="~/" class="logo" runat="server">
+                        <a href="Catalogo.aspx" class="logo" runat="server">
                             <div class="logo-icon"><div class="logo-icon-inner"></div></div>
                             CAMPUS_STORE
                         </a>
@@ -215,7 +215,7 @@
                                     <asp:Label ID="lblCantidadCarrito" runat="server" Text="2"></asp:Label>
                                 </span>
                             </a>
-                            <asp:HyperLink ID="lnkPerfil" runat="server" NavigateUrl="~/Perfil.aspx" CssClass="header-icon">
+                            <asp:HyperLink ID="lnkPerfil" runat="server" NavigateUrl="~/Settings.aspx" CssClass="header-icon">
                                 <i class="bi bi-person-circle"></i>
                             </asp:HyperLink>
 
@@ -260,7 +260,7 @@
                                     <span class="total-amount">$2038.00 USD</span>
                                 </div>
                                 <div class="cart-actions">
-                                    <asp:HyperLink runat="server" NavigateUrl="~/Pago.aspx" CssClass="btn btn-primary-cart">
+                                    <asp:HyperLink runat="server" NavigateUrl="~/Checkout.aspx" CssClass="btn btn-primary-cart">
                                         PROCEDER CON EL PAGO <i class="bi bi-arrow-right"></i>
                                     </asp:HyperLink>
                                     <asp:HyperLink runat="server" NavigateUrl="~/Shopping_Car.aspx" CssClass="btn btn-secondary-cart">
