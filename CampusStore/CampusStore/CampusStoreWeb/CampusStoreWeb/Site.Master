@@ -310,7 +310,7 @@
                             <li><asp:HyperLink ID="lnkFooterLibros" runat="server" NavigateUrl="~/Libros.aspx">Libros</asp:HyperLink></li>
                             <li><asp:HyperLink ID="lnkFooterCuadernos" runat="server" NavigateUrl="~/Cuadernos.aspx">Cuadernos</asp:HyperLink></li>
                         </ul>
-                        <asp:HyperLink ID="lnkBrowseAll" runat="server" NavigateUrl="~/Productos.aspx" CssClass="footer-browse-all">
+                        <asp:HyperLink ID="lnkBrowseAll" runat="server" NavigateUrl="~/Shop_Page.aspx" CssClass="footer-browse-all">
                             Browse All Product <i class="bi bi-arrow-right"></i>
                         </asp:HyperLink>
                     </div>
