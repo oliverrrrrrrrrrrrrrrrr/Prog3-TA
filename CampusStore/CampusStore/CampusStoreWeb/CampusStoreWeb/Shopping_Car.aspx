@@ -242,7 +242,7 @@
                         <span>Total</span>
                         <span>$112.10 USD</span>
                     </div>
-                    <a href="#" class="btn btn-proceed">PROCEED TO CHECKOUT <i class="arrow-right"></i></a>
+                    <a href="Checkout.aspx" class="btn btn-proceed">PROCEED TO CHECKOUT <i class="arrow-right"></i></a>
                 </div>
 
                 <!-- Caja de Cupón -->

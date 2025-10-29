@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Catalogo.aspx" />
+    <Content Include="Checkout.aspx" />
     <Content Include="Content\Site.css" />
     <Content Include="Forget_Password.aspx" />
     <Content Include="GenerarReportes.aspx" />
@@ -105,6 +106,13 @@
     </Compile>
     <Compile Include="Catalogo.aspx.designer.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout.aspx.designer.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forget_Password.aspx.cs">
       <DependentUpon>Forget_Password.aspx</DependentUpon>
