@@ -213,13 +213,13 @@ namespace CampusStoreWeb
         protected global::System.Web.UI.WebControls.LinkButton btnEditarDescuento;
 
         /// <summary>
-        /// Control btnEliminarDescuento.
+        /// Control btnDesactivarDescuento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnEliminarDescuento;
+        protected global::System.Web.UI.WebControls.LinkButton btnDesactivarDescuento;
 
         /// <summary>
         /// Control pnlSinDescuento.

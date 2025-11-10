@@ -668,8 +668,8 @@
                             <asp:LinkButton ID="btnEditarDescuento" runat="server" CssClass="btn-form btn-small btn-guardar" OnClick="btnEditarDescuento_Click" CausesValidation="false">
                                 <i class="bi bi-pencil"></i> Editar
                             </asp:LinkButton>
-                            <asp:LinkButton ID="btnEliminarDescuento" runat="server" CssClass="btn-form btn-small btn-danger-small" OnClick="btnEliminarDescuento_Click" OnClientClick="return confirm('¿Eliminar el descuento?');" CausesValidation="false">
-                                <i class="bi bi-trash"></i> Eliminar
+                            <asp:LinkButton ID="btnDesactivarDescuento" runat="server" CssClass="btn-form btn-small btn-desactivar-small" OnClick="btnCambiarEstadoDescuento_Click" OnClientClick="return confirm('¿Desactivar este descuento?');" CausesValidation="false">
+                                <i class="bi bi-pause-circle"></i> Desactivar
                             </asp:LinkButton>
                         </div>
                     </asp:Panel>

@@ -52,6 +52,7 @@ namespace CampusStoreWeb
                         {
                             ViewState["idArticulo"] = idArticuloActual;
                             MostrarDatosArticulo();
+                            CargarDescuento();
                         }
                         else
                         {
@@ -148,6 +149,7 @@ namespace CampusStoreWeb
                 {
                     // Tiene descuento activo
                     ViewState["idDescuento"] = descuentoActual.idDescuento;
+                    ViewState["descuentoActual"] = descuentoActual;
                     MostrarDescuentoActivo();
                 }
                 else
@@ -206,6 +208,42 @@ namespace CampusStoreWeb
         }
 
         // ========================================
+        // BOTÓN ACTIVAR/DESACTIVAR DESCUENTO
+        // ========================================
+        protected void btnCambiarEstadoDescuento_Click(object sender, EventArgs e)
+        {
+            if (ViewState["idDescuento"] != null)
+            {
+                try
+                {
+                    // Cambiar el estado al contrario
+                    if (ViewState["descuentoActual"] != null)
+                        descuentoActual = (DescuentoWS.descuento)ViewState["descuentoActual"];
+
+                    descuentoActual.activo = !(descuentoActual.activo);
+                    descuentoActual.activoSpecified = true;
+
+                    // Guardar en el WS
+                    descuentoWS.guardarDescuento(descuentoActual, DescuentoWS.estado.Modificado);
+
+                    string mensaje = descuentoActual.activo ? "activado" : "desactivado";
+
+                    // Recargar
+                    CargarDescuento();
+
+                    
+                    string script = $"alert('Descuento {mensaje} exitosamente');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "success", script, true);
+                }
+                catch (Exception ex)
+                {
+                    string script = $"alert('Error al cambiar estado: {ex.Message}');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                }
+            }
+        }
+
+        // ========================================
         // BOTÓN GUARDAR DESCUENTO
         // ========================================
         protected void btnGuardarDescuento_Click(object sender, EventArgs e)
@@ -218,25 +256,26 @@ namespace CampusStoreWeb
                     
                     DescuentoWS.descuento descuento = new DescuentoWS.descuento() {
                         valorDescuento = double.Parse(txtDescuentoValor.Text),
-                        valorDescuentoSpecified = true, // ✅ asegura que se envíe
+                        valorDescuentoSpecified = true,
 
                         fechaCaducidad = DateTime.Parse(txtDescuentoFecha.Text),
-                        fechaCaducidadSpecified = true, // ✅ asegura que se envíe
+                        fechaCaducidadSpecified = true,
 
                         activo = chkDescuentoActivo.Checked,
-                        activoSpecified = true, // ✅ asegura que se envíe
+                        activoSpecified = true,
 
-                        tipoProducto = DescuentoWS.tipoProducto.ARTICULO, // ✅ enum no necesita Specified
+                        tipoProducto = DescuentoWS.tipoProducto.ARTICULO,
                         tipoProductoSpecified = true,
 
                         idProducto = idArticuloActual,
-                        idProductoSpecified = true // ✅ asegura que se envíe
+                        idProductoSpecified = true
                     };
 
                     if (ViewState["idDescuento"] != null)
                     {
                         // ACTUALIZAR descuento existente
                         descuento.idDescuento = (int)ViewState["idDescuento"];
+                        descuento.idDescuentoSpecified = true;
                         descuentoWS.guardarDescuento(descuento, DescuentoWS.estado.Modificado);
                     }
                     else

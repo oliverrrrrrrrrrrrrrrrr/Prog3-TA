@@ -35,15 +35,6 @@ namespace CampusStoreWeb.ArticuloWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticuloResponse")]
         System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.obtenerArticuloResponse> obtenerArticuloAsync(CampusStoreWeb.ArticuloWS.obtenerArticuloRequest request);
         
-        // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
-        CampusStoreWeb.ArticuloWS.eliminarArticuloResponse eliminarArticulo(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.eliminarArticuloResponse> eliminarArticuloAsync(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request);
-        
         // CODEGEN: El parámetro 'articulo' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -52,6 +43,15 @@ namespace CampusStoreWeb.ArticuloWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloResponse")]
         System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.guardarArticuloResponse> guardarArticuloAsync(CampusStoreWeb.ArticuloWS.guardarArticuloRequest request);
+        
+        // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
+        CampusStoreWeb.ArticuloWS.eliminarArticuloResponse eliminarArticulo(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.eliminarArticuloResponse> eliminarArticuloAsync(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request);
     }
     
     /// <remarks/>
@@ -1030,34 +1030,6 @@ namespace CampusStoreWeb.ArticuloWS {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarArticulo", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarArticuloRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int id;
-        
-        public eliminarArticuloRequest() {
-        }
-        
-        public eliminarArticuloRequest(int id) {
-            this.id = id;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarArticuloResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarArticuloResponse {
-        
-        public eliminarArticuloResponse() {
-        }
-    }
-    
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
@@ -1104,6 +1076,34 @@ namespace CampusStoreWeb.ArticuloWS {
     public partial class guardarArticuloResponse {
         
         public guardarArticuloResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarArticulo", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarArticuloRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int id;
+        
+        public eliminarArticuloRequest() {
+        }
+        
+        public eliminarArticuloRequest(int id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarArticuloResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarArticuloResponse {
+        
+        public eliminarArticuloResponse() {
         }
     }
     
@@ -1179,28 +1179,6 @@ namespace CampusStoreWeb.ArticuloWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.ArticuloWS.eliminarArticuloResponse CampusStoreWeb.ArticuloWS.ArticuloWS.eliminarArticulo(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request) {
-            return base.Channel.eliminarArticulo(request);
-        }
-        
-        public void eliminarArticulo(int id) {
-            CampusStoreWeb.ArticuloWS.eliminarArticuloRequest inValue = new CampusStoreWeb.ArticuloWS.eliminarArticuloRequest();
-            inValue.id = id;
-            CampusStoreWeb.ArticuloWS.eliminarArticuloResponse retVal = ((CampusStoreWeb.ArticuloWS.ArticuloWS)(this)).eliminarArticulo(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.eliminarArticuloResponse> CampusStoreWeb.ArticuloWS.ArticuloWS.eliminarArticuloAsync(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request) {
-            return base.Channel.eliminarArticuloAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.eliminarArticuloResponse> eliminarArticuloAsync(int id) {
-            CampusStoreWeb.ArticuloWS.eliminarArticuloRequest inValue = new CampusStoreWeb.ArticuloWS.eliminarArticuloRequest();
-            inValue.id = id;
-            return ((CampusStoreWeb.ArticuloWS.ArticuloWS)(this)).eliminarArticuloAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         CampusStoreWeb.ArticuloWS.guardarArticuloResponse CampusStoreWeb.ArticuloWS.ArticuloWS.guardarArticulo(CampusStoreWeb.ArticuloWS.guardarArticuloRequest request) {
             return base.Channel.guardarArticulo(request);
         }
@@ -1222,6 +1200,28 @@ namespace CampusStoreWeb.ArticuloWS {
             inValue.articulo = articulo;
             inValue.estado = estado;
             return ((CampusStoreWeb.ArticuloWS.ArticuloWS)(this)).guardarArticuloAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CampusStoreWeb.ArticuloWS.eliminarArticuloResponse CampusStoreWeb.ArticuloWS.ArticuloWS.eliminarArticulo(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request) {
+            return base.Channel.eliminarArticulo(request);
+        }
+        
+        public void eliminarArticulo(int id) {
+            CampusStoreWeb.ArticuloWS.eliminarArticuloRequest inValue = new CampusStoreWeb.ArticuloWS.eliminarArticuloRequest();
+            inValue.id = id;
+            CampusStoreWeb.ArticuloWS.eliminarArticuloResponse retVal = ((CampusStoreWeb.ArticuloWS.ArticuloWS)(this)).eliminarArticulo(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.eliminarArticuloResponse> CampusStoreWeb.ArticuloWS.ArticuloWS.eliminarArticuloAsync(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request) {
+            return base.Channel.eliminarArticuloAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.eliminarArticuloResponse> eliminarArticuloAsync(int id) {
+            CampusStoreWeb.ArticuloWS.eliminarArticuloRequest inValue = new CampusStoreWeb.ArticuloWS.eliminarArticuloRequest();
+            inValue.id = id;
+            return ((CampusStoreWeb.ArticuloWS.ArticuloWS)(this)).eliminarArticuloAsync(inValue);
         }
     }
 }
