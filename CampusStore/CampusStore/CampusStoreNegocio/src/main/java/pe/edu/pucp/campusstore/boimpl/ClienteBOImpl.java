@@ -38,5 +38,10 @@ public class ClienteBOImpl implements ClienteBO{
             this.clienteDAO.actualizar(modelo);
         }
     }
+
+    @Override
+    public boolean login(String nombreUsuario, String contraseña) {
+        return this.clienteDAO.login(nombreUsuario, contraseña);
+    }
     
 }

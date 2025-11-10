@@ -114,3 +114,33 @@ BEGIN
 END//
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure loginCliente
+-- -----------------------------------------------------
+
+DELIMITER //
+USE `libreria`;
+DROP procedure IF EXISTS `loginCliente`;
+
+CREATE PROCEDURE loginCliente(
+    IN p_nombreUsuario VARCHAR(50),
+    IN p_contraseña VARCHAR(50),
+    OUT p_valido BOOLEAN
+)
+BEGIN
+    DECLARE v_count INT DEFAULT 0;
+
+    SELECT COUNT(*) INTO v_count
+    FROM cliente
+    WHERE nombreUsuario = p_nombreUsuario
+      AND contraseña = p_contraseña;
+
+    IF v_count > 0 THEN
+        SET p_valido = TRUE;
+    ELSE
+        SET p_valido = FALSE;
+    END IF;
+END //
+
+DELIMITER ;

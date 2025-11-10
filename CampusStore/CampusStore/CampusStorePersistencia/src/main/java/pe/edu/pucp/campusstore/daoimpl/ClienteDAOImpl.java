@@ -79,6 +79,38 @@ public class ClienteDAOImpl extends BaseDAO<Cliente> implements ClienteDAO {
         modelo.setCorreo(rs.getString("correo"));
         modelo.setTelefono(rs.getString("telefono"));
         
-        return modelo;    }
+        return modelo;    
+    }
+    
+    protected PreparedStatement comandoLogin(Connection conn, String nombreUsuario, 
+            String contraseña) throws SQLException {
+        String sql = "{call loginCliente(?, ?, ?)}";
+        
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setString("p_nombreUsuario", nombreUsuario);
+        cmd.setString("p_contraseña", contraseña);
+        cmd.registerOutParameter("p_valido", Types.BOOLEAN);
+        
+        return cmd;
+    }
+
+    @Override
+    public boolean login(String nombreUsuario, String contraseña) {
+        return ejecutarComando(conn -> {
+            try (PreparedStatement cmd = this.comandoLogin(conn, nombreUsuario, contraseña)) {
+                if (cmd instanceof CallableStatement callableCmd) {
+                    callableCmd.execute();
+                    boolean valido = callableCmd.getBoolean("p_valido");
+                    
+                    if (!valido) {
+                        System.err.println("No se encontro el registro con "
+                            + "username: " + nombreUsuario + ", password");
+                    }
+                    return valido;
+                }
+                return false;
+            }
+        });
+    }
 
 }
