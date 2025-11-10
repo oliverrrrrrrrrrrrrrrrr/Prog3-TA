@@ -10,7 +10,9 @@ import pe.edu.pucp.campusstore.modelo.Descuento;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
 import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
-@WebService(serviceName = "DescuentoWS")
+@WebService(
+        serviceName = "DescuentoWS",
+        targetNamespace = "http://services.campusstore.pucp.edu.pe/")
 public class DescuentoWS {
     
     private final DescuentoBO descuentoBO;
@@ -45,6 +47,14 @@ public class DescuentoWS {
         @WebParam(name = "descuento") Descuento descuento, 
         @WebParam(name = "estado") Estado estado
     ) {
+        System.out.println("---- DEBUG guardarDescuento ----");
+        System.out.println("Descuento recibido:");
+        System.out.println("idProducto = " + descuento.getIdProducto());
+        System.out.println("tipoProducto = " + descuento.getTipoProducto());
+        System.out.println("valorDescuento = " + descuento.getValorDescuento());
+        System.out.println("activo = " + descuento.getActivo());
+        System.out.println("fechaCaducidad = " + descuento.getFechaCaducidad());
+        System.out.println("estado = " + estado);
         this.descuentoBO.guardar(descuento, estado);
     }
     

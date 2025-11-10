@@ -215,34 +215,35 @@ namespace CampusStoreWeb
                 try
                 {
                     idArticuloActual = (int)ViewState["idArticulo"];
-
-                    ArticuloWS.articulo art = articuloWS.obtenerArticulo(idArticuloActual);
                     
-                    DescuentoWS.descuento nuevoDescuento = new DescuentoWS.descuento {
+                    DescuentoWS.descuento descuento = new DescuentoWS.descuento() {
                         valorDescuento = double.Parse(txtDescuentoValor.Text),
+                        valorDescuentoSpecified = true, // ✅ asegura que se envíe
+
                         fechaCaducidad = DateTime.Parse(txtDescuentoFecha.Text),
+                        fechaCaducidadSpecified = true, // ✅ asegura que se envíe
+
                         activo = chkDescuentoActivo.Checked,
-                        tipoProducto = DescuentoWS.tipoProducto.ARTICULO,
-                        producto = { 
-                            precio = art.precio, 
-                            precioDescuento = art.precioDescuento,
-                            stockReal = art.stockReal, 
-                            stockVirtual = art.stockVirtual, 
-                            nombre = art.nombre, 
-                            descripcion = art.descripcion
-                        } 
+                        activoSpecified = true, // ✅ asegura que se envíe
+
+                        tipoProducto = DescuentoWS.tipoProducto.ARTICULO, // ✅ enum no necesita Specified
+                        tipoProductoSpecified = true,
+
+                        idProducto = idArticuloActual,
+                        idProductoSpecified = true // ✅ asegura que se envíe
                     };
 
                     if (ViewState["idDescuento"] != null)
                     {
                         // ACTUALIZAR descuento existente
-                        nuevoDescuento.idDescuento = (int)ViewState["idDescuento"];
-                        descuentoWS.guardarDescuento(nuevoDescuento, DescuentoWS.estado.Modificado);
+                        descuento.idDescuento = (int)ViewState["idDescuento"];
+                        descuentoWS.guardarDescuento(descuento, DescuentoWS.estado.Modificado);
                     }
                     else
                     {
                         // CREAR nuevo descuento
-                        descuentoWS.guardarDescuento(nuevoDescuento, DescuentoWS.estado.Nuevo);
+                        Console.WriteLine($"TipoProducto enviado: {descuento.tipoProducto}");
+                        descuentoWS.guardarDescuento(descuento, DescuentoWS.estado.Nuevo);
                     }
 
                     // Recargar

@@ -45,7 +45,7 @@
       <xs:element minOccurs="0" name="activo" type="xs:boolean" />
       <xs:element minOccurs="0" name="fechaCaducidad" type="xs:dateTime" />
       <xs:element minOccurs="0" name="idDescuento" type="xs:int" />
-      <xs:element minOccurs="0" name="producto" type="tns:producto" />
+      <xs:element minOccurs="0" name="idProducto" type="xs:int" />
       <xs:element minOccurs="0" name="tipoProducto" type="tns:tipoProducto" />
       <xs:element minOccurs="0" name="valorDescuento" type="xs:double" />
     </xs:sequence>
