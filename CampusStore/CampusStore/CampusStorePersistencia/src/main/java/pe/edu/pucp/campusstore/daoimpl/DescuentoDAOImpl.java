@@ -119,4 +119,29 @@ public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements Descue
         
         return modelo;
     }
+    
+    protected PreparedStatement comandoObtenerDescuentoPorProducto(Connection conn, int idProducto, TipoProducto tipoProducto) throws SQLException{
+        String sql = "{call obtenerDescuentoPorProducto(?, ?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt("p_idProducto", idProducto);
+        cmd.setString("p_tipo", tipoProducto.toString());
+        
+        return cmd;
+    }
+
+    @Override
+    public Descuento obtenerDescuentoPorProducto(int idProducto, TipoProducto tipoProducto) {
+        return ejecutarComando(conn -> {
+            try (PreparedStatement cmd = this.comandoObtenerDescuentoPorProducto(conn, idProducto, tipoProducto)) {
+                ResultSet rs = cmd.executeQuery();
+
+                if (!rs.next()) {
+                    System.err.println("No se encontro el registro");
+                    return null;
+                }
+
+                return this.mapearModelo(rs);
+            }
+        });
+    }
 }

@@ -79,6 +79,7 @@
             border-radius: 4px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             padding: 24px;
+            border : none;
         }
         
         .articulos-header {
@@ -113,6 +114,7 @@
         .table-articulos {
             width: 100%;
             border-collapse: collapse;
+            border: none;
         }
         
         .table-articulos thead th {
@@ -131,6 +133,25 @@
             color: #191C1F;
             font-size: 14px;
             border-bottom: 1px solid #E4E7E9;
+        }
+
+        .table-header{
+            background-color: #F2F4F5;
+            color: #475156;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid #E4E7E9;
+        }
+
+        .table-items{
+            padding: 16px;
+            color: #475156;
+            font-size: 14px;
+            border-bottom: 1px solid #E4E7E9;
+            font-weight: 500;
         }
         
         .table-articulos tbody tr:last-child td {
@@ -281,133 +302,32 @@
                     </div>
                     
                     <!-- Tabla -->
-                    <div class="table-responsive">
-                        <table class="table-articulos">
-                            <thead>
-                                <tr>
-                                    <th>ARTÍCULO ID</th>
-                                    <th>STOCK</th>
-                                    <th>NOMBRE</th>
-                                    <th>PRECIO UNITARIO</th>
-                                    <th></th>
-                                    <th>DETALLE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="articulo-id">#84562319</td>
-                                    <td class="articulo-stock">12</td>
-                                    <td>Mochila escolar azul</td>
-                                    <td class="articulo-precio">$45.00</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
+                    <div class ="table-responsive">
+                        <asp:GridView ID="gvArticulos" runat="server" AutoGenerateColumns="false"
+                            CssClass="table-articulos" PageSize="5" AllowPaging="true" OnPageIndexChanging="gvArticulos_PageIndexChanging">
+                            <Columns>
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="ID" DataField="idArticulo" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="NOMBRE" DataField="nombre" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="STOCK" Datafield="stockReal" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="PRECIO UNITARIO" Datafield="precio" />
+                                <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="EDITAR">
+                                    <ItemTemplate>
+                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar" OnClick="lbModificar_Click" CommandArgument='<%# Eval("idArticulo") %>'>
                                             <i class="bi bi-pencil"></i>
                                         </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleArticulo.aspx?id=84562319" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="DETALLES">
+                                    <ItemTemplate>
+                                        <asp:HyperLink runat="server" 
+                                            NavigateUrl='<%# "~/DetalleArticulo.aspx?id=" + Eval("idArticulo") %>' 
+                                            CssClass="btn-view-details">
+                                            Ver Detalles <i class="bi bi-arrow-right"></i>
                                         </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="articulo-id">#92837465</td>
-                                    <td class="articulo-stock">8</td>
-                                    <td>Cuaderno universitario 100 hojas</td>
-                                    <td class="articulo-precio">$12.50</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleArticulo.aspx?id=92837465" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="articulo-id">#74829156</td>
-                                    <td class="articulo-stock">25</td>
-                                    <td>Peluche de Ralsei - Deltarune</td>
-                                    <td class="articulo-precio">$1,500.00</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleArticulo.aspx?id=74829156" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="articulo-id">#65492837</td>
-                                    <td class="articulo-stock">15</td>
-                                    <td>Tomatelodo térmico 500ml</td>
-                                    <td class="articulo-precio">$28.90</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleArticulo.aspx?id=65492837" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="articulo-id">#38291574</td>
-                                    <td class="articulo-stock">30</td>
-                                    <td>Set de lapiceros de colores x12</td>
-                                    <td class="articulo-precio">$18.00</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleArticulo.aspx?id=38291574" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="articulo-id">#91827364</td>
-                                    <td class="articulo-stock">6</td>
-                                    <td>Calculadora científica Casio</td>
-                                    <td class="articulo-precio">$89.90</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleArticulo.aspx?id=91827364" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="articulo-id">#52738194</td>
-                                    <td class="articulo-stock">20</td>
-                                    <td>Agenda 2024 tamaño A5</td>
-                                    <td class="articulo-precio">$35.00</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleArticulo.aspx?id=52738194" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
                     </div>
                 </div>
             </div>

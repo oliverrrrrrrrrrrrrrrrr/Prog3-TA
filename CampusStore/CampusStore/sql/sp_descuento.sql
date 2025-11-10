@@ -196,3 +196,45 @@ BEGIN
     END IF;
 END//
 DELIMITER ;
+
+USE `libreria`;
+DROP PROCEDURE IF EXISTS `obtenerDescuentoPorProducto`;
+
+DELIMITER //
+CREATE PROCEDURE `obtenerDescuentoPorProducto`(
+    IN p_idProducto INT,
+    IN p_tipo VARCHAR(10)
+)
+BEGIN
+    IF p_tipo = 'ARTICULO' THEN
+        SELECT 
+            da.idDescuentoArticulo AS idDescuento,
+            da.valorDescuento,
+            da.fechaCaducidad,
+            da.activo,
+            'ARTICULO' AS tipoProducto,
+            da.ARTICULO_idArticulo AS idArticulo
+        FROM descuento_articulo da
+        WHERE da.ARTICULO_idArticulo = p_idProducto
+          AND da.activo = TRUE
+          AND da.fechaCaducidad >= NOW();
+
+    ELSEIF p_tipo = 'LIBRO' THEN
+        SELECT 
+            dl.idDescuentoLibro AS idDescuento,
+            dl.valorDescuento,
+            dl.fechaCaducidad,
+            dl.activo,
+            'LIBRO' AS tipoProducto,
+            dl.LIBRO_idLibro AS idLibro
+        FROM descuento_libro dl
+        WHERE dl.LIBRO_idLibro = p_idProducto
+          AND dl.activo = TRUE
+          AND dl.fechaCaducidad >= NOW();
+
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Tipo no válido: debe ser ARTICULO o LIBRO';
+    END IF;
+END//
+DELIMITER ;

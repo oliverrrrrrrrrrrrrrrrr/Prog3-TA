@@ -6,6 +6,7 @@ import pe.edu.pucp.campusstore.dao.DescuentoDAO;
 import pe.edu.pucp.campusstore.daoimpl.DescuentoDAOImpl;
 import pe.edu.pucp.campusstore.modelo.Descuento;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
+import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
 public class DescuentoBOImpl implements DescuentoBO{
 
@@ -37,6 +38,10 @@ public class DescuentoBOImpl implements DescuentoBO{
         } else {
             this.descuentoDAO.actualizar(modelo);
         }    
+    }
+    
+    public Descuento obtenerDescuentoPorProducto(int idProducto, TipoProducto tipoProducto){
+        return this.descuentoDAO.obtenerDescuentoPorProducto(idProducto, tipoProducto);
     }
     
 }
