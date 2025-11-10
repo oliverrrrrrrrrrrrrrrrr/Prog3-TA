@@ -10,7 +10,7 @@ public class Descuento {
     private Date fechaCaducidad;
     private Boolean activo;
     private TipoProducto tipoProducto;
-    private Producto producto;
+    private Integer idProducto;
     
     
     public Descuento() {
@@ -19,16 +19,16 @@ public class Descuento {
         this.fechaCaducidad = null;
         this.activo = null;
         this.tipoProducto = null;
-        this.producto = null;
+        this.idProducto = null;
     }
 
-    public Descuento(Integer idDescuento, Double valorDescuento, Date fechaCaducidad, Boolean activo, TipoProducto tipoProducto, Producto producto) {
+    public Descuento(Integer idDescuento, Double valorDescuento, Date fechaCaducidad, Boolean activo, TipoProducto tipoProducto, Integer idProducto) {
         this.idDescuento = idDescuento;
         this.valorDescuento = valorDescuento;
         this.fechaCaducidad = fechaCaducidad;
         this.activo = activo;
         this.tipoProducto = tipoProducto;
-        this.producto = producto;
+        this.idProducto = idProducto;
     }
 
     public Integer getIdDescuento() {
@@ -71,12 +71,12 @@ public class Descuento {
         this.tipoProducto = tipoProducto;
     }
 
-    public Producto getProducto() {
-        return producto;
+    public Integer getIdProducto() {
+        return idProducto;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
     }
     
 }

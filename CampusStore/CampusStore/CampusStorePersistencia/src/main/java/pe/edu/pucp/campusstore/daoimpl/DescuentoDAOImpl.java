@@ -9,9 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import pe.edu.pucp.campusstore.dao.DescuentoDAO;
-import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Descuento;
-import pe.edu.pucp.campusstore.modelo.Libro;
 import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
 public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements DescuentoDAO {
@@ -24,13 +22,7 @@ public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements Descue
         CallableStatement cmd = conn.prepareCall(sql);
         
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
-        
-        switch (modelo.getProducto()) {
-            case Articulo articulo -> cmd.setInt("p_idReferencia", articulo.getIdArticulo());
-            case Libro libro -> cmd.setInt("p_idReferencia", libro.getIdLibro());
-            default -> throw new SQLException("Tipo de producto no válido");
-        }
-        
+        cmd.setInt("p_idReferencia", modelo.getIdProducto());
         cmd.setDouble("p_valorDescuento", modelo.getValorDescuento());
         cmd.setDate("p_fechaCaducidad", new Date(modelo.getFechaCaducidad().getTime()));
         cmd.setBoolean("p_activo", modelo.getActivo());
@@ -106,15 +98,9 @@ public class DescuentoDAOImpl extends BaseModeloDAO<Descuento> implements Descue
         modelo.setTipoProducto(tipo);
         
         if (tipo == TipoProducto.ARTICULO) {
-            Integer idArticulo = rs.getInt("idArticulo");
-            if(!rs.wasNull()){
-                modelo.setProducto(new ArticuloDAOImpl().leer(idArticulo));
-            }
+            modelo.setIdProducto(rs.getInt("idArticulo"));
         } else if (tipo == TipoProducto.LIBRO) {
-            Integer idLibro = rs.getInt("idLibro");
-            if(!rs.wasNull()){
-                modelo.setProducto(new LibroDAOImpl().leer(idLibro));
-            }
+            modelo.setIdProducto(rs.getInt("idLibro"));
         }
         
         return modelo;

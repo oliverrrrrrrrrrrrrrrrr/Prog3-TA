@@ -31,10 +31,6 @@ import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-/**
- *
- * @author AXEL
- */
 public class DescuentoDAOTest implements PersistibleProbable{
     private int testId;
     private final int idIncorrecto = 99999;
@@ -93,7 +89,7 @@ public class DescuentoDAOTest implements PersistibleProbable{
         descuento.setFechaCaducidad(new GregorianCalendar(2025,Calendar.DECEMBER,25).getTime());
         descuento.setValorDescuento(25.00);
         descuento.setTipoProducto(TipoProducto.LIBRO);
-        descuento.setProducto(new LibroDAOImpl().leer(this.testLibroId));
+        descuento.setIdProducto(this.testLibroId);
         this.testId = descuentoDAO.crear(descuento);
         assertTrue(this.testId > 0);
     }
@@ -112,7 +108,7 @@ public class DescuentoDAOTest implements PersistibleProbable{
         descuento.setValorDescuento(22.00);
         
         descuento.setTipoProducto(TipoProducto.LIBRO);
-        descuento.setProducto(new LibroDAOImpl().leer(this.testLibroId));
+        descuento.setIdProducto(this.testLibroId);
         
         boolean modifico = descuentoDAO.actualizar(descuento);
         assertTrue(modifico);
@@ -120,7 +116,7 @@ public class DescuentoDAOTest implements PersistibleProbable{
         Descuento descuentoModificado = descuentoDAO.leer(descuento);
         assertEquals(descuentoModificado.getActivo(), Boolean.TRUE);
         assertEquals(descuentoModificado.getFechaCaducidad().getTime(), new GregorianCalendar(2025,Calendar.DECEMBER,20).getTime().getTime());
-        assertEquals(descuentoModificado.getValorDescuento(), 22.00);
+        assertEquals(descuentoModificado.getValorDescuento(), (Double)22.00);
     }
 
     @Test
@@ -136,7 +132,7 @@ public class DescuentoDAOTest implements PersistibleProbable{
         descuento.setValorDescuento(22.00);
         
         descuento.setTipoProducto(TipoProducto.LIBRO);
-        descuento.setProducto(new LibroDAOImpl().leer(this.testLibroId));
+        descuento.setIdProducto(this.testLibroId);
 
         boolean modifico = descuentoDAO.actualizar(descuento);
         assertFalse(modifico);
