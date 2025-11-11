@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DetalleCliente.aspx.cs" Inherits="CampusStoreWeb.DetalleCliente" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DetalleEmpleado.aspx.cs" Inherits="CampusStoreWeb.DetalleEmpleado" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         /* Breadcrumb personalizado */
@@ -483,12 +483,12 @@
             .detalle-grid {
                 grid-template-columns: 1fr;
             }
-    
+
             .detalle-header {
                 flex-direction: column;
                 gap: 20px;
             }
-    
+
             .info-row {
                 grid-template-columns: 1fr;
                 gap: 8px;
@@ -516,9 +516,9 @@
                         </asp:HyperLink>
                     </li>
                     <li class="breadcrumb-item">
-                        <asp:HyperLink runat="server" NavigateUrl="~/GestionarClientes.aspx">Gestionar Clientes</asp:HyperLink>
+                        <asp:HyperLink runat="server" NavigateUrl="~/GestionarEmpleados.aspx">Gestionar Empleados</asp:HyperLink>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Detalle del Cliente</li>
+                    <li class="breadcrumb-item active" aria-current="page">Detalle del Empleado</li>
                 </ol>
             </nav>
         </div>
@@ -527,7 +527,7 @@
     <div class="container">
 
         <!-- Botón volver -->
-        <asp:HyperLink ID="btnVolver" runat="server" NavigateUrl="~/GestionarClientes.aspx" CssClass="btn-back">
+        <asp:HyperLink ID="btnVolver" runat="server" NavigateUrl="~/GestionarEmpleados.aspx" CssClass="btn-back">
             <i class="bi bi-arrow-left"></i> Volver a Clientes
         </asp:HyperLink>
 
@@ -542,15 +542,15 @@
 
         <!-- Card de detalle -->
         <asp:Panel ID="pnlDetalle" runat="server" CssClass="detalle-card">
-    
+
             <!-- Header -->
             <div class="detalle-header">
                 <div class="detalle-title">
                     <h1>
-                        <asp:Label ID="lblNombreCliente" runat="server" Text=""></asp:Label>
+                        <asp:Label ID="lblNombreEmpleado" runat="server" Text=""></asp:Label>
                     </h1>
                     <span class="detalle-id">
-                        Cliente ID: #<asp:Label ID="lblClienteID" runat="server" Text=""></asp:Label>
+                        Empleado ID: #<asp:Label ID="lblEmpleadoID" runat="server" Text=""></asp:Label>
                     </span>
                 </div>
                 <div class="detalle-actions">
@@ -562,11 +562,11 @@
                     </asp:LinkButton>
                 </div>
             </div>
-    
+
             <!-- Vista de Detalle (solo lectura) -->
             <asp:Panel ID="pnlVista" runat="server">
                 <div class="detalle-grid">
-            
+        
                     <!-- Información -->
                     <div class="detalle-info">
 
@@ -604,9 +604,15 @@
                                 <asp:Label ID="lblTelefono" runat="server" Text="Teléfono"></asp:Label>
                             </div>
                         </div>
-                
-                        <!-- falta cupones?, puede ser en un "Ver cupones" pantalla aparte, ya que puede cargar demasiado -->
-                
+                        <div class ="info-row">
+                            <span class="info-label">Sueldo</span>
+                            <div>
+                                <asp:Label ID="lblSueldo" runat="server" Text="Sueldo"></asp:Label>
+                            </div>
+                        </div>
+            
+                        <!-- falta agregar el rol y si esta activo o no -->
+            
                     </div>
                 </div>
             </asp:Panel>
@@ -642,13 +648,19 @@
                         <asp:TextBox ID="txtTelefono" runat="server" TextMode="Number"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtTelefono" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
                     </div>
+                    <div class="form-group">
+                        <label>Sueldo *</label>
+                        <asp:TextBox ID="txtSueldo" runat="server" TextMode="Number" step="0.01"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rfvSueldo" runat="server" ControlToValidate="txtSueldo" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
+                    </div>
+                    <!-- falta agregar el rol y si esta activo o no -->
                 </div>
                 <div class="form-actions">
                     <asp:Button ID="btnCancelarEdit" runat="server" Text="Cancelar" CssClass="btn-form btn-cancelar-edit" OnClick="btnCancelarEdit_Click" CausesValidation="false" />
                     <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cambios" CssClass="btn-form btn-guardar" OnClick="btnGuardar_Click" ValidationGroup="EditarForm" />
                 </div>
             </asp:Panel>
-    
+
         </asp:Panel>
     </div>
 </asp:Content>
