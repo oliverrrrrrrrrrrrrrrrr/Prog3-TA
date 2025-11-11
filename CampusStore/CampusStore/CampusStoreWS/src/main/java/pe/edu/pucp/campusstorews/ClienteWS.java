@@ -54,5 +54,10 @@ public class ClienteWS {
     ) {
         return this.clienteBO.login(correo, contraseña);
     }
+    
+    @WebMethod(operationName = "buscarClientePorCuenta")
+    public Cliente buscarClientePorCuenta(@WebParam(name = "cuenta") String cuenta) {
+        return this.clienteBO.buscarPorCuenta(cuenta);
+    }
 }
 

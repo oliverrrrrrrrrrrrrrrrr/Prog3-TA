@@ -1,4 +1,4 @@
-﻿using CampusStoreWeb.CampusStoreWS;
+﻿using CampusStoreWeb.ClienteWS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +39,7 @@ namespace CampusStoreWeb
                 return;
             }
 
-            Session["Email"] = email;
+            Session["email"] = email;
             System.Web.Security.FormsAuthentication.RedirectFromLoginPage(email, false);
         }
 
@@ -51,26 +51,44 @@ namespace CampusStoreWeb
                 return;
             }
 
+            string nombreUsuario = txtUserName.Text;
             string email = txtSignUpEmail.Text;
             string password = txtSignUpPassword.Text;
+            string confirmPassword = txtConfirmPassword.Text;
+
+            if(password != confirmPassword)
+            {
+                cvPasswordMismatch.IsValid = false;
+                cvPasswordMismatch.ErrorMessage = "Las contraseñas no coinciden.";
+                return;
+            }
 
             cliente cliente = new cliente
             {
                 correo = email,
                 contraseña = password,
-                nombre = "Nuevo cliente",
-                nombreUsuario = "Nuevo cliente",
-                telefono = "123456789"
+                nombreUsuario = nombreUsuario,
+                nombre = nombreUsuario
             };
 
-            this.clientWS.guardarCliente(cliente, estado.Nuevo);
+            try
+            {
+                this.clientWS.guardarCliente(cliente, estado.Nuevo);
 
-            string script = @"
-                setTimeout(function() {
-                    window.location.href = 'Login.aspx';
-                }, 10000);
-            ";
-            ClientScript.RegisterStartupScript(this.GetType(), "redirigir", script, true);
+                // Registro exitoso
+                string script = @"
+                    alert('¡Registro exitoso! Serás redirigido al inicio de sesión.');
+                    window.location.href = 'SignIn.aspx';
+                ";
+                ClientScript.RegisterStartupScript(this.GetType(), "redirigir", script, true);
+            }
+            catch
+            {
+                // Error al guardar
+                cvUsernameAlreadyExists.IsValid = false;
+                cvUsernameAlreadyExists.ErrorMessage = "El nombre de usuario o correo ya existe.";
+                return;
+            }
         }
     }
 }

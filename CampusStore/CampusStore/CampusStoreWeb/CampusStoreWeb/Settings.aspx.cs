@@ -1,3 +1,4 @@
+using CampusStoreWeb.ClienteWS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,13 @@ namespace CampusStoreWeb
 {
     public partial class Settings : System.Web.UI.Page
     {
+        public ClienteWSClient clientWS;
+
+        public Settings()
+        {
+            clientWS = new ClienteWSClient();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -21,10 +29,15 @@ namespace CampusStoreWeb
         {
             // En un proyecto real, aquí cargarías los datos del usuario desde la base de datos
             // Por ahora cargamos datos de ejemplo
-            
-            txtUsername.Text = "kevin_user";
-            txtFullName.Text = "Kevin Gilbert";
-            txtEmail.Text = "kevin.gilbert@gmail.com";
+
+            string cuenta = Page.User.Identity.Name;
+            cliente cliente = clientWS.buscarClientePorCuenta(cuenta);
+
+            txtUsername.Text = cliente.nombreUsuario;
+            txtFullName.Text = cliente.nombre;
+            txtEmail.Text = cliente.correo;
+
+            Session["Cliente"] = cliente;
         }
 
         protected void btnSaveChanges_Click(object sender, EventArgs e)
@@ -85,18 +98,13 @@ namespace CampusStoreWeb
 
         private void SaveUserSettings()
         {
-            // Aquí implementarías la lógica para guardar en la base de datos
-            // Por ejemplo:
-            /*
-            var user = new User
-            {
-                Username = txtUsername.Text,
-                FullName = txtFullName.Text,
-                Email = txtEmail.Text
-            };
-            
-            userRepository.Update(user);
-            */
+
+            cliente cliente = (cliente)Session["Cliente"];
+            cliente.nombre = txtFullName.Text;
+            cliente.nombreUsuario = txtUsername.Text;
+            cliente.correo = txtEmail.Text;
+
+            clientWS.guardarCliente(cliente, estado.Modificado);
         }
 
         private void ShowMessage(string message, string type)

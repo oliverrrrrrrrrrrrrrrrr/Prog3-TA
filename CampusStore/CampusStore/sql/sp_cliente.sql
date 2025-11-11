@@ -119,10 +119,10 @@ DELIMITER ;
 -- procedure loginCliente
 -- -----------------------------------------------------
 
-DELIMITER //
 USE `libreria`;
 DROP procedure IF EXISTS `loginCliente`;
 
+DELIMITER //
 CREATE PROCEDURE loginCliente(
     IN p_correo VARCHAR(50),
     IN p_contraseña VARCHAR(50),
@@ -141,6 +141,21 @@ BEGIN
     ELSE
         SET p_valido = FALSE;
     END IF;
+END //
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure buscarClientePorCuenta
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP procedure IF EXISTS `loginCliente`;
+
+DELIMITER //
+CREATE PROCEDURE buscarClientePorCuenta(IN p_cuenta VARCHAR(50))
+BEGIN
+	SELECT * FROM cliente WHERE correo = p_cuenta;
 END //
 
 DELIMITER ;

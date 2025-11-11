@@ -78,6 +78,24 @@ namespace CampusStoreWeb
         protected global::System.Web.UI.WebControls.Button btnSignIn;
 
         /// <summary>
+        /// Control txtUserName.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtUserName;
+
+        /// <summary>
+        /// Control rfvUserName.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUserName;
+
+        /// <summary>
         /// Control txtSignUpEmail.
         /// </summary>
         /// <remarks>
@@ -103,6 +121,24 @@ namespace CampusStoreWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
+
+        /// <summary>
+        /// Control cvPasswordMismatch.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvPasswordMismatch;
+
+        /// <summary>
+        /// Control cvUsernameAlreadyExists.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvUsernameAlreadyExists;
 
         /// <summary>
         /// Control btnSignUp.

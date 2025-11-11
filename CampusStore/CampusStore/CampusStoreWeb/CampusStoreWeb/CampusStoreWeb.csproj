@@ -111,6 +111,9 @@
     <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.obtenerClienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\ClienteWS\configuration91.svcinfo" />
     <None Include="Connected Services\ClienteWS\configuration.svcinfo" />
     <None Include="Connected Services\ClienteWS\Reference.svcmap">

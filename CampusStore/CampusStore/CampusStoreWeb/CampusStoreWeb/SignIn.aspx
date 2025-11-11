@@ -241,7 +241,8 @@
                  <asp:CustomValidator 
                     ID="cvLoginError" 
                     runat="server" 
-                    Display="None" 
+                    Display="Dynamic"
+                    CssClass="text-danger small"
                     EnableClientScript="false" />
                 
                 <asp:Button ID="btnSignIn" runat="server" CssClass="btn-signin" 
@@ -250,6 +251,18 @@
             
             <!-- Sign Up Form (Hidden by default) -->
             <div class="tab-content-wrapper" id="contentSignUp">
+                <div class="mb-3">
+                    <label for="txtUserName" class="form-label">Nombre Usuario</label>
+                    <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control" 
+                                 placeholder="" ValidationGroup="SignUp" />
+                    <asp:RequiredFieldValidator ID="rfvUserName" runat="server" 
+                                                ControlToValidate="txtUserName"
+                                                ErrorMessage="Nombre de usuario es requerido" 
+                                                CssClass="text-danger small"
+                                                Display="Dynamic"
+                                                ValidationGroup="SignUp" />
+                </div>
+
                 <div class="mb-3">
                     <label for="txtSignUpEmail" class="form-label">Email Address</label>
                     <asp:TextBox ID="txtSignUpEmail" runat="server" CssClass="form-control" 
@@ -272,6 +285,20 @@
                     <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" 
                                  TextMode="Password" placeholder="" ValidationGroup="SignUp" />
                 </div>
+
+                <asp:CustomValidator 
+                   ID="cvPasswordMismatch" 
+                   runat="server" 
+                   Display="Dynamic"
+                   CssClass="text-danger small"
+                   EnableClientScript="false" />
+
+                <asp:CustomValidator 
+                   ID="cvUsernameAlreadyExists" 
+                   runat="server" 
+                   Display="Dynamic"
+                   CssClass="text-danger small"
+                   EnableClientScript="false" />
                 
                 <asp:Button ID="btnSignUp" runat="server" CssClass="btn-signin" 
                             Text="SIGN UP ➔" ValidationGroup="SignUp" OnClick="btnSignUp_Click" />

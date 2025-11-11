@@ -43,5 +43,10 @@ public class ClienteBOImpl implements ClienteBO{
     public boolean login(String correo, String contraseña) {
         return this.clienteDAO.login(correo, contraseña);
     }
+
+    @Override
+    public Cliente buscarPorCuenta(String cuenta) {
+        return this.clienteDAO.buscarPorCuenta(cuenta);
+    }
     
 }
