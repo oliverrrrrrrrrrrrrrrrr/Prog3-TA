@@ -59,5 +59,10 @@ namespace CampusStoreWeb
             // Redirigir a la página de detalles del cliente
             Response.Redirect("DetalleCliente.aspx");
         }
+
+        protected void btnAgregarCliente_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("GestionarCliente.aspx");
+        }
     }
 }

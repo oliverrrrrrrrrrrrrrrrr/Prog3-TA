@@ -58,5 +58,10 @@ namespace CampusStoreWeb
             // Redirigir a la página de detalles del libro
             Response.Redirect("DetalleLibro.aspx");
         }
+
+        protected void btnAgregarLibro_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("GestionarLibros.aspx");
+        }
     }
 }

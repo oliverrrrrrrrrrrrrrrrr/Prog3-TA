@@ -58,5 +58,10 @@ namespace CampusStoreWeb
             // Redirigir a la página de detalles del empleado
             Response.Redirect("DetalleEmpleado.aspx");
         }
+
+        protected void btnAgregarEmpleado_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("GestionarEmpleado.aspx");
+        }
     }
 }

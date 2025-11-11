@@ -13,5 +13,10 @@ namespace CampusStoreWeb
         {
 
         }
+
+        protected void btnAgregarArticulo_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("GestionarPedidos.aspx");
+        }
     }
 }

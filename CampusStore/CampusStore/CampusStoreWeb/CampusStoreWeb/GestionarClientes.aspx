@@ -213,30 +213,175 @@
         }
         
         /* Botón flotante de agregar */
-        .btn-add-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 56px;
-            height: 56px;
+        .btn-agregar-container {
+            display: flex;
+            justify-content: flex-end;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #E4E7E9;
+        }
+
+        .btn-agregar-articulo {
             background-color: var(--primary-orange);
             color: white;
-            border-radius: 50%;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
             border: none;
-            font-size: 24px;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(250, 130, 50, 0.3);
+        }
+
+        .btn-agregar-articulo:hover {
+            background-color: #d86f28;
+            transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(250, 130, 50, 0.4);
+        }
+
+        .btn-agregar-articulo i {
+            font-size: 18px;
+        }
+
+        /* Formulario de agregar/editar inline */
+        .formulario-card {
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid var(--primary-orange);
+        }
+
+        .formulario-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #E4E7E9;
+        }
+
+        .formulario-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #191C1F;
+            margin: 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            z-index: 1000;
+            gap: 12px;
         }
-        
-        .btn-add-float:hover {
+
+        .formulario-header h2 i {
+            color: var(--primary-orange);
+        }
+
+        .btn-cerrar-form {
+            background: none;
+            border: none;
+            color: #5F6C72;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .btn-cerrar-form:hover {
+            color: var(--primary-orange);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            color: #475156;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #E4E7E9;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #191C1F;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #E4E7E9;
+        }
+
+        .btn-form {
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-transform: uppercase;
+        }
+
+        .btn-guardar {
+            background-color: var(--primary-orange);
+            color: white;
+        }
+
+        .btn-guardar:hover {
             background-color: #d86f28;
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(250, 130, 50, 0.5);
+        }
+
+        .btn-cancelar {
+            background-color: #E4E7E9;
+            color: #5F6C72;
+        }
+
+        .btn-cancelar:hover {
+            background-color: #d1d5d9;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </asp:Content>
@@ -330,14 +475,17 @@
                             </Columns>
                         </asp:GridView>
                     </div>
+
+                    <!-- Botón Agregar Nuevo (dentro del card, abajo a la derecha) -->
+                    <div class="btn-agregar-container">
+                        <asp:LinkButton ID="btnAgregarCliente" runat="server" CssClass="btn-agregar-articulo" OnClick="btnAgregarCliente_Click" CausesValidation="false">
+                            <i class="bi bi-plus-lg"></i>
+                            Agregar Cliente
+                        </asp:LinkButton>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Botón flotante para agregar nuevo cliente -->
-    <asp:LinkButton ID="btnAgregarCliente" runat="server" CssClass="btn-add-float" ToolTip="Agregar nuevo cliente">
-        <i class="bi bi-plus-lg"></i>
-    </asp:LinkButton>
     
 </asp:Content>

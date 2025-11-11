@@ -61,5 +61,11 @@ namespace CampusStoreWeb
             // Redirigir a la página de detalles
             Response.Redirect("DetalleArticulo.aspx");
         }
+
+        protected void btnAgregarArticulo_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("GestionarArticulos.aspx");
+        }
+
     }
 }
