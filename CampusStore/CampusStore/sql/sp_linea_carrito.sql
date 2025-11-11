@@ -257,3 +257,41 @@ BEGIN
     END IF;
 END//
 DELIMITER ;
+
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE listarLineasPorCarrito(IN p_idCarrito INT)
+BEGIN
+    SELECT 
+        idLineaCarrito,
+        cantidad,
+        precioUnitario,
+        subtotal,
+        precioConDescuento,
+        subtotalConDescuento,
+        CARRITO_idCarrito,
+        articulo_idArticulo AS producto,
+        'ARTICULO' AS tipo
+    FROM linea_carrito_articulo
+    WHERE CARRITO_idCarrito = p_idCarrito
+
+    UNION ALL
+
+    SELECT 
+        idLineaCarrito,
+        cantidad,
+        precioUnitario,
+        subtotal,
+        precioConDescuento,
+        subtotalConDescuento,
+        CARRITO_idCarrito,
+        libro_idLibro AS producto,
+        'LIBRO' AS tipo
+    FROM linea_carrito_libro
+    WHERE CARRITO_idCarrito = p_idCarrito;
+END //
+
+DELIMITER ;
