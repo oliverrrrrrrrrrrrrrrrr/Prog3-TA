@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.campusstore.bases.dao.TransaccionalBaseModeloDAO;
 import pe.edu.pucp.campusstore.dao.LineaCarritoDAO;
 import pe.edu.pucp.campusstore.modelo.Articulo;
@@ -131,6 +133,35 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
         
         return modelo;
     }
+    
+    protected PreparedStatement comandoLeerTodosPorCarrito(Connection conn, 
+            int idOrden) throws SQLException {
+        
+        String sql = "{call listarLineasPorCarrito(?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt("p_idCarrito", idOrden);
+        return cmd;
+    }
+
+    @Override
+    public List<LineaCarrito> leerTodosPorCarrito(int idCarrito, Connection conn) {
+        try (PreparedStatement cmd = this.comandoLeerTodosPorCarrito(conn, idCarrito)) {
+            ResultSet rs = cmd.executeQuery();
+
+            List<LineaCarrito> modelos = new ArrayList<>();
+            while (rs.next()) {
+                modelos.add(this.mapearModelo(rs));
+            }
+
+            return modelos;
+        }
+        catch (SQLException e) {
+            System.err.println("Error SQL: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+    
+    
 }
 
 

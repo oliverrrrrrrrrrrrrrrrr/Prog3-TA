@@ -40,6 +40,7 @@ public class DescuentoBOImpl implements DescuentoBO{
         }    
     }
     
+    @Override
     public Descuento obtenerDescuentoPorProducto(int idProducto, TipoProducto tipoProducto){
         return this.descuentoDAO.obtenerDescuentoPorProducto(idProducto, tipoProducto);
     }
