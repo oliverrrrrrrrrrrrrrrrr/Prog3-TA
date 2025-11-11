@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignIn.aspx.cs" Inherits="CampusStoreWeb.SignIn" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="CampusStoreWeb.SignUp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         /* Breadcrumb personalizado */
@@ -37,32 +37,32 @@
             color: #6c757d;
         }
         
-        /* Sign In Container */
-        .signin-container {
+        /* Sign Up Container */
+        .signup-container {
             max-width: 450px;
             margin: 0 auto 80px;
         }
         
-        .signin-card {
+        .signup-card {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 40px 35px;
         }
         
-        .signin-header {
+        .signup-header {
             text-align: center;
             margin-bottom: 30px;
         }
         
-        .signin-header h2 {
+        .signup-header h2 {
             color: #1e5a7d;
             font-size: 28px;
             font-weight: 600;
             margin-bottom: 8px;
         }
         
-        .signin-header p {
+        .signup-header p {
             color: #6c757d;
             font-size: 14px;
             margin: 0;
@@ -108,21 +108,8 @@
             color: #1e5a7d;
         }
         
-        .forgot-password {
-            color: #00bcd4;
-            text-decoration: none;
-            font-size: 14px;
-            float: right;
-            margin-bottom: 5px;
-        }
-        
-        .forgot-password:hover {
-            color: #0097a7;
-            text-decoration: underline;
-        }
-        
         /* Button */
-        .btn-signin {
+        .btn-signup {
             width: 100%;
             background-color: #ff6b35;
             color: white;
@@ -140,16 +127,16 @@
             margin-top: 25px;
         }
         
-        .btn-signin:hover {
+        .btn-signup:hover {
             background-color: #e55a28;
         }
         
-        .btn-signin:active {
+        .btn-signup:active {
             background-color: #cc4d1f;
         }
         
-        /* Sign Up Link */
-        .signup-link {
+        /* Sign In Link */
+        .signin-link {
             text-align: center;
             margin-top: 20px;
             padding-top: 20px;
@@ -158,13 +145,13 @@
             font-size: 14px;
         }
         
-        .signup-link a {
+        .signin-link a {
             color: #ff6b35;
             text-decoration: none;
             font-weight: 600;
         }
         
-        .signup-link a:hover {
+        .signin-link a:hover {
             color: #e55a28;
             text-decoration: underline;
         }
@@ -183,24 +170,35 @@
                 <li class="breadcrumb-item">
                     <a href="#">Cuenta de Usuario</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Inicio de sesión</li>
+                <li class="breadcrumb-item active" aria-current="page">Registrarse</li>
             </ol>
         </nav>
     </div>
     
-    <!-- Sign In Container -->
-    <div class="signin-container">
-        <div class="signin-card">
+    <!-- Sign Up Container -->
+    <div class="signup-container">
+        <div class="signup-card">
             
             <!-- Header -->
-            <div class="signin-header">
-                <h2>¡Bienvenido!</h2>
-                <p>Por favor, inicia sesión para continuar</p>
+            <div class="signup-header">
+                <h2>Crea tu cuenta</h2>
+                <p>¡Únete a nosotros y empieza a comprar ahora!</p>
             </div>
             
-            <!-- Sign In Form -->
+            <!-- Sign Up Form -->
             <div class="mb-3">
-                <label for="txtEmail" class="form-label">Correo electrónico</label>
+                <label for="txtUserName" class="form-label">Nombre Usuario</label>
+                <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control" 
+                             placeholder="" />
+                <asp:RequiredFieldValidator ID="rfvUserName" runat="server" 
+                                            ControlToValidate="txtUserName"
+                                            ErrorMessage="El nombre de usuario es obligatorio" 
+                                            CssClass="text-danger small"
+                                            Display="Dynamic" />
+            </div>
+
+            <div class="mb-3">
+                <label for="txtEmail" class="form-label">Dirección de correo electrónico</label>
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" 
                              TextMode="Email" placeholder="" />
                 <asp:RequiredFieldValidator ID="rfvEmail" runat="server" 
@@ -210,17 +208,8 @@
                                             Display="Dynamic" />
             </div>
             
-            <div class="mb-2">
-                <label for="txtPassword" class="form-label">Contraseña</label>
-                <asp:HyperLink ID="lnkForgotPassword" runat="server" 
-                               NavigateUrl="~/Forget_Password.aspx" 
-                               CssClass="forgot-password">
-                    Olvidé mi contraseña
-                </asp:HyperLink>
-                <div style="clear: both;"></div>
-            </div>
-            
             <div class="mb-3">
+                <label for="txtPassword" class="form-label">Contraseña</label>
                 <div class="password-wrapper">
                     <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" 
                                  TextMode="Password" placeholder="" />
@@ -234,31 +223,69 @@
                                             CssClass="text-danger small"
                                             Display="Dynamic" />
             </div>
+            
+            <div class="mb-3">
+                <label for="txtConfirmPassword" class="form-label">Confirmar contraseña</label>
+                <div class="password-wrapper">
+                    <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" 
+                                 TextMode="Password" placeholder="" />
+                    <button type="button" class="password-toggle" id="toggleConfirmPassword">
+                        <i class="bi bi-eye" id="eyeIconConfirm"></i>
+                    </button>
+                </div>
+                <asp:RequiredFieldValidator ID="rfvConfirmPassword" runat="server" 
+                                            ControlToValidate="txtConfirmPassword"
+                                            ErrorMessage="Es necesario confirmar la contraseña" 
+                                            CssClass="text-danger small"
+                                            Display="Dynamic" />
+                <asp:CompareValidator ID="cvPasswordMatch" runat="server"
+                                      ControlToValidate="txtConfirmPassword"
+                                      ControlToCompare="txtPassword"
+                                      ErrorMessage="Las contraseñas no coinciden"
+                                      CssClass="text-danger small"
+                                      Display="Dynamic" />
+            </div>
 
             <asp:CustomValidator 
-                ID="cvLoginError" 
+                ID="cvSignUpError" 
                 runat="server" 
                 Display="Dynamic"
-                CssClass="text-danger small"
+                CssClass="text-danger small d-block"
                 EnableClientScript="false" />
             
-            <asp:Button ID="btnSignIn" runat="server" CssClass="btn-signin" 
-                        Text="Iniciar sesión ➔" OnClick="btnSignIn_Click" />
+            <asp:Button ID="btnSignUp" runat="server" CssClass="btn-signup" 
+                        Text="Registrarse ➔" OnClick="btnSignUp_Click" />
             
-            <!-- Sign Up Link -->
-            <div class="signup-link">
-                ¿No tienes cuenta? <a href="SignUp.aspx">Registrarse</a>
+            <!-- Sign In Link -->
+            <div class="signin-link">
+                ¿Ya tienes una cuenta? <a href="SignIn.aspx">Iniciar sesión</a>
             </div>
             
         </div>
     </div>
     
     <script>
-        // Password Toggle
-        document.getElementById('togglePassword').addEventListener('click', function () {
+        // Password Toggle for Password
+        document.getElementById('togglePassword').addEventListener('click', function() {
             const passwordField = document.getElementById('<%= txtPassword.ClientID %>');
             const eyeIcon = document.getElementById('eyeIcon');
-
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.classList.remove('bi-eye');
+                eyeIcon.classList.add('bi-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.classList.remove('bi-eye-slash');
+                eyeIcon.classList.add('bi-eye');
+            }
+        });
+        
+        // Password Toggle for Confirm Password
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+            const passwordField = document.getElementById('<%= txtConfirmPassword.ClientID %>');
+            const eyeIcon = document.getElementById('eyeIconConfirm');
+            
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
                 eyeIcon.classList.remove('bi-eye');

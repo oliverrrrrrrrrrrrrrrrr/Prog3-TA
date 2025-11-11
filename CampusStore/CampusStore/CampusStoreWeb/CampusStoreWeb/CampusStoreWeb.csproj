@@ -215,6 +215,7 @@
     <Content Include="Images\ralseiPeluche.jpg" />
     <Content Include="Images\thegreft.png" />
     <Content Include="Images\undertale.png" />
+    <Content Include="LogOut.aspx" />
     <Content Include="OrderDetails.aspx" />
     <Content Include="OrderHistory.aspx" />
     <Content Include="Product_detail.aspx" />
@@ -223,6 +224,7 @@
     <Content Include="Shopping_Car.aspx" />
     <Content Include="Shop_Page.aspx" />
     <Content Include="SignIn.aspx" />
+    <Content Include="SignUp.aspx" />
     <Content Include="testMaster.aspx" />
     <Content Include="Verify_Code.aspx" />
     <Content Include="Web.config" />
@@ -347,6 +349,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LogOut.aspx.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LogOut.aspx.designer.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OrderDetails.aspx.cs">
       <DependentUpon>OrderDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -403,6 +412,13 @@
     </Compile>
     <Compile Include="SignIn.aspx.designer.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SignUp.aspx.cs">
+      <DependentUpon>SignUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SignUp.aspx.designer.cs">
+      <DependentUpon>SignUp.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

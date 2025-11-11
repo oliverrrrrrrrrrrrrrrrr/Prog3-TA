@@ -27,9 +27,6 @@ namespace CampusStoreWeb
 
         private void LoadUserSettings()
         {
-            // En un proyecto real, aquí cargarías los datos del usuario desde la base de datos
-            // Por ahora cargamos datos de ejemplo
-
             string cuenta = Page.User.Identity.Name;
             cliente cliente = clientWS.buscarClientePorCuenta(cuenta);
 
@@ -42,20 +39,18 @@ namespace CampusStoreWeb
 
         protected void btnSaveChanges_Click(object sender, EventArgs e)
         {
-            // Validar que los campos requeridos estén llenos
-            if (string.IsNullOrWhiteSpace(txtUsername.Text) || 
+            if (string.IsNullOrWhiteSpace(txtUsername.Text) ||
                 string.IsNullOrWhiteSpace(txtFullName.Text) ||
                 string.IsNullOrWhiteSpace(txtEmail.Text))
             {
-                ShowMessage("Please fill in all required fields.", "error");
+                ShowMessage("Por favor completar los campos solicitados.", "error");
                 return;
             }
 
-            // En un proyecto real, aquí guardarías los cambios en la base de datos
-            // Por ahora solo mostramos un mensaje de éxito
-            SaveUserSettings();
-            
-            ShowMessage("Your settings have been saved successfully!", "success");
+            if (SaveUserSettings())
+            {
+                ShowMessage("¡Los cambios se guardaron correctamente!", "success");
+            }
         }
 
         protected void btnChangePassword_Click(object sender, EventArgs e)
@@ -63,48 +58,68 @@ namespace CampusStoreWeb
             // Validar cambio de contraseña
             if (string.IsNullOrWhiteSpace(txtCurrentPassword.Text))
             {
-                ShowMessage("Please enter your current password.", "error");
+                ShowMessage("Por favor ingresa tu contraseña.", "error");
+                return;
+            }
+
+            cliente cliente = (cliente)Session["Cliente"];
+
+            if(cliente.contraseña != txtCurrentPassword.Text)
+            {
+                ShowMessage("La contraseña es incorrecta.", "error");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtNewPassword.Text))
             {
-                ShowMessage("Please enter a new password.", "error");
+                ShowMessage("Por favor ingresa una nueva contraseña.", "error");
                 return;
             }
 
             if (txtNewPassword.Text != txtConfirmPassword.Text)
             {
-                ShowMessage("New password and confirmation do not match.", "error");
+                ShowMessage("Las contraseñas no coinciden.", "error");
                 return;
             }
 
-            if (txtNewPassword.Text.Length < 8)
-            {
-                ShowMessage("Password must be at least 8 characters long.", "error");
-                return;
-            }
+            cliente.contraseña = txtNewPassword.Text;
+            clientWS.guardarCliente(cliente, estado.Modificado);
 
-            // En un proyecto real, aquí cambiarías la contraseña en la base de datos
-            // Por ahora solo mostramos un mensaje de éxito
-            
             // Limpiar los campos de contraseña
             txtCurrentPassword.Text = "";
             txtNewPassword.Text = "";
             txtConfirmPassword.Text = "";
             
-            ShowMessage("Your password has been changed successfully!", "success");
+            ShowMessage("¡Tu contraseña fue cambiada con éxito!", "success");
         }
 
-        private void SaveUserSettings()
+        private bool SaveUserSettings()
         {
-
             cliente cliente = (cliente)Session["Cliente"];
+
+            //Backup de datos antiguos en caso de error
+            string oldEmail = cliente.correo;
+            string oldUsername = cliente.nombreUsuario;
+
             cliente.nombre = txtFullName.Text;
             cliente.nombreUsuario = txtUsername.Text;
             cliente.correo = txtEmail.Text;
 
-            clientWS.guardarCliente(cliente, estado.Modificado);
+            try
+            {
+                clientWS.guardarCliente(cliente, estado.Modificado);
+                Session["Cliente"] = cliente; // Solo actualiza si fue exitoso
+                return true;
+            }
+            catch
+            {
+                cliente.nombreUsuario = oldUsername;
+                cliente.correo = oldEmail;
+                cvSignUpError.IsValid = false;
+                cvSignUpError.ErrorMessage = "El nombre de usuario o correo ya existe.";
+
+                return false;
+            }
         }
 
         private void ShowMessage(string message, string type)

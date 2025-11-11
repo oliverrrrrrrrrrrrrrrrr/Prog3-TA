@@ -1,6 +1,7 @@
 <%@ Page Title="Settings" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Settings.aspx.cs" Inherits="CampusStoreWeb.Settings" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
     <style>
         /* Estilos específicos para Settings */
         .breadcrumb {
@@ -181,9 +182,9 @@
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="Shop_Page.aspx"><i class="bi bi-house-door"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="Settings.aspx">User Account</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Settings</li>
+            <li class="breadcrumb-item"><a href="Shop_Page.aspx"><i class="bi bi-house-door"></i>Home</a></li>
+            <li class="breadcrumb-item"><a href="Settings.aspx">Cuenta de Usuario</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Configuración</li>
         </ol>
     </nav>
 
@@ -194,19 +195,19 @@
                 <div class="sidebar-menu">
                     <a href="OrderHistory.aspx" class="sidebar-menu-item">
                         <i class="bi bi-box-seam"></i>
-                        Order History
+                        Historial de compras
                     </a>
                     <a href="Shopping_Car.aspx" class="sidebar-menu-item">
                         <i class="bi bi-cart3"></i>
-                        Shopping Cart
+                        Carrito de compras
                     </a>
                     <a href="Settings.aspx" class="sidebar-menu-item active">
                         <i class="bi bi-gear"></i>
-                        Setting
+                        Configuración de la cuenta
                     </a>
-                    <a href="#" class="sidebar-menu-item">
+                    <a href="LogOut.aspx" class="sidebar-menu-item">
                         <i class="bi bi-box-arrow-right"></i>
-                        Log-out
+                        Cerrar sesión
                     </a>
                 </div>
             </aside>
@@ -215,61 +216,68 @@
             <main class="col-md-9">
                 <div class="settings-container">
                     <div class="settings-header">
-                        <h4>ACCOUNT SETTINGS</h4>
+                        <h4>CONFIGURACIÓN DE LA CUENTA</h4>
                     </div>
 
                     <!-- Mensaje de éxito -->
                     <div id="alertSuccess" class="alert-success-custom">
-                        <i class="bi bi-check-circle"></i> Your settings have been saved successfully!
+                        <i class="bi bi-check-circle"></i> ¡Los cambios se han guardado correctamente!
                     </div>
 
                     <!-- Sección de Información de Cuenta -->
                     <div class="settings-section">
                         <div class="form-row-custom">
                             <div class="form-group-custom">
-                                <label for="txtUsername">Username</label>
+                                <label for="txtUsername">Nombre de Usuario</label>
                                 <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" placeholder="Username"></asp:TextBox>
                             </div>
                             
                             <div class="form-group-custom">
-                                <label for="txtFullName">Full Name</label>
+                                <label for="txtFullName">Nombre Completo</label>
                                 <asp:TextBox ID="txtFullName" runat="server" CssClass="form-control" placeholder="Full Name"></asp:TextBox>
                             </div>
                         </div>
 
                         <div class="form-row-custom">
                             <div class="form-group-custom">
-                                <label for="txtEmail">Email</label>
+                                <label for="txtEmail">Correo electrónico</label>
                                 <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" placeholder="Email"></asp:TextBox>
                             </div>
                         </div>
 
+                        <asp:CustomValidator 
+                            ID="cvSignUpError" 
+                            runat="server" 
+                            Display="Dynamic"
+                            CssClass="text-danger small d-block"
+                            EnableClientScript="false" />
+
                         <div class="settings-actions" style="margin-top: 20px;">
-                            <asp:Button ID="btnSaveAccountChanges" runat="server" Text="SAVE CHANGES" CssClass="btn-save-changes" OnClick="btnSaveChanges_Click" />
+                            <asp:Button ID="btnSaveAccountChanges" runat="server" Text="GUARDAR CAMBIOS" CssClass="btn-save-changes" OnClick="btnSaveChanges_Click" />
                         </div>
                     </div>
 
                     <!-- Sección de Cambio de Contraseña -->
                     <div class="settings-section">
-                        <h5 class="settings-section-title">CHANGE PASSWORD</h5>
+                        <h5 class="settings-section-title">CAMBIAR CONTRASEÑA</h5>
                         
                         <div class="form-group-custom">
-                            <label for="txtCurrentPassword">Current Password</label>
+                            <label for="txtCurrentPassword">Contraseña actual</label>
                             <asp:TextBox ID="txtCurrentPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                         </div>
 
                         <div class="form-group-custom">
-                            <label for="txtNewPassword">New Password</label>
-                            <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" CssClass="form-control" placeholder="8+ characters"></asp:TextBox>
+                            <label for="txtNewPassword">Nueva contraseña</label>
+                            <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                         </div>
                         
                         <div class="form-group-custom">
-                            <label for="txtConfirmPassword">Confirm Password</label>
+                            <label for="txtConfirmPassword">Confirmar nueva contraseña</label>
                             <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                         </div>
 
                         <div class="settings-actions" style="margin-top: 20px;">
-                            <asp:Button ID="btnChangePassword" runat="server" Text="CHANGE PASSWORD" CssClass="btn-save-changes" OnClick="btnChangePassword_Click" />
+                            <asp:Button ID="btnChangePassword" runat="server" Text="CAMBIAR CONTRASEÑA" CssClass="btn-save-changes" OnClick="btnChangePassword_Click" />
                         </div>
                     </div>
                 </div>
@@ -279,7 +287,7 @@
 
     <script>
         function resetForm() {
-            if (confirm('Are you sure you want to discard all changes?')) {
+            if (confirm('¿Seguro que deseas descartar los cambios?')) {
                 location.reload();
             }
         }
