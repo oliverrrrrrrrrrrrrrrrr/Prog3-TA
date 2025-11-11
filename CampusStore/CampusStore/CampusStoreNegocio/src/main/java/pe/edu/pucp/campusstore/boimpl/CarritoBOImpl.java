@@ -97,10 +97,10 @@ public class CarritoBOImpl implements CarritoBO{
                 conn.commit();
             } catch (SQLException ex) {
                 conn.rollback();
-                throw new RuntimeException("Error guardando OrdenVenta", ex);
+                throw new RuntimeException("Error guardando Carrito", ex);
             }
         } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException("Error de conexión al guardar OrdenVenta"
+            throw new RuntimeException("Error de conexión al guardar Carrito"
                     + "", e);
         }
     }
