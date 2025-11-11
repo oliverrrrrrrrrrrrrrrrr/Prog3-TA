@@ -113,6 +113,7 @@
         .table-libros {
             width: 100%;
             border-collapse: collapse;
+            border: none;
         }
         
         .table-libros thead th {
@@ -131,6 +132,25 @@
             color: #191C1F;
             font-size: 14px;
             border-bottom: 1px solid #E4E7E9;
+        }
+
+        .table-header{
+            background-color: #F2F4F5;
+            color: #475156;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid #E4E7E9;
+        }
+
+        .table-items{
+            padding: 16px;
+            color: #475156;
+            font-size: 14px;
+            border-bottom: 1px solid #E4E7E9;
+            font-weight: 500;
         }
         
         .table-libros tbody tr:last-child td {
@@ -282,132 +302,31 @@
                     
                     <!-- Tabla -->
                     <div class="table-responsive">
-                        <table class="table-libros">
-                            <thead>
-                                <tr>
-                                    <th>LIBRO ID</th>
-                                    <th>STOCK</th>
-                                    <th>NOMBRE</th>
-                                    <th>PRECIO UNITARIO</th>
-                                    <th></th>
-                                    <th>DETALLE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="libro-id">#96459761</td>
-                                    <td class="libro-stock">5</td>
-                                    <td>El libro troll del Rubius</td>
-                                    <td class="libro-precio">$150.00</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
+                        <asp:GridView ID="gvLibros" runat="server" AutoGenerateColumns="false"
+                            CssClass="table-libros" PageSize="5" AllowPaging="true" OnPageIndexChanging="gvLibros_PageIndexChanging">
+                            <Columns>
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="ID" DataField="idLibro" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="NOMBRE" DataField="idLibro" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="STOCK" DataField="idLibro" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="PRECIO UNITARIO" DataField="idLibro" />
+                                <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="EDITAR">
+                                    <ItemTemplate>
+                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar" OnClick="lbModificar_Click" CommandArgument='<%# Eval("idLibro") %>'>
                                             <i class="bi bi-pencil"></i>
                                         </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleLibro.aspx?id=96459761" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="DETALLES">
+                                    <ItemTemplate>
+                                        <asp:HyperLink runat="server" 
+                                            NavigateUrl='<%# "~/DetalleLibro.aspx?id=" + Eval("idLibro") %>' 
+                                            CssClass="btn-view-details">
+                                            Ver Detalles <i class="bi bi-arrow-right"></i>
                                         </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="libro-id">#71667167</td>
-                                    <td class="libro-stock">11</td>
-                                    <td>El codigo Da Vinci</td>
-                                    <td class="libro-precio">$80.00</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleLibro.aspx?id=71667167" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="libro-id">#95214362</td>
-                                    <td class="libro-stock">3</td>
-                                    <td>Hábitos atómicos</td>
-                                    <td class="libro-precio">$159.90</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleLibro.aspx?id=95214362" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="libro-id">#71667167</td>
-                                    <td class="libro-stock">1</td>
-                                    <td>La casa te elige a ti</td>
-                                    <td class="libro-precio">$69.90</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleLibro.aspx?id=71667167" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="libro-id">#51746385</td>
-                                    <td class="libro-stock">2</td>
-                                    <td>Harry Potter y la piedra filosofal</td>
-                                    <td class="libro-precio">$35.50</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleLibro.aspx?id=51746385" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="libro-id">#51746385</td>
-                                    <td class="libro-stock">1</td>
-                                    <td>El visitante</td>
-                                    <td class="libro-precio">$69.90</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleLibro.aspx?id=51746385" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="libro-id">#673971743</td>
-                                    <td class="libro-stock">1</td>
-                                    <td>Undertale Art Book</td>
-                                    <td class="libro-precio">$42.00</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleLibro.aspx?id=673971743" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
                     </div>
                 </div>
             </div>
