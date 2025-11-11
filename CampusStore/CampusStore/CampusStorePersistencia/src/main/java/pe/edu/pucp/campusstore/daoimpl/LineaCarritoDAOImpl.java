@@ -160,6 +160,11 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<LineaCarrito> leerTodosPorCarrito(int idCarrito) {
+        return ejecutarComando(conn -> leerTodosPorCarrito(idCarrito, conn));
+    }
     
     
 }

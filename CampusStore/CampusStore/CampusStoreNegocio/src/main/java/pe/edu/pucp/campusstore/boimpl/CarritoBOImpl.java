@@ -31,7 +31,13 @@ public class CarritoBOImpl implements CarritoBO{
 
     @Override
     public Carrito obtener(int id) {
-        return carritoDAO.leer(id);
+        Carrito carrito = carritoDAO.leer(id);
+        if (carrito == null) return null;
+        
+        List<LineaCarrito> lineas = 
+                lineaCarritoDAO.leerTodosPorCarrito(id);
+        carrito.setLineas(lineas);
+        return carrito;
     }
 
     @Override

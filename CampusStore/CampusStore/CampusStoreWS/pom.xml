@@ -32,11 +32,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>CampusStoreNegocio</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>CampusStorePersistencia</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -48,6 +43,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>CampusStoreModelo</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CampusStoreNegocio</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
