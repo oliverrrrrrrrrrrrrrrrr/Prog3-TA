@@ -65,13 +65,13 @@ public class LibroBOImpl implements LibroBO {
                 }
 
                 for (Autor autor : autores) {
-                    Integer idAutor = autor.getIdAutor() != null
-                            ? autor.getIdAutor()
-                            : autorDAO.crear(autor, conn); // INSERT autor si es nuevo
+                    
+                    Integer idAutor=autorDAO.crear(autor, conn); // INSERT autor si es nuevo
 
                     if (idAutor == null) {
                         throw new RuntimeException("No se pudo crear autor");
                     }
+                    autor.setIdAutor(idAutor);
                     AutoresLibro autoresLibroAux = new AutoresLibro();
                     autoresLibroAux.setAutor(autor);
                     autoresLibroAux.setLibro(libro);
@@ -85,7 +85,7 @@ public class LibroBOImpl implements LibroBO {
                 throw new RuntimeException("Error registrando libro", ex);
             }
         } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException("Error de conexión al guardar Carrito"
+            throw new RuntimeException("Error de conexión al guardar Libro"
                     + "", e);
         }
     }

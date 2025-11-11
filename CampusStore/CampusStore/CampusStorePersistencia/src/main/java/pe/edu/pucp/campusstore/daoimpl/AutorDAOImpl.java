@@ -18,7 +18,7 @@ public class AutorDAOImpl extends TransaccionalBaseDAO<Autor> implements AutorDA
     protected PreparedStatement comandoCrear(Connection conn, 
             Autor modelo) throws SQLException {
         
-        String sql = "{call insertarAutor(?, ?, ?, ?)}";
+        String sql = "{call insertarAutorSiNoExiste(?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_apellidos", modelo.getApellidos());

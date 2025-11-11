@@ -102,3 +102,37 @@ BEGIN
 END//
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure insertarAutorSiNoExiste
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP procedure IF EXISTS `insertarAutorSiNoExiste`;
+
+DELIMITER //
+
+CREATE PROCEDURE insertarAutorSiNoExiste(
+    IN p_nombre VARCHAR(100),
+    IN p_apellidos VARCHAR(100),
+    IN p_alias VARCHAR(45),
+    OUT p_id INT
+)
+BEGIN
+    -- Buscar autor duplicado
+    SELECT idAutor INTO p_id
+    FROM autor
+    WHERE nombre = p_nombre
+      AND (apellidos = p_apellidos OR (apellidos IS NULL AND p_apellidos IS NULL))
+    LIMIT 1;
+
+    -- Si no existe, insertarlo
+    IF p_id IS NULL THEN
+        INSERT INTO autor(nombre, apellidos, alias)
+        VALUES (p_nombre, p_apellidos, p_alias);
+        SET p_id = LAST_INSERT_ID();
+    END IF;
+
+END //
+
+DELIMITER ;
