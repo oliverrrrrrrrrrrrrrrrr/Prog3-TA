@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import pe.edu.pucp.campusstore.bases.dao.TransaccionalBaseDAO;
 import pe.edu.pucp.campusstore.dao.LibroDAO;
 import pe.edu.pucp.campusstore.modelo.Descuento;
 import pe.edu.pucp.campusstore.modelo.Editorial;
@@ -15,7 +16,7 @@ import pe.edu.pucp.campusstore.modelo.enums.Formato;
 import pe.edu.pucp.campusstore.modelo.enums.GeneroLibro;
 import pe.edu.pucp.campusstore.modelo.Libro;
 
-public class LibroDAOImpl extends BaseDAO<Libro> implements LibroDAO {
+public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDAO {
     @Override
     protected PreparedStatement comandoCrear(Connection conn, 
             Libro modelo) throws SQLException {

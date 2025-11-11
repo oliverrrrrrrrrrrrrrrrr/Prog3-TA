@@ -7,11 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import pe.edu.pucp.campusstore.bases.dao.TransaccionalBaseDAO;
 
 import pe.edu.pucp.campusstore.modelo.Autor;
 import pe.edu.pucp.campusstore.dao.AutorDAO;
 
-public class AutorDAOImpl extends BaseDAO<Autor> implements AutorDAO {
+public class AutorDAOImpl extends TransaccionalBaseDAO<Autor> implements AutorDAO {
     
     @Override
     protected PreparedStatement comandoCrear(Connection conn, 
