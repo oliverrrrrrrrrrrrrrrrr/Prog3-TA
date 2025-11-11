@@ -1,81 +1,89 @@
 ﻿using CampusStoreWeb.ArticuloWS;
 using CampusStoreWeb.DescuentoWS;
+using CampusStoreWeb.LibroWS;
 using System;
 using System.Web.UI.WebControls;
 
 namespace CampusStoreWeb
 {
-    public partial class DetalleArticulo : System.Web.UI.Page
+    public partial class DetalleLibro : System.Web.UI.Page
     {
-        private readonly ArticuloWSClient articuloWS;
+        private readonly LibroWSClient libroWS;
         private readonly DescuentoWSClient descuentoWS;
-        private articulo articuloActual;
+        private libro libroActual;
         private DescuentoWS.descuento descuentoActual;
-        private int idArticuloActual;
+        private int idLibroActual;
 
-        public DetalleArticulo()
+        public DetalleLibro()
         {
-            this.articuloWS = new ArticuloWSClient();
-            this.descuentoWS = new DescuentoWSClient();
+            libroWS = new LibroWSClient();
+            descuentoWS = new DescuentoWSClient();
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                CargarCategorias();
-                CargarDetalleArticulo();
+                CargarGeneros();
+                CargarFormatos();
+                CargarDetalleLibro();
             }
         }
 
-        private void CargarCategorias()
+        private void CargarGeneros()
         {
-            ddlCategoria.Items.Clear();
-            ddlCategoria.DataSource = Enum.GetNames(typeof(tipoArticulo));
-            ddlCategoria.DataBind();
-            ddlCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
+            ddlGenero.Items.Clear();
+            ddlGenero.DataSource = Enum.GetNames(typeof(generoLibro));
+            ddlGenero.DataBind();
+            ddlGenero.Items.Insert(0, new ListItem("Seleccione un género"));
         }
 
-        private void CargarDetalleArticulo()
+        private void CargarFormatos()
         {
-            // Obtener el ID desde la QueryString
+            ddlFormato.Items.Clear();
+            ddlFormato.DataSource = Enum.GetNames(typeof(formato));
+            ddlFormato.DataBind();
+            ddlFormato.Items.Insert(0, new ListItem("Seleccione un formato"));
+        }
+
+        private void CargarDetalleLibro()
+        {
             if (Request.QueryString["id"] != null)
             {
-                if (int.TryParse(Request.QueryString["id"], out idArticuloActual))
+                if (int.TryParse(Request.QueryString["id"], out idLibroActual))
                 {
                     try
                     {
-                        // Obtener el artículo desde el Web Service
-                        articuloActual = articuloWS.obtenerArticulo(idArticuloActual);
+                        libroActual = libroWS.obtenerLibro(idLibroActual);
 
-                        if (articuloActual != null)
+                        if(libroActual != null)
                         {
-                            ViewState["idArticulo"] = idArticuloActual;
-                            MostrarDatosArticulo();
+                            ViewState["idLibro"] = idLibroActual;
+                            MostrarDatosLibro();
                             CargarDescuento();
                         }
                         else
                         {
-                            MostrarMensajeError("No se encontró el artículo solicitado.");
+                            MostrarMensajeError("No se encontró el libro solicitado.");
                         }
                     }
                     catch (Exception ex)
                     {
-                        MostrarMensajeError("Error al cargar el artículo: " + ex.Message);
+                        MostrarMensajeError("Error al cargar el libro: " + ex.Message);
                     }
                 }
                 else
                 {
-                    MostrarMensajeError("El identificador del artículo no es válido.");
+                    MostrarMensajeError("El identificador del libro no es válido.");
                 }
             }
             else
             {
-                MostrarMensajeError("No se especificó un artículo para mostrar.");
+                MostrarMensajeError("No se especificó un libro para mostrar.");
             }
         }
 
-        private void MostrarDatosArticulo()
+        private void MostrarDatosLibro()
         {
             // Mostrar el panel de detalles
             pnlDetalle.Visible = true;
@@ -83,29 +91,23 @@ namespace CampusStoreWeb
             pnlVista.Visible = true;
             pnlFormEdicion.Visible = false;
 
-            // Datos básicos
-            lblArticuloID.Text = articuloActual.idArticulo.ToString();
-            lblNombreArticulo.Text = articuloActual.nombre;
-            lblPrecioUnitario.Text = articuloActual.precio.ToString("N2");
-            lblPrecioConDescuento.Text = articuloActual.precioDescuento.ToString("N2");
-            lblStockReal.Text = articuloActual.stockReal.ToString();
-            lblStockVirtual.Text = articuloActual.stockVirtual.ToString();
-            lblCategoria.Text = articuloActual.tipoArticulo.ToString() ?? "Sin categoría";
-            lblDescripcion.Text = articuloActual.descripcion ?? "Sin descripción disponible";
+            lblLibroID.Text = libroActual.idLibro.ToString();
+            lblNombreLibro.Text = libroActual.nombre;
+            lblPrecioUnitario.Text = libroActual.precio.ToString("N2");
+            lblPrecioConDescuento.Text = libroActual.precioDescuento.ToString("N2");
+            lblStockReal.Text = libroActual.stockReal.ToString();
+            lblStockVirtual.Text = libroActual.stockVirtual.ToString();
+            lblISBN.Text = libroActual.isbn;
+            lblGenero.Text = libroActual.genero.ToString();
+            lblFechaPublicacion.Text = libroActual.fechaPublicacion.ToShortDateString();
+            lblFormato.Text = libroActual.formato.ToString();
+            lblEditorial.Text = libroActual.editorial.nombre;
+            lblSinopsis.Text = libroActual.sinopsis ?? "Sin sinopsis disponible.";
+            lblDescripcion.Text = libroActual.descripcion ?? "Sin descripción disponible.";
 
-            // Stock con badge de color
-            ConfigurarStockBadge(articuloActual.stockReal, articuloActual.stockVirtual);
+            ConfigurarStockBadge(libroActual.stockReal, libroActual.stockVirtual);
 
-            // Imagen - Si tienes una propiedad de imagen en el objeto
-            // Si no, puedes usar una imagen por defecto o basada en la categoría
-            /*if (!string.IsNullOrEmpty(articuloActual.imagenUrl))
-            {
-                imgArticulo.ImageUrl = articuloActual.imagenUrl;
-            }
-            else
-            {
-                imgArticulo.ImageUrl = "~/Images/default-articulo.jpg";
-            }*/
+            // IMAGEN FALTA
         }
 
         private void ConfigurarStockBadge(int stockReal, int stockVirtual)
@@ -137,7 +139,7 @@ namespace CampusStoreWeb
             {
                 // Obtener descuento del artículo desde el WS
                 // Ajusta según tu método en el WS
-                descuentoActual = descuentoWS.obtenerDescuentoPorProducto(idArticuloActual, DescuentoWS.tipoProducto.ARTICULO);
+                descuentoActual = descuentoWS.obtenerDescuentoPorProducto(idLibroActual, DescuentoWS.tipoProducto.ARTICULO);
 
                 if (descuentoActual != null && descuentoActual.activo)
                 {
@@ -225,7 +227,7 @@ namespace CampusStoreWeb
                     // Recargar
                     CargarDescuento();
 
-                    
+
                     string script = $"alert('Descuento {mensaje} exitosamente');";
                     ClientScript.RegisterStartupScript(this.GetType(), "success", script, true);
                 }
@@ -242,13 +244,14 @@ namespace CampusStoreWeb
         // ========================================
         protected void btnGuardarDescuento_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid && ViewState["idArticulo"] != null)
+            if (Page.IsValid && ViewState["idLibro"] != null)
             {
                 try
                 {
-                    idArticuloActual = (int)ViewState["idArticulo"];
-                    
-                    DescuentoWS.descuento descuento = new DescuentoWS.descuento() {
+                    idLibroActual = (int)ViewState["idLibro"];
+
+                    DescuentoWS.descuento descuento = new DescuentoWS.descuento()
+                    {
                         valorDescuento = double.Parse(txtDescuentoValor.Text),
                         valorDescuentoSpecified = true,
 
@@ -261,7 +264,7 @@ namespace CampusStoreWeb
                         tipoProducto = DescuentoWS.tipoProducto.ARTICULO,
                         tipoProductoSpecified = true,
 
-                        idProducto = idArticuloActual,
+                        idProducto = idLibroActual,
                         idProductoSpecified = true
                     };
 
@@ -362,16 +365,16 @@ namespace CampusStoreWeb
         protected void btnEditar_Click(object sender, EventArgs e)
         {
             // Recuperar ID del ViewState
-            if (ViewState["idArticulo"] != null)
+            if (ViewState["idLibro"] != null)
             {
-                idArticuloActual = (int)ViewState["idArticulo"];
-                
+                idLibroActual = (int)ViewState["idLibro"];
+
                 try
                 {
                     // Recargar el artículo por si cambió
-                    articuloActual = articuloWS.obtenerArticulo(idArticuloActual);
-                    
-                    if (articuloActual != null)
+                    libroActual = libroWS.obtenerLibro(idLibroActual);
+
+                    if (libroActual != null)
                     {
                         CargarFormularioEdicion();
                         MostrarFormularioEdicion(true);
@@ -386,13 +389,19 @@ namespace CampusStoreWeb
 
         private void CargarFormularioEdicion()
         {
-            txtNombre.Text = articuloActual.nombre;
-            txtPrecioUnitario.Text = articuloActual.precio.ToString("F2");
-            txtPrecioConDescuento.Text = articuloActual.precioDescuento.ToString("F2");
-            txtStockReal.Text = articuloActual.stockReal.ToString();
-            txtStockVirtual.Text = articuloActual.stockVirtual.ToString();
-            ddlCategoria.SelectedValue = articuloActual.tipoArticulo.ToString();
-            txtDescripcion.Text = articuloActual.descripcion;
+            txtNombre.Text = libroActual.nombre;
+            txtPrecioUnitario.Text = libroActual.precio.ToString("F2");
+            txtPrecioConDescuento.Text = libroActual.precioDescuento.ToString("F2");
+            txtStockReal.Text = libroActual.stockReal.ToString();
+            txtStockVirtual.Text = libroActual.stockVirtual.ToString();
+            txtISBN.Text = libroActual.isbn;
+            ddlGenero.SelectedValue = libroActual.genero.ToString();
+            txtFechaPublicacion.Text = libroActual.fechaPublicacion.ToString("yyyy-MM-dd");
+            ddlFormato.SelectedValue = libroActual.formato.ToString();
+            //EDITORIAL FALTA
+            //AUTORES FALTA
+            txtSinopsis.Text = libroActual.sinopsis;
+            txtDescripcion.Text = libroActual.descripcion;
 
         }
 
@@ -411,33 +420,39 @@ namespace CampusStoreWeb
         // ========================================
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid && ViewState["idArticulo"] != null)
+            if (Page.IsValid && ViewState["idLibro"] != null)
             {
                 try
                 {
-                    idArticuloActual = (int)ViewState["idArticulo"];
+                    idLibroActual = (int)ViewState["idLibro"];
 
                     // Crear objeto con los datos del formulario
-                    articulo articuloEditado = new articulo
+                    libro libroEditado = new libro
                     {
-                        idArticulo = idArticuloActual,
+                        idLibro = idLibroActual,
                         nombre = txtNombre.Text.Trim(),
                         precio = double.Parse(txtPrecioUnitario.Text),
                         precioDescuento = double.Parse(txtPrecioConDescuento.Text),
                         stockReal = int.Parse(txtStockReal.Text),
                         stockVirtual = int.Parse(txtStockVirtual.Text),
-                        tipoArticulo = (tipoArticulo)Enum.Parse(typeof(tipoArticulo), ddlCategoria.SelectedItem.Text),
+                        isbn = txtISBN.Text,
+                        genero = (generoLibro)Enum.Parse(typeof(generoLibro), ddlGenero.SelectedItem.Text),
+                        fechaPublicacion = DateTime.Parse(lblFechaPublicacion.Text),
+                        formato = (formato)Enum.Parse(typeof(formato), ddlFormato.SelectedItem.Text),
+                        sinopsis = txtSinopsis.Text,
                         descripcion = txtDescripcion.Text,
+                        //EDITORIAL FALTA
+                        //AUTORES FALTA
                     };
 
                     // Llamar al WS para actualizar
-                    articuloWS.guardarArticulo(articuloEditado,ArticuloWS.estado.Modificado);
+                    libroWS.guardarLibro(libroEditado, LibroWS.estado.Modificado);
 
                     // Recargar datos actualizados
-                    articuloActual = articuloWS.obtenerArticulo(idArticuloActual);
+                    libroActual = libroWS.obtenerLibro(idLibroActual);
 
                     // Volver a la vista de detalle
-                    MostrarDatosArticulo();
+                    MostrarDatosLibro();
                     MostrarFormularioEdicion(false);
 
                     // Mostrar mensaje de éxito
@@ -446,11 +461,12 @@ namespace CampusStoreWeb
                 }
                 catch (Exception ex)
                 {
-                    string script = $"alert('Error al guardar: {ex.Message}');";
+                    string script = $"alert('Error al guardar cambios: {ex.Message}');";
                     ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
                 }
             }
         }
+
         protected void btnCancelarEdit_Click(object sender, EventArgs e)
         {
             // Volver a mostrar los datos sin cambios
@@ -459,19 +475,19 @@ namespace CampusStoreWeb
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (ViewState["idArticulo"] != null)
+            if (ViewState["idLibro"] != null)
             {
                 try
                 {
-                    idArticuloActual = (int)ViewState["idArticulo"];
-                    articuloWS.eliminarArticulo(idArticuloActual);
+                    idLibroActual = (int)ViewState["idLibro"];
+                    libroWS.eliminarLibro(idLibroActual);
 
                     // Redirigir con mensaje de éxito
-                    Response.Redirect("GestionarArticulos.aspx?mensaje=eliminado");
+                    Response.Redirect("GestionarLibros.aspx?mensaje=eliminado");
                 }
                 catch (Exception ex)
                 {
-                    MostrarMensajeError("Error al eliminar el artículo: " + ex.Message);
+                    MostrarMensajeError("Error al eliminar el libro: " + ex.Message);
                 }
             }
         }
