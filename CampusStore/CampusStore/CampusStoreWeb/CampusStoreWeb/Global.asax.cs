@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using System.Web.UI;
 
 namespace CampusStoreWeb
 {
@@ -11,6 +12,7 @@ namespace CampusStoreWeb
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
         }
     }
 }

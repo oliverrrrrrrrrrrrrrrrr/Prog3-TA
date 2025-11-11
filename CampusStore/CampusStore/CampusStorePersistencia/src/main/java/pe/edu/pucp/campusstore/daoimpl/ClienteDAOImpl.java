@@ -82,12 +82,12 @@ public class ClienteDAOImpl extends BaseDAO<Cliente> implements ClienteDAO {
         return modelo;    
     }
     
-    protected PreparedStatement comandoLogin(Connection conn, String nombreUsuario, 
+    protected PreparedStatement comandoLogin(Connection conn, String correo, 
             String contraseña) throws SQLException {
         String sql = "{call loginCliente(?, ?, ?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setString("p_nombreUsuario", nombreUsuario);
+        cmd.setString("p_correo", correo);
         cmd.setString("p_contraseña", contraseña);
         cmd.registerOutParameter("p_valido", Types.BOOLEAN);
         
@@ -95,16 +95,16 @@ public class ClienteDAOImpl extends BaseDAO<Cliente> implements ClienteDAO {
     }
 
     @Override
-    public boolean login(String nombreUsuario, String contraseña) {
+    public boolean login(String correo, String contraseña) {
         return ejecutarComando(conn -> {
-            try (PreparedStatement cmd = this.comandoLogin(conn, nombreUsuario, contraseña)) {
+            try (PreparedStatement cmd = this.comandoLogin(conn, correo, contraseña)) {
                 if (cmd instanceof CallableStatement callableCmd) {
                     callableCmd.execute();
                     boolean valido = callableCmd.getBoolean("p_valido");
                     
                     if (!valido) {
                         System.err.println("No se encontro el registro con "
-                            + "username: " + nombreUsuario + ", password");
+                            + "correo: " + correo + ", password");
                     }
                     return valido;
                 }

@@ -1,4 +1,5 @@
 <discovery xmlns="http://schemas.xmlsoap.org/disco/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
-    <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/SoftProgWS/LibroWS?wsdl"/>
-    <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/SoftProgWS/ArticuloWS?wsdl"/>
+    <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/CampusStoreWS/LibroWS?wsdl"/>
+    <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/CampusStoreWS/ArticuloWS?wsdl"/>
+	<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/CampusStoreWS/ClienteWS?wsdl"/>
 </discovery>

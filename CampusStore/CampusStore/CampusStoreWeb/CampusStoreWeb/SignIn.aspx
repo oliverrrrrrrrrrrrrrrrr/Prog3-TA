@@ -237,6 +237,12 @@
                                                 CssClass="text-danger small"
                                                 Display="Dynamic" />
                 </div>
+
+                 <asp:CustomValidator 
+                    ID="cvLoginError" 
+                    runat="server" 
+                    Display="None" 
+                    EnableClientScript="false" />
                 
                 <asp:Button ID="btnSignIn" runat="server" CssClass="btn-signin" 
                             Text="SIGN IN ➔" OnClick="btnSignIn_Click" />

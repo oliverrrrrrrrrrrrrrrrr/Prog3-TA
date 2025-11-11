@@ -124,7 +124,7 @@ USE `libreria`;
 DROP procedure IF EXISTS `loginCliente`;
 
 CREATE PROCEDURE loginCliente(
-    IN p_nombreUsuario VARCHAR(50),
+    IN p_correo VARCHAR(50),
     IN p_contraseña VARCHAR(50),
     OUT p_valido BOOLEAN
 )
@@ -133,7 +133,7 @@ BEGIN
 
     SELECT COUNT(*) INTO v_count
     FROM cliente
-    WHERE nombreUsuario = p_nombreUsuario
+    WHERE correo = p_correo
       AND contraseña = p_contraseña;
 
     IF v_count > 0 THEN

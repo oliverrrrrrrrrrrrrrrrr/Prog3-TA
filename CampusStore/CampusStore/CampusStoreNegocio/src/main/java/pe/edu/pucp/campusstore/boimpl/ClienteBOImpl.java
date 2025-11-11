@@ -40,8 +40,8 @@ public class ClienteBOImpl implements ClienteBO{
     }
 
     @Override
-    public boolean login(String nombreUsuario, String contraseña) {
-        return this.clienteDAO.login(nombreUsuario, contraseña);
+    public boolean login(String correo, String contraseña) {
+        return this.clienteDAO.login(correo, contraseña);
     }
     
 }

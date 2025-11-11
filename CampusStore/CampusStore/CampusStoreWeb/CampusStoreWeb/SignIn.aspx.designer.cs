@@ -60,6 +60,15 @@ namespace CampusStoreWeb
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPassword;
 
         /// <summary>
+        /// Control cvLoginError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvLoginError;
+
+        /// <summary>
         /// Control btnSignIn.
         /// </summary>
         /// <remarks>

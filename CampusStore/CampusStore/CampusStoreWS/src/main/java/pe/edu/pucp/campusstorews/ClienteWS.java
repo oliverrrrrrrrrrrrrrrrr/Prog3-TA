@@ -49,10 +49,10 @@ public class ClienteWS {
     
     @WebMethod(operationName = "loginCliente")
     public boolean login(
-        @WebParam(name = "nombreUsuario") String nombreUsuario, 
+        @WebParam(name = "correo") String correo, 
         @WebParam(name = "contraseña") String contraseña
     ) {
-        return this.clienteBO.login(nombreUsuario, contraseña);
+        return this.clienteBO.login(correo, contraseña);
     }
 }
 
