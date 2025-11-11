@@ -306,9 +306,9 @@
                             CssClass="table-libros" PageSize="5" AllowPaging="true" OnPageIndexChanging="gvLibros_PageIndexChanging">
                             <Columns>
                                 <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="ID" DataField="idLibro" />
-                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="NOMBRE" DataField="idLibro" />
-                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="STOCK" DataField="idLibro" />
-                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="PRECIO UNITARIO" DataField="idLibro" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="NOMBRE" DataField="nombre" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="STOCK" DataField="stock" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="PRECIO UNITARIO" DataField="precio" />
                                 <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="EDITAR">
                                     <ItemTemplate>
                                         <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar" OnClick="lbModificar_Click" CommandArgument='<%# Eval("idLibro") %>'>

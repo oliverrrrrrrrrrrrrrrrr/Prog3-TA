@@ -113,6 +113,7 @@
         .table-clientes {
             width: 100%;
             border-collapse: collapse;
+            border : none;
         }
         
         .table-clientes thead th {
@@ -131,6 +132,25 @@
             color: #191C1F;
             font-size: 14px;
             border-bottom: 1px solid #E4E7E9;
+        }
+
+        .table-header{
+            background-color: #F2F4F5;
+            color: #475156;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid #E4E7E9;
+        }
+
+        .table-items{
+            padding: 16px;
+            color: #475156;
+            font-size: 14px;
+            border-bottom: 1px solid #E4E7E9;
+            font-weight: 500;
         }
         
         .table-clientes tbody tr:last-child td {
@@ -291,146 +311,24 @@
                     
                     <!-- Tabla -->
                     <div class="table-responsive">
-                        <table class="table-clientes">
-                            <thead>
-                                <tr>
-                                    <th>EMPLEADO ID</th>
-                                    <th>ESTADO</th>
-                                    <th>APELLIDO</th>
-                                    <th>NOMBRE</th>
-                                    <th></th>
-                                    <th>DETALLES</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="empleado-id">#96459761</td>
-                                    <td>
-                                        <span class="estado-badge estado-deshabilitado">DESHABILITADO</span>
-                                    </td>
-                                    <td>Arista</td>
-                                    <td>Fernandez</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleCliente.aspx?id=96459761" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
+                        <asp:GridView ID="gvClientes" runat="server" AutoGenerateColumns="false"
+                            CssClass="table-clientes" PageSize="5" AllowPaging="true" OnPageIndexChanging="gvClientes_PageIndexChanging">
+                            <Columns>
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="ID" DataField="idCliente" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="NOMBRES" DataField="nombre" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="USUARIO" DataField="nombreUsuario" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="TELEFONO" DataField="telefono" />
+                                <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="DETALLES">
+                                    <ItemTemplate>
+                                        <asp:HyperLink runat="server" 
+                                            NavigateUrl='<%# "~/DetalleCliente.aspx?id=" + Eval("idCliente") %>' 
+                                            CssClass="btn-view-details">
+                                            Ver Detalles <i class="bi bi-arrow-right"></i>
                                         </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="empleado-id">#71667167</td>
-                                    <td>
-                                        <span class="estado-badge estado-activo">ACTIVO</span>
-                                    </td>
-                                    <td>Benites</td>
-                                    <td>Joaquín</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleCliente.aspx?id=71667167" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="empleado-id">#95214362</td>
-                                    <td>
-                                        <span class="estado-badge estado-deshabilitado">DESHABILITADO</span>
-                                    </td>
-                                    <td>José</td>
-                                    <td>José</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleCliente.aspx?id=95214362" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="empleado-id">#71667167</td>
-                                    <td>
-                                        <span class="estado-badge estado-activo">ACTIVO</span>
-                                    </td>
-                                    <td>López</td>
-                                    <td>María</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleCliente.aspx?id=71667167" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="empleado-id">#51746385</td>
-                                    <td>
-                                        <span class="estado-badge estado-activo">ACTIVO</span>
-                                    </td>
-                                    <td>Ramírez</td>
-                                    <td>Enrique</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleCliente.aspx?id=51746385" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="empleado-id">#51746385</td>
-                                    <td>
-                                        <span class="estado-badge estado-activo">ACTIVO</span>
-                                    </td>
-                                    <td>Madrid</td>
-                                    <td>Luis</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleCliente.aspx?id=51746385" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="empleado-id">#673971743</td>
-                                    <td>
-                                        <span class="estado-badge estado-activo">ACTIVO</span>
-                                    </td>
-                                    <td>Martinelli</td>
-                                    <td>Andrea</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetalleCliente.aspx?id=673971743" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
                     </div>
                 </div>
             </div>

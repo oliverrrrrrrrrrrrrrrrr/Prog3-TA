@@ -93,6 +93,30 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.cliente.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.eliminarClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.guardarClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.listarClientesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.loginClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.obtenerClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ClienteWS\configuration91.svcinfo" />
+    <None Include="Connected Services\ClienteWS\configuration.svcinfo" />
+    <None Include="Connected Services\ClienteWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Connected Services\DescuentoWS\CampusStoreWeb.DescuentoWS.descuento.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -111,6 +135,10 @@
     <Content Include="Connected Services\DescuentoWS\CampusStoreWeb.DescuentoWS.obtenerDescuentoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\ClienteWS\ClienteWS.wsdl" />
+    <None Include="Connected Services\ClienteWS\ClienteWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\DescuentoWS\configuration91.svcinfo" />
     <None Include="Connected Services\DescuentoWS\configuration.svcinfo" />
     <None Include="Connected Services\DescuentoWS\Reference.svcmap">
@@ -140,6 +168,7 @@
     </None>
     <Content Include="Content\Site.css" />
     <Content Include="DetalleArticulo.aspx" />
+    <Content Include="DetalleCliente.aspx" />
     <Content Include="DetalleLibro.aspx" />
     <Content Include="Forget_Password.aspx" />
     <Content Include="GenerarReportes.aspx" />
@@ -189,6 +218,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ClienteWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\DescuentoWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -205,6 +239,13 @@
     </Compile>
     <Compile Include="DetalleArticulo.aspx.designer.cs">
       <DependentUpon>DetalleArticulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleCliente.aspx.cs">
+      <DependentUpon>DetalleCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleCliente.aspx.designer.cs">
+      <DependentUpon>DetalleCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="DetalleLibro.aspx.cs">
       <DependentUpon>DetalleLibro.aspx</DependentUpon>
@@ -380,6 +421,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ArticuloWS\" />
+    <WCFMetadataStorage Include="Connected Services\ClienteWS\" />
     <WCFMetadataStorage Include="Connected Services\DescuentoWS\" />
     <WCFMetadataStorage Include="Connected Services\LibroWS\" />
   </ItemGroup>
