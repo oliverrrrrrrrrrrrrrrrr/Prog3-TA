@@ -111,10 +111,42 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
         modelo.setPrecioConDescuento(rs.getDouble("precioConDescuento"));
         modelo.setSubTotalConDescuento(rs.getDouble("subtotalConDescuento"));
         
-        TipoProducto tipo = TipoProducto.valueOf(rs.getString("tipo"));
+        TipoProducto tipo = TipoProducto.valueOf(rs.getString("tipoProducto"));
         modelo.setTipoProducto(tipo);
         
-        Integer idProducto=rs.getInt("producto");
+        if (tipo == TipoProducto.ARTICULO) {
+            Integer idArticulo = rs.getInt("idArticulo");
+            if(!rs.wasNull()){
+                modelo.setProducto(new ArticuloDAOImpl().leer(idArticulo));
+            }
+        } else if (tipo == TipoProducto.LIBRO) {
+            Integer idLibro = rs.getInt("idLibro");
+            if(!rs.wasNull()){
+                modelo.setProducto(new LibroDAOImpl().leer(idLibro));
+            }
+        }
+
+        Integer idCarrito = rs.getInt("CARRITO_idCarrito");
+        if(!rs.wasNull()){
+            modelo.setCarrito(new CarritoDAOImpl().leer(idCarrito));
+        }
+        
+        return modelo;
+    }
+    
+    protected LineaCarrito mapearModeloPorCarrito(ResultSet rs) throws SQLException {
+        LineaCarrito modelo = new LineaCarrito();
+        
+        modelo.setIdLineaCarrito(rs.getInt("idLineaCarrito"));
+        modelo.setCantidad(rs.getInt("cantidad"));
+        modelo.setPrecioUnitario(rs.getDouble("precioUnitario"));
+        modelo.setSubtotal(rs.getDouble("subtotal"));
+        modelo.setPrecioConDescuento(rs.getDouble("precioConDescuento"));
+        modelo.setSubTotalConDescuento(rs.getDouble("subtotalConDescuento"));
+        
+        TipoProducto tipo = TipoProducto.valueOf(rs.getString("tipo"));
+        modelo.setTipoProducto(tipo);
+        Integer idProducto = rs.getInt("producto");
         
         if (tipo == TipoProducto.ARTICULO) {
             if(!rs.wasNull()){
@@ -150,7 +182,7 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
 
             List<LineaCarrito> modelos = new ArrayList<>();
             while (rs.next()) {
-                modelos.add(this.mapearModelo(rs));
+                modelos.add(this.mapearModeloPorCarrito(rs));
             }
 
             return modelos;
