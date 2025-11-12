@@ -16,7 +16,7 @@ public class EditorialDAOImpl extends TransaccionalBaseDAO<Editorial> implements
     protected PreparedStatement comandoCrear(Connection conn, 
             Editorial modelo) throws SQLException {
         
-        String sql = "{call insertarEditorial(?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call insertarEditorialSiNoExiste(?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_direccion", modelo.getDireccion());
