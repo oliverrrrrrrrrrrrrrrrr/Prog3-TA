@@ -3,274 +3,109 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
+
+        <!-- =================================================================== -->
+        <!-- ESTE ES EL <div class="row"> PRINCIPAL QUE ENVUELVE AMBAS COLUMNAS -->
+        <!-- =================================================================== -->
         <div class="row">
 
             <!-- ============================================= -->
-            <!-- COLUMNA IZQUIERDA: FILTROS                    -->
+            <!-- COLUMNA 1: FILTROS (col-md-3)                 -->
             <!-- ============================================= -->
             <aside class="col-md-3">
                 <div class="filters-sidebar">
                     
-                    <!-- SECCIÓN DE CATEGORÍAS (usando radios) -->
+                    <!-- SECCIÓN DE CATEGORÍAS -->
                     <div class="filter-section">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="categoria" id="catLibros" checked>
-                            <label class="form-check-label" for="catLibros">Libros</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="categoria" id="catMochilas">
-                            <label class="form-check-label" for="catMochilas">Mochilas</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="categoria" id="catCuadernos">
-                            <label class="form-check-label" for="catCuadernos">Cuadernos</label>
-                        </div>
-                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="categoria" id="catPeluches">
-                            <label class="form-check-label" for="catPeluches">Peluches</label>
-                        </div>
-                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="categoria" id="catTomatodos">
-                            <label class="form-check-label" for="catTomatodos">Tomatodos</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="categoria" id="catUtiles">
-                            <label class="form-check-label" for="catUtiles">Utiles</label>
-                        </div>
+                        <h4>CATEGORÍAS</h4>
+                        <asp:RadioButtonList ID="rblCategorias" runat="server" CssClass="form-check-list" RepeatLayout="Flow">
+                            <asp:ListItem Value="libro" Text="Libros" Selected="True"></asp:ListItem>
+                            <asp:ListItem Value="articulo" Text="Artículos"></asp:ListItem>
+                            <asp:ListItem Value="peluche" Text="Peluches"></asp:ListItem>
+                            <asp:ListItem Value="tomatodo" Text="Tomatodos"></asp:ListItem>
+                            <asp:ListItem Value="util" Text="Utiles"></asp:ListItem>
+                        </asp:RadioButtonList>
                     </div>
 
                     <!-- SECCIÓN DE EDITORIALES -->
                     <div class="filter-section">
                         <h4>EDITORIALES</h4>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="editPenguin" checked>
-                            <label class="form-check-label" for="editPenguin">Penguin Random House</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="editHarper" checked>
-                            <label class="form-check-label" for="editHarper">HarperCollins</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="editSimon" checked>
-                            <label class="form-check-label" for="editSimon">Simon & Schuster</label>
-                        </div>
-                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="editPlaneta" checked>
-                            <label class="form-check-label" for="editPlaneta">Planeta</label>
-                        </div>
+                        <asp:CheckBoxList ID="cblEditoriales" runat="server" CssClass="form-check-list">
+                            <asp:ListItem Value="1">Penguin Random House</asp:ListItem> 
+                            <asp:ListItem Value="2">HarperCollins</asp:ListItem>      
+                            <asp:ListItem Value="3">Simon & Schuster</asp:ListItem>   
+                            <asp:ListItem Value="4">Planeta</asp:ListItem>            
+                        </asp:CheckBoxList>
                     </div>
 
                     <!-- SECCIÓN DE AUTORES -->
                     <div class="filter-section">
                         <h4>AUTORES</h4>
-                        <div class="form-check">
-                             <input class="form-check-input" type="checkbox" id="autGaston" checked>
-                            <label class="form-check-label" for="autGaston">Gaston Acurio</label>
-                        </div>
+                        <asp:CheckBoxList ID="cblAutores" runat="server" CssClass="form-check-list">
+                            <asp:ListItem Value="1">Gaston Acurio</asp:ListItem>
+                        </asp:CheckBoxList>
                     </div>
 
                     <!-- SECCIÓN DE GÉNERO -->
                     <div class="filter-section">
                         <h4>GÉNERO LIBRO</h4>
-                        <div class="form-check"><input class="form-check-input" type="checkbox" id="genNovela" checked><label for="genNovela">Novela</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox" id="genRomantico" checked><label for="genRomantico">Romántico</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox" id="genFantasia" checked><label for="genFantasia">Fantasía</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox" id="genCiencia" checked><label for="genCiencia">Ciencia ficción</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox" id="genMisterio" checked><label for="genMisterio">Misterio / Suspenso</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox" id="genAventura" checked><label for="genAventura">Aventura</label></div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox" id="genHistorico" checked><label for="genHistorico">Histórico</label></div>
+                        <asp:CheckBoxList ID="cblGeneros" runat="server" CssClass="form-check-list">
+                            <asp:ListItem Value="NOVELA">Novela</asp:ListItem>
+                            <asp:ListItem Value="ROMANTICO">Romántico</asp:ListItem>
+                            <asp:ListItem Value="FANTASIA">Fantasía</asp:ListItem>
+                            <asp:ListItem Value="CIENCIA_FICCION">Ciencia ficción</asp:ListItem>
+                            <asp:ListItem Value="MISTERIO_SUSPENSO">Misterio / Suspenso</asp:ListItem>
+                            <asp:ListItem Value="AVENTURA">Aventura</asp:ListItem>
+                            <asp:ListItem Value="HISTORICO">Histórico</asp:ListItem>
+                        </asp:CheckBoxList>
                     </div>
+                    
                     <div>
-                        <button type="button" onclick="button_filtros_clic" class="btn btn-outline-primary">Aplicar Filtros</button>
+                        <asp:Button ID="btnAplicarFiltros" runat="server" Text="Aplicar Filtros" OnClick="btnAplicarFiltros_Click" CssClass="btn btn-outline-primary" />
                     </div>
                 </div>
             </aside>
 
             <!-- ============================================= -->
-            <!-- COLUMNA DERECHA: PRODUCTOS                    -->
+            <!-- COLUMNA 2: PRODUCTOS (col-md-9)               -->
             <!-- ============================================= -->
             <main class="col-md-9">
-                
-
-                <!-- Cuadrícula de productos -->
+                <!-- Fila INTERNA para la cuadrícula de productos y el mensaje -->
                 <div class="row">
                     
-                    <!-- Producto 1 -->
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                        <div class="card h-100 product-card">
-                            <div class="card-img-container">
-                                <a href="Product_detail.aspx?id=1">
-                                    <img class="card-img-top" src="Images/undertale.png" alt="Undertale">
-                                </a>
-                            
-                            <div class="product-actions">
-                                <!-- Botón 1: Agregar al Carrito (Blanco) -->
-                                <a href="Carrito.aspx?accion=agregar&id=7" class="action-btn" title="Agregar al Carrito">
-                                    <!-- Icono SVG de Carrito -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
-                                </a>
-                
-                                <!-- Botón 2: Vista Rápida (Naranja) -->
-                                <a href="#" class="action-btn action-btn-orange" title="Vista Rápida">
-                                    <!-- Icono SVG de Ojo -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"/></svg>
-                                </a>
-                            </div>
+                    <!-- El Repeater que genera las tarjetas de producto -->
+                    <asp:Repeater ID="rptProductos" runat="server">
+                        <ItemTemplate>
+                            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                                <div class="card h-100 product-card">
+                                    <div class="card-img-container">
+                                        <a href='<%# Eval("TipoProducto", "Product_detail.aspx?type={0}&id=") + Eval("Id") %>'>
+                                            <asp:Image runat="server" CssClass="card-img-top" ImageUrl='<%# Eval("UrlImagen") %>' AlternateText='<%# Eval("Nombre") %>' />
+                                        </a>
+                                        <div class="product-actions">
+                                            <%-- Tus botones de acción aquí --%>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href='<%# Eval("TipoProducto", "Product_detail.aspx?type={0}&id=") + Eval("Id") %>'><%# Eval("Nombre") %></a>
+                                        </h5>
+                                        <p class="card-text price"><%# Eval("Precio", "${0:C}") %></p>
+                                    </div>
                                 </div>
-                            <div class="card-body">
-                                <h5 class="card-title"><a href="Product_detail.aspx?id=1">Undertale Art Book</a></h5>
-                                <div class="card-rating">★★★★☆ (738)</div>
-                                <p class="card-text price">$70</p>
                             </div>
-                        </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+
+                    <!-- El Panel para el mensaje de "No hay productos" -->
+                    <div class="col-12">
+                         <asp:Panel ID="pnlNoResults" runat="server" Visible="false" CssClass="text-center mt-5">
+                            <h4>No se encontraron productos con estas características.</h4>
+                            <p>Intenta ajustar tus filtros o selecciona otra categoría.</p>
+                        </asp:Panel>
                     </div>
 
-                    <!-- Producto 2 -->
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                        <div class="card h-100 product-card">
-                             <div class="card-img-container">
-                                <a href="Product_detail.aspx?id=2">
-                                    <img class="card-img-top"  src="Images/libroSISOPS.webp" alt="Libro MOS">
-                                </a>
-                            <div class="product-actions">
-                                <!-- Botón 1: Agregar al Carrito (Blanco) -->
-                                <a href="Carrito.aspx?accion=agregar&id=7" class="action-btn" title="Agregar al Carrito">
-                                    <!-- Icono SVG de Carrito -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
-                                </a>
-                
-                                <!-- Botón 2: Vista Rápida (Naranja) -->
-                                <a href="#" class="action-btn action-btn-orange" title="Vista Rápida">
-                                    <!-- Icono SVG de Ojo -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"/></svg>
-                                </a>
-                            </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title"><a href="Product_detail.aspx?id=2">Libro Modern Operating Systems De Andrew Tanenbaum; Herbert Bos</a></h5>
-                                <div class="card-rating">★★★★☆ (536)</div>
-                                <p class="card-text price">$2,300</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Producto 3 -->
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                         <div class="card h-100 product-card">
-                            <div class="card-img-container">    
-                                <a href="Product_detail.aspx?id=3">
-                                    <img class="card-img-top" src="Images/libroTroll.jpg" alt="Libro Troll">
-                                </a>
-                            <div class="product-actions">
-                                <!-- Botón 1: Agregar al Carrito (Blanco) -->
-                                <a href="Carrito.aspx?accion=agregar&id=7" class="action-btn" title="Agregar al Carrito">
-                                    <!-- Icono SVG de Carrito -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
-                                </a>
-                
-                                <!-- Botón 2: Vista Rápida (Naranja) -->
-                                <a href="#" class="action-btn action-btn-orange" title="Vista Rápida">
-                                    <!-- Icono SVG de Ojo -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"/></svg>
-                                </a>
-                            </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title"><a href="Product_detail.aspx?id=3">Libro Troll</a></h5>
-                                <div class="card-rating">★★★☆☆ (423)</div>
-                                <p class="card-text price">$360</p>
-                            </div>
-                        </div>
-                    </div>
-
-                   
-                    <!-- Producto 4 -->
-                     <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                         <div class="card h-100 product-card">
-                             <div class="card-img-container">
-                                 <a href="Product_detail.aspx?id=4">
-                                     <img class="card-img-top" src="Images/thegreft.png" alt="Libro theGrefg">
-                                 </a>
-                            <div class="product-actions">
-                                <!-- Botón 1: Agregar al Carrito (Blanco) -->
-                                <a href="Carrito.aspx?accion=agregar&id=7" class="action-btn" title="Agregar al Carrito">
-                                    <!-- Icono SVG de Carrito -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
-                                </a>
-                
-                                <!-- Botón 2: Vista Rápida (Naranja) -->
-                                <a href="#" class="action-btn action-btn-orange" title="Vista Rápida">
-                                    <!-- Icono SVG de Ojo -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"/></svg>
-                                </a>
-                             </div>
-                            </div>
-                             <div class="card-body">
-                                 <h5 class="card-title">
-                                     <a href="Product_detail.aspx?id=4">TheGrefg los secretos de Youtube</a>
-                                 </h5>
-                                 <div class="card-rating">★☆☆☆☆ (816)</div>
-                                 <p class="card-text price">$80</p>
-                             </div>
-                         </div>
-                     </div>
-                    <!-- Producto 5 -->
-                     <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                         <div class="card h-100 product-card">
-                             <div class="card-img-container">
-                                 <a href="Product_detail.aspx?id=5"
-                                     ><img class="card-img-top" src="Images/PythnForDummies.webp" alt="python dummies">
-                                 </a>
-                            <div class="product-actions">
-                                <!-- Botón 1: Agregar al Carrito (Blanco) -->
-                                <a href="Carrito.aspx?accion=agregar&id=7" class="action-btn" title="Agregar al Carrito">
-                                    <!-- Icono SVG de Carrito -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
-                                </a>
-                
-                                <!-- Botón 2: Vista Rápida (Naranja) -->
-                                <a href="#" class="action-btn action-btn-orange" title="Vista Rápida">
-                                    <!-- Icono SVG de Ojo -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"/></svg>
-                                </a>
-                             </div>
-                            </div>
-                             <div class="card-body">
-                                 <h5 class="card-title">
-                                 <a href="Product_detail.aspx?id=5">Python for dummies</a>
-                                 </h5><div class="card-rating">★★★★★ (647)</div>
-                                 <p class="card-text price">$1,500</p>
-                             </div></div></div>
-                    <!-- Producto 6 -->
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                        <div class="card h-100 product-card">
-                            <div class="card-img-container">
-                                <span class="product-tag tag-sale">25% OFF</span>
-                                <a href="Product_detail.aspx?id=6">
-                                    <img class="card-img-top" src="Images/diarioGreg.png" alt="diario Greg">
-                                </a>
-                            <div class="product-actions">
-                                <!-- Botón 1: Agregar al Carrito (Blanco) -->
-                                <a href="Carrito.aspx?accion=agregar&id=7" class="action-btn" title="Agregar al Carrito">
-                                    <!-- Icono SVG de Carrito -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
-                                </a>
-                
-                                <!-- Botón 2: Vista Rápida (Naranja) -->
-                                <a href="#" class="action-btn action-btn-orange" title="Vista Rápida">
-                                    <!-- Icono SVG de Ojo -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"/></svg>
-                                </a>
-                            </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <a href="Product_detail.aspx?id=6">Diario de Greg</a>
-                                </h5>
-                                <div class="card-rating">★★★★★ (877)</div>
-                                <p class="card-text price">$1,200</p>
-                            </div></div></div>               
-                </div>
+                </div> <!-- CORRECCIÓN: Este es el cierre de la fila INTERNA de contenido -->
 
                 <!-- PAGINACIÓN -->
                 <nav class="d-flex justify-content-center mt-4">
@@ -282,7 +117,8 @@
                 </nav>
 
             </main>
-        </div>
+          
+        </div> <!-- CORRECCIÓN: Este es el CIERRE CORRECTO del <div class="row"> PRINCIPAL -->
+
     </div>
 </asp:Content>
-
