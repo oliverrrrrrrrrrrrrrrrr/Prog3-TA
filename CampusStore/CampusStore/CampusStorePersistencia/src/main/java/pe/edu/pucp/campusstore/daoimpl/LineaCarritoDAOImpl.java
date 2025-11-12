@@ -111,21 +111,21 @@ public class LineaCarritoDAOImpl extends TransaccionalBaseModeloDAO<LineaCarrito
         modelo.setPrecioConDescuento(rs.getDouble("precioConDescuento"));
         modelo.setSubTotalConDescuento(rs.getDouble("subtotalConDescuento"));
         
-        TipoProducto tipo = TipoProducto.valueOf(rs.getString("tipoProducto"));
+        TipoProducto tipo = TipoProducto.valueOf(rs.getString("tipo"));
         modelo.setTipoProducto(tipo);
         
+        Integer idProducto=rs.getInt("producto");
+        
         if (tipo == TipoProducto.ARTICULO) {
-            Integer idArticulo = rs.getInt("idArticulo");
             if(!rs.wasNull()){
-                modelo.setProducto(new ArticuloDAOImpl().leer(idArticulo));
+                modelo.setProducto(new ArticuloDAOImpl().leer(idProducto));
             }
         } else if (tipo == TipoProducto.LIBRO) {
-            Integer idLibro = rs.getInt("idLibro");
             if(!rs.wasNull()){
-                modelo.setProducto(new LibroDAOImpl().leer(idLibro));
+                modelo.setProducto(new LibroDAOImpl().leer(idProducto));
             }
         }
-        
+
         Integer idCarrito = rs.getInt("CARRITO_idCarrito");
         if(!rs.wasNull()){
             modelo.setCarrito(new CarritoDAOImpl().leer(idCarrito));
