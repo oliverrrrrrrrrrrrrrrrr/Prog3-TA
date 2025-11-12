@@ -1,6 +1,5 @@
 package pe.edu.pucp.campusstore.daoimpl;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +12,6 @@ import pe.edu.pucp.campusstore.dao.FiltroDAO;
 import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.FiltrosProducto;
 import pe.edu.pucp.campusstore.modelo.Libro;
-import pe.edu.pucp.campusstore.modelo.enums.TipoArticulo;
-
 /**
  *
  * @author AXEL
@@ -119,9 +116,9 @@ public class FiltroDAOImpl extends BaseDAO<FiltrosProducto> implements FiltroDAO
     public String generarQueryFiltroLibros(List<Integer> idAutores, 
             List<Integer> idEditoriales, List<String> generos){
         
-        StringBuilder sql = new StringBuilder("SELECT DISTINCT l.* FROM libro l" + 
-                "LEFT JOIN libro_has_autor lha ON l.idlibro = lha.LIBRO_idlibro"+
-                "WHERE 1=1"
+        StringBuilder sql = new StringBuilder("SELECT DISTINCT l.* FROM libro l " + 
+                "LEFT JOIN libro_has_autor lha ON l.idlibro = lha.LIBRO_idlibro "+
+                "WHERE 1=1 "
         );
         
         if(idEditoriales != null && !idEditoriales.isEmpty()){
