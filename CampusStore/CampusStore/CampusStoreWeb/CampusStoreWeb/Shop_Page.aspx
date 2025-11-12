@@ -80,7 +80,9 @@
                         <div class="form-check"><input class="form-check-input" type="checkbox" id="genAventura" checked><label for="genAventura">Aventura</label></div>
                         <div class="form-check"><input class="form-check-input" type="checkbox" id="genHistorico" checked><label for="genHistorico">Histórico</label></div>
                     </div>
-
+                    <div>
+                        <button type="button" onclick="button_filtros_clic" class="btn btn-outline-primary">Aplicar Filtros</button>
+                    </div>
                 </div>
             </aside>
 
