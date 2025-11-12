@@ -22,17 +22,15 @@ import pe.edu.pucp.campusstore.modelo.Libro;
  *
  * @author mibb8
  */
-public class AutorLibroDAOImpl extends TransaccionalBaseModeloDAO<AutoresLibro> implements AutorLibroDAO{
+public class AutorLibroDAOImpl extends TransaccionalBaseModeloDAO<AutoresLibro> implements AutorLibroDAO {
 
     @Override
     protected PreparedStatement comandoCrear(Connection conn, AutoresLibro modelo) throws SQLException {
-        String sql = "{call insertarAutorLibro(?, ?)}";
-        
+        String sql = "{call insertarAutorLibro(?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_idLibro", modelo.getAutor().getIdAutor());
-        cmd.setInt("p_idAutor", modelo.getLibro().getIdLibro());
+        cmd.setInt("p_idLibro", modelo.getLibro().getIdLibro());
+        cmd.setInt("p_idAutor", modelo.getAutor().getIdAutor());
         cmd.registerOutParameter("p_id", Types.INTEGER);
-        
         return cmd;
     }
 
@@ -44,11 +42,11 @@ public class AutorLibroDAOImpl extends TransaccionalBaseModeloDAO<AutoresLibro> 
     @Override
     protected PreparedStatement comandoEliminar(Connection conn, AutoresLibro modelo) throws SQLException {
         String sql = "{call eliminarAutorLibro(?, ?)}";
-        
+
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_idLibro", modelo.getLibro().getIdLibro());
         cmd.setInt("p_idAutor", modelo.getAutor().getIdAutor());
-        
+
         return cmd;
     }
 
@@ -64,16 +62,15 @@ public class AutorLibroDAOImpl extends TransaccionalBaseModeloDAO<AutoresLibro> 
 
     @Override
     protected AutoresLibro mapearModelo(ResultSet rs) throws SQLException {
-        AutoresLibro autoresLibro=new AutoresLibro();
-        Libro libroAux=new Libro();
+        AutoresLibro autoresLibro = new AutoresLibro();
+        Libro libroAux = new Libro();
         libroAux.setIdLibro(rs.getInt("LIBRO_idLibro"));
         autoresLibro.setLibro(libroAux);
-        Autor autorAux=new Autor();
+        Autor autorAux = new Autor();
         autorAux.setIdAutor(rs.getInt("AUTOR_idAutor"));
         autoresLibro.setAutor(autorAux);
-        
+
         return autoresLibro;
     }
-
 
 }

@@ -63,6 +63,7 @@ public class LibroBOImpl implements LibroBO {
                 if (idLibro == null) {
                     throw new RuntimeException("No se pudo crear libro");
                 }
+                libro.setIdLibro(idLibro);
 
                 for (Autor autor : autores) {
                     
