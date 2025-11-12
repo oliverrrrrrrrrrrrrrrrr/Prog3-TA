@@ -4,9 +4,9 @@
  */
 package pe.edu.pucp.campusstore.dao;
 
-import pe.edu.pucp.campusstore.interfaces.dao.Persistible;
+import pe.edu.pucp.campusstore.interfaces.dao.PersistibleTransaccional;
 import pe.edu.pucp.campusstore.modelo.Editorial;
 
-public interface EditorialDAO extends Persistible<Editorial, Integer>{
+public interface EditorialDAO extends PersistibleTransaccional<Editorial, Integer>{
     
 }

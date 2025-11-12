@@ -6,9 +6,11 @@ import java.util.List;
 import pe.edu.pucp.campusstore.bo.LibroBO;
 import pe.edu.pucp.campusstore.dao.AutorDAO;
 import pe.edu.pucp.campusstore.dao.AutorLibroDAO;
+import pe.edu.pucp.campusstore.dao.EditorialDAO;
 import pe.edu.pucp.campusstore.dao.LibroDAO;
 import pe.edu.pucp.campusstore.daoimpl.AutorDAOImpl;
 import pe.edu.pucp.campusstore.daoimpl.AutorLibroDAOImpl;
+import pe.edu.pucp.campusstore.daoimpl.EditorialDAOImpl;
 import pe.edu.pucp.campusstore.daoimpl.LibroDAOImpl;
 import pe.edu.pucp.campusstore.db.DBFactoryProvider;
 import pe.edu.pucp.campusstore.db.DBManager;
@@ -21,11 +23,13 @@ public class LibroBOImpl implements LibroBO {
 
     private final LibroDAO libroDAO;
     private final AutorDAO autorDAO;
+    private final EditorialDAO editorialDAO;
     private final AutorLibroDAO autorLibroDAO;
 
     public LibroBOImpl() {
         this.libroDAO = new LibroDAOImpl();
         this.autorDAO = new AutorDAOImpl();
+        this.editorialDAO = new EditorialDAOImpl();
         this.autorLibroDAO = new AutorLibroDAOImpl();
     }
 
@@ -59,6 +63,8 @@ public class LibroBOImpl implements LibroBO {
         try (Connection conn = dbManager.getConnection()) {
             conn.setAutoCommit(false); // Iniciar transacción
             try {
+                Integer idEditorial=this.editorialDAO.crear(libro.getEditorial(), conn);
+                libro.getEditorial().setIdEditorial(idEditorial);
                 Integer idLibro = libroDAO.crear(libro, conn); // INSERT libro
                 if (idLibro == null) {
                     throw new RuntimeException("No se pudo crear libro");

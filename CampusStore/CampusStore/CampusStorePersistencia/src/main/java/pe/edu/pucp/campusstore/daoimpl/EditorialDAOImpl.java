@@ -1,6 +1,5 @@
 package pe.edu.pucp.campusstore.daoimpl;
 
-import pe.edu.pucp.campusstore.bases.dao.BaseDAO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,10 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import pe.edu.pucp.campusstore.bases.dao.TransaccionalBaseDAO;
 import pe.edu.pucp.campusstore.dao.EditorialDAO;
 import pe.edu.pucp.campusstore.modelo.Editorial;
 
-public class EditorialDAOImpl extends BaseDAO<Editorial> implements EditorialDAO {
+public class EditorialDAOImpl extends TransaccionalBaseDAO<Editorial> implements EditorialDAO {
          @Override
     protected PreparedStatement comandoCrear(Connection conn, 
             Editorial modelo) throws SQLException {
