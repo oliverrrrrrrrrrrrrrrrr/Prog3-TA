@@ -70,7 +70,7 @@ namespace CampusStoreWeb
 
         protected void btnAgregarArticulo_Click(object sender, EventArgs e)
         {
-            Response.Redirect("GestionarArticulos.aspx");
+            Response.Redirect("AgregarArticulo.aspx");
         }
 
     }
