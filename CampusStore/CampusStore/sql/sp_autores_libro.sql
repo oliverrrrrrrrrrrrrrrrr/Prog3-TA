@@ -10,17 +10,11 @@ USE `libreria`//
 CREATE PROCEDURE `insertarAutorLibro`(
     IN p_idLibro INT,
     IN p_idAutor INT,
-	IN p_id INT
+    OUT p_id INT
 )
 BEGIN
-    INSERT INTO libro_has_autor (
-        LIBRO_idLibro,
-        AUTOR_idAutor
-    ) VALUES (
-        p_idLibro,
-        p_idAutor
-    );
-    
+    INSERT INTO libro_has_autor (LIBRO_idLibro, AUTOR_idAutor)
+    VALUES (p_idLibro, p_idAutor);
     SET p_id = 1;
 END//
 
