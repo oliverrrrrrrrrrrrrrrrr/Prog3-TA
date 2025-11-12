@@ -67,7 +67,7 @@ namespace CampusStoreWeb
 
         protected void btnAgregarLibro_Click(object sender, EventArgs e)
         {
-            Response.Redirect("GestionarLibros.aspx");
+            Response.Redirect("AgregarLibro.aspx");
         }
     }
 }

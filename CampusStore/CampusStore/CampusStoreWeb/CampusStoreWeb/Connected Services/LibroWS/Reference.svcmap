@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="4e4d8116-5589-4a75-98b8-10b921259998" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="bd40afda-d86a-4926-b23f-be88c55c6db4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -9,7 +9,9 @@
     <GenerateInternalTypes>false</GenerateInternalTypes>
     <GenerateMessageContracts>false</GenerateMessageContracts>
     <NamespaceMappings />
-    <CollectionMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
     <UseSerializerForFaults>true</UseSerializerForFaults>
@@ -22,8 +24,8 @@
     <MetadataSource Address="http://localhost:8080/CampusStoreWS/LibroWS?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="LibroWS.wsdl" MetadataType="Wsdl" ID="07b5d1f2-265d-4514-b600-5582846b80b4" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/LibroWS?wsdl" />
-    <MetadataFile FileName="LibroWS.xsd" MetadataType="Schema" ID="d76d8ba5-6d36-44ce-aba0-d96e8a159cb8" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/LibroWS?xsd=1" />
+    <MetadataFile FileName="LibroWS.wsdl" MetadataType="Wsdl" ID="ee7b58ab-d92f-4ff5-95df-ce0aff42ffa0" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/LibroWS?wsdl" />
+    <MetadataFile FileName="LibroWS.xsd" MetadataType="Schema" ID="36646458-1dfb-46d1-b2bb-445c5066fbd2" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/LibroWS?xsd=1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
