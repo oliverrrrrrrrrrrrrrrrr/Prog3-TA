@@ -117,3 +117,57 @@ BEGIN
 END//
 
 DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- procedure insertarEditorialSiNoExiste
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP PROCEDURE IF EXISTS `insertarEditorialSiNoExiste`;
+DELIMITER //
+
+CREATE PROCEDURE `insertarEditorialSiNoExiste`(
+    IN p_nombre VARCHAR(100),
+    IN p_direccion VARCHAR(255),
+    IN p_telefono VARCHAR(20),
+    IN p_cif VARCHAR(20),
+    IN p_email VARCHAR(100),
+    IN p_sitioWeb VARCHAR(100),
+    OUT p_id INT
+)
+BEGIN
+    DECLARE v_idExistente INT;
+
+    -- Buscar si ya existe una editorial con los mismos datos
+    SELECT idEditorial INTO v_idExistente
+    FROM editorial
+    WHERE cif = p_cif
+    LIMIT 1;
+
+    -- Si existe, devolver su id
+    IF v_idExistente IS NOT NULL THEN
+        SET p_id = v_idExistente;
+    ELSE
+        -- Si no existe, insertar nueva editorial
+        INSERT INTO editorial (
+            nombre,
+            direccion,
+            telefono,
+            cif,
+            email,
+            sitioWeb
+        ) VALUES (
+            p_nombre,
+            p_direccion,
+            p_telefono,
+            p_cif,
+            p_email,
+            p_sitioWeb
+        );
+
+        -- Devolver el id generado
+        SET p_id = LAST_INSERT_ID();
+    END IF;
+END//
+DELIMITER ;
