@@ -14,7 +14,7 @@ namespace CampusStoreWeb
         {
             FormsAuthentication.SignOut();
             Session.Clear();
-            Response.Redirect("Login.aspx");
+            Response.Redirect("SignIn.aspx");
         }
     }
 }

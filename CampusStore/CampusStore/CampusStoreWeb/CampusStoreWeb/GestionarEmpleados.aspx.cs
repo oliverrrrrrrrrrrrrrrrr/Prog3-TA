@@ -17,7 +17,13 @@ namespace CampusStoreWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Verificar que sea Admin
+            bool isAdmin = Session["IsAdmin"] != null && (bool)Session["IsAdmin"];
+            if (!isAdmin)
+            {
+                Response.Redirect("Catalogo.aspx");
+                return;
+            }
         }
 
         protected void Page_Init(object sender, EventArgs e)
