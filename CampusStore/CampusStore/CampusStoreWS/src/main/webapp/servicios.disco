@@ -2,4 +2,5 @@
     <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/CampusStoreWS/LibroWS?wsdl"/>
     <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/CampusStoreWS/ArticuloWS?wsdl"/>
 	<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/CampusStoreWS/ClienteWS?wsdl"/>
+	<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/CampusStoreWS/FiltroWS?wsdl"/>
 </discovery>

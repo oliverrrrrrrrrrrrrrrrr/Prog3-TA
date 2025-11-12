@@ -188,9 +188,27 @@
     <None Include="Connected Services\EmpleadoWS\EmpleadoWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Connected Services\FiltroWS\CampusStoreWeb.FiltroWS.articulo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\FiltroWS\CampusStoreWeb.FiltroWS.filtrarLibrosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\FiltroWS\CampusStoreWeb.FiltroWS.filtrarPorTipoArticuloResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\FiltroWS\CampusStoreWeb.FiltroWS.libro.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\LibroWS\configuration91.svcinfo" />
     <None Include="Connected Services\LibroWS\configuration.svcinfo" />
     <None Include="Connected Services\LibroWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\FiltroWS\configuration91.svcinfo" />
+    <None Include="Connected Services\FiltroWS\configuration.svcinfo" />
+    <None Include="Connected Services\FiltroWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -265,6 +283,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\LibroWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\FiltroWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -401,7 +424,6 @@
     </Compile>
     <Compile Include="Shop_Page.aspx.cs">
       <DependentUpon>Shop_Page.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Shop_Page.aspx.designer.cs">
       <DependentUpon>Shop_Page.aspx</DependentUpon>
@@ -460,6 +482,10 @@
     <None Include="Connected Services\LibroWS\LibroWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\FiltroWS\FiltroWS.wsdl" />
+    <None Include="Connected Services\FiltroWS\FiltroWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <None Include="Web.Debug.config">
@@ -482,6 +508,7 @@
     <WCFMetadataStorage Include="Connected Services\DescuentoWS\" />
     <WCFMetadataStorage Include="Connected Services\EmpleadoWS\" />
     <WCFMetadataStorage Include="Connected Services\LibroWS\" />
+    <WCFMetadataStorage Include="Connected Services\FiltroWS\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
