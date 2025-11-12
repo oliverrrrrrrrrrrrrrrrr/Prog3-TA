@@ -171,9 +171,9 @@
                     
                     <!-- Encabezados de la tabla -->
                     <div class="cart-header d-none d-md-flex">
-                        <div class="header-product">PRODUCTS</div>
-                        <div class="header-price">PRICE</div>
-                        <div class="header-quantity">QUANTITY</div>
+                        <div class="header-product">PRODUCTOS</div>
+                        <div class="header-price">PRECIO</div>
+                        <div class="header-quantity">CANTIDAD</div>
                         <div class="header-subtotal">SUB-TOTAL</div>
                     </div>
 
@@ -190,12 +190,12 @@
                                     </div>
                                 </div>
                                 <!-- Columna de Precio -->
-                                <div class="cart-price" data-title="Price">
+                                <div class="cart-price" data-title="Precio">
                                     <span class="old-price"><%# Eval("OldPrice", "${0:0.00}") %></span>
                                     <span class="current-price"><%# Eval("CurrentPrice", "${0:0.00}") %></span>
                                 </div>
                                 <!-- Columna de Cantidad -->
-                                <div class="cart-quantity" data-title="Quantity">
+                                <div class="cart-quantity" data-title="Cantidad">
                                     <div class="quantity-selector">
                                         <button type="button" class="btn-qty btn-qty-minus">-</button>
                                         <input type="text" value='<%# Eval("Quantity") %>' readonly />
@@ -228,22 +228,22 @@
                         <span>$95.00</span>
                     </div>
                     <div class="summary-item">
-                        <span>Shipping</span>
-                        <span>Free</span>
+                        <span>Envío</span>
+                        <span>Gratis</span>
                     </div>
                     <div class="summary-item">
-                        <span>Discount</span>
+                        <span>Descuento</span>
                         <span>$29.00</span>
                     </div>
                      <div class="summary-item">
-                        <span>Tax</span>
+                        <span>Impuesto</span>
                         <span>$17.10</span>
                     </div>
                     <div class="summary-total">
                         <span>Total</span>
                         <span>$112.10 USD</span>
                     </div>
-                    <a href="Checkout.aspx" class="btn btn-proceed">PROCEED TO CHECKOUT <i class="arrow-right"></i></a>
+                    <a href="Checkout.aspx" class="btn btn-proceed">PROCEDER AL PAGO <i class="arrow-right"></i></a>
                 </div>
 
                 <!-- Caja de Cupón -->

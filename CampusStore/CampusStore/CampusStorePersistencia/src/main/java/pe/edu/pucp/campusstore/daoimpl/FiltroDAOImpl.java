@@ -67,9 +67,19 @@ public class FiltroDAOImpl extends BaseDAO<FiltrosProducto> implements FiltroDAO
     }
     protected PreparedStatement comandoFiltrarArticulo(Connection conn,
             String tipoArticulo) throws SQLException{
-        String sql = "SELECT * FROM articulo WHERE tipoArticulo = ?";
-        PreparedStatement cmd = conn.prepareStatement(sql);
-        cmd.setString(1,tipoArticulo);
+        // Si el tipo es "articulo", devolver todos los artículos sin filtrar por tipo
+        String sql;
+        PreparedStatement cmd;
+        
+        if ("articulo".equalsIgnoreCase(tipoArticulo)) {
+            sql = "SELECT * FROM articulo";
+            cmd = conn.prepareStatement(sql);
+        } else {
+            sql = "SELECT * FROM articulo WHERE tipoArticulo = ?";
+            cmd = conn.prepareStatement(sql);
+            cmd.setString(1, tipoArticulo);
+        }
+        
         return cmd;
     }
 

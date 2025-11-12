@@ -215,29 +215,29 @@
     <section class="category-section mb-5">
         <h2>Compra por categorías</h2>
         <div class="category-grid">
-            <asp:HyperLink runat="server" NavigateUrl="~/Productos.aspx?categoria=mochilas" CssClass="category-item">
-                <asp:Image runat="server" ImageUrl="~/Images/mochila.png" AlternateText="Mochilas" />
-                <p>Mochilas</p>
-            </asp:HyperLink>
-            <asp:HyperLink runat="server" NavigateUrl="~/Productos.aspx?categoria=cuadernos" CssClass="category-item">
-                <asp:Image runat="server" ImageUrl="~/Images/cuaderno.png" AlternateText="Cuadernos" />
-                <p>Cuadernos</p>
-            </asp:HyperLink>
-            <asp:HyperLink runat="server" NavigateUrl="~/Productos.aspx?categoria=tomatodos" CssClass="category-item">
-                <asp:Image runat="server" ImageUrl="~/Images/tomatodo.png" AlternateText="Tomatodos" />
-                <p>Tomatodos</p>
-            </asp:HyperLink>
-            <asp:HyperLink runat="server" NavigateUrl="~/Productos.aspx?categoria=peluches" CssClass="category-item">
-                <asp:Image runat="server" ImageUrl="~/Images/peluche.png" AlternateText="Peluches" />
-                <p>Peluches</p>
-            </asp:HyperLink>
-            <asp:HyperLink runat="server" NavigateUrl="~/Productos.aspx?categoria=libros" CssClass="category-item">
+            <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=libro" CssClass="category-item">
                 <asp:Image runat="server" ImageUrl="~/Images/libros.png" AlternateText="Libros" />
                 <p>Libros</p>
             </asp:HyperLink>
-            <asp:HyperLink runat="server" NavigateUrl="~/Productos.aspx?categoria=utiles" CssClass="category-item">
-                <asp:Image runat="server" ImageUrl="~/Images/utiles.png" AlternateText="Útiles" />
-                <p>Útiles</p>
+            <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=articulo" CssClass="category-item">
+                <asp:Image runat="server" ImageUrl="~/Images/utiles.png" AlternateText="Todos los artículos" />
+                <p>Todos los artículos</p>
+            </asp:HyperLink>
+            <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=LAPICERO" CssClass="category-item">
+                <asp:Image runat="server" ImageUrl="~/Images/lapiceros_faber.png" AlternateText="Lapiceros" />
+                <p>Lapiceros</p>
+            </asp:HyperLink>
+            <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=CUADERNO" CssClass="category-item">
+                <asp:Image runat="server" ImageUrl="~/Images/cuaderno.png" AlternateText="Cuadernos" />
+                <p>Cuadernos</p>
+            </asp:HyperLink>
+            <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=PELUCHE" CssClass="category-item">
+                <asp:Image runat="server" ImageUrl="~/Images/peluche.png" AlternateText="Peluches" />
+                <p>Peluches</p>
+            </asp:HyperLink>
+            <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=TOMATODO" CssClass="category-item">
+                <asp:Image runat="server" ImageUrl="~/Images/tomatodo.png" AlternateText="Tomatodos" />
+                <p>Tomatodos</p>
             </asp:HyperLink>
         </div>
     </section>
@@ -256,7 +256,7 @@
                         <span>La oferta acaba en:</span>
                         <span class="countdown-timer">24 de dic, 11:59PM</span>
                     </div>
-                    <asp:HyperLink runat="server" NavigateUrl="~/Ofertas.aspx" CssClass="btn-promo">COMPRAR AHORA <i class="bi bi-arrow-right"></i></asp:HyperLink>
+                    <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx" CssClass="btn-promo">COMPRAR AHORA <i class="bi bi-arrow-right"></i></asp:HyperLink>
                     <asp:Image runat="server" ImageUrl="~/Images/gadgets.png" CssClass="banner-image" AlternateText="Artículos de tecnología en oferta"/>
                 </aside>
             </div>
@@ -268,155 +268,40 @@
                         <h2 class="h3 mb-0">Productos destacados</h2>
                         <nav class="product-filters">
                             <ul>
-                                <li><asp:HyperLink runat="server" NavigateUrl="~/" CssClass="active">Todos</asp:HyperLink></li>
-                                <li><asp:HyperLink runat="server" NavigateUrl="~/Libros.aspx">Libros</asp:HyperLink></li>
-                                <li><asp:HyperLink runat="server" NavigateUrl="~/Tomatodos.aspx">Tomatodos</asp:HyperLink></li>
-                                <li><asp:HyperLink runat="server" NavigateUrl="~/Utiles.aspx">Útiles</asp:HyperLink></li>
-                                <li><asp:HyperLink runat="server" NavigateUrl="~/Peluches.aspx">Peluches</asp:HyperLink></li>
+                                <li><asp:LinkButton ID="lnkFiltroTodos" runat="server" OnClick="FiltrarProductos_Click" CommandArgument="articulo" CssClass="active">Todos</asp:LinkButton></li>
+                                <li><asp:LinkButton ID="lnkFiltroLibros" runat="server" OnClick="FiltrarProductos_Click" CommandArgument="libro">Libros</asp:LinkButton></li>
+                                <li><asp:LinkButton ID="lnkFiltroLapiceros" runat="server" OnClick="FiltrarProductos_Click" CommandArgument="LAPICERO">Lapiceros</asp:LinkButton></li>
+                                <li><asp:LinkButton ID="lnkFiltroCuadernos" runat="server" OnClick="FiltrarProductos_Click" CommandArgument="CUADERNO">Cuadernos</asp:LinkButton></li>
+                                <li><asp:LinkButton ID="lnkFiltroPeluches" runat="server" OnClick="FiltrarProductos_Click" CommandArgument="PELUCHE">Peluches</asp:LinkButton></li>
+                                <li><asp:LinkButton ID="lnkFiltroTomatodos" runat="server" OnClick="FiltrarProductos_Click" CommandArgument="TOMATODO">Tomatodos</asp:LinkButton></li>
                             </ul>
                         </nav>
                     </div>
 
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                        <!-- Producto 1 -->
-                        <div class="col">
-                            <div class="product-card">
-                                <div class="product-image-container">
-                                    <asp:Image runat="server" ImageUrl="~/Images/peluche_hollow.png" AlternateText="Peluche Hollow Knight" />
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-rating">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                        <span class="rating-count">(738)</span>
+                        <asp:Repeater ID="rptProductosDestacados" runat="server">
+                            <ItemTemplate>
+                                <div class="col">
+                                    <div class="product-card">
+                                        <div class="product-image-container">
+                                            <asp:Image runat="server" ImageUrl='<%# Eval("UrlImagen") %>' AlternateText='<%# Eval("Nombre") %>' />
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-rating">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-half"></i>
+                                                <span class="rating-count">(<%# GetRandomReviews() %>)</span>
+                                            </div>
+                                            <p class="product-title"><%# Eval("Nombre") %></p>
+                                            <p class="product-price">$<%# Eval("Precio", "{0:F2}") %></p>
+                                        </div>
                                     </div>
-                                    <p class="product-title">Peluche de Caballero - Hollow Knight</p>
-                                    <p class="product-price">$70</p>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Producto 2 -->
-                        <div class="col">
-                            <div class="product-card">
-                                <div class="product-image-container">
-                                    <asp:Image runat="server" ImageUrl="~/Images/lapiceros_faber.png" AlternateText="Lapiceros Faber-Castell" />
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-rating">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
-                                        <span class="rating-count">(536)</span>
-                                    </div>
-                                    <p class="product-title">Lapiceros FABER-CASTELL Trilux 032 Caja 12u</p>
-                                    <p class="product-price">$5</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Producto 3 -->
-                        <div class="col">
-                            <div class="product-card">
-                                <div class="product-image-container">
-                                    <asp:Image runat="server" ImageUrl="~/Images/libro_coquito.png" AlternateText="Libro Coquito" />
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-rating">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
-                                        <span class="rating-count">(423)</span>
-                                    </div>
-                                    <p class="product-title">Libro Coquito</p>
-                                    <p class="product-price">$25</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Producto 4 -->
-                        <div class="col">
-                            <div class="product-card">
-                                <div class="product-image-container">
-                                    <asp:Image runat="server" ImageUrl="~/Images/tomatodo_bluey.png" AlternateText="Tomatodo Bluey" />
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-rating">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i><i class="bi bi-star"></i>
-                                        <span class="rating-count">(816)</span>
-                                    </div>
-                                    <p class="product-title">Tomatodo Infantil Ecozen Bluey 580 ml</p>
-                                    <p class="product-price">$10</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Producto 5 -->
-                        <div class="col">
-                            <div class="product-card">
-                                <div class="product-image-container">
-                                    <asp:Image runat="server" ImageUrl="~/Images/diario_hollow.png" AlternateText="Diario del Cazador" />
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-rating">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
-                                        <span class="rating-count">(647)</span>
-                                    </div>
-                                    <p class="product-title">Diario del Cazador Hollow Knight - Edición Coleccionable</p>
-                                    <p class="product-price">$60</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Producto 6 -->
-                        <div class="col">
-                            <div class="product-card">
-                                <span class="discount-badge">25% OFF</span>
-                                <div class="product-image-container">
-                                    <asp:Image runat="server" ImageUrl="~/Images/mochila_laptop.png" AlternateText="Mochila Porta Laptop" />
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-rating">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i><i class="bi bi-star"></i>
-                                        <span class="rating-count">(877)</span>
-                                    </div>
-                                    <p class="product-title">Mochila Porta Laptop Truper</p>
-                                    <p class="product-price">
-                                        <span class="original-price">$60</span>$45
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Producto 7 -->
-                        <div class="col">
-                            <div class="product-card">
-                                <div class="product-image-container">
-                                    <asp:Image runat="server" ImageUrl="~/Images/undertale_artbook.png" AlternateText="Undertale Art Book" />
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-rating">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
-                                        <span class="rating-count">(426)</span>
-                                    </div>
-                                    <p class="product-title">Undertale Art Book</p>
-                                    <p class="product-price">$250</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Producto 8 -->
-                        <div class="col">
-                            <div class="product-card">
-                                <div class="product-image-container">
-                                    <asp:Image runat="server" ImageUrl="~/Images/peluche_ralsei.png" AlternateText="Peluche Ralsei" />
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-rating">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                        <span class="rating-count">(583)</span>
-                                    </div>
-                                    <p class="product-title">Peluche de Ralsei - Deltarune</p>
-                                    <p class="product-price">$32</p>
-                                </div>
-                            </div>
-                        </div>
-
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
                 </div>
             </div>

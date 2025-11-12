@@ -1,5 +1,64 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Shop_Page.aspx.cs" Inherits="CampusStoreWeb.Shop_Page" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+        function validarFiltrosCliente() {
+            // Obtener la categoría seleccionada
+            var categoriaSeleccionada = '';
+            var radioButtons = document.querySelectorAll('input[type="radio"][name*="rblCategorias"]');
+            for (var i = 0; i < radioButtons.length; i++) {
+                if (radioButtons[i].checked) {
+                    categoriaSeleccionada = radioButtons[i].value;
+                    break;
+                }
+            }
+            
+            // Si NO es libro, verificar que no haya filtros de libro seleccionados
+            if (categoriaSeleccionada !== 'libro') {
+                var hayFiltrosLibro = false;
+                
+                // Verificar Editoriales
+                var checkboxesEditoriales = document.querySelectorAll('input[type="checkbox"][name*="cblEditoriales"]');
+                for (var i = 0; i < checkboxesEditoriales.length; i++) {
+                    if (checkboxesEditoriales[i].checked) {
+                        hayFiltrosLibro = true;
+                        break;
+                    }
+                }
+                
+                // Verificar Autores
+                if (!hayFiltrosLibro) {
+                    var checkboxesAutores = document.querySelectorAll('input[type="checkbox"][name*="cblAutores"]');
+                    for (var i = 0; i < checkboxesAutores.length; i++) {
+                        if (checkboxesAutores[i].checked) {
+                            hayFiltrosLibro = true;
+                            break;
+                        }
+                    }
+                }
+                
+                // Verificar Géneros
+                if (!hayFiltrosLibro) {
+                    var checkboxesGeneros = document.querySelectorAll('input[type="checkbox"][name*="cblGeneros"]');
+                    for (var i = 0; i < checkboxesGeneros.length; i++) {
+                        if (checkboxesGeneros[i].checked) {
+                            hayFiltrosLibro = true;
+                            break;
+                        }
+                    }
+                }
+                
+                if (hayFiltrosLibro) {
+                    alert('⚠️ No puedes aplicar filtros de LIBROS (Editorial, Autor o Género) cuando la categoría seleccionada no es "Libros".\n\n' +
+                          'Por favor:\n' +
+                          '• Selecciona la categoría "Libros", o\n' +
+                          '• Desmarca los filtros de Editorial, Autor y Género.');
+                    return false; // Prevenir el postback
+                }
+            }
+            
+            return true; // Permitir el postback
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
@@ -20,10 +79,11 @@
                         <h4>CATEGORÍAS</h4>
                         <asp:RadioButtonList ID="rblCategorias" runat="server" CssClass="form-check-list" RepeatLayout="Flow">
                             <asp:ListItem Value="libro" Text="Libros" Selected="True"></asp:ListItem>
-                            <asp:ListItem Value="articulo" Text="Artículos"></asp:ListItem>
-                            <asp:ListItem Value="peluche" Text="Peluches"></asp:ListItem>
-                            <asp:ListItem Value="tomatodo" Text="Tomatodos"></asp:ListItem>
-                            <asp:ListItem Value="util" Text="Utiles"></asp:ListItem>
+                            <asp:ListItem Value="articulo" Text="Todos los artículos"></asp:ListItem>
+                            <asp:ListItem Value="LAPICERO" Text="Lapiceros"></asp:ListItem>
+                            <asp:ListItem Value="CUADERNO" Text="Cuadernos"></asp:ListItem>
+                            <asp:ListItem Value="PELUCHE" Text="Peluches"></asp:ListItem>
+                            <asp:ListItem Value="TOMATODO" Text="Tomatodos"></asp:ListItem>
                         </asp:RadioButtonList>
                     </div>
 
@@ -42,7 +102,7 @@
                     <div class="filter-section">
                         <h4>AUTORES</h4>
                         <asp:CheckBoxList ID="cblAutores" runat="server" CssClass="form-check-list">
-                            <asp:ListItem Value="1">Gaston Acurio</asp:ListItem>
+                            <asp:ListItem Value="59">Gaston Acurio</asp:ListItem>
                         </asp:CheckBoxList>
                     </div>
 
@@ -51,17 +111,19 @@
                         <h4>GÉNERO LIBRO</h4>
                         <asp:CheckBoxList ID="cblGeneros" runat="server" CssClass="form-check-list">
                             <asp:ListItem Value="NOVELA">Novela</asp:ListItem>
-                            <asp:ListItem Value="ROMANTICO">Romántico</asp:ListItem>
+                            <asp:ListItem Value="NARRATIVO">Narrativo</asp:ListItem>
+                            <asp:ListItem Value="DRAMA">Drama</asp:ListItem>
                             <asp:ListItem Value="FANTASIA">Fantasía</asp:ListItem>
-                            <asp:ListItem Value="CIENCIA_FICCION">Ciencia ficción</asp:ListItem>
-                            <asp:ListItem Value="MISTERIO_SUSPENSO">Misterio / Suspenso</asp:ListItem>
                             <asp:ListItem Value="AVENTURA">Aventura</asp:ListItem>
-                            <asp:ListItem Value="HISTORICO">Histórico</asp:ListItem>
+                            <asp:ListItem Value="CIENCIA_FICCION">Ciencia ficción</asp:ListItem>
                         </asp:CheckBoxList>
                     </div>
                     
                     <div>
-                        <asp:Button ID="btnAplicarFiltros" runat="server" Text="Aplicar Filtros" OnClick="btnAplicarFiltros_Click" CssClass="btn btn-outline-primary" />
+                        <asp:Button ID="btnAplicarFiltros" runat="server" Text="Aplicar Filtros" 
+                                    OnClick="btnAplicarFiltros_Click" 
+                                    OnClientClick="return validarFiltrosCliente();"
+                                    CssClass="btn btn-outline-primary" />
                     </div>
                 </div>
             </aside>

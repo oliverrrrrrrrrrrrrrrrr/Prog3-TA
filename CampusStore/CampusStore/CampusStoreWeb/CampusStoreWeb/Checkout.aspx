@@ -1,4 +1,4 @@
-<%@ Page Title="Checkout" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Checkout.aspx.cs" Inherits="CampusStoreWeb.Checkout" %>
+<%@ Page Title="Finalizar Compra" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Checkout.aspx.cs" Inherits="CampusStoreWeb.Checkout" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -261,8 +261,8 @@
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="Shop_Page.aspx"><i class="bi bi-house-door"></i> Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Order Detail Buyout</li>
+            <li class="breadcrumb-item"><a href="Shop_Page.aspx"><i class="bi bi-house-door"></i> Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detalle del Pedido</li>
         </ol>
     </nav>
 
@@ -276,7 +276,7 @@
                         <a href="Shopping_Car.aspx" class="back-button">
                             <i class="bi bi-arrow-left"></i>
                         </a>
-                        <h4>ORDER DETAILS</h4>
+                        <h4>DETALLES DEL PEDIDO</h4>
                     </div>
 
                     <!-- Order Summary -->
@@ -286,10 +286,10 @@
                                 <asp:Label ID="lblOrderId" runat="server" Text="#96459761"></asp:Label>
                             </div>
                             <div class="order-info">
-                                <asp:Label ID="lblProductCount" runat="server" Text="2 Products"></asp:Label>
+                                <asp:Label ID="lblProductCount" runat="server" Text="2 Productos"></asp:Label>
                                 <span> • </span>
-                                Order Placed in 
-                                <asp:Label ID="lblOrderDate" runat="server" Text="17 Jan, 2021 at 7:32 PM"></asp:Label>
+                                Pedido realizado el 
+                                <asp:Label ID="lblOrderDate" runat="server" Text="17 Ene, 2021 a las 7:32 PM"></asp:Label>
                             </div>
                         </div>
                         <div class="order-summary-right">
@@ -301,16 +301,16 @@
 
                     <!-- Products Header -->
                     <div class="products-header">
-                        <h5>Product <span class="product-count">(<asp:Label ID="lblProductCountHeader" runat="server" Text="02"></asp:Label>)</span></h5>
+                        <h5>Productos <span class="product-count">(<asp:Label ID="lblProductCountHeader" runat="server" Text="02"></asp:Label>)</span></h5>
                     </div>
 
                     <!-- Products Table -->
                     <table class="table table-custom">
                         <thead>
                             <tr>
-                                <th>PRODUCTS</th>
-                                <th>PRICE</th>
-                                <th>QUANTITY</th>
+                                <th>PRODUCTOS</th>
+                                <th>PRECIO</th>
+                                <th>CANTIDAD</th>
                                 <th>SUB-TOTAL</th>
                                 <th></th>
                             </tr>

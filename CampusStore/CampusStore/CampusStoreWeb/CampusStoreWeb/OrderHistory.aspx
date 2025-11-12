@@ -1,4 +1,4 @@
-<%@ Page Title="Order History" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OrderHistory.aspx.cs" Inherits="CampusStoreWeb.OrderHistory" %>
+<%@ Page Title="Historial de Pedidos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OrderHistory.aspx.cs" Inherits="CampusStoreWeb.OrderHistory" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -183,9 +183,9 @@
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="Default.aspx"><i class="bi bi-house-door"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="Settings.aspx">User Account</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Order History</li>
+            <li class="breadcrumb-item"><a href="Default.aspx"><i class="bi bi-house-door"></i> Inicio</a></li>
+            <li class="breadcrumb-item"><a href="Settings.aspx">Cuenta de Usuario</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Historial de Pedidos</li>
         </ol>
     </nav>
 
@@ -196,19 +196,19 @@
                 <div class="sidebar-menu">
                     <a href="OrderHistory.aspx" class="sidebar-menu-item active">
                         <i class="bi bi-box-seam"></i>
-                        Order History
+                        Historial de Pedidos
                     </a>
-                    <a href="#" class="sidebar-menu-item">
+                    <a href="Shopping_Car.aspx" class="sidebar-menu-item">
                         <i class="bi bi-cart3"></i>
-                        Shopping Cart
+                        Carrito de Compras
                     </a>
                     <a href="Settings.aspx" class="sidebar-menu-item">
                         <i class="bi bi-gear"></i>
-                        Setting
+                        Configuración
                     </a>
-                    <a href="#" class="sidebar-menu-item">
+                    <a href="LogOut.aspx" class="sidebar-menu-item">
                         <i class="bi bi-box-arrow-right"></i>
-                        Log-out
+                        Cerrar Sesión
                     </a>
                 </div>
             </aside>
@@ -217,17 +217,17 @@
             <main class="col-md-9">
                 <div class="order-table">
                     <div class="order-table-header">
-                        <h4>ORDER HISTORY</h4>
+                        <h4>HISTORIAL DE PEDIDOS</h4>
                     </div>
 
                     <table class="table table-custom">
                         <thead>
                             <tr>
-                                <th>ORDER ID</th>
-                                <th>STATUS</th>
-                                <th>DATE</th>
+                                <th>ID PEDIDO</th>
+                                <th>ESTADO</th>
+                                <th>FECHA</th>
                                 <th>TOTAL</th>
-                                <th>ACTION</th>
+                                <th>ACCIÓN</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -244,7 +244,7 @@
                                         <td><strong><%# Eval("TotalFormatted") %></strong></td>
                                         <td>
                                             <a href='OrderDetails.aspx?id=<%# Eval("OrderId") %>' class="btn-view-details">
-                                                View Details <i class="bi bi-arrow-right"></i>
+                                                Ver Detalles <i class="bi bi-arrow-right"></i>
                                             </a>
                                         </td>
                                     </tr>

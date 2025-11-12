@@ -29,6 +29,19 @@ namespace CampusStoreWeb
         {
             if (!IsPostBack)
             {
+                // Verificar si viene una categoría desde la QueryString
+                string categoriaURL = Request.QueryString["categoria"];
+                if (!string.IsNullOrEmpty(categoriaURL))
+                {
+                    // Pre-seleccionar la categoría recibida
+                    ListItem item = rblCategorias.Items.FindByValue(categoriaURL);
+                    if (item != null)
+                    {
+                        rblCategorias.ClearSelection();
+                        item.Selected = true;
+                    }
+                }
+
                 // La primera vez que carga la página, mostramos los productos iniciales
                 CargarProductos();
             }
@@ -36,6 +49,12 @@ namespace CampusStoreWeb
 
         protected void btnAplicarFiltros_Click(object sender, EventArgs e)
         {
+            // Validar que los filtros de libro solo se usen con la categoría "Libros"
+            if (!ValidarFiltros())
+            {
+                return; // Si la validación falla, no continuar
+            }
+
             // Cuando se hace clic en el botón, recargamos los productos con los filtros seleccionados
             CargarProductos();
         }
@@ -120,6 +139,40 @@ namespace CampusStoreWeb
         }
 
         // --- MÉTODOS DE AYUDA PARA LEER LOS FILTROS ---
+
+        private bool ValidarFiltros()
+        {
+            string categoriaSeleccionada = rblCategorias.SelectedValue;
+
+            // Si la categoría NO es libro, verificar que no haya filtros de libro seleccionados
+            if (categoriaSeleccionada != "libro")
+            {
+                bool hayEditorialesSeleccionadas = cblEditoriales.Items.Cast<ListItem>().Any(li => li.Selected);
+                bool hayAutoresSeleccionados = cblAutores.Items.Cast<ListItem>().Any(li => li.Selected);
+                bool hayGenerosSeleccionados = cblGeneros.Items.Cast<ListItem>().Any(li => li.Selected);
+
+                if (hayEditorialesSeleccionadas || hayAutoresSeleccionados || hayGenerosSeleccionados)
+                {
+                    string mensaje = "No puedes aplicar filtros de LIBROS (Editorial, Autor o Género) cuando la categoría seleccionada no es 'Libros'.\\n\\n";
+                    mensaje += "Por favor:\\n";
+                    mensaje += "• Selecciona la categoría 'Libros', o\\n";
+                    mensaje += "• Desmarca los filtros de Editorial, Autor y Género.";
+
+                    // Mostrar mensaje de error en JavaScript
+                    System.Web.UI.ScriptManager.RegisterStartupScript(
+                        this,
+                        GetType(),
+                        "validacionFiltros",
+                        $"alert('{mensaje}');",
+                        true
+                    );
+
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
         private int[] GetSelectedIntValues(CheckBoxList cbl)
         {

@@ -288,7 +288,7 @@
                 <div class="row">
                     <!-- Logo and Info -->
                     <div class="col-lg-3 col-md-6 mb-4">
-                        <a href="~/" class="footer-logo" runat="server">
+                        <a href="~/Catalogo.aspx" class="footer-logo" runat="server">
                             <div class="logo-icon">
                                 <div class="logo-icon-inner"></div>
                             </div>
@@ -303,26 +303,26 @@
                     
                     <!-- Top Category -->
                     <div class="col-lg-3 col-md-6 mb-4 footer-section">
-                        <h5>Top Category</h5>
+                        <h5>Categorías Principales</h5>
                         <ul>
-                            <li><asp:HyperLink ID="lnkFooterPeluches" runat="server" NavigateUrl="~/Peluches.aspx">Peluches</asp:HyperLink></li>
-                            <li><asp:HyperLink ID="lnkFooterTomatelodos" runat="server" NavigateUrl="~/Tomatelodos.aspx">Tomatelodos</asp:HyperLink></li>
-                            <li><asp:HyperLink ID="lnkFooterUtiles" runat="server" NavigateUrl="~/Utiles.aspx">Útiles</asp:HyperLink></li>
-                            <li><asp:HyperLink ID="lnkFooterLibros" runat="server" NavigateUrl="~/Libros.aspx">Libros</asp:HyperLink></li>
-                            <li><asp:HyperLink ID="lnkFooterCuadernos" runat="server" NavigateUrl="~/Cuadernos.aspx">Cuadernos</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterPeluches" runat="server" NavigateUrl="~/Catalogo.aspx">Peluches</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterTomatelodos" runat="server" NavigateUrl="~/Catalogo.aspx">Tomatelodos</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterUtiles" runat="server" NavigateUrl="~/Catalogo.aspx">Útiles</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterLibros" runat="server" NavigateUrl="~/Catalogo.aspx">Libros</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterCuadernos" runat="server" NavigateUrl="~/Catalogo.aspx">Cuadernos</asp:HyperLink></li>
                         </ul>
-                        <asp:HyperLink ID="lnkBrowseAll" runat="server" NavigateUrl="~/Shop_Page.aspx" CssClass="footer-browse-all">
-                            Browse All Product <i class="bi bi-arrow-right"></i>
+                        <asp:HyperLink ID="lnkBrowseAll" runat="server" NavigateUrl="~/Catalogo.aspx" CssClass="footer-browse-all">
+                            Ver Todos los Productos <i class="bi bi-arrow-right"></i>
                         </asp:HyperLink>
                     </div>
                     
                     <!-- Quick Links -->
                     <div class="col-lg-3 col-md-6 mb-4 footer-section">
-                        <h5>Quick Links</h5>
+                        <h5>Enlaces Rápidos</h5>
                         <ul>
-                            <li><asp:HyperLink ID="lnkShopProduct" runat="server" NavigateUrl="~/Productos.aspx">Shop Product</asp:HyperLink></li>
-                            <li><asp:HyperLink ID="lnkShoppingCart" runat="server" NavigateUrl="~/Carrito.aspx">Shoping Cart</asp:HyperLink></li>
-                            <li><asp:HyperLink ID="lnkAboutUs" runat="server" NavigateUrl="~/Nosotros.aspx">About Us</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkShopProduct" runat="server" NavigateUrl="~/Catalogo.aspx">Productos</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkShoppingCart" runat="server" NavigateUrl="~/Shopping_Car.aspx">Carrito de Compras</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkAboutUs" runat="server" NavigateUrl="~/Catalogo.aspx">Acerca de</asp:HyperLink></li>
                         </ul>
                     </div>
                     
