@@ -458,14 +458,9 @@ namespace CampusStoreWeb
                         formatoSpecified = true,
                         editorial = editorialLibro,
                         autores = autoresSeleccionados.ToArray(),
-<<<<<<< HEAD
                         sinopsis = string.IsNullOrWhiteSpace(txtSinopsis.Text) ? "Sin sinopsis" : txtSinopsis.Text.Trim(),
-                        descripcion = string.IsNullOrWhiteSpace(txtDescripcion.Text) ? "Sin descripción" : txtDescripcion.Text.Trim()
-=======
-                        sinopsis = txtSinopsis.Text,
-                        descripcion = txtDescripcion.Text,
+                        descripcion = string.IsNullOrWhiteSpace(txtDescripcion.Text) ? "Sin descripción" : txtDescripcion.Text.Trim(),
                         imagenURL = imagenUrl
->>>>>>> e2bf2c0cb8cc6435abcd81e2a4bcef627df61f68
                     };
 
                     // Guardar en el Web Service
