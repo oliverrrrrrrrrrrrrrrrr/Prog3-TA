@@ -6,6 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
 
+using System.Configuration;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+
+
 namespace CampusStoreWeb
 {
     public partial class AgregarLibro : System.Web.UI.Page
@@ -212,6 +219,14 @@ namespace CampusStoreWeb
             {
                 try
                 {
+                    // Validar archivo de imagen
+                    if (!fuPortada.HasFile)
+                    {
+                        string scriptNoImg = "alert('Debe seleccionar una imagen de portada.');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "errorImagen", scriptNoImg, true);
+                        return;
+                    }
+
                     // Precio con descuento no debe ser mayor al precio unitario
                     double precioUnitario = double.Parse(txtPrecioUnitario.Text);
                     double precioConDescuento = double.Parse(txtPrecioConDescuento.Text);
@@ -246,6 +261,9 @@ namespace CampusStoreWeb
                         sitioWeb = editorialSeleccionada.sitioWeb
                     };
 
+                    // Subir imagen a ImgBB y obtener URL
+                    string imagenUrl = SubirImagenAImgBB(fuPortada.PostedFile);
+
                     // Crear nuevo libro
                     libro nuevoLibro = new libro
                     {
@@ -268,7 +286,8 @@ namespace CampusStoreWeb
                         editorial = editorialLibro,
                         autores = autoresSeleccionados.ToArray(),
                         sinopsis = txtSinopsis.Text,
-                        descripcion = txtDescripcion.Text
+                        descripcion = txtDescripcion.Text,
+                        imagenURL = imagenUrl
                     };
 
                     // Guardar en el Web Service
@@ -293,5 +312,55 @@ namespace CampusStoreWeb
         {
             Response.Redirect("GestionarLibros.aspx");
         }
+
+        private static readonly HttpClient httpClient = new HttpClient();
+
+        private string SubirImagenAImgBB(System.Web.HttpPostedFile archivo)
+        {
+            if (archivo == null || archivo.ContentLength == 0)
+                throw new Exception("No se recibió ninguna imagen.");
+
+            // Validación simple de tipo de archivo (opcional, puedes mejorarla)
+            if (!archivo.ContentType.StartsWith("image/"))
+                throw new Exception("El archivo seleccionado no es una imagen válida.");
+
+            string apiKey = ConfigurationManager.AppSettings["ImgBBApiKey"];
+            if (string.IsNullOrEmpty(apiKey))
+                throw new Exception("No se ha configurado la API Key de ImgBB.");
+
+            using (var content = new MultipartFormDataContent())
+            {
+                byte[] bytes;
+                using (var br = new BinaryReader(archivo.InputStream))
+                {
+                    bytes = br.ReadBytes(archivo.ContentLength);
+                }
+
+                var fileContent = new ByteArrayContent(bytes);
+                fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse(archivo.ContentType);
+
+                // "image" es el nombre de campo que ImgBB espera
+                content.Add(fileContent, "image", Path.GetFileName(archivo.FileName));
+
+                var url = $"https://api.imgbb.com/1/upload?key={apiKey}";
+                var response = httpClient.PostAsync(url, content).Result;
+                response.EnsureSuccessStatusCode();
+
+                string json = response.Content.ReadAsStringAsync().Result;
+
+                // dynamic para obtener result.data.url
+                dynamic result = JsonConvert.DeserializeObject(json);
+                bool success = result.success;
+
+                if (!success)
+                {
+                    throw new Exception("ImgBB no pudo procesar la imagen.");
+                }
+
+                string imageUrl = result.data.url;
+                return imageUrl;
+            }
+        }
+
     }
 }

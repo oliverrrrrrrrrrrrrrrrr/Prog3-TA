@@ -66,6 +66,7 @@ public class DescuentoDAOTest implements PersistibleProbable{
         libro.setFormato(Formato.TAPA_DURA);
         libro.setSinopsis("Sinopsis prueba");
         libro.setEditorial(new EditorialDAOImpl().leer(this.testEditorialId));
+        libro.setImagenURL("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/800px-FullMoon2010.jpg");
         libro.setAutores(null);
         this.testLibroId = libroDAO.crear(libro);
     }

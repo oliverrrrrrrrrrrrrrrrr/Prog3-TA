@@ -522,6 +522,16 @@
                         ValidationGroup="AgregarForm" />
                 </div>
 
+                <!-- Sección de Imagen -->
+                <div class="form-group form-group-full">
+                    <label>Portada (imagen) <span class="required">*</span></label>
+                    <asp:FileUpload ID="fuPortada" runat="server" />
+                    <span class="form-help-text">
+                        Seleccione una imagen desde su computadora (JPG, PNG).
+                    </span>
+                </div>
+
+
                 <!-- Sección de Autores -->
                 <div class="form-group form-group-full">
                     <div class="autores-section">

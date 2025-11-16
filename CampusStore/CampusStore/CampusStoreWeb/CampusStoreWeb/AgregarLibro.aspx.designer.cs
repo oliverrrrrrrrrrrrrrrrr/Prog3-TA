@@ -231,6 +231,15 @@ namespace CampusStoreWeb
         protected global::System.Web.UI.WebControls.RangeValidator rvStockVirtual;
 
         /// <summary>
+        /// Control fuPortada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fuPortada;
+
+        /// <summary>
         /// Control ddlAutores.
         /// </summary>
         /// <remarks>
