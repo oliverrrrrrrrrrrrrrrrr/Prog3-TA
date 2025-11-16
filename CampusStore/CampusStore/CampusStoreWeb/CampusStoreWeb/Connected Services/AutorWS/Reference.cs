@@ -24,6 +24,14 @@ namespace CampusStoreWeb.AutorWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresResponse")]
         System.Threading.Tasks.Task<CampusStoreWeb.AutorWS.listarAutoresResponse> listarAutoresAsync(CampusStoreWeb.AutorWS.listarAutoresRequest request);
         
+        // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CampusStoreWeb.AutorWS.eliminarAutorResponse eliminarAutor(CampusStoreWeb.AutorWS.eliminarAutorRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.AutorWS.eliminarAutorResponse> eliminarAutorAsync(CampusStoreWeb.AutorWS.eliminarAutorRequest request);
+        
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -32,14 +40,6 @@ namespace CampusStoreWeb.AutorWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorResponse")]
         System.Threading.Tasks.Task<CampusStoreWeb.AutorWS.obtenerAutorResponse> obtenerAutorAsync(CampusStoreWeb.AutorWS.obtenerAutorRequest request);
-        
-        // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        CampusStoreWeb.AutorWS.eliminarAutorResponse eliminarAutor(CampusStoreWeb.AutorWS.eliminarAutorRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.AutorWS.eliminarAutorResponse> eliminarAutorAsync(CampusStoreWeb.AutorWS.eliminarAutorRequest request);
         
         // CODEGEN: El parámetro 'autor' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorResponse")]
@@ -51,7 +51,7 @@ namespace CampusStoreWeb.AutorWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -169,6 +169,34 @@ namespace CampusStoreWeb.AutorWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarAutor", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarAutorRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int id;
+        
+        public eliminarAutorRequest() {
+        }
+        
+        public eliminarAutorRequest(int id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarAutorResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarAutorResponse {
+        
+        public eliminarAutorResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerAutor", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
     public partial class obtenerAutorRequest {
         
@@ -202,36 +230,8 @@ namespace CampusStoreWeb.AutorWS {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarAutor", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarAutorRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int id;
-        
-        public eliminarAutorRequest() {
-        }
-        
-        public eliminarAutorRequest(int id) {
-            this.id = id;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarAutorResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarAutorResponse {
-        
-        public eliminarAutorResponse() {
-        }
-    }
-    
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
     public enum estado {
@@ -328,6 +328,28 @@ namespace CampusStoreWeb.AutorWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CampusStoreWeb.AutorWS.eliminarAutorResponse CampusStoreWeb.AutorWS.AutorWS.eliminarAutor(CampusStoreWeb.AutorWS.eliminarAutorRequest request) {
+            return base.Channel.eliminarAutor(request);
+        }
+        
+        public void eliminarAutor(int id) {
+            CampusStoreWeb.AutorWS.eliminarAutorRequest inValue = new CampusStoreWeb.AutorWS.eliminarAutorRequest();
+            inValue.id = id;
+            CampusStoreWeb.AutorWS.eliminarAutorResponse retVal = ((CampusStoreWeb.AutorWS.AutorWS)(this)).eliminarAutor(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CampusStoreWeb.AutorWS.eliminarAutorResponse> CampusStoreWeb.AutorWS.AutorWS.eliminarAutorAsync(CampusStoreWeb.AutorWS.eliminarAutorRequest request) {
+            return base.Channel.eliminarAutorAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CampusStoreWeb.AutorWS.eliminarAutorResponse> eliminarAutorAsync(int id) {
+            CampusStoreWeb.AutorWS.eliminarAutorRequest inValue = new CampusStoreWeb.AutorWS.eliminarAutorRequest();
+            inValue.id = id;
+            return ((CampusStoreWeb.AutorWS.AutorWS)(this)).eliminarAutorAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         CampusStoreWeb.AutorWS.obtenerAutorResponse CampusStoreWeb.AutorWS.AutorWS.obtenerAutor(CampusStoreWeb.AutorWS.obtenerAutorRequest request) {
             return base.Channel.obtenerAutor(request);
         }
@@ -348,28 +370,6 @@ namespace CampusStoreWeb.AutorWS {
             CampusStoreWeb.AutorWS.obtenerAutorRequest inValue = new CampusStoreWeb.AutorWS.obtenerAutorRequest();
             inValue.id = id;
             return ((CampusStoreWeb.AutorWS.AutorWS)(this)).obtenerAutorAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.AutorWS.eliminarAutorResponse CampusStoreWeb.AutorWS.AutorWS.eliminarAutor(CampusStoreWeb.AutorWS.eliminarAutorRequest request) {
-            return base.Channel.eliminarAutor(request);
-        }
-        
-        public void eliminarAutor(int id) {
-            CampusStoreWeb.AutorWS.eliminarAutorRequest inValue = new CampusStoreWeb.AutorWS.eliminarAutorRequest();
-            inValue.id = id;
-            CampusStoreWeb.AutorWS.eliminarAutorResponse retVal = ((CampusStoreWeb.AutorWS.AutorWS)(this)).eliminarAutor(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.AutorWS.eliminarAutorResponse> CampusStoreWeb.AutorWS.AutorWS.eliminarAutorAsync(CampusStoreWeb.AutorWS.eliminarAutorRequest request) {
-            return base.Channel.eliminarAutorAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<CampusStoreWeb.AutorWS.eliminarAutorResponse> eliminarAutorAsync(int id) {
-            CampusStoreWeb.AutorWS.eliminarAutorRequest inValue = new CampusStoreWeb.AutorWS.eliminarAutorRequest();
-            inValue.id = id;
-            return ((CampusStoreWeb.AutorWS.AutorWS)(this)).eliminarAutorAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

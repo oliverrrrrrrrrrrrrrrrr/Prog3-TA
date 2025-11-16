@@ -31,7 +31,7 @@ public class CarritoDAOTest implements PersistibleProbable{
     public void inicializar() {
         System.out.println("ini");
         ClienteDAO clienteDAO=new ClienteDAOImpl();
-        Cliente modelo=new Cliente(0, null, "NombreFalso", "contraseña", "nombreUs"+(Math.random()*100), "correo"+(Math.random()*100), "949394819");
+        Cliente modelo=new Cliente(0, null, "NombreFalso", "contraseña", "nombreUs"+(Math.random()*100), "correo"+System.currentTimeMillis(), "949394819");
         idCliente=clienteDAO.crear(modelo);
         CuponDAO cuponDAO=new CuponDAOImpl();
         Cupon cupon=new Cupon(0, "codigo"+(Math.random()*100), 12.3, Date.from(Instant.now()), true, 10);

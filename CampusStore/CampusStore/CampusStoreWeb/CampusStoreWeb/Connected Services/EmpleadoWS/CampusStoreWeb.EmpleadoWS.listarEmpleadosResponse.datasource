@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="listarEmpleadosResponse" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse</TypeInfo>
+   <TypeInfo>CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse, Connected Services.EmpleadoWS.Reference.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

@@ -74,7 +74,9 @@ public class LibroDAOTest implements PersistibleProbable{
         libro.setFormato(Formato.TAPA_DURA);
         libro.setSinopsis("Sinopsis prueba");
         libro.setEditorial(new EditorialDAOImpl().leer(this.testEditorialId));
+        libro.setImagenURL("link prueba");
         libro.setAutores(null);
+        
         
         this.testId = libroDAO.crear(libro);
         assertTrue(this.testId > 0);
@@ -102,6 +104,7 @@ public class LibroDAOTest implements PersistibleProbable{
         libro.setFormato(Formato.TAPA_DURA);
         libro.setSinopsis("Sinopsis modificada");
         libro.setEditorial(new EditorialDAOImpl().leer(this.testEditorialId));
+        libro.setImagenURL("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/800px-FullMoon2010.jpg");
         libro.setAutores(null);
         
         boolean modifico = libroDAO.actualizar(libro);

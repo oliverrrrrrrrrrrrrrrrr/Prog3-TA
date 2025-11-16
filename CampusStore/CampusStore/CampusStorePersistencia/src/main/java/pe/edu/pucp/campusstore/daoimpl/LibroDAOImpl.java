@@ -21,7 +21,7 @@ public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDA
     protected PreparedStatement comandoCrear(Connection conn, 
             Libro modelo) throws SQLException {
         
-        String sql = "{call insertarLibro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call insertarLibro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         
         cmd.setDouble("p_precio", modelo.getPrecio());
@@ -36,6 +36,7 @@ public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDA
         cmd.setString("p_formato", modelo.getFormato().toString());
         cmd.setString("p_sinopsis", modelo.getSinopsis());
         cmd.setInt("p_idEditorial", modelo.getEditorial().getIdEditorial());
+        cmd.setString("p_imagenURL", modelo.getImagenURL());
         //cmd.setInt("p_idDescuento", modelo.getDescuento().getIdDescuento());
         cmd.registerOutParameter("p_id", Types.INTEGER);
         
@@ -46,7 +47,7 @@ public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDA
     protected PreparedStatement comandoActualizar(Connection conn, 
             Libro modelo) throws SQLException {
         
-        String sql = "{call modificarLibro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call modificarLibro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_id", modelo.getIdLibro());
@@ -62,6 +63,7 @@ public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDA
         cmd.setString("p_formato", modelo.getFormato().toString());
         cmd.setString("p_sinopsis", modelo.getSinopsis());
         cmd.setInt("p_idEditorial", modelo.getEditorial().getIdEditorial());
+        cmd.setString("p_imagenURL", modelo.getImagenURL());
         //cmd.setInt("p_idDescuento", modelo.getDescuento().getIdDescuento());
         
         return cmd;
@@ -120,6 +122,7 @@ public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDA
         if(!rs.wasNull()){
             modelo.setEditorial(new EditorialDAOImpl().leer(idEditorial));
         }
+        modelo.setImagenURL(rs.getString("imagenURL"));
         /*
         Descuento descuento = new Descuento();
         descuento.setIdDescuento(rs.getInt("idDescuento"));
