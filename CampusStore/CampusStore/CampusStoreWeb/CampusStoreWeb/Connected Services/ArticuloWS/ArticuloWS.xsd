@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://services.campusstore.pucp.edu.pe/" targetNamespace="http://services.campusstore.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="eliminarArticulo" type="tns:eliminarArticulo" />
@@ -135,4 +136,143 @@
       <xs:enumeration value="Eliminado" />
     </xs:restriction>
   </xs:simpleType>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.campusstore.pucp.edu.pe/" targetNamespace="http://services.campusstore.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="eliminarArticulo" type="tns:eliminarArticulo" />
+  <xs:element name="eliminarArticuloResponse" type="tns:eliminarArticuloResponse" />
+  <xs:element name="guardarArticulo" type="tns:guardarArticulo" />
+  <xs:element name="guardarArticuloResponse" type="tns:guardarArticuloResponse" />
+  <xs:element name="listarArticulos" type="tns:listarArticulos" />
+  <xs:element name="listarArticulosResponse" type="tns:listarArticulosResponse" />
+  <xs:element name="obtenerArticulo" type="tns:obtenerArticulo" />
+  <xs:element name="obtenerArticuloResponse" type="tns:obtenerArticuloResponse" />
+  <xs:complexType name="obtenerArticulo">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerArticuloResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:articulo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="articulo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:producto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idArticulo" type="xs:int" />
+          <xs:element minOccurs="0" name="tipoArticulo" type="tns:tipoArticulo" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="producto" abstract="true">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element minOccurs="0" name="descuento" type="tns:descuento" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="precio" type="xs:double" />
+      <xs:element minOccurs="0" name="precioDescuento" type="xs:double" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="reseñas" nillable="true" type="tns:reseña" />
+      <xs:element minOccurs="0" name="stockReal" type="xs:int" />
+      <xs:element minOccurs="0" name="stockVirtual" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="descuento">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fechaCaducidad" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="idDescuento" type="xs:int" />
+      <xs:element minOccurs="0" name="idProducto" type="xs:int" />
+      <xs:element minOccurs="0" name="tipoProducto" type="tns:tipoProducto" />
+      <xs:element minOccurs="0" name="valorDescuento" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="reseña">
+    <xs:sequence>
+      <xs:element name="calificacion" type="xs:double" />
+      <xs:element minOccurs="0" name="cliente" type="tns:cliente" />
+      <xs:element minOccurs="0" name="idReseña" type="xs:int" />
+      <xs:element minOccurs="0" name="producto" type="tns:producto" />
+      <xs:element minOccurs="0" name="reseña" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoProducto" type="tns:tipoProducto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cliente">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:usuario">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="cuponesUsados" nillable="true" type="tns:cupon" />
+          <xs:element minOccurs="0" name="idCliente" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="usuario" abstract="true">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contraseña" type="xs:string" />
+      <xs:element minOccurs="0" name="correo" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="nombreUsuario" type="xs:string" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cupon">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="codigo" type="xs:string" />
+      <xs:element minOccurs="0" name="descuento" type="xs:double" />
+      <xs:element minOccurs="0" name="fechaCaducidad" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="idCupon" type="xs:int" />
+      <xs:element minOccurs="0" name="usosRestantes" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarArticulos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarArticulosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:articulo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarArticulo">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarArticuloResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="guardarArticulo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="articulo" type="tns:articulo" />
+      <xs:element minOccurs="0" name="estado" type="tns:estado" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="guardarArticuloResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:simpleType name="tipoArticulo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="LAPICERO" />
+      <xs:enumeration value="CUADERNO" />
+      <xs:enumeration value="PELUCHE" />
+      <xs:enumeration value="TOMATODO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tipoProducto">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ARTICULO" />
+      <xs:enumeration value="LIBRO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="estado">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Nuevo" />
+      <xs:enumeration value="Modificado" />
+      <xs:enumeration value="Eliminado" />
+    </xs:restriction>
+  </xs:simpleType>
+>>>>>>> Stashed changes
 </xs:schema>

@@ -17,18 +17,30 @@
   <message name="listarLibrosResponse">
     <part name="parameters" element="tns:listarLibrosResponse" />
   </message>
+<<<<<<< Updated upstream
   <message name="obtenerLibro">
     <part name="parameters" element="tns:obtenerLibro" />
   </message>
   <message name="obtenerLibroResponse">
     <part name="parameters" element="tns:obtenerLibroResponse" />
   </message>
+=======
+>>>>>>> Stashed changes
   <message name="eliminarLibro">
     <part name="parameters" element="tns:eliminarLibro" />
   </message>
   <message name="eliminarLibroResponse">
     <part name="parameters" element="tns:eliminarLibroResponse" />
   </message>
+<<<<<<< Updated upstream
+=======
+  <message name="obtenerLibro">
+    <part name="parameters" element="tns:obtenerLibro" />
+  </message>
+  <message name="obtenerLibroResponse">
+    <part name="parameters" element="tns:obtenerLibroResponse" />
+  </message>
+>>>>>>> Stashed changes
   <portType name="LibroWS">
     <operation name="guardarLibro">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroRequest" message="tns:guardarLibro" />
@@ -38,18 +50,40 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosRequest" message="tns:listarLibros" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosResponse" message="tns:listarLibrosResponse" />
     </operation>
+<<<<<<< Updated upstream
     <operation name="obtenerLibro">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest" message="tns:obtenerLibro" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse" message="tns:obtenerLibroResponse" />
     </operation>
+=======
+>>>>>>> Stashed changes
     <operation name="eliminarLibro">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroRequest" message="tns:eliminarLibro" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroResponse" message="tns:eliminarLibroResponse" />
     </operation>
+<<<<<<< Updated upstream
+=======
+    <operation name="obtenerLibro">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest" message="tns:obtenerLibro" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse" message="tns:obtenerLibroResponse" />
+    </operation>
+>>>>>>> Stashed changes
   </portType>
   <binding name="LibroWSPortBinding" type="tns:LibroWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <operation name="guardarLibro">
+<<<<<<< Updated upstream
+=======
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarLibros">
+>>>>>>> Stashed changes
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -68,6 +102,7 @@
       </output>
     </operation>
     <operation name="obtenerLibro">
+<<<<<<< Updated upstream
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -77,6 +112,8 @@
       </output>
     </operation>
     <operation name="eliminarLibro">
+=======
+>>>>>>> Stashed changes
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
