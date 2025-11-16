@@ -258,6 +258,9 @@
     <Content Include="Connected Services\LibroWS\CampusStoreWeb.LibroWS.obtenerLibroResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\LibroWS\CampusStoreWeb.LibroWS.registrarLibroResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\LibroWS\configuration91.svcinfo" />
     <None Include="Connected Services\LibroWS\configuration.svcinfo" />
     <None Include="Connected Services\LibroWS\Reference.svcmap">
@@ -316,7 +319,6 @@
     </Compile>
     <Compile Include="Catalogo.aspx.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Catalogo.aspx.designer.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>

@@ -8,6 +8,8 @@
   <xs:element name="listarLibrosResponse" type="tns:listarLibrosResponse" />
   <xs:element name="obtenerLibro" type="tns:obtenerLibro" />
   <xs:element name="obtenerLibroResponse" type="tns:obtenerLibroResponse" />
+  <xs:element name="registrarLibro" type="tns:registrarLibro" />
+  <xs:element name="registrarLibroResponse" type="tns:registrarLibroResponse" />
   <xs:complexType name="guardarLibro">
     <xs:sequence>
       <xs:element minOccurs="0" name="libro" type="tns:libro" />
@@ -127,6 +129,17 @@
   <xs:complexType name="listarLibrosResponse">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:libro" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarLibro">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="libro" type="tns:libro" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="autores" type="tns:autor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarLibroResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="obtenerLibro">

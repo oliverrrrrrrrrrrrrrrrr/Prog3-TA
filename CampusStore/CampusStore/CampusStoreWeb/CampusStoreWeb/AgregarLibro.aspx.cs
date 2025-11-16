@@ -14,6 +14,7 @@ namespace CampusStoreWeb
         private readonly AutorWSClient autorWS;
         private readonly EditorialWSClient editorialWS;
         private List<LibroWS.autor> autoresSeleccionados;
+        private LibroWS.editorial editorialTemporal;
 
         public AgregarLibro()
         {
@@ -47,6 +48,12 @@ namespace CampusStoreWeb
                 if (ViewState["AutoresSeleccionados"] != null)
                 {
                     autoresSeleccionados = (List<LibroWS.autor>)ViewState["AutoresSeleccionados"];
+                }
+
+                // Recuperar editorial temporal si existe
+                if (ViewState["EditorialTemporal"] != null)
+                {
+                    editorialTemporal = (LibroWS.editorial)ViewState["EditorialTemporal"];
                 }
             }
         }
@@ -135,6 +142,126 @@ namespace CampusStoreWeb
             }
         }
 
+        // ========================================
+        // GUARDAR NUEVA EDITORIAL (TEMPORAL)
+        // ========================================
+        protected void btnGuardarEditorial_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                try
+                {
+                    // Crear nueva editorial
+                    editorialTemporal = new LibroWS.editorial
+                    {
+                        idEditorial = 0, // solo temporal
+                        idEditorialSpecified = false,
+                        nombre = txtEditorialNombre.Text.Trim(),
+                        cif = txtEditorialCIF.Text.Trim(),
+                        telefono = string.IsNullOrWhiteSpace(txtEditorialTelefono.Text) ? 0 : int.Parse(txtEditorialTelefono.Text),
+                        telefonoSpecified = !string.IsNullOrWhiteSpace(txtEditorialTelefono.Text),
+                        email = txtEditorialEmail.Text.Trim(),
+                        direccion = txtEditorialDireccion.Text.Trim(),
+                        sitioWeb = txtEditorialWeb.Text.Trim()
+                    };
+
+                    // Guardar en ViewState para mantenerla entre postbacks
+                    ViewState["EditorialTemporal"] = editorialTemporal;
+
+                    // Agregar al dropdown como opción temporal
+                    ddlEditorial.Items.Insert(1, new ListItem($"[NUEVA] {editorialTemporal.nombre}", "TEMP_EDITORIAL"));
+                    ddlEditorial.SelectedValue = "TEMP_EDITORIAL";
+
+                    // Limpiar campos del modal
+                    LimpiarModalEditorial();
+
+                    // Cerrar modal y mostrar mensaje
+                    string script = @"
+                        hideModalEditorial();
+                        alert('Editorial preparada. Se creará al guardar el libro.');
+                    ";
+                    ClientScript.RegisterStartupScript(this.GetType(), "editorialSuccess", script, true);
+                }
+                catch (Exception ex)
+                {
+                    string script = $"alert('Error al preparar editorial: {ex.Message}');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                }
+            }
+        }
+
+        private void LimpiarModalEditorial()
+        {
+            txtEditorialNombre.Text = string.Empty;
+            txtEditorialCIF.Text = string.Empty;
+            txtEditorialTelefono.Text = string.Empty;
+            txtEditorialEmail.Text = string.Empty;
+            txtEditorialDireccion.Text = string.Empty;
+            txtEditorialWeb.Text = string.Empty;
+        }
+
+        // ========================================
+        // GUARDAR NUEVO AUTOR (TEMPORAL)
+        // ========================================
+        protected void btnGuardarAutor_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                try
+                {
+                    // Crear nuevo autor
+                    LibroWS.autor nuevoAutorTemporal = new LibroWS.autor
+                    {
+                        idAutor = 0, // solo temporal
+                        idAutorSpecified = false,
+                        nombre = txtAutorNombre.Text.Trim(),
+                        apellidos = txtAutorApellidos.Text.Trim(),
+                        alias = txtAutorAlias.Text.Trim()
+                    };
+
+                    // Recuperar la lista de autores
+                    if (ViewState["AutoresSeleccionados"] != null)
+                    {
+                        autoresSeleccionados = (List<LibroWS.autor>)ViewState["AutoresSeleccionados"];
+                    }
+                    else
+                    {
+                        autoresSeleccionados = new List<LibroWS.autor>();
+                    }
+
+                    // Agregar directamente a la lista de autores seleccionados
+                    autoresSeleccionados.Add(nuevoAutorTemporal);
+                    ViewState["AutoresSeleccionados"] = autoresSeleccionados;
+                    ActualizarListaAutores();
+
+                    // Limpiar campos del modal
+                    LimpiarModalAutor();
+
+                    // Cerrar modal y mostrar mensaje
+                    string script = @"
+                        hideModalAutor();
+                        alert('Autor agregado a la lista. Se creará al guardar el libro.');
+                    ";
+                    ClientScript.RegisterStartupScript(this.GetType(), "autorSuccess", script, true);
+                }
+                catch (Exception ex)
+                {
+                    string script = $"alert('Error al agregar autor: {ex.Message}');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                }
+            }
+        }
+
+        private void LimpiarModalAutor()
+        {
+            txtAutorNombre.Text = string.Empty;
+            txtAutorApellidos.Text = string.Empty;
+            txtAutorAlias.Text = string.Empty;
+        }
+
+        // ========================================
+        // AGREGAR AUTOR A LA LISTA
+        // ========================================
         protected void btnAgregarAutor_Click(object sender, EventArgs e)
         {
             if (ddlAutores.SelectedValue != "0")
@@ -158,13 +285,17 @@ namespace CampusStoreWeb
                     {
                         // Obtener el autor completo
                         AutorWS.autor autorCompleto = autorWS.obtenerAutor(idAutor);
+
+                        // Convertir a tipo LibroWS.autor
                         LibroWS.autor autorLibro = new LibroWS.autor()
                         {
                             idAutor = autorCompleto.idAutor,
+                            idAutorSpecified = true,
                             nombre = autorCompleto.nombre,
                             apellidos = autorCompleto.apellidos,
                             alias = autorCompleto.alias
                         };
+
                         if (autorCompleto != null)
                         {
                             autoresSeleccionados.Add(autorLibro);
@@ -206,6 +337,9 @@ namespace CampusStoreWeb
             }
         }
 
+        // ========================================
+        // GUARDAR LIBRO COMPLETO
+        // ========================================
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -223,28 +357,67 @@ namespace CampusStoreWeb
                         return;
                     }
 
-                    // Obtener la editorial seleccionada
-                    int idEditorial = int.Parse(ddlEditorial.SelectedValue);
-                    EditorialWS.editorial editorialSeleccionada = editorialWS.obtenerEditorial(idEditorial);
+                    // ========================================
+                    // OBTENER O USAR EDITORIAL TEMPORAL
+                    // ========================================
+                    LibroWS.editorial editorialLibro;
 
-                    // Recuperar autores seleccionados
+                    if (ddlEditorial.SelectedValue == "TEMP_EDITORIAL")
+                    {
+                        // Usar la editorial temporal creada (NO está en BD aún)
+                        if (ViewState["EditorialTemporal"] != null)
+                        {
+                            editorialLibro = (LibroWS.editorial)ViewState["EditorialTemporal"];
+                        }
+                        else
+                        {
+                            string script = "alert('Error: No se encontró la editorial temporal.');";
+                            ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                            return;
+                        }
+                    }
+                    else if (ddlEditorial.SelectedValue != "0")
+                    {
+                        // Obtener editorial existente de la BD
+                        int idEditorial = int.Parse(ddlEditorial.SelectedValue);
+                        EditorialWS.editorial editorialExistente = editorialWS.obtenerEditorial(idEditorial);
+
+                        // Convertir a tipo LibroWS.editorial
+                        editorialLibro = new LibroWS.editorial()
+                        {
+                            idEditorial = editorialExistente.idEditorial,
+                            idEditorialSpecified = true,
+                            nombre = editorialExistente.nombre,
+                            cif = editorialExistente.cif,
+                            direccion = editorialExistente.direccion,
+                            email = editorialExistente.email,
+                            telefono = editorialExistente.telefono,
+                            telefonoSpecified = true,
+                            sitioWeb = editorialExistente.sitioWeb
+                        };
+                    }
+                    else
+                    {
+                        string script = "alert('Debe seleccionar o crear una editorial.');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                        return;
+                    }
+
+                    // ========================================
+                    // RECUPERAR AUTORES (pueden ser existentes o temporales)
+                    // ========================================
                     if (ViewState["AutoresSeleccionados"] != null)
                     {
                         autoresSeleccionados = (List<LibroWS.autor>)ViewState["AutoresSeleccionados"];
                     }
-
-                    LibroWS.editorial editorialLibro = new LibroWS.editorial()
+                    else
                     {
-                        idEditorial = editorialSeleccionada.idEditorial,
-                        idEditorialSpecified = true,
-                        nombre = editorialSeleccionada.nombre,
-                        cif = editorialSeleccionada.cif,
-                        direccion = editorialSeleccionada.direccion,
-                        email = editorialSeleccionada.email,
-                        telefono = editorialSeleccionada.telefono,
-                        telefonoSpecified = true,
-                        sitioWeb = editorialSeleccionada.sitioWeb
-                    };
+                        autoresSeleccionados = new List<LibroWS.autor>();
+                    }
+
+                    // ========================================
+                    // CREAR LIBRO CON TODOS LOS DATOS
+                    // ========================================
 
                     // Crear nuevo libro
                     libro nuevoLibro = new libro
@@ -267,16 +440,16 @@ namespace CampusStoreWeb
                         formatoSpecified = true,
                         editorial = editorialLibro,
                         autores = autoresSeleccionados.ToArray(),
-                        sinopsis = txtSinopsis.Text,
-                        descripcion = txtDescripcion.Text
+                        sinopsis = string.IsNullOrWhiteSpace(txtSinopsis.Text) ? "Sin sinopsis" : txtSinopsis.Text.Trim(),
+                        descripcion = string.IsNullOrWhiteSpace(txtDescripcion.Text) ? "Sin descripción" : txtDescripcion.Text.Trim()
                     };
 
                     // Guardar en el Web Service
-                    libroWS.guardarLibro(nuevoLibro, LibroWS.estado.Nuevo);
+                    libroWS.registrarLibro(nuevoLibro, autoresSeleccionados.ToArray());
 
                     // Mostrar mensaje de éxito y redirigir
                     string successScript = @"
-                        alert('Libro agregado exitosamente');
+                        alert('Libro, editorial y autores creados exitosamente');
                         window.location.href = 'GestionarLibros.aspx';
                     ";
                     ClientScript.RegisterStartupScript(this.GetType(), "success", successScript, true);
