@@ -5,6 +5,18 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/LibroWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+  <message name="eliminarLibro">
+    <part name="parameters" element="tns:eliminarLibro" />
+  </message>
+  <message name="eliminarLibroResponse">
+    <part name="parameters" element="tns:eliminarLibroResponse" />
+  </message>
+  <message name="guardarLibro">
+    <part name="parameters" element="tns:guardarLibro" />
+  </message>
+  <message name="guardarLibroResponse">
+    <part name="parameters" element="tns:guardarLibroResponse" />
+  </message>
   <message name="registrarLibro">
     <part name="parameters" element="tns:registrarLibro" />
   </message>
@@ -17,37 +29,21 @@
   <message name="listarLibrosResponse">
     <part name="parameters" element="tns:listarLibrosResponse" />
   </message>
-  <message name="guardarLibro">
-    <part name="parameters" element="tns:guardarLibro" />
-  </message>
-  <message name="guardarLibroResponse">
-    <part name="parameters" element="tns:guardarLibroResponse" />
-  </message>
-<<<<<<< HEAD
-  <message name="listarLibros">
-    <part name="parameters" element="tns:listarLibros" />
-  </message>
-  <message name="listarLibrosResponse">
-    <part name="parameters" element="tns:listarLibrosResponse" />
-  </message>
-=======
->>>>>>> e2bf2c0cb8cc6435abcd81e2a4bcef627df61f68
-  <message name="eliminarLibro">
-    <part name="parameters" element="tns:eliminarLibro" />
-  </message>
-  <message name="eliminarLibroResponse">
-    <part name="parameters" element="tns:eliminarLibroResponse" />
-  </message>
-<<<<<<< HEAD
   <message name="obtenerLibro">
     <part name="parameters" element="tns:obtenerLibro" />
   </message>
   <message name="obtenerLibroResponse">
     <part name="parameters" element="tns:obtenerLibroResponse" />
   </message>
-=======
->>>>>>> e2bf2c0cb8cc6435abcd81e2a4bcef627df61f68
   <portType name="LibroWS">
+    <operation name="eliminarLibro">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroRequest" message="tns:eliminarLibro" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroResponse" message="tns:eliminarLibroResponse" />
+    </operation>
+    <operation name="guardarLibro">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroRequest" message="tns:guardarLibro" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroResponse" message="tns:guardarLibroResponse" />
+    </operation>
     <operation name="registrarLibro">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroRequest" message="tns:registrarLibro" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroResponse" message="tns:registrarLibroResponse" />
@@ -56,31 +52,31 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosRequest" message="tns:listarLibros" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosResponse" message="tns:listarLibrosResponse" />
     </operation>
-    <operation name="guardarLibro">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroRequest" message="tns:guardarLibro" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroResponse" message="tns:guardarLibroResponse" />
-    </operation>
-<<<<<<< HEAD
-    <operation name="listarLibros">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosRequest" message="tns:listarLibros" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosResponse" message="tns:listarLibrosResponse" />
-    </operation>
-=======
->>>>>>> e2bf2c0cb8cc6435abcd81e2a4bcef627df61f68
-    <operation name="eliminarLibro">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroRequest" message="tns:eliminarLibro" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroResponse" message="tns:eliminarLibroResponse" />
-    </operation>
-<<<<<<< HEAD
     <operation name="obtenerLibro">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest" message="tns:obtenerLibro" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse" message="tns:obtenerLibroResponse" />
     </operation>
-=======
->>>>>>> e2bf2c0cb8cc6435abcd81e2a4bcef627df61f68
   </portType>
   <binding name="LibroWSPortBinding" type="tns:LibroWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="eliminarLibro">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="guardarLibro">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="registrarLibro">
       <soap:operation soapAction="" />
       <input>
@@ -99,34 +95,6 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="guardarLibro">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="listarLibros">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="eliminarLibro">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-<<<<<<< HEAD
     <operation name="obtenerLibro">
       <soap:operation soapAction="" />
       <input>
@@ -136,8 +104,6 @@
         <soap:body use="literal" />
       </output>
     </operation>
-=======
->>>>>>> e2bf2c0cb8cc6435abcd81e2a4bcef627df61f68
   </binding>
   <service name="LibroWS">
     <port name="LibroWSPort" binding="tns:LibroWSPortBinding">

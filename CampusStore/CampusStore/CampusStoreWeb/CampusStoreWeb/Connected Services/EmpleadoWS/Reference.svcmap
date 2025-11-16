@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="d9a24438-720f-4285-ad45-df0b23f8e4b1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="f239a79a-9172-489e-907a-cd850de01105" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,8 +22,8 @@
     <MetadataSource Address="http://localhost:8080/CampusStoreWS/EmpleadoWS?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="EmpleadoWS.xsd" MetadataType="Schema" ID="ddeb26e2-0c26-4921-96fd-0c65b7403cbd" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/EmpleadoWS?xsd=1" />
-    <MetadataFile FileName="EmpleadoWS.wsdl" MetadataType="Wsdl" ID="fba0a576-80ae-4a54-83c0-d387bc7e502b" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/EmpleadoWS?wsdl" />
+    <MetadataFile FileName="EmpleadoWS.xsd" MetadataType="Schema" ID="2a4209ce-9538-4432-9f4a-a7fa7d23044e" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/EmpleadoWS?xsd=1" />
+    <MetadataFile FileName="EmpleadoWS.wsdl" MetadataType="Wsdl" ID="c66cc23f-17fa-4524-9d33-a991aaad003d" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/EmpleadoWS?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

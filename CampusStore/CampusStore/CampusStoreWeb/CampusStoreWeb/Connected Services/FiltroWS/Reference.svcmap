@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="6da05356-a82b-4176-9179-094b90d87b1b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="f97da0c1-a28d-466a-b586-e15a59b440cb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,8 +22,8 @@
     <MetadataSource Address="http://localhost:8080/CampusStoreWS/FiltroWS?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="FiltroWS.xsd" MetadataType="Schema" ID="64175012-18a6-4212-8161-d4f4323d1fd7" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/FiltroWS?xsd=1" />
-    <MetadataFile FileName="FiltroWS.wsdl" MetadataType="Wsdl" ID="0f9642dc-72a9-4ee4-94f1-0758d54c05b1" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/FiltroWS?wsdl" />
+    <MetadataFile FileName="FiltroWS.xsd" MetadataType="Schema" ID="f209dd6c-e6bc-4b9e-adea-f4abccb8c33f" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/FiltroWS?xsd=1" />
+    <MetadataFile FileName="FiltroWS.wsdl" MetadataType="Wsdl" ID="c607fd46-104a-413e-8b14-775cceb7213a" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/FiltroWS?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

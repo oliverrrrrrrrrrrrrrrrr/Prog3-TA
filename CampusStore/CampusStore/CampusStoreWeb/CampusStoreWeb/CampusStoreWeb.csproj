@@ -142,6 +142,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.cliente.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -158,9 +161,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.obtenerClienteResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\AutorWS\AutorWS.wsdl" />
@@ -191,10 +191,6 @@
     <Content Include="Connected Services\DescuentoWS\CampusStoreWeb.DescuentoWS.obtenerDescuentoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ClienteWS\ClienteWS.wsdl" />
-    <None Include="Connected Services\ClienteWS\ClienteWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\DescuentoWS\configuration91.svcinfo" />
     <None Include="Connected Services\DescuentoWS\configuration.svcinfo" />
     <None Include="Connected Services\DescuentoWS\Reference.svcmap">
@@ -216,6 +212,10 @@
     <Content Include="Connected Services\EditorialWS\CampusStoreWeb.EditorialWS.obtenerEditorialResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\DescuentoWS\DescuentoWS.wsdl" />
+    <None Include="Connected Services\DescuentoWS\DescuentoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\EditorialWS\configuration91.svcinfo" />
     <None Include="Connected Services\EditorialWS\configuration.svcinfo" />
     <None Include="Connected Services\EditorialWS\Reference.svcmap">
@@ -237,19 +237,11 @@
     <Content Include="Connected Services\EmpleadoWS\CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\EditorialWS\EditorialWS.wsdl" />
-    <None Include="Connected Services\EditorialWS\EditorialWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\EmpleadoWS\configuration91.svcinfo" />
     <None Include="Connected Services\EmpleadoWS\configuration.svcinfo" />
     <None Include="Connected Services\EmpleadoWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\EmpleadoWS\EmpleadoWS.wsdl" />
-    <None Include="Connected Services\EmpleadoWS\EmpleadoWS.xsd">
-      <SubType>Designer</SubType>
     </None>
     <Content Include="Connected Services\FiltroWS\CampusStoreWeb.FiltroWS.articulo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -263,6 +255,18 @@
     <Content Include="Connected Services\FiltroWS\CampusStoreWeb.FiltroWS.libro.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\ClienteWS\ClienteWS.wsdl" />
+    <None Include="Connected Services\ClienteWS\ClienteWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EditorialWS\EditorialWS.wsdl" />
+    <None Include="Connected Services\EditorialWS\EditorialWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EmpleadoWS\EmpleadoWS.wsdl" />
+    <None Include="Connected Services\EmpleadoWS\EmpleadoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\FiltroWS\configuration91.svcinfo" />
     <None Include="Connected Services\FiltroWS\configuration.svcinfo" />
     <None Include="Connected Services\FiltroWS\Reference.svcmap">
@@ -287,9 +291,34 @@
     <Content Include="Connected Services\LibroWS\CampusStoreWeb.LibroWS.registrarLibroResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\FiltroWS\FiltroWS.wsdl" />
+    <None Include="Connected Services\FiltroWS\FiltroWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\LibroWS\configuration91.svcinfo" />
     <None Include="Connected Services\LibroWS\configuration.svcinfo" />
     <None Include="Connected Services\LibroWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Connected Services\OrdenCompraWS\CampusStoreWeb.OrdenCompraWS.eliminarOrdenCompraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\OrdenCompraWS\CampusStoreWeb.OrdenCompraWS.guardarOrdenCompraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\OrdenCompraWS\CampusStoreWeb.OrdenCompraWS.listarOrdenesCompraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\OrdenCompraWS\CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\OrdenCompraWS\CampusStoreWeb.OrdenCompraWS.ordenCompra.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\OrdenCompraWS\configuration91.svcinfo" />
+    <None Include="Connected Services\OrdenCompraWS\configuration.svcinfo" />
+    <None Include="Connected Services\OrdenCompraWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -304,7 +333,7 @@
     <Content Include="GestionarClientes.aspx" />
     <Content Include="GestionarEmpleados.aspx" />
     <Content Include="GestionarLibros.aspx" />
-    <Content Include="GestionarPedidos.aspx" />
+    <Content Include="GestionarOrdenesCompra.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\carrito.png" />
     <Content Include="Images\diarioGreg.png" />
@@ -396,6 +425,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\OrdenCompraWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="DetalleArticulo.aspx.cs">
       <DependentUpon>DetalleArticulo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -466,12 +500,12 @@
     <Compile Include="GestionarLibros.aspx.designer.cs">
       <DependentUpon>GestionarLibros.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GestionarPedidos.aspx.cs">
-      <DependentUpon>GestionarPedidos.aspx</DependentUpon>
+    <Compile Include="GestionarOrdenesCompra.aspx.cs">
+      <DependentUpon>GestionarOrdenesCompra.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GestionarPedidos.aspx.designer.cs">
-      <DependentUpon>GestionarPedidos.aspx</DependentUpon>
+    <Compile Include="GestionarOrdenesCompra.aspx.designer.cs">
+      <DependentUpon>GestionarOrdenesCompra.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -578,16 +612,12 @@
     <None Include="Connected Services\ArticuloWS\ArticuloWS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\DescuentoWS\DescuentoWS.wsdl" />
-    <None Include="Connected Services\DescuentoWS\DescuentoWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\FiltroWS\FiltroWS.wsdl" />
-    <None Include="Connected Services\FiltroWS\FiltroWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\LibroWS\LibroWS.wsdl" />
     <None Include="Connected Services\LibroWS\LibroWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrdenCompraWS\OrdenCompraWS.wsdl" />
+    <None Include="Connected Services\OrdenCompraWS\OrdenCompraWS.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -615,6 +645,7 @@
     <WCFMetadataStorage Include="Connected Services\EmpleadoWS\" />
     <WCFMetadataStorage Include="Connected Services\FiltroWS\" />
     <WCFMetadataStorage Include="Connected Services\LibroWS\" />
+    <WCFMetadataStorage Include="Connected Services\OrdenCompraWS\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

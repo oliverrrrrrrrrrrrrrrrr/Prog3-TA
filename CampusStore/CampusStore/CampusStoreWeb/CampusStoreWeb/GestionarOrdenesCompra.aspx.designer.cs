@@ -11,25 +11,34 @@ namespace CampusStoreWeb
 {
 
 
-    public partial class GestionarPedidos
+    public partial class GestionarOrdenesCompra
     {
 
         /// <summary>
-        /// Control txtBuscarPedido.
+        /// Control txtBuscarOrdenCompra.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscarPedido;
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarOrdenCompra;
 
         /// <summary>
-        /// Control btnAgregarPedido.
+        /// Control gvOrdenesCompra.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAgregarPedido;
+        protected global::System.Web.UI.WebControls.GridView gvOrdenesCompra;
+
+        /// <summary>
+        /// Control btnAgregarOrdenCompra.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAgregarOrdenCompra;
     }
 }

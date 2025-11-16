@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="172a1512-a3b7-498c-80a3-38bb15821d96" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="5c5a67e2-bcd2-41e5-bc06-b0679c40e413" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,8 +22,8 @@
     <MetadataSource Address="http://localhost:8080/CampusStoreWS/DescuentoWS?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="DescuentoWS.xsd" MetadataType="Schema" ID="c5cb2f91-3342-4ea3-9e23-1e8cf8523061" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/DescuentoWS?xsd=1" />
-    <MetadataFile FileName="DescuentoWS.wsdl" MetadataType="Wsdl" ID="92de48c1-a4bc-4729-9002-ca63c5863129" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/DescuentoWS?wsdl" />
+    <MetadataFile FileName="DescuentoWS.xsd" MetadataType="Schema" ID="e7d93b26-c078-462c-a4d3-03901bf7e0b5" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/DescuentoWS?xsd=1" />
+    <MetadataFile FileName="DescuentoWS.wsdl" MetadataType="Wsdl" ID="2c73bd29-1a3c-4ed4-83fc-cb65cb40c802" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/DescuentoWS?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GestionarPedidos.aspx.cs" Inherits="CampusStoreWeb.GestionarPedidos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GestionarOrdenesCompra.aspx.cs" Inherits="CampusStoreWeb.GestionarOrdenesCompra" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         /* Breadcrumb personalizado */
@@ -141,6 +141,7 @@
         .table-pedidos {
             width: 100%;
             border-collapse: collapse;
+            border: none;
         }
         
         .table-pedidos thead th {
@@ -159,6 +160,25 @@
             color: #191C1F;
             font-size: 14px;
             border-bottom: 1px solid #E4E7E9;
+        }
+
+        .table-header{
+            background-color: #F2F4F5;
+            color: #475156;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid #E4E7E9;
+        }
+
+        .table-items{
+            padding: 16px;
+            color: #475156;
+            font-size: 14px;
+            border-bottom: 1px solid #E4E7E9;
+            font-weight: 500;
         }
         
         .table-pedidos tbody tr:last-child td {
@@ -452,9 +472,9 @@
                         <i class="bi bi-cart3"></i>
                         <span>Gestionar Clientes</span>
                     </asp:HyperLink>
-                    <asp:HyperLink runat="server" NavigateUrl="~/GestionarPedidos.aspx" CssClass="menu-item active">
+                    <asp:HyperLink runat="server" NavigateUrl="~/GestionarOrdenesCompra.aspx" CssClass="menu-item active">
                         <i class="bi bi-file-earmark-text"></i>
-                        <span>Gestionar Pedidos</span>
+                        <span>Gestionar Ordenes de Compra</span>
                     </asp:HyperLink>
                     <asp:HyperLink runat="server" NavigateUrl="~/GenerarReportes.aspx" CssClass="menu-item">
                         <i class="bi bi-gear"></i>
@@ -480,157 +500,37 @@
                     
                     <!-- Barra de búsqueda -->
                     <div class="search-box">
-                        <asp:TextBox ID="txtBuscarPedido" runat="server" placeholder="Ingresar ID" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtBuscarOrdenCompra" runat="server" placeholder="Ingresar ID" CssClass="form-control"></asp:TextBox>
                         <i class="bi bi-search"></i>
                     </div>
                     
                     <!-- Tabla -->
                     <div class="table-responsive">
-                        <table class="table-pedidos">
-                            <thead>
-                                <tr>
-                                    <th>ORDER ID</th>
-                                    <th>STATUS</th>
-                                    <th>DATE</th>
-                                    <th>TOTAL</th>
-                                    <th></th>
-                                    <th>ACTION</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="order-id">#96459761</td>
-                                    <td>
-                                        <span class="status-badge status-pagado">PAGADO</span>
-                                    </td>
-                                    <td class="order-date">Dec 30, 2019 05:18</td>
-                                    <td class="order-total">$1,500 (5 Products)</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetallePedido.aspx?id=96459761" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
+                        <asp:GridView ID="gvOrdenesCompra" runat="server" AutoGenerateColumns="false"
+                            CssClass="table-pedidos" PageSize="5" AllowPaging="true" OnPageIndexChanging="gvOrdenesCompra_PageIndexChanging">
+                            <Columns>
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="ID" DataField="idOrdenCompra" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="ESTADO" DataField="estado" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="FECHA CREACIÓN" DataField="fechaCreacion" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="FECHA LIMITE" DataField="limitePago" />
+                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="TOTAL" DataField="total" />
+                                <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="DETALLES">
+                                    <ItemTemplate>
+                                        <asp:HyperLink runat="server" 
+                                            NavigateUrl='<%# "~/DetalleOrdenCompra.aspx?id=" + Eval("idOrdenCompra") %>' 
+                                            CssClass="btn-view-details">
+                                            Ver Detalles <i class="bi bi-arrow-right"></i>
                                         </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#71667167</td>
-                                    <td>
-                                        <span class="status-badge status-entregado">ENTREGADO</span>
-                                    </td>
-                                    <td class="order-date">Feb 2, 2019 19:28</td>
-                                    <td class="order-total">$80 (11 Products)</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetallePedido.aspx?id=71667167" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#95214362</td>
-                                    <td>
-                                        <span class="status-badge status-no-pagado">NO PAGADO</span>
-                                    </td>
-                                    <td class="order-date">Mar 20, 2019 23:14</td>
-                                    <td class="order-total">$160 (3 Products)</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetallePedido.aspx?id=95214362" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#71667167</td>
-                                    <td>
-                                        <span class="status-badge status-entregado">ENTREGADO</span>
-                                    </td>
-                                    <td class="order-date">Feb 2, 2019 19:28</td>
-                                    <td class="order-total">$80 (1 Products)</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetallePedido.aspx?id=71667167" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#51746385</td>
-                                    <td>
-                                        <span class="status-badge status-entregado">ENTREGADO</span>
-                                    </td>
-                                    <td class="order-date">Feb 2, 2019 19:28</td>
-                                    <td class="order-total">$2,300 (2 Products)</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetallePedido.aspx?id=51746385" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#51746385</td>
-                                    <td>
-                                        <span class="status-badge status-entregado">ENTREGADO</span>
-                                    </td>
-                                    <td class="order-date">Dec 30, 2019 07:52</td>
-                                    <td class="order-total">$70 (1 Products)</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetallePedido.aspx?id=51746385" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#673971743</td>
-                                    <td>
-                                        <span class="status-badge status-entregado">ENTREGADO</span>
-                                    </td>
-                                    <td class="order-date">Dec 7, 2019 23:26</td>
-                                    <td class="order-total">$220 (1 Products)</td>
-                                    <td>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:HyperLink runat="server" NavigateUrl="~/DetallePedido.aspx?id=673971743" CssClass="btn-view-details">
-                                            View Details <i class="bi bi-arrow-right"></i>
-                                        </asp:HyperLink>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+                        
                     </div>
                     <div class="btn-agregar-container">
-                        <asp:LinkButton ID="btnAgregarPedido" runat="server" CssClass="btn-agregar-articulo" OnClick="btnAgregarPedido_Click" CausesValidation="false">
+                        <asp:LinkButton ID="btnAgregarOrdenCompra" runat="server" CssClass="btn-agregar-articulo" OnClick="btnAgregarOrdenCompra_Click" CausesValidation="false">
                             <i class="bi bi-plus-lg"></i>
-                            Agregar Pedido
+                            Agregar Orden de Compra
                         </asp:LinkButton>
                     </div>
                 </div>

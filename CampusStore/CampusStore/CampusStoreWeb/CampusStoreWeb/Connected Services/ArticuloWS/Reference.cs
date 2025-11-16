@@ -15,6 +15,14 @@ namespace CampusStoreWeb.ArticuloWS {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", ConfigurationName="ArticuloWS.ArticuloWS")]
     public interface ArticuloWS {
         
+        // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CampusStoreWeb.ArticuloWS.eliminarArticuloResponse eliminarArticulo(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.eliminarArticuloResponse> eliminarArticuloAsync(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request);
+        
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -24,15 +32,6 @@ namespace CampusStoreWeb.ArticuloWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosResponse")]
         System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.listarArticulosResponse> listarArticulosAsync(CampusStoreWeb.ArticuloWS.listarArticulosRequest request);
-        
-        // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
-        CampusStoreWeb.ArticuloWS.eliminarArticuloResponse eliminarArticulo(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.eliminarArticuloResponse> eliminarArticuloAsync(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request);
         
         // CODEGEN: El parámetro 'articulo' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloResponse")]
@@ -54,8 +53,36 @@ namespace CampusStoreWeb.ArticuloWS {
         System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.obtenerArticuloResponse> obtenerArticuloAsync(CampusStoreWeb.ArticuloWS.obtenerArticuloRequest request);
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarArticulo", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarArticuloRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int id;
+        
+        public eliminarArticuloRequest() {
+        }
+        
+        public eliminarArticuloRequest(int id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarArticuloResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarArticuloResponse {
+        
+        public eliminarArticuloResponse() {
+        }
+    }
+    
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -120,7 +147,7 @@ namespace CampusStoreWeb.ArticuloWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
     public enum tipoArticulo {
@@ -140,7 +167,7 @@ namespace CampusStoreWeb.ArticuloWS {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(articulo))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -326,7 +353,7 @@ namespace CampusStoreWeb.ArticuloWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -512,7 +539,7 @@ namespace CampusStoreWeb.ArticuloWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
     public enum tipoProducto {
@@ -525,7 +552,7 @@ namespace CampusStoreWeb.ArticuloWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -698,7 +725,7 @@ namespace CampusStoreWeb.ArticuloWS {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(cliente))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -786,7 +813,7 @@ namespace CampusStoreWeb.ArticuloWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -837,7 +864,7 @@ namespace CampusStoreWeb.ArticuloWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -994,36 +1021,8 @@ namespace CampusStoreWeb.ArticuloWS {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarArticulo", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarArticuloRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int id;
-        
-        public eliminarArticuloRequest() {
-        }
-        
-        public eliminarArticuloRequest(int id) {
-            this.id = id;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarArticuloResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarArticuloResponse {
-        
-        public eliminarArticuloResponse() {
-        }
-    }
-    
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
     public enum estado {
@@ -1135,27 +1134,6 @@ namespace CampusStoreWeb.ArticuloWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.ArticuloWS.listarArticulosResponse CampusStoreWeb.ArticuloWS.ArticuloWS.listarArticulos(CampusStoreWeb.ArticuloWS.listarArticulosRequest request) {
-            return base.Channel.listarArticulos(request);
-        }
-        
-        public CampusStoreWeb.ArticuloWS.articulo[] listarArticulos() {
-            CampusStoreWeb.ArticuloWS.listarArticulosRequest inValue = new CampusStoreWeb.ArticuloWS.listarArticulosRequest();
-            CampusStoreWeb.ArticuloWS.listarArticulosResponse retVal = ((CampusStoreWeb.ArticuloWS.ArticuloWS)(this)).listarArticulos(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.listarArticulosResponse> CampusStoreWeb.ArticuloWS.ArticuloWS.listarArticulosAsync(CampusStoreWeb.ArticuloWS.listarArticulosRequest request) {
-            return base.Channel.listarArticulosAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.listarArticulosResponse> listarArticulosAsync() {
-            CampusStoreWeb.ArticuloWS.listarArticulosRequest inValue = new CampusStoreWeb.ArticuloWS.listarArticulosRequest();
-            return ((CampusStoreWeb.ArticuloWS.ArticuloWS)(this)).listarArticulosAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         CampusStoreWeb.ArticuloWS.eliminarArticuloResponse CampusStoreWeb.ArticuloWS.ArticuloWS.eliminarArticulo(CampusStoreWeb.ArticuloWS.eliminarArticuloRequest request) {
             return base.Channel.eliminarArticulo(request);
         }
@@ -1175,6 +1153,27 @@ namespace CampusStoreWeb.ArticuloWS {
             CampusStoreWeb.ArticuloWS.eliminarArticuloRequest inValue = new CampusStoreWeb.ArticuloWS.eliminarArticuloRequest();
             inValue.id = id;
             return ((CampusStoreWeb.ArticuloWS.ArticuloWS)(this)).eliminarArticuloAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CampusStoreWeb.ArticuloWS.listarArticulosResponse CampusStoreWeb.ArticuloWS.ArticuloWS.listarArticulos(CampusStoreWeb.ArticuloWS.listarArticulosRequest request) {
+            return base.Channel.listarArticulos(request);
+        }
+        
+        public CampusStoreWeb.ArticuloWS.articulo[] listarArticulos() {
+            CampusStoreWeb.ArticuloWS.listarArticulosRequest inValue = new CampusStoreWeb.ArticuloWS.listarArticulosRequest();
+            CampusStoreWeb.ArticuloWS.listarArticulosResponse retVal = ((CampusStoreWeb.ArticuloWS.ArticuloWS)(this)).listarArticulos(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.listarArticulosResponse> CampusStoreWeb.ArticuloWS.ArticuloWS.listarArticulosAsync(CampusStoreWeb.ArticuloWS.listarArticulosRequest request) {
+            return base.Channel.listarArticulosAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CampusStoreWeb.ArticuloWS.listarArticulosResponse> listarArticulosAsync() {
+            CampusStoreWeb.ArticuloWS.listarArticulosRequest inValue = new CampusStoreWeb.ArticuloWS.listarArticulosRequest();
+            return ((CampusStoreWeb.ArticuloWS.ArticuloWS)(this)).listarArticulosAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

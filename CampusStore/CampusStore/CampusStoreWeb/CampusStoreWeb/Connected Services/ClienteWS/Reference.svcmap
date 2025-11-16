@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="0c3a47e6-abe5-45b8-8391-c2807ed6ca45" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="1b9fca94-903f-4669-b5e6-2078437eaafe" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,8 +22,8 @@
     <MetadataSource Address="http://localhost:8080/CampusStoreWS/ClienteWS?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ClienteWS.xsd" MetadataType="Schema" ID="8eafe93e-166d-4bdc-87d4-80633a9c180b" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/ClienteWS?xsd=1" />
-    <MetadataFile FileName="ClienteWS.wsdl" MetadataType="Wsdl" ID="d3d5acde-7e0d-4d18-8431-aaa837d0cf77" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/ClienteWS?wsdl" />
+    <MetadataFile FileName="ClienteWS.xsd" MetadataType="Schema" ID="8324f1be-6bef-4e4e-9487-150c7e816083" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/ClienteWS?xsd=1" />
+    <MetadataFile FileName="ClienteWS.wsdl" MetadataType="Wsdl" ID="e9435139-ef77-40af-9321-c752f1f57cb8" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/ClienteWS?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
