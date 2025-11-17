@@ -23,6 +23,8 @@ namespace CampusStoreWeb
         private List<LibroWS.autor> autoresSeleccionados;
         private LibroWS.editorial editorialTemporal;
 
+        private static readonly HttpClient httpClient = new HttpClient();
+
         public AgregarLibro()
         {
             this.libroWS = new LibroWSClient();
@@ -485,8 +487,6 @@ namespace CampusStoreWeb
         {
             Response.Redirect("GestionarLibros.aspx");
         }
-
-        private static readonly HttpClient httpClient = new HttpClient();
 
         private string SubirImagenAImgBB(System.Web.HttpPostedFile archivo)
         {
