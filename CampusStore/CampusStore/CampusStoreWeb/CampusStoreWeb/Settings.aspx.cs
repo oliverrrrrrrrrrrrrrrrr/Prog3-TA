@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -59,6 +60,15 @@ namespace CampusStoreWeb
 
             if (SaveUserSettings())
             {
+                //cliente cliente = (cliente)Session["Cliente"];
+                //cliente.nombreUsuario = txtUsername.Text;
+                //cliente.nombre = txtFullName.Text;
+                //cliente.correo = txtEmail.Text;
+                //Session["Cliente"] = cliente;
+                //Session["emaill"]= txtEmail.Text;
+                FormsAuthentication.SignOut();
+                FormsAuthentication.SetAuthCookie(txtEmail.Text, false);
+                Session["email"] = txtEmail.Text;
                 ShowMessage("¡Los cambios se guardaron correctamente!", "success");
             }
         }
