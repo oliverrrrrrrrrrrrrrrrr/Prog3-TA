@@ -46,7 +46,7 @@ public class ClienteBOImpl implements ClienteBO{
 
     @Override
     public Cliente buscarPorCuenta(String cuenta) {
-        return this.clienteDAO.buscarPorCuenta(cuenta);
+        return this.clienteDAO.buscarClientePorCorreo(cuenta);
     }
     
 }

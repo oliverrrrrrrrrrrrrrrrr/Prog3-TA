@@ -47,13 +47,13 @@ public class ClienteWS {
         this.clienteBO.guardar(cliente, estado);
     }
     
-    @WebMethod(operationName = "loginCliente")
-    public boolean login(
-        @WebParam(name = "correo") String correo, 
-        @WebParam(name = "contraseña") String contraseña
-    ) {
-        return this.clienteBO.login(correo, contraseña);
-    }
+//    @WebMethod(operationName = "loginCliente")
+//    public boolean login(
+//        @WebParam(name = "correo") String correo, 
+//        @WebParam(name = "contraseña") String contraseña
+//    ) {
+//        return this.clienteBO.login(correo, contraseña);
+//    }
     
     @WebMethod(operationName = "buscarClientePorCuenta")
     public Cliente buscarClientePorCuenta(@WebParam(name = "cuenta") String cuenta) {

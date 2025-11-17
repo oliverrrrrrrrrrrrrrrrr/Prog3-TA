@@ -9,5 +9,5 @@ import pe.edu.pucp.campusstore.modelo.Empleado;
  * @author AXEL
  */
 public interface EmpleadoDAO extends Persistible<Empleado, Integer> {
-
+    Empleado buscarEmpleadoPorCorreo(String correo);
 }

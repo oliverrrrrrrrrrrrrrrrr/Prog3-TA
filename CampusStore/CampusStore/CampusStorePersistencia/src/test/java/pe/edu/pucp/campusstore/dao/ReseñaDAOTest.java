@@ -44,6 +44,7 @@ public class ReseñaDAOTest implements PersistibleProbable{
         articulo.setDescripcion("Articulo para pruebas de reseña");
         articulo.setDescuento(null);
         articulo.setReseñas(null);
+        articulo.setImagenURL("imagen url");
         articulo.setTipoArticulo(TipoArticulo.LAPICERO);
         
         this.testArticuloId = articuloDAO.crear(articulo);

@@ -1,4 +1,5 @@
 ﻿using CampusStoreWeb.ClienteWS;
+using CampusStoreWeb.UsuarioWS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,12 @@ namespace CampusStoreWeb
 {
     public partial class SignIn : System.Web.UI.Page
     {
-        public ClienteWSClient clientWS;
+        //public ClienteWSClient clientWS;
+        public UsuarioWSClient usuarioWS;
 
         public SignIn()
         {
-            clientWS = new ClienteWSClient();
+            usuarioWS = new UsuarioWSClient();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -33,23 +35,37 @@ namespace CampusStoreWeb
             string password = txtPassword.Text;
 
             // PRIMERO: Verificar si es un administrador
-            if (EsAdministrador(email, password))
-            {
-                Session["Email"] = email;
-                Session["Rol"] = "Admin";
-                Session["IsAdmin"] = true;
-                Session["NombreUsuario"] = "Administrator";
+            //if (EsAdministrador(email, password))
+            //{
+            //    Session["Email"] = email;
+            //    Session["Rol"] = "Admin";
+            //    Session["IsAdmin"] = true;
+            //    Session["NombreUsuario"] = "Administrator";
 
-                FormsAuthentication.RedirectFromLoginPage(email, false);
-                Response.Redirect("GestionarEmpleados.aspx");
-                return;
-            }
+            //    FormsAuthentication.RedirectFromLoginPage(email, false);
+            //    Response.Redirect("GestionarEmpleados.aspx");
+            //    return;
+            //}
 
-            if (!this.clientWS.loginCliente(email, password))
+            loginResponse respuesta = this.usuarioWS.loginUsuario(email, password);
+
+            if (!respuesta.encontrado)
             {
                 cvLoginError.IsValid = false;
                 cvLoginError.ErrorMessage = "La cuenta o contraseña es incorrecta.";
 
+                return;
+            }
+
+            if (respuesta.tipoUsuario == tipoUsuario.EMPLEADO)
+            {
+                Session["Email"] = email;
+                Session["Rol"] = "Admin";
+                Session["IsAdmin"] = true;
+                Session["NombreUsuario"] = respuesta.usuario.nombreUsuario;
+
+                FormsAuthentication.RedirectFromLoginPage(email, false);
+                Response.Redirect("GestionarEmpleados.aspx");
                 return;
             }
 

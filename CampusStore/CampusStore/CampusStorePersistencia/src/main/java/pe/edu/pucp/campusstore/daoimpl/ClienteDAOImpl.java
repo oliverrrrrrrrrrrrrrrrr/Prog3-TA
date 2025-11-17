@@ -113,27 +113,27 @@ public class ClienteDAOImpl extends BaseDAO<Cliente> implements ClienteDAO {
         });
     }
 
-    protected PreparedStatement comandoBuscarPorCuenta(
-            Connection conn, String cuenta) 
+    protected PreparedStatement comandoBuscarPorCorreo(
+            Connection conn, String correo) 
             throws SQLException {
         
-        String sql = "{call buscarClientePorCuenta(?)}";
+        String sql = "{call buscarClientePorCorreo(?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setString("p_cuenta", cuenta);
+        cmd.setString("p_correo", correo);
         
         return cmd;
     }
     
     @Override
-    public Cliente buscarPorCuenta(String cuenta) {
+    public Cliente buscarClientePorCorreo(String correo) {
         return ejecutarComando(conn -> {
-            try (PreparedStatement cmd = this.comandoBuscarPorCuenta(conn, cuenta)) {
+            try (PreparedStatement cmd = this.comandoBuscarPorCorreo(conn, correo)) {
                 ResultSet rs = cmd.executeQuery();
 
                 if (!rs.next()) {
                     System.err.println("No se encontro el registro con "
-                            + "cuenta: " + cuenta);
+                            + "correo: " + correo);
                     return null;
                 }
 

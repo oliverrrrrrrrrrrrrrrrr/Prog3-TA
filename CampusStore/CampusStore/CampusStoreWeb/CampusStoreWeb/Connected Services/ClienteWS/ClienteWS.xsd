@@ -8,21 +8,8 @@
   <xs:element name="guardarClienteResponse" type="tns:guardarClienteResponse" />
   <xs:element name="listarClientes" type="tns:listarClientes" />
   <xs:element name="listarClientesResponse" type="tns:listarClientesResponse" />
-  <xs:element name="loginCliente" type="tns:loginCliente" />
-  <xs:element name="loginClienteResponse" type="tns:loginClienteResponse" />
   <xs:element name="obtenerCliente" type="tns:obtenerCliente" />
   <xs:element name="obtenerClienteResponse" type="tns:obtenerClienteResponse" />
-  <xs:complexType name="loginCliente">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="correo" type="xs:string" />
-      <xs:element minOccurs="0" name="contraseña" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="loginClienteResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:boolean" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="eliminarCliente">
     <xs:sequence>
       <xs:element name="id" type="xs:int" />

@@ -16,30 +16,14 @@ namespace CampusStoreWeb.ClienteWS {
     public interface ClienteWS {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/loginClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/loginClienteResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        CampusStoreWeb.ClienteWS.loginClienteResponse loginCliente(CampusStoreWeb.ClienteWS.loginClienteRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/loginClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/loginClienteResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.loginClienteResponse> loginClienteAsync(CampusStoreWeb.ClienteWS.loginClienteRequest request);
-        
-        // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        CampusStoreWeb.ClienteWS.eliminarClienteResponse eliminarCliente(CampusStoreWeb.ClienteWS.eliminarClienteRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.eliminarClienteResponse> eliminarClienteAsync(CampusStoreWeb.ClienteWS.eliminarClienteRequest request);
-        
-        // CODEGEN: El parámetro 'cliente' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
-        CampusStoreWeb.ClienteWS.guardarClienteResponse guardarCliente(CampusStoreWeb.ClienteWS.guardarClienteRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse buscarClientePorCuenta(CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.guardarClienteResponse> guardarClienteAsync(CampusStoreWeb.ClienteWS.guardarClienteRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse> buscarClientePorCuentaAsync(CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/listarClientesRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/listarClientesResponse")]
@@ -61,88 +45,27 @@ namespace CampusStoreWeb.ClienteWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerClienteResponse")]
         System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.obtenerClienteResponse> obtenerClienteAsync(CampusStoreWeb.ClienteWS.obtenerClienteRequest request);
         
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaResponse")]
+        // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse buscarClientePorCuenta(CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest request);
+        CampusStoreWeb.ClienteWS.eliminarClienteResponse eliminarCliente(CampusStoreWeb.ClienteWS.eliminarClienteRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse> buscarClientePorCuentaAsync(CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="loginCliente", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class loginClienteRequest {
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.eliminarClienteResponse> eliminarClienteAsync(CampusStoreWeb.ClienteWS.eliminarClienteRequest request);
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string correo;
+        // CODEGEN: El parámetro 'cliente' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
+        CampusStoreWeb.ClienteWS.guardarClienteResponse guardarCliente(CampusStoreWeb.ClienteWS.guardarClienteRequest request);
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=1)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string contraseña;
-        
-        public loginClienteRequest() {
-        }
-        
-        public loginClienteRequest(string correo, string contraseña) {
-            this.correo = correo;
-            this.contraseña = contraseña;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="loginClienteResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class loginClienteResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public bool @return;
-        
-        public loginClienteResponse() {
-        }
-        
-        public loginClienteResponse(bool @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarCliente", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarClienteRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int id;
-        
-        public eliminarClienteRequest() {
-        }
-        
-        public eliminarClienteRequest(int id) {
-            this.id = id;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarClienteResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarClienteResponse {
-        
-        public eliminarClienteResponse() {
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.guardarClienteResponse> guardarClienteAsync(CampusStoreWeb.ClienteWS.guardarClienteRequest request);
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -193,7 +116,7 @@ namespace CampusStoreWeb.ClienteWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -366,7 +289,7 @@ namespace CampusStoreWeb.ClienteWS {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(cliente))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -453,52 +376,39 @@ namespace CampusStoreWeb.ClienteWS {
         }
     }
     
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
-    public enum estado {
-        
-        /// <remarks/>
-        Nuevo,
-        
-        /// <remarks/>
-        Modificado,
-        
-        /// <remarks/>
-        Eliminado,
-    }
-    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="guardarCliente", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class guardarClienteRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarClientePorCuenta", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarClientePorCuentaRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public CampusStoreWeb.ClienteWS.cliente cliente;
+        public string cuenta;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=1)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public CampusStoreWeb.ClienteWS.estado estado;
-        
-        public guardarClienteRequest() {
+        public buscarClientePorCuentaRequest() {
         }
         
-        public guardarClienteRequest(CampusStoreWeb.ClienteWS.cliente cliente, CampusStoreWeb.ClienteWS.estado estado) {
-            this.cliente = cliente;
-            this.estado = estado;
+        public buscarClientePorCuentaRequest(string cuenta) {
+            this.cuenta = cuenta;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="guardarClienteResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class guardarClienteResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarClientePorCuentaResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarClientePorCuentaResponse {
         
-        public guardarClienteResponse() {
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public CampusStoreWeb.ClienteWS.cliente @return;
+        
+        public buscarClientePorCuentaResponse() {
+        }
+        
+        public buscarClientePorCuentaResponse(CampusStoreWeb.ClienteWS.cliente @return) {
+            this.@return = @return;
         }
     }
     
@@ -569,36 +479,77 @@ namespace CampusStoreWeb.ClienteWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarClientePorCuenta", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class buscarClientePorCuentaRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarCliente", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarClienteRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string cuenta;
+        public int id;
         
-        public buscarClientePorCuentaRequest() {
+        public eliminarClienteRequest() {
         }
         
-        public buscarClientePorCuentaRequest(string cuenta) {
-            this.cuenta = cuenta;
+        public eliminarClienteRequest(int id) {
+            this.id = id;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarClientePorCuentaResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class buscarClientePorCuentaResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarClienteResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarClienteResponse {
+        
+        public eliminarClienteResponse() {
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
+    public enum estado {
+        
+        /// <remarks/>
+        Nuevo,
+        
+        /// <remarks/>
+        Modificado,
+        
+        /// <remarks/>
+        Eliminado,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="guardarCliente", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class guardarClienteRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public CampusStoreWeb.ClienteWS.cliente @return;
+        public CampusStoreWeb.ClienteWS.cliente cliente;
         
-        public buscarClientePorCuentaResponse() {
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public CampusStoreWeb.ClienteWS.estado estado;
+        
+        public guardarClienteRequest() {
         }
         
-        public buscarClientePorCuentaResponse(CampusStoreWeb.ClienteWS.cliente @return) {
-            this.@return = @return;
+        public guardarClienteRequest(CampusStoreWeb.ClienteWS.cliente cliente, CampusStoreWeb.ClienteWS.estado estado) {
+            this.cliente = cliente;
+            this.estado = estado;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="guardarClienteResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class guardarClienteResponse {
+        
+        public guardarClienteResponse() {
         }
     }
     
@@ -630,74 +581,26 @@ namespace CampusStoreWeb.ClienteWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.ClienteWS.loginClienteResponse CampusStoreWeb.ClienteWS.ClienteWS.loginCliente(CampusStoreWeb.ClienteWS.loginClienteRequest request) {
-            return base.Channel.loginCliente(request);
+        CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse CampusStoreWeb.ClienteWS.ClienteWS.buscarClientePorCuenta(CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest request) {
+            return base.Channel.buscarClientePorCuenta(request);
         }
         
-        public bool loginCliente(string correo, string contraseña) {
-            CampusStoreWeb.ClienteWS.loginClienteRequest inValue = new CampusStoreWeb.ClienteWS.loginClienteRequest();
-            inValue.correo = correo;
-            inValue.contraseña = contraseña;
-            CampusStoreWeb.ClienteWS.loginClienteResponse retVal = ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).loginCliente(inValue);
+        public CampusStoreWeb.ClienteWS.cliente buscarClientePorCuenta(string cuenta) {
+            CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest inValue = new CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest();
+            inValue.cuenta = cuenta;
+            CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse retVal = ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).buscarClientePorCuenta(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.loginClienteResponse> CampusStoreWeb.ClienteWS.ClienteWS.loginClienteAsync(CampusStoreWeb.ClienteWS.loginClienteRequest request) {
-            return base.Channel.loginClienteAsync(request);
+        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse> CampusStoreWeb.ClienteWS.ClienteWS.buscarClientePorCuentaAsync(CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest request) {
+            return base.Channel.buscarClientePorCuentaAsync(request);
         }
         
-        public System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.loginClienteResponse> loginClienteAsync(string correo, string contraseña) {
-            CampusStoreWeb.ClienteWS.loginClienteRequest inValue = new CampusStoreWeb.ClienteWS.loginClienteRequest();
-            inValue.correo = correo;
-            inValue.contraseña = contraseña;
-            return ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).loginClienteAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.ClienteWS.eliminarClienteResponse CampusStoreWeb.ClienteWS.ClienteWS.eliminarCliente(CampusStoreWeb.ClienteWS.eliminarClienteRequest request) {
-            return base.Channel.eliminarCliente(request);
-        }
-        
-        public void eliminarCliente(int id) {
-            CampusStoreWeb.ClienteWS.eliminarClienteRequest inValue = new CampusStoreWeb.ClienteWS.eliminarClienteRequest();
-            inValue.id = id;
-            CampusStoreWeb.ClienteWS.eliminarClienteResponse retVal = ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).eliminarCliente(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.eliminarClienteResponse> CampusStoreWeb.ClienteWS.ClienteWS.eliminarClienteAsync(CampusStoreWeb.ClienteWS.eliminarClienteRequest request) {
-            return base.Channel.eliminarClienteAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.eliminarClienteResponse> eliminarClienteAsync(int id) {
-            CampusStoreWeb.ClienteWS.eliminarClienteRequest inValue = new CampusStoreWeb.ClienteWS.eliminarClienteRequest();
-            inValue.id = id;
-            return ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).eliminarClienteAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.ClienteWS.guardarClienteResponse CampusStoreWeb.ClienteWS.ClienteWS.guardarCliente(CampusStoreWeb.ClienteWS.guardarClienteRequest request) {
-            return base.Channel.guardarCliente(request);
-        }
-        
-        public void guardarCliente(CampusStoreWeb.ClienteWS.cliente cliente, CampusStoreWeb.ClienteWS.estado estado) {
-            CampusStoreWeb.ClienteWS.guardarClienteRequest inValue = new CampusStoreWeb.ClienteWS.guardarClienteRequest();
-            inValue.cliente = cliente;
-            inValue.estado = estado;
-            CampusStoreWeb.ClienteWS.guardarClienteResponse retVal = ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).guardarCliente(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.guardarClienteResponse> CampusStoreWeb.ClienteWS.ClienteWS.guardarClienteAsync(CampusStoreWeb.ClienteWS.guardarClienteRequest request) {
-            return base.Channel.guardarClienteAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.guardarClienteResponse> guardarClienteAsync(CampusStoreWeb.ClienteWS.cliente cliente, CampusStoreWeb.ClienteWS.estado estado) {
-            CampusStoreWeb.ClienteWS.guardarClienteRequest inValue = new CampusStoreWeb.ClienteWS.guardarClienteRequest();
-            inValue.cliente = cliente;
-            inValue.estado = estado;
-            return ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).guardarClienteAsync(inValue);
+        public System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse> buscarClientePorCuentaAsync(string cuenta) {
+            CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest inValue = new CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest();
+            inValue.cuenta = cuenta;
+            return ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).buscarClientePorCuentaAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -745,26 +648,49 @@ namespace CampusStoreWeb.ClienteWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse CampusStoreWeb.ClienteWS.ClienteWS.buscarClientePorCuenta(CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest request) {
-            return base.Channel.buscarClientePorCuenta(request);
+        CampusStoreWeb.ClienteWS.eliminarClienteResponse CampusStoreWeb.ClienteWS.ClienteWS.eliminarCliente(CampusStoreWeb.ClienteWS.eliminarClienteRequest request) {
+            return base.Channel.eliminarCliente(request);
         }
         
-        public CampusStoreWeb.ClienteWS.cliente buscarClientePorCuenta(string cuenta) {
-            CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest inValue = new CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest();
-            inValue.cuenta = cuenta;
-            CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse retVal = ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).buscarClientePorCuenta(inValue);
-            return retVal.@return;
+        public void eliminarCliente(int id) {
+            CampusStoreWeb.ClienteWS.eliminarClienteRequest inValue = new CampusStoreWeb.ClienteWS.eliminarClienteRequest();
+            inValue.id = id;
+            CampusStoreWeb.ClienteWS.eliminarClienteResponse retVal = ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).eliminarCliente(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse> CampusStoreWeb.ClienteWS.ClienteWS.buscarClientePorCuentaAsync(CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest request) {
-            return base.Channel.buscarClientePorCuentaAsync(request);
+        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.eliminarClienteResponse> CampusStoreWeb.ClienteWS.ClienteWS.eliminarClienteAsync(CampusStoreWeb.ClienteWS.eliminarClienteRequest request) {
+            return base.Channel.eliminarClienteAsync(request);
         }
         
-        public System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse> buscarClientePorCuentaAsync(string cuenta) {
-            CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest inValue = new CampusStoreWeb.ClienteWS.buscarClientePorCuentaRequest();
-            inValue.cuenta = cuenta;
-            return ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).buscarClientePorCuentaAsync(inValue);
+        public System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.eliminarClienteResponse> eliminarClienteAsync(int id) {
+            CampusStoreWeb.ClienteWS.eliminarClienteRequest inValue = new CampusStoreWeb.ClienteWS.eliminarClienteRequest();
+            inValue.id = id;
+            return ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).eliminarClienteAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CampusStoreWeb.ClienteWS.guardarClienteResponse CampusStoreWeb.ClienteWS.ClienteWS.guardarCliente(CampusStoreWeb.ClienteWS.guardarClienteRequest request) {
+            return base.Channel.guardarCliente(request);
+        }
+        
+        public void guardarCliente(CampusStoreWeb.ClienteWS.cliente cliente, CampusStoreWeb.ClienteWS.estado estado) {
+            CampusStoreWeb.ClienteWS.guardarClienteRequest inValue = new CampusStoreWeb.ClienteWS.guardarClienteRequest();
+            inValue.cliente = cliente;
+            inValue.estado = estado;
+            CampusStoreWeb.ClienteWS.guardarClienteResponse retVal = ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).guardarCliente(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.guardarClienteResponse> CampusStoreWeb.ClienteWS.ClienteWS.guardarClienteAsync(CampusStoreWeb.ClienteWS.guardarClienteRequest request) {
+            return base.Channel.guardarClienteAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CampusStoreWeb.ClienteWS.guardarClienteResponse> guardarClienteAsync(CampusStoreWeb.ClienteWS.cliente cliente, CampusStoreWeb.ClienteWS.estado estado) {
+            CampusStoreWeb.ClienteWS.guardarClienteRequest inValue = new CampusStoreWeb.ClienteWS.guardarClienteRequest();
+            inValue.cliente = cliente;
+            inValue.estado = estado;
+            return ((CampusStoreWeb.ClienteWS.ClienteWS)(this)).guardarClienteAsync(inValue);
         }
     }
 }

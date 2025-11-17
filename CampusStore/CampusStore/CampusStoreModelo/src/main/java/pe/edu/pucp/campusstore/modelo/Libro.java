@@ -13,7 +13,6 @@ public class Libro extends Producto {
     private Formato formato;
     private String sinopsis;
     private Editorial editorial;
-    private String imagenURL;
     private List<Autor> autores;
     
     public Libro() {
@@ -25,12 +24,11 @@ public class Libro extends Producto {
         this.formato = null;
         this.sinopsis = null;
         this.editorial = null;
-        this.imagenURL = null;
         this.autores = null;
     }
 
-    public Libro(Integer idLibro, String isbn, GeneroLibro genero, Date fechaPublicacion, Formato formato, String sinopsis, Editorial editorial, String imagenURL, List<Autor> autores, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, Descuento descuento, List<Reseña> reseñas) {
-        super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion, descuento, reseñas);
+    public Libro(Integer idLibro, String isbn, GeneroLibro genero, Date fechaPublicacion, Formato formato, String sinopsis, Editorial editorial, List<Autor> autores, Double precio, Double precioDescuento, Integer stockReal, Integer stockVirtual, String nombre, String descripcion, Descuento descuento, List<Reseña> reseñas, String imagenURL) {
+        super(precio, precioDescuento, stockReal, stockVirtual, nombre, descripcion, descuento, reseñas, imagenURL);
         this.idLibro = idLibro;
         this.isbn = isbn;
         this.genero = genero;
@@ -38,9 +36,10 @@ public class Libro extends Producto {
         this.formato = formato;
         this.sinopsis = sinopsis;
         this.editorial = editorial;
-        this.imagenURL = imagenURL;
         this.autores = autores;
     }
+    
+    
 
     /**
      * @return the idLibro
@@ -138,20 +137,6 @@ public class Libro extends Producto {
      */
     public void setEditorial(Editorial editorial) {
         this.editorial = editorial;
-    }
-
-    /**
-     * @return the imagenURL
-     */
-    public String getImagenURL() {
-        return imagenURL;
-    }
-
-    /**
-     * @param imagenURL the imagenURL to set
-     */
-    public void setImagenURL(String imagenURL) {
-        this.imagenURL = imagenURL;
     }
 
     /**

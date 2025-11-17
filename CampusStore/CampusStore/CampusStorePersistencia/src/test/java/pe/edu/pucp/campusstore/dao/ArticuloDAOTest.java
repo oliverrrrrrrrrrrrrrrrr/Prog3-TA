@@ -51,6 +51,7 @@ public class ArticuloDAOTest implements PersistibleProbable{
         articulo.setDescripcion("");
         articulo.setDescuento(null);
         articulo.setReseñas(null);
+        articulo.setImagenURL("imagen url");
         articulo.setTipoArticulo(TipoArticulo.LAPICERO);
         
         this.testId = articuloDAO.crear(articulo);
@@ -74,7 +75,7 @@ public class ArticuloDAOTest implements PersistibleProbable{
         articulo.setTipoArticulo(TipoArticulo.LAPICERO);
         articulo.setDescuento(null);
         articulo.setReseñas(null);
-        
+        articulo.setImagenURL("imagen url actualizado");
         boolean modifico = articuloDAO.actualizar(articulo);
         assertTrue(modifico);
         
@@ -105,7 +106,7 @@ public class ArticuloDAOTest implements PersistibleProbable{
         articulo.setTipoArticulo(TipoArticulo.LAPICERO);
         articulo.setDescuento(null);
         articulo.setReseñas(null);
-        
+        articulo.setImagenURL("imagen url actualizado");
         boolean modifico = articuloDAO.actualizar(articulo);
         assertFalse(modifico);
     }

@@ -93,6 +93,7 @@ public class LineaCarritoDAOTest implements PersistibleProbable{
         articulo.setDescripcion("Articulo de prueba");
         articulo.setDescuento(null);
         articulo.setReseñas(null);
+        articulo.setImagenURL("imagen url");
         articulo.setTipoArticulo(TipoArticulo.LAPICERO);
         
         this.testArticuloId = articuloDAO.crear(articulo);

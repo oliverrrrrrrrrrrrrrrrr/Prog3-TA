@@ -17,7 +17,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
     protected PreparedStatement comandoCrear(Connection conn, 
             Articulo modelo) throws SQLException {
         
-        String sql = "{call insertarArticulo(?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call insertarArticulo(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_nombre", modelo.getNombre());
         cmd.setString("p_descripcion", modelo.getDescripcion());
@@ -26,6 +26,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         cmd.setInt("p_stockReal", modelo.getStockReal());
         cmd.setInt("p_stockVirtual", modelo.getStockVirtual());
         cmd.setString("p_tipoArticulo", modelo.getTipoArticulo().toString());
+        cmd.setString("p_imagenURL", modelo.getImagenURL());
         cmd.registerOutParameter("p_id", Types.INTEGER);
 
         return cmd;
@@ -35,7 +36,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
     protected PreparedStatement comandoActualizar(Connection conn, 
             Articulo modelo) throws SQLException {
         
-        String sql = "{call modificarArticulo(?, ?, ?, ?, ?, ?, ?, ?)}";
+        String sql = "{call modificarArticulo(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setString("p_nombre", modelo.getNombre());
@@ -45,6 +46,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         cmd.setInt("p_stockReal", modelo.getStockReal());
         cmd.setInt("p_stockVirtual", modelo.getStockVirtual());
         cmd.setString("p_tipoArticulo", modelo.getTipoArticulo().toString());
+        cmd.setString("p_imagenURL", modelo.getImagenURL());
         cmd.setInt("p_id", modelo.getIdArticulo());
         
         return cmd;
@@ -92,6 +94,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         modelo.setStockVirtual(rs.getInt("stockVirtual"));
         modelo.setNombre(rs.getString("nombre"));
         modelo.setDescripcion(rs.getString("descripcion"));
+        modelo.setImagenURL(rs.getString("imagenURL"));
         
         modelo.setTipoArticulo(TipoArticulo.valueOf(rs.getString("tipoArticulo")));
         
