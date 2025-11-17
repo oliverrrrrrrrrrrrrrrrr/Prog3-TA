@@ -1,4 +1,4 @@
-﻿using CampusStoreWeb.LibroWS;
+﻿using CampusStoreWeb.CampusStoreWS;
 using System;
 using System.ComponentModel;
 using System.Linq;

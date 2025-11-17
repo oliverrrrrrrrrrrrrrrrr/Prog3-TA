@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <discovery xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.xmlsoap.org/disco/">
-  <contractRef ref="http://localhost:8080/CampusStoreWS/LibroWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
   <contractRef ref="http://localhost:8080/CampusStoreWS/ArticuloWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://localhost:8080/CampusStoreWS/AutorWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
   <contractRef ref="http://localhost:8080/CampusStoreWS/ClienteWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://localhost:8080/CampusStoreWS/DescuentoWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://localhost:8080/CampusStoreWS/EditorialWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://localhost:8080/CampusStoreWS/EmpleadoWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://localhost:8080/CampusStoreWS/FiltroWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://localhost:8080/CampusStoreWS/LibroWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://localhost:8080/CampusStoreWS/OrdenCompraWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://localhost:8080/CampusStoreWS/UsuarioWS?wsdl" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
 </discovery>

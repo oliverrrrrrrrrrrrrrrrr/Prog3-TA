@@ -1,4 +1,4 @@
-﻿using CampusStoreWeb.ArticuloWS;
+﻿using CampusStoreWeb.CampusStoreWS;
 using System;
 using System.Configuration;
 using System.IO;

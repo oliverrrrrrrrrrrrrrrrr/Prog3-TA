@@ -1,5 +1,4 @@
-﻿using CampusStoreWeb.ClienteWS;
-using CampusStoreWeb.EmpleadoWS;
+﻿using CampusStoreWeb.CampusStoreWS;
 using System;
 
 namespace CampusStoreWeb
@@ -147,7 +146,7 @@ namespace CampusStoreWeb
                     };
 
                     // Llamar al WS para actualizar
-                    empleadoWS.guardarEmpleado(empleadoEditado, EmpleadoWS.estado.Modificado);
+                    empleadoWS.guardarEmpleado(empleadoEditado, estado.Modificado);
 
                     // Recargar datos actualizados
                     empleadoActual = empleadoWS.obtenerEmpleado(idEmpleadoActual);

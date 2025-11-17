@@ -101,403 +101,170 @@
     <Content Include="AgregarOrdenCompra.aspx" />
     <Content Include="Catalogo.aspx" />
     <Content Include="Checkout.aspx" />
-    <Content Include="Connected Services\ArticuloWS\CampusStoreWeb.ArticuloWS.articulo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\ArticuloWS\CampusStoreWeb.ArticuloWS.eliminarArticuloResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\ArticuloWS\CampusStoreWeb.ArticuloWS.guardarArticuloResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\ArticuloWS\CampusStoreWeb.ArticuloWS.listarArticulosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\ArticuloWS\CampusStoreWeb.ArticuloWS.obtenerArticuloResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\ArticuloWS\configuration91.svcinfo" />
-    <None Include="Connected Services\ArticuloWS\configuration.svcinfo" />
-    <None Include="Connected Services\ArticuloWS\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Connected Services\AutorWS\CampusStoreWeb.AutorWS.autor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\AutorWS\CampusStoreWeb.AutorWS.eliminarAutorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\AutorWS\CampusStoreWeb.AutorWS.guardarAutorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\AutorWS\CampusStoreWeb.AutorWS.listarAutoresResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\AutorWS\CampusStoreWeb.AutorWS.obtenerAutorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\AutorWS\configuration91.svcinfo" />
-    <None Include="Connected Services\AutorWS\configuration.svcinfo" />
-    <None Include="Connected Services\AutorWS\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.cliente.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.eliminarClienteResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.guardarClienteResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.listarClientesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.obtenerClienteResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\AutorWS\AutorWS.wsdl" />
-    <None Include="Connected Services\AutorWS\AutorWS.xsd">
+    <None Include="Connected Services\CampusStoreWS\ArticuloWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\AutorWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\AutorWS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Connected Services\ClienteWS\CampusStoreWeb.ClienteWS.buscarClientePorCuentaResponse.datasource">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.articulo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ClienteWS\configuration91.svcinfo" />
-    <None Include="Connected Services\ClienteWS\configuration.svcinfo" />
-    <None Include="Connected Services\ClienteWS\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Connected Services\DescuentoWS\CampusStoreWeb.DescuentoWS.descuento.datasource">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.autor.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\DescuentoWS\CampusStoreWeb.DescuentoWS.eliminarDescuentoResponse.datasource">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.buscarClientePorCuentaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\DescuentoWS\CampusStoreWeb.DescuentoWS.guardarDescuentoResponse.datasource">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.cliente.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\DescuentoWS\CampusStoreWeb.DescuentoWS.listarDescuentosResponse.datasource">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.descuento.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\DescuentoWS\CampusStoreWeb.DescuentoWS.obtenerDescuentoPorProductoResponse.datasource">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.editorial.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\DescuentoWS\CampusStoreWeb.DescuentoWS.obtenerDescuentoResponse.datasource">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarArticuloResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\DescuentoWS\configuration91.svcinfo" />
-    <None Include="Connected Services\DescuentoWS\configuration.svcinfo" />
-    <None Include="Connected Services\DescuentoWS\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Connected Services\EditorialWS\CampusStoreWeb.EditorialWS.editorial.datasource">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarAutorResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\EditorialWS\CampusStoreWeb.EditorialWS.eliminarEditorialResponse.datasource">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarClienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\EditorialWS\CampusStoreWeb.EditorialWS.guardarEditorialResponse.datasource">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarDescuentoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\EditorialWS\CampusStoreWeb.EditorialWS.listarEditorialesResponse.datasource">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarEditorialResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\EditorialWS\CampusStoreWeb.EditorialWS.obtenerEditorialResponse.datasource">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarEmpleadoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\DescuentoWS\DescuentoWS.wsdl" />
-    <None Include="Connected Services\DescuentoWS\DescuentoWS.xsd">
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarLibroResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarOrdenCompraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.empleado.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.filtrarLibrosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.filtrarPorTipoArticuloResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarArticuloResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarAutorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarDescuentoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarEditorialResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarEmpleadoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarLibroResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarOrdenCompraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.libro.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarArticulosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarAutoresResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarClientesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarDescuentosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarEditorialesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarEmpleadosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarLibrosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarOrdenesCompraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.loginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.loginUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerArticuloResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerAutorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerDescuentoPorProductoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerDescuentoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerEditorialResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerEmpleadoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerLibroResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerOrdenCompraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.ordenCompra.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.registrarLibroResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\CampusStoreWS\DescuentoWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\DescuentoWS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\EditorialWS\configuration91.svcinfo" />
-    <None Include="Connected Services\EditorialWS\configuration.svcinfo" />
-    <None Include="Connected Services\EditorialWS\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Connected Services\EmpleadoWS\CampusStoreWeb.EmpleadoWS.eliminarEmpleadoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\EmpleadoWS\CampusStoreWeb.EmpleadoWS.empleado.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\EmpleadoWS\CampusStoreWeb.EmpleadoWS.guardarEmpleadoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\EmpleadoWS\CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\EmpleadoWS\CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\EmpleadoWS\configuration91.svcinfo" />
-    <None Include="Connected Services\EmpleadoWS\configuration.svcinfo" />
-    <None Include="Connected Services\EmpleadoWS\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Connected Services\FiltroWS\CampusStoreWeb.FiltroWS.articulo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\FiltroWS\CampusStoreWeb.FiltroWS.filtrarLibrosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\FiltroWS\CampusStoreWeb.FiltroWS.filtrarPorTipoArticuloResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\FiltroWS\CampusStoreWeb.FiltroWS.libro.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\ClienteWS\ClienteWS.wsdl" />
-    <None Include="Connected Services\ClienteWS\ClienteWS.xsd">
+    <None Include="Connected Services\CampusStoreWS\EditorialWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\EditorialWS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\EditorialWS\EditorialWS.wsdl" />
-    <None Include="Connected Services\EditorialWS\EditorialWS.xsd">
+    <None Include="Connected Services\CampusStoreWS\EmpleadoWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\FiltroWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\FiltroWS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\EmpleadoWS\EmpleadoWS.wsdl" />
-    <None Include="Connected Services\EmpleadoWS\EmpleadoWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\FiltroWS\configuration91.svcinfo" />
-    <None Include="Connected Services\FiltroWS\configuration.svcinfo" />
-    <None Include="Connected Services\FiltroWS\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Connected Services\LibroWS\CampusStoreWeb.LibroWS.eliminarLibroResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\LibroWS\CampusStoreWeb.LibroWS.guardarLibroResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\LibroWS\CampusStoreWeb.LibroWS.libro.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\LibroWS\CampusStoreWeb.LibroWS.listarLibrosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\LibroWS\CampusStoreWeb.LibroWS.obtenerLibroResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\LibroWS\CampusStoreWeb.LibroWS.registrarLibroResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\FiltroWS\FiltroWS.wsdl" />
-    <None Include="Connected Services\FiltroWS\FiltroWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\LibroWS\configuration91.svcinfo" />
-    <None Include="Connected Services\LibroWS\configuration.svcinfo" />
-    <None Include="Connected Services\LibroWS\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Connected Services\OrdenCompraWS\CampusStoreWeb.OrdenCompraWS.eliminarOrdenCompraResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\OrdenCompraWS\CampusStoreWeb.OrdenCompraWS.guardarOrdenCompraResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\OrdenCompraWS\CampusStoreWeb.OrdenCompraWS.listarOrdenesCompraResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\OrdenCompraWS\CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\OrdenCompraWS\CampusStoreWeb.OrdenCompraWS.ordenCompra.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\OrdenCompraWS\configuration91.svcinfo" />
-    <None Include="Connected Services\OrdenCompraWS\configuration.svcinfo" />
-    <None Include="Connected Services\OrdenCompraWS\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\UsuarioWS\ArticuloWS.wsdl" />
-    <None Include="Connected Services\UsuarioWS\ArticuloWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UsuarioWS\AutorWS.wsdl" />
-    <None Include="Connected Services\UsuarioWS\AutorWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.articulo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.autor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.cliente.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.descuento.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.editorial.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.eliminarArticuloResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.eliminarAutorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.eliminarClienteResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.eliminarDescuentoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.eliminarEditorialResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.eliminarEmpleadoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.eliminarOrdenCompraResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.empleado.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.filtrarLibrosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.filtrarPorTipoArticuloResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.guardarArticuloResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.guardarAutorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.guardarClienteResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.guardarDescuentoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.guardarEditorialResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.guardarEmpleadoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.guardarOrdenCompraResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.libro.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.listarArticulosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.listarAutoresResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.listarClientesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.listarDescuentosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.listarEditorialesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.listarEmpleadosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.listarOrdenesCompraResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.loginResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.obtenerArticuloResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.obtenerAutorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.obtenerClienteResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.obtenerDescuentoPorProductoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.obtenerDescuentoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.obtenerEditorialResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.obtenerEmpleadoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.obtenerOrdenCompraResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.ordenCompra.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.eliminarLibroResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.guardarLibroResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.listarLibrosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.obtenerLibroResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.registrarLibroResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.loginUsuarioResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.buscarClientePorCuentaResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\UsuarioWS\ClienteWS.wsdl" />
-    <None Include="Connected Services\UsuarioWS\ClienteWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UsuarioWS\DescuentoWS.wsdl" />
-    <None Include="Connected Services\UsuarioWS\EditorialWS.wsdl" />
-    <None Include="Connected Services\UsuarioWS\EditorialWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UsuarioWS\EmpleadoWS.wsdl" />
-    <None Include="Connected Services\UsuarioWS\EmpleadoWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UsuarioWS\FiltroWS.wsdl" />
-    <None Include="Connected Services\UsuarioWS\FiltroWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UsuarioWS\LibroWS.wsdl" />
-    <None Include="Connected Services\UsuarioWS\LibroWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UsuarioWS\OrdenCompraWS.wsdl" />
-    <None Include="Connected Services\UsuarioWS\OrdenCompraWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UsuarioWS\servicios.disco" />
-    <None Include="Connected Services\UsuarioWS\configuration91.svcinfo" />
-    <None Include="Connected Services\UsuarioWS\configuration.svcinfo" />
-    <None Include="Connected Services\UsuarioWS\Reference.svcmap">
+    <None Include="Connected Services\CampusStoreWS\LibroWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\servicios.disco" />
+    <None Include="Connected Services\CampusStoreWS\configuration91.svcinfo" />
+    <None Include="Connected Services\CampusStoreWS\configuration.svcinfo" />
+    <None Include="Connected Services\CampusStoreWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -572,52 +339,7 @@
     <Compile Include="Checkout.aspx.designer.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\ArticuloWS\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\AutorWS\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\ClienteWS\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\DescuentoWS\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\EditorialWS\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\EmpleadoWS\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\FiltroWS\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\LibroWS\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\OrdenCompraWS\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\UsuarioWS\Reference.cs">
+    <Compile Include="Connected Services\CampusStoreWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -807,23 +529,25 @@
     <Content Include="Images\libroSISOPS.webp" />
     <Content Include="Images\PythnForDummies.webp" />
     <Content Include="Images\tomatodo.webp" />
-    <None Include="Connected Services\ArticuloWS\ArticuloWS.wsdl" />
-    <None Include="Connected Services\ArticuloWS\ArticuloWS.xsd">
+    <None Include="Connected Services\CampusStoreWS\ArticuloWS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\LibroWS\LibroWS.wsdl" />
-    <None Include="Connected Services\LibroWS\LibroWS.xsd">
+    <None Include="Connected Services\CampusStoreWS\ClienteWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\ClienteWS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrdenCompraWS\OrdenCompraWS.wsdl" />
-    <None Include="Connected Services\OrdenCompraWS\OrdenCompraWS.xsd">
+    <None Include="Connected Services\CampusStoreWS\EmpleadoWS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UsuarioWS\DescuentoWS.xsd">
+    <None Include="Connected Services\CampusStoreWS\LibroWS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UsuarioWS\UsuarioWS.wsdl" />
-    <None Include="Connected Services\UsuarioWS\UsuarioWS.xsd">
+    <None Include="Connected Services\CampusStoreWS\OrdenCompraWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\OrdenCompraWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CampusStoreWS\UsuarioWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\UsuarioWS.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -843,16 +567,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ArticuloWS\" />
-    <WCFMetadataStorage Include="Connected Services\AutorWS\" />
-    <WCFMetadataStorage Include="Connected Services\ClienteWS\" />
-    <WCFMetadataStorage Include="Connected Services\DescuentoWS\" />
-    <WCFMetadataStorage Include="Connected Services\EditorialWS\" />
-    <WCFMetadataStorage Include="Connected Services\EmpleadoWS\" />
-    <WCFMetadataStorage Include="Connected Services\FiltroWS\" />
-    <WCFMetadataStorage Include="Connected Services\LibroWS\" />
-    <WCFMetadataStorage Include="Connected Services\OrdenCompraWS\" />
-    <WCFMetadataStorage Include="Connected Services\UsuarioWS\" />
+    <WCFMetadataStorage Include="Connected Services\CampusStoreWS\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

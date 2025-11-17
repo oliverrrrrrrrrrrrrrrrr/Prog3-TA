@@ -1,4 +1,4 @@
-﻿using CampusStoreWeb.OrdenCompraWS;
+﻿using CampusStoreWeb.CampusStoreWS;
 using System;
 using System.Collections.Generic;
 

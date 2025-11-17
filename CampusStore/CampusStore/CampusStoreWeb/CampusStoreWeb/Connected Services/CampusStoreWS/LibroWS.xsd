@@ -8,6 +8,8 @@
   <xs:element name="listarLibrosResponse" type="tns:listarLibrosResponse" />
   <xs:element name="obtenerLibro" type="tns:obtenerLibro" />
   <xs:element name="obtenerLibroResponse" type="tns:obtenerLibroResponse" />
+  <xs:element name="registrarLibro" type="tns:registrarLibro" />
+  <xs:element name="registrarLibroResponse" type="tns:registrarLibroResponse" />
   <xs:complexType name="guardarLibro">
     <xs:sequence>
       <xs:element minOccurs="0" name="libro" type="tns:libro" />
@@ -34,6 +36,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="descripcion" type="xs:string" />
       <xs:element minOccurs="0" name="descuento" type="tns:descuento" />
+      <xs:element minOccurs="0" name="imagenURL" type="xs:string" />
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
       <xs:element minOccurs="0" name="precio" type="xs:double" />
       <xs:element minOccurs="0" name="precioDescuento" type="xs:double" />
@@ -139,10 +142,22 @@
       <xs:element minOccurs="0" name="return" type="tns:libro" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="registrarLibro">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="libro" type="tns:libro" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="autores" type="tns:autor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarLibroResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:simpleType name="formato">
     <xs:restriction base="xs:string">
       <xs:enumeration value="TAPA_BLANDA" />
       <xs:enumeration value="TAPA_DURA" />
+      <xs:enumeration value="COLECCIONISTA" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="generoLibro">

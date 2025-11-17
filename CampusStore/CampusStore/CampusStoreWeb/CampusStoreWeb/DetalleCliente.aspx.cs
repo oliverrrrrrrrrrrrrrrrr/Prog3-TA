@@ -1,4 +1,4 @@
-﻿using CampusStoreWeb.ClienteWS;
+﻿using CampusStoreWeb.CampusStoreWS;
 using System;
 
 namespace CampusStoreWeb
@@ -142,7 +142,7 @@ namespace CampusStoreWeb
                     };
 
                     // Llamar al WS para actualizar
-                    clienteWS.guardarCliente(clienteEditado, ClienteWS.estado.Modificado);
+                    clienteWS.guardarCliente(clienteEditado, estado.Modificado);
 
                     // Recargar datos actualizados
                     clienteActual = clienteWS.obtenerCliente(idClienteActual);

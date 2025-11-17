@@ -1,6 +1,4 @@
-﻿using CampusStoreWeb.ArticuloWS;
-using CampusStoreWeb.DescuentoWS;
-using CampusStoreWeb.LibroWS;
+﻿using CampusStoreWeb.CampusStoreWS;
 using System;
 using System.Web.UI.WebControls;
 
@@ -11,7 +9,7 @@ namespace CampusStoreWeb
         private readonly LibroWSClient libroWS;
         private readonly DescuentoWSClient descuentoWS;
         private libro libroActual;
-        private DescuentoWS.descuento descuentoActual;
+        private descuento descuentoActual;
         private int idLibroActual;
 
         public DetalleLibro()
@@ -139,7 +137,7 @@ namespace CampusStoreWeb
             {
                 // Obtener descuento del artículo desde el WS
                 // Ajusta según tu método en el WS
-                descuentoActual = descuentoWS.obtenerDescuentoPorProducto(idLibroActual, DescuentoWS.tipoProducto.ARTICULO);
+                descuentoActual = descuentoWS.obtenerDescuentoPorProducto(idLibroActual, tipoProducto.ARTICULO);
 
                 if (descuentoActual != null && descuentoActual.activo)
                 {
@@ -214,13 +212,13 @@ namespace CampusStoreWeb
                 {
                     // Cambiar el estado al contrario
                     if (ViewState["descuentoActual"] != null)
-                        descuentoActual = (DescuentoWS.descuento)ViewState["descuentoActual"];
+                        descuentoActual = (descuento)ViewState["descuentoActual"];
 
                     descuentoActual.activo = !(descuentoActual.activo);
                     descuentoActual.activoSpecified = true;
 
                     // Guardar en el WS
-                    descuentoWS.guardarDescuento(descuentoActual, DescuentoWS.estado.Modificado);
+                    descuentoWS.guardarDescuento(descuentoActual, estado.Modificado);
 
                     string mensaje = descuentoActual.activo ? "activado" : "desactivado";
 
@@ -250,7 +248,7 @@ namespace CampusStoreWeb
                 {
                     idLibroActual = (int)ViewState["idLibro"];
 
-                    DescuentoWS.descuento descuento = new DescuentoWS.descuento()
+                    descuento descuento = new descuento()
                     {
                         valorDescuento = double.Parse(txtDescuentoValor.Text),
                         valorDescuentoSpecified = true,
@@ -261,7 +259,7 @@ namespace CampusStoreWeb
                         activo = chkDescuentoActivo.Checked,
                         activoSpecified = true,
 
-                        tipoProducto = DescuentoWS.tipoProducto.ARTICULO,
+                        tipoProducto = tipoProducto.ARTICULO,
                         tipoProductoSpecified = true,
 
                         idProducto = idLibroActual,
@@ -273,13 +271,13 @@ namespace CampusStoreWeb
                         // ACTUALIZAR descuento existente
                         descuento.idDescuento = (int)ViewState["idDescuento"];
                         descuento.idDescuentoSpecified = true;
-                        descuentoWS.guardarDescuento(descuento, DescuentoWS.estado.Modificado);
+                        descuentoWS.guardarDescuento(descuento, estado.Modificado);
                     }
                     else
                     {
                         // CREAR nuevo descuento
                         Console.WriteLine($"TipoProducto enviado: {descuento.tipoProducto}");
-                        descuentoWS.guardarDescuento(descuento, DescuentoWS.estado.Nuevo);
+                        descuentoWS.guardarDescuento(descuento, estado.Nuevo);
                     }
 
                     // Recargar
@@ -446,7 +444,7 @@ namespace CampusStoreWeb
                     };
 
                     // Llamar al WS para actualizar
-                    libroWS.guardarLibro(libroEditado, LibroWS.estado.Modificado);
+                    libroWS.guardarLibro(libroEditado, estado.Modificado);
 
                     // Recargar datos actualizados
                     libroActual = libroWS.obtenerLibro(idLibroActual);

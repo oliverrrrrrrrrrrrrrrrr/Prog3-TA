@@ -1,6 +1,4 @@
-﻿using CampusStoreWeb.AutorWS;
-using CampusStoreWeb.EditorialWS;
-using CampusStoreWeb.LibroWS;
+﻿using CampusStoreWeb.CampusStoreWS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +18,8 @@ namespace CampusStoreWeb
         private readonly LibroWSClient libroWS;
         private readonly AutorWSClient autorWS;
         private readonly EditorialWSClient editorialWS;
-        private List<LibroWS.autor> autoresSeleccionados;
-        private LibroWS.editorial editorialTemporal;
+        private List<autor> autoresSeleccionados;
+        private editorial editorialTemporal;
 
         private static readonly HttpClient httpClient = new HttpClient();
 
@@ -56,13 +54,13 @@ namespace CampusStoreWeb
                 // Recuperar la lista de autores de ViewState en cada postback
                 if (ViewState["AutoresSeleccionados"] != null)
                 {
-                    autoresSeleccionados = (List<LibroWS.autor>)ViewState["AutoresSeleccionados"];
+                    autoresSeleccionados = (List<autor>)ViewState["AutoresSeleccionados"];
                 }
 
                 // Recuperar editorial temporal si existe
                 if (ViewState["EditorialTemporal"] != null)
                 {
-                    editorialTemporal = (LibroWS.editorial)ViewState["EditorialTemporal"];
+                    editorialTemporal = (editorial)ViewState["EditorialTemporal"];
                 }
             }
         }
@@ -130,7 +128,7 @@ namespace CampusStoreWeb
 
         private void InicializarListaAutores()
         {
-            autoresSeleccionados = new List<LibroWS.autor>();
+            autoresSeleccionados = new List<autor>();
             ViewState["AutoresSeleccionados"] = autoresSeleccionados;
             ActualizarListaAutores();
         }
@@ -161,7 +159,7 @@ namespace CampusStoreWeb
                 try
                 {
                     // Crear nueva editorial
-                    editorialTemporal = new LibroWS.editorial
+                    editorialTemporal = new editorial
                     {
                         idEditorial = 0, // solo temporal
                         idEditorialSpecified = false,
@@ -219,7 +217,7 @@ namespace CampusStoreWeb
                 try
                 {
                     // Crear nuevo autor
-                    LibroWS.autor nuevoAutorTemporal = new LibroWS.autor
+                    autor nuevoAutorTemporal = new autor
                     {
                         idAutor = 0, // solo temporal
                         idAutorSpecified = false,
@@ -231,11 +229,11 @@ namespace CampusStoreWeb
                     // Recuperar la lista de autores
                     if (ViewState["AutoresSeleccionados"] != null)
                     {
-                        autoresSeleccionados = (List<LibroWS.autor>)ViewState["AutoresSeleccionados"];
+                        autoresSeleccionados = (List<autor>)ViewState["AutoresSeleccionados"];
                     }
                     else
                     {
-                        autoresSeleccionados = new List<LibroWS.autor>();
+                        autoresSeleccionados = new List<autor>();
                     }
 
                     // Agregar directamente a la lista de autores seleccionados
@@ -282,21 +280,21 @@ namespace CampusStoreWeb
                     // Recuperar la lista de autores seleccionados
                     if (ViewState["AutoresSeleccionados"] != null)
                     {
-                        autoresSeleccionados = (List<LibroWS.autor>)ViewState["AutoresSeleccionados"];
+                        autoresSeleccionados = (List<autor>)ViewState["AutoresSeleccionados"];
                     }
                     else
                     {
-                        autoresSeleccionados = new List<LibroWS.autor>();
+                        autoresSeleccionados = new List<autor>();
                     }
 
                     // Verificar si el autor ya fue agregado a la lista
                     if (!autoresSeleccionados.Any(a => a.idAutor == idAutor))
                     {
                         // Obtener el autor completo
-                        AutorWS.autor autorCompleto = autorWS.obtenerAutor(idAutor);
+                        autor autorCompleto = autorWS.obtenerAutor(idAutor);
 
                         // Convertir a tipo LibroWS.autor
-                        LibroWS.autor autorLibro = new LibroWS.autor()
+                            autor autorLibro = new autor()
                         {
                             idAutor = autorCompleto.idAutor,
                             idAutorSpecified = true,
@@ -338,7 +336,7 @@ namespace CampusStoreWeb
                 // Recuperar la lista
                 if (ViewState["AutoresSeleccionados"] != null)
                 {
-                    autoresSeleccionados = (List<LibroWS.autor>)ViewState["AutoresSeleccionados"];
+                    autoresSeleccionados = (List<autor>)ViewState["AutoresSeleccionados"];
                     autoresSeleccionados.RemoveAll(a => a.idAutor == idAutor);
                     ViewState["AutoresSeleccionados"] = autoresSeleccionados;
                     ActualizarListaAutores();
@@ -377,14 +375,14 @@ namespace CampusStoreWeb
                     // ========================================
                     // OBTENER O USAR EDITORIAL TEMPORAL
                     // ========================================
-                    LibroWS.editorial editorialLibro;
+                    editorial editorialLibro;
 
                     if (ddlEditorial.SelectedValue == "TEMP_EDITORIAL")
                     {
                         // Usar la editorial temporal creada (NO está en BD aún)
                         if (ViewState["EditorialTemporal"] != null)
                         {
-                            editorialLibro = (LibroWS.editorial)ViewState["EditorialTemporal"];
+                            editorialLibro = (editorial)ViewState["EditorialTemporal"];
                         }
                         else
                         {
@@ -397,10 +395,10 @@ namespace CampusStoreWeb
                     {
                         // Obtener editorial existente de la BD
                         int idEditorial = int.Parse(ddlEditorial.SelectedValue);
-                        EditorialWS.editorial editorialExistente = editorialWS.obtenerEditorial(idEditorial);
+                        editorial editorialExistente = editorialWS.obtenerEditorial(idEditorial);
 
                         // Convertir a tipo LibroWS.editorial
-                        editorialLibro = new LibroWS.editorial()
+                        editorialLibro = new editorial()
                         {
                             idEditorial = editorialExistente.idEditorial,
                             idEditorialSpecified = true,
@@ -425,11 +423,11 @@ namespace CampusStoreWeb
                     // ========================================
                     if (ViewState["AutoresSeleccionados"] != null)
                     {
-                        autoresSeleccionados = (List<LibroWS.autor>)ViewState["AutoresSeleccionados"];
+                        autoresSeleccionados = (List<autor>)ViewState["AutoresSeleccionados"];
                     }
                     else
                     {
-                        autoresSeleccionados = new List<LibroWS.autor>();
+                        autoresSeleccionados = new List<autor>();
                     }
 
                     // ========================================
