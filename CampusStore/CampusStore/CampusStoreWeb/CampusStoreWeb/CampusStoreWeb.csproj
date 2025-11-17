@@ -98,6 +98,7 @@
   <ItemGroup>
     <Content Include="AgregarArticulo.aspx" />
     <Content Include="AgregarLibro.aspx" />
+    <Content Include="AgregarOrdenCompra.aspx" />
     <Content Include="Catalogo.aspx" />
     <Content Include="Checkout.aspx" />
     <Content Include="Connected Services\ArticuloWS\CampusStoreWeb.ArticuloWS.articulo.datasource">
@@ -327,6 +328,7 @@
     <Content Include="DetalleCliente.aspx" />
     <Content Include="DetalleEmpleado.aspx" />
     <Content Include="DetalleLibro.aspx" />
+    <Content Include="DetalleOrdenCompra.aspx" />
     <Content Include="Forget_Password.aspx" />
     <Content Include="GenerarReportes.aspx" />
     <Content Include="GestionarArticulos.aspx" />
@@ -371,6 +373,13 @@
     </Compile>
     <Compile Include="AgregarLibro.aspx.designer.cs">
       <DependentUpon>AgregarLibro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarOrdenCompra.aspx.cs">
+      <DependentUpon>AgregarOrdenCompra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarOrdenCompra.aspx.designer.cs">
+      <DependentUpon>AgregarOrdenCompra.aspx</DependentUpon>
     </Compile>
     <Compile Include="Catalogo.aspx.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>
@@ -457,6 +466,13 @@
     </Compile>
     <Compile Include="DetalleLibro.aspx.designer.cs">
       <DependentUpon>DetalleLibro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleOrdenCompra.aspx.cs">
+      <DependentUpon>DetalleOrdenCompra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleOrdenCompra.aspx.designer.cs">
+      <DependentUpon>DetalleOrdenCompra.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forget_Password.aspx.cs">
       <DependentUpon>Forget_Password.aspx</DependentUpon>
