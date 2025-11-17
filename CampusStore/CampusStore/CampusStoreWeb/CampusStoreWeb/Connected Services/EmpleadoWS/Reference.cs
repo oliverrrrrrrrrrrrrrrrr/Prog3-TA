@@ -15,16 +15,6 @@ namespace CampusStoreWeb.EmpleadoWS {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", ConfigurationName="EmpleadoWS.EmpleadoWS")]
     public interface EmpleadoWS {
         
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/listarEmpleadosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/listarEmpleadosResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse listarEmpleados(CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/listarEmpleadosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/listarEmpleadosResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse> listarEmpleadosAsync(CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest request);
-        
         // CODEGEN: El parámetro 'empleado' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/guardarEmpleadoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/guardarEmpleadoResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -35,14 +25,14 @@ namespace CampusStoreWeb.EmpleadoWS {
         System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.guardarEmpleadoResponse> guardarEmpleadoAsync(CampusStoreWeb.EmpleadoWS.guardarEmpleadoRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/listarEmpleadosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/listarEmpleadosResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse obtenerEmpleado(CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest request);
+        CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse listarEmpleados(CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse> obtenerEmpleadoAsync(CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/listarEmpleadosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/listarEmpleadosResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse> listarEmpleadosAsync(CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest request);
         
         // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/eliminarEmpleadoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/eliminarEmpleadoResponse")]
@@ -52,6 +42,16 @@ namespace CampusStoreWeb.EmpleadoWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/eliminarEmpleadoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/eliminarEmpleadoResponse")]
         System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.eliminarEmpleadoResponse> eliminarEmpleadoAsync(CampusStoreWeb.EmpleadoWS.eliminarEmpleadoRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse obtenerEmpleado(CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse> obtenerEmpleadoAsync(CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest request);
     }
     
     /// <remarks/>
@@ -324,34 +324,6 @@ namespace CampusStoreWeb.EmpleadoWS {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarEmpleados", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarEmpleadosRequest {
-        
-        public listarEmpleadosRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarEmpleadosResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarEmpleadosResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public CampusStoreWeb.EmpleadoWS.empleado[] @return;
-        
-        public listarEmpleadosResponse() {
-        }
-        
-        public listarEmpleadosResponse(CampusStoreWeb.EmpleadoWS.empleado[] @return) {
-            this.@return = @return;
-        }
-    }
-    
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
@@ -404,6 +376,62 @@ namespace CampusStoreWeb.EmpleadoWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarEmpleados", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarEmpleadosRequest {
+        
+        public listarEmpleadosRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarEmpleadosResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarEmpleadosResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public CampusStoreWeb.EmpleadoWS.empleado[] @return;
+        
+        public listarEmpleadosResponse() {
+        }
+        
+        public listarEmpleadosResponse(CampusStoreWeb.EmpleadoWS.empleado[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarEmpleado", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarEmpleadoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int id;
+        
+        public eliminarEmpleadoRequest() {
+        }
+        
+        public eliminarEmpleadoRequest(int id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarEmpleadoResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarEmpleadoResponse {
+        
+        public eliminarEmpleadoResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerEmpleado", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
     public partial class obtenerEmpleadoRequest {
         
@@ -437,34 +465,6 @@ namespace CampusStoreWeb.EmpleadoWS {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarEmpleado", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarEmpleadoRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int id;
-        
-        public eliminarEmpleadoRequest() {
-        }
-        
-        public eliminarEmpleadoRequest(int id) {
-            this.id = id;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarEmpleadoResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarEmpleadoResponse {
-        
-        public eliminarEmpleadoResponse() {
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface EmpleadoWSChannel : CampusStoreWeb.EmpleadoWS.EmpleadoWS, System.ServiceModel.IClientChannel {
     }
@@ -493,27 +493,6 @@ namespace CampusStoreWeb.EmpleadoWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse CampusStoreWeb.EmpleadoWS.EmpleadoWS.listarEmpleados(CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest request) {
-            return base.Channel.listarEmpleados(request);
-        }
-        
-        public CampusStoreWeb.EmpleadoWS.empleado[] listarEmpleados() {
-            CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest inValue = new CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest();
-            CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse retVal = ((CampusStoreWeb.EmpleadoWS.EmpleadoWS)(this)).listarEmpleados(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse> CampusStoreWeb.EmpleadoWS.EmpleadoWS.listarEmpleadosAsync(CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest request) {
-            return base.Channel.listarEmpleadosAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse> listarEmpleadosAsync() {
-            CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest inValue = new CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest();
-            return ((CampusStoreWeb.EmpleadoWS.EmpleadoWS)(this)).listarEmpleadosAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         CampusStoreWeb.EmpleadoWS.guardarEmpleadoResponse CampusStoreWeb.EmpleadoWS.EmpleadoWS.guardarEmpleado(CampusStoreWeb.EmpleadoWS.guardarEmpleadoRequest request) {
             return base.Channel.guardarEmpleado(request);
         }
@@ -538,26 +517,24 @@ namespace CampusStoreWeb.EmpleadoWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse CampusStoreWeb.EmpleadoWS.EmpleadoWS.obtenerEmpleado(CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest request) {
-            return base.Channel.obtenerEmpleado(request);
+        CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse CampusStoreWeb.EmpleadoWS.EmpleadoWS.listarEmpleados(CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest request) {
+            return base.Channel.listarEmpleados(request);
         }
         
-        public CampusStoreWeb.EmpleadoWS.empleado obtenerEmpleado(int id) {
-            CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest inValue = new CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest();
-            inValue.id = id;
-            CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse retVal = ((CampusStoreWeb.EmpleadoWS.EmpleadoWS)(this)).obtenerEmpleado(inValue);
+        public CampusStoreWeb.EmpleadoWS.empleado[] listarEmpleados() {
+            CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest inValue = new CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest();
+            CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse retVal = ((CampusStoreWeb.EmpleadoWS.EmpleadoWS)(this)).listarEmpleados(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse> CampusStoreWeb.EmpleadoWS.EmpleadoWS.obtenerEmpleadoAsync(CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest request) {
-            return base.Channel.obtenerEmpleadoAsync(request);
+        System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse> CampusStoreWeb.EmpleadoWS.EmpleadoWS.listarEmpleadosAsync(CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest request) {
+            return base.Channel.listarEmpleadosAsync(request);
         }
         
-        public System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse> obtenerEmpleadoAsync(int id) {
-            CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest inValue = new CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest();
-            inValue.id = id;
-            return ((CampusStoreWeb.EmpleadoWS.EmpleadoWS)(this)).obtenerEmpleadoAsync(inValue);
+        public System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.listarEmpleadosResponse> listarEmpleadosAsync() {
+            CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest inValue = new CampusStoreWeb.EmpleadoWS.listarEmpleadosRequest();
+            return ((CampusStoreWeb.EmpleadoWS.EmpleadoWS)(this)).listarEmpleadosAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -580,6 +557,29 @@ namespace CampusStoreWeb.EmpleadoWS {
             CampusStoreWeb.EmpleadoWS.eliminarEmpleadoRequest inValue = new CampusStoreWeb.EmpleadoWS.eliminarEmpleadoRequest();
             inValue.id = id;
             return ((CampusStoreWeb.EmpleadoWS.EmpleadoWS)(this)).eliminarEmpleadoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse CampusStoreWeb.EmpleadoWS.EmpleadoWS.obtenerEmpleado(CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest request) {
+            return base.Channel.obtenerEmpleado(request);
+        }
+        
+        public CampusStoreWeb.EmpleadoWS.empleado obtenerEmpleado(int id) {
+            CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest inValue = new CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest();
+            inValue.id = id;
+            CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse retVal = ((CampusStoreWeb.EmpleadoWS.EmpleadoWS)(this)).obtenerEmpleado(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse> CampusStoreWeb.EmpleadoWS.EmpleadoWS.obtenerEmpleadoAsync(CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest request) {
+            return base.Channel.obtenerEmpleadoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CampusStoreWeb.EmpleadoWS.obtenerEmpleadoResponse> obtenerEmpleadoAsync(int id) {
+            CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest inValue = new CampusStoreWeb.EmpleadoWS.obtenerEmpleadoRequest();
+            inValue.id = id;
+            return ((CampusStoreWeb.EmpleadoWS.EmpleadoWS)(this)).obtenerEmpleadoAsync(inValue);
         }
     }
 }

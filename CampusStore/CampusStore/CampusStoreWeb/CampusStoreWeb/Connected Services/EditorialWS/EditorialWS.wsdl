@@ -17,17 +17,17 @@
   <message name="eliminarEditorialResponse">
     <part name="parameters" element="tns:eliminarEditorialResponse" />
   </message>
-  <message name="listarEditoriales">
-    <part name="parameters" element="tns:listarEditoriales" />
-  </message>
-  <message name="listarEditorialesResponse">
-    <part name="parameters" element="tns:listarEditorialesResponse" />
-  </message>
   <message name="guardarEditorial">
     <part name="parameters" element="tns:guardarEditorial" />
   </message>
   <message name="guardarEditorialResponse">
     <part name="parameters" element="tns:guardarEditorialResponse" />
+  </message>
+  <message name="listarEditoriales">
+    <part name="parameters" element="tns:listarEditoriales" />
+  </message>
+  <message name="listarEditorialesResponse">
+    <part name="parameters" element="tns:listarEditorialesResponse" />
   </message>
   <portType name="EditorialWS">
     <operation name="obtenerEditorial">
@@ -38,13 +38,13 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialRequest" message="tns:eliminarEditorial" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialResponse" message="tns:eliminarEditorialResponse" />
     </operation>
-    <operation name="listarEditoriales">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesRequest" message="tns:listarEditoriales" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesResponse" message="tns:listarEditorialesResponse" />
-    </operation>
     <operation name="guardarEditorial">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialRequest" message="tns:guardarEditorial" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialResponse" message="tns:guardarEditorialResponse" />
+    </operation>
+    <operation name="listarEditoriales">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesRequest" message="tns:listarEditoriales" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesResponse" message="tns:listarEditorialesResponse" />
     </operation>
   </portType>
   <binding name="EditorialWSPortBinding" type="tns:EditorialWS">
@@ -67,7 +67,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="listarEditoriales">
+    <operation name="guardarEditorial">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -76,7 +76,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="guardarEditorial">
+    <operation name="listarEditoriales">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

@@ -137,6 +137,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="TAPA_BLANDA" />
       <xs:enumeration value="TAPA_DURA" />
+      <xs:enumeration value="COLECCIONISTA" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="generoLibro">

@@ -5,17 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/AutorWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="obtenerAutor">
-    <part name="parameters" element="tns:obtenerAutor" />
-  </message>
-  <message name="obtenerAutorResponse">
-    <part name="parameters" element="tns:obtenerAutorResponse" />
-  </message>
   <message name="listarAutores">
     <part name="parameters" element="tns:listarAutores" />
   </message>
   <message name="listarAutoresResponse">
     <part name="parameters" element="tns:listarAutoresResponse" />
+  </message>
+  <message name="obtenerAutor">
+    <part name="parameters" element="tns:obtenerAutor" />
+  </message>
+  <message name="obtenerAutorResponse">
+    <part name="parameters" element="tns:obtenerAutorResponse" />
   </message>
   <message name="guardarAutor">
     <part name="parameters" element="tns:guardarAutor" />
@@ -30,13 +30,13 @@
     <part name="parameters" element="tns:eliminarAutorResponse" />
   </message>
   <portType name="AutorWS">
-    <operation name="obtenerAutor">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorRequest" message="tns:obtenerAutor" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorResponse" message="tns:obtenerAutorResponse" />
-    </operation>
     <operation name="listarAutores">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresRequest" message="tns:listarAutores" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresResponse" message="tns:listarAutoresResponse" />
+    </operation>
+    <operation name="obtenerAutor">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorRequest" message="tns:obtenerAutor" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorResponse" message="tns:obtenerAutorResponse" />
     </operation>
     <operation name="guardarAutor">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorRequest" message="tns:guardarAutor" />
@@ -49,7 +49,7 @@
   </portType>
   <binding name="AutorWSPortBinding" type="tns:AutorWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="obtenerAutor">
+    <operation name="listarAutores">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -58,7 +58,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="listarAutores">
+    <operation name="obtenerAutor">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

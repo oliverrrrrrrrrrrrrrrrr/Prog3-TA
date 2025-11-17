@@ -1383,6 +1383,9 @@ namespace CampusStoreWeb.FiltroWS {
         
         /// <remarks/>
         TAPA_DURA,
+        
+        /// <remarks/>
+        COLECCIONISTA,
     }
     
     /// <remarks/>

@@ -32,6 +32,14 @@ namespace CampusStoreWeb.EditorialWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialResponse")]
         System.Threading.Tasks.Task<CampusStoreWeb.EditorialWS.eliminarEditorialResponse> eliminarEditorialAsync(CampusStoreWeb.EditorialWS.eliminarEditorialRequest request);
         
+        // CODEGEN: El parámetro 'editorial' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CampusStoreWeb.EditorialWS.guardarEditorialResponse guardarEditorial(CampusStoreWeb.EditorialWS.guardarEditorialRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.EditorialWS.guardarEditorialResponse> guardarEditorialAsync(CampusStoreWeb.EditorialWS.guardarEditorialRequest request);
+        
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -40,14 +48,6 @@ namespace CampusStoreWeb.EditorialWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesResponse")]
         System.Threading.Tasks.Task<CampusStoreWeb.EditorialWS.listarEditorialesResponse> listarEditorialesAsync(CampusStoreWeb.EditorialWS.listarEditorialesRequest request);
-        
-        // CODEGEN: El parámetro 'editorial' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        CampusStoreWeb.EditorialWS.guardarEditorialResponse guardarEditorial(CampusStoreWeb.EditorialWS.guardarEditorialRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.EditorialWS.guardarEditorialResponse> guardarEditorialAsync(CampusStoreWeb.EditorialWS.guardarEditorialRequest request);
     }
     
     /// <remarks/>
@@ -258,34 +258,6 @@ namespace CampusStoreWeb.EditorialWS {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarEditoriales", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarEditorialesRequest {
-        
-        public listarEditorialesRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarEditorialesResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarEditorialesResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public CampusStoreWeb.EditorialWS.editorial[] @return;
-        
-        public listarEditorialesResponse() {
-        }
-        
-        public listarEditorialesResponse(CampusStoreWeb.EditorialWS.editorial[] @return) {
-            this.@return = @return;
-        }
-    }
-    
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
@@ -332,6 +304,34 @@ namespace CampusStoreWeb.EditorialWS {
     public partial class guardarEditorialResponse {
         
         public guardarEditorialResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarEditoriales", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarEditorialesRequest {
+        
+        public listarEditorialesRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarEditorialesResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarEditorialesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public CampusStoreWeb.EditorialWS.editorial[] @return;
+        
+        public listarEditorialesResponse() {
+        }
+        
+        public listarEditorialesResponse(CampusStoreWeb.EditorialWS.editorial[] @return) {
+            this.@return = @return;
         }
     }
     
@@ -408,27 +408,6 @@ namespace CampusStoreWeb.EditorialWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.EditorialWS.listarEditorialesResponse CampusStoreWeb.EditorialWS.EditorialWS.listarEditoriales(CampusStoreWeb.EditorialWS.listarEditorialesRequest request) {
-            return base.Channel.listarEditoriales(request);
-        }
-        
-        public CampusStoreWeb.EditorialWS.editorial[] listarEditoriales() {
-            CampusStoreWeb.EditorialWS.listarEditorialesRequest inValue = new CampusStoreWeb.EditorialWS.listarEditorialesRequest();
-            CampusStoreWeb.EditorialWS.listarEditorialesResponse retVal = ((CampusStoreWeb.EditorialWS.EditorialWS)(this)).listarEditoriales(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.EditorialWS.listarEditorialesResponse> CampusStoreWeb.EditorialWS.EditorialWS.listarEditorialesAsync(CampusStoreWeb.EditorialWS.listarEditorialesRequest request) {
-            return base.Channel.listarEditorialesAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<CampusStoreWeb.EditorialWS.listarEditorialesResponse> listarEditorialesAsync() {
-            CampusStoreWeb.EditorialWS.listarEditorialesRequest inValue = new CampusStoreWeb.EditorialWS.listarEditorialesRequest();
-            return ((CampusStoreWeb.EditorialWS.EditorialWS)(this)).listarEditorialesAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         CampusStoreWeb.EditorialWS.guardarEditorialResponse CampusStoreWeb.EditorialWS.EditorialWS.guardarEditorial(CampusStoreWeb.EditorialWS.guardarEditorialRequest request) {
             return base.Channel.guardarEditorial(request);
         }
@@ -450,6 +429,27 @@ namespace CampusStoreWeb.EditorialWS {
             inValue.editorial = editorial;
             inValue.estado = estado;
             return ((CampusStoreWeb.EditorialWS.EditorialWS)(this)).guardarEditorialAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CampusStoreWeb.EditorialWS.listarEditorialesResponse CampusStoreWeb.EditorialWS.EditorialWS.listarEditoriales(CampusStoreWeb.EditorialWS.listarEditorialesRequest request) {
+            return base.Channel.listarEditoriales(request);
+        }
+        
+        public CampusStoreWeb.EditorialWS.editorial[] listarEditoriales() {
+            CampusStoreWeb.EditorialWS.listarEditorialesRequest inValue = new CampusStoreWeb.EditorialWS.listarEditorialesRequest();
+            CampusStoreWeb.EditorialWS.listarEditorialesResponse retVal = ((CampusStoreWeb.EditorialWS.EditorialWS)(this)).listarEditoriales(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CampusStoreWeb.EditorialWS.listarEditorialesResponse> CampusStoreWeb.EditorialWS.EditorialWS.listarEditorialesAsync(CampusStoreWeb.EditorialWS.listarEditorialesRequest request) {
+            return base.Channel.listarEditorialesAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CampusStoreWeb.EditorialWS.listarEditorialesResponse> listarEditorialesAsync() {
+            CampusStoreWeb.EditorialWS.listarEditorialesRequest inValue = new CampusStoreWeb.EditorialWS.listarEditorialesRequest();
+            return ((CampusStoreWeb.EditorialWS.EditorialWS)(this)).listarEditorialesAsync(inValue);
         }
     }
 }

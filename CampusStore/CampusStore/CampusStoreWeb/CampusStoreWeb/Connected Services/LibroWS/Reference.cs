@@ -16,14 +16,24 @@ namespace CampusStoreWeb.LibroWS {
     public interface LibroWS {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        CampusStoreWeb.LibroWS.listarLibrosResponse listarLibros(CampusStoreWeb.LibroWS.listarLibrosRequest request);
+        CampusStoreWeb.LibroWS.obtenerLibroResponse obtenerLibro(CampusStoreWeb.LibroWS.obtenerLibroRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.listarLibrosResponse> listarLibrosAsync(CampusStoreWeb.LibroWS.listarLibrosRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.obtenerLibroResponse> obtenerLibroAsync(CampusStoreWeb.LibroWS.obtenerLibroRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        CampusStoreWeb.LibroWS.registrarLibroResponse registrarLibro(CampusStoreWeb.LibroWS.registrarLibroRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.registrarLibroResponse> registrarLibroAsync(CampusStoreWeb.LibroWS.registrarLibroRequest request);
         
         // CODEGEN: El parámetro 'libro' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroResponse")]
@@ -44,24 +54,14 @@ namespace CampusStoreWeb.LibroWS {
         System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.eliminarLibroResponse> eliminarLibroAsync(CampusStoreWeb.LibroWS.eliminarLibroRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        CampusStoreWeb.LibroWS.registrarLibroResponse registrarLibro(CampusStoreWeb.LibroWS.registrarLibroRequest request);
+        CampusStoreWeb.LibroWS.listarLibrosResponse listarLibros(CampusStoreWeb.LibroWS.listarLibrosRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.registrarLibroResponse> registrarLibroAsync(CampusStoreWeb.LibroWS.registrarLibroRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        CampusStoreWeb.LibroWS.obtenerLibroResponse obtenerLibro(CampusStoreWeb.LibroWS.obtenerLibroRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.obtenerLibroResponse> obtenerLibroAsync(CampusStoreWeb.LibroWS.obtenerLibroRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.listarLibrosResponse> listarLibrosAsync(CampusStoreWeb.LibroWS.listarLibrosRequest request);
     }
     
     /// <remarks/>
@@ -1326,6 +1326,9 @@ namespace CampusStoreWeb.LibroWS {
         
         /// <remarks/>
         TAPA_DURA,
+        
+        /// <remarks/>
+        COLECCIONISTA,
     }
     
     /// <remarks/>
@@ -1356,27 +1359,76 @@ namespace CampusStoreWeb.LibroWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarLibros", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarLibrosRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerLibro", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerLibroRequest {
         
-        public listarLibrosRequest() {
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int id;
+        
+        public obtenerLibroRequest() {
+        }
+        
+        public obtenerLibroRequest(int id) {
+            this.id = id;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarLibrosResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarLibrosResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerLibroResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerLibroResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public CampusStoreWeb.LibroWS.libro[] @return;
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public CampusStoreWeb.LibroWS.libro @return;
         
-        public listarLibrosResponse() {
+        public obtenerLibroResponse() {
         }
         
-        public listarLibrosResponse(CampusStoreWeb.LibroWS.libro[] @return) {
+        public obtenerLibroResponse(CampusStoreWeb.LibroWS.libro @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="registrarLibro", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class registrarLibroRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public CampusStoreWeb.LibroWS.libro libro;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute("autores", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public CampusStoreWeb.LibroWS.autor[] autores;
+        
+        public registrarLibroRequest() {
+        }
+        
+        public registrarLibroRequest(CampusStoreWeb.LibroWS.libro libro, CampusStoreWeb.LibroWS.autor[] autores) {
+            this.libro = libro;
+            this.autores = autores;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="registrarLibroResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class registrarLibroResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public registrarLibroResponse() {
+        }
+        
+        public registrarLibroResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -1461,76 +1513,27 @@ namespace CampusStoreWeb.LibroWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="registrarLibro", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class registrarLibroRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarLibros", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarLibrosRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public CampusStoreWeb.LibroWS.libro libro;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=1)]
-        [System.Xml.Serialization.XmlElementAttribute("autores", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public CampusStoreWeb.LibroWS.autor[] autores;
-        
-        public registrarLibroRequest() {
-        }
-        
-        public registrarLibroRequest(CampusStoreWeb.LibroWS.libro libro, CampusStoreWeb.LibroWS.autor[] autores) {
-            this.libro = libro;
-            this.autores = autores;
+        public listarLibrosRequest() {
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="registrarLibroResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class registrarLibroResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarLibrosResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarLibrosResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public CampusStoreWeb.LibroWS.libro[] @return;
         
-        public registrarLibroResponse() {
+        public listarLibrosResponse() {
         }
         
-        public registrarLibroResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerLibro", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class obtenerLibroRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int id;
-        
-        public obtenerLibroRequest() {
-        }
-        
-        public obtenerLibroRequest(int id) {
-            this.id = id;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerLibroResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class obtenerLibroResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public CampusStoreWeb.LibroWS.libro @return;
-        
-        public obtenerLibroResponse() {
-        }
-        
-        public obtenerLibroResponse(CampusStoreWeb.LibroWS.libro @return) {
+        public listarLibrosResponse(CampusStoreWeb.LibroWS.libro[] @return) {
             this.@return = @return;
         }
     }
@@ -1563,24 +1566,51 @@ namespace CampusStoreWeb.LibroWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.LibroWS.listarLibrosResponse CampusStoreWeb.LibroWS.LibroWS.listarLibros(CampusStoreWeb.LibroWS.listarLibrosRequest request) {
-            return base.Channel.listarLibros(request);
+        CampusStoreWeb.LibroWS.obtenerLibroResponse CampusStoreWeb.LibroWS.LibroWS.obtenerLibro(CampusStoreWeb.LibroWS.obtenerLibroRequest request) {
+            return base.Channel.obtenerLibro(request);
         }
         
-        public CampusStoreWeb.LibroWS.libro[] listarLibros() {
-            CampusStoreWeb.LibroWS.listarLibrosRequest inValue = new CampusStoreWeb.LibroWS.listarLibrosRequest();
-            CampusStoreWeb.LibroWS.listarLibrosResponse retVal = ((CampusStoreWeb.LibroWS.LibroWS)(this)).listarLibros(inValue);
+        public CampusStoreWeb.LibroWS.libro obtenerLibro(int id) {
+            CampusStoreWeb.LibroWS.obtenerLibroRequest inValue = new CampusStoreWeb.LibroWS.obtenerLibroRequest();
+            inValue.id = id;
+            CampusStoreWeb.LibroWS.obtenerLibroResponse retVal = ((CampusStoreWeb.LibroWS.LibroWS)(this)).obtenerLibro(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.listarLibrosResponse> CampusStoreWeb.LibroWS.LibroWS.listarLibrosAsync(CampusStoreWeb.LibroWS.listarLibrosRequest request) {
-            return base.Channel.listarLibrosAsync(request);
+        System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.obtenerLibroResponse> CampusStoreWeb.LibroWS.LibroWS.obtenerLibroAsync(CampusStoreWeb.LibroWS.obtenerLibroRequest request) {
+            return base.Channel.obtenerLibroAsync(request);
         }
         
-        public System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.listarLibrosResponse> listarLibrosAsync() {
-            CampusStoreWeb.LibroWS.listarLibrosRequest inValue = new CampusStoreWeb.LibroWS.listarLibrosRequest();
-            return ((CampusStoreWeb.LibroWS.LibroWS)(this)).listarLibrosAsync(inValue);
+        public System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.obtenerLibroResponse> obtenerLibroAsync(int id) {
+            CampusStoreWeb.LibroWS.obtenerLibroRequest inValue = new CampusStoreWeb.LibroWS.obtenerLibroRequest();
+            inValue.id = id;
+            return ((CampusStoreWeb.LibroWS.LibroWS)(this)).obtenerLibroAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CampusStoreWeb.LibroWS.registrarLibroResponse CampusStoreWeb.LibroWS.LibroWS.registrarLibro(CampusStoreWeb.LibroWS.registrarLibroRequest request) {
+            return base.Channel.registrarLibro(request);
+        }
+        
+        public int registrarLibro(CampusStoreWeb.LibroWS.libro libro, CampusStoreWeb.LibroWS.autor[] autores) {
+            CampusStoreWeb.LibroWS.registrarLibroRequest inValue = new CampusStoreWeb.LibroWS.registrarLibroRequest();
+            inValue.libro = libro;
+            inValue.autores = autores;
+            CampusStoreWeb.LibroWS.registrarLibroResponse retVal = ((CampusStoreWeb.LibroWS.LibroWS)(this)).registrarLibro(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.registrarLibroResponse> CampusStoreWeb.LibroWS.LibroWS.registrarLibroAsync(CampusStoreWeb.LibroWS.registrarLibroRequest request) {
+            return base.Channel.registrarLibroAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.registrarLibroResponse> registrarLibroAsync(CampusStoreWeb.LibroWS.libro libro, CampusStoreWeb.LibroWS.autor[] autores) {
+            CampusStoreWeb.LibroWS.registrarLibroRequest inValue = new CampusStoreWeb.LibroWS.registrarLibroRequest();
+            inValue.libro = libro;
+            inValue.autores = autores;
+            return ((CampusStoreWeb.LibroWS.LibroWS)(this)).registrarLibroAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1630,51 +1660,24 @@ namespace CampusStoreWeb.LibroWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.LibroWS.registrarLibroResponse CampusStoreWeb.LibroWS.LibroWS.registrarLibro(CampusStoreWeb.LibroWS.registrarLibroRequest request) {
-            return base.Channel.registrarLibro(request);
+        CampusStoreWeb.LibroWS.listarLibrosResponse CampusStoreWeb.LibroWS.LibroWS.listarLibros(CampusStoreWeb.LibroWS.listarLibrosRequest request) {
+            return base.Channel.listarLibros(request);
         }
         
-        public int registrarLibro(CampusStoreWeb.LibroWS.libro libro, CampusStoreWeb.LibroWS.autor[] autores) {
-            CampusStoreWeb.LibroWS.registrarLibroRequest inValue = new CampusStoreWeb.LibroWS.registrarLibroRequest();
-            inValue.libro = libro;
-            inValue.autores = autores;
-            CampusStoreWeb.LibroWS.registrarLibroResponse retVal = ((CampusStoreWeb.LibroWS.LibroWS)(this)).registrarLibro(inValue);
+        public CampusStoreWeb.LibroWS.libro[] listarLibros() {
+            CampusStoreWeb.LibroWS.listarLibrosRequest inValue = new CampusStoreWeb.LibroWS.listarLibrosRequest();
+            CampusStoreWeb.LibroWS.listarLibrosResponse retVal = ((CampusStoreWeb.LibroWS.LibroWS)(this)).listarLibros(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.registrarLibroResponse> CampusStoreWeb.LibroWS.LibroWS.registrarLibroAsync(CampusStoreWeb.LibroWS.registrarLibroRequest request) {
-            return base.Channel.registrarLibroAsync(request);
+        System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.listarLibrosResponse> CampusStoreWeb.LibroWS.LibroWS.listarLibrosAsync(CampusStoreWeb.LibroWS.listarLibrosRequest request) {
+            return base.Channel.listarLibrosAsync(request);
         }
         
-        public System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.registrarLibroResponse> registrarLibroAsync(CampusStoreWeb.LibroWS.libro libro, CampusStoreWeb.LibroWS.autor[] autores) {
-            CampusStoreWeb.LibroWS.registrarLibroRequest inValue = new CampusStoreWeb.LibroWS.registrarLibroRequest();
-            inValue.libro = libro;
-            inValue.autores = autores;
-            return ((CampusStoreWeb.LibroWS.LibroWS)(this)).registrarLibroAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.LibroWS.obtenerLibroResponse CampusStoreWeb.LibroWS.LibroWS.obtenerLibro(CampusStoreWeb.LibroWS.obtenerLibroRequest request) {
-            return base.Channel.obtenerLibro(request);
-        }
-        
-        public CampusStoreWeb.LibroWS.libro obtenerLibro(int id) {
-            CampusStoreWeb.LibroWS.obtenerLibroRequest inValue = new CampusStoreWeb.LibroWS.obtenerLibroRequest();
-            inValue.id = id;
-            CampusStoreWeb.LibroWS.obtenerLibroResponse retVal = ((CampusStoreWeb.LibroWS.LibroWS)(this)).obtenerLibro(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.obtenerLibroResponse> CampusStoreWeb.LibroWS.LibroWS.obtenerLibroAsync(CampusStoreWeb.LibroWS.obtenerLibroRequest request) {
-            return base.Channel.obtenerLibroAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.obtenerLibroResponse> obtenerLibroAsync(int id) {
-            CampusStoreWeb.LibroWS.obtenerLibroRequest inValue = new CampusStoreWeb.LibroWS.obtenerLibroRequest();
-            inValue.id = id;
-            return ((CampusStoreWeb.LibroWS.LibroWS)(this)).obtenerLibroAsync(inValue);
+        public System.Threading.Tasks.Task<CampusStoreWeb.LibroWS.listarLibrosResponse> listarLibrosAsync() {
+            CampusStoreWeb.LibroWS.listarLibrosRequest inValue = new CampusStoreWeb.LibroWS.listarLibrosRequest();
+            return ((CampusStoreWeb.LibroWS.LibroWS)(this)).listarLibrosAsync(inValue);
         }
     }
 }

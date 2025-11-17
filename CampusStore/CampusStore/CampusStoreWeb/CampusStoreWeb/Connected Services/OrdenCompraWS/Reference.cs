@@ -37,6 +37,15 @@ namespace CampusStoreWeb.OrdenCompraWS {
             "")]
         System.Threading.Tasks.Task<CampusStoreWeb.OrdenCompraWS.listarOrdenesCompraResponse> listarOrdenesCompraAsync(CampusStoreWeb.OrdenCompraWS.listarOrdenesCompraRequest request);
         
+        // CODEGEN: El parámetro 'ordenCompra' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompraRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompraResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
+        CampusStoreWeb.OrdenCompraWS.guardarOrdenCompraResponse guardarOrdenCompra(CampusStoreWeb.OrdenCompraWS.guardarOrdenCompraRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompraRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompraResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.OrdenCompraWS.guardarOrdenCompraResponse> guardarOrdenCompraAsync(CampusStoreWeb.OrdenCompraWS.guardarOrdenCompraRequest request);
+        
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/obtenerOrdenCompraRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/obtenerOrdenCompraResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -46,15 +55,6 @@ namespace CampusStoreWeb.OrdenCompraWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/obtenerOrdenCompraRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/obtenerOrdenCompraResponse")]
         System.Threading.Tasks.Task<CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraResponse> obtenerOrdenCompraAsync(CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest request);
-        
-        // CODEGEN: El parámetro 'ordenCompra' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompraRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompraResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
-        CampusStoreWeb.OrdenCompraWS.guardarOrdenCompraResponse guardarOrdenCompra(CampusStoreWeb.OrdenCompraWS.guardarOrdenCompraRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompraRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompraResponse")]
-        System.Threading.Tasks.Task<CampusStoreWeb.OrdenCompraWS.guardarOrdenCompraResponse> guardarOrdenCompraAsync(CampusStoreWeb.OrdenCompraWS.guardarOrdenCompraRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1570,42 +1570,6 @@ namespace CampusStoreWeb.OrdenCompraWS {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerOrdenCompra", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class obtenerOrdenCompraRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int id;
-        
-        public obtenerOrdenCompraRequest() {
-        }
-        
-        public obtenerOrdenCompraRequest(int id) {
-            this.id = id;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerOrdenCompraResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
-    public partial class obtenerOrdenCompraResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public CampusStoreWeb.OrdenCompraWS.ordenCompra @return;
-        
-        public obtenerOrdenCompraResponse() {
-        }
-        
-        public obtenerOrdenCompraResponse(CampusStoreWeb.OrdenCompraWS.ordenCompra @return) {
-            this.@return = @return;
-        }
-    }
-    
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
@@ -1652,6 +1616,42 @@ namespace CampusStoreWeb.OrdenCompraWS {
     public partial class guardarOrdenCompraResponse {
         
         public guardarOrdenCompraResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerOrdenCompra", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerOrdenCompraRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int id;
+        
+        public obtenerOrdenCompraRequest() {
+        }
+        
+        public obtenerOrdenCompraRequest(int id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerOrdenCompraResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerOrdenCompraResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public CampusStoreWeb.OrdenCompraWS.ordenCompra @return;
+        
+        public obtenerOrdenCompraResponse() {
+        }
+        
+        public obtenerOrdenCompraResponse(CampusStoreWeb.OrdenCompraWS.ordenCompra @return) {
+            this.@return = @return;
         }
     }
     
@@ -1726,29 +1726,6 @@ namespace CampusStoreWeb.OrdenCompraWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraResponse CampusStoreWeb.OrdenCompraWS.OrdenCompraWS.obtenerOrdenCompra(CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest request) {
-            return base.Channel.obtenerOrdenCompra(request);
-        }
-        
-        public CampusStoreWeb.OrdenCompraWS.ordenCompra obtenerOrdenCompra(int id) {
-            CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest inValue = new CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest();
-            inValue.id = id;
-            CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraResponse retVal = ((CampusStoreWeb.OrdenCompraWS.OrdenCompraWS)(this)).obtenerOrdenCompra(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraResponse> CampusStoreWeb.OrdenCompraWS.OrdenCompraWS.obtenerOrdenCompraAsync(CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest request) {
-            return base.Channel.obtenerOrdenCompraAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraResponse> obtenerOrdenCompraAsync(int id) {
-            CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest inValue = new CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest();
-            inValue.id = id;
-            return ((CampusStoreWeb.OrdenCompraWS.OrdenCompraWS)(this)).obtenerOrdenCompraAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         CampusStoreWeb.OrdenCompraWS.guardarOrdenCompraResponse CampusStoreWeb.OrdenCompraWS.OrdenCompraWS.guardarOrdenCompra(CampusStoreWeb.OrdenCompraWS.guardarOrdenCompraRequest request) {
             return base.Channel.guardarOrdenCompra(request);
         }
@@ -1770,6 +1747,29 @@ namespace CampusStoreWeb.OrdenCompraWS {
             inValue.ordenCompra = ordenCompra;
             inValue.estado = estado;
             return ((CampusStoreWeb.OrdenCompraWS.OrdenCompraWS)(this)).guardarOrdenCompraAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraResponse CampusStoreWeb.OrdenCompraWS.OrdenCompraWS.obtenerOrdenCompra(CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest request) {
+            return base.Channel.obtenerOrdenCompra(request);
+        }
+        
+        public CampusStoreWeb.OrdenCompraWS.ordenCompra obtenerOrdenCompra(int id) {
+            CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest inValue = new CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest();
+            inValue.id = id;
+            CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraResponse retVal = ((CampusStoreWeb.OrdenCompraWS.OrdenCompraWS)(this)).obtenerOrdenCompra(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraResponse> CampusStoreWeb.OrdenCompraWS.OrdenCompraWS.obtenerOrdenCompraAsync(CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest request) {
+            return base.Channel.obtenerOrdenCompraAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraResponse> obtenerOrdenCompraAsync(int id) {
+            CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest inValue = new CampusStoreWeb.OrdenCompraWS.obtenerOrdenCompraRequest();
+            inValue.id = id;
+            return ((CampusStoreWeb.OrdenCompraWS.OrdenCompraWS)(this)).obtenerOrdenCompraAsync(inValue);
         }
     }
 }
