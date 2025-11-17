@@ -82,6 +82,7 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
         
         modelo.setIdOrdenCompra(rs.getInt("idOrdenCompra"));
         modelo.setLimitePago(rs.getDate("fechaLimitePago"));
+        modelo.setFechaCreacion(rs.getDate("fechaCreacion"));
         modelo.setTotal(rs.getDouble("total"));
         modelo.setTotalDescontado(rs.getDouble("totalConDescuento"));
         modelo.setEstado(EstadoOrden.valueOf(rs.getString("estado")));
