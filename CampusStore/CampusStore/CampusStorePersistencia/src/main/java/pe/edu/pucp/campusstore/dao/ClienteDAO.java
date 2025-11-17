@@ -6,4 +6,5 @@ import pe.edu.pucp.campusstore.modelo.Cliente;
 public interface ClienteDAO extends Persistible<Cliente, Integer> {
     boolean login(String correo, String contraseña);
     Cliente buscarClientePorCorreo(String correo);
+    Integer buscarClienteIdPorCorreo(String correo);
 }

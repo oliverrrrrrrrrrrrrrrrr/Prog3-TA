@@ -29,6 +29,7 @@ namespace CampusStoreWeb.UsuarioWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesCompraRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesCompraResponse" +
             "")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.listarOrdenesCompraResponse listarOrdenesCompra(CampusStoreWeb.UsuarioWS.listarOrdenesCompraRequest request);
         
@@ -39,6 +40,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/obtenerOrdenCompraRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/obtenerOrdenCompraResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.obtenerOrdenCompraResponse obtenerOrdenCompra(CampusStoreWeb.UsuarioWS.obtenerOrdenCompraRequest request);
         
@@ -48,6 +50,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'ordenCompra' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompraRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompraResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.guardarOrdenCompraResponse guardarOrdenCompra(CampusStoreWeb.UsuarioWS.guardarOrdenCompraRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompraRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompraResponse")]
@@ -675,11 +678,13 @@ namespace CampusStoreWeb.UsuarioWS {
         
         private bool encontradoFieldSpecified;
         
+        private int idUsuarioField;
+        
+        private bool idUsuarioFieldSpecified;
+        
         private tipoUsuario tipoUsuarioField;
         
         private bool tipoUsuarioFieldSpecified;
-        
-        private usuario usuarioField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
@@ -707,6 +712,30 @@ namespace CampusStoreWeb.UsuarioWS {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public int idUsuario {
+            get {
+                return this.idUsuarioField;
+            }
+            set {
+                this.idUsuarioField = value;
+                this.RaisePropertyChanged("idUsuario");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idUsuarioSpecified {
+            get {
+                return this.idUsuarioFieldSpecified;
+            }
+            set {
+                this.idUsuarioFieldSpecified = value;
+                this.RaisePropertyChanged("idUsuarioSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
         public tipoUsuario tipoUsuario {
             get {
                 return this.tipoUsuarioField;
@@ -726,18 +755,6 @@ namespace CampusStoreWeb.UsuarioWS {
             set {
                 this.tipoUsuarioFieldSpecified = value;
                 this.RaisePropertyChanged("tipoUsuarioSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public usuario usuario {
-            get {
-                return this.usuarioField;
-            }
-            set {
-                this.usuarioField = value;
-                this.RaisePropertyChanged("usuario");
             }
         }
         
@@ -762,277 +779,6 @@ namespace CampusStoreWeb.UsuarioWS {
         
         /// <remarks/>
         EMPLEADO,
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(empleado))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(cliente))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
-    public abstract partial class usuario : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string contraseñaField;
-        
-        private string correoField;
-        
-        private string nombreField;
-        
-        private string nombreUsuarioField;
-        
-        private string telefonoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string contraseña {
-            get {
-                return this.contraseñaField;
-            }
-            set {
-                this.contraseñaField = value;
-                this.RaisePropertyChanged("contraseña");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string correo {
-            get {
-                return this.correoField;
-            }
-            set {
-                this.correoField = value;
-                this.RaisePropertyChanged("correo");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string nombre {
-            get {
-                return this.nombreField;
-            }
-            set {
-                this.nombreField = value;
-                this.RaisePropertyChanged("nombre");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public string nombreUsuario {
-            get {
-                return this.nombreUsuarioField;
-            }
-            set {
-                this.nombreUsuarioField = value;
-                this.RaisePropertyChanged("nombreUsuario");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public string telefono {
-            get {
-                return this.telefonoField;
-            }
-            set {
-                this.telefonoField = value;
-                this.RaisePropertyChanged("telefono");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
-    public partial class empleado : usuario {
-        
-        private bool activoField;
-        
-        private bool activoFieldSpecified;
-        
-        private int idEmpleadoField;
-        
-        private bool idEmpleadoFieldSpecified;
-        
-        private rol rolField;
-        
-        private double sueldoField;
-        
-        private bool sueldoFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public bool activo {
-            get {
-                return this.activoField;
-            }
-            set {
-                this.activoField = value;
-                this.RaisePropertyChanged("activo");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool activoSpecified {
-            get {
-                return this.activoFieldSpecified;
-            }
-            set {
-                this.activoFieldSpecified = value;
-                this.RaisePropertyChanged("activoSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public int idEmpleado {
-            get {
-                return this.idEmpleadoField;
-            }
-            set {
-                this.idEmpleadoField = value;
-                this.RaisePropertyChanged("idEmpleado");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idEmpleadoSpecified {
-            get {
-                return this.idEmpleadoFieldSpecified;
-            }
-            set {
-                this.idEmpleadoFieldSpecified = value;
-                this.RaisePropertyChanged("idEmpleadoSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public rol rol {
-            get {
-                return this.rolField;
-            }
-            set {
-                this.rolField = value;
-                this.RaisePropertyChanged("rol");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public double sueldo {
-            get {
-                return this.sueldoField;
-            }
-            set {
-                this.sueldoField = value;
-                this.RaisePropertyChanged("sueldo");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool sueldoSpecified {
-            get {
-                return this.sueldoFieldSpecified;
-            }
-            set {
-                this.sueldoFieldSpecified = value;
-                this.RaisePropertyChanged("sueldoSpecified");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
-    public partial class rol : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string descripcionField;
-        
-        private int idRolField;
-        
-        private bool idRolFieldSpecified;
-        
-        private string nombreField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string descripcion {
-            get {
-                return this.descripcionField;
-            }
-            set {
-                this.descripcionField = value;
-                this.RaisePropertyChanged("descripcion");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public int idRol {
-            get {
-                return this.idRolField;
-            }
-            set {
-                this.idRolField = value;
-                this.RaisePropertyChanged("idRol");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idRolSpecified {
-            get {
-                return this.idRolFieldSpecified;
-            }
-            set {
-                this.idRolFieldSpecified = value;
-                this.RaisePropertyChanged("idRolSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string nombre {
-            get {
-                return this.nombreField;
-            }
-            set {
-                this.nombreField = value;
-                this.RaisePropertyChanged("nombre");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
     
     /// <remarks/>
@@ -2342,6 +2088,277 @@ namespace CampusStoreWeb.UsuarioWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
+    public partial class rol : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string descripcionField;
+        
+        private int idRolField;
+        
+        private bool idRolFieldSpecified;
+        
+        private string nombreField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string descripcion {
+            get {
+                return this.descripcionField;
+            }
+            set {
+                this.descripcionField = value;
+                this.RaisePropertyChanged("descripcion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public int idRol {
+            get {
+                return this.idRolField;
+            }
+            set {
+                this.idRolField = value;
+                this.RaisePropertyChanged("idRol");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idRolSpecified {
+            get {
+                return this.idRolFieldSpecified;
+            }
+            set {
+                this.idRolFieldSpecified = value;
+                this.RaisePropertyChanged("idRolSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string nombre {
+            get {
+                return this.nombreField;
+            }
+            set {
+                this.nombreField = value;
+                this.RaisePropertyChanged("nombre");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(empleado))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(cliente))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
+    public abstract partial class usuario : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string contraseñaField;
+        
+        private string correoField;
+        
+        private string nombreField;
+        
+        private string nombreUsuarioField;
+        
+        private string telefonoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string contraseña {
+            get {
+                return this.contraseñaField;
+            }
+            set {
+                this.contraseñaField = value;
+                this.RaisePropertyChanged("contraseña");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string correo {
+            get {
+                return this.correoField;
+            }
+            set {
+                this.correoField = value;
+                this.RaisePropertyChanged("correo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string nombre {
+            get {
+                return this.nombreField;
+            }
+            set {
+                this.nombreField = value;
+                this.RaisePropertyChanged("nombre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string nombreUsuario {
+            get {
+                return this.nombreUsuarioField;
+            }
+            set {
+                this.nombreUsuarioField = value;
+                this.RaisePropertyChanged("nombreUsuario");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string telefono {
+            get {
+                return this.telefonoField;
+            }
+            set {
+                this.telefonoField = value;
+                this.RaisePropertyChanged("telefono");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
+    public partial class empleado : usuario {
+        
+        private bool activoField;
+        
+        private bool activoFieldSpecified;
+        
+        private int idEmpleadoField;
+        
+        private bool idEmpleadoFieldSpecified;
+        
+        private rol rolField;
+        
+        private double sueldoField;
+        
+        private bool sueldoFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public bool activo {
+            get {
+                return this.activoField;
+            }
+            set {
+                this.activoField = value;
+                this.RaisePropertyChanged("activo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool activoSpecified {
+            get {
+                return this.activoFieldSpecified;
+            }
+            set {
+                this.activoFieldSpecified = value;
+                this.RaisePropertyChanged("activoSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public int idEmpleado {
+            get {
+                return this.idEmpleadoField;
+            }
+            set {
+                this.idEmpleadoField = value;
+                this.RaisePropertyChanged("idEmpleado");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idEmpleadoSpecified {
+            get {
+                return this.idEmpleadoFieldSpecified;
+            }
+            set {
+                this.idEmpleadoFieldSpecified = value;
+                this.RaisePropertyChanged("idEmpleadoSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public rol rol {
+            get {
+                return this.rolField;
+            }
+            set {
+                this.rolField = value;
+                this.RaisePropertyChanged("rol");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public double sueldo {
+            get {
+                return this.sueldoField;
+            }
+            set {
+                this.sueldoField = value;
+                this.RaisePropertyChanged("sueldo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool sueldoSpecified {
+            get {
+                return this.sueldoFieldSpecified;
+            }
+            set {
+                this.sueldoFieldSpecified = value;
+                this.RaisePropertyChanged("sueldoSpecified");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.campusstore.pucp.edu.pe/")]
     public enum estadoOrden {
         
@@ -2591,8 +2608,19 @@ namespace CampusStoreWeb.UsuarioWS {
     public interface ClienteWS {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        CampusStoreWeb.UsuarioWS.buscarClientePorCuentaResponse buscarClientePorCuenta(CampusStoreWeb.UsuarioWS.buscarClientePorCuentaRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaResponse")]
+        System.Threading.Tasks.Task<CampusStoreWeb.UsuarioWS.buscarClientePorCuentaResponse> buscarClientePorCuentaAsync(CampusStoreWeb.UsuarioWS.buscarClientePorCuentaRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/listarClientesRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/listarClientesResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.listarClientesResponse listarClientes(CampusStoreWeb.UsuarioWS.listarClientesRequest request);
         
@@ -2602,6 +2630,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerClienteResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.obtenerClienteResponse obtenerCliente(CampusStoreWeb.UsuarioWS.obtenerClienteRequest request);
         
@@ -2611,6 +2640,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.eliminarClienteResponse eliminarCliente(CampusStoreWeb.UsuarioWS.eliminarClienteRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteResponse")]
@@ -2619,10 +2649,47 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'cliente' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.guardarClienteResponse guardarCliente(CampusStoreWeb.UsuarioWS.guardarClienteRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteResponse")]
         System.Threading.Tasks.Task<CampusStoreWeb.UsuarioWS.guardarClienteResponse> guardarClienteAsync(CampusStoreWeb.UsuarioWS.guardarClienteRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarClientePorCuenta", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarClientePorCuentaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string cuenta;
+        
+        public buscarClientePorCuentaRequest() {
+        }
+        
+        public buscarClientePorCuentaRequest(string cuenta) {
+            this.cuenta = cuenta;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarClientePorCuentaResponse", WrapperNamespace="http://services.campusstore.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarClientePorCuentaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.campusstore.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public CampusStoreWeb.UsuarioWS.cliente @return;
+        
+        public buscarClientePorCuentaResponse() {
+        }
+        
+        public buscarClientePorCuentaResponse(CampusStoreWeb.UsuarioWS.cliente @return) {
+            this.@return = @return;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2778,6 +2845,29 @@ namespace CampusStoreWeb.UsuarioWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CampusStoreWeb.UsuarioWS.buscarClientePorCuentaResponse CampusStoreWeb.UsuarioWS.ClienteWS.buscarClientePorCuenta(CampusStoreWeb.UsuarioWS.buscarClientePorCuentaRequest request) {
+            return base.Channel.buscarClientePorCuenta(request);
+        }
+        
+        public CampusStoreWeb.UsuarioWS.cliente buscarClientePorCuenta(string cuenta) {
+            CampusStoreWeb.UsuarioWS.buscarClientePorCuentaRequest inValue = new CampusStoreWeb.UsuarioWS.buscarClientePorCuentaRequest();
+            inValue.cuenta = cuenta;
+            CampusStoreWeb.UsuarioWS.buscarClientePorCuentaResponse retVal = ((CampusStoreWeb.UsuarioWS.ClienteWS)(this)).buscarClientePorCuenta(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CampusStoreWeb.UsuarioWS.buscarClientePorCuentaResponse> CampusStoreWeb.UsuarioWS.ClienteWS.buscarClientePorCuentaAsync(CampusStoreWeb.UsuarioWS.buscarClientePorCuentaRequest request) {
+            return base.Channel.buscarClientePorCuentaAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CampusStoreWeb.UsuarioWS.buscarClientePorCuentaResponse> buscarClientePorCuentaAsync(string cuenta) {
+            CampusStoreWeb.UsuarioWS.buscarClientePorCuentaRequest inValue = new CampusStoreWeb.UsuarioWS.buscarClientePorCuentaRequest();
+            inValue.cuenta = cuenta;
+            return ((CampusStoreWeb.UsuarioWS.ClienteWS)(this)).buscarClientePorCuentaAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         CampusStoreWeb.UsuarioWS.listarClientesResponse CampusStoreWeb.UsuarioWS.ClienteWS.listarClientes(CampusStoreWeb.UsuarioWS.listarClientesRequest request) {
             return base.Channel.listarClientes(request);
         }
@@ -2875,6 +2965,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/listarEmpleadosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/listarEmpleadosResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.listarEmpleadosResponse listarEmpleados(CampusStoreWeb.UsuarioWS.listarEmpleadosRequest request);
         
@@ -2884,6 +2975,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'empleado' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/guardarEmpleadoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/guardarEmpleadoResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.guardarEmpleadoResponse guardarEmpleado(CampusStoreWeb.UsuarioWS.guardarEmpleadoRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/guardarEmpleadoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/guardarEmpleadoResponse")]
@@ -2892,6 +2984,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.obtenerEmpleadoResponse obtenerEmpleado(CampusStoreWeb.UsuarioWS.obtenerEmpleadoRequest request);
         
@@ -2901,6 +2994,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/eliminarEmpleadoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/eliminarEmpleadoResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.eliminarEmpleadoResponse eliminarEmpleado(CampusStoreWeb.UsuarioWS.eliminarEmpleadoRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/eliminarEmpleadoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EmpleadoWS/eliminarEmpleadoResponse")]
@@ -3157,6 +3251,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.eliminarArticuloResponse eliminarArticulo(CampusStoreWeb.UsuarioWS.eliminarArticuloRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse")]
@@ -3165,6 +3260,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'articulo' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.guardarArticuloResponse guardarArticulo(CampusStoreWeb.UsuarioWS.guardarArticuloRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloResponse")]
@@ -3173,6 +3269,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.listarArticulosResponse listarArticulos(CampusStoreWeb.UsuarioWS.listarArticulosRequest request);
         
@@ -3182,6 +3279,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticuloResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.obtenerArticuloResponse obtenerArticulo(CampusStoreWeb.UsuarioWS.obtenerArticuloRequest request);
         
@@ -3439,6 +3537,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/UsuarioWS/loginUsuarioRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/UsuarioWS/loginUsuarioResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.loginUsuarioResponse loginUsuario(CampusStoreWeb.UsuarioWS.loginUsuarioRequest request);
         
@@ -3547,6 +3646,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.obtenerAutorResponse obtenerAutor(CampusStoreWeb.UsuarioWS.obtenerAutorRequest request);
         
@@ -3556,6 +3656,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.listarAutoresResponse listarAutores(CampusStoreWeb.UsuarioWS.listarAutoresRequest request);
         
@@ -3565,6 +3666,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'autor' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.guardarAutorResponse guardarAutor(CampusStoreWeb.UsuarioWS.guardarAutorRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorResponse")]
@@ -3573,6 +3675,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.eliminarAutorResponse eliminarAutor(CampusStoreWeb.UsuarioWS.eliminarAutorRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse")]
@@ -3829,6 +3932,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/listarDescuentosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/DescuentoWS/listarDescuentosResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.listarDescuentosResponse listarDescuentos(CampusStoreWeb.UsuarioWS.listarDescuentosRequest request);
         
@@ -3838,6 +3942,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.obtenerDescuentoResponse obtenerDescuento(CampusStoreWeb.UsuarioWS.obtenerDescuentoRequest request);
         
@@ -3847,6 +3952,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'descuento' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/guardarDescuentoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/DescuentoWS/guardarDescuentoResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.guardarDescuentoResponse guardarDescuento(CampusStoreWeb.UsuarioWS.guardarDescuentoRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/guardarDescuentoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/DescuentoWS/guardarDescuentoResponse")]
@@ -3855,6 +3961,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'descuento' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/eliminarDescuentoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/DescuentoWS/eliminarDescuentoResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.eliminarDescuentoResponse eliminarDescuento(CampusStoreWeb.UsuarioWS.eliminarDescuentoRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/eliminarDescuentoRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/DescuentoWS/eliminarDescuentoResponse")]
@@ -3865,6 +3972,7 @@ namespace CampusStoreWeb.UsuarioWS {
             "quest", ReplyAction="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoPorProductoRe" +
             "sponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.obtenerDescuentoPorProductoResponse obtenerDescuentoPorProducto(CampusStoreWeb.UsuarioWS.obtenerDescuentoPorProductoRequest request);
         
@@ -4200,6 +4308,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.listarLibrosResponse listarLibros(CampusStoreWeb.UsuarioWS.listarLibrosRequest request);
         
@@ -4209,6 +4318,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'libro' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.guardarLibroResponse guardarLibro(CampusStoreWeb.UsuarioWS.guardarLibroRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroResponse")]
@@ -4217,6 +4327,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.eliminarLibroResponse eliminarLibro(CampusStoreWeb.UsuarioWS.eliminarLibroRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroResponse")]
@@ -4225,6 +4336,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.registrarLibroResponse registrarLibro(CampusStoreWeb.UsuarioWS.registrarLibroRequest request);
         
@@ -4234,6 +4346,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.obtenerLibroResponse obtenerLibro(CampusStoreWeb.UsuarioWS.obtenerLibroRequest request);
         
@@ -4557,6 +4670,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/FiltroWS/filtrarPorTipoArticuloRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/FiltroWS/filtrarPorTipoArticuloResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.filtrarPorTipoArticuloResponse filtrarPorTipoArticulo(CampusStoreWeb.UsuarioWS.filtrarPorTipoArticuloRequest request);
         
@@ -4566,6 +4680,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/FiltroWS/filtrarLibrosRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/FiltroWS/filtrarLibrosResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.filtrarLibrosResponse filtrarLibros(CampusStoreWeb.UsuarioWS.filtrarLibrosRequest request);
         
@@ -4740,6 +4855,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/obtenerEditorialRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/obtenerEditorialResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.obtenerEditorialResponse obtenerEditorial(CampusStoreWeb.UsuarioWS.obtenerEditorialRequest request);
         
@@ -4749,6 +4865,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'id' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.eliminarEditorialResponse eliminarEditorial(CampusStoreWeb.UsuarioWS.eliminarEditorialRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialResponse")]
@@ -4757,6 +4874,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         CampusStoreWeb.UsuarioWS.listarEditorialesResponse listarEditoriales(CampusStoreWeb.UsuarioWS.listarEditorialesRequest request);
         
@@ -4766,6 +4884,7 @@ namespace CampusStoreWeb.UsuarioWS {
         // CODEGEN: El parámetro 'editorial' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(usuario))]
         CampusStoreWeb.UsuarioWS.guardarEditorialResponse guardarEditorial(CampusStoreWeb.UsuarioWS.guardarEditorialRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialRequest", ReplyAction="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialResponse")]

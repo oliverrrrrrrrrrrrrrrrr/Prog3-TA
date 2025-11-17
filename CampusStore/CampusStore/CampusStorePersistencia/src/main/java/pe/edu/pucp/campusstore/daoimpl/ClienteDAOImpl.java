@@ -142,4 +142,33 @@ public class ClienteDAOImpl extends BaseDAO<Cliente> implements ClienteDAO {
         });
     }
     
+    protected PreparedStatement comandoBuscarIdPorCorreo(
+            Connection conn, String correo) 
+            throws SQLException {
+        
+        String sql = "{call buscarClienteIdPorCorreo(?)}";
+        
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setString("p_correo", correo);
+        
+        return cmd;
+    }
+
+    @Override
+    public Integer buscarClienteIdPorCorreo(String correo) {
+        return ejecutarComando(conn -> {
+            try (PreparedStatement cmd = this.comandoBuscarIdPorCorreo(conn, correo)) {
+                ResultSet rs = cmd.executeQuery();
+
+                if (!rs.next()) {
+                    System.err.println("No se encontro el registro con "
+                            + "correo: " + correo);
+                    return 0;
+                }
+
+                return rs.getInt(1);
+            }
+        });
+    }
+    
 }

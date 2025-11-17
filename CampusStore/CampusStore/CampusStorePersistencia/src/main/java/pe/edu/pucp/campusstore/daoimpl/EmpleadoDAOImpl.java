@@ -132,4 +132,33 @@ public class EmpleadoDAOImpl extends BaseDAO<Empleado> implements EmpleadoDAO {
         });
     }
     
+    protected PreparedStatement comandoBuscarIdPorCorreo(
+            Connection conn, String correo) 
+            throws SQLException {
+        
+        String sql = "{call buscarEmpleadoIdPorCorreo(?)}";
+        
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setString("p_correo", correo);
+        
+        return cmd;
+    }
+
+    @Override
+    public Integer buscarEmpleadoIdPorCorreo(String correo) {
+        return ejecutarComando(conn -> {
+            try (PreparedStatement cmd = this.comandoBuscarIdPorCorreo(conn, correo)) {
+                ResultSet rs = cmd.executeQuery();
+
+                if (!rs.next()) {
+                    System.err.println("No se encontro el registro con "
+                            + "correo: " + correo);
+                    return null;
+                }
+
+                return rs.getInt(1);
+            }
+        });
+    }
+    
 }

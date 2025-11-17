@@ -38,13 +38,13 @@ public class UsuarioBOImpl implements UsuarioBO{
             return new LoginResponse(
                     Boolean.TRUE,
                     TipoUsuario.CLIENTE,
-                    clienteDAO.buscarClientePorCorreo(correo)
+                    clienteDAO.buscarClienteIdPorCorreo(correo)
             );
         } else if (tipoUsuario.equals(TipoUsuario.EMPLEADO.toString())){
             EmpleadoDAO empleadoDAO=new EmpleadoDAOImpl();
             return new LoginResponse(Boolean.TRUE,
                     TipoUsuario.EMPLEADO,
-                    empleadoDAO.buscarEmpleadoPorCorreo(correo)
+                    empleadoDAO.buscarEmpleadoIdPorCorreo(correo)
             );
         }
         return new LoginResponse(Boolean.FALSE, null, null);

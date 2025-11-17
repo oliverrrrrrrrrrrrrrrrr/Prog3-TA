@@ -27,25 +27,10 @@ namespace CampusStoreWeb
         protected void btnSignIn_Click(object sender, EventArgs e)
         {
             if (!Page.IsValid)
-            {
                 return;
-            }
 
             string email = txtEmail.Text;
             string password = txtPassword.Text;
-
-            // PRIMERO: Verificar si es un administrador
-            //if (EsAdministrador(email, password))
-            //{
-            //    Session["Email"] = email;
-            //    Session["Rol"] = "Admin";
-            //    Session["IsAdmin"] = true;
-            //    Session["NombreUsuario"] = "Administrator";
-
-            //    FormsAuthentication.RedirectFromLoginPage(email, false);
-            //    Response.Redirect("GestionarEmpleados.aspx");
-            //    return;
-            //}
 
             loginResponse respuesta = this.usuarioWS.loginUsuario(email, password);
 
@@ -53,7 +38,6 @@ namespace CampusStoreWeb
             {
                 cvLoginError.IsValid = false;
                 cvLoginError.ErrorMessage = "La cuenta o contraseña es incorrecta.";
-
                 return;
             }
 
@@ -62,15 +46,17 @@ namespace CampusStoreWeb
                 Session["Email"] = email;
                 Session["Rol"] = "Admin";
                 Session["IsAdmin"] = true;
-                Session["NombreUsuario"] = respuesta.usuario.nombreUsuario;
+                Session["NombreUsuario"] = "Administrator";
 
                 FormsAuthentication.RedirectFromLoginPage(email, false);
                 Response.Redirect("GestionarEmpleados.aspx");
                 return;
             }
 
-            Session["email"] = email;
-            System.Web.Security.FormsAuthentication.RedirectFromLoginPage(email, false);
+            Session["Email"] = email;
+
+            FormsAuthentication.RedirectFromLoginPage(email, false);
+            Response.Redirect("Catalogo.aspx");
         }
 
         private bool EsAdministrador(string email, string password)

@@ -16,17 +16,8 @@
   <xs:complexType name="loginResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="encontrado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="tipoUsuario" type="tns:tipoUsuario" />
-      <xs:element minOccurs="0" name="usuario" type="tns:usuario" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="usuario" abstract="true">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="contraseña" type="xs:string" />
-      <xs:element minOccurs="0" name="correo" type="xs:string" />
-      <xs:element minOccurs="0" name="nombre" type="xs:string" />
-      <xs:element minOccurs="0" name="nombreUsuario" type="xs:string" />
-      <xs:element minOccurs="0" name="telefono" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="tipoUsuario">

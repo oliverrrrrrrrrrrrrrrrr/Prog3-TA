@@ -14,12 +14,12 @@ import pe.edu.pucp.campusstore.modelo.enums.TipoUsuario;
 public class LoginResponse {
     private Boolean encontrado;
     private TipoUsuario tipoUsuario;
-    private Usuario usuario;
+    private Integer idUsuario;
 
-    public LoginResponse(Boolean encontrado, TipoUsuario tipoUsuario, Usuario usuario) {
+    public LoginResponse(Boolean encontrado, TipoUsuario tipoUsuario, Integer idUsuario) {
         this.encontrado = encontrado;
         this.tipoUsuario = tipoUsuario;
-        this.usuario = usuario;
+        this.idUsuario = idUsuario;
     }
 
     /**
@@ -51,17 +51,17 @@ public class LoginResponse {
     }
 
     /**
-     * @return the usuario
+     * @return the idUsuario
      */
-    public Usuario getUsuario() {
-        return usuario;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
     /**
-     * @param usuario the usuario to set
+     * @param idUsuario the idUsuario to set
      */
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
     
     

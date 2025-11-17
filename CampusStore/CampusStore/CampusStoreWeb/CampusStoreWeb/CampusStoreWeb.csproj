@@ -466,6 +466,9 @@
     <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.loginUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\UsuarioWS\CampusStoreWeb.UsuarioWS.buscarClientePorCuentaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\UsuarioWS\ClienteWS.wsdl" />
     <None Include="Connected Services\UsuarioWS\ClienteWS.xsd">
       <SubType>Designer</SubType>

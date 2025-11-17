@@ -10,4 +10,5 @@ import pe.edu.pucp.campusstore.modelo.Empleado;
  */
 public interface EmpleadoDAO extends Persistible<Empleado, Integer> {
     Empleado buscarEmpleadoPorCorreo(String correo);
+    Integer buscarEmpleadoIdPorCorreo(String correo);
 }
