@@ -86,7 +86,7 @@ namespace CampusStoreWeb
                                 Nombre = lib.nombre,
                                 Precio = (decimal)lib.precio,
                                 TipoProducto = "libro",
-                                UrlImagen = $"{BASE_URL_IMAGENES}libro_{lib.idLibro}.jpg"
+                                UrlImagen = lib.imagenURL
                             });
                         }
                     }
@@ -106,7 +106,7 @@ namespace CampusStoreWeb
                                 Nombre = art.nombre,
                                 Precio = (decimal)art.precio,
                                 TipoProducto = categoriaSeleccionada,
-                                UrlImagen = $"{BASE_URL_IMAGENES}{categoriaSeleccionada}_{art.idArticulo}.jpg"
+                                UrlImagen = art.imagenURL
                             });
                         }
                     }

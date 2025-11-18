@@ -2638,7 +2638,6 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- procedure contarProductosCarrito
 -- -----------------------------------------------------
-use libreriaCampusStore2;
 DELIMITER $$
 CREATE DEFINER=`root`@`%` PROCEDURE `contarProductosCarrito`(
     IN p_idCarrito INT

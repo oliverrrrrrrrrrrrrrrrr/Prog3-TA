@@ -19,7 +19,7 @@ namespace CampusStoreWeb
 
     public partial class Catalogo : System.Web.UI.Page
     {
-        private const string BASE_URL_IMAGENES = "http://localhost:8080/TuAplicacionJava/images/";
+       
         private string categoriaActual = "articulo"; // Por defecto muestra todos
         private static Random random = new Random();
 
@@ -76,7 +76,7 @@ namespace CampusStoreWeb
                                 Nombre = lib.nombre,
                                 Precio = (decimal)lib.precio,
                                 TipoProducto = "libro",
-                                UrlImagen = $"{BASE_URL_IMAGENES}libro_{lib.idLibro}.jpg"
+                                UrlImagen = lib.imagenURL
                             });
                         }
                     }
@@ -95,7 +95,7 @@ namespace CampusStoreWeb
                                 Nombre = art.nombre,
                                 Precio = (decimal)art.precio,
                                 TipoProducto = art.tipoArticulo.ToString(),
-                                UrlImagen = $"{BASE_URL_IMAGENES}{tipoParaUrl}_{art.idArticulo}.jpg"
+                                UrlImagen = art.imagenURL
                             });
                         }
                     }
@@ -118,7 +118,7 @@ namespace CampusStoreWeb
                                 Nombre = lib.nombre,
                                 Precio = (decimal)lib.precio,
                                 TipoProducto = "libro",
-                                UrlImagen = $"{BASE_URL_IMAGENES}libro_{lib.idLibro}.jpg"
+                                UrlImagen = lib.imagenURL
                             });
                         }
                     }
@@ -140,7 +140,7 @@ namespace CampusStoreWeb
                                 Nombre = art.nombre,
                                 Precio = (decimal)art.precio,
                                 TipoProducto = categoriaActual,
-                                UrlImagen = $"{BASE_URL_IMAGENES}{tipoParaUrl}_{art.idArticulo}.jpg"
+                                UrlImagen = art.imagenURL
                             });
                         }
                     }
