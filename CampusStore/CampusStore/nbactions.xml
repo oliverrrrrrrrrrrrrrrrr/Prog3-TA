@@ -24,4 +24,15 @@
                 <skipTests>true</skipTests>
             </properties>
         </action>
+        <action>
+            <actionName>build-with-dependencies</actionName>
+            <reactor>also-make</reactor>
+            <packagings>
+                <packaging>*</packaging>
+            </packagings>
+            <goals>
+                <goal>install</goal>
+                <goal>-DskipTests</goal>
+            </goals>
+        </action>
     </actions>

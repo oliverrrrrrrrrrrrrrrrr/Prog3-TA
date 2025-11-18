@@ -113,16 +113,6 @@
       <xs:element minOccurs="0" name="usosRestantes" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="articulo">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:producto">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="idArticulo" type="xs:int" />
-          <xs:element minOccurs="0" name="tipoArticulo" type="tns:tipoArticulo" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
   <xs:complexType name="guardarLibroResponse">
     <xs:sequence />
   </xs:complexType>
@@ -184,14 +174,6 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="ARTICULO" />
       <xs:enumeration value="LIBRO" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="tipoArticulo">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="LAPICERO" />
-      <xs:enumeration value="CUADERNO" />
-      <xs:enumeration value="PELUCHE" />
-      <xs:enumeration value="TOMATODO" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="estado">

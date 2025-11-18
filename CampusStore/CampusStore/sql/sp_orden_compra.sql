@@ -49,7 +49,7 @@ CREATE PROCEDURE `insertarOrdenCompra`(
 )
 BEGIN
     -- Validar estado
-    IF p_estado NOT IN ('NO_PAGADO', 'PAGADO', 'ENTREGADO') THEN
+    IF p_estado NOT IN ('NO_PAGADO', 'PAGADO', 'ENTREGADO', 'CANCELADO') THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Estado inválido. Valores permitidos: NO_PAGADO, PAGADO, ENTREGADO';
     END IF;
@@ -115,7 +115,7 @@ CREATE PROCEDURE `modificarOrdenCompra`(
 )
 BEGIN
     -- Validar estado
-    IF p_estado NOT IN ('NO_PAGADO', 'PAGADO', 'ENTREGADO') THEN
+    IF p_estado NOT IN ('NO_PAGADO', 'PAGADO', 'ENTREGADO', 'CANCELADO') THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Estado inválido. Valores permitidos: NO_PAGADO, PAGADO, ENTREGADO';
     END IF;

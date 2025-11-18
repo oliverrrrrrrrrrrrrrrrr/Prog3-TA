@@ -51,7 +51,7 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
         cmd.setDouble("p_totalConDescuento", modelo.getTotalDescontado());
         cmd.setString("p_estado", modelo.getEstado().toString());
         cmd.setInt("p_idCliente", modelo.getCliente().getIdCliente());
-        
+        System.out.println(modelo.getEstado().toString());
         return cmd;
     }
 

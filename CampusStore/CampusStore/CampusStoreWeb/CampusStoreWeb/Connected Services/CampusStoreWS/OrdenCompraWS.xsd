@@ -215,14 +215,6 @@
   <xs:complexType name="guardarOrdenCompraResponse">
     <xs:sequence />
   </xs:complexType>
-  <xs:complexType name="listarOrdenesCompra">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="listarOrdenesCompraResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:ordenCompra" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="listarLibrosCarrito">
     <xs:sequence>
       <xs:element name="idCarrito" type="xs:int" />
@@ -231,6 +223,14 @@
   <xs:complexType name="listarLibrosCarritoResponse">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:lineaCarrito" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarOrdenesCompra">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarOrdenesCompraResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:ordenCompra" />
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="tipoArticulo">
@@ -269,6 +269,7 @@
       <xs:enumeration value="NO_PAGADO" />
       <xs:enumeration value="PAGADO" />
       <xs:enumeration value="ENTREGADO" />
+      <xs:enumeration value="CANCELADO" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="estado">

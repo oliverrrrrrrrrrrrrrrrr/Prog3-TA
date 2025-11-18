@@ -113,16 +113,6 @@
       <xs:element minOccurs="0" name="usosRestantes" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="articulo">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:producto">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="idArticulo" type="xs:int" />
-          <xs:element minOccurs="0" name="tipoArticulo" type="tns:tipoArticulo" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
   <xs:complexType name="filtrarPorTipoArticulo">
     <xs:sequence>
       <xs:element minOccurs="0" name="tipoArticulo" type="xs:string" />
@@ -132,6 +122,16 @@
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:articulo" />
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="articulo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:producto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idArticulo" type="xs:int" />
+          <xs:element minOccurs="0" name="tipoArticulo" type="tns:tipoArticulo" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:simpleType name="formato">
     <xs:restriction base="xs:string">

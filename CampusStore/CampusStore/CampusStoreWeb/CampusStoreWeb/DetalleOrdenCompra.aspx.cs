@@ -271,7 +271,7 @@ namespace CampusStoreWeb
 
                     // Cambiar estado a CANCELADO
                     ordenActual = ordenCompraWS.obtenerOrdenCompra(idOrdenActual);
-                    ordenActual.estado = estadoOrden.NO_PAGADO;
+                    ordenActual.estado = estadoOrden.CANCELADO;
                     ordenActual.estadoSpecified = true;
 
                     ordenCompraWS.guardarOrdenCompra(ordenActual,estado.Modificado);
