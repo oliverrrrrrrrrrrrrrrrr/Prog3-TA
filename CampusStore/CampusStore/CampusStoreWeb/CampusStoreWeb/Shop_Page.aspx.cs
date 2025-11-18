@@ -210,22 +210,17 @@ namespace CampusStoreWeb
                 string[] args = e.CommandArgument.ToString().Split(',');
                 if (args.Length == 2)
                 {
+                    
+
                     int productoId = int.Parse(args[0]);
                     string productoTipo = args[1];
-                    int cantidad = 1; // El botón del hover siempre añade una unidad
 
-                    // --- LÓGICA PARA AGREGAR AL CARRITO ---
-                    // Aquí es donde llamas a tu lógica de negocio para el carrito.
-                    // Puede ser una clase que maneje la Sesión, o llame a la BD.
-                    // Ejemplo:
-                    // CarritoDeCompras.AgregarItem(productoId, productoTipo, cantidad);
+                    // Lógica para añadir 1 item al carrito...
+                    System.Diagnostics.Debug.WriteLine($"Añadido desde hover: ID={productoId}, Tipo='{productoTipo}'");
 
-                    // Mensaje de depuración para confirmar que funciona
-                    System.Diagnostics.Debug.WriteLine($"Añadido al carrito: ID={productoId}, Tipo='{productoTipo}', Cantidad={cantidad}");
-
-                    // Opcional: Mostrar un popup de confirmación al usuario.
-                    string script = "Swal.fire({ icon: 'success', title: '¡Añadido!', text: 'Producto agregado al carrito.', showConfirmButton: false, timer: 1500 });";
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                    Session["ShowAddToCartAlert"] = true;
+                    Response.Redirect(Request.RawUrl, false); // false para evitar ThreadAbortException
+                    Context.ApplicationInstance.CompleteRequest();
                 }
             }
         }
@@ -281,5 +276,22 @@ namespace CampusStoreWeb
                 return null;
             }
         }
+
+        [WebMethod]
+        public static bool AddItemToCart(string tipo, int id, int cantidad)
+        {
+            try
+            {
+                // Lógica para añadir items al carrito...
+                System.Diagnostics.Debug.WriteLine($"Añadido desde modal: ID={id}, Tipo='{tipo}', Cantidad={cantidad}");
+                return true; // Devuelve true si la operación fue exitosa
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error en WebMethod AddItemToCart: {ex.Message}");
+                return false; // Devuelve false si hubo un error
+            }
+        }
+
     }
 }

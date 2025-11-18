@@ -64,71 +64,20 @@
 
     /* Estilos de los filtros (sin cambios) */
     .form-check-list { list-style-type: none; padding-left: 0; }
-     #quickViewModal .modal-lg { 
-        max-width: 900px; /* Ancho del modal */
-    }
-    
-    #quickViewModal .modal-body {
-        padding: 2rem; /* Más espacio interior */
-    }
-
-    #quickViewModal .quick-view-title {
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-    }
-    
-    #quickViewModal .quick-view-price {
-        font-size: 1.75rem;
-        font-weight: 600;
-        color: #0d6efd; /* Azul */
-        margin-bottom: 1rem;
-    }
-
-    #quickViewModal .quick-view-description {
-        color: #6c757d;
-        margin-bottom: 1.5rem;
-    }
-
-    #quickViewModal .quick-view-availability {
-        font-size: 0.9rem;
-        margin-bottom: 1.5rem;
-    }
-    #quickViewModal .quick-view-availability .in-stock {
-        color: #198754; /* Verde */
-        font-weight: bold;
-    }
-
-    #quickViewModal .quick-view-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    #quickViewModal .quick-view-qty {
-        width: 70px;
-        text-align: center;
-        height: 40px;
-    }
-    
-    #quickViewModal .btn-add-to-cart {
-        background-color: #ffc107; /* Amarillo */
-        border-color: #ffc107;
-        color: #212529;
-        font-weight: bold;
-        height: 40px;
-    }
-    #quickViewModal .btn-add-to-cart:hover {
-        background-color: #e0a800;
-        border-color: #e0a800;
-    }
-
-    #quickViewModal .loading-spinner { 
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
-        min-height: 400px; 
-    }
+     #quickViewModal .modal-lg { max-width: 900px; }
+        #quickViewModal .modal-content { border-radius: 4px; border: none; }
+        #quickViewModal .modal-body { padding: 2rem; }
+        #quickViewModal .quick-view-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        #quickViewModal .quick-view-price { font-size: 1.75rem; font-weight: 600; color: #0d6efd; margin-bottom: 1rem; }
+        #quickViewModal .quick-view-description { color: #6c757d; margin-bottom: 1.5rem; }
+        #quickViewModal .quick-view-availability { font-size: 0.9rem; margin-bottom: 1.5rem; }
+        #quickViewModal .quick-view-availability .in-stock { color: #198754; font-weight: bold; }
+        #quickViewModal .quick-view-availability .out-stock { color: #dc3545; font-weight: bold; }
+        #quickViewModal .quick-view-actions { display: flex; align-items: center; gap: 10px; }
+        #quickViewModal .quick-view-qty { width: 70px; text-align: center; height: 40px; }
+        #quickViewModal .btn-add-to-cart { background-color: #ffc107; border-color: #ffc107; color: #212529; font-weight: bold; height: 40px; }
+        #quickViewModal .btn-add-to-cart:hover { background-color: #e0a800; border-color: #e0a800; }
+        #quickViewModal .loading-spinner { display: flex; justify-content: center; align-items: center; min-height: 400px; }
     </style>
     <script type="text/javascript">
         function validarFiltrosCliente() {
@@ -288,7 +237,7 @@
                                 <!-- Capa de acciones (hijo directo del contenedor) -->
                                 <div class="product-actions">
                                     <!-- Botón de Vista Rápida (Ojo) -->
-                                      <a href="#" class="action-btn" title="Vista Rápida" 
+                                       <a href="#" class="action-btn" title="Vista Rápida" 
                                                onclick='openQuickView(<%# Eval("Id") %>, "<%# Eval("TipoProducto") %>"); return false;'>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
                                             </a>
@@ -336,10 +285,10 @@
 
     </div>
     <!-- HTML DEL MODAL DE VISTA RÁPIDA -->
-    <div class="modal fade" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
+     <div class="modal fade" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-0">
                     <h5 class="modal-title" id="quickViewModalLabel">Vista Rápida</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -353,67 +302,87 @@
         </div>
     </div>
 
+
     <!-- JAVASCRIPT para la lógica del Modal -->
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
+         var quickViewModal; // Hacemos la variable del modal global
 
-            var quickViewModal;
-            var modalElement = document.getElementById('quickViewModal');
-            if (modalElement) {
-                quickViewModal = new bootstrap.Modal(modalElement, {});
-            }
+         // 1. Envolvemos la inicialización en DOMContentLoaded
+         document.addEventListener('DOMContentLoaded', function () {
+             var modalElement = document.getElementById('quickViewModal');
+             if (modalElement) {
+                 quickViewModal = new bootstrap.Modal(modalElement, {});
+             }
+         });
 
-            window.openQuickView = function (id, tipo) {
-                if (!quickViewModal) return;
-                document.getElementById('modalContent').innerHTML = '';
-                document.getElementById('modalLoading').style.display = 'flex';
-                quickViewModal.show();
-                PageMethods.GetProductDetails(tipo, id, onGetDetailsSuccess, onGetDetailsError);
-            };
+         // 2. Definimos las funciones en el scope GLOBAL (fuera de DOMContentLoaded)
+         function openQuickView(id, tipo) {
+             if (!quickViewModal) {
+                 console.error('Bootstrap Modal no está inicializado.');
+                 return;
+             }
+             document.getElementById('modalContent').innerHTML = '';
+             document.getElementById('modalLoading').style.display = 'flex';
+             quickViewModal.show();
+             PageMethods.GetProductDetails(tipo, id, onGetDetailsSuccess, onGetDetailsError);
+         }
 
-            window.onGetDetailsSuccess = function (result) {
-                document.getElementById('modalLoading').style.display = 'none';
-                if (result) {
-                    // Generar HTML con la nueva estructura y clases
-                    let autorHtml = result.Autor ? `<p class="text-muted mb-2">Autor: ${result.Autor}</p>` : '';
-                    let disponibilidadClass = result.Stock > 0 ? "in-stock" : "out-stock";
-                    let disponibilidadTexto = result.Stock > 0 ? "En Stock" : "Agotado";
+         function onGetDetailsSuccess(result) {
+             document.getElementById('modalLoading').style.display = 'none';
+             if (result) {
+                 let autorHtml = result.Autor ? `<p class="text-muted mb-2">Autor: ${result.Autor}</p>` : '';
+                 let disponibilidadClass = result.Stock > 0 ? "in-stock" : "out-stock";
+                 let disponibilidadTexto = result.Stock > 0 ? "En Stock" : "Agotado";
 
-                    let contentHtml = `
+                 let contentHtml = `
                     <div class="row">
                         <div class="col-md-6">
                             <img id="mainModalImage" src="${result.UrlImagen}" class="img-fluid rounded" />
                         </div>
                         <div class="col-md-6">
-                            <p class="text-muted mb-1">${result.TipoProducto === 'libro' ? 'Libro' : 'Artículo'}</p>
+                            <p class="text-muted mb-1">${result.TipoDeProducto || (result.TipoProducto === 'libro' ? 'Libro' : 'Artículo')}</p>
                             <h2 class="quick-view-title">${result.Nombre}</h2>
                             ${autorHtml}
                             <h3 class="quick-view-price">${result.Precio.toLocaleString('es-PE', { style: 'currency', currency: 'PEN' })}</h3>
                             <p class="quick-view-description">${result.Descripcion || 'Sin descripción.'}</p>
                             <p class="quick-view-availability">Disponibilidad: <span class="${disponibilidadClass}">${disponibilidadTexto}</span></p>
-
                             <div class="quick-view-actions">
-                                <input id="modalQty" type="number" class="form-control quick-view-qty" value="1" min="1" max="${result.Stock}" />
-                                <button class="btn btn-add-to-cart" onclick="addFromModal(${result.Id}, '${result.TipoProducto}')">AGREGAR AL CARRITO</button>
+                                <input id="modalQty" type="number" class="form-control quick-view-qty" value="1" min="1" max="${result.Stock}" ${result.Stock === 0 ? 'disabled' : ''} />
+                                <button class="btn btn-add-to-cart" onclick="addFromModal(${result.Id}, '${result.TipoProducto}')" ${result.Stock === 0 ? 'disabled' : ''}>AGREGAR AL CARRITO</button>
                             </div>
                         </div>
                     </div>`;
 
-                    document.getElementById('modalContent').innerHTML = contentHtml;
-                } else {
-                    document.getElementById('modalContent').innerHTML = '<p class="text-center text-danger">No se pudieron cargar los detalles del producto.</p>';
-                }
-            };
+                 document.getElementById('modalContent').innerHTML = contentHtml;
+             } else {
+                 document.getElementById('modalContent').innerHTML = '<p class="text-center text-danger">No se pudieron cargar los detalles del producto.</p>';
+             }
+         }
 
-            window.onGetDetailsError = function (error) {
-                document.getElementById('modalLoading').style.display = 'none';
-                document.getElementById('modalContent').innerHTML = `<p class="text-center text-danger">Error: ${error.get_message()}</p>`;
-            };
+         function onGetDetailsError(error) {
+             document.getElementById('modalLoading').style.display = 'none';
+             document.getElementById('modalContent').innerHTML = `<p class="text-center text-danger">Error: ${error.get_message()}</p>`;
+         }
 
-            window.addFromModal = function (id, tipo) {
-                // Lógica para añadir al carrito desde el modal
-            };
+         function addFromModal(id, tipo) {
+             const qtyInput = document.getElementById('modalQty');
+             const cantidad = parseInt(qtyInput.value, 10);
+             if (cantidad > 0) {
+                 quickViewModal.hide();
+                 PageMethods.AddItemToCart(tipo, id, cantidad, onAddToCartSuccess, onAddToCartError);
+             }
+         }
 
-        }); // Fin del DOMContentLoaded
+         function onAddToCartSuccess(result) {
+             if (result === true) {
+                 Swal.fire({ icon: 'success', title: '¡Añadido!', text: 'Producto agregado al carrito.', showConfirmButton: false, timer: 1500 });
+             } else {
+                 Swal.fire({ icon: 'error', title: 'Oops...', text: 'No se pudo agregar el producto al carrito.' });
+             }
+         }
+
+         function onAddToCartError(error) {
+             Swal.fire({ icon: 'error', title: 'Error de Conexión', text: 'Hubo un problema al comunicarse con el servidor.' });
+         }
     </script>
 </asp:Content>
