@@ -216,7 +216,7 @@
         <h2>Compra por categorías</h2>
         <div class="category-grid">
             <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=libro" CssClass="category-item">
-                <asp:Image runat="server" ImageUrl="~/Images/libros.png" AlternateText="Libros" />
+                <asp:Image runat="server" ImageUrl="~/Images/libro.png" AlternateText="Libros" />
                 <p>Libros</p>
             </asp:HyperLink>
             <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=articulo" CssClass="category-item">
@@ -232,11 +232,11 @@
                 <p>Cuadernos</p>
             </asp:HyperLink>
             <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=PELUCHE" CssClass="category-item">
-                <asp:Image runat="server" ImageUrl="~/Images/peluche.png" AlternateText="Peluches" />
+                <asp:Image runat="server" ImageUrl="~/Images/ralseiPeluche.png" AlternateText="Peluches" />
                 <p>Peluches</p>
             </asp:HyperLink>
             <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=TOMATODO" CssClass="category-item">
-                <asp:Image runat="server" ImageUrl="~/Images/tomatodo.png" AlternateText="Tomatodos" />
+                <asp:Image runat="server" ImageUrl="~/Images/tomatodo.webp" AlternateText="Tomatodos" />
                 <p>Tomatodos</p>
             </asp:HyperLink>
         </div>
