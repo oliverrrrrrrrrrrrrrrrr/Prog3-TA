@@ -152,7 +152,7 @@
                                         <h5 class="card-title">
                                             <a href='<%# Eval("TipoProducto", "Product_detail.aspx?type={0}&id=") + Eval("Id") %>'><%# Eval("Nombre") %></a>
                                         </h5>
-                                        <p class="card-text price"><%# Eval("Precio", "${0:C}") %></p>
+                                        <p class="card-text price"><%# Eval("Precio", "{0:C}") %></p>
                                     </div>
                                 </div>
                             </div>
