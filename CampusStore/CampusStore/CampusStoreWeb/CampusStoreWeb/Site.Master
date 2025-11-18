@@ -171,9 +171,8 @@
                             CAMPUS_STORE
                         </a>
                     </div>
-                    
-                    <!-- Search Bar -->
-                    <div class="search-bar d-flex">
+
+                    <div class="search-bar d-flex align-items-stretch">
                         <asp:TextBox ID="txtBusqueda" runat="server" CssClass="form-control" placeholder="Busca productos, autores y más..."></asp:TextBox>
                         <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-search" OnClick="btnBuscar_Click">
                             <i class="bi bi-search"></i>
@@ -181,28 +180,43 @@
                     </div>
 
                     <style>
+                        .search-bar {
+                            max-width: 600px;
+                            width: 100%;
+                        }
+    
                         .search-bar input {
                             border-radius: 4px 0 0 4px;
                             border: none;
                             padding: 10px 15px;
+                            height: 44px; /* Altura fija */
+                            flex: 1;
                         }
     
                         .btn-search {
                             border-radius: 0 4px 4px 0;
                             border: none;
                             background-color: white;
-                            padding: 10px 15px;
+                            padding: 0 15px; /* Padding horizontal solamente */
                             display: flex;
                             align-items: center;
                             justify-content: center;
                             text-decoration: none;
                             color: #1e5a7d;
                             font-size: 18px;
+                            height: 44px; /* Misma altura que el input */
+                            min-width: 44px; /* Ancho mínimo para el botón */
                         }
     
                         .btn-search:hover {
                             background-color: #f0f0f0;
                             color: #1e5a7d;
+                            text-decoration: none;
+                        }
+    
+                        .btn-search:focus {
+                            outline: none;
+                            box-shadow: none;
                         }
                     </style>
                     
@@ -305,11 +319,11 @@
                     <div class="col-lg-3 col-md-6 mb-4 footer-section">
                         <h5>Categorías Principales</h5>
                         <ul>
-                            <li><asp:HyperLink ID="lnkFooterPeluches" runat="server" NavigateUrl="~/Catalogo.aspx">Peluches</asp:HyperLink></li>
-                            <li><asp:HyperLink ID="lnkFooterTomatelodos" runat="server" NavigateUrl="~/Catalogo.aspx">Tomatelodos</asp:HyperLink></li>
-                            <li><asp:HyperLink ID="lnkFooterUtiles" runat="server" NavigateUrl="~/Catalogo.aspx">Útiles</asp:HyperLink></li>
-                            <li><asp:HyperLink ID="lnkFooterLibros" runat="server" NavigateUrl="~/Catalogo.aspx">Libros</asp:HyperLink></li>
-                            <li><asp:HyperLink ID="lnkFooterCuadernos" runat="server" NavigateUrl="~/Catalogo.aspx">Cuadernos</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterPeluches" runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=PELUCHE">Peluches</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterTomatelodos" runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=TOMATODO">Tomatodos</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterUtiles" runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=LAPICERO">Lapiceros</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterLibros" runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=libro">Libros</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterCuadernos" runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=CUADERNO">Cuadernos</asp:HyperLink></li>
                         </ul>
                         <asp:HyperLink ID="lnkBrowseAll" runat="server" NavigateUrl="~/Catalogo.aspx" CssClass="footer-browse-all">
                             Ver Todos los Productos <i class="bi bi-arrow-right"></i>

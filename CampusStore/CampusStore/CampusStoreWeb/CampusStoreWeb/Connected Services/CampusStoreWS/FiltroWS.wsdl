@@ -5,31 +5,31 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/FiltroWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="filtrarPorTipoArticulo">
-    <part name="parameters" element="tns:filtrarPorTipoArticulo" />
-  </message>
-  <message name="filtrarPorTipoArticuloResponse">
-    <part name="parameters" element="tns:filtrarPorTipoArticuloResponse" />
-  </message>
   <message name="filtrarLibros">
     <part name="parameters" element="tns:filtrarLibros" />
   </message>
   <message name="filtrarLibrosResponse">
     <part name="parameters" element="tns:filtrarLibrosResponse" />
   </message>
+  <message name="filtrarPorTipoArticulo">
+    <part name="parameters" element="tns:filtrarPorTipoArticulo" />
+  </message>
+  <message name="filtrarPorTipoArticuloResponse">
+    <part name="parameters" element="tns:filtrarPorTipoArticuloResponse" />
+  </message>
   <portType name="FiltroWS">
-    <operation name="filtrarPorTipoArticulo">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/FiltroWS/filtrarPorTipoArticuloRequest" message="tns:filtrarPorTipoArticulo" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/FiltroWS/filtrarPorTipoArticuloResponse" message="tns:filtrarPorTipoArticuloResponse" />
-    </operation>
     <operation name="filtrarLibros">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/FiltroWS/filtrarLibrosRequest" message="tns:filtrarLibros" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/FiltroWS/filtrarLibrosResponse" message="tns:filtrarLibrosResponse" />
     </operation>
+    <operation name="filtrarPorTipoArticulo">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/FiltroWS/filtrarPorTipoArticuloRequest" message="tns:filtrarPorTipoArticulo" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/FiltroWS/filtrarPorTipoArticuloResponse" message="tns:filtrarPorTipoArticuloResponse" />
+    </operation>
   </portType>
   <binding name="FiltroWSPortBinding" type="tns:FiltroWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="filtrarPorTipoArticulo">
+    <operation name="filtrarLibros">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -38,7 +38,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="filtrarLibros">
+    <operation name="filtrarPorTipoArticulo">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
