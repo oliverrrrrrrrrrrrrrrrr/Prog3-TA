@@ -1,7 +1,14 @@
 package pe.edu.pucp.campusstore.modelo;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 
+@XmlRootElement(name = "Producto")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({Libro.class, Articulo.class}) // ✅ CRÍTICO: Le dice a JAXB las subclases
 public abstract class Producto {
     private Double precio;
     private Double precioDescuento;

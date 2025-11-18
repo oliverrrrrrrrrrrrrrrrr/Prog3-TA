@@ -154,6 +154,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" />
         
         <!-- Top Banner -->
         <div class="top-banner">
@@ -227,7 +228,7 @@
                             <a id="lnkCarrito" class="header-icon">
                                 <i class="bi bi-cart3"></i>
                                 <span class="cart-badge">
-                                    <asp:Label ID="lblCantidadCarrito" runat="server" Text="2"></asp:Label>
+                                    <asp:Label ID="lblCantidadCarrito" runat="server"></asp:Label>
                                 </span>
                             </a>
                             <asp:HyperLink ID="lnkPerfil" runat="server" NavigateUrl="~/Settings.aspx" CssClass="header-icon">
@@ -235,55 +236,67 @@
                             </asp:HyperLink>
 
                             <!-- ==================================================== -->
-                            <!-- ==== MARKUP DEL POPUP DEL CARRITO (AÑADIDO) ==== -->
+                            <!-- ==== POPUP DEL CARRITO (DINÁMICO) ==== -->
                             <!-- ==================================================== -->
-                            <%-- Lo ocultamos por defecto con style="display:none;" y lo manejamos con JS --%>
                             <div id="shoppingCartPopup" class="shopping-cart-popup" style="display:none;">
                                 <div class="cart-heading">
-                                    Carrito de compras (<asp:Label ID="lblCantidadPopup" runat="server" Text="02"></asp:Label>)
+                                    Carrito de compras (<asp:Label ID="lblCantidadPopup" runat="server" Text="0"></asp:Label>)
                                 </div>
-                                <div class="cart-product-list">
-                                    <%-- Idealmente, esto sería un control Repeater o ListView para mostrar productos dinámicamente --%>
-                                    <!-- Producto 1 -->
-                                    <div class="cart-product-item">
-                                        <asp:Image runat="server" ImageUrl="~/Images/peluche_ralsei.png" alt="Peluche Ralsei" />
-                                        <div class="cart-product-details">
-                                            <p class="cart-product-name">Peluche de Ralsei-Deltarune</p>
-                                            <div class="cart-product-price">
-                                                <span class="quantity">1 x</span>
-                                                <span class="price">$1,500</span>
-                                            </div>
+    
+                                <asp:UpdatePanel ID="upCarrito" runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
+                                        <div class="cart-product-list">
+                                            <!-- Repeater para mostrar los productos dinámicamente -->
+                                            <asp:Repeater ID="rptCarritoItems" runat="server" OnItemCommand="rptCarritoItems_ItemCommand">
+                                                <ItemTemplate>
+                                                    <div class="cart-product-item">
+                                                        <asp:Image runat="server" 
+                                                                   ImageUrl='<%# Eval("producto.imagenURL") %>' 
+                                                                   alt='<%# Eval("producto.nombre") %>' 
+                                                                   CssClass="cart-product-image" />
+                                                        <div class="cart-product-details">
+                                                            <p class="cart-product-name"><%# Eval("producto.nombre") %></p>
+                                                            <div class="cart-product-price">
+                                                                <span class="quantity"><%# Eval("cantidad") %> x</span>
+                                                                <span class="price">$<%# String.Format("{0:N2}", Eval("precioUnitario")) %></span>
+                                                            </div>
+                                                        </div>
+                                                        <asp:LinkButton runat="server" 
+                                                                        CommandName="Eliminar" 
+                                                                        CommandArgument='<%# Eval("idLineaCarrito") %>'
+                                                                        CssClass="cart-remove-item"
+                                                                        OnClientClick="return confirm('¿Eliminar este producto del carrito?');">
+                                                            &times;
+                                                        </asp:LinkButton>
+                                                    </div>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                
+                                            <!-- Mensaje cuando el carrito está vacío -->
+                                            <asp:Panel ID="pnlCarritoVacio" runat="server" Visible="false" CssClass="cart-empty-message">
+                                                <p style="text-align: center; padding: 20px; color: #666;">
+                                                    <i class="bi bi-cart-x" style="font-size: 48px; display: block; margin-bottom: 10px;"></i>
+                                                    Tu carrito está vacío
+                                                </p>
+                                            </asp:Panel>
                                         </div>
-                                        <button type="button" class="cart-remove-item">&times;</button>
-                                    </div>
-                                    <!-- Producto 2 -->
-                                    <div class="cart-product-item">
-                                        <asp:Image runat="server" ImageUrl="~/Images/undertale_artbook.png" alt="Undertale Art Book" />
-                                        <div class="cart-product-details">
-                                            <p class="cart-product-name">Undertale Art Book</p>
-                                            <div class="cart-product-price">
-                                                <span class="quantity">2 x</span>
-                                                <span class="price">$269</span>
-                                            </div>
+                                        <hr class="cart-divider" />
+                                        <div class="cart-subtotal">
+                                            <span class="total-label">Sub-Total:</span>
+                                            <span class="total-amount">$<asp:Label ID="lblSubtotal" runat="server" Text="0.00"></asp:Label> USD</span>
                                         </div>
-                                        <button type="button" class="cart-remove-item">&times;</button>
-                                    </div>
-                                </div>
-                                <hr class="cart-divider" />
-                                <div class="cart-subtotal">
-                                    <span class="total-label">Sub-Total:</span>
-                                    <span class="total-amount">$2038.00 USD</span>
-                                </div>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+    
                                 <div class="cart-actions">
-                                    <asp:HyperLink runat="server" NavigateUrl="~/Checkout.aspx" CssClass="btn btn-primary-cart">
+                                    <asp:HyperLink ID="lnkCheckout" runat="server" NavigateUrl="~/Checkout.aspx" CssClass="btn btn-primary-cart">
                                         PROCEDER CON EL PAGO <i class="bi bi-arrow-right"></i>
                                     </asp:HyperLink>
-                                    <asp:HyperLink runat="server" NavigateUrl="~/Shopping_Car.aspx" CssClass="btn btn-secondary-cart">
+                                    <asp:HyperLink ID="lnkVerCarrito" runat="server" NavigateUrl="~/Shopping_Car.aspx" CssClass="btn btn-secondary-cart">
                                         VER CARRITO DE COMPRAS
                                     </asp:HyperLink>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

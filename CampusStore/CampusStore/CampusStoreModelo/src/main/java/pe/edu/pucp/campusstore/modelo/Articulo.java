@@ -1,8 +1,13 @@
 package pe.edu.pucp.campusstore.modelo;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import pe.edu.pucp.campusstore.modelo.enums.TipoArticulo;
 import java.util.List;
 
+@XmlRootElement(name = "Articulo")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Articulo extends Producto {
     private Integer idArticulo;
     private TipoArticulo tipoArticulo;

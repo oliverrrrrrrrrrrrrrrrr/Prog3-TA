@@ -283,6 +283,30 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Connected Services\CarritoWS\CampusStoreWeb.CarritoWS.carrito.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CarritoWS\CampusStoreWeb.CarritoWS.eliminarCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CarritoWS\CampusStoreWeb.CarritoWS.guardarCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CarritoWS\CampusStoreWeb.CarritoWS.listarCarritosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CarritoWS\CampusStoreWeb.CarritoWS.obtenerCarritoPorClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CarritoWS\CampusStoreWeb.CarritoWS.obtenerCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\CarritoWS\configuration91.svcinfo" />
+    <None Include="Connected Services\CarritoWS\configuration.svcinfo" />
+    <None Include="Connected Services\CarritoWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\Site.css" />
     <Content Include="DetalleArticulo.aspx" />
     <Content Include="DetalleCliente.aspx" />
@@ -355,6 +379,11 @@
       <DependentUpon>Checkout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\CampusStoreWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\CarritoWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -565,6 +594,10 @@
     <None Include="Connected Services\CampusStoreWS\UsuarioWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\CarritoWS\CarritoWS.wsdl" />
+    <None Include="Connected Services\CarritoWS\CarritoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <None Include="Web.Debug.config">
@@ -583,6 +616,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\CampusStoreWS\" />
+    <WCFMetadataStorage Include="Connected Services\CarritoWS\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

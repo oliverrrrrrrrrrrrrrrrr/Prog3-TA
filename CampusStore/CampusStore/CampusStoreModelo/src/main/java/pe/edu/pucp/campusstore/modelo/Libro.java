@@ -1,10 +1,15 @@
 package pe.edu.pucp.campusstore.modelo;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import pe.edu.pucp.campusstore.modelo.enums.GeneroLibro;
 import pe.edu.pucp.campusstore.modelo.enums.Formato;
 import java.util.Date;
 import java.util.List;
 
+@XmlRootElement(name = "Libro")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Libro extends Producto {
     private Integer idLibro;
     private String isbn;
