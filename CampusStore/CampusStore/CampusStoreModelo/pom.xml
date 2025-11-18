@@ -13,4 +13,11 @@
         <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>pe.edu.pucp.campusstoremodelo.CampusStoreModelo</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+    </dependencies>
 </project>

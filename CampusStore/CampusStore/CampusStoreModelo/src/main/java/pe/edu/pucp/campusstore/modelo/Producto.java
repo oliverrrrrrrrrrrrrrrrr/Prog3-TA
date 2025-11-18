@@ -1,7 +1,9 @@
 package pe.edu.pucp.campusstore.modelo;
 
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 
+@XmlSeeAlso({Articulo.class, Libro.class})
 public abstract class Producto {
     private Double precio;
     private Double precioDescuento;

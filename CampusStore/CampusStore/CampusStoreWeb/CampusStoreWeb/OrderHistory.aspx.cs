@@ -4,14 +4,31 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CampusStoreWeb.CampusStoreWS;
 
 namespace CampusStoreWeb
 {
     public partial class OrderHistory : System.Web.UI.Page
     {
+        private readonly ClienteWSClient clienteWS;
+        private readonly OrdenCompraWSClient ordenCompraWS;
+
+        public OrderHistory()
+        {
+            this.clienteWS = new ClienteWSClient();
+            this.ordenCompraWS = new OrdenCompraWSClient();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            //si no es segunda vez que se carga la pagina, hacer el loadOrders
+            // Verificar que el usuario esté autenticado
+            if (!User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("SignIn.aspx");
+                return;
+            }
+
+            // Si no es postback, cargar las órdenes
             if (!IsPostBack)
             {
                 LoadOrders();
@@ -20,109 +37,102 @@ namespace CampusStoreWeb
 
         private void LoadOrders()
         {
-            // Datos de ejemplo - en un proyecto real, estos vendrían de una base de datos
-            var orders = new List<OrderInfo>
+            try
             {
-                new OrderInfo 
-                { 
-                    OrderId = "#96459761", 
-                    Status = "IN PROGRESS", 
-                    OrderDate = new DateTime(2019, 12, 30, 7, 52, 0),
-                    Total = 80,
-                    ProductCount = 5
-                },
-                new OrderInfo 
-                { 
-                    OrderId = "#71667167", 
-                    Status = "COMPLETED", 
-                    OrderDate = new DateTime(2019, 12, 7, 23, 26, 0),
-                    Total = 70,
-                    ProductCount = 4
-                },
-                new OrderInfo 
-                { 
-                    OrderId = "#95214362", 
-                    Status = "CANCELED", 
-                    OrderDate = new DateTime(2019, 12, 7, 23, 26, 0),
-                    Total = 2300,
-                    ProductCount = 2
-                },
-                new OrderInfo 
-                { 
-                    OrderId = "#71667167", 
-                    Status = "COMPLETED", 
-                    OrderDate = new DateTime(2019, 2, 2, 19, 28, 0),
-                    Total = 250,
-                    ProductCount = 1
-                },
-                new OrderInfo 
-                { 
-                    OrderId = "#51746385", 
-                    Status = "COMPLETED", 
-                    OrderDate = new DateTime(2019, 12, 30, 7, 52, 0),
-                    Total = 360,
-                    ProductCount = 2
-                },
-                new OrderInfo 
-                { 
-                    OrderId = "#51746385", 
-                    Status = "CANCELED", 
-                    OrderDate = new DateTime(2019, 12, 4, 21, 42, 0),
-                    Total = 220,
-                    ProductCount = 7
-                },
-                new OrderInfo 
-                { 
-                    OrderId = "#673971743", 
-                    Status = "COMPLETED", 
-                    OrderDate = new DateTime(2019, 2, 2, 19, 28, 0),
-                    Total = 80,
-                    ProductCount = 1
-                },
-                new OrderInfo 
-                { 
-                    OrderId = "#673971743", 
-                    Status = "COMPLETED", 
-                    OrderDate = new DateTime(2019, 3, 20, 23, 14, 0),
-                    Total = 160,
-                    ProductCount = 1
-                },
-                new OrderInfo 
-                { 
-                    OrderId = "#673971743", 
-                    Status = "COMPLETED", 
-                    OrderDate = new DateTime(2019, 12, 4, 21, 42, 0),
-                    Total = 1500,
-                    ProductCount = 3
-                },
-                new OrderInfo 
-                { 
-                    OrderId = "#673971743", 
-                    Status = "COMPLETED", 
-                    OrderDate = new DateTime(2019, 12, 30, 7, 52, 0),
-                    Total = 1200,
-                    ProductCount = 19
-                },
-                new OrderInfo 
-                { 
-                    OrderId = "#673971743", 
-                    Status = "CANCELED", 
-                    OrderDate = new DateTime(2019, 12, 30, 5, 18, 0),
-                    Total = 1500,
-                    ProductCount = 1
-                },
-                new OrderInfo 
-                { 
-                    OrderId = "#673971743", 
-                    Status = "COMPLETED", 
-                    OrderDate = new DateTime(2019, 12, 30, 7, 52, 0),
-                    Total = 80,
-                    ProductCount = 1
-                }
-            };
+                // Obtener el email del usuario autenticado
+                string userEmail = User.Identity.Name;
 
-            rptOrders.DataSource = orders;
-            rptOrders.DataBind();
+                // Buscar el cliente por su cuenta/email - usar el namespace específico
+                cliente clienteActual = clienteWS.buscarClientePorCuenta(userEmail);
+
+                if (clienteActual == null)
+                {
+                    // Si no se encuentra el cliente, redirigir al login
+                    Response.Redirect("SignIn.aspx");
+                    return;
+                }
+
+                // Obtener las órdenes del cliente - las propiedades son en minúsculas
+                ordenCompra[] ordenes = ordenCompraWS.listarOrdenesPorCliente(clienteActual.idCliente);
+
+                // Convertir las órdenes a OrderInfo para mostrar en la vista
+                var orders = new List<OrderInfo>();
+
+                if (ordenes != null && ordenes.Length > 0)
+                {
+                    foreach (var orden in ordenes)
+                    {
+                        // Contar productos del carrito de la orden
+                        int productCount = 0;
+                        if (orden.carrito != null && orden.carrito.idCarrito > 0)
+                        {
+                            try
+                            {
+                                productCount = ordenCompraWS.contarProductosCarrito(orden.carrito.idCarrito);
+                            }
+                            catch
+                            {
+                                productCount = 0;
+                            }
+                        }
+
+                        // Obtener el total a mostrar (usar total con descuento si existe)
+                        double total = orden.total;
+                        try
+                        {
+                            var totalDescontadoProp = orden.GetType().GetProperty("totalDescontado");
+                            if (totalDescontadoProp != null)
+                            {
+                                var totalDescontado = totalDescontadoProp.GetValue(orden);
+                                if (totalDescontado != null && (double)totalDescontado > 0)
+                                {
+                                    total = (double)totalDescontado;
+                                }
+                            }
+                        }
+                        catch { }
+
+                        orders.Add(new OrderInfo
+                        {
+                            OrderId = "#" + orden.idOrdenCompra.ToString(),
+                            Status = ConvertirEstado(orden.estado.ToString()),
+                            OrderDate = orden.fechaCreacion,
+                            Total = (decimal)total,
+                            ProductCount = productCount
+                        });
+                    }
+                }
+
+                // Ordenar por fecha descendente (más reciente primero)
+                orders = orders.OrderByDescending(o => o.OrderDate).ToList();
+
+                rptOrders.DataSource = orders;
+                rptOrders.DataBind();
+            }
+            catch (Exception ex)
+            {
+                // Log del error (en producción deberías usar un logger apropiado)
+                System.Diagnostics.Debug.WriteLine("Error al cargar órdenes: " + ex.Message);
+                
+                // Mostrar lista vacía en caso de error
+                rptOrders.DataSource = new List<OrderInfo>();
+                rptOrders.DataBind();
+            }
+        }
+
+        private string ConvertirEstado(string estadoOrden)
+        {
+            switch (estadoOrden)
+            {
+                case "NO_PAGADO":
+                    return "IN PROGRESS";
+                case "PAGADO":
+                    return "COMPLETED";
+                case "ENTREGADO":
+                    return "COMPLETED";
+                default:
+                    return "IN PROGRESS";
+            }
         }
 
         protected string GetStatusClass(string status)
@@ -151,7 +161,7 @@ namespace CampusStoreWeb
 
             public string TotalFormatted
             {
-                get { return string.Format("${0} ({1} Product{2})", Total, ProductCount, ProductCount != 1 ? "s" : ""); }
+                get { return string.Format("${0:F2} ({1} Product{2})", Total, ProductCount, ProductCount != 1 ? "s" : ""); }
             }
         }
     }

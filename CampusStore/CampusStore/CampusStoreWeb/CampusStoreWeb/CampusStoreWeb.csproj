@@ -247,6 +247,21 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.registrarLibroResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.contarProductosCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.lineaCarrito.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarArticulosCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarLibrosCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarOrdenesPorClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\CampusStoreWS\DescuentoWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\DescuentoWS.xsd">
       <SubType>Designer</SubType>
