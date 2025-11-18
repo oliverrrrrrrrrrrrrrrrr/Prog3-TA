@@ -101,4 +101,34 @@ public class CarritoDAOImpl extends TransaccionalBaseDAO<Carrito> implements Car
         
         return modelo;
     }
+    
+    protected PreparedStatement comandoObtenerIdCarritoPorCliente(Connection conn, 
+            int idCliente) throws SQLException {
+        
+        String sql = "{call obtenerCarritoPorCliente(?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt("p_idCliente", idCliente);
+        return cmd;
+    }
+
+    @Override
+    public int obtenerIdCarritoPorCliente(int idCliente, Connection conn) {
+        try (PreparedStatement cmd = this.comandoObtenerIdCarritoPorCliente(conn, idCliente)) {
+            ResultSet rs = cmd.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getInt("idCarrito");
+            }
+            return -1;
+        }
+        catch (SQLException e) {
+            System.err.println("Error SQL: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+    
+    @Override
+    public int obtenerIdCarritoPorCliente(int idCliente) {
+        return ejecutarComando(conn -> obtenerIdCarritoPorCliente(idCliente, conn));
+    }
 }

@@ -77,6 +77,11 @@ namespace CampusStoreWeb
                             lblAutor.Text = p.autores[0].nombre;
                             pnlAutor.Visible = true;
                         }
+                        else
+                        {
+                            lblAutor.Text = "Desconocido";
+                            pnlAutor.Visible = true;
+                        }
 
                         // Puedes agregar SKU, Editorial, etc. de la misma manera
                     }

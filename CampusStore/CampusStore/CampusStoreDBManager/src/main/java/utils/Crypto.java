@@ -30,7 +30,7 @@ public class Crypto {
     }
 
     public static void main(String[] args) throws Exception {
-        String password = "prog31inf30";
-        System.out.println(encrypt(password));
+        String password = "iGnUy6derY7emRv1wnjowA==";
+        System.out.println(decrypt(password));
     }
 }

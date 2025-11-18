@@ -111,5 +111,8 @@ public class CarritoBOImpl implements CarritoBO{
         }
     }
 
-    
+    @Override
+    public Carrito obtenerCarritoPorCliente(int idCliente) {
+        return this.carritoDAO.leer(this.carritoDAO.obtenerIdCarritoPorCliente(idCliente));
+    }
 }
