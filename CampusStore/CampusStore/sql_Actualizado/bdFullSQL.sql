@@ -2633,6 +2633,89 @@ END$$
 
 DELIMITER ;
 
+
+
+-- -----------------------------------------------------
+-- procedure contarProductosCarrito
+-- -----------------------------------------------------
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `contarProductosCarrito`(
+    IN p_idCarrito INT
+)
+BEGIN
+    SELECT 
+        IFNULL(
+            (SELECT SUM(cantidad) FROM linea_carrito_articulo WHERE CARRITO_idCarrito = p_idCarrito), 0
+        ) + 
+        IFNULL(
+            (SELECT SUM(cantidad) FROM linea_carrito_libro WHERE CARRITO_idCarrito = p_idCarrito), 0
+        ) AS totalProductos;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure listarArticulosCarrito
+-- -----------------------------------------------------
+
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `listarArticulosCarrito`(
+    IN p_idCarrito INT
+)
+BEGIN
+    SELECT 
+        lca.idLineaCarrito,
+        lca.cantidad,
+        lca.precioUnitario,
+        lca.subtotal,
+        lca.precioConDescuento,
+        lca.subtotalConDescuento,
+        lca.CARRITO_idCarrito,
+        lca.articulo_idArticulo,
+        a.nombre AS nombreArticulo,
+        a.tipoArticulo,
+        a.imagenURL,
+        a.stock,
+        a.precio AS precioActual
+    FROM linea_carrito_articulo lca
+    INNER JOIN articulo a ON lca.articulo_idArticulo = a.idArticulo
+    WHERE lca.CARRITO_idCarrito = p_idCarrito;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure listarLibrosCarrito
+-- -----------------------------------------------------
+
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `listarLibrosCarrito`(
+    IN p_idCarrito INT
+)
+BEGIN
+    SELECT 
+        lcl.idLineaCarrito,
+        lcl.cantidad,
+        lcl.precioUnitario,
+        lcl.subtotal,
+        lcl.precioConDescuento,
+        lcl.subtotalConDescuento,
+        lcl.CARRITO_idCarrito,
+        lcl.libro_idLibro,
+        l.nombre AS nombreLibro,
+        l.sinopsis,
+        l.fechaPublicacion,
+        l.generoLibro,
+        l.numeroPaginas,
+        l.imagenURL,
+        l.stock,
+        l.precio AS precioActual
+    FROM linea_carrito_libro lcl
+    INNER JOIN libro l ON lcl.libro_idLibro = l.idLibro
+    WHERE lcl.CARRITO_idCarrito = p_idCarrito;
+END$$
+
+DELIMITER ;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

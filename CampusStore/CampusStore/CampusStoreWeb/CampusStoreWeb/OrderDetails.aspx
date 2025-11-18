@@ -304,11 +304,6 @@
                         </strong>
                     </div>
 
-                    <!-- Products Header -->
-                    <div class="products-header">
-                        <h5>Product <span class="product-count">(<asp:Label ID="lblProductCountHeader" runat="server" Text="02"></asp:Label>)</span></h5>
-                    </div>
-
                     <!-- Products Table -->
                     <table class="table table-custom">
                         <thead>
