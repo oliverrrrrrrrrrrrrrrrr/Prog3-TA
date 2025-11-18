@@ -240,7 +240,7 @@
                                                 <%# Eval("Status") %>
                                             </span>
                                         </td>
-                                        <td><%# Eval("OrderDate", "{0:MMM d, yyyy HH:mm}") %></td>
+                                        <td><%# Eval("OrderDateFormatted") %></td>
                                         <td><strong><%# Eval("TotalFormatted") %></strong></td>
                                         <td>
                                             <a href='OrderDetails.aspx?id=<%# ((OrderInfo)Container.DataItem).OrderId.Replace("#", "") %>' class="btn-view-details">

@@ -108,7 +108,10 @@ namespace CampusStoreWeb
 
                         // Mostrar información de la orden
                         lblOrderId.Text = "#" + orden.idOrdenCompra.ToString();
-                        lblOrderDate.Text = orden.fechaCreacion.ToString("dd MMM, yyyy") + " at " + orden.fechaCreacion.ToString("hh:mm tt");
+                        
+                        // Formatear fecha en español sin hora
+                        System.Globalization.CultureInfo cultureEs = new System.Globalization.CultureInfo("es-ES");
+                        lblOrderDate.Text = orden.fechaCreacion.ToString("dd 'de' MMM 'de' yyyy", cultureEs);
                         
                         // Usar el total con descuento si existe
                         double total = orden.total;
@@ -127,7 +130,9 @@ namespace CampusStoreWeb
                         catch { }
 
                         lblOrderTotal.Text = "$" + total.ToString("F2");
-                        lblArrivalDate.Text = orden.limitePago.ToString("dd MMM, yyyy");
+
+                        // Guardar el estado de la orden para usarlo en la carga de productos
+                        ViewState["EstadoOrden"] = orden.estado.ToString();
 
                         // Cargar productos del carrito
                         System.Diagnostics.Debug.WriteLine($"DEBUG: orden.carrito es null? {orden.carrito == null}");
@@ -139,14 +144,16 @@ namespace CampusStoreWeb
                             
                             if (idCarrito > 0)
                             {
-                                LoadProducts(idCarrito);
+                                // Obtener el estado de la orden desde ViewState
+                                string estadoOrden = ViewState["EstadoOrden"]?.ToString() ?? "";
+                                LoadProducts(idCarrito, estadoOrden);
                             }
                             else
                             {
                                 System.Diagnostics.Debug.WriteLine("DEBUG: idCarrito <= 0");
                                 rptProducts.DataSource = new List<ProductInfo>();
                                 rptProducts.DataBind();
-                                lblProductCount.Text = "0 Products";
+                                lblProductCount.Text = "0 Productos";
                             }
                         }
                         else
@@ -154,7 +161,7 @@ namespace CampusStoreWeb
                             System.Diagnostics.Debug.WriteLine("DEBUG: orden.carrito es NULL");
                             rptProducts.DataSource = new List<ProductInfo>();
                             rptProducts.DataBind();
-                            lblProductCount.Text = "0 Products";
+                            lblProductCount.Text = "0 Productos";
                         }
                     }
                     catch (Exception ex)
@@ -181,13 +188,12 @@ namespace CampusStoreWeb
             lblOrderId.Text = "Error";
             lblOrderDate.Text = mensaje;
             lblOrderTotal.Text = "$0.00";
-            lblArrivalDate.Text = "-";
-            lblProductCount.Text = "0 Products";
+            lblProductCount.Text = "0 Productos";
             rptProducts.DataSource = new List<ProductInfo>();
             rptProducts.DataBind();
         }
 
-        private void LoadProducts(int idCarrito)
+        private void LoadProducts(int idCarrito, string estadoOrden)
         {
             try
             {
@@ -231,7 +237,8 @@ namespace CampusStoreWeb
                                 ProductName = articulo.nombre,
                                 Price = precioFinal,
                                 Quantity = linea.cantidad,
-                                SubTotal = subtotalFinal
+                                SubTotal = subtotalFinal,
+                                PuedeCalificar = estadoOrden == "ENTREGADO"
                             });
                         }
                         else
@@ -278,7 +285,8 @@ namespace CampusStoreWeb
                                 ProductName = libro.nombre,
                                 Price = precioFinal,
                                 Quantity = linea.cantidad,
-                                SubTotal = subtotalFinal
+                                SubTotal = subtotalFinal,
+                                PuedeCalificar = estadoOrden == "ENTREGADO"
                             });
                         }
                         else
@@ -294,12 +302,12 @@ namespace CampusStoreWeb
                 if (products.Count > 0)
                 {
                     int totalQuantity = products.Sum(p => p.Quantity);
-                    lblProductCount.Text = totalQuantity + " Product" + (totalQuantity != 1 ? "s" : "");
+                    lblProductCount.Text = totalQuantity + " Producto" + (totalQuantity != 1 ? "s" : "");
                     System.Diagnostics.Debug.WriteLine($"DEBUG: Productos mostrados - Total items: {totalQuantity}, Total productos: {products.Count}");
                 }
                 else
                 {
-                    lblProductCount.Text = "0 Products";
+                    lblProductCount.Text = "0 Productos";
                     System.Diagnostics.Debug.WriteLine("DEBUG: No se encontraron productos");
                 }
 
@@ -314,7 +322,7 @@ namespace CampusStoreWeb
                 System.Diagnostics.Debug.WriteLine($"Inner exception: {ex.InnerException?.Message}");
                 rptProducts.DataSource = new List<ProductInfo>();
                 rptProducts.DataBind();
-                lblProductCount.Text = "0 Products";
+                lblProductCount.Text = "0 Productos";
             }
         }
 
@@ -342,6 +350,7 @@ namespace CampusStoreWeb
             public decimal Price { get; set; }
             public int Quantity { get; set; }
             public decimal SubTotal { get; set; }
+            public bool PuedeCalificar { get; set; }
         }
     }
 }

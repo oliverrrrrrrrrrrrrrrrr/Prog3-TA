@@ -125,13 +125,15 @@ namespace CampusStoreWeb
             switch (estadoOrden)
             {
                 case "NO_PAGADO":
-                    return "IN PROGRESS";
+                    return "NO PAGADO";
                 case "PAGADO":
-                    return "COMPLETED";
+                    return "PAGADO";
                 case "ENTREGADO":
-                    return "COMPLETED";
+                    return "ENTREGADO";
+                case "CANCELADO":
+                    return "CANCELADO";
                 default:
-                    return "IN PROGRESS";
+                    return estadoOrden;
             }
         }
 
@@ -139,14 +141,16 @@ namespace CampusStoreWeb
         {
             switch (status.ToUpper())
             {
-                case "IN PROGRESS":
+                case "NO PAGADO":
                     return "status-in-progress";
-                case "COMPLETED":
+                case "PAGADO":
                     return "status-completed";
-                case "CANCELED":
+                case "ENTREGADO":
+                    return "status-completed";
+                case "CANCELADO":
                     return "status-canceled";
                 default:
-                    return "";
+                    return "status-in-progress";
             }
         }
 
@@ -161,7 +165,16 @@ namespace CampusStoreWeb
 
             public string TotalFormatted
             {
-                get { return string.Format("${0:F2} ({1} Product{2})", Total, ProductCount, ProductCount != 1 ? "s" : ""); }
+                get { return string.Format("${0:F2} ({1} Producto{2})", Total, ProductCount, ProductCount != 1 ? "s" : ""); }
+            }
+
+            public string OrderDateFormatted
+            {
+                get 
+                { 
+                    System.Globalization.CultureInfo cultureEs = new System.Globalization.CultureInfo("es-ES");
+                    return OrderDate.ToString("dd 'de' MMM 'de' yyyy", cultureEs); 
+                }
             }
         }
     }

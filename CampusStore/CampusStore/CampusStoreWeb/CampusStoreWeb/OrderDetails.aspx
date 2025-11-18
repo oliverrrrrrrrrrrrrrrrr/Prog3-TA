@@ -1,4 +1,4 @@
-<%@ Page Title="Order Details" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OrderDetails.aspx.cs" Inherits="CampusStoreWeb.OrderDetails" %>
+<%@ Page Title="Detalles del Pedido" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OrderDetails.aspx.cs" Inherits="CampusStoreWeb.OrderDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -234,10 +234,10 @@
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="Shop_Page.aspx"><i class="bi bi-house-door"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="Settings.aspx">User Account</a></li>
-            <li class="breadcrumb-item"><a href="OrderHistory.aspx">Order History</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Order Details</li>
+            <li class="breadcrumb-item"><a href="Shop_Page.aspx"><i class="bi bi-house-door"></i> Inicio</a></li>
+            <li class="breadcrumb-item"><a href="Settings.aspx">Cuenta de Usuario</a></li>
+            <li class="breadcrumb-item"><a href="OrderHistory.aspx">Historial de Pedidos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detalles del Pedido</li>
         </ol>
     </nav>
 
@@ -248,19 +248,19 @@
                 <div class="sidebar-menu">
                     <a href="OrderHistory.aspx" class="sidebar-menu-item active">
                         <i class="bi bi-box-seam"></i>
-                        Order History
+                        Historial de Pedidos
                     </a>
-                    <a href="#" class="sidebar-menu-item">
+                    <a href="Shopping_Car.aspx" class="sidebar-menu-item">
                         <i class="bi bi-cart3"></i>
-                        Shopping Cart
+                        Carrito de Compras
                     </a>
                     <a href="Settings.aspx" class="sidebar-menu-item">
                         <i class="bi bi-gear"></i>
-                        Setting
+                        Configuración
                     </a>
-                    <a href="#" class="sidebar-menu-item">
+                    <a href="LogOut.aspx" class="sidebar-menu-item">
                         <i class="bi bi-box-arrow-right"></i>
-                        Log-out
+                        Cerrar Sesión
                     </a>
                 </div>
             </aside>
@@ -273,7 +273,7 @@
                         <a href="OrderHistory.aspx" class="back-button">
                             <i class="bi bi-arrow-left"></i>
                         </a>
-                        <h4>ORDER DETAILS</h4>
+                        <h4>DETALLES DEL PEDIDO</h4>
                     </div>
 
                     <!-- Order Summary -->
@@ -283,10 +283,10 @@
                                 <asp:Label ID="lblOrderId" runat="server" Text="#96459761"></asp:Label>
                             </div>
                             <div class="order-info">
-                                <asp:Label ID="lblProductCount" runat="server" Text="4 Products"></asp:Label>
+                                <asp:Label ID="lblProductCount" runat="server" Text="4 Productos"></asp:Label>
                                 <span> , </span>
-                                Order Placed in 
-                                <asp:Label ID="lblOrderDate" runat="server" Text="17 Jan, 2021 at 7:32 PM"></asp:Label>
+                                Pedido realizado el 
+                                <asp:Label ID="lblOrderDate" runat="server" Text="17 Ene, 2021"></asp:Label>
                             </div>
                         </div>
                         <div class="order-summary-right">
@@ -296,21 +296,13 @@
                         </div>
                     </div>
 
-                    <!-- Order Expected Arrival -->
-                    <div class="order-arrival">
-                        Order expected arrival 
-                        <strong>
-                            <asp:Label ID="lblArrivalDate" runat="server" Text="23 Jan, 2021"></asp:Label>
-                        </strong>
-                    </div>
-
                     <!-- Products Table -->
                     <table class="table table-custom">
                         <thead>
                             <tr>
-                                <th>PRODUCTS</th>
-                                <th>PRICE</th>
-                                <th>QUANTITY</th>
+                                <th>PRODUCTOS</th>
+                                <th>PRECIO</th>
+                                <th>CANTIDAD</th>
                                 <th>SUB-TOTAL</th>
                                 <th></th>
                             </tr>
@@ -332,9 +324,11 @@
                                         <td>x<%# Eval("Quantity") %></td>
                                         <td><strong>$<%# Eval("SubTotal") %></strong></td>
                                         <td>
-                                            <a href="#" class="btn-rating" data-bs-toggle="modal" data-bs-target="#ratingModal">
-                                                Leave a Rating <i class="bi bi-plus-circle"></i>
-                                            </a>
+                                            <asp:Panel ID="pnlRating" runat="server" Visible='<%# Eval("PuedeCalificar") %>'>
+                                                <a href="#" class="btn-rating" data-bs-toggle="modal" data-bs-target="#ratingModal">
+                                                    Dejar una Calificación <i class="bi bi-plus-circle"></i>
+                                                </a>
+                                            </asp:Panel>
                                         </td>
                                     </tr>
                                 </ItemTemplate>
@@ -354,23 +348,23 @@
                     <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="rating-form">
                         <div class="mb-4">
-                            <label for="ddlRating" class="form-label fw-semibold">Rating</label>
+                            <label for="ddlRating" class="form-label fw-semibold">Calificación</label>
                             <asp:DropDownList ID="ddlRating" runat="server" CssClass="form-select rating-select">
-                                <asp:ListItem Value="5" Selected="True">5 Star Rating</asp:ListItem>
-                                <asp:ListItem Value="4"> 4 Star Rating</asp:ListItem>
-                                <asp:ListItem Value="3">3 Star Rating</asp:ListItem>
-                                <asp:ListItem Value="2"> 2 Star Rating</asp:ListItem>
-                                <asp:ListItem Value="1"> 1 Star Rating</asp:ListItem>
+                                <asp:ListItem Value="5" Selected="True">5 Estrellas</asp:ListItem>
+                                <asp:ListItem Value="4">4 Estrellas</asp:ListItem>
+                                <asp:ListItem Value="3">3 Estrellas</asp:ListItem>
+                                <asp:ListItem Value="2">2 Estrellas</asp:ListItem>
+                                <asp:ListItem Value="1">1 Estrella</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         
                         <div class="mb-4">
-                            <label for="txtFeedback" class="form-label fw-semibold">Feedback</label>
+                            <label for="txtFeedback" class="form-label fw-semibold">Comentario</label>
                             <asp:TextBox ID="txtFeedback" runat="server" TextMode="MultiLine" Rows="4" 
-                                CssClass="form-control" placeholder="Write down your feedback about our product & services"></asp:TextBox>
+                                CssClass="form-control" placeholder="Escribe tu comentario sobre nuestros productos y servicios"></asp:TextBox>
                         </div>
                         
-                        <asp:Button ID="btnPublishReview" runat="server" Text="PUBLISH REVIEW" 
+                        <asp:Button ID="btnPublishReview" runat="server" Text="PUBLICAR RESEÑA" 
                             CssClass="btn btn-publish-review w-100" OnClick="btnPublishReview_Click" />
                     </div>
                 </div>

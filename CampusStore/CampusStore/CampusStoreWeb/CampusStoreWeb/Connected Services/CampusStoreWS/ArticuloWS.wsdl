@@ -5,6 +5,12 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/ArticuloWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+  <message name="guardarArticulo">
+    <part name="parameters" element="tns:guardarArticulo" />
+  </message>
+  <message name="guardarArticuloResponse">
+    <part name="parameters" element="tns:guardarArticuloResponse" />
+  </message>
   <message name="listarArticulos">
     <part name="parameters" element="tns:listarArticulos" />
   </message>
@@ -23,13 +29,11 @@
   <message name="eliminarArticuloResponse">
     <part name="parameters" element="tns:eliminarArticuloResponse" />
   </message>
-  <message name="guardarArticulo">
-    <part name="parameters" element="tns:guardarArticulo" />
-  </message>
-  <message name="guardarArticuloResponse">
-    <part name="parameters" element="tns:guardarArticuloResponse" />
-  </message>
   <portType name="ArticuloWS">
+    <operation name="guardarArticulo">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloRequest" message="tns:guardarArticulo" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloResponse" message="tns:guardarArticuloResponse" />
+    </operation>
     <operation name="listarArticulos">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosRequest" message="tns:listarArticulos" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosResponse" message="tns:listarArticulosResponse" />
@@ -42,13 +46,18 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest" message="tns:eliminarArticulo" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse" message="tns:eliminarArticuloResponse" />
     </operation>
-    <operation name="guardarArticulo">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloRequest" message="tns:guardarArticulo" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloResponse" message="tns:guardarArticuloResponse" />
-    </operation>
   </portType>
   <binding name="ArticuloWSPortBinding" type="tns:ArticuloWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="guardarArticulo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="listarArticulos">
       <soap:operation soapAction="" />
       <input>
@@ -68,15 +77,6 @@
       </output>
     </operation>
     <operation name="eliminarArticulo">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="guardarArticulo">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
