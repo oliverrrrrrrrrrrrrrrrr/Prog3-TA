@@ -20,12 +20,154 @@ namespace CampusStoreWeb
         private readonly ArticuloWSClient articuloWS;
         private readonly LibroWSClient libroWS;
 
+        // Variable de clase para almacenar el ID de la orden
+        private int? orderIdActual;
+        
+        // Variables de clase para almacenar el ID y tipo del producto seleccionado para reseña
+        private int? productoIdSeleccionado;
+        private string productoTipoSeleccionado;
+        
+        // Variable de clase para almacenar el cliente actual (cargado una vez)
+        private cliente clienteActual;
+
         public OrderDetails()
         {
             this.clienteWS = new ClienteWSClient();
             this.ordenCompraWS = new OrdenCompraWSClient();
             this.articuloWS = new ArticuloWSClient();
             this.libroWS = new LibroWSClient();
+        }
+
+        // Propiedad pública para acceder al ID de la orden desde otras funciones
+        public int? OrderIdActual
+        {
+            get
+            {
+                // Primero intentar obtener de la variable de clase
+                if (orderIdActual.HasValue)
+                {
+                    return orderIdActual;
+                }
+                
+                // Si no está en la variable, intentar obtener de ViewState
+                if (ViewState["OrderId"] != null)
+                {
+                    orderIdActual = (int)ViewState["OrderId"];
+                    return orderIdActual;
+                }
+                
+                // Si no está en ViewState, intentar obtener de QueryString
+                return ObtenerOrderIdDesdeQueryString();
+            }
+        }
+
+        // Propiedades públicas para acceder al ID y tipo del producto seleccionado
+        public int? ProductoIdSeleccionado
+        {
+            get
+            {
+                if (productoIdSeleccionado.HasValue)
+                {
+                    return productoIdSeleccionado;
+                }
+                
+                if (ViewState["ProductoIdSeleccionado"] != null)
+                {
+                    productoIdSeleccionado = (int)ViewState["ProductoIdSeleccionado"];
+                    return productoIdSeleccionado;
+                }
+                
+                return null;
+            }
+        }
+
+        public string ProductoTipoSeleccionado
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(productoTipoSeleccionado))
+                {
+                    return productoTipoSeleccionado;
+                }
+                
+                if (ViewState["ProductoTipoSeleccionado"] != null)
+                {
+                    productoTipoSeleccionado = ViewState["ProductoTipoSeleccionado"].ToString();
+                    return productoTipoSeleccionado;
+                }
+                
+                return null;
+            }
+        }
+
+        // Propiedad para obtener el cliente actual (cargado una vez y reutilizable)
+        public cliente ClienteActual
+        {
+            get
+            {
+                // Si ya está cargado en la variable de clase, devolverlo
+                if (clienteActual != null)
+                {
+                    return clienteActual;
+                }
+                
+                // Si está en ViewState, cargarlo desde ahí
+                if (ViewState["ClienteActual"] != null)
+                {
+                    clienteActual = (cliente)ViewState["ClienteActual"];
+                    return clienteActual;
+                }
+                
+                // Si no está cargado, cargarlo ahora
+                return CargarClienteActual();
+            }
+        }
+
+        // Método privado para cargar el cliente actual (solo se ejecuta una vez)
+        private cliente CargarClienteActual()
+        {
+            try
+            {
+                string userEmail = User.Identity.Name;
+                cliente cliente = clienteWS.buscarClientePorCuenta(userEmail);
+                
+                if (cliente != null)
+                {
+                    // Guardar en variable de clase y ViewState para reutilización
+                    clienteActual = cliente;
+                    ViewState["ClienteActual"] = cliente;
+                    System.Diagnostics.Debug.WriteLine($"DEBUG: Cliente cargado - ID: {cliente.idCliente}, Email: {cliente.correo}");
+                }
+                
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"ERROR al cargar cliente: {ex.Message}");
+                return null;
+            }
+        }
+
+        // Método privado para obtener el ID desde QueryString
+        private int? ObtenerOrderIdDesdeQueryString()
+        {
+            string rawId = Request.QueryString["id"];
+            
+            if (!string.IsNullOrEmpty(rawId))
+            {
+                // Remover el # si viene con él
+                string orderIdParam = rawId.Trim().TrimStart('#').Trim();
+                
+                if (!string.IsNullOrEmpty(orderIdParam) && int.TryParse(orderIdParam, out int orderId))
+                {
+                    // Guardar en ViewState y variable de clase
+                    ViewState["OrderId"] = orderId;
+                    orderIdActual = orderId;
+                    return orderId;
+                }
+            }
+            
+            return null;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -45,140 +187,121 @@ namespace CampusStoreWeb
 
         private void LoadOrderDetails()
         {
-            // Obtener el ID de la orden desde la query string (igual que DetalleArticulo/DetalleLibro)
-            string rawId = Request.QueryString["id"];
-            System.Diagnostics.Debug.WriteLine($"DEBUG: rawId desde QueryString = '{rawId}'");
+            // Obtener el ID de la orden usando el método centralizado
+            int? orderIdNullable = ObtenerOrderIdDesdeQueryString();
             
-            if (!string.IsNullOrEmpty(rawId))
+            if (!orderIdNullable.HasValue)
             {
-                // Remover el # si viene con él, igual que acepta con o sin #
-                string orderIdParam = rawId.Trim().TrimStart('#').Trim();
-                System.Diagnostics.Debug.WriteLine($"DEBUG: orderIdParam después de Trim = '{orderIdParam}'");
-                
-                // Si después de remover # queda vacío, intentar parsear el raw original
-                if (string.IsNullOrEmpty(orderIdParam) && rawId.StartsWith("#"))
+                MostrarError("No se especificó una orden para mostrar.");
+                return;
+            }
+            
+            int orderId = orderIdNullable.Value;
+            System.Diagnostics.Debug.WriteLine($"DEBUG: OrderId obtenido = {orderId}");
+            
+            // Guardar el ID en la variable de clase para uso posterior
+            orderIdActual = orderId;
+            
+            try
+            {
+                // Obtener el cliente actual (ya está cargado y guardado, solo lo obtenemos)
+                cliente clienteActual = ClienteActual;
+
+                if (clienteActual == null)
                 {
-                    // Si era solo "#", no hay ID válido
-                    MostrarError("El identificador de la orden no es válido. El valor recibido fue solo '#'.");
+                    MostrarError("No se encontró el cliente.");
                     return;
                 }
+
+                // Obtener la orden
+                ordenCompra orden = ordenCompraWS.obtenerOrdenCompra(orderId);
                 
-                int orderId;
-                if (int.TryParse(orderIdParam, out orderId))
+                if (orden == null)
                 {
-                    try
+                    MostrarError("No se encontró la orden solicitada.");
+                    return;
+                }
+
+                // SEGURIDAD: Verificar que la orden pertenece al cliente actual
+                // Usar reflection por compatibilidad entre namespaces
+                int clienteOrdenId = 0;
+                if (orden.cliente != null)
+                {
+                    var idProp = orden.cliente.GetType().GetProperty("idCliente") ?? 
+                                orden.cliente.GetType().GetProperty("idcliente");
+                    if (idProp != null)
                     {
-                        // Obtener el cliente actual
-                        string userEmail = User.Identity.Name;
-                        cliente clienteActual = clienteWS.buscarClientePorCuenta(userEmail);
+                        clienteOrdenId = (int)idProp.GetValue(orden.cliente);
+                    }
+                }
+                
+                if (clienteOrdenId != clienteActual.idCliente)
+                {
+                    MostrarError("La orden no pertenece a tu cuenta.");
+                    return;
+                }
 
-                        if (clienteActual == null)
+                // Mostrar información de la orden
+                lblOrderId.Text = "#" + orden.idOrdenCompra.ToString();
+                
+                // Formatear fecha en español sin hora
+                System.Globalization.CultureInfo cultureEs = new System.Globalization.CultureInfo("es-ES");
+                lblOrderDate.Text = orden.fechaCreacion.ToString("dd 'de' MMM 'de' yyyy", cultureEs);
+                
+                // Usar el total con descuento si existe
+                double total = orden.total;
+                try
+                {
+                    var totalDescontadoProp = orden.GetType().GetProperty("totalDescontado");
+                    if (totalDescontadoProp != null)
+                    {
+                        var totalDescontado = totalDescontadoProp.GetValue(orden);
+                        if (totalDescontado != null && (double)totalDescontado > 0)
                         {
-                            MostrarError("No se encontró el cliente.");
-                            return;
-                        }
-
-                        // Obtener la orden
-                        ordenCompra orden = ordenCompraWS.obtenerOrdenCompra(orderId);
-                        
-                        if (orden == null)
-                        {
-                            MostrarError("No se encontró la orden solicitada.");
-                            return;
-                        }
-
-                        // SEGURIDAD: Verificar que la orden pertenece al cliente actual
-                        // Usar reflection por compatibilidad entre namespaces
-                        int clienteOrdenId = 0;
-                        if (orden.cliente != null)
-                        {
-                            var idProp = orden.cliente.GetType().GetProperty("idCliente") ?? 
-                                        orden.cliente.GetType().GetProperty("idcliente");
-                            if (idProp != null)
-                            {
-                                clienteOrdenId = (int)idProp.GetValue(orden.cliente);
-                            }
-                        }
-                        
-                        if (clienteOrdenId != clienteActual.idCliente)
-                        {
-                            MostrarError("La orden no pertenece a tu cuenta.");
-                            return;
-                        }
-
-                        // Mostrar información de la orden
-                        lblOrderId.Text = "#" + orden.idOrdenCompra.ToString();
-                        
-                        // Formatear fecha en español sin hora
-                        System.Globalization.CultureInfo cultureEs = new System.Globalization.CultureInfo("es-ES");
-                        lblOrderDate.Text = orden.fechaCreacion.ToString("dd 'de' MMM 'de' yyyy", cultureEs);
-                        
-                        // Usar el total con descuento si existe
-                        double total = orden.total;
-                        try
-                        {
-                            var totalDescontadoProp = orden.GetType().GetProperty("totalDescontado");
-                            if (totalDescontadoProp != null)
-                            {
-                                var totalDescontado = totalDescontadoProp.GetValue(orden);
-                                if (totalDescontado != null && (double)totalDescontado > 0)
-                                {
-                                    total = (double)totalDescontado;
-                                }
-                            }
-                        }
-                        catch { }
-
-                        lblOrderTotal.Text = "$" + total.ToString("F2");
-
-                        // Guardar el estado de la orden para usarlo en la carga de productos
-                        ViewState["EstadoOrden"] = orden.estado.ToString();
-
-                        // Cargar productos del carrito
-                        System.Diagnostics.Debug.WriteLine($"DEBUG: orden.carrito es null? {orden.carrito == null}");
-                        
-                        if (orden.carrito != null)
-                        {
-                            int idCarrito = orden.carrito.idCarrito;
-                            System.Diagnostics.Debug.WriteLine($"DEBUG: orden.carrito.idCarrito = {idCarrito}");
-                            
-                            if (idCarrito > 0)
-                            {
-                                // Obtener el estado de la orden desde ViewState
-                                string estadoOrden = ViewState["EstadoOrden"]?.ToString() ?? "";
-                                LoadProducts(idCarrito, estadoOrden);
-                            }
-                            else
-                            {
-                                System.Diagnostics.Debug.WriteLine("DEBUG: idCarrito <= 0");
-                                rptProducts.DataSource = new List<ProductInfo>();
-                                rptProducts.DataBind();
-                                lblProductCount.Text = "0 Productos";
-                            }
-                        }
-                        else
-                        {
-                            System.Diagnostics.Debug.WriteLine("DEBUG: orden.carrito es NULL");
-                            rptProducts.DataSource = new List<ProductInfo>();
-                            rptProducts.DataBind();
-                            lblProductCount.Text = "0 Productos";
+                            total = (double)totalDescontado;
                         }
                     }
-                    catch (Exception ex)
+                }
+                catch { }
+
+                lblOrderTotal.Text = "$" + total.ToString("F2");
+
+                // Guardar el estado de la orden para usarlo en la carga de productos
+                ViewState["EstadoOrden"] = orden.estado.ToString();
+
+                // Cargar productos del carrito
+                System.Diagnostics.Debug.WriteLine($"DEBUG: orden.carrito es null? {orden.carrito == null}");
+                
+                if (orden.carrito != null)
+                {
+                    int idCarrito = orden.carrito.idCarrito;
+                    System.Diagnostics.Debug.WriteLine($"DEBUG: orden.carrito.idCarrito = {idCarrito}");
+                    
+                    if (idCarrito > 0)
                     {
-                        MostrarError("Error al cargar la orden: " + ex.Message);
+                        // Obtener el estado de la orden desde ViewState
+                        string estadoOrden = ViewState["EstadoOrden"]?.ToString() ?? "";
+                        LoadProducts(idCarrito, estadoOrden);
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("DEBUG: idCarrito <= 0");
+                        rptProducts.DataSource = new List<ProductInfo>();
+                        rptProducts.DataBind();
+                        lblProductCount.Text = "0 Productos";
                     }
                 }
                 else
                 {
-                    string debugMsg = $"El identificador de la orden no es válido. Valor recibido: '{orderIdParam}'";
-                    System.Diagnostics.Debug.WriteLine($"DEBUG: {debugMsg}");
-                    MostrarError(debugMsg);
+                    System.Diagnostics.Debug.WriteLine("DEBUG: orden.carrito es NULL");
+                    rptProducts.DataSource = new List<ProductInfo>();
+                    rptProducts.DataBind();
+                    lblProductCount.Text = "0 Productos";
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MostrarError("No se especificó una orden para mostrar.");
+                MostrarError("Error al cargar la orden: " + ex.Message);
             }
         }
 
@@ -238,7 +361,9 @@ namespace CampusStoreWeb
                                 Price = precioFinal,
                                 Quantity = linea.cantidad,
                                 SubTotal = subtotalFinal,
-                                PuedeCalificar = estadoOrden == "ENTREGADO"
+                                PuedeCalificar = estadoOrden == "ENTREGADO",
+                                ProductId = articulo.idArticulo,
+                                ProductType = "ARTICULO"
                             });
                         }
                         else
@@ -286,7 +411,9 @@ namespace CampusStoreWeb
                                 Price = precioFinal,
                                 Quantity = linea.cantidad,
                                 SubTotal = subtotalFinal,
-                                PuedeCalificar = estadoOrden == "ENTREGADO"
+                                PuedeCalificar = estadoOrden == "ENTREGADO",
+                                ProductId = libro.idLibro,
+                                ProductType = "LIBRO"
                             });
                         }
                         else
@@ -326,19 +453,155 @@ namespace CampusStoreWeb
             }
         }
 
+        // Método que se ejecuta cuando se hace clic en el botón de calificar
+        protected void lnkCalificar_Command(object sender, CommandEventArgs e)
+        {
+            // Obtener el ID y tipo del producto desde CommandArgument
+            string[] argumentos = e.CommandArgument.ToString().Split('|');
+            
+            if (argumentos.Length == 2)
+            {
+                int productId = int.Parse(argumentos[0]);
+                string productType = argumentos[1];
+                
+                // Guardar el ID y tipo del producto seleccionado
+                GuardarProductoSeleccionado(productId, productType);
+                
+                System.Diagnostics.Debug.WriteLine($"DEBUG: Producto seleccionado para calificar - ID: {productId}, Tipo: {productType}");
+            }
+            
+            // El modal se abrirá automáticamente con JavaScript después del postback
+            // Usamos setTimeout para asegurar que el DOM esté listo
+            string script = @"
+                setTimeout(function() {
+                    var modal = new bootstrap.Modal(document.getElementById('ratingModal'));
+                    modal.show();
+                }, 100);
+            ";
+            ScriptManager.RegisterStartupScript(this, GetType(), "OpenRatingModal", script, true);
+        }
+
         protected void btnPublishReview_Click(object sender, EventArgs e)
         {
-            // TODO: Implementar guardado de reseña
-            string rating = ddlRating.SelectedValue;
-            string feedback = txtFeedback.Text;
+            // Verificar que se haya seleccionado un producto
+            if (!ProductoIdSeleccionado.HasValue || string.IsNullOrEmpty(ProductoTipoSeleccionado))
+            {
+                string errorScript = "alert('Error: No se ha seleccionado un producto para calificar.');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", errorScript, true);
+                return;
+            }
             
-            // Por ahora solo mostrar mensaje
-            string script = "alert('Función de reseñas pendiente de implementar. Rating: " + rating + " estrellas');";
-            ScriptManager.RegisterStartupScript(this, GetType(), "ShowMessage", script, true);
-            
-            // Limpiar campos
-            txtFeedback.Text = string.Empty;
-            ddlRating.SelectedIndex = 0;
+            try
+            {
+                // Crear el cliente del Web Service dentro del método
+                ResenaWSClient resenaWS = new ResenaWSClient();
+                
+                // Obtener datos del formulario
+                string ratingStr = ddlRating.SelectedValue;
+                string feedback = txtFeedback.Text;
+                
+                // Obtener ID y tipo del producto seleccionado
+                int productId = ProductoIdSeleccionado.Value;
+                string productType = ProductoTipoSeleccionado;
+                
+                // Obtener el cliente actual
+                cliente clienteActual = ClienteActual;
+                
+                if (clienteActual == null)
+                {
+                    string errorScript = "alert('Error: No se encontró el cliente.');";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", errorScript, true);
+                    resenaWS.Close();
+                    return;
+                }
+                
+                // Crear el objeto reseña
+                reseña nuevaResena = new reseña();
+                
+                // Asignar calificación (convertir de string a double)
+                nuevaResena.calificacion = double.Parse(ratingStr);
+                
+                // Asignar comentario (puede ser null o vacío)
+                nuevaResena.reseña1 = string.IsNullOrWhiteSpace(feedback) ? null : feedback;
+                
+                // Asignar tipo de producto (convertir string a enum)
+                nuevaResena.tipoProducto = (productType == "ARTICULO") 
+                    ? tipoProducto.ARTICULO 
+                    : tipoProducto.LIBRO;
+                
+                // Obtener el producto completo (artículo o libro según el tipo)
+                // NO podemos crear uno nuevo con solo el ID porque Producto es abstracto
+                // y el Web Service necesita el objeto completo para deserializar correctamente
+                if (productType == "ARTICULO")
+                {
+                    // Obtener el artículo completo desde el Web Service
+                    articulo articuloCompleto = articuloWS.obtenerArticulo(productId);
+                    if (articuloCompleto == null)
+                    {
+                        string errorScript = "alert('Error: No se encontró el artículo.');";
+                        ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", errorScript, true);
+                        resenaWS.Close();
+                        return;
+                    }
+                    nuevaResena.producto = articuloCompleto;
+                }
+                else // LIBRO
+                {
+                    // Obtener el libro completo desde el Web Service
+                    libro libroCompleto = libroWS.obtenerLibro(productId);
+                    if (libroCompleto == null)
+                    {
+                        string errorScript = "alert('Error: No se encontró el libro.');";
+                        ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", errorScript, true);
+                        resenaWS.Close();
+                        return;
+                    }
+                    nuevaResena.producto = libroCompleto;
+                }
+                
+                // Asignar el objeto cliente completo
+                nuevaResena.cliente = clienteActual;
+                
+                // Llamar al Web Service para guardar la reseña
+                resenaWS.guardarResena(nuevaResena, estado.Nuevo);
+                
+                // Cerrar el cliente del Web Service
+                resenaWS.Close();
+                
+                // Mostrar mensaje de éxito
+                string successScript = "alert('¡Reseña publicada exitosamente!');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowSuccess", successScript, true);
+                
+                // Cerrar el modal
+                string closeModalScript = "$('#ratingModal').modal('hide');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "CloseModal", closeModalScript, true);
+                
+                // Limpiar campos
+                txtFeedback.Text = string.Empty;
+                ddlRating.SelectedIndex = 0;
+                
+                // Limpiar producto seleccionado
+                productoIdSeleccionado = null;
+                productoTipoSeleccionado = null;
+                ViewState["ProductoIdSeleccionado"] = null;
+                ViewState["ProductoTipoSeleccionado"] = null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"ERROR al guardar reseña: {ex.Message}");
+                string errorScript = $"alert('Error al guardar la reseña: {ex.Message}');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", errorScript, true);
+            }
+        }
+
+        // Método para guardar el ID y tipo del producto seleccionado
+        protected void GuardarProductoSeleccionado(int productId, string productType)
+        {
+            productoIdSeleccionado = productId;
+            productoTipoSeleccionado = productType;
+            ViewState["ProductoIdSeleccionado"] = productId;
+            ViewState["ProductoTipoSeleccionado"] = productType;
+            System.Diagnostics.Debug.WriteLine($"DEBUG: Producto seleccionado - ID: {productId}, Tipo: {productType}");
         }
 
         // Clase para representar la información de un producto
@@ -351,6 +614,8 @@ namespace CampusStoreWeb
             public int Quantity { get; set; }
             public decimal SubTotal { get; set; }
             public bool PuedeCalificar { get; set; }
+            public int ProductId { get; set; }
+            public string ProductType { get; set; }
         }
     }
 }

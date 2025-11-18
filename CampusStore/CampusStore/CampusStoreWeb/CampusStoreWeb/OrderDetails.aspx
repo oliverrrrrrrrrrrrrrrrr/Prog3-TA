@@ -325,9 +325,13 @@
                                         <td><strong>$<%# Eval("SubTotal") %></strong></td>
                                         <td>
                                             <asp:Panel ID="pnlRating" runat="server" Visible='<%# Eval("PuedeCalificar") %>'>
-                                                <a href="#" class="btn-rating" data-bs-toggle="modal" data-bs-target="#ratingModal">
+                                                <asp:LinkButton ID="lnkCalificar" runat="server" 
+                                                    CssClass="btn-rating" 
+                                                    CommandArgument='<%# Eval("ProductId") + "|" + Eval("ProductType") %>'
+                                                    OnCommand="lnkCalificar_Command"
+                                                    OnClientClick="return true;">
                                                     Dejar una Calificación <i class="bi bi-plus-circle"></i>
-                                                </a>
+                                                </asp:LinkButton>
                                             </asp:Panel>
                                         </td>
                                     </tr>
