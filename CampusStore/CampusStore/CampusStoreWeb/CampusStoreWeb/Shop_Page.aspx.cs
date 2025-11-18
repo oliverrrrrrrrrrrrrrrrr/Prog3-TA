@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
@@ -18,6 +19,10 @@ namespace CampusStoreWeb
         public decimal Precio { get; set; }
         public string TipoProducto { get; set; }
         public string UrlImagen { get; set; }
+        public int Stock { get; set; }
+        public string Autor { get; set; }
+        public string Descripcion { get; set; }
+        public string TipoDeProducto { get; set; }
     }
 
     public partial class Shop_Page : System.Web.UI.Page
@@ -44,6 +49,14 @@ namespace CampusStoreWeb
 
                 // La primera vez que carga la página, mostramos los productos iniciales
                 CargarProductos();
+            }
+            if (Session["ShowAddToCartAlert"] != null && (bool)Session["ShowAddToCartAlert"])
+            {
+                string script = "Swal.fire({ icon: 'success', title: '¡Añadido!', text: 'Producto agregado al carrito.', showConfirmButton: false, timer: 1500 });";
+                ClientScript.RegisterStartupScript(this.GetType(), "addToCartAlert", script, true);
+
+                // "Consumimos" la bandera para que no se vuelva a mostrar
+                Session["ShowAddToCartAlert"] = false;
             }
         }
 
@@ -188,6 +201,85 @@ namespace CampusStoreWeb
                       .Where(li => li.Selected)
                       .Select(li => li.Value)
                       .ToArray();
+        }
+        protected void rptProductos_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "AddToCart")
+            {
+                // El CommandArgument contiene "ID,TIPO" (ej: "123,libro")
+                string[] args = e.CommandArgument.ToString().Split(',');
+                if (args.Length == 2)
+                {
+                    int productoId = int.Parse(args[0]);
+                    string productoTipo = args[1];
+                    int cantidad = 1; // El botón del hover siempre añade una unidad
+
+                    // --- LÓGICA PARA AGREGAR AL CARRITO ---
+                    // Aquí es donde llamas a tu lógica de negocio para el carrito.
+                    // Puede ser una clase que maneje la Sesión, o llame a la BD.
+                    // Ejemplo:
+                    // CarritoDeCompras.AgregarItem(productoId, productoTipo, cantidad);
+
+                    // Mensaje de depuración para confirmar que funciona
+                    System.Diagnostics.Debug.WriteLine($"Añadido al carrito: ID={productoId}, Tipo='{productoTipo}', Cantidad={cantidad}");
+
+                    // Opcional: Mostrar un popup de confirmación al usuario.
+                    string script = "Swal.fire({ icon: 'success', title: '¡Añadido!', text: 'Producto agregado al carrito.', showConfirmButton: false, timer: 1500 });";
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                }
+            }
+        }
+        [WebMethod]
+        public static ProductoUnificado GetProductDetails(string tipo, int id)
+        {
+            try
+            {
+                
+                
+                if (tipo.ToLower() == "libro")
+                {
+                    var cliente = new LibroWSClient();
+                    // 1. Llamar al servicio específico de libros
+                    libro libroResult = cliente.obtenerLibro(id);
+                    if (libroResult == null) return null;
+
+                    // 2. Mapear el objeto 'libro' a nuestro objeto unificado 'QuickViewProduct'
+                    return new ProductoUnificado
+                    {
+                        Id = libroResult.idLibro,
+                        Nombre = libroResult.nombre,
+                        Autor = (libroResult.autores != null && libroResult.autores.Length > 0) ? libroResult.autores[0].nombre : null, // El '?' evita un error si 'autor' es nulo
+                        Descripcion = libroResult.descripcion,
+                        Precio = (decimal)libroResult.precio,
+                        Stock = libroResult.stockReal,
+                        UrlImagen =libroResult.imagenURL // Creamos una lista con la única imagen
+                    };
+                }
+                else // Lógica para Artículos y otros
+                {
+                    // 1. Llamar al servicio específico de artículos
+                    var cliente = new ArticuloWSClient();
+                    articulo articuloResult = cliente.obtenerArticulo(id);
+                    if (articuloResult == null) return null;
+
+                    // 2. Mapear el objeto 'articulo' a nuestro objeto unificado 'QuickViewProduct'
+                    return new ProductoUnificado
+                    {
+                        Id = articuloResult.idArticulo,
+                        Nombre = articuloResult.nombre,
+                        Autor = null, // Los artículos no tienen autor
+                        Descripcion = articuloResult.descripcion,
+                        Precio = (decimal)articuloResult.precio,
+                        Stock = articuloResult.stockReal,
+                        UrlImagen =articuloResult.imagenURL// Creamos una lista con la única imagen
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error en WebMethod GetProductDetails: {ex.Message}");
+                return null;
+            }
         }
     }
 }

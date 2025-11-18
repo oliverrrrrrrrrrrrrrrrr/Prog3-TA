@@ -1,5 +1,135 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Shop_Page.aspx.cs" Inherits="CampusStoreWeb.Shop_Page" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 2. CSS para el efecto Hover y los nuevos botones -->
+    <style>
+        /* 1. Contenedor de la imagen: Le decimos que será el "ancla" para los botones */
+    .product-card .card-img-container { 
+        position: relative; 
+        overflow: hidden; 
+    }
+
+    /* 2. Capa de los botones (NUEVA TÉCNICA DE CENTRADO) */
+    .product-card .product-actions {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        
+        /* Centrado con Flexbox: robusto y moderno */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        background-color: rgba(0, 0, 0, 0.2); /* Opcional: un ligero velo oscuro */
+        opacity: 0; /* Oculto por defecto */
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    /* 3. El efecto hover ahora solo muestra/oculta la capa */
+    .product-card:hover .product-actions { 
+        opacity: 1; 
+    }
+
+    /* 4. Estilo de los botones (sin cambios) */
+    .product-card .action-btn { 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        width: 45px; 
+        height: 45px; 
+        background-color: white; 
+        color: #333; 
+        border-radius: 50%; 
+        text-decoration: none; 
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15); 
+        transition: background-color 0.2s, color 0.2s; 
+        
+        /* Evita que los botones se muevan al aparecer la capa */
+        transform: translateY(10px);
+        transition: transform 0.3s ease-in-out, background-color 0.2s, color 0.2s;
+    }
+    
+    .product-card:hover .action-btn {
+        transform: translateY(0);
+    }
+
+    .product-card .action-btn:hover { 
+        background-color: #fd7e14; 
+        color: #fff; 
+    }
+
+    /* Estilos de los filtros (sin cambios) */
+    .form-check-list { list-style-type: none; padding-left: 0; }
+     #quickViewModal .modal-lg { 
+        max-width: 900px; /* Ancho del modal */
+    }
+    
+    #quickViewModal .modal-body {
+        padding: 2rem; /* Más espacio interior */
+    }
+
+    #quickViewModal .quick-view-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    #quickViewModal .quick-view-price {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #0d6efd; /* Azul */
+        margin-bottom: 1rem;
+    }
+
+    #quickViewModal .quick-view-description {
+        color: #6c757d;
+        margin-bottom: 1.5rem;
+    }
+
+    #quickViewModal .quick-view-availability {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    #quickViewModal .quick-view-availability .in-stock {
+        color: #198754; /* Verde */
+        font-weight: bold;
+    }
+
+    #quickViewModal .quick-view-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    #quickViewModal .quick-view-qty {
+        width: 70px;
+        text-align: center;
+        height: 40px;
+    }
+    
+    #quickViewModal .btn-add-to-cart {
+        background-color: #ffc107; /* Amarillo */
+        border-color: #ffc107;
+        color: #212529;
+        font-weight: bold;
+        height: 40px;
+    }
+    #quickViewModal .btn-add-to-cart:hover {
+        background-color: #e0a800;
+        border-color: #e0a800;
+    }
+
+    #quickViewModal .loading-spinner { 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        min-height: 400px; 
+    }
+    </style>
     <script type="text/javascript">
         function validarFiltrosCliente() {
             // Obtener la categoría seleccionada
@@ -48,11 +178,14 @@
                 }
                 
                 if (hayFiltrosLibro) {
-                    alert('⚠️ No puedes aplicar filtros de LIBROS (Editorial, Autor o Género) cuando la categoría seleccionada no es "Libros".\n\n' +
-                          'Por favor:\n' +
-                          '• Selecciona la categoría "Libros", o\n' +
-                          '• Desmarca los filtros de Editorial, Autor y Género.');
-                    return false; // Prevenir el postback
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Filtros Incompatibles',
+                        html: 'No puedes aplicar filtros de <strong>Editorial, Autor o Género</strong> cuando la categoría no es "Libros".<br/><br/>Por favor, selecciona la categoría <strong>"Libros"</strong> o desmarca los filtros específicos.',
+                        confirmButtonColor: '#0d6efd',
+                        confirmButtonText: 'Entendido'
+                    });
+                    return false; // Prevenir postback
                 }
             }
             
@@ -61,6 +194,8 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
+
     <div class="container-fluid">
 
         <!-- =================================================================== -->
@@ -136,28 +271,45 @@
                 <div class="row">
                     
                     <!-- El Repeater que genera las tarjetas de producto -->
-                    <asp:Repeater ID="rptProductos" runat="server">
-                        <ItemTemplate>
-                            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                                <div class="card h-100 product-card">
-                                    <div class="card-img-container">
-                                        <a href='<%# Eval("TipoProducto", "Product_detail.aspx?type={0}&id=") + Eval("Id") %>'>
-                                            <asp:Image runat="server" CssClass="card-img-top" ImageUrl='<%# Eval("UrlImagen") %>' AlternateText='<%# Eval("Nombre") %>' />
-                                        </a>
-                                        <div class="product-actions">
-                                            <%-- Tus botones de acción aquí --%>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            <a href='<%# Eval("TipoProducto", "Product_detail.aspx?type={0}&id=") + Eval("Id") %>'><%# Eval("Nombre") %></a>
-                                        </h5>
-                                        <p class="card-text price"><%# Eval("Precio", "{0:C}") %></p>
-                                    </div>
+                   <!-- El Repeater que genera las tarjetas de producto -->
+            <asp:Repeater ID="rptProductos" runat="server" OnItemCommand="rptProductos_ItemCommand">
+                <ItemTemplate>
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card h-100 product-card">
+
+                            <!-- Contenedor de la imagen (el ancla) -->
+                            <div class="card-img-container">
+                    
+                                <!-- Imagen principal -->
+                                <a href='<%# Eval("TipoProducto", "Product_detail.aspx?type={0}&id=") + Eval("Id") %>'>
+                                    <asp:Image runat="server" CssClass="card-img-top" ImageUrl='<%# Eval("UrlImagen") %>' AlternateText='<%# Eval("Nombre") %>' />
+                                </a>
+                    
+                                <!-- Capa de acciones (hijo directo del contenedor) -->
+                                <div class="product-actions">
+                                    <!-- Botón de Vista Rápida (Ojo) -->
+                                      <a href="#" class="action-btn" title="Vista Rápida" 
+                                               onclick='openQuickView(<%# Eval("Id") %>, "<%# Eval("TipoProducto") %>"); return false;'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                                            </a>
+                                    <!-- Botón de Añadir al Carrito -->
+                                    <asp:LinkButton runat="server" CommandName="AddToCart" CommandArgument='<%# Eval("Id") + "," + Eval("TipoProducto") %>' CssClass="action-btn" ToolTip="Añadir al Carrito">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+                                    </asp:LinkButton>
                                 </div>
                             </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
+
+                            <!-- Cuerpo de la tarjeta -->
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href='<%# Eval("TipoProducto", "Product_detail.aspx?type={0}&id=") + Eval("Id") %>'><%# Eval("Nombre") %></a>
+                                </h5>
+                                <p class="card-text price"><%# Eval("Precio", "{0:C}") %></p>
+                            </div>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
 
                     <!-- El Panel para el mensaje de "No hay productos" -->
                     <div class="col-12">
@@ -183,4 +335,85 @@
         </div> <!-- CORRECCIÓN: Este es el CIERRE CORRECTO del <div class="row"> PRINCIPAL -->
 
     </div>
+    <!-- HTML DEL MODAL DE VISTA RÁPIDA -->
+    <div class="modal fade" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quickViewModalLabel">Vista Rápida</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="modalContent"></div>
+                    <div id="modalLoading" class="loading-spinner">
+                        <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT para la lógica del Modal -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var quickViewModal;
+            var modalElement = document.getElementById('quickViewModal');
+            if (modalElement) {
+                quickViewModal = new bootstrap.Modal(modalElement, {});
+            }
+
+            window.openQuickView = function (id, tipo) {
+                if (!quickViewModal) return;
+                document.getElementById('modalContent').innerHTML = '';
+                document.getElementById('modalLoading').style.display = 'flex';
+                quickViewModal.show();
+                PageMethods.GetProductDetails(tipo, id, onGetDetailsSuccess, onGetDetailsError);
+            };
+
+            window.onGetDetailsSuccess = function (result) {
+                document.getElementById('modalLoading').style.display = 'none';
+                if (result) {
+                    // Generar HTML con la nueva estructura y clases
+                    let autorHtml = result.Autor ? `<p class="text-muted mb-2">Autor: ${result.Autor}</p>` : '';
+                    let disponibilidadClass = result.Stock > 0 ? "in-stock" : "out-stock";
+                    let disponibilidadTexto = result.Stock > 0 ? "En Stock" : "Agotado";
+
+                    let contentHtml = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img id="mainModalImage" src="${result.UrlImagen}" class="img-fluid rounded" />
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-muted mb-1">${result.TipoProducto === 'libro' ? 'Libro' : 'Artículo'}</p>
+                            <h2 class="quick-view-title">${result.Nombre}</h2>
+                            ${autorHtml}
+                            <h3 class="quick-view-price">${result.Precio.toLocaleString('es-PE', { style: 'currency', currency: 'PEN' })}</h3>
+                            <p class="quick-view-description">${result.Descripcion || 'Sin descripción.'}</p>
+                            <p class="quick-view-availability">Disponibilidad: <span class="${disponibilidadClass}">${disponibilidadTexto}</span></p>
+
+                            <div class="quick-view-actions">
+                                <input id="modalQty" type="number" class="form-control quick-view-qty" value="1" min="1" max="${result.Stock}" />
+                                <button class="btn btn-add-to-cart" onclick="addFromModal(${result.Id}, '${result.TipoProducto}')">AGREGAR AL CARRITO</button>
+                            </div>
+                        </div>
+                    </div>`;
+
+                    document.getElementById('modalContent').innerHTML = contentHtml;
+                } else {
+                    document.getElementById('modalContent').innerHTML = '<p class="text-center text-danger">No se pudieron cargar los detalles del producto.</p>';
+                }
+            };
+
+            window.onGetDetailsError = function (error) {
+                document.getElementById('modalLoading').style.display = 'none';
+                document.getElementById('modalContent').innerHTML = `<p class="text-center text-danger">Error: ${error.get_message()}</p>`;
+            };
+
+            window.addFromModal = function (id, tipo) {
+                // Lógica para añadir al carrito desde el modal
+            };
+
+        }); // Fin del DOMContentLoaded
+    </script>
 </asp:Content>
