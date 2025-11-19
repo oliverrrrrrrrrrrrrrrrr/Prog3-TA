@@ -5,17 +5,23 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/LibroWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+  <message name="guardarLibro">
+    <part name="parameters" element="tns:guardarLibro" />
+  </message>
+  <message name="guardarLibroResponse">
+    <part name="parameters" element="tns:guardarLibroResponse" />
+  </message>
   <message name="listarLibros">
     <part name="parameters" element="tns:listarLibros" />
   </message>
   <message name="listarLibrosResponse">
     <part name="parameters" element="tns:listarLibrosResponse" />
   </message>
-  <message name="obtenerLibro">
-    <part name="parameters" element="tns:obtenerLibro" />
+  <message name="eliminarLibro">
+    <part name="parameters" element="tns:eliminarLibro" />
   </message>
-  <message name="obtenerLibroResponse">
-    <part name="parameters" element="tns:obtenerLibroResponse" />
+  <message name="eliminarLibroResponse">
+    <part name="parameters" element="tns:eliminarLibroResponse" />
   </message>
   <message name="registrarLibro">
     <part name="parameters" element="tns:registrarLibro" />
@@ -23,17 +29,11 @@
   <message name="registrarLibroResponse">
     <part name="parameters" element="tns:registrarLibroResponse" />
   </message>
-  <message name="guardarLibro">
-    <part name="parameters" element="tns:guardarLibro" />
+  <message name="obtenerLibro">
+    <part name="parameters" element="tns:obtenerLibro" />
   </message>
-  <message name="guardarLibroResponse">
-    <part name="parameters" element="tns:guardarLibroResponse" />
-  </message>
-  <message name="eliminarLibro">
-    <part name="parameters" element="tns:eliminarLibro" />
-  </message>
-  <message name="eliminarLibroResponse">
-    <part name="parameters" element="tns:eliminarLibroResponse" />
+  <message name="obtenerLibroResponse">
+    <part name="parameters" element="tns:obtenerLibroResponse" />
   </message>
   <message name="leerAutoresPorLibro">
     <part name="parameters" element="tns:leerAutoresPorLibro" />
@@ -42,25 +42,25 @@
     <part name="parameters" element="tns:leerAutoresPorLibroResponse" />
   </message>
   <portType name="LibroWS">
+    <operation name="guardarLibro">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroRequest" message="tns:guardarLibro" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroResponse" message="tns:guardarLibroResponse" />
+    </operation>
     <operation name="listarLibros">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosRequest" message="tns:listarLibros" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosResponse" message="tns:listarLibrosResponse" />
     </operation>
-    <operation name="obtenerLibro">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest" message="tns:obtenerLibro" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse" message="tns:obtenerLibroResponse" />
+    <operation name="eliminarLibro">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroRequest" message="tns:eliminarLibro" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroResponse" message="tns:eliminarLibroResponse" />
     </operation>
     <operation name="registrarLibro">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroRequest" message="tns:registrarLibro" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroResponse" message="tns:registrarLibroResponse" />
     </operation>
-    <operation name="guardarLibro">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroRequest" message="tns:guardarLibro" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroResponse" message="tns:guardarLibroResponse" />
-    </operation>
-    <operation name="eliminarLibro">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroRequest" message="tns:eliminarLibro" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibroResponse" message="tns:eliminarLibroResponse" />
+    <operation name="obtenerLibro">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest" message="tns:obtenerLibro" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse" message="tns:obtenerLibroResponse" />
     </operation>
     <operation name="leerAutoresPorLibro">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/leerAutoresPorLibroRequest" message="tns:leerAutoresPorLibro" />
@@ -69,6 +69,15 @@
   </portType>
   <binding name="LibroWSPortBinding" type="tns:LibroWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="guardarLibro">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="listarLibros">
       <soap:operation soapAction="" />
       <input>
@@ -78,7 +87,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="obtenerLibro">
+    <operation name="eliminarLibro">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -96,16 +105,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="guardarLibro">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="eliminarLibro">
+    <operation name="obtenerLibro">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

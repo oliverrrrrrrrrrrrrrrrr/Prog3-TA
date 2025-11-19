@@ -2,13 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
 namespace CampusStoreWeb
 {
 
@@ -49,14 +46,6 @@ namespace CampusStoreWeb
 
                 // La primera vez que carga la página, mostramos los productos iniciales
                 CargarProductos();
-            }
-            if (Session["ShowAddToCartAlert"] != null && (bool)Session["ShowAddToCartAlert"])
-            {
-                string script = "Swal.fire({ icon: 'success', title: '¡Añadido!', text: 'Producto agregado al carrito.', showConfirmButton: false, timer: 1500 });";
-                ClientScript.RegisterStartupScript(this.GetType(), "addToCartAlert", script, true);
-
-                // "Consumimos" la bandera para que no se vuelva a mostrar
-                Session["ShowAddToCartAlert"] = false;
             }
         }
 
@@ -202,28 +191,6 @@ namespace CampusStoreWeb
                       .Select(li => li.Value)
                       .ToArray();
         }
-        protected void rptProductos_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-            if (e.CommandName == "AddToCart")
-            {
-                // El CommandArgument contiene "ID,TIPO" (ej: "123,libro")
-                string[] args = e.CommandArgument.ToString().Split(',');
-                if (args.Length == 2)
-                {
-                    
-
-                    int productoId = int.Parse(args[0]);
-                    string productoTipo = args[1];
-
-                    // Lógica para añadir 1 item al carrito...
-                    System.Diagnostics.Debug.WriteLine($"Añadido desde hover: ID={productoId}, Tipo='{productoTipo}'");
-
-                    Session["ShowAddToCartAlert"] = true;
-                    Response.Redirect(Request.RawUrl, false); // false para evitar ThreadAbortException
-                    Context.ApplicationInstance.CompleteRequest();
-                }
-            }
-        }
         [WebMethod]
         public static ProductoUnificado GetProductDetails(string tipo, int id)
         {
@@ -276,22 +243,5 @@ namespace CampusStoreWeb
                 return null;
             }
         }
-
-        [WebMethod]
-        public static bool AddItemToCart(string tipo, int id, int cantidad)
-        {
-            try
-            {
-                // Lógica para añadir items al carrito...
-                System.Diagnostics.Debug.WriteLine($"Añadido desde modal: ID={id}, Tipo='{tipo}', Cantidad={cantidad}");
-                return true; // Devuelve true si la operación fue exitosa
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Error en WebMethod AddItemToCart: {ex.Message}");
-                return false; // Devuelve false si hubo un error
-            }
-        }
-
     }
 }

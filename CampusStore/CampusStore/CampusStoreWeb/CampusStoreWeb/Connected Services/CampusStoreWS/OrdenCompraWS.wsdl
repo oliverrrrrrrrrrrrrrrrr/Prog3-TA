@@ -23,29 +23,17 @@
   <message name="listarLibrosCarritoResponse">
     <part name="parameters" element="tns:listarLibrosCarritoResponse" />
   </message>
-  <message name="contarProductosCarrito">
-    <part name="parameters" element="tns:contarProductosCarrito" />
-  </message>
-  <message name="contarProductosCarritoResponse">
-    <part name="parameters" element="tns:contarProductosCarritoResponse" />
-  </message>
-  <message name="listarArticulosCarrito">
-    <part name="parameters" element="tns:listarArticulosCarrito" />
-  </message>
-  <message name="listarArticulosCarritoResponse">
-    <part name="parameters" element="tns:listarArticulosCarritoResponse" />
-  </message>
   <message name="cancelarOrdenesExpiradas">
     <part name="parameters" element="tns:cancelarOrdenesExpiradas" />
   </message>
   <message name="cancelarOrdenesExpiradasResponse">
     <part name="parameters" element="tns:cancelarOrdenesExpiradasResponse" />
   </message>
-  <message name="listarOrdenesCompra">
-    <part name="parameters" element="tns:listarOrdenesCompra" />
+  <message name="listarArticulosCarrito">
+    <part name="parameters" element="tns:listarArticulosCarrito" />
   </message>
-  <message name="listarOrdenesCompraResponse">
-    <part name="parameters" element="tns:listarOrdenesCompraResponse" />
+  <message name="listarArticulosCarritoResponse">
+    <part name="parameters" element="tns:listarArticulosCarritoResponse" />
   </message>
   <message name="eliminarOrdenCompra">
     <part name="parameters" element="tns:eliminarOrdenCompra" />
@@ -58,6 +46,18 @@
   </message>
   <message name="listarOrdenesPorClienteResponse">
     <part name="parameters" element="tns:listarOrdenesPorClienteResponse" />
+  </message>
+  <message name="listarOrdenesCompra">
+    <part name="parameters" element="tns:listarOrdenesCompra" />
+  </message>
+  <message name="listarOrdenesCompraResponse">
+    <part name="parameters" element="tns:listarOrdenesCompraResponse" />
+  </message>
+  <message name="contarProductosCarrito">
+    <part name="parameters" element="tns:contarProductosCarrito" />
+  </message>
+  <message name="contarProductosCarritoResponse">
+    <part name="parameters" element="tns:contarProductosCarritoResponse" />
   </message>
   <portType name="OrdenCompraWS">
     <operation name="guardarOrdenCompra">
@@ -72,21 +72,13 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarLibrosCarritoRequest" message="tns:listarLibrosCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarLibrosCarritoResponse" message="tns:listarLibrosCarritoResponse" />
     </operation>
-    <operation name="contarProductosCarrito">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/contarProductosCarritoRequest" message="tns:contarProductosCarrito" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/contarProductosCarritoResponse" message="tns:contarProductosCarritoResponse" />
-    </operation>
-    <operation name="listarArticulosCarrito">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarArticulosCarritoRequest" message="tns:listarArticulosCarrito" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarArticulosCarritoResponse" message="tns:listarArticulosCarritoResponse" />
-    </operation>
     <operation name="cancelarOrdenesExpiradas">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/cancelarOrdenesExpiradasRequest" message="tns:cancelarOrdenesExpiradas" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/cancelarOrdenesExpiradasResponse" message="tns:cancelarOrdenesExpiradasResponse" />
     </operation>
-    <operation name="listarOrdenesCompra">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesCompraRequest" message="tns:listarOrdenesCompra" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesCompraResponse" message="tns:listarOrdenesCompraResponse" />
+    <operation name="listarArticulosCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarArticulosCarritoRequest" message="tns:listarArticulosCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarArticulosCarritoResponse" message="tns:listarArticulosCarritoResponse" />
     </operation>
     <operation name="eliminarOrdenCompra">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/eliminarOrdenCompraRequest" message="tns:eliminarOrdenCompra" />
@@ -95,6 +87,14 @@
     <operation name="listarOrdenesPorCliente">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesPorClienteRequest" message="tns:listarOrdenesPorCliente" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesPorClienteResponse" message="tns:listarOrdenesPorClienteResponse" />
+    </operation>
+    <operation name="listarOrdenesCompra">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesCompraRequest" message="tns:listarOrdenesCompra" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesCompraResponse" message="tns:listarOrdenesCompraResponse" />
+    </operation>
+    <operation name="contarProductosCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/contarProductosCarritoRequest" message="tns:contarProductosCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/contarProductosCarritoResponse" message="tns:contarProductosCarritoResponse" />
     </operation>
   </portType>
   <binding name="OrdenCompraWSPortBinding" type="tns:OrdenCompraWS">
@@ -126,24 +126,6 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="contarProductosCarrito">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="listarArticulosCarrito">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
     <operation name="cancelarOrdenesExpiradas">
       <soap:operation soapAction="" />
       <input>
@@ -153,7 +135,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="listarOrdenesCompra">
+    <operation name="listarArticulosCarrito">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -172,6 +154,24 @@
       </output>
     </operation>
     <operation name="listarOrdenesPorCliente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarOrdenesCompra">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="contarProductosCarrito">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

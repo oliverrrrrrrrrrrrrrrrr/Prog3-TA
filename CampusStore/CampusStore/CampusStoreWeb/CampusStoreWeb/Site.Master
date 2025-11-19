@@ -349,7 +349,6 @@
                         <ul>
                             <li><asp:HyperLink ID="lnkShopProduct" runat="server" NavigateUrl="~/Catalogo.aspx">Productos</asp:HyperLink></li>
                             <li><asp:HyperLink ID="lnkShoppingCart" runat="server" NavigateUrl="~/Shopping_Car.aspx">Carrito de Compras</asp:HyperLink></li>
-                            <li><asp:HyperLink ID="lnkAboutUs" runat="server" NavigateUrl="~/Catalogo.aspx">Acerca de</asp:HyperLink></li>
                         </ul>
                     </div>
                     
