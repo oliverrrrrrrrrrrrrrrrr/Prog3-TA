@@ -29,12 +29,9 @@ namespace CampusStoreWeb
 
                 if (isAdmin)
                 {
-<<<<<<< Updated upstream
                     // Menú para Admin
                     //lnkAboutUs.Visible = true;
 
-=======
->>>>>>> Stashed changes
                     // Ocultar opciones de cliente
                     lnkShopProduct.Visible = false;
                     lnkShoppingCart.Visible = false;
@@ -50,10 +47,7 @@ namespace CampusStoreWeb
                 {
                     CargarCarrito();
                     // Menú para Cliente
-<<<<<<< Updated upstream
                     //lnkAboutUs.Visible = true;
-=======
->>>>>>> Stashed changes
                     lnkShopProduct.Visible = true;
                     lnkShoppingCart.Visible = true;
                     lnkFooterCuadernos.Visible = true;
