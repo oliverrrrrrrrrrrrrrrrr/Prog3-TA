@@ -254,6 +254,34 @@
                 padding: 20px;
             }
         }
+        .order-details {
+            background: white;
+            border: 1px solid #E4E7E9;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .order-header {
+            display: grid;
+            grid-template-columns: 80px 2fr 100px 120px 120px;
+            gap: 16px;
+            padding: 16px;
+            background: #F2F4F5;
+            font-weight: 600;
+            font-size: 12px;
+            color: #475156;
+            text-transform: uppercase;
+        }
+
+        .order-header div:first-child {
+            grid-column: 1 / 3;
+        }
+
+        .order-header div:nth-child(3),
+        .order-header div:nth-child(4),
+        .order-header div:nth-child(5) {
+            text-align: right;
+        }
     </style>
 </asp:Content>
 
@@ -267,99 +295,111 @@
     </nav>
 
     <div class="checkout-container">
-        <div class="row">
-            <!-- Left Column - Order Details -->
-            <div class="col-lg-7 mb-4">
-                <div class="order-details-container">
-                    <!-- Header -->
-                    <div class="order-details-header">
-                        <a href="Shopping_Car.aspx" class="back-button">
-                            <i class="bi bi-arrow-left"></i>
-                        </a>
-                        <h4>DETALLES DEL PEDIDO</h4>
-                    </div>
+    <div class="row">
+        <!-- Left Column - Order Details -->
+        <div class="col-lg-7 mb-4">
+            <div class="order-details-container">
+                <!-- Header -->
+                <div class="order-details-header">
+                    <a href="Shopping_Car.aspx" class="back-button">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                    <h4>DETALLES DEL PEDIDO</h4>
+                </div>
 
-                    <!-- Order Summary -->
-                    <div class="order-summary">
-                        <div class="order-summary-left">
-                            <div class="order-id">
-                                <asp:Label ID="lblOrderId" runat="server" Text="#96459761"></asp:Label>
-                            </div>
-                            <div class="order-info">
-                                <asp:Label ID="lblProductCount" runat="server" Text="2 Productos"></asp:Label>
-                                <span> • </span>
-                                Pedido realizado el 
-                                <asp:Label ID="lblOrderDate" runat="server" Text="17 Ene, 2021 a las 7:32 PM"></asp:Label>
-                            </div>
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <div class="order-summary-left">
+                        <div class="order-id">
+                            <asp:Label ID="lblOrderId" runat="server"></asp:Label>
                         </div>
-                        <div class="order-summary-right">
-                            <div class="order-total">
-                                <asp:Label ID="lblOrderTotal" runat="server" Text="$109.00"></asp:Label>
-                            </div>
+                        <div class="order-info">
+                            <asp:Label ID="lblProductCount" runat="server"></asp:Label>
+                            <span> • </span>
+                            Pedido realizado el 
+                            <asp:Label ID="lblOrderDate" runat="server"></asp:Label>
                         </div>
                     </div>
+                    <div class="order-summary-right">
+                        <div class="order-total">
+                            $<asp:Label ID="lblOrderTotal" runat="server"></asp:Label>
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- Products Header -->
+                <!-- Products Section -->
+                <div class="checkout-products">
+                    <!-- Título de productos -->
+                    <div class="products-title">
+                        <h5>Productos (<asp:Label ID="lblProductCountHeader" runat="server"></asp:Label>)</h5>
+                    </div>
+
+                    <!-- Header de la tabla -->
                     <div class="products-header">
-                        <h5>Productos <span class="product-count">(<asp:Label ID="lblProductCountHeader" runat="server" Text="02"></asp:Label>)</span></h5>
+                        <div class="header-producto">PRODUCTO</div>
+                        <div class="header-cantidad">CANTIDAD</div>
+                        <div class="header-precio">PRECIO</div>
+                        <div class="header-subtotal">SUBTOTAL</div>
                     </div>
 
-                    <!-- Products Table -->
-                    <table class="table table-custom">
-                        <thead>
-                            <tr>
-                                <th>PRODUCTOS</th>
-                                <th>PRECIO</th>
-                                <th>CANTIDAD</th>
-                                <th>SUB-TOTAL</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <asp:Repeater ID="rptProducts" runat="server">
-                                <ItemTemplate>
-                                    <tr>
-                                        <td>
-                                            <div class="product-info">
-                                                <img src='<%# Eval("ImageUrl") %>' alt='<%# Eval("ProductName") %>' class="product-image" />
-                                                <div class="product-details">
-                                                    <span class="product-category"><%# Eval("Category") %></span>
-                                                    <span class="product-name"><%# Eval("ProductName") %></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><strong>$<%# Eval("Price") %></strong></td>
-                                        <td>x<%# Eval("Quantity") %></td>
-                                        <td><strong>$<%# Eval("SubTotal") %></strong></td>
-                                        </td>
-                                    </tr>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </tbody>
-                    </table>
+                    <!-- Repeater con los productos -->
+                    <asp:Repeater ID="rptDetalleOrden" runat="server">
+                        <ItemTemplate>
+                            <div class="product-row">
+                                <!-- Columna Producto (imagen + nombre) -->
+                                <div class="product-info">
+                                    <img src='<%# Eval("producto.imagenURL") %>' alt='<%# Eval("producto.nombre") %>' />
+                                    <span class="product-name"><%# Eval("producto.nombre") %></span>
+                                </div>
+                
+                                <!-- Columna Cantidad -->
+                                <div class="product-quantity">
+                                    x<%# Eval("cantidad") %>
+                                </div>
+                
+                                <!-- Columna Precio -->
+                                <div class="product-price">
+                                    $<%# String.Format("{0:N2}", 
+                                        Convert.ToDouble(Eval("precioConDescuento")) > 0 
+                                            ? Eval("precioConDescuento") 
+                                            : Eval("precioUnitario")) %>
+                                </div>
+                
+                                <!-- Columna Subtotal -->
+                                <div class="product-subtotal">
+                                    $<%# String.Format("{0:N2}", 
+                                        (Convert.ToDouble(Eval("precioConDescuento")) > 0 
+                                            ? Convert.ToDouble(Eval("precioConDescuento")) 
+                                            : Convert.ToDouble(Eval("precioUnitario"))) 
+                                        * Convert.ToInt32(Eval("cantidad"))) %>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                 </div>
             </div>
+        </div>
 
-            <!-- Right Column - QR Code and Payment -->
-            <div class="col-lg-5 mb-4">
-                <div class="qr-payment-section">
-                    <div class="qr-code-container">
-                        <div id="qrcode"></div>
-                    </div>
+        <!-- Right Column - QR Code and Payment -->
+        <div class="col-lg-5 mb-4">
+            <div class="qr-payment-section">
+                <div class="qr-code-container">
+                    <div id="qrcode"></div>
+                </div>
 
-                    <asp:LinkButton ID="btnProceedPayment" runat="server" CssClass="btn-proceed-payment" OnClick="btnProceedPayment_Click">
-                        PROCEDER CON EL PAGO DIFERIDO <i class="bi bi-arrow-right"></i>
-                    </asp:LinkButton>
+                <asp:LinkButton ID="btnProceedPayment" runat="server" CssClass="btn-proceed-payment" OnClick="btnProceedPayment_Click">
+                    PROCEDER CON EL PAGO DIFERIDO <i class="bi bi-arrow-right"></i>
+                </asp:LinkButton>
 
-                    <div class="payment-instructions">
-                        Lea este QR o presione el botón para realizar el pago diferido.
-                        <br /><br />
-                        <strong>Tiene 48 horas para realizar el pago, caso contrario su orden será cancelada.</strong>
-                    </div>
+                <div class="payment-instructions">
+                    Lea este QR o presione el botón para realizar el pago diferido.
+                    <br /><br />
+                    <strong>Tiene 48 horas para realizar el pago, caso contrario su orden será cancelada.</strong>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <!-- QR Code Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>

@@ -177,38 +177,62 @@
                         <div class="header-subtotal">SUB-TOTAL</div>
                     </div>
 
-                    <!-- Repeater para los items del carrito -->
-                    <asp:Repeater ID="rptCartItems" runat="server">
-                        <ItemTemplate>
-                            <div class="cart-item">
-                                <!-- Columna de Producto -->
-                                <div class="cart-product">
-                                    <button class="remove-item">&times;</button>
-                                    <img src='<%# Eval("ImageUrl") %>' alt='<%# Eval("Title") %>' />
-                                    <div class="product-info">
-                                        <a href="#" class="product-title"><%# Eval("Title") %></a>
-                                    </div>
-                                </div>
-                                <!-- Columna de Precio -->
-                                <div class="cart-price" data-title="Precio">
-                                    <span class="old-price"><%# Eval("OldPrice", "${0:0.00}") %></span>
-                                    <span class="current-price"><%# Eval("CurrentPrice", "${0:0.00}") %></span>
-                                </div>
-                                <!-- Columna de Cantidad -->
-                                <div class="cart-quantity" data-title="Cantidad">
-                                    <div class="quantity-selector">
-                                        <button type="button" class="btn-qty btn-qty-minus">-</button>
-                                        <input type="text" value='<%# Eval("Quantity") %>' readonly />
-                                        <button type="button" class="btn-qty btn-qty-plus">+</button>
-                                    </div>
-                                </div>
-                                <!-- Columna de Subtotal -->
-                                <div class="cart-subtotal" data-title="Sub-Total">
-                                    <%# Eval("SubTotal", "${0:0.00}") %>
-                                </div>
-                            </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
+                     <!-- Repeater para los items del carrito -->
+        <asp:Repeater ID="rptCartItems" runat="server" OnItemCommand="rptCartItems_ItemCommand">
+            <ItemTemplate>
+                <div class="cart-item">
+                    <!-- Columna de Producto -->
+                    <div class="cart-product">
+                        <asp:LinkButton runat="server" 
+                                        CommandName="Eliminar" 
+                                        CommandArgument='<%# Eval("idLineaCarrito") %>'
+                                        CssClass="remove-item"
+                                        OnClientClick="return confirm('¿Eliminar este producto del carrito?');">
+                            &times;
+                        </asp:LinkButton>
+                        <img src='<%# Eval("producto.imagenURL") %>' alt='<%# Eval("producto.nombre") %>' />
+                        <div class="product-info">
+                            <span class="product-title"><%# Eval("producto.nombre") %></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Columna de Precio -->
+                    <div class="cart-price" data-title="Precio">
+                        <%# Convert.ToDouble(Eval("precioConDescuento")) > 0 && Convert.ToDouble(Eval("precioConDescuento")) < Convert.ToDouble(Eval("producto.precio")) 
+                            ? "<span class='old-price'>$" + String.Format("{0:N2}", Eval("producto.precio")) + "</span><span class='current-price'>$" + String.Format("{0:N2}", Eval("precioConDescuento")) + "</span>"
+                            : "<span class='current-price'>$" + String.Format("{0:N2}", Eval("precioUnitario")) + "</span>" %>
+                    </div>
+                    
+                    <!-- Columna de Cantidad -->
+                    <div class="cart-quantity" data-title="Cantidad">
+                        <div class="quantity-selector">
+                            <asp:LinkButton runat="server" 
+                                            CommandName="Restar" 
+                                            CommandArgument='<%# Eval("idLineaCarrito") %>'
+                                            CssClass="btn-qty btn-qty-minus">
+                                -
+                            </asp:LinkButton>
+                            <input type="text" value='<%# Eval("cantidad") %>' readonly />
+                            <asp:LinkButton runat="server" 
+                                            CommandName="Sumar" 
+                                            CommandArgument='<%# Eval("idLineaCarrito") %>'
+                                            CssClass="btn-qty btn-qty-plus">
+                                +
+                            </asp:LinkButton>
+                        </div>
+                    </div>
+                    
+                    <!-- Columna de Subtotal -->
+                    <div class="cart-subtotal" data-title="Sub-Total">
+                        $<%# String.Format("{0:N2}", 
+                            (Convert.ToDouble(Eval("precioConDescuento")) > 0 
+                                ? Convert.ToDouble(Eval("precioConDescuento")) 
+                                : Convert.ToDouble(Eval("precioUnitario"))) 
+                            * Convert.ToInt32(Eval("cantidad"))) %>
+                    </div>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
 
                     <!-- Botones de Acción Debajo del Carrito -->
                     <div class="cart-actions">
@@ -221,31 +245,42 @@
             <!-- Columna Derecha: Resumen y Cupón -->
             <div class="col-lg-4">
                 <!-- Caja de Resumen -->
-                <div class="summary-box">
-                    <h3>Resumen de la compra</h3>
-                    <div class="summary-item">
-                        <span>Sub-total</span>
-                        <span>$95.00</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Envío</span>
-                        <span>Gratis</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Descuento</span>
-                        <span>$29.00</span>
-                    </div>
-                     <div class="summary-item">
-                        <span>Impuesto</span>
-                        <span>$17.10</span>
-                    </div>
-                    <div class="summary-total">
-                        <span>Total</span>
-                        <span>$112.10 USD</span>
-                    </div>
-                    <a href="Checkout.aspx" class="btn btn-proceed">PROCEDER AL PAGO <i class="arrow-right"></i></a>
-                </div>
+                    <asp:Panel ID="pnlResumen" runat="server" CssClass="summary-box">
+                        <h3>Resumen de la compra</h3>
+        
+                        <div class="summary-item">
+                            <span>Sub-total</span>
+                            <span>$<asp:Label ID="lblSubtotal" runat="server" Text="0.00"></asp:Label></span>
+                        </div>
+        
+                        <asp:Panel ID="pnlDescuento" runat="server" Visible="false" CssClass="summary-item">
+                            <span>Descuento</span>
+                            <span class="discount-amount">-$<asp:Label ID="lblDescuento" runat="server" Text="0.00"></asp:Label></span>
+                        </asp:Panel>
+        
+                        <div class="summary-item">
+                            <span>Impuesto (18%)</span>
+                            <span>$<asp:Label ID="lblImpuesto" runat="server" Text="0.00"></asp:Label></span>
+                        </div>
+        
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span>$<asp:Label ID="lblTotal" runat="server" Text="0.00"></asp:Label> USD</span>
+                        </div>
+        
+                        <asp:HyperLink ID="lnkCheckout" runat="server" NavigateUrl="~/Checkout.aspx" CssClass="btn btn-proceed">
+                            PROCEDER AL PAGO <i class="bi bi-arrow-right"></i>
+                        </asp:HyperLink>
+                    </asp:Panel>
 
+                    <!-- Mensaje si el carrito está vacío -->
+                    <asp:Panel ID="pnlResumenVacio" runat="server" Visible="false" CssClass="summary-box summary-empty">
+                        <i class="bi bi-cart-x"></i>
+                        <p>No hay productos en el carrito</p>
+                        <asp:HyperLink runat="server" NavigateUrl="~/Catalogo.aspx" CssClass="btn btn-primary">
+                            Ir a comprar
+                        </asp:HyperLink>
+                    </asp:Panel>
                 <!-- Caja de Cupón -->
                 <div class="coupon-box">
                     <h3>Código del cupón</h3>

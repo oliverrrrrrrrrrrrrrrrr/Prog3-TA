@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CampusStoreWeb.CampusStoreWS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,59 +10,150 @@ namespace CampusStoreWeb
 {
     public partial class Shopping_Car : System.Web.UI.Page
     {
+        public CarritoWSClient carritoWS;
+        public ClienteWSClient clienteWS;
+        private const decimal PORCENTAJE_IMPUESTO = 0.18m;
+
+        public Shopping_Car()
+        {
+            carritoWS = new CarritoWSClient();
+            clienteWS = new ClienteWSClient();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                BindCartData();
+                CargarCarrito();
             }
         }
 
-        private void BindCartData()
+        private void CargarCarrito()
         {
-            // En una aplicación real, esta lista vendría de una Sesión o Base de Datos.
-            // Para este ejemplo, usamos datos de prueba que coinciden con la imagen.
-            var cartItems = new List<ProductInCart>
+            try
             {
-                new ProductInCart
+                // Obtener el ID del cliente logueado
+                string cuenta = Page.User.Identity.Name;
+                int idCliente = clienteWS.buscarClientePorCuenta(cuenta).idCliente;
+
+                if (idCliente <= 0)
                 {
-                    ID = 1,
-                    Title = "El libro troll del Rubius",
-                    ImageUrl = "Images/libroTroll.jpg", // Asegúrate de que esta imagen exista
-                    OldPrice = 99.00m,
-                    CurrentPrice = 70.00m,
-                    Quantity = 1
-                },
-                new ProductInCart
-                {
-                    ID = 2,
-                    Title = "Tomatodo Azul - 1L",
-                    ImageUrl = "Images/tomatodo.webp", // Asegúrate de que esta imagen exista o usa un placeholder
-                    OldPrice = 0, // No tiene precio antiguo
-                    CurrentPrice = 25.00m,
-                    Quantity = 3
+                    MostrarCarritoVacio();
+                    return;
                 }
-            };
 
-            rptCartItems.DataSource = cartItems;
-            rptCartItems.DataBind();
+                var carrito = carritoWS.obtenerCarritoPorCliente(idCliente);
+
+                if (carrito != null && carrito.lineas != null && carrito.lineas.Length > 0)
+                {
+                    rptCartItems.DataSource = carrito.lineas;
+                    rptCartItems.DataBind();
+
+                    // Calcular resumen
+                    CalcularResumen(carrito);
+
+                    pnlResumen.Visible = true;
+                    pnlResumenVacio.Visible = false;
+                }
+                else
+                {
+                    MostrarCarritoVacio();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error: {ex.Message}");
+                MostrarCarritoVacio();
+            }
         }
-    }
 
-    // Clase auxiliar para representar un producto en el carrito
-    public class ProductInCart
-    {
-        public int ID { get; set; }
-        public string Title { get; set; }
-        public string ImageUrl { get; set; }
-        public decimal OldPrice { get; set; }
-        public decimal CurrentPrice { get; set; }
-        public int Quantity { get; set; }
-
-        // Propiedad calculada para el subtotal
-        public decimal SubTotal
+        private void MostrarCarritoVacio()
         {
-            get { return CurrentPrice * Quantity; }
+            rptCartItems.DataSource = null;
+            rptCartItems.DataBind();
+
+            pnlResumen.Visible = false;
+            pnlResumenVacio.Visible = true;
+        }
+
+        private void CalcularResumen(dynamic carrito)
+        {
+            // 1. Calcular subtotal (suma de todos los productos)
+            decimal subtotal = 0;
+            foreach (var linea in carrito.lineas)
+            {
+                decimal precioFinal = linea.precioConDescuento > 0
+                    ? (decimal)linea.precioConDescuento
+                    : (decimal)linea.precioUnitario;
+
+                subtotal += precioFinal * linea.cantidad;
+            }
+
+            lblSubtotal.Text = subtotal.ToString("N2");
+
+            // 2. Calcular descuento del cupón (si existe)
+            decimal descuento = 0;
+            if (carrito.cupon != null && carrito.cupon.activo)
+            {
+                descuento = subtotal * ((decimal)carrito.cupon.descuento / 100m);
+                lblDescuento.Text = descuento.ToString("N2");
+                pnlDescuento.Visible = true;
+            }
+            else
+            {
+                pnlDescuento.Visible = false;
+            }
+
+            // 3. Calcular subtotal después de descuento
+            decimal subtotalConDescuento = subtotal - descuento;
+
+            // 4. Calcular impuesto (sobre subtotal con descuento)
+            decimal impuesto = subtotalConDescuento * PORCENTAJE_IMPUESTO;
+            lblImpuesto.Text = impuesto.ToString("N2");
+
+            // 5. Calcular total final
+            decimal total = subtotalConDescuento + impuesto;
+            lblTotal.Text = total.ToString("N2");
+        }
+
+        protected void rptCartItems_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            int lineaCarritoId = Convert.ToInt32(e.CommandArgument);
+
+            try
+            {
+                switch (e.CommandName)
+                {
+                    case "Eliminar":
+                        // TODO
+                        bool resultado = true; //carritoWS.eliminarLineaCarrito(lineaCarritoId);
+                        if (resultado)
+                        {
+                            CargarCarrito();
+                            ScriptManager.RegisterStartupScript(this, GetType(), "mensaje",
+                                "alert('Producto eliminado del carrito');", true);
+                        }
+                        break;
+
+                    case "Sumar":
+                        // TODO
+                        //carritoWS.actualizarCantidadLinea(lineaCarritoId, 1);
+                        CargarCarrito();
+                        break;
+
+                    case "Restar":
+                        // TODO
+                        //carritoWS.actualizarCantidadLinea(lineaCarritoId, -1);
+                        CargarCarrito();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error: {ex.Message}");
+                ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                    "alert('Error al actualizar el carrito');", true);
+            }
         }
     }
 }
