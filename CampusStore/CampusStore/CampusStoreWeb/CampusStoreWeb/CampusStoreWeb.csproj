@@ -610,14 +610,13 @@
     <None Include="Connected Services\CampusStoreWS\UsuarioWS.xsd">
       <SubType>Designer</SubType>
     </None>
-<<<<<<< Updated upstream
-=======
+
     <None Include="Connected Services\CarritoWS\CarritoWS.wsdl" />
     <None Include="Connected Services\CarritoWS\CarritoWS.xsd">
       <SubType>Designer</SubType>
     </None>
     <Content Include="Images\merchandise_Peluche_Pokemon_totodile.webp" />
->>>>>>> Stashed changes
+
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <None Include="Web.Debug.config">
