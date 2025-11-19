@@ -248,4 +248,29 @@ public class OrdenCompraDAOImpl extends BaseDAO<OrdenCompra> implements OrdenCom
             }
         });
     }
+
+    @Override
+    public int cancelarOrdenesExpiradas() {
+        return ejecutarComando(conn -> {
+            try {
+                String sql = "{call cancelarOrdenesExpiradas()}";
+                CallableStatement cmd = conn.prepareCall(sql);
+                
+                ResultSet rs = cmd.executeQuery();
+                
+                int ordenesCanceladas = 0;
+                if (rs.next()) {
+                    ordenesCanceladas = rs.getInt("ordenesCanceladas");
+                }
+                
+                rs.close();
+                cmd.close();
+                
+                return ordenesCanceladas;
+            } catch (SQLException e) {
+                System.err.println("Error al cancelar órdenes expiradas: " + e.getMessage());
+                return 0;
+            }
+        });
+    }
 }

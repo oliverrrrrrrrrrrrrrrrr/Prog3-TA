@@ -9,4 +9,5 @@ public interface OrdenCompraBO extends Gestionable<OrdenCompra>{
     int contarProductosCarrito(int idCarrito);
     List<LineaCarrito> listarArticulosCarrito(int idCarrito);
     List<LineaCarrito> listarLibrosCarrito(int idCarrito);
+    int cancelarOrdenesExpiradas();
 }

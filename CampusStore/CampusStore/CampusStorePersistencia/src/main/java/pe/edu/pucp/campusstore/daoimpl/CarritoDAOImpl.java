@@ -20,7 +20,11 @@ public class CarritoDAOImpl extends TransaccionalBaseDAO<Carrito> implements Car
         
         String sql = "{call insertarCarrito(?, ?, ?)}";
         CallableStatement cmd = conn.prepareCall(sql);
-        cmd.setInt("p_idCupon", modelo.getCupon().getIdCupon());
+        if(modelo.getCupon() != null && modelo.getCupon().getIdCupon() != null){
+            cmd.setInt("p_idCupon", modelo.getCupon().getIdCupon());
+        }else{
+            cmd.setNull("p_idCupon", Types.INTEGER);
+        }
         if(modelo.getCliente() != null){
                 cmd.setInt("p_idCliente", modelo.getCliente().getIdCliente());
         }else{
@@ -39,7 +43,11 @@ public class CarritoDAOImpl extends TransaccionalBaseDAO<Carrito> implements Car
         
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setBoolean("p_completado", modelo.getCompletado());
-        cmd.setInt("p_idCupon", modelo.getCupon().getIdCupon());
+        if(modelo.getCupon() != null && modelo.getCupon().getIdCupon() != null){
+            cmd.setInt("p_idCupon", modelo.getCupon().getIdCupon());
+        }else{
+            cmd.setNull("p_idCupon", Types.INTEGER);
+        }
         if(modelo.getCliente() != null){
                 cmd.setInt("p_idCliente", modelo.getCliente().getIdCliente());
         }else{

@@ -295,7 +295,11 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerCarritoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+<<<<<<< HEAD
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.leerAutoresPorLibroResponse.datasource">
+=======
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.cancelarOrdenesExpiradasResponse.datasource">
+>>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\CampusStoreWS\CarritoWS.wsdl" />
@@ -338,11 +342,15 @@
     <Content Include="GestionarLibros.aspx" />
     <Content Include="GestionarOrdenesCompra.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\790-2-424x454.png" />
     <Content Include="Images\carrito.png" />
+    <Content Include="Images\chain 2.png" />
+    <Content Include="Images\cuaderno-anillado-top-carta-rayado-solido-100-hojas-73809-default-1.png" />
     <Content Include="Images\diarioGreg.png" />
     <Content Include="Images\libro.png" />
     <Content Include="Images\libroTroll.jpg" />
     <Content Include="Images\perritoLobotomizado.png" />
+    <Content Include="Images\pngtree-some-books-without-bckground-png-image_20337382.png" />
     <Content Include="Images\ralseiPeluche.jpg" />
     <Content Include="Images\thegreft.png" />
     <Content Include="Images\undertale.png" />
@@ -609,6 +617,13 @@
     <None Include="Connected Services\CampusStoreWS\UsuarioWS.xsd">
       <SubType>Designer</SubType>
     </None>
+
+    <None Include="Connected Services\CarritoWS\CarritoWS.wsdl" />
+    <None Include="Connected Services\CarritoWS\CarritoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Images\merchandise_Peluche_Pokemon_totodile.webp" />
+
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <None Include="Web.Debug.config">

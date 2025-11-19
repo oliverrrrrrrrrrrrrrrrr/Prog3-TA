@@ -58,5 +58,10 @@ public class OrdenCompraBOImpl implements OrdenCompraBO{
     public List<LineaCarrito> listarLibrosCarrito(int idCarrito) {
         return ordenCompraDAO.listarLibrosCarrito(idCarrito);
     }
+
+    @Override
+    public int cancelarOrdenesExpiradas() {
+        return ordenCompraDAO.cancelarOrdenesExpiradas();
+    }
     
 }

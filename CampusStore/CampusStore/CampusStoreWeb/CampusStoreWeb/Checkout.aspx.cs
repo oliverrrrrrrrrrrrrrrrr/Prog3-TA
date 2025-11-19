@@ -13,6 +13,8 @@ namespace CampusStoreWeb
         public CarritoWSClient carritoWS;
         public ClienteWSClient clienteWS;
         public OrdenCompraWSClient ordenCompraWS;
+        public LibroWSClient libroWS;
+        public ArticuloWSClient articuloWS;
         private const decimal PORCENTAJE_IMPUESTO = 0.18m;
 
         public Checkout()
@@ -20,6 +22,8 @@ namespace CampusStoreWeb
             carritoWS = new CarritoWSClient();
             clienteWS = new ClienteWSClient();
             ordenCompraWS = new OrdenCompraWSClient();
+            libroWS = new LibroWSClient();
+            articuloWS = new ArticuloWSClient();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -85,6 +89,7 @@ namespace CampusStoreWeb
 
                 // Debug: Verificar que se obtuvo el carrito
                 System.Diagnostics.Debug.WriteLine($"Carrito obtenido - ID: {carrito?.idCarrito}");
+                System.Diagnostics.Debug.WriteLine($"Carrito completado: {carrito?.completado}");
                 System.Diagnostics.Debug.WriteLine($"Líneas del carrito: {carrito?.lineas?.Length ?? 0}");
 
                 if (carrito != null && carrito.lineas != null && carrito.lineas.Length > 0)
@@ -95,21 +100,42 @@ namespace CampusStoreWeb
                         System.Diagnostics.Debug.WriteLine($"  - Producto: {linea.producto?.nombre}, Cantidad: {linea.cantidad}");
                     }
 
-                    // 1. Cargar productos en el repeater
+                    // 1. Verificar si el carrito está completado, si no, crear orden y marcarlo como completado
+                    bool ordenCreada = false;
+                    bool ordenYaExistia = false;
+                    
+                    if (!carrito.completado)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Carrito no completado, generando orden de compra...");
+                        var resultado = GenerarOrdenCompra(idCliente, carrito);
+                        ordenCreada = resultado.Item1;
+                        ordenYaExistia = resultado.Item2;
+                        
+                        // Recargar el carrito para obtener los datos actualizados
+                        carrito = carritoWS.obtenerCarritoPorCliente(idCliente);
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Carrito ya completado, no se genera nueva orden");
+                        ordenYaExistia = true;
+                    }
+
+                    // 2. Mostrar mensaje según la situación
+                    MostrarMensaje(ordenCreada, ordenYaExistia);
+
+                    // 3. Cargar productos en el repeater
                     rptDetalleOrden.DataSource = carrito.lineas;
                     rptDetalleOrden.DataBind();
 
                     System.Diagnostics.Debug.WriteLine("Repeater data bound exitosamente");
 
-                    // 2. Actualizar labels del resumen
+                    // 4. Actualizar labels del resumen
                     ActualizarLabelsResumen(carrito);
-
-                    // 3. Generar orden de compra
-                    GenerarOrdenCompra(idCliente, carrito);
                 }
                 else
                 {
                     System.Diagnostics.Debug.WriteLine("Carrito vacío o nulo");
+                    MostrarMensajeError("Tu carrito está vacío. Agrega productos antes de proceder al pago.");
                     MostrarCarritoVacio();
                 }
             }
@@ -168,10 +194,20 @@ namespace CampusStoreWeb
             }
         }
 
-        private void GenerarOrdenCompra(int idCliente, dynamic carrito)
+        private System.Tuple<bool, bool> GenerarOrdenCompra(int idCliente, dynamic carrito)
         {
+            bool ordenCreada = false;
+            bool ordenYaExistia = false;
+            
             try
             {
+                // Verificar si el carrito ya está completado
+                if (carrito.completado)
+                {
+                    System.Diagnostics.Debug.WriteLine("El carrito ya está completado, no se genera nueva orden");
+                    return new System.Tuple<bool, bool>(false, true);
+                }
+
                 // Calcular totales
                 decimal subtotal = 0;
                 decimal subtotalSinDescuento = 0;
@@ -236,10 +272,10 @@ namespace CampusStoreWeb
                 }
 
                 ordenCompra.total = totalDouble;
-                ordenCompra.totalSpecified = true; // ✅ IMPORTANTE
+                ordenCompra.totalSpecified = true;
 
                 ordenCompra.totalDescontado = totalDescontadoDouble;
-                ordenCompra.totalDescontadoSpecified = true; // ✅ IMPORTANTE
+                ordenCompra.totalDescontadoSpecified = true;
 
                 // Estado
                 ordenCompra.estado = estadoOrden.NO_PAGADO;
@@ -250,22 +286,253 @@ namespace CampusStoreWeb
                 System.Diagnostics.Debug.WriteLine($"Cliente ID: {ordenCompra.cliente?.idCliente ?? 0}");
                 System.Diagnostics.Debug.WriteLine($"Carrito ID: {ordenCompra.carrito?.idCarrito ?? 0}");
                 System.Diagnostics.Debug.WriteLine($"Fecha creación: {ordenCompra.fechaCreacion}");
-                System.Diagnostics.Debug.WriteLine($"Fecha creación Specified: {ordenCompra.fechaCreacionSpecified}");
                 System.Diagnostics.Debug.WriteLine($"Límite pago: {ordenCompra.limitePago}");
-                System.Diagnostics.Debug.WriteLine($"Límite pago Specified: {ordenCompra.limitePagoSpecified}");
                 System.Diagnostics.Debug.WriteLine($"Total: {ordenCompra.total}");
-                System.Diagnostics.Debug.WriteLine($"Total Specified: {ordenCompra.totalSpecified}");
                 System.Diagnostics.Debug.WriteLine($"Total Descontado: {ordenCompra.totalDescontado}");
-                System.Diagnostics.Debug.WriteLine($"Total Descontado Specified: {ordenCompra.totalDescontadoSpecified}");
                 System.Diagnostics.Debug.WriteLine($"Estado: {ordenCompra.estado}");
-                System.Diagnostics.Debug.WriteLine($"Estado Specified: {ordenCompra.estadoSpecified}");
 
+                // Guardar la orden de compra
+                try
+                {
+                    ordenCompraWS.guardarOrdenCompra(ordenCompra, estado.Nuevo);
+                    System.Diagnostics.Debug.WriteLine("Orden de compra creada exitosamente");
+                    ordenCreada = true;
+
+                    var lineasCarrito = carrito.lineas as lineaCarrito[];
+                    DescontarStockVirtual(lineasCarrito ?? Array.Empty<lineaCarrito>());
+
+                    // Marcar el carrito como completado
+                    carrito.completado = true;
+                    carritoWS.guardarCarrito(carrito, estado.Modificado);
+                    System.Diagnostics.Debug.WriteLine("Carrito marcado como completado");
+                }
+                catch (Exception exOrden)
+                {
+                    // Si ya existe una orden para este carrito, el procedimiento lanzará un error
+                    // En ese caso, simplemente marcamos el carrito como completado si no lo está
+                    System.Diagnostics.Debug.WriteLine($"Error al crear orden (puede que ya exista): {exOrden.Message}");
+                    ordenYaExistia = true;
+                    
+                    // Intentar marcar el carrito como completado de todas formas
+                    try
+                    {
+                        if (!carrito.completado)
+                        {
+                            carrito.completado = true;
+                            carritoWS.guardarCarrito(carrito, estado.Modificado);
+                            System.Diagnostics.Debug.WriteLine("Carrito marcado como completado después de error");
+                        }
+                    }
+                    catch (Exception exCarrito)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Error al marcar carrito como completado: {exCarrito.Message}");
+                    }
+                }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error generando orden: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
                 // No lanzar excepción aquí para que no afecte la visualización
             }
+            
+            return new System.Tuple<bool, bool>(ordenCreada, ordenYaExistia);
+        }
+
+        private void DescontarStockVirtual(lineaCarrito[] lineas)
+        {
+            if (lineas == null || lineas.Length == 0) return;
+
+            foreach (var linea in lineas)
+            {
+                if (linea == null || linea.cantidad <= 0)
+                    continue;
+
+                try
+                {
+                    switch (linea.tipoProducto)
+                    {
+                        case tipoProducto.LIBRO:
+                            DescontarStockLibro(linea);
+                            break;
+                        case tipoProducto.ARTICULO:
+                            DescontarStockArticulo(linea);
+                            break;
+                        default:
+                            System.Diagnostics.Debug.WriteLine($"Tipo de producto no soportado para descuento de stock: {linea.tipoProducto}");
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Error descontando stock virtual para la línea {linea.idLineaCarrito}: {ex.Message}");
+                }
+            }
+        }
+
+        private void DescontarStockLibro(lineaCarrito linea)
+        {
+            var productoLibro = linea.producto as libro;
+            int idLibro = productoLibro?.idLibro ?? ObtenerIdProducto(linea.producto, "idLibro");
+
+            if (idLibro <= 0)
+            {
+                System.Diagnostics.Debug.WriteLine("No se pudo determinar el ID del libro para descontar stock virtual.");
+                return;
+            }
+
+            var libroActual = libroWS.obtenerLibro(idLibro);
+            if (libroActual == null)
+            {
+                System.Diagnostics.Debug.WriteLine($"No se encontró el libro con ID {idLibro} para actualizar stock virtual.");
+                return;
+            }
+
+            int stockAnterior = libroActual.stockVirtual;
+            int nuevoStock = Math.Max(0, stockAnterior - linea.cantidad);
+            libroActual.stockVirtual = nuevoStock;
+            libroActual.stockVirtualSpecified = true;
+            libroActual.idLibroSpecified = true;
+
+            PrepararProductoParaGuardado(libroActual);
+
+            libroWS.guardarLibro(libroActual, estado.Modificado);
+            System.Diagnostics.Debug.WriteLine($"Libro ID {idLibro}: stock virtual {stockAnterior} -> {nuevoStock}");
+        }
+
+        private void DescontarStockArticulo(lineaCarrito linea)
+        {
+            var productoArticulo = linea.producto as articulo;
+            int idArticulo = productoArticulo?.idArticulo ?? ObtenerIdProducto(linea.producto, "idArticulo");
+
+            if (idArticulo <= 0)
+            {
+                System.Diagnostics.Debug.WriteLine("No se pudo determinar el ID del artículo para descontar stock virtual.");
+                return;
+            }
+
+            var articuloActual = articuloWS.obtenerArticulo(idArticulo);
+            if (articuloActual == null)
+            {
+                System.Diagnostics.Debug.WriteLine($"No se encontró el artículo con ID {idArticulo} para actualizar stock virtual.");
+                return;
+            }
+
+            int stockAnterior = articuloActual.stockVirtual;
+            int nuevoStock = Math.Max(0, stockAnterior - linea.cantidad);
+            articuloActual.stockVirtual = nuevoStock;
+            articuloActual.stockVirtualSpecified = true;
+            articuloActual.idArticuloSpecified = true;
+
+            PrepararProductoParaGuardado(articuloActual);
+
+            articuloWS.guardarArticulo(articuloActual, estado.Modificado);
+            System.Diagnostics.Debug.WriteLine($"Artículo ID {idArticulo}: stock virtual {stockAnterior} -> {nuevoStock}");
+        }
+
+        private int ObtenerIdProducto(object producto, string propertyName)
+        {
+            if (producto == null || string.IsNullOrEmpty(propertyName))
+            {
+                return 0;
+            }
+
+            try
+            {
+                var property = producto.GetType().GetProperty(propertyName);
+                if (property == null)
+                {
+                    return 0;
+                }
+
+                var value = property.GetValue(producto);
+                if (value is int idInt)
+                {
+                    return idInt;
+                }
+
+                if (value != null && int.TryParse(value.ToString(), out int parsed))
+                {
+                    return parsed;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"No se pudo obtener la propiedad {propertyName} del producto: {ex.Message}");
+            }
+
+            return 0;
+        }
+
+        private void PrepararProductoParaGuardado(producto productoBase)
+        {
+            if (productoBase == null)
+            {
+                return;
+            }
+
+            productoBase.precioSpecified = true;
+
+            if (!productoBase.precioDescuentoSpecified)
+            {
+                productoBase.precioDescuento = 0;
+                productoBase.precioDescuentoSpecified = true;
+            }
+
+            productoBase.stockRealSpecified = true;
+            productoBase.stockVirtualSpecified = true;
+
+            if (productoBase is libro libroProd)
+            {
+                if (!libroProd.precioDescuentoSpecified)
+                {
+                    libroProd.precioDescuento = 0;
+                    libroProd.precioDescuentoSpecified = true;
+                }
+            }
+            else if (productoBase is articulo articuloProd)
+            {
+                if (!articuloProd.precioDescuentoSpecified)
+                {
+                    articuloProd.precioDescuento = 0;
+                    articuloProd.precioDescuentoSpecified = true;
+                }
+            }
+        }
+
+        private void MostrarMensaje(bool ordenCreada, bool ordenYaExistia)
+        {
+            pnlMensaje.Visible = true;
+            
+            if (ordenCreada)
+            {
+                // Orden creada exitosamente
+                pnlMensaje.CssClass = "alert-message alert-success";
+                iconMensaje.CssClass = "bi bi-check-circle-fill";
+                lblMensaje.Text = "<strong>¡Orden de compra generada exitosamente!</strong> Tu pedido ha sido procesado y está pendiente de pago. Tienes 48 horas para realizar el pago.";
+            }
+            else if (ordenYaExistia)
+            {
+                // Orden ya existía
+                pnlMensaje.CssClass = "alert-message alert-info";
+                iconMensaje.CssClass = "bi bi-info-circle-fill";
+                lblMensaje.Text = "<strong>Orden de compra existente.</strong> Ya tienes una orden de compra generada para este carrito. Procede con el pago cuando estés listo.";
+            }
+            else
+            {
+                // Error al crear orden
+                pnlMensaje.CssClass = "alert-message alert-warning";
+                iconMensaje.CssClass = "bi bi-exclamation-triangle-fill";
+                lblMensaje.Text = "<strong>Atención:</strong> Hubo un problema al generar la orden de compra. Por favor, intenta nuevamente.";
+            }
+        }
+
+        private void MostrarMensajeError(string mensaje)
+        {
+            pnlMensaje.Visible = true;
+            pnlMensaje.CssClass = "alert-message alert-danger";
+            iconMensaje.CssClass = "bi bi-x-circle-fill";
+            lblMensaje.Text = $"<strong>Error:</strong> {mensaje}";
         }
 
         private void MostrarCarritoVacio()

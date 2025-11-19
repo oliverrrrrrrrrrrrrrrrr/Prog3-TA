@@ -79,4 +79,9 @@ public class OrdenCompraWS {
     ) {
         return this.ordenCompraBO.listarLibrosCarrito(idCarrito);
     }
+
+    @WebMethod(operationName = "cancelarOrdenesExpiradas")
+    public int cancelarOrdenesExpiradas() {
+        return this.ordenCompraBO.cancelarOrdenesExpiradas();
+    }
 }

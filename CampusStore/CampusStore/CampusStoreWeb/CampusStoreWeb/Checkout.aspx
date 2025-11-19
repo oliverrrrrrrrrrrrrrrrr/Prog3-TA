@@ -97,12 +97,16 @@
             color: #2DA5F3;
         }
 
-        .products-header {
+        .checkout-products {
+            padding: 0;
+        }
+
+        .products-title {
             padding: 20px 24px;
             border-bottom: 1px solid #E4E7E9;
         }
 
-        .products-header h5 {
+        .products-title h5 {
             margin: 0;
             font-size: 16px;
             font-weight: 600;
@@ -112,6 +116,95 @@
         .product-count {
             color: #475156;
             font-weight: 400;
+        }
+
+        .products-header {
+            display: grid;
+            grid-template-columns: 2fr 100px 120px 120px;
+            gap: 16px;
+            padding: 16px 24px;
+            background-color: #F2F4F5;
+            border-bottom: 1px solid #E4E7E9;
+            font-size: 12px;
+            font-weight: 600;
+            color: #475156;
+            text-transform: uppercase;
+        }
+
+        .header-producto {
+            grid-column: 1;
+        }
+
+        .header-cantidad {
+            grid-column: 2;
+            text-align: center;
+        }
+
+        .header-precio {
+            grid-column: 3;
+            text-align: right;
+        }
+
+        .header-subtotal {
+            grid-column: 4;
+            text-align: right;
+        }
+
+        .product-row {
+            display: grid;
+            grid-template-columns: 2fr 100px 120px 120px;
+            gap: 16px;
+            padding: 20px 24px;
+            border-bottom: 1px solid #E4E7E9;
+            align-items: center;
+        }
+
+        .product-row:last-child {
+            border-bottom: none;
+        }
+
+        .product-row .product-info {
+            grid-column: 1;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .product-row .product-info img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border: 1px solid #E4E7E9;
+            border-radius: 4px;
+        }
+
+        .product-row .product-info .product-name {
+            font-size: 14px;
+            color: #191C1F;
+            font-weight: 500;
+        }
+
+        .product-row .product-quantity {
+            grid-column: 2;
+            text-align: center;
+            font-size: 14px;
+            color: #191C1F;
+        }
+
+        .product-row .product-price {
+            grid-column: 3;
+            text-align: right;
+            font-size: 14px;
+            color: #191C1F;
+            font-weight: 500;
+        }
+
+        .product-row .product-subtotal {
+            grid-column: 4;
+            text-align: right;
+            font-size: 14px;
+            color: #191C1F;
+            font-weight: 600;
         }
 
         .table-custom {
@@ -282,6 +375,46 @@
         .order-header div:nth-child(5) {
             text-align: right;
         }
+
+        /* Estilos para mensajes de alerta */
+        .alert-message {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background-color: #D4EDDA;
+            color: #155724;
+            border: 1px solid #C3E6CB;
+        }
+
+        .alert-info {
+            background-color: #D1ECF1;
+            color: #0C5460;
+            border: 1px solid #BEE5EB;
+        }
+
+        .alert-warning {
+            background-color: #FFF3CD;
+            color: #856404;
+            border: 1px solid #FFEAA7;
+        }
+
+        .alert-danger {
+            background-color: #F8D7DA;
+            color: #721C24;
+            border: 1px solid #F5C6CB;
+        }
+
+        .alert-message i {
+            font-size: 20px;
+        }
     </style>
 </asp:Content>
 
@@ -299,6 +432,12 @@
         <!-- Left Column - Order Details -->
         <div class="col-lg-7 mb-4">
             <div class="order-details-container">
+                <!-- Mensaje de alerta -->
+                <asp:Panel ID="pnlMensaje" runat="server" CssClass="alert-message" Visible="false">
+                    <asp:Label ID="iconMensaje" runat="server" CssClass="bi"></asp:Label>
+                    <asp:Label ID="lblMensaje" runat="server"></asp:Label>
+                </asp:Panel>
+
                 <!-- Header -->
                 <div class="order-details-header">
                     <a href="Shopping_Car.aspx" class="back-button">

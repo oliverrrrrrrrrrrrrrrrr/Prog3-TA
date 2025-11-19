@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/AutorWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+<<<<<<< HEAD
   <message name="listarAutores">
     <part name="parameters" element="tns:listarAutores" />
   </message>
@@ -13,6 +14,10 @@
   </message>
   <message name="guardarAutor">
     <part name="parameters" element="tns:guardarAutor" />
+=======
+  <message name="eliminarAutor">
+    <part name="parameters" element="tns:eliminarAutor" />
+>>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
   </message>
   <message name="guardarAutorResponse">
     <part name="parameters" element="tns:guardarAutorResponse" />
@@ -23,6 +28,7 @@
   <message name="obtenerAutorResponse">
     <part name="parameters" element="tns:obtenerAutorResponse" />
   </message>
+<<<<<<< HEAD
   <message name="eliminarAutor">
     <part name="parameters" element="tns:eliminarAutor" />
   </message>
@@ -37,18 +43,67 @@
     <operation name="guardarAutor">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorRequest" message="tns:guardarAutor" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorResponse" message="tns:guardarAutorResponse" />
+=======
+  <message name="listarAutores">
+    <part name="parameters" element="tns:listarAutores" />
+  </message>
+  <message name="listarAutoresResponse">
+    <part name="parameters" element="tns:listarAutoresResponse" />
+  </message>
+  <message name="guardarAutor">
+    <part name="parameters" element="tns:guardarAutor" />
+  </message>
+  <message name="guardarAutorResponse">
+    <part name="parameters" element="tns:guardarAutorResponse" />
+  </message>
+  <portType name="AutorWS">
+    <operation name="eliminarAutor">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest" message="tns:eliminarAutor" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse" message="tns:eliminarAutorResponse" />
+>>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
     </operation>
     <operation name="obtenerAutor">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorRequest" message="tns:obtenerAutor" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorResponse" message="tns:obtenerAutorResponse" />
     </operation>
+<<<<<<< HEAD
     <operation name="eliminarAutor">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest" message="tns:eliminarAutor" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse" message="tns:eliminarAutorResponse" />
+=======
+    <operation name="listarAutores">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresRequest" message="tns:listarAutores" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresResponse" message="tns:listarAutoresResponse" />
+    </operation>
+    <operation name="guardarAutor">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorRequest" message="tns:guardarAutor" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorResponse" message="tns:guardarAutorResponse" />
+>>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
     </operation>
   </portType>
   <binding name="AutorWSPortBinding" type="tns:AutorWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+<<<<<<< HEAD
+=======
+    <operation name="eliminarAutor">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerAutor">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+>>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
     <operation name="listarAutores">
       <soap:operation soapAction="" />
       <input>
@@ -59,6 +114,7 @@
       </output>
     </operation>
     <operation name="guardarAutor">
+<<<<<<< HEAD
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -68,6 +124,8 @@
       </output>
     </operation>
     <operation name="obtenerAutor">
+=======
+>>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

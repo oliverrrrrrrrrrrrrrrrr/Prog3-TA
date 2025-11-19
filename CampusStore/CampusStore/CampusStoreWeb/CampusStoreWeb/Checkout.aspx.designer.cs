@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
-// <generado automáticamente>
-//     Este código fue generado por una herramienta.
+// <generado automï¿½ticamente>
+//     Este cï¿½digo fue generado por una herramienta.
 //
-//     Los cambios en este archivo podrían causar un comportamiento incorrecto y se perderán si
-//     se vuelve a generar el código. 
-// </generado automáticamente>
+//     Los cambios en este archivo podrï¿½an causar un comportamiento incorrecto y se perderï¿½n si
+//     se vuelve a generar el cï¿½digo. 
+// </generado automï¿½ticamente>
 //------------------------------------------------------------------------------
 
 namespace CampusStoreWeb
@@ -15,11 +15,38 @@ namespace CampusStoreWeb
     {
 
         /// <summary>
+        /// Control pnlMensaje.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automticamente.
+        /// Para modificarlo, mueva la declaracin del campo del archivo del diseador al archivo de cdigo subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlMensaje;
+
+        /// <summary>
+        /// Control iconMensaje.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automticamente.
+        /// Para modificarlo, mueva la declaracin del campo del archivo del diseador al archivo de cdigo subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label iconMensaje;
+
+        /// <summary>
+        /// Control lblMensaje.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automticamente.
+        /// Para modificarlo, mueva la declaracin del campo del archivo del diseador al archivo de cdigo subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensaje;
+
+        /// <summary>
         /// Control lblOrderId.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOrderId;
 
@@ -27,8 +54,8 @@ namespace CampusStoreWeb
         /// Control lblProductCount.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblProductCount;
 
@@ -36,8 +63,8 @@ namespace CampusStoreWeb
         /// Control lblOrderDate.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOrderDate;
 
@@ -45,8 +72,8 @@ namespace CampusStoreWeb
         /// Control lblOrderTotal.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOrderTotal;
 
@@ -54,8 +81,8 @@ namespace CampusStoreWeb
         /// Control lblProductCountHeader.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblProductCountHeader;
 
@@ -63,8 +90,8 @@ namespace CampusStoreWeb
         /// Control rptDetalleOrden.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptDetalleOrden;
 
@@ -72,8 +99,8 @@ namespace CampusStoreWeb
         /// Control btnProceedPayment.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnProceedPayment;
     }

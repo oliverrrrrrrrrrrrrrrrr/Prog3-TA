@@ -11,4 +11,5 @@ public interface OrdenCompraDAO extends Persistible<OrdenCompra, Integer> {
     int contarProductosCarrito(Integer idCarrito);
     List<LineaCarrito> listarArticulosCarrito(Integer idCarrito);
     List<LineaCarrito> listarLibrosCarrito(Integer idCarrito);
+    int cancelarOrdenesExpiradas();
 }

@@ -7,15 +7,18 @@
   </types>
   <message name="listarResenas">
     <part name="parameters" element="tns:listarResenas" />
+<<<<<<< HEAD
   </message>
   <message name="listarResenasResponse">
     <part name="parameters" element="tns:listarResenasResponse" />
   </message>
   <message name="guardarResena">
     <part name="parameters" element="tns:guardarResena" />
+=======
+>>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
   </message>
-  <message name="guardarResenaResponse">
-    <part name="parameters" element="tns:guardarResenaResponse" />
+  <message name="listarResenasResponse">
+    <part name="parameters" element="tns:listarResenasResponse" />
   </message>
   <message name="obtenerResena">
     <part name="parameters" element="tns:obtenerResena" />
@@ -23,6 +26,15 @@
   <message name="obtenerResenaResponse">
     <part name="parameters" element="tns:obtenerResenaResponse" />
   </message>
+<<<<<<< HEAD
+=======
+  <message name="guardarResena">
+    <part name="parameters" element="tns:guardarResena" />
+  </message>
+  <message name="guardarResenaResponse">
+    <part name="parameters" element="tns:guardarResenaResponse" />
+  </message>
+>>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
   <message name="eliminarResena">
     <part name="parameters" element="tns:eliminarResena" />
   </message>
@@ -33,15 +45,25 @@
     <operation name="listarResenas">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasRequest" message="tns:listarResenas" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasResponse" message="tns:listarResenasResponse" />
+<<<<<<< HEAD
     </operation>
     <operation name="guardarResena">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResenaRequest" message="tns:guardarResena" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResenaResponse" message="tns:guardarResenaResponse" />
+=======
+>>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
     </operation>
     <operation name="obtenerResena">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerResenaRequest" message="tns:obtenerResena" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerResenaResponse" message="tns:obtenerResenaResponse" />
     </operation>
+<<<<<<< HEAD
+=======
+    <operation name="guardarResena">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResenaRequest" message="tns:guardarResena" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResenaResponse" message="tns:guardarResenaResponse" />
+    </operation>
+>>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
     <operation name="eliminarResena">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/eliminarResenaRequest" message="tns:eliminarResena" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/eliminarResenaResponse" message="tns:eliminarResenaResponse" />
@@ -50,6 +72,7 @@
   <binding name="ResenaWSPortBinding" type="tns:ResenaWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <operation name="listarResenas">
+<<<<<<< HEAD
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -59,6 +82,8 @@
       </output>
     </operation>
     <operation name="guardarResena">
+=======
+>>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -76,6 +101,18 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< HEAD
+=======
+    <operation name="guardarResena">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+>>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
     <operation name="eliminarResena">
       <soap:operation soapAction="" />
       <input>

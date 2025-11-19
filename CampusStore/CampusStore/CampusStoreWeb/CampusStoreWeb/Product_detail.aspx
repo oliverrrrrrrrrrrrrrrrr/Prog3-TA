@@ -72,8 +72,8 @@
                         <asp:Panel ID="pnlAutor" runat="server" Visible="false">
                             <strong>Autor:</strong> <asp:Label ID="lblAutor" runat="server"></asp:Label> <br />
                         </asp:Panel>
-                        <strong>Availability:</strong> <asp:Label ID="lblDisponibilidad" runat="server" CssClass="stock-status"></asp:Label> <br />
-                        <strong>Category:</strong> <asp:Label ID="lblCategoria" runat="server"></asp:Label>
+                        <strong>Disponibilidad:</strong> <asp:Label ID="lblDisponibilidad" runat="server" CssClass="stock-status"></asp:Label> <br />
+                        <strong>Categoria:</strong> <asp:Label ID="lblCategoria" runat="server"></asp:Label>
                     </div>
 
                     <div class="product-price-block">
@@ -85,13 +85,16 @@
                     </div>
 
                     <div class="action-buttons-container">
+                        <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="alert alert-dismissible fade show" Style="display:none;">
+                            <asp:Label ID="lblAlertMessage" runat="server"></asp:Label>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </asp:Panel>
                         <div class="qty-selector">
                             <button type="button" class="qty-btn" onclick="updateQty(-1)">-</button>
                             <asp:TextBox ID="txtCantidad" runat="server" Text="1" CssClass="qty-input" onchange="validateQty()"></asp:TextBox>
                             <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
                         </div>
                         <asp:Button ID="btnAddToCart" runat="server" Text="ADD TO CART" OnClick="btnAddToCart_Click" CssClass="btn-orange-solid" />
-                        <asp:Button ID="btnBuyNow" runat="server" Text="BUY NOW" OnClick="btnBuyNow_Click" CssClass="btn-orange-outline" />
                     </div>
                 </div>
             </div>
@@ -103,10 +106,10 @@
                 <div class="custom-tabs">
                     <ul class="nav nav-tabs" id="productTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description-pane" type="button" role="tab">DESCRIPTION</button>
+                            <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description-pane" type="button" role="tab">DESCRIPCION</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review-pane" type="button" role="tab">REVIEW</button>
+                            <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review-pane" type="button" role="tab">RESEÑA</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="productTabContent">
