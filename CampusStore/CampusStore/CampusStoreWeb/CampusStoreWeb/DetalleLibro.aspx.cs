@@ -54,7 +54,7 @@ namespace CampusStoreWeb
                     {
                         libroActual = libroWS.obtenerLibro(idLibroActual);
 
-                        if(libroActual != null)
+                        if (libroActual != null)
                         {
                             ViewState["idLibro"] = idLibroActual;
                             MostrarDatosLibro();
@@ -118,8 +118,8 @@ namespace CampusStoreWeb
 
             lblSinopsis.Text = libroActual.sinopsis ?? "Sin sinopsis disponible.";
             lblDescripcion.Text = libroActual.descripcion ?? "Sin descripción disponible.";
-            imgLibro.ImageUrl=libroActual.imagenURL;
-            
+            imgLibro.ImageUrl = libroActual.imagenURL;
+
             ConfigurarStockBadge(libroActual.stockReal, libroActual.stockVirtual);
 
         }
@@ -403,6 +403,7 @@ namespace CampusStoreWeb
 
         private void CargarFormularioEdicion()
         {
+            
             txtNombre.Text = libroActual.nombre;
             txtPrecioUnitario.Text = libroActual.precio.ToString("F2");
             txtPrecioConDescuento.Text = libroActual.precioDescuento.ToString("F2");
@@ -444,18 +445,32 @@ namespace CampusStoreWeb
                     libro libroEditado = new libro
                     {
                         idLibro = idLibroActual,
+                        idLibroSpecified = true,
                         nombre = txtNombre.Text.Trim(),
                         precio = double.Parse(txtPrecioUnitario.Text),
+                        precioSpecified= true,
                         precioDescuento = double.Parse(txtPrecioConDescuento.Text),
+                        precioDescuentoSpecified= true,
                         stockReal = int.Parse(txtStockReal.Text),
+                        stockRealSpecified= true,
                         stockVirtual = int.Parse(txtStockVirtual.Text),
+                        stockVirtualSpecified=true,
                         isbn = txtISBN.Text,
+                        
                         genero = (generoLibro)Enum.Parse(typeof(generoLibro), ddlGenero.SelectedItem.Text),
+                        generoSpecified=true,
                         fechaPublicacion = DateTime.Parse(lblFechaPublicacion.Text),
+                        fechaPublicacionSpecified=true,
                         formato = (formato)Enum.Parse(typeof(formato), ddlFormato.SelectedItem.Text),
+                        formatoSpecified=true,
                         sinopsis = txtSinopsis.Text,
                         descripcion = txtDescripcion.Text,
                         //EDITORIAL FALTA
+                        //editorial=new editorial
+                        //{
+                        //    idEditorial=
+                        //}
+
                         //AUTORES FALTA
                     };
 

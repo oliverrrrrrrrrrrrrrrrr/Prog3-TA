@@ -5,6 +5,12 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/CarritoWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+  <message name="guardarCarrito">
+    <part name="parameters" element="tns:guardarCarrito" />
+  </message>
+  <message name="guardarCarritoResponse">
+    <part name="parameters" element="tns:guardarCarritoResponse" />
+  </message>
   <message name="eliminarCarrito">
     <part name="parameters" element="tns:eliminarCarrito" />
   </message>
@@ -23,12 +29,6 @@
   <message name="obtenerCarritoResponse">
     <part name="parameters" element="tns:obtenerCarritoResponse" />
   </message>
-  <message name="guardarCarrito">
-    <part name="parameters" element="tns:guardarCarrito" />
-  </message>
-  <message name="guardarCarritoResponse">
-    <part name="parameters" element="tns:guardarCarritoResponse" />
-  </message>
   <message name="obtenerCarritoPorCliente">
     <part name="parameters" element="tns:obtenerCarritoPorCliente" />
   </message>
@@ -36,6 +36,10 @@
     <part name="parameters" element="tns:obtenerCarritoPorClienteResponse" />
   </message>
   <portType name="CarritoWS">
+    <operation name="guardarCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoRequest" message="tns:guardarCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoResponse" message="tns:guardarCarritoResponse" />
+    </operation>
     <operation name="eliminarCarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoRequest" message="tns:eliminarCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoResponse" message="tns:eliminarCarritoResponse" />
@@ -48,10 +52,6 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoRequest" message="tns:obtenerCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoResponse" message="tns:obtenerCarritoResponse" />
     </operation>
-    <operation name="guardarCarrito">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoRequest" message="tns:guardarCarrito" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoResponse" message="tns:guardarCarritoResponse" />
-    </operation>
     <operation name="obtenerCarritoPorCliente">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoPorClienteRequest" message="tns:obtenerCarritoPorCliente" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoPorClienteResponse" message="tns:obtenerCarritoPorClienteResponse" />
@@ -59,6 +59,15 @@
   </portType>
   <binding name="CarritoWSPortBinding" type="tns:CarritoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="guardarCarrito">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="eliminarCarrito">
       <soap:operation soapAction="" />
       <input>
@@ -78,15 +87,6 @@
       </output>
     </operation>
     <operation name="obtenerCarrito">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="guardarCarrito">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
