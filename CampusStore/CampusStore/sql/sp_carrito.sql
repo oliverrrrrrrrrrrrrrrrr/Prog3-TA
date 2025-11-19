@@ -86,3 +86,25 @@ BEGIN
 END//
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure obtenerCarritoPorCliente
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP procedure IF EXISTS `obtenerCarritoPorCliente`;
+
+DELIMITER //
+USE `libreria`//
+CREATE PROCEDURE `obtenerCarritoPorCliente`(
+	IN p_idCliente INT
+)
+BEGIN
+    SELECT *
+    FROM carrito 
+    WHERE CLIENTE_idCliente = p_idCliente
+    ORDER BY completado ASC, fechaCreacion DESC, idCarrito DESC
+    LIMIT 1;
+END//
+
+DELIMITER ;

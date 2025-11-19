@@ -85,13 +85,16 @@
                     </div>
 
                     <div class="action-buttons-container">
+                        <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="alert alert-dismissible fade show" Style="display:none;">
+                            <asp:Label ID="lblAlertMessage" runat="server"></asp:Label>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </asp:Panel>
                         <div class="qty-selector">
                             <button type="button" class="qty-btn" onclick="updateQty(-1)">-</button>
                             <asp:TextBox ID="txtCantidad" runat="server" Text="1" CssClass="qty-input" onchange="validateQty()"></asp:TextBox>
                             <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
                         </div>
                         <asp:Button ID="btnAddToCart" runat="server" Text="ADD TO CART" OnClick="btnAddToCart_Click" CssClass="btn-orange-solid" />
-                        <asp:Button ID="btnBuyNow" runat="server" Text="BUY NOW" OnClick="btnBuyNow_Click" CssClass="btn-orange-outline" />
                     </div>
                 </div>
             </div>

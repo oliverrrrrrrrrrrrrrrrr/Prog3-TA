@@ -2729,8 +2729,11 @@ CREATE PROCEDURE obtenerCarritoPorCliente(
 	IN p_idCliente INT
 )
 BEGIN
-    SELECT * FROM carrito 
-    WHERE CLIENTE_idCliente = p_idCliente;
+    SELECT *
+    FROM carrito 
+    WHERE CLIENTE_idCliente = p_idCliente
+    ORDER BY completado ASC, fechaCreacion DESC, idCarrito DESC
+    LIMIT 1;
 END$$
 
 DELIMITER ;

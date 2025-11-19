@@ -13,6 +13,8 @@ namespace CampusStoreWeb
         public CarritoWSClient carritoWS;
         public ClienteWSClient clienteWS;
         public OrdenCompraWSClient ordenCompraWS;
+        public LibroWSClient libroWS;
+        public ArticuloWSClient articuloWS;
         private const decimal PORCENTAJE_IMPUESTO = 0.18m;
 
         public Checkout()
@@ -20,6 +22,8 @@ namespace CampusStoreWeb
             carritoWS = new CarritoWSClient();
             clienteWS = new ClienteWSClient();
             ordenCompraWS = new OrdenCompraWSClient();
+            libroWS = new LibroWSClient();
+            articuloWS = new ArticuloWSClient();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -294,6 +298,9 @@ namespace CampusStoreWeb
                     System.Diagnostics.Debug.WriteLine("Orden de compra creada exitosamente");
                     ordenCreada = true;
 
+                    var lineasCarrito = carrito.lineas as lineaCarrito[];
+                    DescontarStockVirtual(lineasCarrito ?? Array.Empty<lineaCarrito>());
+
                     // Marcar el carrito como completado
                     carrito.completado = true;
                     carritoWS.guardarCarrito(carrito, estado.Modificado);
@@ -330,6 +337,167 @@ namespace CampusStoreWeb
             }
             
             return new System.Tuple<bool, bool>(ordenCreada, ordenYaExistia);
+        }
+
+        private void DescontarStockVirtual(lineaCarrito[] lineas)
+        {
+            if (lineas == null || lineas.Length == 0) return;
+
+            foreach (var linea in lineas)
+            {
+                if (linea == null || linea.cantidad <= 0)
+                    continue;
+
+                try
+                {
+                    switch (linea.tipoProducto)
+                    {
+                        case tipoProducto.LIBRO:
+                            DescontarStockLibro(linea);
+                            break;
+                        case tipoProducto.ARTICULO:
+                            DescontarStockArticulo(linea);
+                            break;
+                        default:
+                            System.Diagnostics.Debug.WriteLine($"Tipo de producto no soportado para descuento de stock: {linea.tipoProducto}");
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Error descontando stock virtual para la línea {linea.idLineaCarrito}: {ex.Message}");
+                }
+            }
+        }
+
+        private void DescontarStockLibro(lineaCarrito linea)
+        {
+            var productoLibro = linea.producto as libro;
+            int idLibro = productoLibro?.idLibro ?? ObtenerIdProducto(linea.producto, "idLibro");
+
+            if (idLibro <= 0)
+            {
+                System.Diagnostics.Debug.WriteLine("No se pudo determinar el ID del libro para descontar stock virtual.");
+                return;
+            }
+
+            var libroActual = libroWS.obtenerLibro(idLibro);
+            if (libroActual == null)
+            {
+                System.Diagnostics.Debug.WriteLine($"No se encontró el libro con ID {idLibro} para actualizar stock virtual.");
+                return;
+            }
+
+            int stockAnterior = libroActual.stockVirtual;
+            int nuevoStock = Math.Max(0, stockAnterior - linea.cantidad);
+            libroActual.stockVirtual = nuevoStock;
+            libroActual.stockVirtualSpecified = true;
+            libroActual.idLibroSpecified = true;
+
+            PrepararProductoParaGuardado(libroActual);
+
+            libroWS.guardarLibro(libroActual, estado.Modificado);
+            System.Diagnostics.Debug.WriteLine($"Libro ID {idLibro}: stock virtual {stockAnterior} -> {nuevoStock}");
+        }
+
+        private void DescontarStockArticulo(lineaCarrito linea)
+        {
+            var productoArticulo = linea.producto as articulo;
+            int idArticulo = productoArticulo?.idArticulo ?? ObtenerIdProducto(linea.producto, "idArticulo");
+
+            if (idArticulo <= 0)
+            {
+                System.Diagnostics.Debug.WriteLine("No se pudo determinar el ID del artículo para descontar stock virtual.");
+                return;
+            }
+
+            var articuloActual = articuloWS.obtenerArticulo(idArticulo);
+            if (articuloActual == null)
+            {
+                System.Diagnostics.Debug.WriteLine($"No se encontró el artículo con ID {idArticulo} para actualizar stock virtual.");
+                return;
+            }
+
+            int stockAnterior = articuloActual.stockVirtual;
+            int nuevoStock = Math.Max(0, stockAnterior - linea.cantidad);
+            articuloActual.stockVirtual = nuevoStock;
+            articuloActual.stockVirtualSpecified = true;
+            articuloActual.idArticuloSpecified = true;
+
+            PrepararProductoParaGuardado(articuloActual);
+
+            articuloWS.guardarArticulo(articuloActual, estado.Modificado);
+            System.Diagnostics.Debug.WriteLine($"Artículo ID {idArticulo}: stock virtual {stockAnterior} -> {nuevoStock}");
+        }
+
+        private int ObtenerIdProducto(object producto, string propertyName)
+        {
+            if (producto == null || string.IsNullOrEmpty(propertyName))
+            {
+                return 0;
+            }
+
+            try
+            {
+                var property = producto.GetType().GetProperty(propertyName);
+                if (property == null)
+                {
+                    return 0;
+                }
+
+                var value = property.GetValue(producto);
+                if (value is int idInt)
+                {
+                    return idInt;
+                }
+
+                if (value != null && int.TryParse(value.ToString(), out int parsed))
+                {
+                    return parsed;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"No se pudo obtener la propiedad {propertyName} del producto: {ex.Message}");
+            }
+
+            return 0;
+        }
+
+        private void PrepararProductoParaGuardado(producto productoBase)
+        {
+            if (productoBase == null)
+            {
+                return;
+            }
+
+            productoBase.precioSpecified = true;
+
+            if (!productoBase.precioDescuentoSpecified)
+            {
+                productoBase.precioDescuento = 0;
+                productoBase.precioDescuentoSpecified = true;
+            }
+
+            productoBase.stockRealSpecified = true;
+            productoBase.stockVirtualSpecified = true;
+
+            if (productoBase is libro libroProd)
+            {
+                if (!libroProd.precioDescuentoSpecified)
+                {
+                    libroProd.precioDescuento = 0;
+                    libroProd.precioDescuentoSpecified = true;
+                }
+            }
+            else if (productoBase is articulo articuloProd)
+            {
+                if (!articuloProd.precioDescuentoSpecified)
+                {
+                    articuloProd.precioDescuento = 0;
+                    articuloProd.precioDescuentoSpecified = true;
+                }
+            }
         }
 
         private void MostrarMensaje(bool ordenCreada, bool ordenYaExistia)
