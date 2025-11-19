@@ -20,6 +20,9 @@ namespace CampusStoreWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Response.ContentEncoding = System.Text.Encoding.UTF8;
+            Response.HeaderEncoding = System.Text.Encoding.UTF8;
+            Response.Charset = "UTF-8";
             if (!IsPostBack)
             {
                 LoadUserSettings();
