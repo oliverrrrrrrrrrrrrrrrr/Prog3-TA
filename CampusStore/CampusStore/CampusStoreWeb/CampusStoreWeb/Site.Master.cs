@@ -95,6 +95,7 @@ namespace CampusStoreWeb
 
                 // Llamar al servicio SOAP para obtener el carrito
                 var carrito = carritoWS.obtenerCarritoPorCliente(idCliente);
+                System.Diagnostics.Debug.WriteLine($"[Site.Master] Carrito obtenido: ID={carrito?.idCarrito}, completado={carrito?.completado}, lineas={carrito?.lineas?.Length ?? 0}");
 
                 // Verificar que el carrito existe, NO está completado y tiene productos
                 if (carrito != null && !carrito.completado && carrito.lineas != null && carrito.lineas.Length > 0)

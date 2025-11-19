@@ -44,6 +44,7 @@ namespace CampusStoreWeb
 
                 // Obtener el carrito del cliente
                 var carrito = carritoWS.obtenerCarritoPorCliente(idCliente);
+                System.Diagnostics.Debug.WriteLine($"[Shopping_Car] Carrito obtenido: ID={carrito?.idCarrito}, completado={carrito?.completado}, lineas={carrito?.lineas?.Length ?? 0}");
 
                 // Verificar que el carrito existe, NO está completado y tiene productos
                 if (carrito != null && !carrito.completado && carrito.lineas != null && carrito.lineas.Length > 0)
