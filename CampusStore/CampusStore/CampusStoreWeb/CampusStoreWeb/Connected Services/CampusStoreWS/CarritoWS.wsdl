@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.campusstore.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="CarritoWS" targetNamespace="http://services.campusstore.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
@@ -6,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/CarritoWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="obtenerCarritoPorCliente">
-    <part name="parameters" element="tns:obtenerCarritoPorCliente" />
+  <message name="listarCarritos">
+    <part name="parameters" element="tns:listarCarritos" />
   </message>
-  <message name="obtenerCarritoPorClienteResponse">
-    <part name="parameters" element="tns:obtenerCarritoPorClienteResponse" />
+  <message name="listarCarritosResponse">
+    <part name="parameters" element="tns:listarCarritosResponse" />
   </message>
   <message name="guardarCarrito">
     <part name="parameters" element="tns:guardarCarrito" />
@@ -18,49 +17,49 @@
   <message name="guardarCarritoResponse">
     <part name="parameters" element="tns:guardarCarritoResponse" />
   </message>
-  <message name="eliminarCarrito">
-    <part name="parameters" element="tns:eliminarCarrito" />
-  </message>
-  <message name="eliminarCarritoResponse">
-    <part name="parameters" element="tns:eliminarCarritoResponse" />
-  </message>
-  <message name="listarCarritos">
-    <part name="parameters" element="tns:listarCarritos" />
-  </message>
-  <message name="listarCarritosResponse">
-    <part name="parameters" element="tns:listarCarritosResponse" />
-  </message>
   <message name="obtenerCarrito">
     <part name="parameters" element="tns:obtenerCarrito" />
   </message>
   <message name="obtenerCarritoResponse">
     <part name="parameters" element="tns:obtenerCarritoResponse" />
   </message>
+  <message name="eliminarCarrito">
+    <part name="parameters" element="tns:eliminarCarrito" />
+  </message>
+  <message name="eliminarCarritoResponse">
+    <part name="parameters" element="tns:eliminarCarritoResponse" />
+  </message>
+  <message name="obtenerCarritoPorCliente">
+    <part name="parameters" element="tns:obtenerCarritoPorCliente" />
+  </message>
+  <message name="obtenerCarritoPorClienteResponse">
+    <part name="parameters" element="tns:obtenerCarritoPorClienteResponse" />
+  </message>
   <portType name="CarritoWS">
-    <operation name="obtenerCarritoPorCliente">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoPorClienteRequest" message="tns:obtenerCarritoPorCliente" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoPorClienteResponse" message="tns:obtenerCarritoPorClienteResponse" />
+    <operation name="listarCarritos">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosRequest" message="tns:listarCarritos" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosResponse" message="tns:listarCarritosResponse" />
     </operation>
     <operation name="guardarCarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoRequest" message="tns:guardarCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoResponse" message="tns:guardarCarritoResponse" />
     </operation>
-    <operation name="eliminarCarrito">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoRequest" message="tns:eliminarCarrito" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoResponse" message="tns:eliminarCarritoResponse" />
-    </operation>
-    <operation name="listarCarritos">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosRequest" message="tns:listarCarritos" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosResponse" message="tns:listarCarritosResponse" />
-    </operation>
     <operation name="obtenerCarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoRequest" message="tns:obtenerCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoResponse" message="tns:obtenerCarritoResponse" />
     </operation>
+    <operation name="eliminarCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoRequest" message="tns:eliminarCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoResponse" message="tns:eliminarCarritoResponse" />
+    </operation>
+    <operation name="obtenerCarritoPorCliente">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoPorClienteRequest" message="tns:obtenerCarritoPorCliente" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoPorClienteResponse" message="tns:obtenerCarritoPorClienteResponse" />
+    </operation>
   </portType>
   <binding name="CarritoWSPortBinding" type="tns:CarritoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="obtenerCarritoPorCliente">
+    <operation name="listarCarritos">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -78,6 +77,15 @@
         <soap:body use="literal" />
       </output>
     </operation>
+    <operation name="obtenerCarrito">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="eliminarCarrito">
       <soap:operation soapAction="" />
       <input>
@@ -87,16 +95,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="listarCarritos">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="obtenerCarrito">
+    <operation name="obtenerCarritoPorCliente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -111,118 +110,4 @@
       <soap:address location="http://localhost:8080/CampusStoreWS/CarritoWS" />
     </port>
   </service>
-=======
-<?xml version="1.0" encoding="utf-8"?>
-<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.campusstore.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="CarritoWS" targetNamespace="http://services.campusstore.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
-  <types>
-    <xsd:schema>
-      <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/CarritoWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
-    </xsd:schema>
-  </types>
-  <message name="obtenerCarritoPorCliente">
-    <part name="parameters" element="tns:obtenerCarritoPorCliente" />
-  </message>
-  <message name="obtenerCarritoPorClienteResponse">
-    <part name="parameters" element="tns:obtenerCarritoPorClienteResponse" />
-  </message>
-  <message name="obtenerCarrito">
-    <part name="parameters" element="tns:obtenerCarrito" />
-  </message>
-  <message name="obtenerCarritoResponse">
-    <part name="parameters" element="tns:obtenerCarritoResponse" />
-  </message>
-  <message name="eliminarCarrito">
-    <part name="parameters" element="tns:eliminarCarrito" />
-  </message>
-  <message name="eliminarCarritoResponse">
-    <part name="parameters" element="tns:eliminarCarritoResponse" />
-  </message>
-  <message name="guardarCarrito">
-    <part name="parameters" element="tns:guardarCarrito" />
-  </message>
-  <message name="guardarCarritoResponse">
-    <part name="parameters" element="tns:guardarCarritoResponse" />
-  </message>
-  <message name="listarCarritos">
-    <part name="parameters" element="tns:listarCarritos" />
-  </message>
-  <message name="listarCarritosResponse">
-    <part name="parameters" element="tns:listarCarritosResponse" />
-  </message>
-  <portType name="CarritoWS">
-    <operation name="obtenerCarritoPorCliente">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoPorClienteRequest" message="tns:obtenerCarritoPorCliente" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoPorClienteResponse" message="tns:obtenerCarritoPorClienteResponse" />
-    </operation>
-    <operation name="obtenerCarrito">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoRequest" message="tns:obtenerCarrito" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoResponse" message="tns:obtenerCarritoResponse" />
-    </operation>
-    <operation name="eliminarCarrito">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoRequest" message="tns:eliminarCarrito" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoResponse" message="tns:eliminarCarritoResponse" />
-    </operation>
-    <operation name="guardarCarrito">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoRequest" message="tns:guardarCarrito" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoResponse" message="tns:guardarCarritoResponse" />
-    </operation>
-    <operation name="listarCarritos">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosRequest" message="tns:listarCarritos" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosResponse" message="tns:listarCarritosResponse" />
-    </operation>
-  </portType>
-  <binding name="CarritoWSPortBinding" type="tns:CarritoWS">
-    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="obtenerCarritoPorCliente">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="obtenerCarrito">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="eliminarCarrito">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="guardarCarrito">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="listarCarritos">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-  </binding>
-  <service name="CarritoWS">
-    <port name="CarritoWSPort" binding="tns:CarritoWSPortBinding">
-      <soap:address location="http://localhost:8080/CampusStoreWS/CarritoWS" />
-    </port>
-  </service>
->>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
 </definitions>
