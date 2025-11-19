@@ -295,11 +295,10 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerCarritoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-<<<<<<< HEAD
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.leerAutoresPorLibroResponse.datasource">
-=======
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.cancelarOrdenesExpiradasResponse.datasource">
->>>>>>> c5ef67d70beceb74bc77c9cb602189338c0fd46a
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\CampusStoreWS\CarritoWS.wsdl" />
