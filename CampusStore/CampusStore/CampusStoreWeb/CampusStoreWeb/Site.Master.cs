@@ -96,7 +96,8 @@ namespace CampusStoreWeb
                 // Llamar al servicio SOAP para obtener el carrito
                 var carrito = carritoWS.obtenerCarritoPorCliente(idCliente);
 
-                if (carrito != null && carrito.lineas != null && carrito.lineas.Length > 0)
+                // Verificar que el carrito existe, NO está completado y tiene productos
+                if (carrito != null && !carrito.completado && carrito.lineas != null && carrito.lineas.Length > 0)
                 {
                     // Bind de datos al Repeater
                     rptCarritoItems.DataSource = carrito.lineas;

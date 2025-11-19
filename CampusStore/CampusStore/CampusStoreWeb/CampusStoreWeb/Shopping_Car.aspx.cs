@@ -42,9 +42,11 @@ namespace CampusStoreWeb
                     return;
                 }
 
+                // Obtener el carrito del cliente
                 var carrito = carritoWS.obtenerCarritoPorCliente(idCliente);
 
-                if (carrito != null && carrito.lineas != null && carrito.lineas.Length > 0)
+                // Verificar que el carrito existe, NO está completado y tiene productos
+                if (carrito != null && !carrito.completado && carrito.lineas != null && carrito.lineas.Length > 0)
                 {
                     rptCartItems.DataSource = carrito.lineas;
                     rptCartItems.DataBind();

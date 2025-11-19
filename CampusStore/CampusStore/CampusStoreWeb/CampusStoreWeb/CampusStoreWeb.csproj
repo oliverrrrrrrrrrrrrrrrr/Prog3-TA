@@ -295,6 +295,9 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerCarritoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.cancelarOrdenesExpiradasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\CampusStoreWS\CarritoWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\CarritoWS.xsd">
       <SubType>Designer</SubType>
