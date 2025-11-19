@@ -30,7 +30,7 @@ namespace CampusStoreWeb
                 if (isAdmin)
                 {
                     // Menú para Admin
-                    lnkAboutUs.Visible = true;
+                    //lnkAboutUs.Visible = true;
 
                     // Ocultar opciones de cliente
                     lnkShopProduct.Visible = false;
@@ -47,7 +47,7 @@ namespace CampusStoreWeb
                 {
                     CargarCarrito();
                     // Menú para Cliente
-                    lnkAboutUs.Visible = true;
+                    //lnkAboutUs.Visible = true;
                     lnkShopProduct.Visible = true;
                     lnkShoppingCart.Visible = true;
                     lnkFooterCuadernos.Visible = true;
@@ -81,17 +81,23 @@ namespace CampusStoreWeb
 
         private void CargarCarrito()
         {
+            if (!Request.IsAuthenticated)
+            {
+                MostrarCarritoVacio();
+                return;
+            }
+
             try
             {
                 // Obtener el ID del cliente logueado
                 string cuenta = Page.User.Identity.Name;
-                int idCliente = clienteWS.buscarClientePorCuenta(cuenta).idCliente;
-
-                if (idCliente <= 0)
+                cliente cliente = clienteWS.buscarClientePorCuenta(cuenta);
+                if (cliente == null)
                 {
                     MostrarCarritoVacio();
                     return;
                 }
+                int idCliente = cliente.idCliente;
 
                 // Llamar al servicio SOAP para obtener el carrito
                 var carrito = carritoWS.obtenerCarritoPorCliente(idCliente);

@@ -280,9 +280,13 @@
                             <i class="bi bi-calendar3 date-icon"></i>
                         </div>
                         <div>
-                            <asp:LinkButton ID="btnGenerarVentas" runat="server" CssClass="btn-generar">
+                            <asp:LinkButton ID="btnGenerarVentas" 
+                                            runat="server" 
+                                            CssClass="btn-generar"
+                                            OnClick="btnGenerarVentas_Click">
                                 GENERAR <i class="bi bi-arrow-right"></i>
                             </asp:LinkButton>
+
                         </div>
                     </div>
                     

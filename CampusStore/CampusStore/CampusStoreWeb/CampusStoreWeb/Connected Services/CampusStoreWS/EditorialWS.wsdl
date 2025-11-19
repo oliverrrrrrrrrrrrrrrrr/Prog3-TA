@@ -5,18 +5,6 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/EditorialWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="listarEditoriales">
-    <part name="parameters" element="tns:listarEditoriales" />
-  </message>
-  <message name="listarEditorialesResponse">
-    <part name="parameters" element="tns:listarEditorialesResponse" />
-  </message>
-  <message name="eliminarEditorial">
-    <part name="parameters" element="tns:eliminarEditorial" />
-  </message>
-  <message name="eliminarEditorialResponse">
-    <part name="parameters" element="tns:eliminarEditorialResponse" />
-  </message>
   <message name="obtenerEditorial">
     <part name="parameters" element="tns:obtenerEditorial" />
   </message>
@@ -29,15 +17,19 @@
   <message name="guardarEditorialResponse">
     <part name="parameters" element="tns:guardarEditorialResponse" />
   </message>
+  <message name="listarEditoriales">
+    <part name="parameters" element="tns:listarEditoriales" />
+  </message>
+  <message name="listarEditorialesResponse">
+    <part name="parameters" element="tns:listarEditorialesResponse" />
+  </message>
+  <message name="eliminarEditorial">
+    <part name="parameters" element="tns:eliminarEditorial" />
+  </message>
+  <message name="eliminarEditorialResponse">
+    <part name="parameters" element="tns:eliminarEditorialResponse" />
+  </message>
   <portType name="EditorialWS">
-    <operation name="listarEditoriales">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesRequest" message="tns:listarEditoriales" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesResponse" message="tns:listarEditorialesResponse" />
-    </operation>
-    <operation name="eliminarEditorial">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialRequest" message="tns:eliminarEditorial" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialResponse" message="tns:eliminarEditorialResponse" />
-    </operation>
     <operation name="obtenerEditorial">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/obtenerEditorialRequest" message="tns:obtenerEditorial" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/obtenerEditorialResponse" message="tns:obtenerEditorialResponse" />
@@ -46,27 +38,17 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialRequest" message="tns:guardarEditorial" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialResponse" message="tns:guardarEditorialResponse" />
     </operation>
+    <operation name="listarEditoriales">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesRequest" message="tns:listarEditoriales" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesResponse" message="tns:listarEditorialesResponse" />
+    </operation>
+    <operation name="eliminarEditorial">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialRequest" message="tns:eliminarEditorial" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialResponse" message="tns:eliminarEditorialResponse" />
+    </operation>
   </portType>
   <binding name="EditorialWSPortBinding" type="tns:EditorialWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="listarEditoriales">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="eliminarEditorial">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
     <operation name="obtenerEditorial">
       <soap:operation soapAction="" />
       <input>
@@ -77,6 +59,24 @@
       </output>
     </operation>
     <operation name="guardarEditorial">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarEditoriales">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminarEditorial">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

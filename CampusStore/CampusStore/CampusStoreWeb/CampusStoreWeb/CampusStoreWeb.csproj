@@ -616,10 +616,6 @@
     <None Include="Connected Services\CampusStoreWS\UsuarioWS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\CarritoWS\CarritoWS.wsdl" />
-    <None Include="Connected Services\CarritoWS\CarritoWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Images\merchandise_Peluche_Pokemon_totodile.webp" />
     <None Include="packages.config" />
     <Content Include="Site.Master" />
