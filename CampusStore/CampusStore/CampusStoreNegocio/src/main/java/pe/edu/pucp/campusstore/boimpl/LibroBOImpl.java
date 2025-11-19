@@ -97,4 +97,11 @@ public class LibroBOImpl implements LibroBO {
         }
     }
 
+    @Override
+    public List<Autor> leerAutoresPorLibro(int idLibro) {
+        return this.libroDAO.leerAutoresPorLibro(idLibro);
+    }
+    
+    
+
 }

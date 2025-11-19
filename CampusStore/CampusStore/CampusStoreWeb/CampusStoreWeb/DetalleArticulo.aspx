@@ -571,7 +571,7 @@
                     
                     <!-- Imagen -->
                     <div class="detalle-imagen">
-                        <asp:Image ID="imgArticulo" runat="server" ImageUrl="~/Images/default-articulo.jpg" AlternateText="Imagen del artículo" />
+                        <asp:Image runat="server" ID="imgLibro" />
                     </div>
                     
                     <!-- Información -->

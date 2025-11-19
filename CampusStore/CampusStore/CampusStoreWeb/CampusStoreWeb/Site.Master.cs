@@ -24,7 +24,6 @@ namespace CampusStoreWeb
         {
             if (Page.User.Identity.IsAuthenticated)
             {
-                CargarCarrito();
 
                 bool isAdmin = Session["IsAdmin"] != null && (bool)Session["IsAdmin"];
 
@@ -46,6 +45,7 @@ namespace CampusStoreWeb
                 }
                 else
                 {
+                    CargarCarrito();
                     // Menú para Cliente
                     lnkAboutUs.Visible = true;
                     lnkShopProduct.Visible = true;

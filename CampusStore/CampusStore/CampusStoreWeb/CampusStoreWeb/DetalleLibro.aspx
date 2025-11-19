@@ -478,6 +478,36 @@
         .btn-danger-small:hover {
             background-color: #ffcccc;
         }
+
+        /* Badges de autores */
+        .autores-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .autor-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: #E8F4FD;
+            color: #2DA5F3;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid #2DA5F3;
+        }
+
+        .autor-badge i {
+            font-size: 14px;
+        }
+
+        .text-muted {
+            color: #929FA5;
+            font-size: 14px;
+            font-style: italic;
+        }
     
         @media (max-width: 768px) {
             .detalle-grid {
@@ -570,7 +600,7 @@
                 
                     <!-- Imagen -->
                     <div class="detalle-imagen">
-                        <asp:Image ID="imgLibro" runat="server" ImageUrl="~/Images/default-Libro.jpg" AlternateText="Imagen del artículo" />
+                        <asp:Image runat="server" ID="imgLibro" />
                     </div>
                 
                     <!-- Información -->
@@ -644,6 +674,21 @@
                             <span class="info-value">
                                 <asp:Label ID="lblEditorial" runat="server" Text="Editorial"></asp:Label>
                             </span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">Autores</span>
+                            <div class="autores-list">
+                                <asp:Repeater ID="rptAutores" runat="server">
+                                    <ItemTemplate>
+                                        <span class="autor-badge">
+                                            <i class="bi bi-person-fill"></i>
+                                            <%# Eval("nombre") %> <%# Eval("apellidos") %>
+                                        </span>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <asp:Label ID="lblSinAutores" runat="server" Text="No se especificaron autores" CssClass="text-muted" Visible="false"></asp:Label>
+                            </div>
                         </div>
 
                         <div class="info-row">

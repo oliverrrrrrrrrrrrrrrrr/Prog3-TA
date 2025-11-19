@@ -91,20 +91,10 @@ namespace CampusStoreWeb
             lblStockVirtual.Text = articuloActual.stockVirtual.ToString();
             lblCategoria.Text = articuloActual.tipoArticulo.ToString() ?? "Sin categoría";
             lblDescripcion.Text = articuloActual.descripcion ?? "Sin descripción disponible";
+            imgLibro.ImageUrl = articuloActual.imagenURL;
 
-            // Stock con badge de color
             ConfigurarStockBadge(articuloActual.stockReal, articuloActual.stockVirtual);
 
-            // Imagen - Si tienes una propiedad de imagen en el objeto
-            // Si no, puedes usar una imagen por defecto o basada en la categoría
-            /*if (!string.IsNullOrEmpty(articuloActual.imagenUrl))
-            {
-                imgArticulo.ImageUrl = articuloActual.imagenUrl;
-            }
-            else
-            {
-                imgArticulo.ImageUrl = "~/Images/default-articulo.jpg";
-            }*/
         }
 
         private void ConfigurarStockBadge(int stockReal, int stockVirtual)

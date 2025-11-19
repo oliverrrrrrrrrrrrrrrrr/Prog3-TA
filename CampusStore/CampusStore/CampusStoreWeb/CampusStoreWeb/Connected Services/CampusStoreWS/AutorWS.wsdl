@@ -5,23 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/AutorWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="guardarAutor">
-    <part name="parameters" element="tns:guardarAutor" />
-  </message>
-  <message name="guardarAutorResponse">
-    <part name="parameters" element="tns:guardarAutorResponse" />
-  </message>
   <message name="listarAutores">
     <part name="parameters" element="tns:listarAutores" />
   </message>
   <message name="listarAutoresResponse">
     <part name="parameters" element="tns:listarAutoresResponse" />
   </message>
-  <message name="eliminarAutor">
-    <part name="parameters" element="tns:eliminarAutor" />
+  <message name="guardarAutor">
+    <part name="parameters" element="tns:guardarAutor" />
   </message>
-  <message name="eliminarAutorResponse">
-    <part name="parameters" element="tns:eliminarAutorResponse" />
+  <message name="guardarAutorResponse">
+    <part name="parameters" element="tns:guardarAutorResponse" />
   </message>
   <message name="obtenerAutor">
     <part name="parameters" element="tns:obtenerAutor" />
@@ -29,35 +23,32 @@
   <message name="obtenerAutorResponse">
     <part name="parameters" element="tns:obtenerAutorResponse" />
   </message>
+  <message name="eliminarAutor">
+    <part name="parameters" element="tns:eliminarAutor" />
+  </message>
+  <message name="eliminarAutorResponse">
+    <part name="parameters" element="tns:eliminarAutorResponse" />
+  </message>
   <portType name="AutorWS">
-    <operation name="guardarAutor">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorRequest" message="tns:guardarAutor" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorResponse" message="tns:guardarAutorResponse" />
-    </operation>
     <operation name="listarAutores">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresRequest" message="tns:listarAutores" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresResponse" message="tns:listarAutoresResponse" />
     </operation>
-    <operation name="eliminarAutor">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest" message="tns:eliminarAutor" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse" message="tns:eliminarAutorResponse" />
+    <operation name="guardarAutor">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorRequest" message="tns:guardarAutor" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorResponse" message="tns:guardarAutorResponse" />
     </operation>
     <operation name="obtenerAutor">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorRequest" message="tns:obtenerAutor" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorResponse" message="tns:obtenerAutorResponse" />
     </operation>
+    <operation name="eliminarAutor">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest" message="tns:eliminarAutor" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse" message="tns:eliminarAutorResponse" />
+    </operation>
   </portType>
   <binding name="AutorWSPortBinding" type="tns:AutorWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="guardarAutor">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
     <operation name="listarAutores">
       <soap:operation soapAction="" />
       <input>
@@ -67,7 +58,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="eliminarAutor">
+    <operation name="guardarAutor">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -77,6 +68,15 @@
       </output>
     </operation>
     <operation name="obtenerAutor">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminarAutor">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

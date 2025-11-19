@@ -8,8 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.campusstore.bases.dao.TransaccionalBaseDAO;
 import pe.edu.pucp.campusstore.dao.LibroDAO;
+import pe.edu.pucp.campusstore.modelo.Autor;
 import pe.edu.pucp.campusstore.modelo.Descuento;
 import pe.edu.pucp.campusstore.modelo.Editorial;
 import pe.edu.pucp.campusstore.modelo.enums.Formato;
@@ -132,4 +135,40 @@ public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDA
         */
         return modelo;
     }
+    
+    protected Autor mapearModeloPorAutor(ResultSet rs) throws SQLException {
+        Autor modelo = new Autor();
+        
+        modelo.setIdAutor(rs.getInt("idAutor"));
+        modelo.setNombre(rs.getString("nombre"));
+        modelo.setApellidos(rs.getString("apellidos"));
+        modelo.setAlias(rs.getString("alias"));
+        return modelo;
+    }
+    
+    protected PreparedStatement comandoLeerAutoresPorLibro(Connection conn, 
+            int idLibro) throws SQLException {
+        
+        String sql = "{call listarAutoresPorLibro(?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt("p_idLibro", idLibro);
+        return cmd;
+    }
+
+    public List<Autor> leerAutoresPorLibro(int idLibro) {
+        return ejecutarComando(conn -> {
+            try (PreparedStatement cmd = this.comandoLeerAutoresPorLibro(conn, idLibro)){
+                ResultSet rs = cmd.executeQuery();
+                
+                List<Autor> modelos = new ArrayList<>();
+                
+                while (rs.next()) {
+                    modelos.add(this.mapearModeloPorAutor(rs));
+                }
+                
+                return modelos;
+            }
+        });
+    }
+    
 }

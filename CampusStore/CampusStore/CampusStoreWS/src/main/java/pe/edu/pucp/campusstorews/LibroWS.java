@@ -30,7 +30,9 @@ public class LibroWS {
     public Libro obtenerLibro(
         @WebParam(name = "id") int id
     ) {
-        return this.libroBO.obtener(id);
+        Libro libro = libroBO.obtener(id);
+        libro.setAutores(libroBO.leerAutoresPorLibro(id));
+        return libro;
     }
     
     @WebMethod(operationName = "eliminarLibro")
@@ -53,5 +55,12 @@ public class LibroWS {
             @WebParam(name = "libro") Libro libro,
             @WebParam(name = "autores") List<Autor> autores){
         return this.libroBO.registrarLibro(libro, autores);
+    }
+    
+    @WebMethod(operationName = "leerAutoresPorLibro")
+    public List<Autor> leerAutoresPorLibro(
+            @WebParam(name = "idLibro") int idLibro
+    ){
+      return this.libroBO.leerAutoresPorLibro(idLibro);
     }
 }

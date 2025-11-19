@@ -147,3 +147,29 @@ BEGIN
 END//
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure listarAutoresPorLibro
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP procedure IF EXISTS `listarAutoresPorLibro`;
+
+DELIMITER $$
+
+CREATE PROCEDURE listarAutoresPorLibro(
+    IN p_idLibro INT
+)
+BEGIN
+    SELECT 
+        a.idAutor,
+        a.nombre,
+        a.apellidos,
+        a.alias
+    FROM autor a
+    INNER JOIN libro_has_autor la 
+        ON la.AUTOR_idAutor = a.idAutor
+    WHERE la.LIBRO_idLibro = p_idLibro;
+END $$
+
+DELIMITER ;

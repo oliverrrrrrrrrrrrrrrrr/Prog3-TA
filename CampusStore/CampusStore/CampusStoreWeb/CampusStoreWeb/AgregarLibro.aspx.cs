@@ -363,7 +363,7 @@ namespace CampusStoreWeb
 
                     // Precio con descuento no debe ser mayor al precio unitario
                     double precioUnitario = double.Parse(txtPrecioUnitario.Text);
-                    double precioConDescuento = double.Parse(txtPrecioConDescuento.Text);
+                    double precioConDescuento = double.TryParse(txtPrecioConDescuento.Text, out double valor) ? valor : 0.00;
 
                     if (precioConDescuento > precioUnitario)
                     {

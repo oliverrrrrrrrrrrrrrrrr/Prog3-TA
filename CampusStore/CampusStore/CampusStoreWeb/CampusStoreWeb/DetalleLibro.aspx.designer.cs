@@ -195,6 +195,24 @@ namespace CampusStoreWeb
         protected global::System.Web.UI.WebControls.Label lblEditorial;
 
         /// <summary>
+        /// Control rptAutores.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptAutores;
+
+        /// <summary>
+        /// Control lblSinAutores.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSinAutores;
+
+        /// <summary>
         /// Control lblSinopsis.
         /// </summary>
         /// <remarks>

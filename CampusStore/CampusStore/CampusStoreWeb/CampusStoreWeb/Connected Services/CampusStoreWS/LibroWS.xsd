@@ -7,6 +7,8 @@
   <xs:element name="eliminarLibroResponse" type="tns:eliminarLibroResponse" />
   <xs:element name="guardarLibro" type="tns:guardarLibro" />
   <xs:element name="guardarLibroResponse" type="tns:guardarLibroResponse" />
+  <xs:element name="leerAutoresPorLibro" type="tns:leerAutoresPorLibro" />
+  <xs:element name="leerAutoresPorLibroResponse" type="tns:leerAutoresPorLibroResponse" />
   <xs:element name="listarLibros" type="tns:listarLibros" />
   <xs:element name="listarLibrosResponse" type="tns:listarLibrosResponse" />
   <xs:element name="obtenerLibro" type="tns:obtenerLibro" />
@@ -164,6 +166,16 @@
   <xs:complexType name="obtenerLibroResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="tns:libro" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="leerAutoresPorLibro">
+    <xs:sequence>
+      <xs:element name="idLibro" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="leerAutoresPorLibroResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:autor" />
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="generoLibro">

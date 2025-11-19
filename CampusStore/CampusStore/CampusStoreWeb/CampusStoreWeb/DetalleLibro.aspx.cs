@@ -100,12 +100,28 @@ namespace CampusStoreWeb
             lblFechaPublicacion.Text = libroActual.fechaPublicacion.ToShortDateString();
             lblFormato.Text = libroActual.formato.ToString();
             lblEditorial.Text = libroActual.editorial.nombre;
+
+            libroActual.autores = libroWS.leerAutoresPorLibro(libroActual.idLibro);
+
+            if (libroActual.autores != null && libroActual.autores.Length > 0)
+            {
+                rptAutores.DataSource = libroActual.autores;
+                rptAutores.DataBind();
+                rptAutores.Visible = true;
+                lblSinAutores.Visible = false;
+            }
+            else
+            {
+                rptAutores.Visible = false;
+                lblSinAutores.Visible = true;
+            }
+
             lblSinopsis.Text = libroActual.sinopsis ?? "Sin sinopsis disponible.";
             lblDescripcion.Text = libroActual.descripcion ?? "Sin descripción disponible.";
-
+            imgLibro.ImageUrl=libroActual.imagenURL;
+            
             ConfigurarStockBadge(libroActual.stockReal, libroActual.stockVirtual);
 
-            // IMAGEN FALTA
         }
 
         private void ConfigurarStockBadge(int stockReal, int stockVirtual)
@@ -137,7 +153,7 @@ namespace CampusStoreWeb
             {
                 // Obtener descuento del artículo desde el WS
                 // Ajusta según tu método en el WS
-                descuentoActual = descuentoWS.obtenerDescuentoPorProducto(idLibroActual, tipoProducto.ARTICULO);
+                descuentoActual = descuentoWS.obtenerDescuentoPorProducto(idLibroActual, tipoProducto.LIBRO);
 
                 if (descuentoActual != null && descuentoActual.activo)
                 {
@@ -259,7 +275,7 @@ namespace CampusStoreWeb
                         activo = chkDescuentoActivo.Checked,
                         activoSpecified = true,
 
-                        tipoProducto = tipoProducto.ARTICULO,
+                        tipoProducto = tipoProducto.LIBRO,
                         tipoProductoSpecified = true,
 
                         idProducto = idLibroActual,
