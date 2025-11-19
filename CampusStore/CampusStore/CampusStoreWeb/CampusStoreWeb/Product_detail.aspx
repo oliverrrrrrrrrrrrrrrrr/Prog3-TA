@@ -72,8 +72,8 @@
                         <asp:Panel ID="pnlAutor" runat="server" Visible="false">
                             <strong>Autor:</strong> <asp:Label ID="lblAutor" runat="server"></asp:Label> <br />
                         </asp:Panel>
-                        <strong>Availability:</strong> <asp:Label ID="lblDisponibilidad" runat="server" CssClass="stock-status"></asp:Label> <br />
-                        <strong>Category:</strong> <asp:Label ID="lblCategoria" runat="server"></asp:Label>
+                        <strong>Disponibilidad:</strong> <asp:Label ID="lblDisponibilidad" runat="server" CssClass="stock-status"></asp:Label> <br />
+                        <strong>Categoria:</strong> <asp:Label ID="lblCategoria" runat="server"></asp:Label>
                     </div>
 
                     <div class="product-price-block">
@@ -103,10 +103,10 @@
                 <div class="custom-tabs">
                     <ul class="nav nav-tabs" id="productTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description-pane" type="button" role="tab">DESCRIPTION</button>
+                            <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description-pane" type="button" role="tab">DESCRIPCION</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review-pane" type="button" role="tab">REVIEW</button>
+                            <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review-pane" type="button" role="tab">RESEÑA</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="productTabContent">

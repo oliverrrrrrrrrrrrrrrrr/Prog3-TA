@@ -335,11 +335,15 @@
     <Content Include="GestionarLibros.aspx" />
     <Content Include="GestionarOrdenesCompra.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\790-2-424x454.png" />
     <Content Include="Images\carrito.png" />
+    <Content Include="Images\chain 2.png" />
+    <Content Include="Images\cuaderno-anillado-top-carta-rayado-solido-100-hojas-73809-default-1.png" />
     <Content Include="Images\diarioGreg.png" />
     <Content Include="Images\libro.png" />
     <Content Include="Images\libroTroll.jpg" />
     <Content Include="Images\perritoLobotomizado.png" />
+    <Content Include="Images\pngtree-some-books-without-bckground-png-image_20337382.png" />
     <Content Include="Images\ralseiPeluche.jpg" />
     <Content Include="Images\thegreft.png" />
     <Content Include="Images\undertale.png" />
@@ -606,6 +610,14 @@
     <None Include="Connected Services\CampusStoreWS\UsuarioWS.xsd">
       <SubType>Designer</SubType>
     </None>
+<<<<<<< Updated upstream
+=======
+    <None Include="Connected Services\CarritoWS\CarritoWS.wsdl" />
+    <None Include="Connected Services\CarritoWS\CarritoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Images\merchandise_Peluche_Pokemon_totodile.webp" />
+>>>>>>> Stashed changes
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <None Include="Web.Debug.config">
