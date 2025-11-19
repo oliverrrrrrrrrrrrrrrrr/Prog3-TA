@@ -151,6 +151,9 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarOrdenCompraResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarResenaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.empleado.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -182,6 +185,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarOrdenCompraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarResenaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.libro.datasource">
@@ -223,6 +229,9 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarOrdenesPorClienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarResenasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.loginResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -256,22 +265,13 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerOrdenCompraResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerResenaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.ordenCompra.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.registrarLibroResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarResenaResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarResenaResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarResenasResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerResenaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.reseña.datasource">
@@ -292,9 +292,6 @@
     </None>
     <None Include="Connected Services\CampusStoreWS\LibroWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\ResenaWS.wsdl" />
-    <None Include="Connected Services\CampusStoreWS\ResenaWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\CampusStoreWS\servicios.disco" />
     <None Include="Connected Services\CampusStoreWS\configuration91.svcinfo" />
     <None Include="Connected Services\CampusStoreWS\configuration.svcinfo" />
@@ -607,6 +604,9 @@
     </None>
     <None Include="Connected Services\CampusStoreWS\OrdenCompraWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\OrdenCompraWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CampusStoreWS\ResenaWS.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\CampusStoreWS\UsuarioWS.wsdl" />
