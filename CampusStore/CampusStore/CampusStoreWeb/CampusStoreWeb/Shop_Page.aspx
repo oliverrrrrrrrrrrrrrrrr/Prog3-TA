@@ -74,6 +74,10 @@
         #quickViewModal .quick-view-availability .in-stock { color: #198754; font-weight: bold; }
         #quickViewModal .quick-view-availability .out-stock { color: #dc3545; font-weight: bold; }
         #quickViewModal .loading-spinner { display: flex; justify-content: center; align-items: center; min-height: 400px; }
+        #quickViewModal .quick-view-actions { display: flex; align-items: center; gap: 10px; }
+        #quickViewModal .quick-view-qty { width: 70px; text-align: center; height: 40px; }
+        #quickViewModal .btn-add-to-cart { background-color: #ffc107; border-color: #ffc107; color: #212529; font-weight: bold; height: 40px; }
+        #quickViewModal .btn-add-to-cart:hover { background-color: #e0a800; border-color: #e0a800; }
     </style>
     <script type="text/javascript">
         function validarFiltrosCliente() {
@@ -216,7 +220,7 @@
                     
                     <!-- El Repeater que genera las tarjetas de producto -->
                    <!-- El Repeater que genera las tarjetas de producto -->
-            <asp:Repeater ID="rptProductos" runat="server">
+            <asp:Repeater ID="rptProductos" runat="server" OnItemCommand="rptProductos_ItemCommand">
                 <ItemTemplate>
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                         <div class="card h-100 product-card">
@@ -236,6 +240,11 @@
                                                onclick='openQuickView(<%# Eval("Id") %>, "<%# Eval("TipoProducto") %>"); return false;'>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
                                             </a>
+                                    
+                                    <!-- Botón de Añadir al Carrito -->
+                                    <asp:LinkButton runat="server" CommandName="AddToCart" CommandArgument='<%# Eval("Id") + "," + Eval("TipoProducto") %>' CssClass="action-btn" ToolTip="Añadir al Carrito">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+                                    </asp:LinkButton>
                                 </div>
                             </div>
 
@@ -337,6 +346,10 @@
                             <h3 class="quick-view-price">${result.Precio.toLocaleString('es-PE', { style: 'currency', currency: 'PEN' })}</h3>
                             <p class="quick-view-description">${result.Descripcion || 'Sin descripción.'}</p>
                             <p class="quick-view-availability">Disponibilidad: <span class="${disponibilidadClass}">${disponibilidadTexto}</span></p>
+                            <div class="quick-view-actions">
+                                <input id="modalQty" type="number" class="form-control quick-view-qty" value="1" min="1" max="${result.Stock}" ${result.Stock === 0 ? 'disabled' : ''} />
+                                <button class="btn btn-add-to-cart" onclick="addFromModal(${result.Id}, '${result.TipoProducto}')" ${result.Stock === 0 ? 'disabled' : ''}>AGREGAR AL CARRITO</button>
+                            </div>
                         </div>
                     </div>`;
 
@@ -349,6 +362,30 @@
          function onGetDetailsError(error) {
              document.getElementById('modalLoading').style.display = 'none';
              document.getElementById('modalContent').innerHTML = `<p class="text-center text-danger">Error: ${error.get_message()}</p>`;
+         }
+
+         function addFromModal(productoId, tipoProducto) {
+             var cantidad = parseInt(document.getElementById('modalQty').value) || 1;
+             
+             // Crear un formulario oculto para hacer el postback
+             var form = document.createElement('form');
+             form.method = 'POST';
+             form.action = window.location.href;
+             
+             var targetInput = document.createElement('input');
+             targetInput.type = 'hidden';
+             targetInput.name = '__EVENTTARGET';
+             targetInput.value = 'AddToCartFromModal';
+             form.appendChild(targetInput);
+             
+             var argInput = document.createElement('input');
+             argInput.type = 'hidden';
+             argInput.name = '__EVENTARGUMENT';
+             argInput.value = productoId + ',' + tipoProducto + ',' + cantidad;
+             form.appendChild(argInput);
+             
+             document.body.appendChild(form);
+             form.submit();
          }
 
     </script>

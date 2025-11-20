@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -15,6 +16,10 @@ namespace CampusStoreWeb
         public decimal Precio { get; set; }
         public string TipoProducto { get; set; }
         public string UrlImagen { get; set; }
+        public int Stock { get; set; }
+        public string Autor { get; set; }
+        public string Descripcion { get; set; }
+        public string TipoDeProducto { get; set; }
     }
 
     public partial class Catalogo : System.Web.UI.Page
@@ -22,9 +27,40 @@ namespace CampusStoreWeb
        
         private string categoriaActual = "articulo"; // Por defecto muestra todos
         private static Random random = new Random();
+        private readonly CarritoWSClient carritoWS;
+        private readonly ClienteWSClient clienteWS;
+
+        public Catalogo()
+        {
+            carritoWS = new CarritoWSClient();
+            clienteWS = new ClienteWSClient();
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["ShowAddToCartAlert"] != null && (bool)Session["ShowAddToCartAlert"])
+            {
+                string script = "Swal.fire({ icon: 'success', title: '¡Añadido!', text: 'Producto agregado al carrito.', showConfirmButton: false, timer: 1500 });";
+                ClientScript.RegisterStartupScript(this.GetType(), "addToCartAlert", script, true);
+                Session["ShowAddToCartAlert"] = false;
+            }
+
+            // Manejar postback desde el modal
+            string eventTarget = Request["__EVENTTARGET"];
+            string eventArgument = Request["__EVENTARGUMENT"];
+            
+            if (eventTarget == "AddToCartFromModal" && !string.IsNullOrEmpty(eventArgument))
+            {
+                string[] args = eventArgument.Split(',');
+                if (args.Length == 3)
+                {
+                    int productoId = int.Parse(args[0]);
+                    string productoTipo = args[1];
+                    int cantidad = int.Parse(args[2]);
+                    AgregarAlCarrito(productoId, productoTipo, cantidad);
+                }
+            }
+
             if (!IsPostBack)
             {
                 CargarProductosDestacados();
@@ -156,6 +192,251 @@ namespace CampusStoreWeb
             rptProductosDestacados.DataBind();
         }
 
+        protected void rptProductosDestacados_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "AddToCart")
+            {
+                // El CommandArgument contiene "ID,TIPO" (ej: "123,libro")
+                string[] args = e.CommandArgument.ToString().Split(',');
+                if (args.Length == 2)
+                {
+                    int productoId = int.Parse(args[0]);
+                    string productoTipo = args[1];
+
+                    AgregarAlCarrito(productoId, productoTipo, 1);
+                }
+            }
+        }
+
+        [WebMethod]
+        public static ProductoDestacado GetProductDetails(string tipo, int id)
+        {
+            try
+            {
+                if (tipo.ToLower() == "libro")
+                {
+                    var cliente = new LibroWSClient();
+                    libro libroResult = cliente.obtenerLibro(id);
+                    if (libroResult == null) return null;
+
+                    return new ProductoDestacado
+                    {
+                        Id = libroResult.idLibro,
+                        Nombre = libroResult.nombre,
+                        Autor = (libroResult.autores != null && libroResult.autores.Length > 0) ? libroResult.autores[0].nombre : null,
+                        Descripcion = libroResult.descripcion,
+                        Precio = (decimal)libroResult.precio,
+                        Stock = libroResult.stockReal,
+                        UrlImagen = libroResult.imagenURL,
+                        TipoProducto = "libro",
+                        TipoDeProducto = "Libro"
+                    };
+                }
+                else
+                {
+                    var cliente = new ArticuloWSClient();
+                    articulo articuloResult = cliente.obtenerArticulo(id);
+                    if (articuloResult == null) return null;
+
+                    return new ProductoDestacado
+                    {
+                        Id = articuloResult.idArticulo,
+                        Nombre = articuloResult.nombre,
+                        Autor = null,
+                        Descripcion = articuloResult.descripcion,
+                        Precio = (decimal)articuloResult.precio,
+                        Stock = articuloResult.stockReal,
+                        UrlImagen = articuloResult.imagenURL,
+                        TipoProducto = tipo,
+                        TipoDeProducto = "Artículo"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error en WebMethod GetProductDetails: {ex.Message}");
+                return null;
+            }
+        }
+
+        private void AgregarAlCarrito(int productoId, string tipoProducto, int cantidad)
+        {
+            if (!Page.User.Identity.IsAuthenticated)
+            {
+                Response.Redirect($"SignIn.aspx?returnUrl={Server.UrlEncode(Request.RawUrl)}");
+                return;
+            }
+
+            try
+            {
+                var clienteActual = clienteWS.buscarClientePorCuenta(Page.User.Identity.Name);
+                if (clienteActual == null || clienteActual.idCliente <= 0)
+                {
+                    return;
+                }
+                clienteActual.idClienteSpecified = true;
+
+                var carritoActual = carritoWS.obtenerCarritoPorCliente(clienteActual.idCliente);
+                bool crearNuevoCarrito = carritoActual == null || carritoActual.completado;
+
+                // Obtener datos del producto
+                ProductoDestacado producto = null;
+                if (tipoProducto.ToLower() == "libro")
+                {
+                    var libroWS = new LibroWSClient();
+                    libro libroResult = libroWS.obtenerLibro(productoId);
+                    if (libroResult != null)
+                    {
+                        producto = new ProductoDestacado
+                        {
+                            Id = libroResult.idLibro,
+                            Nombre = libroResult.nombre,
+                            Precio = (decimal)libroResult.precio,
+                            TipoProducto = "libro",
+                            Stock = libroResult.stockReal
+                        };
+                    }
+                }
+                else
+                {
+                    var articuloWS = new ArticuloWSClient();
+                    articulo articuloResult = articuloWS.obtenerArticulo(productoId);
+                    if (articuloResult != null)
+                    {
+                        producto = new ProductoDestacado
+                        {
+                            Id = articuloResult.idArticulo,
+                            Nombre = articuloResult.nombre,
+                            Precio = (decimal)articuloResult.precio,
+                            TipoProducto = tipoProducto,
+                            Stock = articuloResult.stockReal
+                        };
+                    }
+                }
+
+                if (producto == null || producto.Stock <= 0)
+                {
+                    return;
+                }
+
+                cantidad = Math.Max(1, cantidad);
+                cantidad = Math.Min(cantidad, producto.Stock);
+
+                if (crearNuevoCarrito)
+                {
+                    carritoActual = new carrito
+                    {
+                        cliente = clienteActual,
+                        completado = false,
+                        completadoSpecified = true,
+                        fechaCreacion = DateTime.Now,
+                        fechaCreacionSpecified = true,
+                        lineas = Array.Empty<lineaCarrito>()
+                    };
+                    var nuevaLinea = CrearLineaCarrito(producto, cantidad);
+                    carritoActual.lineas = new[] { nuevaLinea };
+                    carritoWS.guardarCarrito(carritoActual, estado.Nuevo);
+                }
+                else
+                {
+                    var lineas = (carritoActual.lineas ?? Array.Empty<lineaCarrito>()).Where(l => l != null).ToList();
+                    tipoProducto tipoEnum = tipoProducto.ToLower() == "libro" ? CampusStoreWS.tipoProducto.LIBRO : CampusStoreWS.tipoProducto.ARTICULO;
+                    var lineaExistente = lineas.FirstOrDefault(l => EsMismoProducto(l, tipoEnum, productoId));
+
+                    if (lineaExistente != null)
+                    {
+                        int nuevaCantidad = lineaExistente.cantidad + cantidad;
+                        nuevaCantidad = Math.Min(nuevaCantidad, producto.Stock);
+                        lineaExistente.cantidad = nuevaCantidad;
+                        lineaExistente.cantidadSpecified = true;
+                        lineaExistente.subtotal = lineaExistente.cantidad * lineaExistente.precioUnitario;
+                        lineaExistente.subtotalSpecified = true;
+
+                        if (lineaExistente.precioConDescuentoSpecified && lineaExistente.precioConDescuento > 0)
+                        {
+                            lineaExistente.subTotalConDescuento = lineaExistente.cantidad * lineaExistente.precioConDescuento;
+                            lineaExistente.subTotalConDescuentoSpecified = true;
+                        }
+                    }
+                    else
+                    {
+                        var nuevaLinea = CrearLineaCarrito(producto, cantidad);
+                        lineas.Add(nuevaLinea);
+                    }
+
+                    carritoActual.lineas = lineas.ToArray();
+                    carritoWS.guardarCarrito(carritoActual, estado.Modificado);
+                }
+
+                Session["ShowAddToCartAlert"] = true;
+                Response.Redirect(Request.RawUrl, false);
+                Context.ApplicationInstance.CompleteRequest();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error al agregar al carrito: {ex.Message}");
+            }
+        }
+
+        private lineaCarrito CrearLineaCarrito(ProductoDestacado producto, int cantidad)
+        {
+            var linea = new lineaCarrito
+            {
+                idLineaCarrito = 0,
+                idLineaCarritoSpecified = true,
+                cantidad = cantidad,
+                cantidadSpecified = true,
+                precioUnitario = (double)producto.Precio,
+                precioUnitarioSpecified = true,
+                subtotal = (double)producto.Precio * cantidad,
+                subtotalSpecified = true,
+                precioConDescuento = (double)producto.Precio,
+                precioConDescuentoSpecified = true,
+                subTotalConDescuento = (double)producto.Precio * cantidad,
+                subTotalConDescuentoSpecified = true,
+                tipoProducto = producto.TipoProducto.ToLower() == "libro" ? CampusStoreWS.tipoProducto.LIBRO : CampusStoreWS.tipoProducto.ARTICULO,
+                tipoProductoSpecified = true
+            };
+
+            if (linea.tipoProducto == CampusStoreWS.tipoProducto.LIBRO)
+            {
+                linea.producto = new libro
+                {
+                    idLibro = producto.Id,
+                    idLibroSpecified = true
+                };
+            }
+            else
+            {
+                linea.producto = new articulo
+                {
+                    idArticulo = producto.Id,
+                    idArticuloSpecified = true
+                };
+            }
+
+            return linea;
+        }
+
+        private bool EsMismoProducto(lineaCarrito linea, CampusStoreWS.tipoProducto tipoEnum, int idProducto)
+        {
+            if (linea == null || linea.tipoProducto != tipoEnum)
+            {
+                return false;
+            }
+
+            if (tipoEnum == CampusStoreWS.tipoProducto.LIBRO && linea.producto is libro libroProd)
+            {
+                return libroProd.idLibroSpecified && libroProd.idLibro == idProducto;
+            }
+
+            if (tipoEnum == CampusStoreWS.tipoProducto.ARTICULO && linea.producto is articulo articuloProd)
+            {
+                return articuloProd.idArticuloSpecified && articuloProd.idArticulo == idProducto;
+            }
+
+            return false;
+        }
 
     }
 }
