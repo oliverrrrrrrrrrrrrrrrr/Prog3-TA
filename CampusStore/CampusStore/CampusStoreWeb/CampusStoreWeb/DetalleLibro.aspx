@@ -508,6 +508,27 @@
             font-size: 14px;
             font-style: italic;
         }
+
+        /* Grid con botón para editorial */
+        .form-control-with-button {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+            align-items: start;
+        }
+
+        .btn-nuevo-item {
+            background-color: #2DA5F3;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            margin-top: 26px;
+        }
     
         @media (max-width: 768px) {
             .detalle-grid {
@@ -855,8 +876,51 @@
                         <label>Formato *</label>
                         <asp:DropDownList ID="ddlFormato" runat="server"></asp:DropDownList>
                     </div>
-                    <!-- EDITORIAL falta-->
-                    <!-- AUTORES falta-->
+                    <div class="form-group">
+                        <label>Editorial *</label>
+                        <div class="form-control-with-button">
+                            <asp:DropDownList ID="ddlEditorialEdit" runat="server"></asp:DropDownList>
+                            <asp:Button ID="btnNuevaEditorialEdit" runat="server" Text="+ Nueva" CssClass="btn-nuevo-item" OnClientClick="showModalEditorial(); return false;" CausesValidation="false" />
+                        </div>
+                        <asp:RequiredFieldValidator ID="rfvEditorialEdit" runat="server" 
+                            ControlToValidate="ddlEditorialEdit" 
+                            InitialValue="0"
+                            ErrorMessage="Seleccione una editorial" 
+                            CssClass="validator"
+                            Display="Dynamic" 
+                            ValidationGroup="EditarForm" />
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label>Autores</label>
+                        <div class="autores-edit-section" style="background-color: #F9FAFB; border: 2px solid #E4E7E9; border-radius: 8px; padding: 16px;">
+                            <div style="display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: end; margin-bottom: 12px;">
+                                <asp:DropDownList ID="ddlAutoresEdit" runat="server"></asp:DropDownList>
+                                <asp:Button ID="btnNuevoAutorEdit" runat="server" Text="+ Nuevo" CssClass="btn-nuevo-item" OnClientClick="showModalAutor(); return false;" CausesValidation="false" style="margin-top: 0;" />
+                                <asp:Button ID="btnAgregarAutorEdit" runat="server" Text="Agregar" CssClass="btn-agregar-autor" OnClick="btnAgregarAutorEdit_Click" CausesValidation="false" style="margin-top: 0; padding: 10px 20px; background-color: var(--primary-orange); color: white; border-radius: 4px; font-size: 13px; font-weight: 600; border: none; cursor: pointer;" />
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                <asp:Repeater ID="rptAutoresEdit" runat="server" OnItemCommand="rptAutoresEdit_ItemCommand">
+                                    <ItemTemplate>
+                                        <div class="autor-tag" style="background-color: white; border: 1px solid #E4E7E9; padding: 6px 12px; border-radius: 20px; font-size: 13px; display: inline-flex; align-items: center; gap: 8px;">
+                                            <span><%# Eval("nombre") %> <%# Eval("apellidos") %></span>
+                                            <asp:LinkButton runat="server" CommandName="EliminarAutor" CommandArgument='<%# Eval("idAutor") %>' CausesValidation="false" style="background: none; border: none; color: #EE5858; cursor: pointer; font-size: 16px; padding: 0;">
+                                                <i class="bi bi-x"></i>
+                                            </asp:LinkButton>
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <asp:Label ID="lblNoAutoresEdit" runat="server" Text="No hay autores seleccionados" CssClass="text-muted" Visible="false" style="color: #929FA5; font-size: 14px; font-style: italic;"></asp:Label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- IMAGEN -->
+                    <div class="form-group form-group-full">
+                        <label>Portada (imagen)</label>
+                        <asp:FileUpload ID="fuPortadaEdit" runat="server" />
+                        <span class="form-help-text">
+                            Deje vacío para mantener la imagen actual. Seleccione una nueva imagen para reemplazarla (JPG, PNG).
+                        </span>
+                    </div>
                     <div class="form-group form-group-full">
                         <label>Sinopsis</label>
                         <asp:TextBox ID="txtSinopsis" runat="server" TextMode="MultiLine"></asp:TextBox>

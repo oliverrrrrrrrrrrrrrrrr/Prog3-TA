@@ -1,5 +1,12 @@
 ﻿using CampusStoreWeb.CampusStoreWS;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.UI.WebControls;
 
 namespace CampusStoreWeb
@@ -11,6 +18,7 @@ namespace CampusStoreWeb
         private libro libroActual;
         private descuento descuentoActual;
         private int idLibroActual;
+        private List<autor> autoresEditSeleccionados;
 
         public DetalleLibro()
         {
@@ -24,7 +32,55 @@ namespace CampusStoreWeb
             {
                 CargarGeneros();
                 CargarFormatos();
+                CargarEditoriales(); // NUEVO
+                CargarAutoresDropdown(); // NUEVO
                 CargarDetalleLibro();
+            }
+            else
+            {
+                // Recuperar autores del ViewState en postbacks
+                if (ViewState["AutoresEditSeleccionados"] != null)
+                {
+                    autoresEditSeleccionados = (List<autor>)ViewState["AutoresEditSeleccionados"];
+                }
+            }
+        }
+
+        private void CargarEditoriales()
+        {
+            try
+            {
+                ddlEditorialEdit.Items.Clear();
+                var editoriales = new EditorialWSClient().listarEditoriales();
+                ddlEditorialEdit.DataSource = editoriales;
+                ddlEditorialEdit.DataTextField = "nombre";
+                ddlEditorialEdit.DataValueField = "idEditorial";
+                ddlEditorialEdit.DataBind();
+                ddlEditorialEdit.Items.Insert(0, new ListItem("-- Seleccione editorial --", "0"));
+            }
+            catch (Exception ex)
+            {
+                string script = $"alert('Error al cargar editoriales: {ex.Message}');";
+                ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+            }
+        }
+
+        private void CargarAutoresDropdown()
+        {
+            try
+            {
+                ddlAutoresEdit.Items.Clear();
+                var autores = new AutorWSClient().listarAutores();
+                ddlAutoresEdit.DataSource = autores;
+                ddlAutoresEdit.DataTextField = "nombre";
+                ddlAutoresEdit.DataValueField = "idAutor";
+                ddlAutoresEdit.DataBind();
+                ddlAutoresEdit.Items.Insert(0, new ListItem("-- Seleccione autor --", "0"));
+            }
+            catch (Exception ex)
+            {
+                string script = $"alert('Error al cargar autores: {ex.Message}');";
+                ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
             }
         }
 
@@ -413,11 +469,104 @@ namespace CampusStoreWeb
             ddlGenero.SelectedValue = libroActual.genero.ToString();
             txtFechaPublicacion.Text = libroActual.fechaPublicacion.ToString("yyyy-MM-dd");
             ddlFormato.SelectedValue = libroActual.formato.ToString();
-            //EDITORIAL FALTA
-            //AUTORES FALTA
+            if (libroActual.editorial != null)
+            {
+                ddlEditorialEdit.SelectedValue = libroActual.editorial.idEditorial.ToString();
+            }
+
+            if (libroActual.autores != null && libroActual.autores.Length > 0)
+            {
+                autoresEditSeleccionados = new List<autor>(libroActual.autores);
+                ViewState["AutoresEditSeleccionados"] = autoresEditSeleccionados;
+                ActualizarAutoresEdit();
+            }
+            else
+            {
+                autoresEditSeleccionados = new List<autor>();
+                ViewState["AutoresEditSeleccionados"] = autoresEditSeleccionados;
+                ActualizarAutoresEdit();
+            }
+
             txtSinopsis.Text = libroActual.sinopsis;
             txtDescripcion.Text = libroActual.descripcion;
 
+        }
+
+        private void ActualizarAutoresEdit()
+        {
+            if (autoresEditSeleccionados != null && autoresEditSeleccionados.Count > 0)
+            {
+                rptAutoresEdit.DataSource = autoresEditSeleccionados;
+                rptAutoresEdit.DataBind();
+                rptAutoresEdit.Visible = true;
+                lblNoAutoresEdit.Visible = false;
+            }
+            else
+            {
+                rptAutoresEdit.Visible = false;
+                lblNoAutoresEdit.Visible = true;
+            }
+        }
+
+        // Agregar autor a la lista de edición
+        protected void btnAgregarAutorEdit_Click(object sender, EventArgs e)
+        {
+            if (ddlAutoresEdit.SelectedValue != "0")
+            {
+                try
+                {
+                    int idAutor = int.Parse(ddlAutoresEdit.SelectedValue);
+
+                    if (ViewState["AutoresEditSeleccionados"] != null)
+                    {
+                        autoresEditSeleccionados = (List<autor>)ViewState["AutoresEditSeleccionados"];
+                    }
+                    else
+                    {
+                        autoresEditSeleccionados = new List<autor>();
+                    }
+
+                    // Verificar si ya está en la lista
+                    if (!autoresEditSeleccionados.Any(a => a.idAutor == idAutor))
+                    {
+                        var autorCompleto = new AutorWSClient().obtenerAutor(idAutor);
+                        if (autorCompleto != null)
+                        {
+                            autoresEditSeleccionados.Add(autorCompleto);
+                            ViewState["AutoresEditSeleccionados"] = autoresEditSeleccionados;
+                            ActualizarAutoresEdit();
+                            ddlAutoresEdit.SelectedIndex = 0;
+                        }
+                    }
+                    else
+                    {
+                        string script = "alert('Este autor ya está en la lista.');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "warning", script, true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string script = $"alert('Error al agregar autor: {ex.Message}');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                }
+            }
+        }
+
+        // Eliminar autor de la lista
+        protected void rptAutoresEdit_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "EliminarAutor")
+            {
+                int idAutor = int.Parse(e.CommandArgument.ToString());
+
+                if (ViewState["AutoresEditSeleccionados"] != null)
+                {
+                    autoresEditSeleccionados = (List<autor>)ViewState["AutoresEditSeleccionados"];
+                    autoresEditSeleccionados.RemoveAll(a => a.idAutor == idAutor);
+                    ViewState["AutoresEditSeleccionados"] = autoresEditSeleccionados;
+                    ActualizarAutoresEdit();
+                }
+            }
         }
 
         private void MostrarFormularioEdicion(bool mostrar)
@@ -440,6 +589,37 @@ namespace CampusStoreWeb
                 try
                 {
                     idLibroActual = (int)ViewState["idLibro"];
+
+                    int idEditorial = int.Parse(ddlEditorialEdit.SelectedValue);
+                    editorial editorialSeleccionada = new EditorialWSClient().obtenerEditorial(idEditorial);
+
+                    if (ViewState["AutoresEditSeleccionados"] != null)
+                    {
+                        autoresEditSeleccionados = (List<autor>)ViewState["AutoresEditSeleccionados"];
+                    }
+
+                    string imagenUrlFinal;
+                    libroActual = libroWS.obtenerLibro(idLibroActual);
+
+                    if (fuPortadaEdit.HasFile)
+                    {
+                        // Si seleccionó una nueva imagen, subirla
+                        try
+                        {
+                            imagenUrlFinal = SubirImagenAImgBB(fuPortadaEdit.PostedFile);
+                        }
+                        catch (Exception imgEx)
+                        {
+                            string scriptEx = $"alert('Error al subir la imagen: {imgEx.Message}');";
+                            ClientScript.RegisterStartupScript(this.GetType(), "errorImagen", scriptEx, true);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        // Mantener la imagen actual del libro
+                        imagenUrlFinal = libroActual.imagenURL;
+                    }
 
                     // Crear objeto con los datos del formulario
                     libro libroEditado = new libro
@@ -465,15 +645,23 @@ namespace CampusStoreWeb
                         formatoSpecified=true,
                         sinopsis = txtSinopsis.Text,
                         descripcion = txtDescripcion.Text,
-                        //EDITORIAL FALTA
-                        //editorial=new editorial
-                        //{
-                        //    idEditorial=
-                        //}
+                        editorial = new editorial
+                        {
+                            idEditorial = editorialSeleccionada.idEditorial,
+                            idEditorialSpecified = true,
+                            nombre = editorialSeleccionada.nombre,
+                            cif = editorialSeleccionada.cif,
+                            direccion = editorialSeleccionada.direccion,
+                            telefono = editorialSeleccionada.telefono,
+                            telefonoSpecified = true,
+                            email = editorialSeleccionada.email,
+                            sitioWeb = editorialSeleccionada.sitioWeb
+                        },
 
-                        //AUTORES FALTA
+                        autores = autoresEditSeleccionados?.ToArray(),
+
+                        imagenURL = imagenUrlFinal
                     };
-
                     // Llamar al WS para actualizar
                     libroWS.guardarLibro(libroEditado, estado.Modificado);
 
@@ -492,6 +680,55 @@ namespace CampusStoreWeb
                 {
                     string script = $"alert('Error al guardar cambios: {ex.Message}');";
                     ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                }
+            }
+        }
+
+        private string SubirImagenAImgBB(System.Web.HttpPostedFile archivo)
+        {
+            if (archivo == null || archivo.ContentLength == 0)
+                throw new Exception("No se recibió ninguna imagen.");
+
+            // Validación simple de tipo de archivo
+            if (!archivo.ContentType.StartsWith("image/"))
+                throw new Exception("El archivo seleccionado no es una imagen válida.");
+
+            string apiKey = ConfigurationManager.AppSettings["ImgBBApiKey"];
+            if (string.IsNullOrEmpty(apiKey))
+                throw new Exception("No se ha configurado la API Key de ImgBB.");
+
+            using (var content = new MultipartFormDataContent())
+            {
+                byte[] bytes;
+                using (var br = new BinaryReader(archivo.InputStream))
+                {
+                    bytes = br.ReadBytes(archivo.ContentLength);
+                }
+
+                var fileContent = new ByteArrayContent(bytes);
+                fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse(archivo.ContentType);
+
+                content.Add(fileContent, "image", Path.GetFileName(archivo.FileName));
+
+                var url = $"https://api.imgbb.com/1/upload?key={apiKey}";
+
+                using (var httpClient = new HttpClient())
+                {
+                    var response = httpClient.PostAsync(url, content).Result;
+                    response.EnsureSuccessStatusCode();
+
+                    string json = response.Content.ReadAsStringAsync().Result;
+
+                    dynamic result = JsonConvert.DeserializeObject(json);
+                    bool success = result.success;
+
+                    if (!success)
+                    {
+                        throw new Exception("ImgBB no pudo procesar la imagen.");
+                    }
+
+                    string imageUrl = result.data.url;
+                    return imageUrl;
                 }
             }
         }

@@ -1,10 +1,5 @@
 package pe.edu.pucp.campusstore.modelo;
 
-/**
- *
- * @author Brayan
- */
-
 public class Editorial {
     private Integer idEditorial;
     private String nombre;
