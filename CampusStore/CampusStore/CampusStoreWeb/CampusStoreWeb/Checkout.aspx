@@ -523,7 +523,7 @@
         <div class="col-lg-5 mb-4">
             <div class="qr-payment-section">
                 <div class="qr-code-container">
-                    <div id="qrcode"></div>
+                    <asp:Image ID="imgQr" runat="server" />
                 </div>
 
                 <asp:LinkButton ID="btnProceedPayment" runat="server" CssClass="btn-proceed-payment" OnClick="btnProceedPayment_Click">
@@ -540,8 +540,9 @@
     </div>
 </div>
 
+    
     <!-- QR Code Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             // Generar el código QR
@@ -554,6 +555,6 @@
                 correctLevel: QRCode.CorrectLevel.H
             });
         });
-    </script>
+    </script> -->
 </asp:Content>
 

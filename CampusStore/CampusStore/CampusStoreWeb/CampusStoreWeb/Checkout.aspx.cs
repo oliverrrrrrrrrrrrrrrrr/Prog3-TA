@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static System.Net.WebRequestMethods;
 
 namespace CampusStoreWeb
 {
@@ -16,6 +17,7 @@ namespace CampusStoreWeb
         public LibroWSClient libroWS;
         public ArticuloWSClient articuloWS;
         private const decimal PORCENTAJE_IMPUESTO = 0.18m;
+        private String idOrdenGenerada;
 
         public Checkout()
         {
@@ -31,6 +33,7 @@ namespace CampusStoreWeb
             if (!IsPostBack)
             {
                 CargarDetallesCheckout();
+                
             }
         }
 
@@ -70,7 +73,28 @@ namespace CampusStoreWeb
                 MostrarCarritoVacio();
             }
         }
+        private String generarURLQR(String codigoOrdenID)
+        {
+            
 
+            // 2. Definir la URL base de WhatsApp. 
+            
+            // Usamos el texto "limpio" para concatenar.
+            string whatsappBase = "https://api.whatsapp.com/send?phone=51993000968&text=HOLA+:D+,+Mi+codigo+de+orden+es+";
+
+            // 3. Reconstruir el mensaje final de WhatsApp (Texto + ID)
+            string mensajeFinalWhatsapp = whatsappBase + codigoOrdenID;
+            
+            // 4. Codificar TODA la URL de WhatsApp para QuickChart
+            // Esta es la codificación que QuickChart necesita.
+            string encodedUrlParaQr = HttpUtility.UrlEncode(mensajeFinalWhatsapp);
+
+            // 5. Crear la URL del QR
+            string qrSource = "https://quickchart.io/qr?text=" + encodedUrlParaQr;
+
+            return qrSource;
+
+        }
         private void CargarCarrito(int idCliente)
         {
             try
@@ -131,6 +155,8 @@ namespace CampusStoreWeb
 
                     // 4. Actualizar labels del resumen
                     ActualizarLabelsResumen(carrito);
+                    string qrUrl = generarURLQR(idOrdenGenerada);
+                    imgQr.ImageUrl = qrUrl;
                 }
                 else
                 {
@@ -153,7 +179,7 @@ namespace CampusStoreWeb
             {
                 // 1. Order ID
                 lblOrderId.Text = "#" + carrito.idCarrito.ToString().PadLeft(8, '0');
-
+                idOrdenGenerada =carrito.idCarrito.ToString().PadLeft(8, '0');
                 // 2. Cantidad de productos
                 int cantidadProductos = carrito.lineas.Length;
                 lblProductCount.Text = cantidadProductos + (cantidadProductos == 1 ? " Producto" : " Productos");
