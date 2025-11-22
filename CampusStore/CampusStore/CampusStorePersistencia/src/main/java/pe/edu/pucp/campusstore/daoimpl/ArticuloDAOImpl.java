@@ -90,6 +90,7 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         
         modelo.setIdArticulo(rs.getInt("idArticulo"));
         modelo.setPrecio(rs.getDouble("precio"));
+        modelo.setPrecioDescuento(rs.getDouble("precioDescuento"));
         modelo.setStockReal(rs.getInt("stockReal"));
         modelo.setStockVirtual(rs.getInt("stockVirtual"));
         modelo.setNombre(rs.getString("nombre"));
@@ -98,17 +99,6 @@ public class ArticuloDAOImpl extends BaseDAO<Articulo> implements ArticuloDAO {
         
         modelo.setTipoArticulo(TipoArticulo.valueOf(rs.getString("tipoArticulo")));
         
-        /*
-        Integer idDescuento = rs.getInt("idDescuento");
-        
-        if(!rs.wasNull()){
-            Descuento descuento = new Descuento();
-            descuento.setIdDescuento(idDescuento);
-            modelo.setDescuento(new DescuentoDAOImpl().leer(descuento));
-        } else{
-            modelo.setDescuento(null);
-        }
-        */
         
         return modelo;
     }
