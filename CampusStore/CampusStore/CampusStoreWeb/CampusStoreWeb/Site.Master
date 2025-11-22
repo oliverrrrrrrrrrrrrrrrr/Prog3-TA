@@ -169,7 +169,7 @@
                     <div class="col-auto">
                         <a href="Catalogo.aspx" class="logo" runat="server">
                             <div class="logo-icon"><div class="logo-icon-inner"></div></div>
-                            CAMPUS_STORE
+                            CAMPUS STORE
                         </a>
                     </div>
 
@@ -224,13 +224,16 @@
                     <!-- Icons -->
                     <div class="col-auto">
                         <div class="header-icons">
-                            <%-- El ClientIDMode="Static" es importante para que el JavaScript encuentre el control fácilmente --%>
-                            <a id="lnkCarrito" class="header-icon">
-                                <i class="bi bi-cart3"></i>
-                                <span class="cart-badge">
-                                    <asp:Label ID="lblCantidadCarrito" runat="server"></asp:Label>
-                                </span>
-                            </a>
+                            <asp:UpdatePanel ID="upIconoCarrito" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:LinkButton ID="lnkCarrito" runat="server" CssClass="header-icon" ClientIDMode="Static">
+                                        <i class="bi bi-cart3"></i>
+                                        <span class="cart-badge">
+                                            <asp:Label ID="lblCantidadCarrito" runat="server"></asp:Label>
+                                        </span>
+                                    </asp:LinkButton>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                             <asp:HyperLink ID="lnkPerfil" runat="server" NavigateUrl="~/Settings.aspx" CssClass="header-icon">
                                 <i class="bi bi-person-circle"></i>
                             </asp:HyperLink>
@@ -239,12 +242,12 @@
                             <!-- ==== POPUP DEL CARRITO (DINÁMICO) ==== -->
                             <!-- ==================================================== -->
                             <div id="shoppingCartPopup" class="shopping-cart-popup" style="display:none;">
-                                <div class="cart-heading">
-                                    Carrito de compras (<asp:Label ID="lblCantidadPopup" runat="server" Text="0"></asp:Label>)
-                                </div>
-    
+                                
                                 <asp:UpdatePanel ID="upCarrito" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+                                        <div class="cart-heading">
+                                            Carrito de compras (<asp:Label ID="lblCantidadPopup" runat="server" Text="0"></asp:Label>)
+                                        </div>
                                         <div class="cart-product-list">
                                             <!-- Repeater para mostrar los productos dinámicamente -->
                                             <asp:Repeater ID="rptCarritoItems" runat="server" OnItemCommand="rptCarritoItems_ItemCommand">
@@ -319,7 +322,7 @@
                             <div class="logo-icon">
                                 <div class="logo-icon-inner"></div>
                             </div>
-                            CAMPUS_STORE
+                            CAMPUS STORE
                         </a>
                         <div class="footer-info mt-3">
                             <p>Avenida Siempre viva 123</p>

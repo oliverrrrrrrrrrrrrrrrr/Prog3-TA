@@ -212,11 +212,11 @@
             
             <div class="mb-2">
                 <label for="txtPassword" class="form-label">Contraseña</label>
-                <asp:HyperLink ID="lnkForgotPassword" runat="server" 
+                <%--<asp:HyperLink ID="lnkForgotPassword" runat="server" 
                                NavigateUrl="~/Forget_Password.aspx" 
                                CssClass="forgot-password">
                     Olvidé mi contraseña
-                </asp:HyperLink>
+                </asp:HyperLink>--%>
                 <div style="clear: both;"></div>
             </div>
             

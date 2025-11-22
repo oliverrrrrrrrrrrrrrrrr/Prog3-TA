@@ -7,6 +7,7 @@ import java.util.List;
 import pe.edu.pucp.campusstore.bo.CarritoBO;
 import pe.edu.pucp.campusstore.boimpl.CarritoBOImpl;
 import pe.edu.pucp.campusstore.modelo.Carrito;
+import pe.edu.pucp.campusstore.modelo.LineaCarrito;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
 
 @WebService(
@@ -37,6 +38,13 @@ public class CarritoWS {
         @WebParam(name = "id") int id
     ) {
         this.carritoBO.eliminar(id);
+    }
+    
+    @WebMethod(operationName = "eliminarLineaDelCarrito")
+    public boolean eliminarLineaDelCarrito(
+        @WebParam(name = "lineaCarrito") LineaCarrito lineaCarrito
+    ) {
+        return this.carritoBO.eliminarLineaCarrito(lineaCarrito);
     }
     
     @WebMethod(operationName = "guardarCarrito")

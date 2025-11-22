@@ -60,6 +60,24 @@ namespace CampusStoreWeb
         protected global::System.Web.UI.WebControls.LinkButton btnBuscar;
 
         /// <summary>
+        /// Control upIconoCarrito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upIconoCarrito;
+
+        /// <summary>
+        /// Control lnkCarrito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkCarrito;
+
+        /// <summary>
         /// Control lblCantidadCarrito.
         /// </summary>
         /// <remarks>
@@ -78,15 +96,6 @@ namespace CampusStoreWeb
         protected global::System.Web.UI.WebControls.HyperLink lnkPerfil;
 
         /// <summary>
-        /// Control lblCantidadPopup.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCantidadPopup;
-
-        /// <summary>
         /// Control upCarrito.
         /// </summary>
         /// <remarks>
@@ -94,6 +103,15 @@ namespace CampusStoreWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upCarrito;
+
+        /// <summary>
+        /// Control lblCantidadPopup.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCantidadPopup;
 
         /// <summary>
         /// Control rptCarritoItems.

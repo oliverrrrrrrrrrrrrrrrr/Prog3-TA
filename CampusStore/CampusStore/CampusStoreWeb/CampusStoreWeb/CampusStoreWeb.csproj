@@ -301,6 +301,9 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.reseña.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarLineaDelCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\CampusStoreWS\CarritoWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\DescuentoWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\DescuentoWS.xsd">
