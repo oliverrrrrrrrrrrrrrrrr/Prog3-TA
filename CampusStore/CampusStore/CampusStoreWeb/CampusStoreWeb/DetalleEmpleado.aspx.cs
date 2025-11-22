@@ -1,24 +1,47 @@
 ﻿using CampusStoreWeb.CampusStoreWS;
 using System;
+using System.Web.UI.WebControls;
 
 namespace CampusStoreWeb
 {
     public partial class DetalleEmpleado : System.Web.UI.Page
     {
         private readonly EmpleadoWSClient empleadoWS;
+        private readonly RolWSClient rolWS;
         private empleado empleadoActual;
         private int idEmpleadoActual;
 
         public DetalleEmpleado()
         {
             this.empleadoWS = new EmpleadoWSClient();
+            this.rolWS = new RolWSClient();
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
             {
+                CargarRoles();
                 CargarDetalleEmpleado();
+            }
+        }
+
+        private void CargarRoles()
+        {
+            try
+            {
+                ddlRol.Items.Clear();
+                var roles = rolWS.listarRoles();
+                ddlRol.DataSource = roles;
+                ddlRol.DataTextField = "nombre";
+                ddlRol.DataValueField = "idRol";
+                ddlRol.DataBind();
+                ddlRol.Items.Insert(0, new ListItem("-- Seleccione un rol --", "0"));
+            }
+            catch (Exception ex)
+            {
+                string script = $"alert('Error al cargar roles: {ex.Message}');";
+                ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
             }
         }
 
@@ -71,6 +94,9 @@ namespace CampusStoreWeb
             lblCorreo.Text = empleadoActual.correo;
             lblTelefono.Text = empleadoActual.telefono;
             lblSueldo.Text = empleadoActual.sueldo.ToString("N2");
+            lblActivo.Text = empleadoActual.activo ? "Activo" : "Inactivo";
+            lblActivo.CssClass = empleadoActual.activo ? "stock-badge stock-disponible" : "stock-badge stock-agotado";
+            lblRol.Text = empleadoActual.rol != null ? empleadoActual.rol.nombre : "Sin rol asignado";
         }
 
         private void MostrarMensajeError(string mensaje)
@@ -108,10 +134,16 @@ namespace CampusStoreWeb
         {
             txtNombre.Text = empleadoActual.nombre;
             txtUsername.Text = empleadoActual.nombreUsuario;
-            txtContraseña.Text = empleadoActual.contraseña;
+            txtContraseña.Text = string.Empty;
+            txtContraseña.Attributes.Add("placeholder", "Dejar vacío para mantener la actual");
             txtCorreo.Text = empleadoActual.correo;
             txtTelefono.Text = empleadoActual.telefono;
-            txtSueldo.Text = empleadoActual.sueldo.ToString("N2");
+            txtSueldo.Text = empleadoActual.sueldo.ToString("F2");
+            chkActivo.Checked = empleadoActual.activo;
+            if (empleadoActual.rol != null)
+            {
+                ddlRol.SelectedValue = empleadoActual.rol.idRol.ToString();
+            }
         }
 
         private void MostrarFormularioEdicion(bool mostrar)
@@ -131,18 +163,32 @@ namespace CampusStoreWeb
                 try
                 {
                     idEmpleadoActual = (int)ViewState["idEmpleado"];
+                    empleadoActual = empleadoWS.obtenerEmpleado(idEmpleadoActual);
+
+                    int idRol = int.Parse(ddlRol.SelectedValue);
+                    rol rolSeleccionado = rolWS.obtenerRol(idRol);
 
                     // Crear objeto con los datos del formulario
                     empleado empleadoEditado = new empleado
                     {
                         idEmpleado = idEmpleadoActual,
+                        idEmpleadoSpecified = true,
                         nombre = txtNombre.Text,
                         nombreUsuario = txtUsername.Text,
-                        contraseña = txtContraseña.Text,
+                        contraseña = string.IsNullOrWhiteSpace(txtContraseña.Text) ? empleadoActual.contraseña : txtContraseña.Text,
                         correo = txtCorreo.Text,
                         telefono = txtTelefono.Text,
-                        sueldo = double.Parse(txtSueldo.Text)
-                        // falto rol y activo
+                        sueldo = double.Parse(txtSueldo.Text),
+                        sueldoSpecified = true,
+                        activo = chkActivo.Checked,
+                        activoSpecified = true,
+                        rol = new rol
+                        {
+                            idRol = rolSeleccionado.idRol,
+                            idRolSpecified = true,
+                            nombre = rolSeleccionado.nombre,
+                            descripcion = rolSeleccionado.descripcion
+                        }
                     };
 
                     // Llamar al WS para actualizar

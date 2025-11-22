@@ -154,6 +154,14 @@
   <xs:complexType name="guardarCarritoResponse">
     <xs:sequence />
   </xs:complexType>
+  <xs:complexType name="listarCarritos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarCarritosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:carrito" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="eliminarLineaDelCarrito">
     <xs:sequence>
       <xs:element minOccurs="0" name="lineaCarrito" type="tns:lineaCarrito" />
@@ -162,14 +170,6 @@
   <xs:complexType name="eliminarLineaDelCarritoResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:boolean" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="listarCarritos">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="listarCarritosResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:carrito" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="obtenerCarrito">

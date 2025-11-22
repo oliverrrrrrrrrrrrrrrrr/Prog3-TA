@@ -479,6 +479,13 @@
             background-color: #ffcccc;
         }
 
+        .form-help-text {
+            font-size: 12px;
+            color: #5F6C72;
+            margin-top: 4px;
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .detalle-grid {
                 grid-template-columns: 1fr;
@@ -528,7 +535,7 @@
 
         <!-- Botón volver -->
         <asp:HyperLink ID="btnVolver" runat="server" NavigateUrl="~/GestionarEmpleados.aspx" CssClass="btn-back">
-            <i class="bi bi-arrow-left"></i> Volver a Clientes
+            <i class="bi bi-arrow-left"></i> Volver a Empleados
         </asp:HyperLink>
 
         <!-- Panel de error (oculto por defecto) -->
@@ -610,9 +617,18 @@
                                 <asp:Label ID="lblSueldo" runat="server" Text="Sueldo"></asp:Label>
                             </div>
                         </div>
-            
-                        <!-- falta agregar el rol y si esta activo o no -->
-            
+                        <div class="info-row">
+                            <span class="info-label">Estado</span>
+                            <div>
+                                <asp:Label ID="lblActivo" runat="server" CssClass="stock-badge" Text=""></asp:Label>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Rol</span>
+                            <span class="info-value">
+                                <asp:Label ID="lblRol" runat="server" Text=""></asp:Label>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </asp:Panel>
@@ -631,29 +647,43 @@
                     <div class="form-group">
                         <label>Username *</label>
                         <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtUsername" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
+                        <asp:RequiredFieldValidator ID="rfvUsername" runat="server" ControlToValidate="txtUsername" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
                     </div>
                     <div class="form-group">
-                        <label>Contraseña *</label>
-                        <asp:TextBox ID="txtContraseña" runat="server" TextMode="Password"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtContraseña" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
+                        <label>Contraseña</label>
+                        <asp:TextBox ID="txtContraseña" runat="server" TextMode="Password" placeholder="Dejar vacío para mantener la actual"></asp:TextBox>
+                        <span class="form-help-text">Solo completar si desea cambiar la contraseña actual</span>
                     </div>
                     <div class="form-group">
                         <label>Correo *</label>
                         <asp:TextBox ID="txtCorreo" runat="server" TextMode="Email"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtCorreo" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
+                        <asp:RequiredFieldValidator ID="rfvCorreo" runat="server" ControlToValidate="txtCorreo" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
                     </div>
                     <div class="form-group">
                         <label>Teléfono *</label>
                         <asp:TextBox ID="txtTelefono" runat="server" TextMode="Number"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtTelefono" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
+                        <asp:RequiredFieldValidator ID="rfvTelefono" runat="server" ControlToValidate="txtTelefono" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
                     </div>
                     <div class="form-group">
                         <label>Sueldo *</label>
                         <asp:TextBox ID="txtSueldo" runat="server" TextMode="Number" step="0.01"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvSueldo" runat="server" ControlToValidate="txtSueldo" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
                     </div>
-                    <!-- falta agregar el rol y si esta activo o no -->
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <asp:CheckBox ID="chkActivo" runat="server" Text="Empleado Activo" Checked="true" />
+                    </div>
+                    <div class="form-group">
+                        <label>Rol *</label>
+                        <asp:DropDownList ID="ddlRol" runat="server"></asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="rfvRol" runat="server" 
+                            ControlToValidate="ddlRol" 
+                            InitialValue="0"
+                            ErrorMessage="Seleccione un rol" 
+                            ForeColor="Red" 
+                            Display="Dynamic" 
+                            ValidationGroup="EditarForm" />
+                    </div>
                 </div>
                 <div class="form-actions">
                     <asp:Button ID="btnCancelarEdit" runat="server" Text="Cancelar" CssClass="btn-form btn-cancelar-edit" OnClick="btnCancelarEdit_Click" CausesValidation="false" />

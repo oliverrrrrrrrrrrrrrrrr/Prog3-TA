@@ -38,4 +38,9 @@ public class RolBOImpl implements RolBO{
         }
     }
     
+    @Override
+    public Integer guardarNuevoRetornaId(Rol modelo){
+        return this.rolDAO.crear(modelo);
+    }
+    
 }

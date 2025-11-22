@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.campusstore.pucp.edu.pe/" targetNamespace="http://services.campusstore.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="eliminarRol" type="tns:eliminarRol" />
+  <xs:element name="eliminarRolResponse" type="tns:eliminarRolResponse" />
+  <xs:element name="guardarNuevoRolRetornaId" type="tns:guardarNuevoRolRetornaId" />
+  <xs:element name="guardarNuevoRolRetornaIdResponse" type="tns:guardarNuevoRolRetornaIdResponse" />
+  <xs:element name="guardarRol" type="tns:guardarRol" />
+  <xs:element name="guardarRolResponse" type="tns:guardarRolResponse" />
+  <xs:element name="listarRoles" type="tns:listarRoles" />
+  <xs:element name="listarRolesResponse" type="tns:listarRolesResponse" />
+  <xs:element name="obtenerRol" type="tns:obtenerRol" />
+  <xs:element name="obtenerRolResponse" type="tns:obtenerRolResponse" />
+  <xs:complexType name="guardarRol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="libro" type="tns:rol" />
+      <xs:element minOccurs="0" name="estado" type="tns:estado" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="rol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element minOccurs="0" name="idRol" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="guardarRolResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarRoles">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarRolesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:rol" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="guardarNuevoRolRetornaId">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:rol" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="guardarNuevoRolRetornaIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarRol">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarRolResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="obtenerRol">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerRolResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:rol" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="estado">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Nuevo" />
+      <xs:enumeration value="Modificado" />
+      <xs:enumeration value="Eliminado" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

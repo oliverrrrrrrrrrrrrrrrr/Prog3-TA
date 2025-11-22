@@ -67,7 +67,7 @@ namespace CampusStoreWeb
 
         protected void btnAgregarEmpleado_Click(object sender, EventArgs e)
         {
-            Response.Redirect("GestionarEmpleado.aspx");
+            Response.Redirect("AgregarEmpleado.aspx");
         }
     }
 }
