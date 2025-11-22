@@ -126,13 +126,6 @@ public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDA
             modelo.setEditorial(new EditorialDAOImpl().leer(idEditorial));
         }
         modelo.setImagenURL(rs.getString("imagenURL"));
-        /*
-        Descuento descuento = new Descuento();
-        descuento.setIdDescuento(rs.getInt("idDescuento"));
-        if(!rs.wasNull()){
-            modelo.setDescuento(new DescuentoDAOImpl().leer(descuento));
-        }
-        */
         return modelo;
     }
     

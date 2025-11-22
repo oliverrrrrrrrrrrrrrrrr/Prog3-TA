@@ -590,13 +590,6 @@
                                 S/.<asp:Label ID="lblPrecioConDescuento" runat="server" Text="0.00"></asp:Label>
                             </span>
                         </div>
-
-                        <div class ="info-row">
-                            <span class="info-label">Descuento</span>
-                            <span class ="info-label">
-                                <asp:Label ID="lblDescuento" runat="server" Text="0.00"></asp:Label>
-                            </span>
-                        </div>
                         
                         <div class="info-row">
                             <span class="info-label">Stock Real</span>

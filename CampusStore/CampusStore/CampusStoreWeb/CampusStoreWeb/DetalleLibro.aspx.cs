@@ -294,6 +294,11 @@ namespace CampusStoreWeb
 
                     string mensaje = descuentoActual.activo ? "activado" : "desactivado";
 
+                    // NUEVO: Recargar el libro actualizado
+                    idLibroActual = (int)ViewState["idLibro"];
+                    libroActual = libroWS.obtenerLibro(idLibroActual);
+                    MostrarDatosLibro();
+
                     // Recargar
                     CargarDescuento();
 
@@ -352,6 +357,9 @@ namespace CampusStoreWeb
                         descuentoWS.guardarDescuento(descuento, estado.Nuevo);
                     }
 
+                    libroActual = libroWS.obtenerLibro(idLibroActual);
+                    MostrarDatosLibro();
+
                     // Recargar
                     CargarDescuento();
                     MostrarFormularioDescuento(false);
@@ -380,6 +388,12 @@ namespace CampusStoreWeb
                     descuentoWS.eliminarDescuento(descuentoActual);
 
                     ViewState.Remove("idDescuento");
+
+                    // NUEVO: Recargar el libro actualizado
+                    idLibroActual = (int)ViewState["idLibro"];
+                    libroActual = libroWS.obtenerLibro(idLibroActual);
+                    MostrarDatosLibro();
+
                     MostrarSinDescuento();
 
                     string script = "alert('Descuento eliminado exitosamente');";

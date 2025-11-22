@@ -211,10 +211,15 @@ namespace CampusStoreWeb
 
                     string mensaje = descuentoActual.activo ? "activado" : "desactivado";
 
+                    // Recargar el artículo actualizado
+                    idArticuloActual = (int)ViewState["idArticulo"];
+                    articuloActual = articuloWS.obtenerArticulo(idArticuloActual);
+                    MostrarDatosArticulo(); // Actualizar precios en la vista
+
                     // Recargar
                     CargarDescuento();
 
-                    
+
                     string script = $"alert('Descuento {mensaje} exitosamente');";
                     ClientScript.RegisterStartupScript(this.GetType(), "success", script, true);
                 }
@@ -268,6 +273,9 @@ namespace CampusStoreWeb
                         descuentoWS.guardarDescuento(descuento, estado.Nuevo);
                     }
 
+                    articuloActual = articuloWS.obtenerArticulo(idArticuloActual);
+                    MostrarDatosArticulo();
+
                     // Recargar
                     CargarDescuento();
                     MostrarFormularioDescuento(false);
@@ -296,6 +304,12 @@ namespace CampusStoreWeb
                     descuentoWS.eliminarDescuento(descuentoActual);
 
                     ViewState.Remove("idDescuento");
+
+                    // NUEVO: Recargar el artículo actualizado
+                    idArticuloActual = (int)ViewState["idArticulo"];
+                    articuloActual = articuloWS.obtenerArticulo(idArticuloActual);
+                    MostrarDatosArticulo();
+
                     MostrarSinDescuento();
 
                     string script = "alert('Descuento eliminado exitosamente');";
