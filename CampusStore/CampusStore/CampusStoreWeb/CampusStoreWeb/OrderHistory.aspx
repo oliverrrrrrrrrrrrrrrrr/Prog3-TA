@@ -1,4 +1,4 @@
-<%@ Page Title="Historial de Pedidos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OrderHistory.aspx.cs" Inherits="CampusStoreWeb.OrderHistory" %>
+﻿<%@ Page Title="Historial de Pedidos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OrderHistory.aspx.cs" Inherits="CampusStoreWeb.OrderHistory" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>

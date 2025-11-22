@@ -115,4 +115,9 @@ public class CarritoBOImpl implements CarritoBO{
     public Carrito obtenerCarritoPorCliente(int idCliente) {
         return obtener(this.carritoDAO.obtenerIdCarritoPorCliente(idCliente));
     }
+
+    @Override
+    public boolean eliminarLineaCarrito(LineaCarrito lineaCarrito) {
+        return this.lineaCarritoDAO.eliminar(lineaCarrito);
+    }
 }

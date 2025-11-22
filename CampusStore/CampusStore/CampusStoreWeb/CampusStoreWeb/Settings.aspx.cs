@@ -48,16 +48,16 @@ namespace CampusStoreWeb
                 string.IsNullOrWhiteSpace(txtFullName.Text) ||
                 string.IsNullOrWhiteSpace(txtEmail.Text))
             {
-                cvSignUpError.IsValid = false;
-                cvSignUpError.ErrorMessage = "Por favor completa todos los campos solicitados.";
+                string script = @"showCustomAlert('Por favor completa todos los campos solicitados.');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowAlert", script, true);
                 return;
             }
 
             // Validar formato de email
             if (!IsValidEmail(txtEmail.Text))
             {
-                cvSignUpError.IsValid = false;
-                cvSignUpError.ErrorMessage = "El formato del correo electrónico no es válido.";
+                string script = @"showCustomAlert('El formato del correo electrónico no es válido.');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowAlert", script, true);
                 return;
             }
 
@@ -81,25 +81,31 @@ namespace CampusStoreWeb
             // Validar cambio de contraseña
             if (string.IsNullOrWhiteSpace(txtCurrentPassword.Text))
             {
-                ShowMessage("Por favor ingresa tu contraseña actual.", "error");
+                string script = @"showCustomAlert('Por favor ingresa tu contraseña actual.');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowAlert", script, true);
+
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtNewPassword.Text))
             {
-                ShowMessage("Por favor ingresa una nueva contraseña.", "error");
+                string script = @"showCustomAlert('Por favor ingresa una nueva contraseña.');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowAlert", script, true);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtConfirmPassword.Text))
             {
-                ShowMessage("Por favor confirma tu nueva contraseña.", "error");
+                string script = @"showCustomAlert('Por favor confirma tu nueva contraseña.');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowAlert", script, true);
                 return;
             }
 
+            // Validar que ambas contraseñas sean iguales
             if (txtNewPassword.Text != txtConfirmPassword.Text)
             {
-                ShowMessage("Las contraseñas no coinciden.", "error");
+                string script = @"showCustomAlert('Las contraseñas no coinciden.');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowAlert", script, true);
                 return;
             }
 
@@ -108,14 +114,16 @@ namespace CampusStoreWeb
             // Verificar que la contraseña actual sea correcta
             if (cliente.contraseña != txtCurrentPassword.Text)
             {
-                ShowMessage("La contraseña actual es incorrecta.", "error");
+                string script = @"showCustomAlert('La contraseña actual es incorrecta.');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowAlert", script, true);
                 return;
             }
 
             // Validar que la nueva contraseña sea diferente a la actual
             if (txtCurrentPassword.Text == txtNewPassword.Text)
             {
-                ShowMessage("La nueva contraseña debe ser diferente a la actual.", "error");
+                string script = @"showCustomAlert('La nueva contraseña debe ser diferente a la actual.');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowAlert", script, true);
                 return;
             }
 

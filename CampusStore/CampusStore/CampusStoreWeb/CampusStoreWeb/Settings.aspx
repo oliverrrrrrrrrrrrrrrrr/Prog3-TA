@@ -3,6 +3,37 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <style>
+    .custom-alert {
+        display: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        z-index: 9999;
+        animation: slideIn 0.3s ease-out;
+    }
+    @keyframes slideIn {
+        from { transform: translateX(400px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    </style>
+
+    <script>
+    function showCustomAlert(message) {
+        var alert = document.getElementById('customAlert');
+        alert.textContent = message;
+        alert.style.display = 'block';
+        setTimeout(function () {
+            alert.style.display = 'none';
+        }, 4000);
+    }
+</script>
+
+    <style>
         /* Estilos específicos para Settings */
         .breadcrumb {
             background-color: #f8f9fa;
@@ -223,6 +254,8 @@
                     <div id="alertSuccess" class="alert-success-custom">
                         <i class="bi bi-check-circle"></i> ¡Los cambios se han guardado correctamente!
                     </div>
+
+                    <div id="customAlert" class="custom-alert"></div>
 
                     <!-- Sección de Información de Cuenta -->
                     <div class="settings-section">

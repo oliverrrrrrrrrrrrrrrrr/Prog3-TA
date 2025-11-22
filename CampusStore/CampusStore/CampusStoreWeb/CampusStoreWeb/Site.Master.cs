@@ -1,6 +1,7 @@
 ﻿using CampusStoreWeb.CampusStoreWS;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -30,7 +31,6 @@ namespace CampusStoreWeb
                 if (isAdmin)
                 {
                     // Menú para Admin
-                    //lnkAboutUs.Visible = true;
 
                     // Ocultar opciones de cliente
                     lnkShopProduct.Visible = false;
@@ -47,7 +47,6 @@ namespace CampusStoreWeb
                 {
                     CargarCarrito();
                     // Menú para Cliente
-                    //lnkAboutUs.Visible = true;
                     lnkShopProduct.Visible = true;
                     lnkShoppingCart.Visible = true;
                     lnkFooterCuadernos.Visible = true;
@@ -61,8 +60,23 @@ namespace CampusStoreWeb
             }
             else
             {
-
+                // Menú para usuario no autenticado
+                OcultarCarrito();
+                lnkPerfil.Visible = false;
             }
+        }
+
+        private void OcultarCarrito()
+        {
+            string script = @"
+                document.addEventListener('DOMContentLoaded', function() {
+                    var cartIcon = document.getElementById('lnkCarrito');
+                    if (cartIcon) {
+                        cartIcon.style.display = 'none';
+                    }
+                });
+            ";
+            ScriptManager.RegisterStartupScript(this, GetType(), "HideCartPopup", script, true);
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
@@ -133,6 +147,18 @@ namespace CampusStoreWeb
                     // Mostrar productos, ocultar mensaje de vacío
                     pnlCarritoVacio.Visible = false;
                     rptCarritoItems.Visible = true;
+
+                    // Ocultar/mostrar el badge según si hay items
+                    if (cantidadTotal == 0)
+                    {
+                        string script = "document.querySelector('.cart-badge').classList.add('cart-badge-hidden');";
+                        ScriptManager.RegisterStartupScript(this, GetType(), "HideBadge", script, true);
+                    }
+                    else
+                    {
+                        string script = "document.querySelector('.cart-badge').classList.remove('cart-badge-hidden');";
+                        ScriptManager.RegisterStartupScript(this, GetType(), "ShowBadge", script, true);
+                    }
                 }
                 else
                 {
@@ -154,9 +180,12 @@ namespace CampusStoreWeb
             rptCarritoItems.Visible = false;
 
             pnlCarritoVacio.Visible = true;
-            lblCantidadCarrito.Text = "00";
-            lblCantidadPopup.Text = "00";
-            lblSubtotal.Text = "0.00";
+            lblCantidadCarrito.Text = "0";
+            lblCantidadPopup.Text = "0";
+
+            lblSubtotal.Visible = false;
+            lnkCheckout.Visible = false;
+            lnkVerCarrito.Visible = false;
         }
 
         protected void rptCarritoItems_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -165,20 +194,33 @@ namespace CampusStoreWeb
             {
                 try
                 {
+                    string cuenta = Page.User.Identity.Name;
+                    cliente cliente = clienteWS.buscarClientePorCuenta(cuenta);
+                    int idCliente = cliente.idCliente;
+
+                    var carrito = carritoWS.obtenerCarritoPorCliente(idCliente);
                     int lineaCarritoId = Convert.ToInt32(e.CommandArgument);
 
-                    // Llamar al servicio SOAP para eliminar la línea
-                    bool resultado = true; //carritoWS.eliminarLineaCarrito(lineaCarritoId);
+                    //  Mini función para encontrar la línea de carrito a eliminar
+                    int i;
+                    for (i = 0; i < carrito.lineas.Length; i++)
+                    {
+                        if (carrito.lineas[i].idLineaCarrito == lineaCarritoId) break;
+                    }
+
+                    bool resultado = carritoWS.eliminarLineaDelCarrito(carrito.lineas[i]);
 
                     if (resultado)
                     {
+
                         // Recargar el carrito
                         CargarCarrito();
 
                         // Actualizar el UpdatePanel
                         upCarrito.Update();
-
-                        // Opcional: Mostrar mensaje de éxito
+                        upIconoCarrito.Update();
+                        
+                        // Mostrar mensaje de éxito
                         ScriptManager.RegisterStartupScript(this, GetType(), "productoEliminado",
                             "showNotification('Producto eliminado del carrito');", true);
                     }

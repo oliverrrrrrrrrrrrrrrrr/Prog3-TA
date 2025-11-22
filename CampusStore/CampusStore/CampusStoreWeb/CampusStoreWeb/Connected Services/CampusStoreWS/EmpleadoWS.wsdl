@@ -17,17 +17,17 @@
   <message name="listarEmpleadosResponse">
     <part name="parameters" element="tns:listarEmpleadosResponse" />
   </message>
-  <message name="obtenerEmpleado">
-    <part name="parameters" element="tns:obtenerEmpleado" />
-  </message>
-  <message name="obtenerEmpleadoResponse">
-    <part name="parameters" element="tns:obtenerEmpleadoResponse" />
-  </message>
   <message name="guardarEmpleado">
     <part name="parameters" element="tns:guardarEmpleado" />
   </message>
   <message name="guardarEmpleadoResponse">
     <part name="parameters" element="tns:guardarEmpleadoResponse" />
+  </message>
+  <message name="obtenerEmpleado">
+    <part name="parameters" element="tns:obtenerEmpleado" />
+  </message>
+  <message name="obtenerEmpleadoResponse">
+    <part name="parameters" element="tns:obtenerEmpleadoResponse" />
   </message>
   <portType name="EmpleadoWS">
     <operation name="eliminarEmpleado">
@@ -38,13 +38,13 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/listarEmpleadosRequest" message="tns:listarEmpleados" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/listarEmpleadosResponse" message="tns:listarEmpleadosResponse" />
     </operation>
-    <operation name="obtenerEmpleado">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoRequest" message="tns:obtenerEmpleado" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoResponse" message="tns:obtenerEmpleadoResponse" />
-    </operation>
     <operation name="guardarEmpleado">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/guardarEmpleadoRequest" message="tns:guardarEmpleado" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/guardarEmpleadoResponse" message="tns:guardarEmpleadoResponse" />
+    </operation>
+    <operation name="obtenerEmpleado">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoRequest" message="tns:obtenerEmpleado" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoResponse" message="tns:obtenerEmpleadoResponse" />
     </operation>
   </portType>
   <binding name="EmpleadoWSPortBinding" type="tns:EmpleadoWS">
@@ -67,7 +67,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="obtenerEmpleado">
+    <operation name="guardarEmpleado">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -76,7 +76,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="guardarEmpleado">
+    <operation name="obtenerEmpleado">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
