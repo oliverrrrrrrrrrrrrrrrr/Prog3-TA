@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AgregarArticulo.aspx" />
+    <Content Include="AgregarCliente.aspx" />
     <Content Include="AgregarEmpleado.aspx" />
     <Content Include="AgregarLibro.aspx" />
     <Content Include="AgregarOrdenCompra.aspx" />
@@ -397,6 +398,13 @@
     </Compile>
     <Compile Include="AgregarArticulo.aspx.designer.cs">
       <DependentUpon>AgregarArticulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarCliente.aspx.cs">
+      <DependentUpon>AgregarCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarCliente.aspx.designer.cs">
+      <DependentUpon>AgregarCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="AgregarEmpleado.aspx.cs">
       <DependentUpon>AgregarEmpleado.aspx</DependentUpon>
