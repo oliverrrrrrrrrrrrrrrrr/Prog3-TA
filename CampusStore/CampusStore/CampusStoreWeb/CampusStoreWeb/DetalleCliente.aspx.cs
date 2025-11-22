@@ -58,6 +58,22 @@ namespace CampusStoreWeb
             }
         }
 
+        private void CargarCuponesCliente()
+        {
+            if (clienteActual.cuponesUsados != null && clienteActual.cuponesUsados.Length > 0)
+            {
+                rptCupones.DataSource = clienteActual.cuponesUsados;
+                rptCupones.DataBind();
+                rptCupones.Visible = true;
+                lblNoCupones.Visible = false;
+            }
+            else
+            {
+                rptCupones.Visible = false;
+                lblNoCupones.Visible = true;
+            }
+        }
+
         private void MostrarDatosCliente()
         {
             pnlDetalle.Visible = true;
@@ -70,6 +86,8 @@ namespace CampusStoreWeb
             lblContraseña.Text = clienteActual.contraseña;
             lblCorreo.Text = clienteActual.correo;
             lblTelefono.Text = clienteActual.telefono;
+
+            CargarCuponesCliente();
         }
 
         private void MostrarMensajeError(string mensaje)
@@ -107,7 +125,8 @@ namespace CampusStoreWeb
         {
             txtNombre.Text = clienteActual.nombre;
             txtUsername.Text = clienteActual.nombreUsuario;
-            txtContraseña.Text = clienteActual.contraseña;
+            txtContraseña.Text = string.Empty;
+            txtContraseña.Attributes.Add("placeholder", "Dejar vacío para mantener la actual");
             txtCorreo.Text = clienteActual.correo;
             txtTelefono.Text = clienteActual.telefono;
         }
@@ -130,15 +149,18 @@ namespace CampusStoreWeb
                 {
                     idClienteActual = (int)ViewState["idCliente"];
 
+                    clienteActual = clienteWS.obtenerCliente(idClienteActual);
+
                     // Crear objeto con los datos del formulario
-                    cliente clienteEditado= new cliente
+                    cliente clienteEditado = new cliente
                     {
                         idCliente = idClienteActual,
+                        idClienteSpecified = true,
                         nombre = txtNombre.Text,
                         nombreUsuario = txtUsername.Text,
-                        contraseña = txtContraseña.Text,
-                        correo = txtCorreo.Text,
-                        telefono = txtTelefono.Text
+                        contraseña = string.IsNullOrWhiteSpace(txtContraseña.Text) ? clienteActual.contraseña : txtContraseña.Text.Trim(),
+                        correo = txtCorreo.Text.Trim(),
+                        telefono = txtTelefono.Text.Trim()
                     };
 
                     // Llamar al WS para actualizar
@@ -152,7 +174,7 @@ namespace CampusStoreWeb
                     MostrarFormularioEdicion(false);
 
                     // Mostrar mensaje de éxito
-                    string script = "alert('Artículo actualizado exitosamente');";
+                    string script = "alert('Cliente actualizado exitosamente');";
                     ClientScript.RegisterStartupScript(this.GetType(), "success", script, true);
                 }
                 catch (Exception ex)

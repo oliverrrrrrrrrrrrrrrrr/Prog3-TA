@@ -2,10 +2,6 @@ package pe.edu.pucp.campusstore.modelo;
 
 import java.util.List;
 
-/**
- *
- * @author Brayan
- */
 public class Cliente extends Usuario{
     private Integer idCliente;
     private List<Cupon> cuponesUsados;

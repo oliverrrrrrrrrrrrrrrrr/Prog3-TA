@@ -98,6 +98,7 @@
   <ItemGroup>
     <Content Include="AgregarArticulo.aspx" />
     <Content Include="AgregarCliente.aspx" />
+    <Content Include="AgregarCupon.aspx" />
     <Content Include="AgregarEmpleado.aspx" />
     <Content Include="AgregarLibro.aspx" />
     <Content Include="AgregarOrdenCompra.aspx" />
@@ -354,6 +355,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="DetalleArticulo.aspx" />
     <Content Include="DetalleCliente.aspx" />
+    <Content Include="DetalleCupon.aspx" />
     <Content Include="DetalleEmpleado.aspx" />
     <Content Include="DetalleLibro.aspx" />
     <Content Include="DetalleOrdenCompra.aspx" />
@@ -361,6 +363,7 @@
     <Content Include="GenerarReportes.aspx" />
     <Content Include="GestionarArticulos.aspx" />
     <Content Include="GestionarClientes.aspx" />
+    <Content Include="GestionarCupones.aspx" />
     <Content Include="GestionarEmpleados.aspx" />
     <Content Include="GestionarLibros.aspx" />
     <Content Include="GestionarOrdenesCompra.aspx" />
@@ -405,6 +408,13 @@
     </Compile>
     <Compile Include="AgregarCliente.aspx.designer.cs">
       <DependentUpon>AgregarCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarCupon.aspx.cs">
+      <DependentUpon>AgregarCupon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarCupon.aspx.designer.cs">
+      <DependentUpon>AgregarCupon.aspx</DependentUpon>
     </Compile>
     <Compile Include="AgregarEmpleado.aspx.cs">
       <DependentUpon>AgregarEmpleado.aspx</DependentUpon>
@@ -459,6 +469,13 @@
     <Compile Include="DetalleCliente.aspx.designer.cs">
       <DependentUpon>DetalleCliente.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DetalleCupon.aspx.cs">
+      <DependentUpon>DetalleCupon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleCupon.aspx.designer.cs">
+      <DependentUpon>DetalleCupon.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DetalleEmpleado.aspx.cs">
       <DependentUpon>DetalleEmpleado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -507,6 +524,13 @@
     </Compile>
     <Compile Include="GestionarClientes.aspx.designer.cs">
       <DependentUpon>GestionarClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionarCupones.aspx.cs">
+      <DependentUpon>GestionarCupones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionarCupones.aspx.designer.cs">
+      <DependentUpon>GestionarCupones.aspx</DependentUpon>
     </Compile>
     <Compile Include="GestionarEmpleados.aspx.cs">
       <DependentUpon>GestionarEmpleados.aspx</DependentUpon>

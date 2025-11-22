@@ -68,7 +68,7 @@ namespace CampusStoreWeb
 
         protected void btnAgregarCliente_Click(object sender, EventArgs e)
         {
-            Response.Redirect("GestionarCliente.aspx");
+            Response.Redirect("AgregarCliente.aspx");
         }
     }
 }

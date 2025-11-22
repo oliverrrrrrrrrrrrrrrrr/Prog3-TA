@@ -1,0 +1,50 @@
+package pe.edu.pucp.campusstorews;
+
+import jakarta.jws.WebService;
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
+import java.util.List;
+import pe.edu.pucp.campusstore.bo.CuponBO;
+import pe.edu.pucp.campusstore.boimpl.CuponBOImpl;
+import pe.edu.pucp.campusstore.modelo.Cupon;
+import pe.edu.pucp.campusstore.modelo.enums.Estado;
+
+
+@WebService(
+        serviceName = "CuponWS",
+        targetNamespace = "http://services.campusstore.pucp.edu.pe/")
+public class CuponWS {
+
+    private final CuponBO cuponBO;
+    
+    public CuponWS() {
+        this.cuponBO = new CuponBOImpl();
+    }
+    
+    @WebMethod(operationName = "listarCupones")
+    public List<Cupon> listarCupones() {
+        return this.cuponBO.listar();
+    }
+    
+    @WebMethod(operationName = "obtenerCupon")
+    public Cupon obtenerCupon(
+        @WebParam(name = "id") int id
+    ) {
+        return this.cuponBO.obtener(id);
+    }
+    
+    @WebMethod(operationName = "eliminarCupon")
+    public void eliminarCupon(
+        @WebParam(name = "id") int id
+    ) {
+        this.cuponBO.eliminar(id);
+    }
+    
+    @WebMethod(operationName = "guardarCupon")
+    public void guardarCupon(
+        @WebParam(name = "cupon") Cupon cupon, 
+        @WebParam(name = "estado") Estado estado
+    ) {
+        this.cuponBO.guardar(cupon, estado);
+    }
+}

@@ -41,7 +41,7 @@ public class RolWS {
     
     @WebMethod(operationName = "guardarRol")
     public void guardarRol(
-        @WebParam(name = "libro") Rol rol, 
+        @WebParam(name = "rol") Rol rol, 
         @WebParam(name = "estado") Estado estado
     ) {
         this.rolBO.guardar(rol, estado);

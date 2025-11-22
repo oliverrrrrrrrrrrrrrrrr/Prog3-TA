@@ -12,7 +12,7 @@
   <xs:element name="obtenerRolResponse" type="tns:obtenerRolResponse" />
   <xs:complexType name="guardarRol">
     <xs:sequence>
-      <xs:element minOccurs="0" name="libro" type="tns:rol" />
+      <xs:element minOccurs="0" name="rol" type="tns:rol" />
       <xs:element minOccurs="0" name="estado" type="tns:estado" />
     </xs:sequence>
   </xs:complexType>

@@ -479,6 +479,13 @@
             background-color: #ffcccc;
         }
 
+        .form-help-text {
+            font-size: 12px;
+            color: #5F6C72;
+            margin-top: 4px;
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .detalle-grid {
                 grid-template-columns: 1fr;
@@ -605,7 +612,32 @@
                             </div>
                         </div>
                 
-                        <!-- falta cupones?, puede ser en un "Ver cupones" pantalla aparte, ya que puede cargar demasiado -->
+                        <div class="cupones-section">
+                            <div class="cupones-header">
+                                <h3><i class="bi bi-ticket-perforated"></i> Cupones Usados</h3>
+                            </div>
+    
+                            <asp:Panel ID="pnlCupones" runat="server" Visible="true">
+                                <asp:Repeater ID="rptCupones" runat="server">
+                                    <ItemTemplate>
+                                        <div class="cupon-card">
+                                            <div class="cupon-info">
+                                                <span class="cupon-codigo"><%# Eval("codigo") %></span>
+                                                <span class="cupon-descuento"><%# Eval("descuento") %>% OFF</span>
+                                                <span class="cupon-estado">
+                                                    <%# (bool)Eval("activo") ? "Activo" : "Usado/Vencido" %>
+                                                </span>
+                                            </div>
+                                            <div class="cupon-detalles">
+                                                <small>Válido hasta: <%# Eval("fechaCaducidad", "{0:dd/MM/yyyy}") %></small>
+                                                <small>Usos restantes: <%# Eval("usosRestantes") %></small>
+                                            </div>
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <asp:Label ID="lblNoCupones" runat="server" Text="Este cliente no ha usado ningún cupón" CssClass="text-muted" Visible="false"></asp:Label>
+                            </asp:Panel>
+                        </div>
                 
                     </div>
                 </div>
@@ -628,14 +660,21 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtUsername" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
                     </div>
                     <div class="form-group">
-                        <label>Contraseña *</label>
-                        <asp:TextBox ID="txtContraseña" runat="server" TextMode="Password"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtContraseña" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
+                        <label>Contraseña</label>
+                        <asp:TextBox ID="txtContraseña" runat="server" TextMode="Password" placeholder="Dejar vacío para mantener la actual"></asp:TextBox>
+                        <span class="form-help-text">Solo completar si desea cambiar la contraseña actual</span>
                     </div>
                     <div class="form-group">
                         <label>Correo *</label>
                         <asp:TextBox ID="txtCorreo" runat="server" TextMode="Email"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtCorreo" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
+                        <asp:RegularExpressionValidator ID="revCorreo" runat="server" 
+                            ControlToValidate="txtCorreo"
+                            ErrorMessage="Ingrese un correo válido"
+                            ValidationExpression="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"
+                            ForeColor="Red"
+                            Display="Dynamic"
+                            ValidationGroup="EditarForm" />
                     </div>
                     <div class="form-group">
                         <label>Teléfono *</label>
@@ -643,6 +682,7 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtTelefono" ErrorMessage="Requerido" ForeColor="Red" Display="Dynamic" ValidationGroup="EditarForm" />
                     </div>
                 </div>
+                
                 <div class="form-actions">
                     <asp:Button ID="btnCancelarEdit" runat="server" Text="Cancelar" CssClass="btn-form btn-cancelar-edit" OnClick="btnCancelarEdit_Click" CausesValidation="false" />
                     <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cambios" CssClass="btn-form btn-guardar" OnClick="btnGuardar_Click" ValidationGroup="EditarForm" />
