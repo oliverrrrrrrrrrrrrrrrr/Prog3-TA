@@ -325,7 +325,26 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarNuevoRolRetornaIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.cupon.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarCuponResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarCuponResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarCuponesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerCuponResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\CampusStoreWS\CarritoWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\CuponWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\CuponWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\CampusStoreWS\DescuentoWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\DescuentoWS.xsd">
       <SubType>Designer</SubType>

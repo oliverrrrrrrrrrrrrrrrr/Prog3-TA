@@ -419,6 +419,10 @@
                         <i class="bi bi-cart3"></i>
                         <span>Gestionar Clientes</span>
                     </asp:HyperLink>
+                    <asp:HyperLink runat="server" NavigateUrl="~/GestionarCupones.aspx" CssClass="menu-item">
+                        <i class="bi bi-ticket-perforated"></i>
+                        <span>Gestionar Cupones</span>
+                    </asp:HyperLink>
                     <asp:HyperLink runat="server" NavigateUrl="~/GestionarOrdenesCompra.aspx" CssClass="menu-item">
                         <i class="bi bi-file-earmark-text"></i>
                         <span>Gestionar Ordenes de Compra</span>
