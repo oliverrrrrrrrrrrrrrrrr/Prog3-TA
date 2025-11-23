@@ -226,7 +226,7 @@
                 <div class="sidebar-menu">
                     <a href="OrderHistory.aspx" class="sidebar-menu-item">
                         <i class="bi bi-box-seam"></i>
-                        Historial de compras
+                        Historial de pedidos
                     </a>
                     <a href="Shopping_Car.aspx" class="sidebar-menu-item">
                         <i class="bi bi-cart3"></i>

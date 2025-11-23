@@ -199,26 +199,32 @@
                     <!-- Columna de Precio -->
                     <div class="cart-price" data-title="Precio">
                         <%# Convert.ToDouble(Eval("precioConDescuento")) > 0 && Convert.ToDouble(Eval("precioConDescuento")) < Convert.ToDouble(Eval("producto.precio")) 
-                            ? "<span class='old-price'>$" + String.Format("{0:N2}", Eval("producto.precio")) + "</span><span class='current-price'>$" + String.Format("{0:N2}", Eval("precioConDescuento")) + "</span>"
-                            : "<span class='current-price'>$" + String.Format("{0:N2}", Eval("precioUnitario")) + "</span>" %>
+                            ? "<span class='old-price'>S/." + String.Format("{0:N2}", Eval("producto.precio")) + "</span><span class='current-price'>$" + String.Format("{0:N2}", Eval("precioConDescuento")) + "</span>"
+                            : "<span class='current-price'>S/." + String.Format("{0:N2}", Eval("precioUnitario")) + "</span>" %>
                     </div>
-                    
+
                     <!-- Columna de Cantidad -->
                     <div class="cart-quantity" data-title="Cantidad">
                         <div class="quantity-selector">
-                            <asp:LinkButton runat="server" 
-                                            CommandName="Restar" 
-                                            CommandArgument='<%# Eval("idLineaCarrito") %>'
-                                            CssClass="btn-qty btn-qty-minus">
+                            <button type="button" 
+                                    class="btn-qty btn-qty-minus" 
+                                    onclick="cambiarCantidad(this, -1, '<%# Eval("idLineaCarrito") %>')">
                                 -
-                            </asp:LinkButton>
-                            <input type="text" value='<%# Eval("cantidad") %>' readonly />
-                            <asp:LinkButton runat="server" 
-                                            CommandName="Sumar" 
-                                            CommandArgument='<%# Eval("idLineaCarrito") %>'
-                                            CssClass="btn-qty btn-qty-plus">
+                            </button>
+                            <input type="text" 
+                                   value='<%# Eval("cantidad") %>' 
+                                   class="cantidad-input" 
+                                   data-id='<%# Eval("idLineaCarrito") %>'
+                                   readonly />
+                            <button type="button" 
+                                    class="btn-qty btn-qty-plus" 
+                                    onclick="cambiarCantidad(this, 1, '<%# Eval("idLineaCarrito") %>')">
                                 +
-                            </asp:LinkButton>
+                            </button>
+
+                            <!-- HIDDENFIELDS AQUÍ (dentro del quantity-selector) -->
+                            <asp:HiddenField ID="hdnCantidad" runat="server" Value='<%# Eval("cantidad") %>' />
+                            <asp:HiddenField ID="hdnIdLinea" runat="server" Value='<%# Eval("idLineaCarrito") %>' />
                         </div>
                     </div>
                     
@@ -237,7 +243,10 @@
                     <!-- Botones de Acción Debajo del Carrito -->
                     <div class="cart-actions">
                         <a href="Shop_Page.aspx" class="btn btn-outline-primary"><i class="arrow-left"></i> REGRESAR A LA TIENDA</a>
-                        <a href="#" class="btn btn-outline-primary">ACTUALIZAR CARRITO</a>
+                        <asp:Button ID="btnGuardarCantidad" runat="server" 
+                            Text="ACTUALIZAR CARRITO" 
+                            OnClick="btnActualizarCarrito_Click"
+                            CssClass="btn btn-outline-primary" />
                     </div>
                 </div>
             </div>
@@ -250,22 +259,22 @@
         
                         <div class="summary-item">
                             <span>Sub-total</span>
-                            <span>$<asp:Label ID="lblSubtotal" runat="server" Text="0.00"></asp:Label></span>
+                            <span>S/.<asp:Label ID="lblSubtotal" runat="server" Text="0.00"></asp:Label></span>
                         </div>
         
                         <asp:Panel ID="pnlDescuento" runat="server" Visible="false" CssClass="summary-item">
                             <span>Descuento</span>
-                            <span class="discount-amount">-$<asp:Label ID="lblDescuento" runat="server" Text="0.00"></asp:Label></span>
+                            <span class="discount-amount">-S/.<asp:Label ID="lblDescuento" runat="server" Text="0.00"></asp:Label></span>
                         </asp:Panel>
         
                         <div class="summary-item">
                             <span>Impuesto (18%)</span>
-                            <span>$<asp:Label ID="lblImpuesto" runat="server" Text="0.00"></asp:Label></span>
+                            <span>S/.<asp:Label ID="lblImpuesto" runat="server" Text="0.00"></asp:Label></span>
                         </div>
         
                         <div class="summary-total">
                             <span>Total</span>
-                            <span>$<asp:Label ID="lblTotal" runat="server" Text="0.00"></asp:Label> USD</span>
+                            <span>S/.<asp:Label ID="lblTotal" runat="server" Text="0.00"></asp:Label></span>
                         </div>
         
                         <asp:HyperLink ID="lnkCheckout" runat="server" NavigateUrl="~/Checkout.aspx" CssClass="btn btn-proceed">
@@ -291,38 +300,24 @@
         </div>
     </div>
 </div>
-    <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        // Seleccionamos todos los contenedores de cantidad que hay en la página
-        const quantitySelectors = document.querySelectorAll('.quantity-selector');
+    <script>
+        function cambiarCantidad(btn, cambio) {
+            const container = btn.parentElement;
+            const input = container.querySelector('.cantidad-input');
+            const hdnCantidad = container.querySelector('input[id*="hdnCantidad"]');
 
-        // Recorremos cada uno de ellos para asignarles los eventos
-        quantitySelectors.forEach(selector => {
-            const minusButton = selector.querySelector('.btn-qty-minus');
-            const plusButton = selector.querySelector('.btn-qty-plus');
-            const inputField = selector.querySelector('input[type="text"]');
+            let nueva = Math.max(1, parseInt(input.value) + cambio);
 
-            // Evento para el botón de restar (-)
-            minusButton.addEventListener('click', function() {
-                // Obtenemos el valor actual y lo convertimos a número
-                let currentValue = parseInt(inputField.value, 10);
+            console.log('Cambio:', cambio, 'Nueva cantidad:', nueva); // DEBUG
 
-                // Solo restamos si el valor es mayor que 1
-                if (currentValue > 1) {
-                    inputField.value = currentValue - 1;
-                }
-            });
-
-            // Evento para el botón de sumar (+)
-            plusButton.addEventListener('click', function() {
-                // Obtenemos el valor actual y lo convertimos a número
-                let currentValue = parseInt(inputField.value, 10);
-
-                // Sumamos 1 al valor actual
-                inputField.value = currentValue + 1;
-            });
-        });
-    });
-    </script>
+            input.value = nueva;
+            if (hdnCantidad) {
+                hdnCantidad.value = nueva;
+                console.log('HiddenField actualizado:', hdnCantidad.value);
+            } else {
+                console.error('No se encontró hdnCantidad');
+            }
+        }
+</script>
 
 </asp:Content>

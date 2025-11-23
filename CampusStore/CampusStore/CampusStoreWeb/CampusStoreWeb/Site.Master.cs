@@ -128,7 +128,7 @@ namespace CampusStoreWeb
                     int cantidadTotal = carrito.lineas.Sum(l => l.cantidad);
 
                     // Calcular subtotal considerando precios con descuento
-                    decimal subtotal = 0;
+                    decimal total = 0;
                     foreach (var linea in carrito.lineas)
                     {
                         // Si tiene precio con descuento, usar ese; si no, usar el precio unitario
@@ -136,13 +136,13 @@ namespace CampusStoreWeb
                             ? (decimal)linea.precioConDescuento
                             : (decimal)linea.precioUnitario;
 
-                        subtotal += precioFinal * linea.cantidad;
+                        total += precioFinal * linea.cantidad;
                     }
 
                     // Actualizar labels
                     lblCantidadCarrito.Text = cantidadTotal.ToString();
                     lblCantidadPopup.Text = cantidadTotal.ToString("00");
-                    lblSubtotal.Text = subtotal.ToString("N2");
+                    lblTotal.Text = total.ToString("N2");
 
                     // Mostrar productos, ocultar mensaje de vacío
                     pnlCarritoVacio.Visible = false;
@@ -183,7 +183,7 @@ namespace CampusStoreWeb
             lblCantidadCarrito.Text = "0";
             lblCantidadPopup.Text = "0";
 
-            lblSubtotal.Visible = false;
+            lblTotal.Visible = false;
             lnkCheckout.Visible = false;
             lnkVerCarrito.Visible = false;
         }

@@ -261,7 +261,7 @@
                                                             <p class="cart-product-name"><%# Eval("producto.nombre") %></p>
                                                             <div class="cart-product-price">
                                                                 <span class="quantity"><%# Eval("cantidad") %> x</span>
-                                                                <span class="price">S/<%# String.Format("{0:N2}", Eval("precioUnitario")) %></span>
+                                                                <span class="price">S/.<%# String.Format("{0:N2}", Eval("precioUnitario")) %></span>
                                                             </div>
                                                         </div>
                                                         <asp:LinkButton runat="server" 
@@ -285,8 +285,8 @@
                                         </div>
                                         <hr class="cart-divider" />
                                         <div class="cart-subtotal">
-                                            <span class="total-label">Sub-Total:</span>
-                                            <span class="total-amount">S/.<asp:Label ID="lblSubtotal" runat="server" Text="0.00"></asp:Label></span>
+                                            <span class="total-label">Total:</span>
+                                            <span class="total-amount">S/.<asp:Label ID="lblTotal" runat="server" Text="0.00"></asp:Label></span>
                                         </div>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>

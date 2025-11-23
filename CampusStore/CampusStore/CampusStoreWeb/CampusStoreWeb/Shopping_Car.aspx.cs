@@ -82,23 +82,23 @@ namespace CampusStoreWeb
         private void CalcularResumen(dynamic carrito)
         {
             // 1. Calcular subtotal (suma de todos los productos)
-            decimal subtotal = 0;
+            decimal total = 0;
             foreach (var linea in carrito.lineas)
             {
                 decimal precioFinal = linea.precioConDescuento > 0
                     ? (decimal)linea.precioConDescuento
                     : (decimal)linea.precioUnitario;
 
-                subtotal += precioFinal * linea.cantidad;
+                total += precioFinal * linea.cantidad;
             }
 
-            lblSubtotal.Text = subtotal.ToString("N2");
+            lblTotal.Text = total.ToString("N2");
 
             // 2. Calcular descuento del cupón (si existe)
             decimal descuento = 0;
             if (carrito.cupon != null && carrito.cupon.activo)
             {
-                descuento = subtotal * ((decimal)carrito.cupon.descuento / 100m);
+                descuento = total * ((decimal)carrito.cupon.descuento / 100m);
                 lblDescuento.Text = descuento.ToString("N2");
                 pnlDescuento.Visible = true;
             }
@@ -107,49 +107,104 @@ namespace CampusStoreWeb
                 pnlDescuento.Visible = false;
             }
 
-            // 3. Calcular subtotal después de descuento
-            decimal subtotalConDescuento = subtotal - descuento;
-
-            // 4. Calcular impuesto (sobre subtotal con descuento)
-            decimal impuesto = subtotalConDescuento * PORCENTAJE_IMPUESTO;
+            // 3. Calcular impuesto (sobre subtotal con descuento)
+            decimal impuesto = total * PORCENTAJE_IMPUESTO;
             lblImpuesto.Text = impuesto.ToString("N2");
 
-            // 5. Calcular total final
-            decimal total = subtotalConDescuento + impuesto;
-            lblTotal.Text = total.ToString("N2");
+            // 4. Calcular subtotal después de descuento
+            decimal subtotal = total - impuesto;
+            lblSubtotal.Text = subtotal.ToString("N2");  
         }
 
         protected void rptCartItems_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            int lineaCarritoId = Convert.ToInt32(e.CommandArgument);
+            // ESTO DEBE APARECER SIEMPRE que presiones CUALQUIER botón
+            System.Diagnostics.Debug.WriteLine("╔════════════════════════════════════╗");
+            System.Diagnostics.Debug.WriteLine("║ EVENTO ItemCommand EJECUTADO      ║");
+            System.Diagnostics.Debug.WriteLine($"║ CommandName: {e.CommandName,-20}║");
+            System.Diagnostics.Debug.WriteLine($"║ CommandArgument: {e.CommandArgument,-16}║");
+            System.Diagnostics.Debug.WriteLine("╚════════════════════════════════════╝");
 
+            if (e.CommandName == "Eliminar")
+            {
+                try
+                {
+                    string cuenta = Page.User.Identity.Name;
+                    cliente cliente = clienteWS.buscarClientePorCuenta(cuenta);
+                    int idCliente = cliente.idCliente;
+
+                    var carrito = carritoWS.obtenerCarritoPorCliente(idCliente);
+                    int lineaCarritoId = Convert.ToInt32(e.CommandArgument);
+
+                    //  Mini función para encontrar la línea de carrito a eliminar
+                    int i;
+                    for (i = 0; i < carrito.lineas.Length; i++)
+                    {
+                        if (carrito.lineas[i].idLineaCarrito == lineaCarritoId) break;
+                    }
+
+                    bool resultado = carritoWS.eliminarLineaDelCarrito(carrito.lineas[i]);
+
+                    if (resultado)
+                    {
+                        // Mostrar mensaje de éxito
+                        ScriptManager.RegisterStartupScript(this, GetType(), "productoEliminado",
+                            "showNotification('Producto eliminado del carrito');", true);
+
+                        // Recargar el carrito
+                        Response.Redirect(Request.RawUrl);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                            "alert('No se pudo eliminar el producto');", true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Error al eliminar producto: {ex.Message}");
+                    ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                        "alert('Error al eliminar el producto');", true);
+                }
+            }
+        }
+
+        protected void btnActualizarCarrito_Click(object sender, EventArgs e)
+        {
             try
             {
-                switch (e.CommandName)
+                string cuenta = Page.User.Identity.Name;
+                cliente cliente = clienteWS.buscarClientePorCuenta(cuenta);
+                var carrito = carritoWS.obtenerCarritoPorCliente(cliente.idCliente);
+
+                // Recorrer TODAS las filas del Repeater
+                foreach (RepeaterItem item in rptCartItems.Items)
                 {
-                    case "Eliminar":
-                        // TODO
-                        bool resultado = true; //carritoWS.eliminarLineaCarrito(lineaCarritoId);
-                        if (resultado)
+                    if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                    {
+                        HiddenField hdnCantidad = (HiddenField)item.FindControl("hdnCantidad");
+                        HiddenField hdnIdLinea = (HiddenField)item.FindControl("hdnIdLinea");
+
+                        if (hdnCantidad != null && hdnIdLinea != null)
                         {
-                            CargarCarrito();
-                            ScriptManager.RegisterStartupScript(this, GetType(), "mensaje",
-                                "alert('Producto eliminado del carrito');", true);
+                            int lineaId = Convert.ToInt32(hdnIdLinea.Value);
+                            int nuevaCantidad = Convert.ToInt32(hdnCantidad.Value);
+
+                            // Actualizar la cantidad en el carrito
+                            for (int i = 0; i < carrito.lineas.Length; i++)
+                            {
+                                if (carrito.lineas[i].idLineaCarrito == lineaId)
+                                {
+                                    carrito.lineas[i].cantidad = nuevaCantidad;
+                                    break;
+                                }
+                            }
                         }
-                        break;
-
-                    case "Sumar":
-                        // TODO
-                        //carritoWS.actualizarCantidadLinea(lineaCarritoId, 1);
-                        CargarCarrito();
-                        break;
-
-                    case "Restar":
-                        // TODO
-                        //carritoWS.actualizarCantidadLinea(lineaCarritoId, -1);
-                        CargarCarrito();
-                        break;
+                    }
                 }
+
+                carritoWS.guardarCarrito(carrito, estado.Modificado);
+                Response.Redirect(Request.RawUrl);
             }
             catch (Exception ex)
             {
