@@ -10,10 +10,6 @@ import pe.edu.pucp.campusstore.boimpl.FiltroBOImpl;
 import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Libro;
 
-/**
- *
- * @author AXEL
- */
 @WebService(serviceName = "FiltroWS",
             targetNamespace = "http://services.campusstore.pucp.edu.pe/")
 public class FiltroWS {

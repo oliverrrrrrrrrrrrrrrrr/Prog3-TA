@@ -12,12 +12,29 @@
             margin-bottom: 30px;
         }
 
-        /* Estilos para las categorías */
+        /* --- NUEVO ESTILO: Carrusel de Categorías --- */
+        .category-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 40px; /* Espacio para las flechas */
+        }
+
         .category-grid {
             display: flex;
-            justify-content: center;
             gap: 20px;
-            flex-wrap: wrap;
+            overflow-x: auto; /* Permite scroll horizontal */
+            scroll-behavior: smooth; /* Desplazamiento suave */
+            padding: 20px 5px;
+            flex-wrap: nowrap; /* IMPORTANTE: Fuerza una sola línea */
+            width: 100%;
+            /* Ocultar barra de scroll visualmente pero mantener funcionalidad */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+        }
+
+        .category-grid::-webkit-scrollbar {
+            display: none; /* Chrome */
         }
 
         .category-item {
@@ -25,11 +42,12 @@
             border-radius: 8px;
             text-align: center;
             padding: 20px;
-            width: 180px;
+            min-width: 180px; /* Ancho fijo mínimo para que no se aplasten */
             transition: box-shadow 0.3s, transform 0.3s;
             background-color: white;
             text-decoration: none;
             color: #191c1f;
+            flex-shrink: 0; /* Evita que los items se encojan */
         }
 
         .category-item:hover {
@@ -45,12 +63,32 @@
             margin-bottom: 15px;
         }
 
-        .category-item p {
-            font-weight: 500;
-            font-size: 16px;
-            margin: 0;
+        /* Botones del carrusel */
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #fa8232;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background 0.3s;
         }
 
+        .scroll-btn:hover {
+            background-color: #e96d18;
+        }
+
+        .scroll-btn.left { left: 0; }
+        .scroll-btn.right { right: 0; }
         /* Sección de productos destacados */
         .promo-banner {
             background-color: #f3de6d;
@@ -273,7 +311,11 @@
     <!-- ======================= Sección de Categorías ======================= -->
     <section class="category-section mb-5">
         <h2>Compra por categorías</h2>
-        <div class="category-grid">
+        <div class="category-wrapper">
+             <button type="button" class="scroll-btn left" onclick="scrollCategories(-1)">
+                <i class="bi bi-chevron-left">&lt;</i>
+            </button>
+        <div class="category-grid" id ="categoryTrack">
             <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=libro" CssClass="category-item">
                 <asp:Image runat="server" ImageUrl="~/Images/pngtree-some-books-without-bckground-png-image_20337382.png" AlternateText="Libros" />
                 <p>Libros</p>
@@ -299,6 +341,10 @@
                 <p>Tomatodos</p>
             </asp:HyperLink>
         </div>
+            <button type="button" class="scroll-btn right" onclick="scrollCategories(1)">
+                <i class="bi bi-chevron-right">&gt;</i>
+            </button>
+            </div>
     </section>
 
     <!-- ======================= Sección de Productos Destacados ======================= -->
@@ -309,12 +355,9 @@
             <!-- Columna del Banner de Promoción -->
             <div class="col-lg-3 mb-4">
                 <aside class="promo-banner">
-                    <h3>32% Descuento</h3>
-                    <p class="subtitle">Para todos los productos</p>
-                    <div class="offer-countdown">
-                        <span>La oferta acaba en:</span>
-                        <span class="countdown-timer">24 de dic, 11:59PM</span>
-                    </div>
+                    <h3>LOS MEJORES PRODUCTOS QUE NO TE PUEDES PERDER</h3>
+                    <p class="subtitle">El top historico de productos mas aclamado por los usuarios</p>
+                   
                     <asp:HyperLink runat="server" NavigateUrl="~/Shop_Page.aspx" CssClass="btn-promo">COMPRAR AHORA <i class="bi bi-arrow-right"></i></asp:HyperLink>
                     <asp:Image runat="server" ImageUrl="~/Images/perritoLobotomizado.png" CssClass="banner-image" AlternateText="Artículos de tecnología en oferta"/>
                 </aside>
@@ -399,10 +442,18 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT para la lógica del Modal -->
     <script type="text/javascript">
          var quickViewModal;
+        function scrollCategories(direction) {
+            const container = document.getElementById('categoryTrack');
+            const scrollAmount = 250; // Cantidad de pixeles a mover
 
+            if (direction === 1) {
+                container.scrollLeft += scrollAmount;
+            } else {
+                container.scrollLeft -= scrollAmount;
+            }
+        }
          document.addEventListener('DOMContentLoaded', function () {
              var modalElement = document.getElementById('quickViewModal');
              if (modalElement) {
@@ -440,10 +491,7 @@
                             <h3 class="quick-view-price">${result.Precio.toLocaleString('es-PE', { style: 'currency', currency: 'PEN' })}</h3>
                             <p class="quick-view-description">${result.Descripcion || 'Sin descripción.'}</p>
                             <p class="quick-view-availability">Disponibilidad: <span class="${disponibilidadClass}">${disponibilidadTexto}</span></p>
-                            <div class="quick-view-actions">
-                                <input id="modalQty" type="number" class="form-control quick-view-qty" value="1" min="1" max="${result.Stock}" ${result.Stock === 0 ? 'disabled' : ''} />
-                                <button class="btn btn-add-to-cart" onclick="addFromModal(${result.Id}, '${result.TipoProducto}')" ${result.Stock === 0 ? 'disabled' : ''}>AGREGAR AL CARRITO</button>
-                            </div>
+                            
                         </div>
                     </div>`;
 
@@ -458,29 +506,7 @@
              document.getElementById('modalContent').innerHTML = `<p class="text-center text-danger">Error: ${error.get_message()}</p>`;
          }
 
-         function addFromModal(productoId, tipoProducto) {
-             var cantidad = parseInt(document.getElementById('modalQty').value) || 1;
-             
-             // Crear un formulario oculto para hacer el postback
-             var form = document.createElement('form');
-             form.method = 'POST';
-             form.action = window.location.href;
-             
-             var targetInput = document.createElement('input');
-             targetInput.type = 'hidden';
-             targetInput.name = '__EVENTTARGET';
-             targetInput.value = 'AddToCartFromModal';
-             form.appendChild(targetInput);
-             
-             var argInput = document.createElement('input');
-             argInput.type = 'hidden';
-             argInput.name = '__EVENTARGUMENT';
-             argInput.value = productoId + ',' + tipoProducto + ',' + cantidad;
-             form.appendChild(argInput);
-             
-             document.body.appendChild(form);
-             form.submit();
-         }
+         
     </script>
 
     <style>
