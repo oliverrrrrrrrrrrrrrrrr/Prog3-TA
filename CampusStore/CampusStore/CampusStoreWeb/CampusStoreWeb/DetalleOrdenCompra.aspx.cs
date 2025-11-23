@@ -130,8 +130,8 @@ namespace CampusStoreWeb
                     return "status-pagado";
                 case estadoOrden.ENTREGADO:
                     return "status-entregado";
-                //case estadoOrden.CANCELADO:
-                //   return "status-cancelado";
+                case estadoOrden.CANCELADO:
+                   return "status-cancelado";
                 default:
                     return "status-pendiente";
             }

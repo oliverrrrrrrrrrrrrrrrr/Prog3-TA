@@ -1,18 +1,22 @@
 package pe.edu.pucp.campusstore.boimpl;
 
 import java.util.List;
+import pe.edu.pucp.campusstore.bo.CarritoBO;
 import pe.edu.pucp.campusstore.bo.OrdenCompraBO;
 import pe.edu.pucp.campusstore.dao.OrdenCompraDAO;
 import pe.edu.pucp.campusstore.daoimpl.OrdenCompraDAOImpl;
+import pe.edu.pucp.campusstore.modelo.Carrito;
 import pe.edu.pucp.campusstore.modelo.OrdenCompra;
 import pe.edu.pucp.campusstore.modelo.LineaCarrito;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
 
 public class OrdenCompraBOImpl implements OrdenCompraBO{
     private final OrdenCompraDAO ordenCompraDAO;
+    private final CarritoBO carritoBO;
 
     public OrdenCompraBOImpl() {
         this.ordenCompraDAO = new OrdenCompraDAOImpl();
+        this.carritoBO = new CarritoBOImpl();
     }
 
     @Override
@@ -22,7 +26,13 @@ public class OrdenCompraBOImpl implements OrdenCompraBO{
 
     @Override
     public OrdenCompra obtener(int id) {
-        return ordenCompraDAO.leer(id);
+        OrdenCompra ordenCompra = ordenCompraDAO.leer(id);
+        if (ordenCompra == null) return null;
+        
+        Carrito carrito = carritoBO.obtener(ordenCompra.getCarrito().getIdCarrito());
+        ordenCompra.setCarrito(carrito);
+        
+        return ordenCompra;
     }
 
     @Override

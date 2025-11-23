@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/ClienteWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="listarClientes">
-    <part name="parameters" element="tns:listarClientes" />
+  <message name="obtenerCliente">
+    <part name="parameters" element="tns:obtenerCliente" />
   </message>
-  <message name="listarClientesResponse">
-    <part name="parameters" element="tns:listarClientesResponse" />
+  <message name="obtenerClienteResponse">
+    <part name="parameters" element="tns:obtenerClienteResponse" />
   </message>
   <message name="eliminarCliente">
     <part name="parameters" element="tns:eliminarCliente" />
@@ -17,17 +17,17 @@
   <message name="eliminarClienteResponse">
     <part name="parameters" element="tns:eliminarClienteResponse" />
   </message>
+  <message name="listarClientes">
+    <part name="parameters" element="tns:listarClientes" />
+  </message>
+  <message name="listarClientesResponse">
+    <part name="parameters" element="tns:listarClientesResponse" />
+  </message>
   <message name="guardarCliente">
     <part name="parameters" element="tns:guardarCliente" />
   </message>
   <message name="guardarClienteResponse">
     <part name="parameters" element="tns:guardarClienteResponse" />
-  </message>
-  <message name="obtenerCliente">
-    <part name="parameters" element="tns:obtenerCliente" />
-  </message>
-  <message name="obtenerClienteResponse">
-    <part name="parameters" element="tns:obtenerClienteResponse" />
   </message>
   <message name="buscarClientePorCuenta">
     <part name="parameters" element="tns:buscarClientePorCuenta" />
@@ -36,21 +36,21 @@
     <part name="parameters" element="tns:buscarClientePorCuentaResponse" />
   </message>
   <portType name="ClienteWS">
-    <operation name="listarClientes">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/listarClientesRequest" message="tns:listarClientes" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/listarClientesResponse" message="tns:listarClientesResponse" />
+    <operation name="obtenerCliente">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerClienteRequest" message="tns:obtenerCliente" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerClienteResponse" message="tns:obtenerClienteResponse" />
     </operation>
     <operation name="eliminarCliente">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteRequest" message="tns:eliminarCliente" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteResponse" message="tns:eliminarClienteResponse" />
     </operation>
+    <operation name="listarClientes">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/listarClientesRequest" message="tns:listarClientes" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/listarClientesResponse" message="tns:listarClientesResponse" />
+    </operation>
     <operation name="guardarCliente">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest" message="tns:guardarCliente" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteResponse" message="tns:guardarClienteResponse" />
-    </operation>
-    <operation name="obtenerCliente">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerClienteRequest" message="tns:obtenerCliente" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerClienteResponse" message="tns:obtenerClienteResponse" />
     </operation>
     <operation name="buscarClientePorCuenta">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaRequest" message="tns:buscarClientePorCuenta" />
@@ -59,7 +59,7 @@
   </portType>
   <binding name="ClienteWSPortBinding" type="tns:ClienteWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="listarClientes">
+    <operation name="obtenerCliente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -77,7 +77,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="guardarCliente">
+    <operation name="listarClientes">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -86,7 +86,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="obtenerCliente">
+    <operation name="guardarCliente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

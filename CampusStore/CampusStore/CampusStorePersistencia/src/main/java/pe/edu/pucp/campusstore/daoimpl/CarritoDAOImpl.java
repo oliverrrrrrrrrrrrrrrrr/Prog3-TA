@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.List;
 import pe.edu.pucp.campusstore.bases.dao.TransaccionalBaseDAO;
 import pe.edu.pucp.campusstore.modelo.Carrito;
 import pe.edu.pucp.campusstore.dao.CarritoDAO;

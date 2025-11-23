@@ -5,23 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/DescuentoWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="obtenerDescuentoPorProducto">
-    <part name="parameters" element="tns:obtenerDescuentoPorProducto" />
+  <message name="guardarDescuento">
+    <part name="parameters" element="tns:guardarDescuento" />
   </message>
-  <message name="obtenerDescuentoPorProductoResponse">
-    <part name="parameters" element="tns:obtenerDescuentoPorProductoResponse" />
+  <message name="guardarDescuentoResponse">
+    <part name="parameters" element="tns:guardarDescuentoResponse" />
   </message>
   <message name="listarDescuentos">
     <part name="parameters" element="tns:listarDescuentos" />
   </message>
   <message name="listarDescuentosResponse">
     <part name="parameters" element="tns:listarDescuentosResponse" />
-  </message>
-  <message name="guardarDescuento">
-    <part name="parameters" element="tns:guardarDescuento" />
-  </message>
-  <message name="guardarDescuentoResponse">
-    <part name="parameters" element="tns:guardarDescuentoResponse" />
   </message>
   <message name="obtenerDescuento">
     <part name="parameters" element="tns:obtenerDescuento" />
@@ -35,18 +29,20 @@
   <message name="eliminarDescuentoResponse">
     <part name="parameters" element="tns:eliminarDescuentoResponse" />
   </message>
+  <message name="obtenerDescuentoPorProducto">
+    <part name="parameters" element="tns:obtenerDescuentoPorProducto" />
+  </message>
+  <message name="obtenerDescuentoPorProductoResponse">
+    <part name="parameters" element="tns:obtenerDescuentoPorProductoResponse" />
+  </message>
   <portType name="DescuentoWS">
-    <operation name="obtenerDescuentoPorProducto">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoPorProductoRequest" message="tns:obtenerDescuentoPorProducto" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoPorProductoResponse" message="tns:obtenerDescuentoPorProductoResponse" />
+    <operation name="guardarDescuento">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/guardarDescuentoRequest" message="tns:guardarDescuento" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/guardarDescuentoResponse" message="tns:guardarDescuentoResponse" />
     </operation>
     <operation name="listarDescuentos">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/listarDescuentosRequest" message="tns:listarDescuentos" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/listarDescuentosResponse" message="tns:listarDescuentosResponse" />
-    </operation>
-    <operation name="guardarDescuento">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/guardarDescuentoRequest" message="tns:guardarDescuento" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/guardarDescuentoResponse" message="tns:guardarDescuentoResponse" />
     </operation>
     <operation name="obtenerDescuento">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoRequest" message="tns:obtenerDescuento" />
@@ -56,10 +52,14 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/eliminarDescuentoRequest" message="tns:eliminarDescuento" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/eliminarDescuentoResponse" message="tns:eliminarDescuentoResponse" />
     </operation>
+    <operation name="obtenerDescuentoPorProducto">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoPorProductoRequest" message="tns:obtenerDescuentoPorProducto" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoPorProductoResponse" message="tns:obtenerDescuentoPorProductoResponse" />
+    </operation>
   </portType>
   <binding name="DescuentoWSPortBinding" type="tns:DescuentoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="obtenerDescuentoPorProducto">
+    <operation name="guardarDescuento">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -69,15 +69,6 @@
       </output>
     </operation>
     <operation name="listarDescuentos">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="guardarDescuento">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -96,6 +87,15 @@
       </output>
     </operation>
     <operation name="eliminarDescuento">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerDescuentoPorProducto">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

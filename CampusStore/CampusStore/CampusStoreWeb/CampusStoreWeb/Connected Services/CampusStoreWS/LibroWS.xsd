@@ -147,6 +147,16 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:libro" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="obtenerLibro">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerLibroResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:libro" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="registrarLibro">
     <xs:sequence>
       <xs:element minOccurs="0" name="libro" type="tns:libro" />
@@ -156,16 +166,6 @@
   <xs:complexType name="registrarLibroResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="obtenerLibro">
-    <xs:sequence>
-      <xs:element name="id" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="obtenerLibroResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:libro" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="leerAutoresPorLibro">
