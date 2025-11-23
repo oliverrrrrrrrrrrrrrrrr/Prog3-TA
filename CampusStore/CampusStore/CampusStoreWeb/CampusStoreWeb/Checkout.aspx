@@ -461,7 +461,7 @@
                     </div>
                     <div class="order-summary-right">
                         <div class="order-total">
-                            $<asp:Label ID="lblOrderTotal" runat="server"></asp:Label>
+                            S/.<asp:Label ID="lblOrderTotal" runat="server"></asp:Label>
                         </div>
                     </div>
                 </div>
@@ -498,7 +498,7 @@
                 
                                 <!-- Columna Precio -->
                                 <div class="product-price">
-                                    $<%# String.Format("{0:N2}", 
+                                    S/.<%# String.Format("{0:N2}", 
                                         Convert.ToDouble(Eval("precioConDescuento")) > 0 
                                             ? Eval("precioConDescuento") 
                                             : Eval("precioUnitario")) %>
@@ -506,7 +506,7 @@
                 
                                 <!-- Columna Subtotal -->
                                 <div class="product-subtotal">
-                                    $<%# String.Format("{0:N2}", 
+                                    S/.<%# String.Format("{0:N2}", 
                                         (Convert.ToDouble(Eval("precioConDescuento")) > 0 
                                             ? Convert.ToDouble(Eval("precioConDescuento")) 
                                             : Convert.ToDouble(Eval("precioUnitario"))) 

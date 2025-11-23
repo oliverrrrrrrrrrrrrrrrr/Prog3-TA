@@ -222,6 +222,16 @@ namespace CampusStoreWeb
                     return;
                 }
 
+                // El botón de proceder al pago solo se muestra si la orden no está cancelada
+                if (orden.estado == estadoOrden.NO_PAGADO)
+                {
+                    btnProcederPago.Visible = true;
+                }
+                else
+                {
+                    btnProcederPago.Visible = false;
+                }
+
                 // SEGURIDAD: Verificar que la orden pertenece al cliente actual
                 // Usar reflection por compatibilidad entre namespaces
                 int clienteOrdenId = 0;
@@ -264,7 +274,7 @@ namespace CampusStoreWeb
                 }
                 catch { }
 
-                lblOrderTotal.Text = "$" + total.ToString("F2");
+                lblOrderTotal.Text = "S/." + total.ToString("F2");
 
                 // Guardar el estado de la orden para usarlo en la carga de productos
                 ViewState["EstadoOrden"] = orden.estado.ToString();
@@ -305,12 +315,26 @@ namespace CampusStoreWeb
             }
         }
 
+        private int ObtenerIdOrdenActual()
+        {
+            // Viene por QueryString desde el historial
+            if (Request.QueryString["id"] != null)
+            {
+                int id;
+                if (int.TryParse(Request.QueryString["id"], out id))
+                {
+                    return id;
+                }
+            }
+            return 0;
+        }
+
         private void MostrarError(string mensaje)
         {
             // Mostrar error en la página en lugar de redirigir (igual que DetalleArticulo/DetalleLibro)
             lblOrderId.Text = "Error";
             lblOrderDate.Text = mensaje;
-            lblOrderTotal.Text = "$0.00";
+            lblOrderTotal.Text = "S/.0.00";
             lblProductCount.Text = "0 Productos";
             rptProducts.DataSource = new List<ProductInfo>();
             rptProducts.DataBind();
@@ -346,10 +370,8 @@ namespace CampusStoreWeb
                             decimal precioFinal = linea.precioConDescuento > 0 
                                 ? (decimal)linea.precioConDescuento 
                                 : (decimal)linea.precioUnitario;
-                            
-                            decimal subtotalFinal = linea.subTotalConDescuento > 0 
-                                ? (decimal)linea.subTotalConDescuento 
-                                : (decimal)linea.subtotal;
+
+                            decimal subtotalFinal = precioFinal * linea.cantidad;
 
                             System.Diagnostics.Debug.WriteLine($"DEBUG: Agregando artículo - Nombre: {articulo.nombre}, Cantidad: {linea.cantidad}");
 
@@ -396,10 +418,8 @@ namespace CampusStoreWeb
                             decimal precioFinal = linea.precioConDescuento > 0 
                                 ? (decimal)linea.precioConDescuento 
                                 : (decimal)linea.precioUnitario;
-                            
-                            decimal subtotalFinal = linea.subTotalConDescuento > 0 
-                                ? (decimal)linea.subTotalConDescuento 
-                                : (decimal)linea.subtotal;
+
+                            decimal subtotalFinal = precioFinal * linea.cantidad;
 
                             System.Diagnostics.Debug.WriteLine($"DEBUG: Agregando libro - Nombre: {libro.nombre}, Cantidad: {linea.cantidad}");
 
@@ -479,6 +499,31 @@ namespace CampusStoreWeb
                 }, 100);
             ";
             ScriptManager.RegisterStartupScript(this, GetType(), "OpenRatingModal", script, true);
+        }
+
+        protected void btnProcederPago_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Obtener el ID de la orden actual
+                int idOrden = ObtenerIdOrdenActual();
+
+                if (idOrden <= 0)
+                {
+                    MostrarError("No se pudo identificar la orden.");
+                    return;
+                }
+
+                System.Diagnostics.Debug.WriteLine($"Redirigiendo a Checkout con idOrden: {idOrden}");
+
+                // Redirigir a Checkout pasando el ID de la orden
+                Response.Redirect($"~/Checkout.aspx?idOrden={idOrden}");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error al redirigir a checkout: {ex.Message}");
+                MostrarError("Error al proceder con el pago. Intenta nuevamente.");
+            }
         }
 
         protected void btnPublishReview_Click(object sender, EventArgs e)

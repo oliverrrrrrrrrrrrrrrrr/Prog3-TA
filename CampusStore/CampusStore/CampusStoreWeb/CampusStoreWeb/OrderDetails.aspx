@@ -227,6 +227,23 @@
             color: #e67528;
             text-decoration: underline;
         }
+
+        .btn-pago-diferido {
+            background-color: #FF8C42;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .btn-pago-diferido:hover {
+            background-color: #E67A35;
+        }
     </style>
 </asp:Content>
 
@@ -291,10 +308,11 @@
                         </div>
                         <div class="order-summary-right">
                             <div class="order-total">
-                                <asp:Label ID="lblOrderTotal" runat="server" Text="$1199.00"></asp:Label>
+                                <asp:Label ID="lblOrderTotal" runat="server" Text="S/.1199.00"></asp:Label>
                             </div>
                         </div>
                     </div>
+
 
                     <!-- Products Table -->
                     <table class="table table-custom">
@@ -303,7 +321,7 @@
                                 <th>PRODUCTOS</th>
                                 <th>PRECIO</th>
                                 <th>CANTIDAD</th>
-                                <th>SUB-TOTAL</th>
+                                <th>TOTAL</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -320,9 +338,9 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><strong>$<%# Eval("Price") %></strong></td>
+                                        <td><strong>S/.<%# Eval("Price") %></strong></td>
                                         <td>x<%# Eval("Quantity") %></td>
-                                        <td><strong>$<%# Eval("SubTotal") %></strong></td>
+                                        <td><strong>S/.<%# Eval("SubTotal") %></strong></td>
                                         <td>
                                             <asp:Panel ID="pnlRating" runat="server" Visible='<%# Eval("PuedeCalificar") %>'>
                                                 <asp:LinkButton ID="lnkCalificar" runat="server" 
@@ -339,6 +357,13 @@
                             </asp:Repeater>
                         </tbody>
                     </table>
+                    <asp:Button 
+                        ID="btnProcederPago" 
+                        runat="server" 
+                        Text="Proceder con el pago →" 
+                        CssClass="btn-pago-diferido"
+                        OnClick="btnProcederPago_Click"
+                        Visible="false" />
                 </div>
             </main>
         </div>

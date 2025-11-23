@@ -64,7 +64,23 @@ namespace CampusStoreWeb
                     return;
                 }
 
-                CargarCarrito(cliente.idCliente);
+                int idOrden = 0;
+                if (Request.QueryString["idOrden"] != null)
+                {
+                    int.TryParse(Request.QueryString["idOrden"], out idOrden);
+                    System.Diagnostics.Debug.WriteLine($"[CHECKOUT] ID Orden desde QueryString: {idOrden}");
+                }
+
+                if (idOrden > 0)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[CHECKOUT] Cargando orden específica: {idOrden}");
+                    CargarOrdenEspecifica(cliente.idCliente, idOrden);
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine($"[CHECKOUT] Cargando carrito activo del cliente");
+                    CargarCarrito(cliente.idCliente);
+                }
             }
             catch (Exception ex)
             {
@@ -95,6 +111,107 @@ namespace CampusStoreWeb
             return qrSource;
 
         }
+
+        private void CargarOrdenEspecifica(int idCliente, int idOrden)
+        {
+            try
+            {
+                System.Diagnostics.Debug.WriteLine($"=== CargarOrdenEspecifica - ID Orden: {idOrden} ===");
+
+                // Obtener la orden completa
+                var orden = ordenCompraWS.obtenerOrdenCompra(idOrden);
+
+                if (orden == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("Orden no encontrada");
+                    MostrarMensajeError("Orden no encontrada.");
+                    MostrarCarritoVacio();
+                    return;
+                }
+
+                // Verificar que la orden pertenece al cliente
+                if (orden.cliente.idCliente != idCliente)
+                {
+                    System.Diagnostics.Debug.WriteLine("La orden no pertenece al cliente");
+                    MostrarMensajeError("No tienes permiso para ver esta orden.");
+                    MostrarCarritoVacio();
+                    return;
+                }
+
+                // Obtener el carrito asociado a la orden
+                var carrito = orden.carrito;
+
+                System.Diagnostics.Debug.WriteLine($"Carrito de la orden - ID: {carrito?.idCarrito}");
+                System.Diagnostics.Debug.WriteLine($"Líneas del carrito: {carrito?.lineas?.Length ?? 0}");
+
+                if (carrito != null && carrito.lineas != null && carrito.lineas.Length > 0)
+                {
+                    // Debug: Mostrar productos
+                    foreach (var linea in carrito.lineas)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"  - Producto: {linea.producto?.nombre}, Cantidad: {linea.cantidad}");
+                    }
+
+                    // Mostrar mensaje de orden existente
+                    MostrarMensaje(false, true);
+
+                    // Cargar productos en el repeater
+                    rptDetalleOrden.DataSource = carrito.lineas;
+                    rptDetalleOrden.DataBind();
+
+                    System.Diagnostics.Debug.WriteLine("Repeater data bound exitosamente");
+
+                    // Actualizar labels del resumen usando los datos de la ORDEN
+                    ActualizarLabelsResumenDesdeOrden(orden);
+
+                    // Generar QR con el ID de la orden
+                    string qrUrl = generarURLQR(orden.idOrdenCompra.ToString().PadLeft(8, '0'));
+                    imgQr.ImageUrl = qrUrl;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Carrito vacío o nulo");
+                    MostrarMensajeError("Esta orden no tiene productos.");
+                    MostrarCarritoVacio();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error en CargarOrdenEspecifica: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
+                MostrarCarritoVacio();
+            }
+        }
+
+        private void ActualizarLabelsResumenDesdeOrden(ordenCompra orden)
+        {
+            try
+            {
+                // 1. Order ID - usar el ID de la orden, NO del carrito
+                lblOrderId.Text = "#" + orden.idOrdenCompra.ToString().PadLeft(8, '0');
+                idOrdenGenerada = orden.idOrdenCompra.ToString().PadLeft(8, '0');
+
+                // 2. Cantidad de productos
+                int cantidadProductos = orden.carrito.lineas.Length;
+                lblProductCount.Text = cantidadProductos + (cantidadProductos == 1 ? " Producto" : " Productos");
+                lblProductCountHeader.Text = cantidadProductos.ToString("00");
+
+                // 3. Fecha del pedido - usar la fecha de creación de la orden
+                DateTime fecha = orden.fechaCreacion;
+                lblOrderDate.Text = FormatearFecha(fecha);
+
+                // 4. Usar los totales de la orden (ya calculados y guardados)
+                decimal total = (decimal)orden.totalDescontado;
+                lblOrderTotal.Text = "S/." + total.ToString("N2");
+
+                System.Diagnostics.Debug.WriteLine($"Labels actualizados desde orden - Total: S/.{total:N2}");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error actualizando labels desde orden: {ex.Message}");
+            }
+        }
+
         private void CargarCarrito(int idCliente)
         {
             try
@@ -207,8 +324,8 @@ namespace CampusStoreWeb
                 }
 
                 decimal subtotalConDescuento = subtotal - descuento;
-                decimal impuesto = subtotalConDescuento * PORCENTAJE_IMPUESTO;
-                decimal total = subtotalConDescuento + impuesto;
+                //decimal impuesto = subtotalConDescuento * PORCENTAJE_IMPUESTO;
+                decimal total = subtotalConDescuento; /*+ impuesto;*/
 
                 lblOrderTotal.Text = total.ToString("N2");
 

@@ -165,7 +165,7 @@ namespace CampusStoreWeb
 
             public string TotalFormatted
             {
-                get { return string.Format("${0:F2} ({1} Producto{2})", Total, ProductCount, ProductCount != 1 ? "s" : ""); }
+                get { return string.Format("S/.{0:F2} ({1} Producto{2})", Total, ProductCount, ProductCount != 1 ? "s" : ""); }
             }
 
             public string OrderDateFormatted
