@@ -6,6 +6,7 @@ import pe.edu.pucp.campusstore.dao.ReseñaDAO;
 import pe.edu.pucp.campusstore.daoimpl.ReseñaDAOImpl;
 import pe.edu.pucp.campusstore.modelo.Reseña;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
+import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
 public class ReseñaBOImpl implements ReseñaBO{
     private final ReseñaDAO reseñaDAO;
@@ -36,6 +37,11 @@ public class ReseñaBOImpl implements ReseñaBO{
         } else {
             this.reseñaDAO.actualizar(modelo);
         }
+    }
+    
+    @Override
+    public List<Reseña> listarPorProducto(TipoProducto tipoProducto, Integer idProducto) {
+        return reseñaDAO.listarPorProducto(tipoProducto, idProducto);
     }
     
 }

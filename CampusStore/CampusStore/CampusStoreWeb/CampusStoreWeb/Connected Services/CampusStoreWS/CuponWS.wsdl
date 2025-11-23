@@ -11,11 +11,11 @@
   <message name="eliminarCuponResponse">
     <part name="parameters" element="tns:eliminarCuponResponse" />
   </message>
-  <message name="listarCupones">
-    <part name="parameters" element="tns:listarCupones" />
+  <message name="guardarCupon">
+    <part name="parameters" element="tns:guardarCupon" />
   </message>
-  <message name="listarCuponesResponse">
-    <part name="parameters" element="tns:listarCuponesResponse" />
+  <message name="guardarCuponResponse">
+    <part name="parameters" element="tns:guardarCuponResponse" />
   </message>
   <message name="obtenerCupon">
     <part name="parameters" element="tns:obtenerCupon" />
@@ -23,28 +23,28 @@
   <message name="obtenerCuponResponse">
     <part name="parameters" element="tns:obtenerCuponResponse" />
   </message>
-  <message name="guardarCupon">
-    <part name="parameters" element="tns:guardarCupon" />
+  <message name="listarCupones">
+    <part name="parameters" element="tns:listarCupones" />
   </message>
-  <message name="guardarCuponResponse">
-    <part name="parameters" element="tns:guardarCuponResponse" />
+  <message name="listarCuponesResponse">
+    <part name="parameters" element="tns:listarCuponesResponse" />
   </message>
   <portType name="CuponWS">
     <operation name="eliminarCupon">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/eliminarCuponRequest" message="tns:eliminarCupon" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/eliminarCuponResponse" message="tns:eliminarCuponResponse" />
     </operation>
-    <operation name="listarCupones">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/listarCuponesRequest" message="tns:listarCupones" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/listarCuponesResponse" message="tns:listarCuponesResponse" />
+    <operation name="guardarCupon">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/guardarCuponRequest" message="tns:guardarCupon" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/guardarCuponResponse" message="tns:guardarCuponResponse" />
     </operation>
     <operation name="obtenerCupon">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/obtenerCuponRequest" message="tns:obtenerCupon" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/obtenerCuponResponse" message="tns:obtenerCuponResponse" />
     </operation>
-    <operation name="guardarCupon">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/guardarCuponRequest" message="tns:guardarCupon" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/guardarCuponResponse" message="tns:guardarCuponResponse" />
+    <operation name="listarCupones">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/listarCuponesRequest" message="tns:listarCupones" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/listarCuponesResponse" message="tns:listarCuponesResponse" />
     </operation>
   </portType>
   <binding name="CuponWSPortBinding" type="tns:CuponWS">
@@ -58,7 +58,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="listarCupones">
+    <operation name="guardarCupon">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -76,7 +76,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="guardarCupon">
+    <operation name="listarCupones">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

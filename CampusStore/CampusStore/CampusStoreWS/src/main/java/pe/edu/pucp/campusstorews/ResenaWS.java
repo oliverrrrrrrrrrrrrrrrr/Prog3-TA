@@ -32,6 +32,14 @@ public class ResenaWS {
         return this.reseñaBO.listar(modelo);
     }
     
+    @WebMethod(operationName = "listarResenasPorProducto")
+    public List<Reseña> listarResenasPorProducto(
+        @WebParam(name = "tipoProducto") TipoProducto tipoProducto,
+        @WebParam(name = "idProducto") int idProducto
+    ) {
+        return this.reseñaBO.listarPorProducto(tipoProducto, idProducto);
+    }
+    
     @WebMethod(operationName = "obtenerResena")
     public Reseña obtenerResena(
         @WebParam(name = "idResena") int idResena,

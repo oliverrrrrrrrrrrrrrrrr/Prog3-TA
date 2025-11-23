@@ -8,6 +8,8 @@
   <xs:element name="guardarResena" type="tns:guardarResena" />
   <xs:element name="guardarResenaResponse" type="tns:guardarResenaResponse" />
   <xs:element name="listarResenas" type="tns:listarResenas" />
+  <xs:element name="listarResenasPorProducto" type="tns:listarResenasPorProducto" />
+  <xs:element name="listarResenasPorProductoResponse" type="tns:listarResenasPorProductoResponse" />
   <xs:element name="listarResenasResponse" type="tns:listarResenasResponse" />
   <xs:element name="obtenerResena" type="tns:obtenerResena" />
   <xs:element name="obtenerResenaResponse" type="tns:obtenerResenaResponse" />
@@ -20,15 +22,15 @@
   <xs:complexType name="eliminarResenaResponse">
     <xs:sequence />
   </xs:complexType>
-  <xs:complexType name="obtenerResena">
+  <xs:complexType name="listarResenasPorProducto">
     <xs:sequence>
-      <xs:element name="idResena" type="xs:int" />
       <xs:element minOccurs="0" name="tipoProducto" type="tns:tipoProducto" />
+      <xs:element name="idProducto" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="obtenerResenaResponse">
+  <xs:complexType name="listarResenasPorProductoResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:reseña" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:reseña" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="reseña">
@@ -137,6 +139,17 @@
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="obtenerResena">
+    <xs:sequence>
+      <xs:element name="idResena" type="xs:int" />
+      <xs:element minOccurs="0" name="tipoProducto" type="tns:tipoProducto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerResenaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:reseña" />
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listarResenas">
     <xs:sequence>

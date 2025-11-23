@@ -16,6 +16,8 @@ import pe.edu.pucp.campusstore.modelo.Cliente;
 import pe.edu.pucp.campusstore.modelo.Libro;
 import pe.edu.pucp.campusstore.modelo.Reseña;
 import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO{
     private ArticuloDAO articuloDAO;
@@ -134,5 +136,29 @@ public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO
         }
         
         return modelo;
+    }
+    
+    @Override
+    public List<Reseña> listarPorProducto(TipoProducto tipoProducto, Integer idProducto) {
+        return ejecutarComando(conn -> {
+            try {
+                String sql = "{call listarReseñasPorProducto(?, ?)}";
+                CallableStatement cmd = conn.prepareCall(sql);
+                cmd.setString(1, tipoProducto.toString());
+                cmd.setInt(2, idProducto);
+                
+                ResultSet rs = cmd.executeQuery();
+                
+                List<Reseña> reseñas = new ArrayList<>();
+                while (rs.next()) {
+                    reseñas.add(this.mapearModelo(rs));
+                }
+                
+                return reseñas;
+            } catch (SQLException e) {
+                System.err.println("Error al listar reseñas por producto: " + e.getMessage());
+                throw new RuntimeException(e);
+            }
+        });
     }
 }

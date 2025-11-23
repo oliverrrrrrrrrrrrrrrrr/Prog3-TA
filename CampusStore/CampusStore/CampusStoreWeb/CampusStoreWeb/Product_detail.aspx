@@ -27,6 +27,10 @@
         .product-detail-page .custom-tabs .nav-link { color: #6c757d; font-weight: 600; border: none; border-bottom: 3px solid transparent; padding: 0.8rem 0; margin-right: 2rem; }
         .product-detail-page .custom-tabs .nav-link.active, .product-detail-page .custom-tabs .nav-link:hover { color: #212529; border-bottom-color: #fd7e14; }
         .product-detail-page .tab-content { padding: 1.5rem 0; line-height: 1.7; }
+        .product-detail-page .reviews-container { margin-top: 1rem; }
+        .product-detail-page .review-item { background-color: #f8f9fa; }
+        .product-detail-page .review-item .review-comment { margin-top: 0.5rem; color: #495057; }
+        .product-detail-page .review-item strong { color: #212529; }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

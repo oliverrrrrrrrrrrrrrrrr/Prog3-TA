@@ -16,6 +16,7 @@ namespace CampusStoreWeb
         private readonly ArticuloWSClient articuloWS;
         private readonly CarritoWSClient carritoWS;
         private readonly ClienteWSClient clienteWS;
+        private readonly ResenaWSClient resenaWS;
 
         private const string VS_TIPO = "DetalleProducto_Tipo";
         private const string VS_ID = "DetalleProducto_Id";
@@ -31,6 +32,7 @@ namespace CampusStoreWeb
             articuloWS = new ArticuloWSClient();
             carritoWS = new CarritoWSClient();
             clienteWS = new ClienteWSClient();
+            resenaWS = new ResenaWSClient();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -87,6 +89,9 @@ namespace CampusStoreWeb
 
                     ConfigurarDisponibilidad(p.stockReal);
                     GuardarDatosProductoEnViewState(tipo, id, p.precio, p.precioDescuentoSpecified && p.precioDescuento > 0 ? (double?)p.precioDescuento : null, p.nombre, p.imagenURL, p.stockReal);
+                    
+                    // Cargar reseñas
+                    CargarResenas(tipoProducto.LIBRO, id);
                 }
                 else
                 {
@@ -107,6 +112,9 @@ namespace CampusStoreWeb
 
                     ConfigurarDisponibilidad(p.stockReal);
                     GuardarDatosProductoEnViewState(tipo, id, p.precio, p.precioDescuentoSpecified && p.precioDescuento > 0 ? (double?)p.precioDescuento : null, p.nombre, p.imagenURL, p.stockReal);
+                    
+                    // Cargar reseñas
+                    CargarResenas(tipoProducto.ARTICULO, id);
                 }
             }
             catch (Exception ex)
@@ -415,6 +423,85 @@ namespace CampusStoreWeb
 
             string script = $"setTimeout(function() {{var alertEl = document.getElementById('{pnlAlert.ClientID}'); if(alertEl) alertEl.style.display='none';}}, 5000);";
             ScriptManager.RegisterStartupScript(this, GetType(), Guid.NewGuid().ToString(), script, true);
+        }
+
+        private void CargarResenas(tipoProducto tipo, int idProducto)
+        {
+            try
+            {
+                var reseñas = resenaWS.listarResenasPorProducto(tipo, idProducto);
+                
+                if (reseñas == null || reseñas.Length == 0)
+                {
+                    litReviews.Text = "<p class='text-muted'>No hay reseñas para este producto todavía.</p>";
+                    return;
+                }
+
+                System.Text.StringBuilder html = new System.Text.StringBuilder();
+                html.Append("<div class='reviews-container'>");
+                
+                // Calcular promedio de calificaciones
+                double promedio = 0;
+                if (reseñas.Length > 0)
+                {
+                    promedio = reseñas.Average(r => r.calificacion);
+                }
+                
+                html.Append($"<div class='mb-4'><h5>Calificación promedio: {promedio:F1}/5.0</h5></div>");
+                
+                foreach (var resena in reseñas)
+                {
+                    html.Append("<div class='review-item mb-4 p-3 border rounded'>");
+                    
+                    // Estrellas
+                    html.Append("<div class='mb-2'>");
+                    int calificacion = (int)Math.Round(resena.calificacion);
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= calificacion)
+                        {
+                            html.Append("<span class='text-warning'>★</span>");
+                        }
+                        else
+                        {
+                            html.Append("<span class='text-muted'>☆</span>");
+                        }
+                    }
+                    html.Append($" <span class='ms-2'>{resena.calificacion:F1}/5.0</span>");
+                    html.Append("</div>");
+                    
+                    // Cliente
+                    if (resena.cliente != null)
+                    {
+                        string nombreCliente = !string.IsNullOrEmpty(resena.cliente.nombre) 
+                            ? resena.cliente.nombre 
+                            : (!string.IsNullOrEmpty(resena.cliente.nombreUsuario) 
+                                ? resena.cliente.nombreUsuario 
+                                : "Cliente");
+                        html.Append($"<div class='mb-2'><strong>{nombreCliente}</strong></div>");
+                    }
+                    
+                    // Comentario
+                    if (!string.IsNullOrEmpty(resena.reseña1))
+                    {
+                        html.Append($"<div class='review-comment'>{System.Web.HttpUtility.HtmlEncode(resena.reseña1)}</div>");
+                    }
+                    else
+                    {
+                        html.Append("<div class='review-comment text-muted'><em>Sin comentario</em></div>");
+                    }
+                    
+                    html.Append("</div>");
+                }
+                
+                html.Append("</div>");
+                litReviews.Text = html.ToString();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al cargar reseñas: " + ex.Message);
+                litReviews.Text = "<p class='text-danger'>Error al cargar las reseñas. Por favor, intente más tarde.</p>";
+            }
         }
 
         private class ProductoSeleccionado
