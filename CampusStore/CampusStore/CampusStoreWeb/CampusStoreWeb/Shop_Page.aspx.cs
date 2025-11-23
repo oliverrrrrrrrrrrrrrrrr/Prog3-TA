@@ -79,9 +79,47 @@ namespace CampusStoreWeb
 
                 // La primera vez que carga la página, mostramos los productos iniciales
                 CargarProductos();
+
+                CargarFiltros();
             }
         }
 
+        private void CargarFiltros()
+        {
+            try
+            {
+                // O el cliente que tenga estos métodos
+
+                // Cargar Editoriales (Top 5)
+                var autores = new AutorWSClient();
+                var editoriales = new EditorialWSClient();
+                editorial[] todasLasEditoriales = editoriales.listarEditoriales();
+                if (todasLasEditoriales != null)
+                {
+                    // Asumimos que quieres las primeras 5, o puedes añadir lógica de "más populares"
+                    cblEditoriales.DataSource = todasLasEditoriales.Take(5);
+                    cblEditoriales.DataTextField = "nombre";
+                    cblEditoriales.DataValueField = "idEditorial";
+                    cblEditoriales.DataBind();
+                }
+
+                // Cargar Autores (Top 5)
+                autor[] todosLosAutores = autores.listarAutores();
+                if (todosLosAutores != null)
+                {
+                    cblAutores.DataSource = todosLosAutores.Take(5);
+                    cblAutores.DataTextField = "nombre";
+                    cblAutores.DataValueField = "idAutor";
+                    cblAutores.DataBind();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al cargar filtros dinámicos: " + ex.Message);
+                // Si falla, los filtros simplemente aparecerán vacíos.
+            }
+        }
         protected void btnAplicarFiltros_Click(object sender, EventArgs e)
         {
             // Validar que los filtros de libro solo se usen con la categoría "Libros"

@@ -174,10 +174,7 @@
                     <div class="filter-section">
                         <h4>EDITORIALES</h4>
                         <asp:CheckBoxList ID="cblEditoriales" runat="server" CssClass="form-check-list">
-                            <asp:ListItem Value="1">Penguin Random House</asp:ListItem> 
-                            <asp:ListItem Value="2">HarperCollins</asp:ListItem>      
-                            <asp:ListItem Value="3">Simon & Schuster</asp:ListItem>   
-                            <asp:ListItem Value="4">Planeta</asp:ListItem>            
+                            <%-- El Code-Behind llenará esta lista dinámicamente --%>
                         </asp:CheckBoxList>
                     </div>
 
@@ -185,7 +182,7 @@
                     <div class="filter-section">
                         <h4>AUTORES</h4>
                         <asp:CheckBoxList ID="cblAutores" runat="server" CssClass="form-check-list">
-                            <asp:ListItem Value="59">Gaston Acurio</asp:ListItem>
+                            <%-- El Code-Behind llenará esta lista dinámicamente --%>
                         </asp:CheckBoxList>
                     </div>
 
