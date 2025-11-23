@@ -931,4 +931,40 @@
         
         </asp:Panel>
     </div>
+           <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function mostrarModalExito() {
+        // Verifica si Swal está cargado
+        if (typeof Swal === 'undefined') {
+            console.error('SweetAlert2 no está cargado. Revisa tu MasterPage.');
+            alert('Datos guardados (Fallback)'); // Solo por si falla la librería
+            return;
+        }
+
+        Swal.fire({
+            title: '¡Éxito!',
+            text: 'Datos cambiados con éxito',
+            icon: 'success',
+            confirmButtonColor: '#FA8232',
+            confirmButtonText: 'Aceptar'
+        }).then((result) => {
+            // Opcional: Recargar la página al cerrar
+            if (result.isConfirmed) {
+                window.location.href = window.location.href;
+            }
+        });
+    }
+
+    function mostrarModalError(mensaje) {
+        if (typeof Swal === 'undefined') { alert(mensaje); return; }
+
+        Swal.fire({
+            title: 'Error',
+            text: mensaje,
+            icon: 'error',
+            confirmButtonColor: '#FA8232',
+            confirmButtonText: 'Ok'
+        });
+    }
+</script>
 </asp:Content>

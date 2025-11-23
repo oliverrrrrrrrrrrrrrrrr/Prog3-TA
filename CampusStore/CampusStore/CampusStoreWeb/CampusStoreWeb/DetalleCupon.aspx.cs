@@ -1,5 +1,6 @@
 ﻿using CampusStoreWeb.CampusStoreWS;
 using System;
+using System.Web.UI;
 
 namespace CampusStoreWeb
 {
@@ -200,13 +201,14 @@ namespace CampusStoreWeb
                     MostrarFormularioEdicion(false);
                     MostrarDatosCupon();
 
-                    string script = "alert('Cupón actualizado exitosamente');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "success", script, true);
+                    string script = "mostrarModalExito();";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaExito", script, true);
                 }
                 catch (Exception ex)
                 {
-                    string script = $"alert('Error al guardar cambios: {ex.Message}');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                    string mensaje = ex.Message.Replace("'", "").Replace("\n", " ");
+                    string script = $"mostrarModalError('{mensaje}');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaError", script, true);
                 }
             }
         }

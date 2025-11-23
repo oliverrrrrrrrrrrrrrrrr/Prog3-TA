@@ -1,6 +1,7 @@
 ﻿using CampusStoreWeb.CampusStoreWS;
 using System;
 using System.Collections.Generic;
+using System.Web.UI;
 
 namespace CampusStoreWeb
 {
@@ -242,13 +243,14 @@ namespace CampusStoreWeb
                     MostrarDatosOrden();
                     MostrarFormularioEdicion(false);
 
-                    string script = "alert('Orden actualizada exitosamente');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "success", script, true);
+                    string script = "mostrarModalExito();";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaExito", script, true);
                 }
                 catch (Exception ex)
                 {
-                    string script = $"alert('Error al guardar: {ex.Message}');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                    string mensaje = ex.Message.Replace("'", "").Replace("\n", " ");
+                    string script = $"mostrarModalError('{mensaje}');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaError", script, true);
                 }
             }
         }
