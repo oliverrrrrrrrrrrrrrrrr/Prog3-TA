@@ -228,7 +228,10 @@ namespace CampusStoreWeb
                 {
                     idOrdenActual = (int)ViewState["idOrden"];
 
+                    ordenActual = ordenCompraWS.obtenerOrdenCompra(idOrdenActual);
+
                     // Actualizar solo estado y fecha límite
+                    
                     ordenActual.estado = (estadoOrden)Enum.Parse(typeof(estadoOrden), ddlEstadoEdit.SelectedValue);
                     ordenActual.estadoSpecified = true;
                     ordenActual.limitePago = DateTime.Parse(txtFechaLimiteEdit.Text);
