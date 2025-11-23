@@ -2,6 +2,7 @@ using CampusStoreWeb.CampusStoreWS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -32,7 +33,10 @@ namespace CampusStoreWeb
         {
             if (!IsPostBack)
             {
-                CargarDetallesCheckout();
+                
+                 CargarDetallesCheckout();
+                
+                    
                 
             }
         }
@@ -49,7 +53,7 @@ namespace CampusStoreWeb
 
                 if (string.IsNullOrEmpty(cuenta))
                 {
-                    Response.Redirect("~/Login.aspx");
+                    Response.Redirect("~/SignIn.aspx");
                     return;
                 }
 
@@ -60,7 +64,7 @@ namespace CampusStoreWeb
 
                 if (cliente == null || cliente.idCliente <= 0)
                 {
-                    Response.Redirect("~/Login.aspx");
+                    Response.Redirect("~/SignIn.aspx");
                     return;
                 }
 
@@ -112,6 +116,16 @@ namespace CampusStoreWeb
 
         }
 
+        private String generarURLParaBoton(string codigoOrdenID)
+        {
+            // Usamos el texto "limpio" para concatenar.
+            string whatsappBase = "https://api.whatsapp.com/send?phone=51993000968&text=HOLA+:D+,+Mi+codigo+de+orden+es+";
+
+            // 3. Reconstruir el mensaje final de WhatsApp (Texto + ID)
+            string mensajeFinalWhatsapp = whatsappBase + codigoOrdenID;
+            return mensajeFinalWhatsapp;
+        }
+
         private void CargarOrdenEspecifica(int idCliente, int idOrden)
         {
             try
@@ -140,14 +154,44 @@ namespace CampusStoreWeb
 
                 // Obtener el carrito asociado a la orden
                 var carrito = orden.carrito;
+                
 
                 System.Diagnostics.Debug.WriteLine($"Carrito de la orden - ID: {carrito?.idCarrito}");
                 System.Diagnostics.Debug.WriteLine($"Líneas del carrito: {carrito?.lineas?.Length ?? 0}");
+                List<lineaCarrito> listaLineas = new List<lineaCarrito>();
+                string qrUrl = generarURLQR(idOrden.ToString());
+                imgQr.ImageUrl = qrUrl;
+                if (orden.carrito != null)
+                {
+                    // Intentamos ver si vinieron llenos (por si acaso)
+                    if (orden.carrito.lineas != null && orden.carrito.lineas.Length > 0)
+                    {
+                        listaLineas.AddRange(orden.carrito.lineas);
+                    }
+                    else
+                    {
+                        // SI ESTÁN VACÍOS: Los buscamos manualmente usando los métodos del WS
+                        int idCarrito = orden.carrito.idCarrito;
 
-                if (carrito != null && carrito.lineas != null && carrito.lineas.Length > 0)
+                        // 1. Traer Artículos
+                        var articulos = ordenCompraWS.listarArticulosCarrito(idCarrito);
+                        if (articulos != null && articulos.Length > 0)
+                        {
+                            listaLineas.AddRange(articulos);
+                        }
+
+                        // 2. Traer Libros
+                        var libros = ordenCompraWS.listarLibrosCarrito(idCarrito);
+                        if (libros != null && libros.Length > 0)
+                        {
+                            listaLineas.AddRange(libros);
+                        }
+                    }
+                }
+                if (listaLineas.Count > 0)
                 {
                     // Debug: Mostrar productos
-                    foreach (var linea in carrito.lineas)
+                    foreach (var linea in listaLineas)
                     {
                         System.Diagnostics.Debug.WriteLine($"  - Producto: {linea.producto?.nombre}, Cantidad: {linea.cantidad}");
                     }
@@ -156,17 +200,15 @@ namespace CampusStoreWeb
                     MostrarMensaje(false, true);
 
                     // Cargar productos en el repeater
-                    rptDetalleOrden.DataSource = carrito.lineas;
+                    rptDetalleOrden.DataSource = listaLineas;
                     rptDetalleOrden.DataBind();
 
                     System.Diagnostics.Debug.WriteLine("Repeater data bound exitosamente");
 
                     // Actualizar labels del resumen usando los datos de la ORDEN
-                    ActualizarLabelsResumenDesdeOrden(orden);
+                    ActualizarLabelsResumenDesdeOrden(orden,listaLineas.Count);
 
-                    // Generar QR con el ID de la orden
-                    string qrUrl = generarURLQR(orden.idOrdenCompra.ToString().PadLeft(8, '0'));
-                    imgQr.ImageUrl = qrUrl;
+                    
                 }
                 else
                 {
@@ -183,16 +225,19 @@ namespace CampusStoreWeb
             }
         }
 
-        private void ActualizarLabelsResumenDesdeOrden(ordenCompra orden)
+        private void ActualizarLabelsResumenDesdeOrden(ordenCompra orden,int CantReal)
         {
             try
             {
                 // 1. Order ID - usar el ID de la orden, NO del carrito
                 lblOrderId.Text = "#" + orden.idOrdenCompra.ToString().PadLeft(8, '0');
                 idOrdenGenerada = orden.idOrdenCompra.ToString().PadLeft(8, '0');
+                ViewState["IdOrdenActual"] = idOrdenGenerada;
+
 
                 // 2. Cantidad de productos
-                int cantidadProductos = orden.carrito.lineas.Length;
+
+                int cantidadProductos = CantReal;
                 lblProductCount.Text = cantidadProductos + (cantidadProductos == 1 ? " Producto" : " Productos");
                 lblProductCountHeader.Text = cantidadProductos.ToString("00");
 
@@ -202,7 +247,12 @@ namespace CampusStoreWeb
 
                 // 4. Usar los totales de la orden (ya calculados y guardados)
                 decimal total = (decimal)orden.totalDescontado;
-                lblOrderTotal.Text = "S/." + total.ToString("N2");
+                if (total == 0 && orden.total > 0)
+                {
+                    total = (decimal)orden.total;
+                }
+
+                lblOrderTotal.Text =  total.ToString("N2");
 
                 System.Diagnostics.Debug.WriteLine($"Labels actualizados desde orden - Total: S/.{total:N2}");
             }
@@ -295,8 +345,11 @@ namespace CampusStoreWeb
             try
             {
                 // 1. Order ID
+
                 lblOrderId.Text = "#" + carrito.idCarrito.ToString().PadLeft(8, '0');
                 idOrdenGenerada =carrito.idCarrito.ToString().PadLeft(8, '0');
+                ViewState["IdOrdenActual"] = idOrdenGenerada;
+
                 // 2. Cantidad de productos
                 int cantidadProductos = carrito.lineas.Length;
                 lblProductCount.Text = cantidadProductos + (cantidadProductos == 1 ? " Producto" : " Productos");
@@ -702,7 +755,18 @@ namespace CampusStoreWeb
 
         protected void btnProceedPayment_Click(object sender, EventArgs e)
         {
-            Response.Redirect("OrderHistory.aspx?message=order_placed");
+            string idOrden = ViewState["IdOrdenActual"] as string;
+
+            string urlParaElBoton = generarURLParaBoton(idOrden);
+            string script = $@"
+            window.open('{urlParaElBoton}', '_blank');
+            setTimeout(function() {{ 
+                window.location.href = 'OrderHistory.aspx?message=order_placed'; 
+            }}, 500);
+               ";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenWA", script, true);
+            
         }
     }
 }

@@ -506,8 +506,9 @@ namespace CampusStoreWeb
             try
             {
                 // Obtener el ID de la orden actual
+     
                 int idOrden = ObtenerIdOrdenActual();
-
+            
                 if (idOrden <= 0)
                 {
                     MostrarError("No se pudo identificar la orden.");
