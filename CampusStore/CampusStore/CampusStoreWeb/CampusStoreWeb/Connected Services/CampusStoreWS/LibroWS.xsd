@@ -2,7 +2,6 @@
 <xs:schema xmlns:tns="http://services.campusstore.pucp.edu.pe/" targetNamespace="http://services.campusstore.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="Articulo" type="tns:articulo" />
   <xs:element name="Libro" type="tns:libro" />
-  <xs:element name="Producto" type="tns:producto" />
   <xs:element name="eliminarLibro" type="tns:eliminarLibro" />
   <xs:element name="eliminarLibroResponse" type="tns:eliminarLibroResponse" />
   <xs:element name="guardarLibro" type="tns:guardarLibro" />
@@ -46,7 +45,7 @@
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
       <xs:element minOccurs="0" name="descripcion" type="xs:string" />
       <xs:element minOccurs="0" name="descuento" type="tns:descuento" />
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="reseñas" nillable="true" type="tns:reseña" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="reseñas" type="tns:reseña" />
       <xs:element minOccurs="0" name="imagenURL" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -81,12 +80,12 @@
   </xs:complexType>
   <xs:complexType name="reseña">
     <xs:sequence>
-      <xs:element name="calificacion" type="xs:double" />
-      <xs:element minOccurs="0" name="cliente" type="tns:cliente" />
       <xs:element minOccurs="0" name="idReseña" type="xs:int" />
-      <xs:element minOccurs="0" name="producto" type="tns:producto" />
+      <xs:element minOccurs="0" name="calificacion" type="xs:double" />
       <xs:element minOccurs="0" name="reseña" type="xs:string" />
       <xs:element minOccurs="0" name="tipoProducto" type="tns:tipoProducto" />
+      <xs:element minOccurs="0" name="idProducto" type="xs:int" />
+      <xs:element minOccurs="0" name="cliente" type="tns:cliente" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="cliente">

@@ -13,11 +13,14 @@ import java.util.List;
 import pe.edu.pucp.campusstore.bases.dao.TransaccionalBaseDAO;
 import pe.edu.pucp.campusstore.dao.LibroDAO;
 import pe.edu.pucp.campusstore.modelo.Autor;
+import pe.edu.pucp.campusstore.modelo.Cliente;
 import pe.edu.pucp.campusstore.modelo.Descuento;
 import pe.edu.pucp.campusstore.modelo.Editorial;
 import pe.edu.pucp.campusstore.modelo.enums.Formato;
 import pe.edu.pucp.campusstore.modelo.enums.GeneroLibro;
 import pe.edu.pucp.campusstore.modelo.Libro;
+import pe.edu.pucp.campusstore.modelo.Reseña;
+import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
 public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDAO {
     @Override
@@ -139,10 +142,45 @@ public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDA
         return modelo;
     }
     
+    private Reseña mapearReseñaPorLibro(ResultSet rs) throws SQLException {
+        Reseña reseña = new Reseña();
+
+        reseña.setIdReseña(rs.getInt("idReseña"));
+        reseña.setCalificacion(rs.getDouble("calificacion"));
+        reseña.setReseña(rs.getString("reseña"));
+        reseña.setTipoProducto(TipoProducto.LIBRO);
+
+        // Libro (solo ID)
+        int idLibro = rs.getInt("idLibro");
+        if(!rs.wasNull()){
+            reseña.setIdProducto(idLibro);
+        }
+
+        // Cliente
+        Cliente cliente = new Cliente();
+        cliente.setIdCliente(rs.getInt("idCliente"));
+        cliente.setNombre(rs.getString("clienteNombre"));
+        cliente.setNombreUsuario(rs.getString("clienteUsuario"));
+        cliente.setCorreo(rs.getString("clienteCorreo"));
+        cliente.setTelefono(rs.getString("clienteTelefono"));
+
+        reseña.setCliente(cliente);
+
+        return reseña;
+    }
+    
     protected PreparedStatement comandoLeerAutoresPorLibro(Connection conn, 
             int idLibro) throws SQLException {
         
         String sql = "{call listarAutoresPorLibro(?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt("p_idLibro", idLibro);
+        return cmd;
+    }
+    
+    protected PreparedStatement comandoObtenerReseñasPorLibro(Connection conn, int idLibro)
+            throws SQLException {
+        String sql = "{call obtenerReseñasPorLibro(?)}";
         CallableStatement cmd = conn.prepareCall(sql);
         cmd.setInt("p_idLibro", idLibro);
         return cmd;
@@ -160,6 +198,22 @@ public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDA
                 }
                 
                 return modelos;
+            }
+        });
+    }
+    
+    @Override
+    public List<Reseña> obtenerReseñasPorLibro(int idLibro) {
+        return ejecutarComando(conn -> {
+            try (PreparedStatement cmd = this.comandoObtenerReseñasPorLibro(conn, idLibro)) {
+                ResultSet rs = cmd.executeQuery();
+                List<Reseña> lista = new ArrayList<>();
+
+                while (rs.next()) {
+                    lista.add(mapearReseñaPorLibro(rs));
+                }
+
+                return lista;
             }
         });
     }

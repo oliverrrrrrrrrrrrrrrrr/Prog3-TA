@@ -590,7 +590,6 @@
                                 <asp:Label ID="lblUsername" runat="server" Text="Username"></asp:Label>
                             </div>
                         </div>
-<<<<<<< HEAD
                         <!-- 
                         <div class ="info-row">
                             <span class="info-label">Contraseña</span>
@@ -599,11 +598,6 @@
                             </div>
                         </div>
                         -->
-=======
-
-                       
-
->>>>>>> cad5f62643bbbaec6f0e230099603895aede1e32
                         <div class ="info-row">
                             <span class="info-label">Correo</span>
                             <div>
@@ -636,7 +630,6 @@
                             </span>
                         </div>
                     </div>
-                </div>
             </asp:Panel>
 
 

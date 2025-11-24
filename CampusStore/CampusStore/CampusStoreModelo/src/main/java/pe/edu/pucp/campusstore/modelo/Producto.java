@@ -2,13 +2,15 @@ package pe.edu.pucp.campusstore.modelo;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 
-@XmlRootElement(name = "Producto")
+//@XmlRootElement(name = "Producto")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso({Libro.class, Articulo.class}) // ✅ CRÍTICO: Le dice a JAXB las subclases
+@XmlSeeAlso({Libro.class, Articulo.class})
 public abstract class Producto {
     private Double precio;
     private Double precioDescuento;
@@ -17,6 +19,7 @@ public abstract class Producto {
     private String nombre;
     private String descripcion;
     private Descuento descuento;
+    @XmlElement(name = "reseñas")
     private List<Reseña> reseñas;
     private String imagenURL;
     

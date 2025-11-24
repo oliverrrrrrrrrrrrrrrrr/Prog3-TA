@@ -589,7 +589,7 @@ namespace CampusStoreWeb
                         resenaWS.Close();
                         return;
                     }
-                    nuevaResena.producto = articuloCompleto;
+                    nuevaResena.idProducto = articuloCompleto.idArticulo;
                 }
                 else // LIBRO
                 {
@@ -602,7 +602,7 @@ namespace CampusStoreWeb
                         resenaWS.Close();
                         return;
                     }
-                    nuevaResena.producto = libroCompleto;
+                    nuevaResena.idProducto = libroCompleto.idLibro;
                 }
                 
                 // Asignar el objeto cliente completo

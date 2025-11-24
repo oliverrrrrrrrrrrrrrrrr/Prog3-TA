@@ -121,3 +121,33 @@ BEGIN
 END//
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure obtenerReseñasPorArticulo
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP PROCEDURE IF EXISTS `obtenerReseñasPorArticulo`;
+
+DELIMITER //
+CREATE PROCEDURE `obtenerReseñasPorArticulo`(
+    IN p_idArticulo INT
+)
+BEGIN
+    SELECT 
+        ra.idReseñaArticulo AS idReseña,
+        ra.calificacion,
+        ra.reseña,
+        ra.ARTICULO_idArticulo as idArticulo,
+        c.idCliente,
+		c.nombre AS clienteNombre,
+		c.nombreUsuario AS clienteUsuario,
+		c.correo AS clienteCorreo,
+		c.telefono AS clienteTelefono
+        
+    FROM reseña_articulo ra
+    INNER JOIN cliente c 
+        ON ra.cliente_idCliente = c.idCliente
+    WHERE ra.ARTICULO_idArticulo = p_idArticulo;
+END//
+DELIMITER ;

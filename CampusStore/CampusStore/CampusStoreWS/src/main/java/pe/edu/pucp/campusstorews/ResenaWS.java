@@ -69,10 +69,10 @@ public class ResenaWS {
     ) {
         // Asegurar que el tipoProducto esté establecido basándose en el tipo de producto
         // Esto es necesario porque puede llegar como null después de la deserialización
-        if (resena.getTipoProducto() == null && resena.getProducto() != null) {
-            if (resena.getProducto() instanceof Articulo) {
+        if (resena.getTipoProducto() == null && resena.getIdProducto()!= null) {
+            if (resena.getTipoProducto() == TipoProducto.ARTICULO) {
                 resena.setTipoProducto(TipoProducto.ARTICULO);
-            } else if (resena.getProducto() instanceof Libro) {
+            } else if (resena.getTipoProducto() == TipoProducto.LIBRO) {
                 resena.setTipoProducto(TipoProducto.LIBRO);
             }
         }

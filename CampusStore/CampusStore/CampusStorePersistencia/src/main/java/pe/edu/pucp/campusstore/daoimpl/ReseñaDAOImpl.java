@@ -39,11 +39,7 @@ public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO
         
         cmd.setString("p_tipo", modelo.getTipoProducto().toString());
         
-        switch (modelo.getProducto()) {
-            case Articulo articulo -> cmd.setInt("p_idReferencia", articulo.getIdArticulo());
-            case Libro libro -> cmd.setInt("p_idReferencia", libro.getIdLibro());
-            default -> throw new SQLException("Tipo de producto no válido");
-        }
+        cmd.setInt("p_idReferencia", modelo.getIdProducto());
         
         cmd.setDouble("p_calificacion", modelo.getCalificacion());
         cmd.setString("p_reseña", modelo.getReseña());
@@ -121,12 +117,12 @@ public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO
         if (tipo == TipoProducto.ARTICULO) {
             Integer idArticulo = rs.getInt("idArticulo");
             if(!rs.wasNull()){
-                modelo.setProducto(new ArticuloDAOImpl().leer(idArticulo));
+                modelo.setIdProducto(idArticulo);
             }
         } else if (tipo == TipoProducto.LIBRO) {
             Integer idLibro = rs.getInt("idLibro");
             if(!rs.wasNull()){
-                modelo.setProducto(new LibroDAOImpl().leer(idLibro));
+                modelo.setIdProducto(idLibro);
             }
         }
         

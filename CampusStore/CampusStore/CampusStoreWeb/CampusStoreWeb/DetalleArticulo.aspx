@@ -478,6 +478,240 @@
         .btn-danger-small:hover {
             background-color: #ffcccc;
         }
+        /* ============================================ */
+        /* SECCIÓN DE RESEÑAS */
+        /* ============================================ */
+        .resenas-section {
+            background-color: #F9FAFB;
+            border: 2px solid #E4E7E9;
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 30px;
+        }
+
+        .resenas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #E4E7E9;
+        }
+
+        .resenas-title-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .resenas-title-group h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #191C1F;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .resenas-title-group h3 i {
+            color: var(--primary-orange);
+            font-size: 24px;
+        }
+
+        .resenas-count {
+            color: #5F6C72;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .resenas-rating-summary {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .rating-promedio {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rating-numero {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-orange);
+            line-height: 1;
+        }
+
+        .rating-estrellas-grande {
+            display: flex;
+            gap: 4px;
+            font-size: 20px;
+        }
+
+        /* Lista de reseñas */
+        .resenas-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .resena-card {
+            background-color: white;
+            border: 1px solid #E4E7E9;
+            border-radius: 8px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .resena-card:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .resena-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .resena-usuario-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .resena-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #F9FAFB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5F6C72;
+            font-size: 32px;
+        }
+
+        .resena-usuario-datos {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .resena-usuario-nombre {
+            font-size: 15px;
+            font-weight: 600;
+            color: #191C1F;
+        }
+
+        .resena-fecha {
+            font-size: 13px;
+            color: #5F6C72;
+        }
+
+        .resena-calificacion {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rating-estrellas {
+            display: flex;
+            gap: 2px;
+            color: var(--primary-orange);
+            font-size: 16px;
+        }
+
+        .rating-estrellas i {
+            color: var(--primary-orange);
+        }
+
+        .rating-estrellas .estrella-vacia {
+            color: #E4E7E9;
+        }
+
+        .rating-numero-pequeno {
+            font-size: 14px;
+            font-weight: 600;
+            color: #5F6C72;
+        }
+
+        .resena-contenido {
+            margin-bottom: 12px;
+        }
+
+        .resena-comentario {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #475156;
+            margin: 0;
+        }
+
+        /* Respuesta del vendedor */
+        .resena-respuesta {
+            background-color: #FFF9F5;
+            border-left: 3px solid var(--primary-orange);
+            border-radius: 4px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .respuesta-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: var(--primary-orange);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .respuesta-header i {
+            font-size: 16px;
+        }
+
+        .respuesta-texto {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #475156;
+            margin: 0 0 8px 0;
+        }
+
+        .respuesta-fecha {
+            font-size: 12px;
+            color: #5F6C72;
+        }
+
+        /* Sin reseñas */
+        .sin-resenas {
+            background-color: white;
+            border: 2px dashed #E4E7E9;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .sin-resenas i {
+            font-size: 56px;
+            color: #929FA5;
+            margin-bottom: 16px;
+        }
+
+        .sin-resenas p {
+            color: #5F6C72;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0 0 8px 0;
+        }
+
+        .sin-resenas-subtexto {
+            color: #929FA5;
+            font-size: 14px;
+        }
         
         @media (max-width: 768px) {
             .detalle-grid {
@@ -500,6 +734,22 @@
 
             .descuento-info-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .resenas-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .resena-header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .rating-promedio {
+                flex-direction: row;
+                gap: 12px;
             }
         }
     </style>
@@ -619,9 +869,65 @@
                             </span>
                         </div>
                         
-                        <!-- falta reseñas, puede ser en un "Ver reseñas" pantalla aparte, ya que puede cargar demasiado -->
-                        
                     </div>
+
+                    <div class="resenas-section">
+                        <div class="resenas-header">
+                            <div class="resenas-title-group">
+                                <h3><i class="bi bi-star-fill"></i> Reseñas y Calificaciones</h3>
+                                <asp:Label ID="lblTotalResenas" runat="server" CssClass="resenas-count" Text="(0 reseñas)"></asp:Label>
+                            </div>
+                            <div class="resenas-rating-summary">
+                                <div class="rating-promedio">
+                                    <span class="rating-numero">
+                                        <asp:Label ID="lblPromedioRating" runat="server" Text="0.0"></asp:Label>
+                                    </span>
+                                    <div class="rating-estrellas-grande" id="estrellasPromedio" runat="server">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lista de reseñas -->
+                        <asp:Panel ID="pnlConResenas" runat="server" Visible="false">
+                            <div class="resenas-lista">
+                                <asp:Repeater ID="rptResenas" runat="server">
+                                    <ItemTemplate>
+                                        <div class="resena-card">
+                                            <div class="resena-header">
+                                                <div class="resena-usuario-info">
+                                                    <div class="resena-avatar">
+                                                        <i class="bi bi-person-circle"></i>
+                                                    </div>
+                                                    <div class="resena-usuario-datos">
+                                                        <span class="resena-usuario-nombre"><%# Eval("cliente.nombre") %> <%# Eval("cliente.nombreUsuario") %></span>
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="resena-calificacion">
+                                                    <div class="rating-estrellas">
+                                                        <%# GenerarEstrellas(Convert.ToInt32(Eval("calificacion"))) %>
+                                                    </div>
+                                                    <span class="rating-numero-pequeno"><%# Eval("calificacion") %>.0</span>
+                                                </div>
+                                            </div>
+                                            <div class="resena-contenido">
+                                                <p class="resena-comentario"><%# Eval("reseña1") %></p>
+                                            </div>
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </div>
+                        </asp:Panel>
+
+                        <!-- Sin reseñas -->
+                        <asp:Panel ID="pnlSinResenas" runat="server" Visible="true" CssClass="sin-resenas">
+                            <i class="bi bi-chat-left-text"></i>
+                            <p>Este producto aún no tiene reseñas</p>
+                            <span class="sin-resenas-subtexto">Sé el primero en compartir tu opinión</span>
+                        </asp:Panel>
+                    </div>
+
                 </div>
 
                 <div class="descuento-section">

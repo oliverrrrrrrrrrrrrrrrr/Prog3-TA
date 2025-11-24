@@ -89,7 +89,7 @@ public class ReseñaDAOTest implements PersistibleProbable{
         Articulo articulo = articuloDAO.leer(this.testArticuloId);
         Cliente cliente = clienteDAO.leer(this.testClienteId);
         
-        reseña.setProducto(articulo);
+        reseña.setIdProducto(articulo.getIdArticulo());
         reseña.setCliente(cliente);
         
         this.testId = reseñaDAO.crear(reseña);
@@ -114,7 +114,7 @@ public class ReseñaDAOTest implements PersistibleProbable{
         Articulo articulo = articuloDAO.leer(this.testArticuloId);
         Cliente cliente = clienteDAO.leer(this.testClienteId);
         
-        reseña.setProducto(articulo);
+        reseña.setIdProducto(articulo.getIdArticulo());
         reseña.setCliente(cliente);
         
         boolean modifico = reseñaDAO.actualizar(reseña);
@@ -144,7 +144,7 @@ public class ReseñaDAOTest implements PersistibleProbable{
         Articulo articulo = articuloDAO.leer(this.testArticuloId);
         Cliente cliente = clienteDAO.leer(this.testClienteId);
         
-        reseña.setProducto(articulo);
+        reseña.setIdProducto(articulo.getIdArticulo());
         reseña.setCliente(cliente);
         
         boolean modifico = reseñaDAO.actualizar(reseña);

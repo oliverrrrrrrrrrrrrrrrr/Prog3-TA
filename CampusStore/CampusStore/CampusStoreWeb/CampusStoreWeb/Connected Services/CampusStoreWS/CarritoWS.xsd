@@ -4,7 +4,6 @@
   <xs:element name="IOException" type="tns:IOException" />
   <xs:element name="InterruptedException" type="tns:InterruptedException" />
   <xs:element name="Libro" type="tns:libro" />
-  <xs:element name="Producto" type="tns:producto" />
   <xs:element name="aplicarCuponACarrito" type="tns:aplicarCuponACarrito" />
   <xs:element name="aplicarCuponACarritoResponse" type="tns:aplicarCuponACarritoResponse" />
   <xs:element name="eliminarCarrito" type="tns:eliminarCarrito" />
@@ -86,7 +85,7 @@
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
       <xs:element minOccurs="0" name="descripcion" type="xs:string" />
       <xs:element minOccurs="0" name="descuento" type="tns:descuento" />
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="reseñas" nillable="true" type="tns:reseña" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="reseñas" type="tns:reseña" />
       <xs:element minOccurs="0" name="imagenURL" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -102,12 +101,12 @@
   </xs:complexType>
   <xs:complexType name="reseña">
     <xs:sequence>
-      <xs:element name="calificacion" type="xs:double" />
-      <xs:element minOccurs="0" name="cliente" type="tns:cliente" />
       <xs:element minOccurs="0" name="idReseña" type="xs:int" />
-      <xs:element minOccurs="0" name="producto" type="tns:producto" />
+      <xs:element minOccurs="0" name="calificacion" type="xs:double" />
       <xs:element minOccurs="0" name="reseña" type="xs:string" />
       <xs:element minOccurs="0" name="tipoProducto" type="tns:tipoProducto" />
+      <xs:element minOccurs="0" name="idProducto" type="xs:int" />
+      <xs:element minOccurs="0" name="cliente" type="tns:cliente" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="libro">
@@ -168,14 +167,6 @@
       <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="listarCarritos">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="listarCarritosResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:carrito" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="eliminarLineaDelCarrito">
     <xs:sequence>
       <xs:element minOccurs="0" name="lineaCarrito" type="tns:lineaCarrito" />
@@ -184,6 +175,14 @@
   <xs:complexType name="eliminarLineaDelCarritoResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarCarritos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarCarritosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:carrito" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="obtenerCarrito">

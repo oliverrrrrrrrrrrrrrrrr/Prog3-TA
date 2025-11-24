@@ -173,3 +173,33 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure obtenerReseñasPorLibro
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP PROCEDURE IF EXISTS `obtenerReseñasPorLibro`;
+
+DELIMITER //
+CREATE PROCEDURE `obtenerReseñasPorLibro`(
+    IN p_idLibro INT
+)
+BEGIN
+    SELECT 
+        rl.idReseñaLibro AS idReseña,
+        rl.calificacion,
+        rl.reseña,
+        rl.LIBRO_idLibro as idLibro,
+        c.idCliente,
+		c.nombre AS clienteNombre,
+		c.nombreUsuario AS clienteUsuario,
+		c.correo AS clienteCorreo,
+		c.telefono AS clienteTelefono
+        
+    FROM reseña_libro rl
+    INNER JOIN cliente c 
+        ON rl.cliente_idCliente = c.idCliente
+    WHERE rl.LIBRO_idLibro = p_idLibro;
+END//
+DELIMITER ;

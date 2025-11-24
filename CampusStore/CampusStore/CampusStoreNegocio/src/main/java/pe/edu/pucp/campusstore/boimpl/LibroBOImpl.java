@@ -40,7 +40,12 @@ public class LibroBOImpl implements LibroBO {
 
     @Override
     public Libro obtener(int id) {
-        return libroDAO.leer(id);
+        Libro libro = this.libroDAO.leer(id);
+        if (libro != null) {
+            libro.setReseñas(libroDAO.obtenerReseñasPorLibro(id));
+            libro.setAutores(libroDAO.leerAutoresPorLibro(id));
+        }
+        return libro;
     }
 
     @Override

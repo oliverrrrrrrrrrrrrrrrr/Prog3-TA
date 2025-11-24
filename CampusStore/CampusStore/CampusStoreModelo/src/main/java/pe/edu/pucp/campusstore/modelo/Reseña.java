@@ -1,13 +1,29 @@
 package pe.edu.pucp.campusstore.modelo;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
 import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Reseña {
+    @XmlElement(name = "idReseña")
     private Integer idReseña;
+
+    @XmlElement(name = "calificacion")
     private Double calificacion;
+
+    @XmlElement(name = "reseña")
     private String reseña;
+
+    @XmlElement(name = "tipoProducto")
     private TipoProducto tipoProducto;
-    private Producto producto;
+
+    @XmlElement(name = "idProducto")
+    private Integer idProducto;
+
+    @XmlElement(name = "cliente")
     private Cliente cliente;
     
     public Reseña() {
@@ -15,16 +31,16 @@ public class Reseña {
         this.calificacion = null;
         this.reseña = null;
         this.tipoProducto = null;
-        this.producto = null;
+        this.idProducto = null;
         this.cliente = null;
     }
 
-    public Reseña(Integer idReseña, Double calificacion, String reseña, TipoProducto tipoProducto, Producto producto, Cliente cliente) {
+    public Reseña(Integer idReseña, Double calificacion, String reseña, TipoProducto tipoProducto, Integer idProducto, Cliente cliente) {
         this.idReseña = idReseña;
         this.calificacion = calificacion;
         this.reseña = reseña;
         this.tipoProducto = tipoProducto;
-        this.producto = producto;
+        this.idProducto = idProducto;
         this.cliente = cliente;
     }
 
@@ -52,14 +68,6 @@ public class Reseña {
         this.tipoProducto = tipoProducto;
     }
 
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -74,6 +82,14 @@ public class Reseña {
 
     public void setIdReseña(Integer idReseña) {
         this.idReseña = idReseña;
+    }
+
+    public Integer getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
     }
     
 }
