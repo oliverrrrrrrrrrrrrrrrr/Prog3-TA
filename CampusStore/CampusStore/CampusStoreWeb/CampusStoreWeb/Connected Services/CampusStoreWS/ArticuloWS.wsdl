@@ -19,18 +19,15 @@
   </message>
   <message name="obtenerArticulo">
     <part name="parameters" element="tns:obtenerArticulo" />
-<<<<<<< Updated upstream
   </message>
   <message name="obtenerArticuloResponse">
     <part name="parameters" element="tns:obtenerArticuloResponse" />
   </message>
-  <message name="eliminarArticulo">
-    <part name="parameters" element="tns:eliminarArticulo" />
-=======
->>>>>>> Stashed changes
+  <message name="listarArticulos">
+    <part name="parameters" element="tns:listarArticulos" />
   </message>
-  <message name="obtenerArticuloResponse">
-    <part name="parameters" element="tns:obtenerArticuloResponse" />
+  <message name="listarArticulosResponse">
+    <part name="parameters" element="tns:listarArticulosResponse" />
   </message>
   <message name="guardarArticulo">
     <part name="parameters" element="tns:guardarArticulo" />
@@ -38,59 +35,31 @@
   <message name="guardarArticuloResponse">
     <part name="parameters" element="tns:guardarArticuloResponse" />
   </message>
-<<<<<<< Updated upstream
   <portType name="ArticuloWS">
-    <operation name="listarArticulos">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosRequest" message="tns:listarArticulos" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosResponse" message="tns:listarArticulosResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulos/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulos/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="obtenerArticulo">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticuloRequest" message="tns:obtenerArticulo" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticuloResponse" message="tns:obtenerArticuloResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticulo/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticulo/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-=======
-  <message name="listarArticulos">
-    <part name="parameters" element="tns:listarArticulos" />
-  </message>
-  <message name="listarArticulosResponse">
-    <part name="parameters" element="tns:listarArticulosResponse" />
-  </message>
-  <portType name="ArticuloWS">
->>>>>>> Stashed changes
     <operation name="eliminarArticulo">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest" message="tns:eliminarArticulo" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse" message="tns:eliminarArticuloResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticulo/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticulo/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-<<<<<<< Updated upstream
-=======
     <operation name="obtenerArticulo">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticuloRequest" message="tns:obtenerArticulo" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticuloResponse" message="tns:obtenerArticuloResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticulo/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticulo/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
->>>>>>> Stashed changes
-    <operation name="guardarArticulo">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloRequest" message="tns:guardarArticulo" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloResponse" message="tns:guardarArticuloResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticulo/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticulo/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-<<<<<<< Updated upstream
-=======
     <operation name="listarArticulos">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosRequest" message="tns:listarArticulos" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosResponse" message="tns:listarArticulosResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulos/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulos/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
->>>>>>> Stashed changes
+    <operation name="guardarArticulo">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloRequest" message="tns:guardarArticulo" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloResponse" message="tns:guardarArticuloResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticulo/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticulo/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
   </portType>
   <binding name="ArticuloWSPortBinding" type="tns:ArticuloWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -110,7 +79,6 @@
       </fault>
     </operation>
     <operation name="obtenerArticulo">
-<<<<<<< Updated upstream
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -125,9 +93,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="eliminarArticulo">
-=======
->>>>>>> Stashed changes
+    <operation name="listarArticulos">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -157,24 +123,6 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-<<<<<<< Updated upstream
-=======
-    <operation name="listarArticulos">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
->>>>>>> Stashed changes
   </binding>
   <service name="ArticuloWS">
     <port name="ArticuloWSPort" binding="tns:ArticuloWSPortBinding">
