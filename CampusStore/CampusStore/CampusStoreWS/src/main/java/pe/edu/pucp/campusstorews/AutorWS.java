@@ -12,9 +12,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.ResourceBundle;
-import pe.edu.pucp.campusstore.bo.AutorBO;
-import pe.edu.pucp.campusstore.boimpl.AutorBOImpl;
-import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Autor;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
 
