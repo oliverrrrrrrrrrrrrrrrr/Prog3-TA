@@ -11,11 +11,11 @@
   <message name="buscarClientePorCuentaResponse">
     <part name="parameters" element="tns:buscarClientePorCuentaResponse" />
   </message>
-  <message name="listarClientes">
-    <part name="parameters" element="tns:listarClientes" />
+  <message name="eliminarCliente">
+    <part name="parameters" element="tns:eliminarCliente" />
   </message>
-  <message name="listarClientesResponse">
-    <part name="parameters" element="tns:listarClientesResponse" />
+  <message name="eliminarClienteResponse">
+    <part name="parameters" element="tns:eliminarClienteResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -23,17 +23,17 @@
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
   </message>
+  <message name="listarClientes">
+    <part name="parameters" element="tns:listarClientes" />
+  </message>
+  <message name="listarClientesResponse">
+    <part name="parameters" element="tns:listarClientesResponse" />
+  </message>
   <message name="obtenerCliente">
     <part name="parameters" element="tns:obtenerCliente" />
   </message>
   <message name="obtenerClienteResponse">
     <part name="parameters" element="tns:obtenerClienteResponse" />
-  </message>
-  <message name="eliminarCliente">
-    <part name="parameters" element="tns:eliminarCliente" />
-  </message>
-  <message name="eliminarClienteResponse">
-    <part name="parameters" element="tns:eliminarClienteResponse" />
   </message>
   <message name="guardarCliente">
     <part name="parameters" element="tns:guardarCliente" />
@@ -46,6 +46,12 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaRequest" message="tns:buscarClientePorCuenta" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaResponse" message="tns:buscarClientePorCuentaResponse" />
     </operation>
+    <operation name="eliminarCliente">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteRequest" message="tns:eliminarCliente" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteResponse" message="tns:eliminarClienteResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarCliente/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarCliente/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
     <operation name="listarClientes">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/listarClientesRequest" message="tns:listarClientes" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/listarClientesResponse" message="tns:listarClientesResponse" />
@@ -57,12 +63,6 @@
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerClienteResponse" message="tns:obtenerClienteResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerCliente/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerCliente/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="eliminarCliente">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteRequest" message="tns:eliminarCliente" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteResponse" message="tns:eliminarClienteResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarCliente/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarCliente/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="guardarCliente">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest" message="tns:guardarCliente" />
@@ -82,6 +82,21 @@
         <soap:body use="literal" />
       </output>
     </operation>
+    <operation name="eliminarCliente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
     <operation name="listarClientes">
       <soap:operation soapAction="" />
       <input>
@@ -98,21 +113,6 @@
       </fault>
     </operation>
     <operation name="obtenerCliente">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="eliminarCliente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

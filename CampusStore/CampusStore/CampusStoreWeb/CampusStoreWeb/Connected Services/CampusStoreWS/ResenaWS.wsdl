@@ -5,23 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/ResenaWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="obtenerTotalResenas">
-    <part name="parameters" element="tns:obtenerTotalResenas" />
-  </message>
-  <message name="obtenerTotalResenasResponse">
-    <part name="parameters" element="tns:obtenerTotalResenasResponse" />
-  </message>
   <message name="listarResenasPorProducto">
     <part name="parameters" element="tns:listarResenasPorProducto" />
   </message>
   <message name="listarResenasPorProductoResponse">
     <part name="parameters" element="tns:listarResenasPorProductoResponse" />
   </message>
-  <message name="obtenerPromedioCalificacion">
-    <part name="parameters" element="tns:obtenerPromedioCalificacion" />
+  <message name="obtenerTotalResenas">
+    <part name="parameters" element="tns:obtenerTotalResenas" />
   </message>
-  <message name="obtenerPromedioCalificacionResponse">
-    <part name="parameters" element="tns:obtenerPromedioCalificacionResponse" />
+  <message name="obtenerTotalResenasResponse">
+    <part name="parameters" element="tns:obtenerTotalResenasResponse" />
   </message>
   <message name="obtenerResena">
     <part name="parameters" element="tns:obtenerResena" />
@@ -41,30 +35,32 @@
   <message name="eliminarResenaResponse">
     <part name="parameters" element="tns:eliminarResenaResponse" />
   </message>
-  <message name="guardarResena">
-    <part name="parameters" element="tns:guardarResena" />
-  </message>
-  <message name="guardarResenaResponse">
-    <part name="parameters" element="tns:guardarResenaResponse" />
-  </message>
   <message name="listarResenas">
     <part name="parameters" element="tns:listarResenas" />
   </message>
   <message name="listarResenasResponse">
     <part name="parameters" element="tns:listarResenasResponse" />
   </message>
+  <message name="guardarResena">
+    <part name="parameters" element="tns:guardarResena" />
+  </message>
+  <message name="guardarResenaResponse">
+    <part name="parameters" element="tns:guardarResenaResponse" />
+  </message>
+  <message name="obtenerPromedioCalificacion">
+    <part name="parameters" element="tns:obtenerPromedioCalificacion" />
+  </message>
+  <message name="obtenerPromedioCalificacionResponse">
+    <part name="parameters" element="tns:obtenerPromedioCalificacionResponse" />
+  </message>
   <portType name="ResenaWS">
-    <operation name="obtenerTotalResenas">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerTotalResenasRequest" message="tns:obtenerTotalResenas" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerTotalResenasResponse" message="tns:obtenerTotalResenasResponse" />
-    </operation>
     <operation name="listarResenasPorProducto">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasPorProductoRequest" message="tns:listarResenasPorProducto" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasPorProductoResponse" message="tns:listarResenasPorProductoResponse" />
     </operation>
-    <operation name="obtenerPromedioCalificacion">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerPromedioCalificacionRequest" message="tns:obtenerPromedioCalificacion" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerPromedioCalificacionResponse" message="tns:obtenerPromedioCalificacionResponse" />
+    <operation name="obtenerTotalResenas">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerTotalResenasRequest" message="tns:obtenerTotalResenas" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerTotalResenasResponse" message="tns:obtenerTotalResenasResponse" />
     </operation>
     <operation name="obtenerResena">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerResenaRequest" message="tns:obtenerResena" />
@@ -78,30 +74,25 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/eliminarResena/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/eliminarResena/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-    <operation name="guardarResena">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResenaRequest" message="tns:guardarResena" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResenaResponse" message="tns:guardarResenaResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResena/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResena/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
     <operation name="listarResenas">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasRequest" message="tns:listarResenas" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasResponse" message="tns:listarResenasResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenas/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenas/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
+    <operation name="guardarResena">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResenaRequest" message="tns:guardarResena" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResenaResponse" message="tns:guardarResenaResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResena/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResena/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="obtenerPromedioCalificacion">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerPromedioCalificacionRequest" message="tns:obtenerPromedioCalificacion" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerPromedioCalificacionResponse" message="tns:obtenerPromedioCalificacionResponse" />
+    </operation>
   </portType>
   <binding name="ResenaWSPortBinding" type="tns:ResenaWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="obtenerTotalResenas">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
     <operation name="listarResenasPorProducto">
       <soap:operation soapAction="" />
       <input>
@@ -111,7 +102,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="obtenerPromedioCalificacion">
+    <operation name="obtenerTotalResenas">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -150,6 +141,21 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
+    <operation name="listarResenas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
     <operation name="guardarResena">
       <soap:operation soapAction="" />
       <input>
@@ -165,7 +171,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="listarResenas">
+    <operation name="obtenerPromedioCalificacion">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -173,12 +179,6 @@
       <output>
         <soap:body use="literal" />
       </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
     </operation>
   </binding>
   <service name="ResenaWS">

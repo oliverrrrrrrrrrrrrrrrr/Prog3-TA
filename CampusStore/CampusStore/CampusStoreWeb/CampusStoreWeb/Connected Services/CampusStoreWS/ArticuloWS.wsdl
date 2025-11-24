@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/ArticuloWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="eliminarArticulo">
-    <part name="parameters" element="tns:eliminarArticulo" />
+  <message name="listarArticulos">
+    <part name="parameters" element="tns:listarArticulos" />
   </message>
-  <message name="eliminarArticuloResponse">
-    <part name="parameters" element="tns:eliminarArticuloResponse" />
+  <message name="listarArticulosResponse">
+    <part name="parameters" element="tns:listarArticulosResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -17,17 +17,11 @@
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
   </message>
-  <message name="obtenerArticulo">
-    <part name="parameters" element="tns:obtenerArticulo" />
+  <message name="eliminarArticulo">
+    <part name="parameters" element="tns:eliminarArticulo" />
   </message>
-  <message name="obtenerArticuloResponse">
-    <part name="parameters" element="tns:obtenerArticuloResponse" />
-  </message>
-  <message name="listarArticulos">
-    <part name="parameters" element="tns:listarArticulos" />
-  </message>
-  <message name="listarArticulosResponse">
-    <part name="parameters" element="tns:listarArticulosResponse" />
+  <message name="eliminarArticuloResponse">
+    <part name="parameters" element="tns:eliminarArticuloResponse" />
   </message>
   <message name="guardarArticulo">
     <part name="parameters" element="tns:guardarArticulo" />
@@ -35,24 +29,24 @@
   <message name="guardarArticuloResponse">
     <part name="parameters" element="tns:guardarArticuloResponse" />
   </message>
+  <message name="obtenerArticulo">
+    <part name="parameters" element="tns:obtenerArticulo" />
+  </message>
+  <message name="obtenerArticuloResponse">
+    <part name="parameters" element="tns:obtenerArticuloResponse" />
+  </message>
   <portType name="ArticuloWS">
-    <operation name="eliminarArticulo">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest" message="tns:eliminarArticulo" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse" message="tns:eliminarArticuloResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticulo/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticulo/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="obtenerArticulo">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticuloRequest" message="tns:obtenerArticulo" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticuloResponse" message="tns:obtenerArticuloResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticulo/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticulo/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
     <operation name="listarArticulos">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosRequest" message="tns:listarArticulos" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulosResponse" message="tns:listarArticulosResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulos/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/listarArticulos/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="eliminarArticulo">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloRequest" message="tns:eliminarArticulo" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticuloResponse" message="tns:eliminarArticuloResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticulo/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/eliminarArticulo/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="guardarArticulo">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticuloRequest" message="tns:guardarArticulo" />
@@ -60,39 +54,15 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticulo/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/guardarArticulo/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
+    <operation name="obtenerArticulo">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticuloRequest" message="tns:obtenerArticulo" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticuloResponse" message="tns:obtenerArticuloResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticulo/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ArticuloWS/obtenerArticulo/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
   </portType>
   <binding name="ArticuloWSPortBinding" type="tns:ArticuloWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="eliminarArticulo">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="obtenerArticulo">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
     <operation name="listarArticulos">
       <soap:operation soapAction="" />
       <input>
@@ -108,7 +78,37 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
+    <operation name="eliminarArticulo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
     <operation name="guardarArticulo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="obtenerArticulo">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
