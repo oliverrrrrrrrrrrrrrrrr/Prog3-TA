@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://services.campusstore.pucp.edu.pe/" targetNamespace="http://services.campusstore.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="Articulo" type="tns:articulo" />
+  <xs:element name="IOException" type="tns:IOException" />
+  <xs:element name="InterruptedException" type="tns:InterruptedException" />
   <xs:element name="Libro" type="tns:libro" />
   <xs:element name="Producto" type="tns:producto" />
   <xs:element name="aplicarCuponACarrito" type="tns:aplicarCuponACarrito" />
@@ -156,14 +158,14 @@
   <xs:complexType name="guardarCarritoResponse">
     <xs:sequence />
   </xs:complexType>
-  <xs:complexType name="eliminarLineaDelCarrito">
+  <xs:complexType name="IOException">
     <xs:sequence>
-      <xs:element minOccurs="0" name="lineaCarrito" type="tns:lineaCarrito" />
+      <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="eliminarLineaDelCarritoResponse">
+  <xs:complexType name="InterruptedException">
     <xs:sequence>
-      <xs:element name="return" type="xs:boolean" />
+      <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listarCarritos">
@@ -172,6 +174,16 @@
   <xs:complexType name="listarCarritosResponse">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:carrito" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarLineaDelCarrito">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="lineaCarrito" type="tns:lineaCarrito" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarLineaDelCarritoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="obtenerCarrito">
