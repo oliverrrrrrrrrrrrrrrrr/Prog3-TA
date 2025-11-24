@@ -50,7 +50,7 @@ public class ReporteUtil {
         URL url = ReporteUtil.class.getClassLoader().getResource("myholylogo.png");
         parametros.put("logopath", url);
 
-        return invocarReporte("ReporteBestSeller", parametros);
+        return invocarReporte("ReporteBestSellers", parametros);
     }
 
     public static byte[] reporteVentas(String fechaInicio, String fechaFin)
