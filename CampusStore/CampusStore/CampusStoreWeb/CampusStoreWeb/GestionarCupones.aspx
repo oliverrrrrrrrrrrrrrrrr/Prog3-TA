@@ -300,9 +300,6 @@
                     <!-- Header -->
                     <div class="cupones-header">
                         <h2>CUPONES DE DESCUENTO</h2>
-                        <asp:HyperLink runat="server" NavigateUrl="~/VerTodosCupones.aspx" CssClass="view-all-link">
-                            View All <i class="bi bi-arrow-right"></i>
-                        </asp:HyperLink>
                     </div>
                     
                     <!-- Tabla -->

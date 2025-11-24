@@ -453,9 +453,6 @@
                     <!-- Header -->
                     <div class="clientes-header">
                         <h2>CLIENTES</h2>
-                        <asp:HyperLink runat="server" NavigateUrl="~/VerTodosClientes.aspx" CssClass="view-all-link">
-                            View All <i class="bi bi-arrow-right"></i>
-                        </asp:HyperLink>
                     </div>
                     
                     <!-- Tabla -->
