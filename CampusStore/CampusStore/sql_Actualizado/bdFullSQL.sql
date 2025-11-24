@@ -2737,16 +2737,121 @@ BEGIN
 END$$
 
 DELIMITER ;
+-- ============================================================
+-- PASO 1 Crear el procedimiento almacenado (si no existe)
+-- ============================================================
 
--- -----------------------------------------------------
--- Event Scheduler: cancelarOrdenesExpiradas
--- -----------------------------------------------------
--- Este evento se ejecuta automáticamente cada hora para cancelar
--- las órdenes de compra que han pasado su fecha límite de pago
--- y aún están en estado NO_PAGADO
+DROP PROCEDURE IF EXISTS `cancelarOrdenesExpiradas`;
 
--- IMPORTANTE: Primero debes habilitar el Event Scheduler de MySQL
--- Ejecuta: SET GLOBAL event_scheduler = ON;
+DELIMITER $$
+
+CREATE PROCEDURE `cancelarOrdenesExpiradas`()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE v_idOrden INT;
+    DECLARE v_idCarrito INT;
+    DECLARE v_idArticulo INT;
+    DECLARE v_idLibro INT;
+    DECLARE v_cantidad INT;
+    
+    -- Cursor para obtener las órdenes que se van a cancelar
+    DECLARE cur_ordenes CURSOR FOR
+        SELECT oc.idOrdenCompra, oc.CARRITO_idCarrito
+        FROM orden_compra oc
+        WHERE oc.estado = 'NO_PAGADO'
+          AND oc.fechaLimitePago < NOW();
+    
+    -- Cursor para obtener las líneas de artículos del carrito
+    DECLARE cur_articulos CURSOR FOR
+        SELECT lca.articulo_idArticulo, lca.cantidad
+        FROM linea_carrito_articulo lca
+        WHERE lca.CARRITO_idCarrito = v_idCarrito;
+    
+    -- Cursor para obtener las líneas de libros del carrito
+    DECLARE cur_libros CURSOR FOR
+        SELECT lcl.libro_idLibro, lcl.cantidad
+        FROM linea_carrito_libro lcl
+        WHERE lcl.CARRITO_idCarrito = v_idCarrito;
+    
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    
+    -- Iniciar transacción
+    START TRANSACTION;
+    
+    -- Abrir cursor de órdenes
+    OPEN cur_ordenes;
+    
+    read_ordenes: LOOP
+        FETCH cur_ordenes INTO v_idOrden, v_idCarrito;
+        IF done THEN
+            LEAVE read_ordenes;
+        END IF;
+        
+        -- Restaurar stock virtual de ARTÍCULOS
+        SET done = FALSE;
+        OPEN cur_articulos;
+        
+        read_articulos: LOOP
+            FETCH cur_articulos INTO v_idArticulo, v_cantidad;
+            IF done THEN
+                LEAVE read_articulos;
+            END IF;
+            
+            -- Restaurar el stock virtual del artículo
+            UPDATE articulo
+            SET stockVirtual = stockVirtual + v_cantidad
+            WHERE idArticulo = v_idArticulo;
+        END LOOP;
+        
+        CLOSE cur_articulos;
+        SET done = FALSE;
+        
+        -- Restaurar stock virtual de LIBROS
+        OPEN cur_libros;
+        
+        read_libros: LOOP
+            FETCH cur_libros INTO v_idLibro, v_cantidad;
+            IF done THEN
+                LEAVE read_libros;
+            END IF;
+            
+            -- Restaurar el stock virtual del libro
+            UPDATE libro
+            SET stockVirtual = stockVirtual + v_cantidad
+            WHERE idLibro = v_idLibro;
+        END LOOP;
+        
+        CLOSE cur_libros;
+        SET done = FALSE;
+        
+    END LOOP;
+    
+    CLOSE cur_ordenes;
+    
+    -- Contar cuántas órdenes se van a cancelar antes de actualizarlas
+    SELECT COUNT(*) INTO @ordenes_canceladas
+    FROM orden_compra
+    WHERE estado = 'NO_PAGADO'
+      AND fechaLimitePago < NOW();
+    
+    -- Ahora sí, cancelar las órdenes
+    UPDATE orden_compra
+    SET estado = 'CANCELADO'
+    WHERE estado = 'NO_PAGADO'
+      AND fechaLimitePago < NOW();
+    
+    -- Confirmar transacción
+    COMMIT;
+    
+    -- Retornar cantidad de órdenes canceladas
+    SELECT @ordenes_canceladas AS ordenesCanceladas;
+END$$
+
+DELIMITER ;
+
+-- ============================================================
+-- PASO 2: Crear el evento programado
+-- ============================================================
 
 -- Eliminar el evento si ya existe
 DROP EVENT IF EXISTS `event_cancelar_ordenes_expiradas`;
