@@ -15,6 +15,12 @@ public class LoginResponse {
     private Boolean encontrado;
     private TipoUsuario tipoUsuario;
     private Integer idUsuario;
+    
+    public LoginResponse() {
+        this.encontrado = false;
+        this.tipoUsuario = null;
+        this.idUsuario = null;
+    }
 
     public LoginResponse(Boolean encontrado, TipoUsuario tipoUsuario, Integer idUsuario) {
         this.encontrado = encontrado;

@@ -42,11 +42,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>CampusStoreModelo</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>CampusStoreNegocio</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -55,6 +50,11 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.20.0</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CampusStoreModelo</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     
