@@ -25,13 +25,92 @@ namespace CampusStoreWeb
                 Response.Redirect("Catalogo.aspx");
                 return;
             }
+
+            if (!IsPostBack)
+            {
+                CargarArticulos();
+            }
         }
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                CargarArticulos();
+            }
+        }
+
+        private void CargarArticulos()
+        {
             articulos = new BindingList<articulo>(articuloWS.listarArticulos());
+            ViewState["ArticulosOriginales"] = articulos;
             gvArticulos.DataSource = articulos;
             gvArticulos.DataBind();
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string textoBuscar = txtBuscar.Text.Trim();
+
+            if (string.IsNullOrEmpty(textoBuscar))
+            {
+                // Si no hay texto, mostrar todos los artículos
+                CargarArticulos();
+                return;
+            }
+
+            // Obtener lista completa de artículos
+            articulos = ViewState["ArticulosOriginales"] as BindingList<articulo>;
+            if (articulos == null)
+            {
+                articulos = new BindingList<articulo>(articuloWS.listarArticulos());
+                ViewState["ArticulosOriginales"] = articulos;
+            }
+
+            // Intentar buscar por ID primero
+            if (int.TryParse(textoBuscar, out int idArticulo))
+            {
+                // Buscar por ID exacto
+                var articulosFiltrados = articulos.Where(x => x.idArticulo == idArticulo).ToList();
+
+                // Si no encuentra por ID, buscar por nombre
+                if (articulosFiltrados.Count == 0)
+                {
+                    articulosFiltrados = articulos.Where(x =>
+                        x.nombre != null &&
+                        x.nombre.ToLower().Contains(textoBuscar.ToLower())
+                    ).ToList();
+                }
+
+                gvArticulos.DataSource = articulosFiltrados;
+                gvArticulos.DataBind();
+            }
+            else
+            {
+                // Si no es número, buscar solo por nombre
+                var articulosFiltrados = articulos.Where(x =>
+                    x.nombre != null &&
+                    x.nombre.ToLower().Contains(textoBuscar.ToLower())
+                ).ToList();
+
+                gvArticulos.DataSource = articulosFiltrados;
+                gvArticulos.DataBind();
+            }
+
+            // Resetear paginación
+            gvArticulos.PageIndex = 0;
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            // Limpiar el campo de búsqueda
+            txtBuscar.Text = string.Empty;
+
+            // Recargar todos los artículos
+            CargarArticulos();
+
+            // Resetear paginación
+            gvArticulos.PageIndex = 0;
         }
 
         protected void gvArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)

@@ -6,6 +6,7 @@
     </xsd:schema>
   </types>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   <message name="eliminarLineaDelCarrito">
     <part name="parameters" element="tns:eliminarLineaDelCarrito" />
     <part name="parameters" element="tns:obtenerCarritoResponse" />
@@ -29,6 +30,13 @@
     <part name="parameters" element="tns:aplicarCuponACarritoResponse" />
   <message name="guardarCarritoResponse">
     <part name="parameters" element="tns:guardarCarritoResponse" />
+=======
+  <message name="obtenerCarrito">
+    <part name="parameters" element="tns:obtenerCarrito" />
+  </message>
+  <message name="obtenerCarritoResponse">
+    <part name="parameters" element="tns:obtenerCarritoResponse" />
+>>>>>>> Stashed changes
 =======
   <message name="obtenerCarrito">
     <part name="parameters" element="tns:obtenerCarrito" />
@@ -66,6 +74,21 @@
   </message>
   <message name="aplicarCuponACarritoResponse">
     <part name="parameters" element="tns:aplicarCuponACarritoResponse" />
+<<<<<<< Updated upstream
+=======
+  </message>
+  <message name="obtenerCarritoPorCliente">
+    <part name="parameters" element="tns:obtenerCarritoPorCliente" />
+  </message>
+  <message name="obtenerCarritoPorClienteResponse">
+    <part name="parameters" element="tns:obtenerCarritoPorClienteResponse" />
+  </message>
+  <message name="eliminarLineaDelCarrito">
+    <part name="parameters" element="tns:eliminarLineaDelCarrito" />
+  </message>
+  <message name="eliminarLineaDelCarritoResponse">
+    <part name="parameters" element="tns:eliminarLineaDelCarritoResponse" />
+>>>>>>> Stashed changes
   </message>
   <message name="obtenerCarritoPorCliente">
     <part name="parameters" element="tns:obtenerCarritoPorCliente" />
@@ -85,6 +108,7 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarLineaDelCarritoRequest" message="tns:eliminarLineaDelCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarLineaDelCarritoResponse" message="tns:eliminarLineaDelCarritoResponse" />
   <portType name="CarritoWS">
+<<<<<<< Updated upstream
     <operation name="eliminarLineaDelCarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarLineaDelCarritoRequest" message="tns:eliminarLineaDelCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarLineaDelCarritoResponse" message="tns:eliminarLineaDelCarritoResponse" />
@@ -97,11 +121,14 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarrito/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarrito/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
 =======
+=======
+>>>>>>> Stashed changes
     <operation name="obtenerCarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoRequest" message="tns:obtenerCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoResponse" message="tns:obtenerCarritoResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarrito/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarrito/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
     </operation>
     <operation name="eliminarCarrito">
@@ -120,12 +147,28 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarrito/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarrito/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
+=======
+    </operation>
+    <operation name="eliminarCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoRequest" message="tns:eliminarCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoResponse" message="tns:eliminarCarritoResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarrito/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarrito/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="guardarCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoRequest" message="tns:guardarCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoResponse" message="tns:guardarCarritoResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarrito/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarrito/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+>>>>>>> Stashed changes
     <operation name="listarCarritos">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosRequest" message="tns:listarCarritos" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosResponse" message="tns:listarCarritosResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritos/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritos/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     <operation name="obtenerCarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoRequest" message="tns:obtenerCarrito" />
@@ -165,6 +208,8 @@
     <operation name="obtenerCarrito">
 >>>>>>> Stashed changes
 =======
+=======
+>>>>>>> Stashed changes
     <operation name="aplicarCuponACarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/aplicarCuponACarritoRequest" message="tns:aplicarCuponACarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/aplicarCuponACarritoResponse" message="tns:aplicarCuponACarritoResponse" />
@@ -181,6 +226,9 @@
   <binding name="CarritoWSPortBinding" type="tns:CarritoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <operation name="obtenerCarrito">
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       <soap:operation soapAction="" />
       <input>
@@ -214,6 +262,21 @@
 <<<<<<< Updated upstream
     <operation name="eliminarCarrito">
 =======
+    <operation name="guardarCarrito">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
     <operation name="guardarCarrito">
       <soap:operation soapAction="" />
       <input>

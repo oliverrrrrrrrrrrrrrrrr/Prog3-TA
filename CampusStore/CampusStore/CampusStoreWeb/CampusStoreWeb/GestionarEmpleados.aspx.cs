@@ -24,13 +24,89 @@ namespace CampusStoreWeb
                 Response.Redirect("Catalogo.aspx");
                 return;
             }
+
+            if (!IsPostBack)
+            {
+                CargarEmpleados();
+            }
         }
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            // Solo cargar en Init si no es postback para respetar la búsqueda
+            if (!IsPostBack)
+            {
+                CargarEmpleados();
+            }
+        }
+
+        private void CargarEmpleados()
+        {
             empleados = new BindingList<empleado>(empleadoWS.listarEmpleados());
+            // Guardar en ViewState para filtrar sin ir a BD
+            ViewState["EmpleadosOriginales"] = empleados;
             gvEmpleados.DataSource = empleados;
             gvEmpleados.DataBind();
+        }
+
+        // LÓGICA DEL BOTÓN BUSCAR
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string textoBuscar = txtBuscar.Text.Trim();
+
+            if (string.IsNullOrEmpty(textoBuscar))
+            {
+                CargarEmpleados();
+                return;
+            }
+
+            // Recuperar lista original
+            empleados = ViewState["EmpleadosOriginales"] as BindingList<empleado>;
+            if (empleados == null)
+            {
+                empleados = new BindingList<empleado>(empleadoWS.listarEmpleados());
+                ViewState["EmpleadosOriginales"] = empleados;
+            }
+
+            // Búsqueda
+            if (int.TryParse(textoBuscar, out int idEmpleado))
+            {
+                // Buscar por ID
+                var empleadosFiltrados = empleados.Where(x => x.idEmpleado == idEmpleado).ToList();
+
+                // Si no encuentra por ID, intentar buscar por texto (nombre/usuario)
+                if (empleadosFiltrados.Count == 0)
+                {
+                    empleadosFiltrados = empleados.Where(x =>
+                        (x.nombre != null && x.nombre.ToLower().Contains(textoBuscar.ToLower())) ||
+                        (x.nombreUsuario != null && x.nombreUsuario.ToLower().Contains(textoBuscar.ToLower()))
+                    ).ToList();
+                }
+
+                gvEmpleados.DataSource = empleadosFiltrados;
+                gvEmpleados.DataBind();
+            }
+            else
+            {
+                // Buscar por Nombre o Nombre de Usuario
+                var empleadosFiltrados = empleados.Where(x =>
+                    (x.nombre != null && x.nombre.ToLower().Contains(textoBuscar.ToLower())) ||
+                    (x.nombreUsuario != null && x.nombreUsuario.ToLower().Contains(textoBuscar.ToLower()))
+                ).ToList();
+
+                gvEmpleados.DataSource = empleadosFiltrados;
+                gvEmpleados.DataBind();
+            }
+
+            gvEmpleados.PageIndex = 0;
+        }
+
+        // LÓGICA DEL BOTÓN LIMPIAR
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtBuscar.Text = string.Empty;
+            CargarEmpleados();
+            gvEmpleados.PageIndex = 0;
         }
 
         protected void gvEmpleados_PageIndexChanging(object sender, System.Web.UI.WebControls.GridViewPageEventArgs e)

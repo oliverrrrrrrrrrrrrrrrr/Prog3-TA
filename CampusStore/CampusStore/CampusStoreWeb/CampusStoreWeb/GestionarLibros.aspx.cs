@@ -34,14 +34,9 @@ namespace CampusStoreWeb
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            // Solo cargar en Init si no es postback
             if (!IsPostBack)
             {
-                libros = new BindingList<libro>(libroWS.listarLibros());
-                // Guardar en ViewState para mantener entre postbacks
-                ViewState["LibrosOriginales"] = libros;
-                gvLibros.DataSource = libros;
-                gvLibros.DataBind();
+                CargarLibros();
             }
         }
 

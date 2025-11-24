@@ -1,6 +1,7 @@
 ﻿using CampusStoreWeb.CampusStoreWS;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Web.UI.WebControls;
 
 namespace CampusStoreWeb
@@ -18,19 +19,92 @@ namespace CampusStoreWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             // Verificar que sea Admin
-            /*bool isAdmin = Session["IsAdmin"] != null && (bool)Session["IsAdmin"];
+            bool isAdmin = Session["IsAdmin"] != null && (bool)Session["IsAdmin"];
             if (!isAdmin)
             {
                 Response.Redirect("Catalogo.aspx");
                 return;
-            }*/
+            }
+
+            if (!IsPostBack)
+            {
+                CargarCupones();
+            }
         }
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            // Solo cargar en Init si no es PostBack
+            if (!IsPostBack)
+            {
+                CargarCupones();
+            }
+        }
+
+        private void CargarCupones()
+        {
             cupones = new BindingList<cupon>(cuponWS.listarCupones());
+            // Guardar en ViewState para persistencia y filtrado
+            ViewState["CuponesOriginales"] = cupones;
             gvCupones.DataSource = cupones;
             gvCupones.DataBind();
+        }
+
+        // LÓGICA DE BÚSQUEDA
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string textoBuscar = txtBuscar.Text.Trim();
+
+            if (string.IsNullOrEmpty(textoBuscar))
+            {
+                CargarCupones();
+                return;
+            }
+
+            // Recuperar lista original del ViewState
+            cupones = ViewState["CuponesOriginales"] as BindingList<cupon>;
+            if (cupones == null)
+            {
+                cupones = new BindingList<cupon>(cuponWS.listarCupones());
+                ViewState["CuponesOriginales"] = cupones;
+            }
+
+            // Intentar buscar por ID primero
+            if (int.TryParse(textoBuscar, out int idCupon))
+            {
+                // Buscar por ID
+                var cuponesFiltrados = cupones.Where(x => x.idCupon == idCupon).ToList();
+
+                // Si no encuentra por ID, intentar por Código
+                if (cuponesFiltrados.Count == 0)
+                {
+                    cuponesFiltrados = cupones.Where(x =>
+                        x.codigo != null && x.codigo.ToLower().Contains(textoBuscar.ToLower())
+                    ).ToList();
+                }
+
+                gvCupones.DataSource = cuponesFiltrados;
+                gvCupones.DataBind();
+            }
+            else
+            {
+                // Buscar solo por Código
+                var cuponesFiltrados = cupones.Where(x =>
+                    x.codigo != null && x.codigo.ToLower().Contains(textoBuscar.ToLower())
+                ).ToList();
+
+                gvCupones.DataSource = cuponesFiltrados;
+                gvCupones.DataBind();
+            }
+
+            gvCupones.PageIndex = 0;
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtBuscar.Text = string.Empty;
+            CargarCupones();
+            gvCupones.PageIndex = 0;
         }
 
         protected void gvCupones_PageIndexChanging(object sender, GridViewPageEventArgs e)

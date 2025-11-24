@@ -603,6 +603,12 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
+                            <EmptyDataTemplate>
+                                <div class="no-results">
+                                    <i class="bi bi-search"></i>
+                                    <p>No se encontraron libros que coincidan con tu búsqueda.</p>
+                                </div>
+                            </EmptyDataTemplate>
                         </asp:GridView>
                     </div>
 

@@ -64,6 +64,7 @@
   <binding name="ArticuloWSPortBinding" type="tns:ArticuloWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <operation name="listarArticulos">
       <soap:operation soapAction="" />
       <input>
@@ -94,6 +95,8 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     <operation name="listarArticulos">

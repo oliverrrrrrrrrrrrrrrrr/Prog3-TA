@@ -370,9 +370,160 @@
             background-color: #d1d5d9;
         }
 
+        /* Barra de búsqueda */
+        .search-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            align-items: stretch;
+        }
+
+        .search-input-group {
+            flex: 1;
+            position: relative;
+            display: flex;
+        }
+
+        .search-input-group input {
+            width: 100%;
+            padding: 12px 45px 12px 16px;
+            border: 2px solid #E4E7E9;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #191C1F;
+            transition: all 0.3s;
+        }
+
+        .search-input-group input:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(250, 130, 50, 0.1);
+        }
+
+        .search-input-group input::placeholder {
+            color: #ADB7BC;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ADB7BC;
+            font-size: 18px;
+            pointer-events: none;
+            transition: color 0.3s;
+        }
+
+        .search-input-group input:focus ~ .search-icon {
+            color: var(--primary-orange);
+        }
+
+        .search-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-search {
+            background-color: var(--primary-orange);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn-search:hover {
+            background-color: #d86f28;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(250, 130, 50, 0.3);
+        }
+
+        .btn-search i {
+            font-size: 16px;
+        }
+
+        .btn-clear {
+            background-color: white;
+            color: #5F6C72;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 2px solid #E4E7E9;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn-clear:hover {
+            background-color: #F9FAFB;
+            border-color: #ADB7BC;
+            color: #191C1F;
+        }
+
+        .btn-clear i {
+            font-size: 16px;
+        }
+        
+        .view-all-link {
+            color: var(--primary-orange);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .view-all-link:hover {
+            color: #d86f28;
+        }
+
+        /* Mensaje sin resultados */
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #5F6C72;
+        }
+
+        .no-results i {
+            font-size: 48px;
+            color: #E4E7E9;
+            margin-bottom: 16px;
+        }
+
+        .no-results p {
+            font-size: 16px;
+            margin: 0;
+        }
+
         @media (max-width: 768px) {
             .form-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .search-buttons {
+                width: 100%;
+            }
+
+            .btn-search,
+            .btn-clear {
+                flex: 1;
             }
         }
     </style>
@@ -446,6 +597,29 @@
                     <div class="articulos-header">
                         <h2>ARTÍCULOS</h2>
                     </div>
+
+                    <!-- Barra de búsqueda -->
+                    <div class="search-bar">
+                        <div class="search-input-group">
+                            <asp:TextBox ID="txtBuscar" runat="server" 
+                                placeholder="Buscar por ID o nombre del artículo..." 
+                                CssClass="form-control">
+                            </asp:TextBox>
+                            <i class="bi bi-search search-icon"></i>
+                        </div>
+                        <div class="search-buttons">
+                            <asp:Button ID="btnBuscar" runat="server" 
+                                Text="Buscar" 
+                                CssClass="btn-search" 
+                                OnClick="btnBuscar_Click">
+                            </asp:Button>
+                            <asp:Button ID="btnLimpiar" runat="server" 
+                                Text="Limpiar" 
+                                CssClass="btn-clear" 
+                                OnClick="btnLimpiar_Click">
+                            </asp:Button>
+                        </div>
+                    </div>
                     
                     <!-- Tabla -->
                     <div class ="table-responsive">
@@ -470,6 +644,12 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
+                            <EmptyDataTemplate>
+                                <div class="no-results">
+                                    <i class="bi bi-search"></i>
+                                    <p>No se encontraron artículos que coincidan con tu búsqueda.</p>
+                                </div>
+                            </EmptyDataTemplate>
                         </asp:GridView>
                     </div>
 
