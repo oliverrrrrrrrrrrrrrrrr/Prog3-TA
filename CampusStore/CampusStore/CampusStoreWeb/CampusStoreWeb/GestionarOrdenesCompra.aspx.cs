@@ -49,9 +49,5 @@ namespace CampusStoreWeb
             Response.Redirect("DetalleOrdenCompra.aspx");
         }
 
-        protected void btnAgregarOrdenCompra_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("GestionarOrdenesCompra .aspx");
-        }
     }
 }

@@ -26,8 +26,10 @@ namespace CampusStoreWeb
     {
         // TODO: AJUSTA ESTA URL para que apunte a tu servidor Java y a la carpeta de imágenes correcta.
         private const string BASE_URL_IMAGENES = "http://localhost:8080/TuAplicacionJava/images/";
+        private const int PRODUCTOS_POR_PAGINA = 12;
         private readonly CarritoWSClient carritoWS;
         private readonly ClienteWSClient clienteWS;
+        private List<ProductoUnificado> todosLosProductos;
 
         public Shop_Page()
         {
@@ -192,11 +194,39 @@ namespace CampusStoreWeb
                 productosUnificados.Clear(); // Limpiamos por si el error ocurrió a mitad de camino
             }
 
+            // Guardar todos los productos para la paginación
+            todosLosProductos = productosUnificados;
+
+            // Obtener el número de página actual
+            int paginaActual = 1;
+            if (ViewState["PaginaActual"] != null)
+            {
+                paginaActual = (int)ViewState["PaginaActual"];
+            }
+            else if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"].StartsWith("CambiarPagina"))
+            {
+                string[] parts = Request["__EVENTARGUMENT"].Split(',');
+                if (parts.Length == 2 && int.TryParse(parts[1], out int pagina))
+                {
+                    paginaActual = pagina;
+                }
+            }
+
+            // Calcular productos para la página actual
+            int totalProductos = productosUnificados.Count;
+            int totalPaginas = (int)Math.Ceiling((double)totalProductos / PRODUCTOS_POR_PAGINA);
+            int indiceInicio = (paginaActual - 1) * PRODUCTOS_POR_PAGINA;
+            var productosPagina = productosUnificados.Skip(indiceInicio).Take(PRODUCTOS_POR_PAGINA).ToList();
+
+            // Guardar información de paginación en ViewState
+            ViewState["TotalPaginas"] = totalPaginas;
+            ViewState["PaginaActual"] = paginaActual;
+
             // --- LÓGICA PARA MOSTRAR/OCULTAR EL MENSAJE ---
-            if (productosUnificados.Any())
+            if (productosPagina.Any())
             {
                 // Si hay productos, mostramos el Repeater y ocultamos el mensaje
-                rptProductos.DataSource = productosUnificados;
+                rptProductos.DataSource = productosPagina;
                 rptProductos.DataBind();
                 rptProductos.Visible = true;
                 pnlNoResults.Visible = false;
@@ -209,7 +239,105 @@ namespace CampusStoreWeb
                 rptProductos.Visible = false;
                 pnlNoResults.Visible = true;
             }
+
+            // Actualizar controles de paginación
+            ActualizarControlesPaginacion();
         }
+
+        private void ActualizarControlesPaginacion()
+        {
+            int paginaActual = ViewState["PaginaActual"] != null ? (int)ViewState["PaginaActual"] : 1;
+            int totalPaginas = ViewState["TotalPaginas"] != null ? (int)ViewState["TotalPaginas"] : 1;
+
+            // Ocultar paginación si solo hay una página o no hay productos
+            if (totalPaginas <= 1 || todosLosProductos == null || !todosLosProductos.Any())
+            {
+                pnlPaginacion.Visible = false;
+                return;
+            }
+
+            pnlPaginacion.Visible = true;
+            litPaginacion.Text = GenerarHTMLPaginacion(paginaActual, totalPaginas);
+        }
+
+        private string GenerarHTMLPaginacion(int paginaActual, int totalPaginas)
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append("<nav class=\"d-flex justify-content-center mt-4\"><ul class=\"pagination\">");
+
+            // Botón anterior
+            if (paginaActual > 1)
+            {
+                sb.Append($"<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"__doPostBack('CambiarPagina','{paginaActual - 1}'); return false;\">&larr;</a></li>");
+            }
+            else
+            {
+                sb.Append("<li class=\"page-item disabled\"><span class=\"page-link\">&larr;</span></li>");
+            }
+
+            // Números de página
+            int inicio = Math.Max(1, paginaActual - 2);
+            int fin = Math.Min(totalPaginas, paginaActual + 2);
+
+            if (inicio > 1)
+            {
+                sb.Append($"<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"__doPostBack('CambiarPagina','1'); return false;\">01</a></li>");
+                if (inicio > 2)
+                {
+                    sb.Append("<li class=\"page-item disabled\"><span class=\"page-link\">...</span></li>");
+                }
+            }
+
+            for (int i = inicio; i <= fin; i++)
+            {
+                if (i == paginaActual)
+                {
+                    sb.Append($"<li class=\"page-item active\"><span class=\"page-link\">{i:D2}</span></li>");
+                }
+                else
+                {
+                    sb.Append($"<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"__doPostBack('CambiarPagina','{i}'); return false;\">{i:D2}</a></li>");
+                }
+            }
+
+            if (fin < totalPaginas)
+            {
+                if (fin < totalPaginas - 1)
+                {
+                    sb.Append("<li class=\"page-item disabled\"><span class=\"page-link\">...</span></li>");
+                }
+                sb.Append($"<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"__doPostBack('CambiarPagina','{totalPaginas}'); return false;\">{totalPaginas:D2}</a></li>");
+            }
+
+            // Botón siguiente
+            if (paginaActual < totalPaginas)
+            {
+                sb.Append($"<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"__doPostBack('CambiarPagina','{paginaActual + 1}'); return false;\">&rarr;</a></li>");
+            }
+            else
+            {
+                sb.Append("<li class=\"page-item disabled\"><span class=\"page-link\">&rarr;</span></li>");
+            }
+
+            sb.Append("</ul></nav>");
+            return sb.ToString();
+        }
+
+        protected override void RaisePostBackEvent(IPostBackEventHandler source, string eventArgument)
+        {
+            if (eventArgument != null && eventArgument.StartsWith("CambiarPagina"))
+            {
+                string[] parts = eventArgument.Split(',');
+                if (parts.Length == 2 && int.TryParse(parts[1], out int nuevaPagina))
+                {
+                    ViewState["PaginaActual"] = nuevaPagina;
+                    CargarProductos();
+                    return;
+                }
+            }
+            base.RaisePostBackEvent(source, eventArgument);
+        }
+
 
         // --- MÉTODOS DE AYUDA PARA LEER LOS FILTROS ---
 

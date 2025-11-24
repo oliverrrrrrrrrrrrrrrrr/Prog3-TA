@@ -412,7 +412,7 @@
                                                 <a href='<%# Eval("TipoProducto", "Product_detail.aspx?type={0}&id=") + Eval("Id") %>'><%# Eval("Nombre") %></a>
                                             </h5>
                                             <p class="product-title"><%# Eval("Nombre") %></p>
-                                            <p class="product-price">$<%# Eval("Precio", "{0:F2}") %></p>
+                                            <p class="product-price">S/.<%# Eval("Precio", "{0:F2}") %></p>
                                         </div>
                                     </div>
                                 </div>

@@ -391,7 +391,7 @@
                         </asp:HyperLink>
                     </li>
                     <li class="breadcrumb-item">
-                        <asp:HyperLink runat="server" NavigateUrl="~/UserAccount.aspx">User Account</asp:HyperLink>
+                        <asp:HyperLink runat="server" NavigateUrl="~/UserAccount.aspx">Cuenta de Administrador</asp:HyperLink>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Gestionar Artículos</li>
                 </ol>
@@ -434,7 +434,7 @@
                     </asp:HyperLink>
                     <asp:HyperLink runat="server" NavigateUrl="~/Logout.aspx" CssClass="menu-item">
                         <i class="bi bi-box-arrow-right"></i>
-                        <span>Cerrar Sesion</span>
+                        <span>Cerrar Sesión</span>
                     </asp:HyperLink>
                 </div>
             </div>
@@ -455,7 +455,11 @@
                                 <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="ID" DataField="idArticulo" />
                                 <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="NOMBRE" DataField="nombre" />
                                 <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="STOCK" Datafield="stockReal" />
-                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="PRECIO UNITARIO" Datafield="precio" />
+                                <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="PRECIO UNITARIO">
+                                    <ItemTemplate>
+                                        <span class="table-items">S/.<%# String.Format("{0:N2}", Eval("precio")) %></span>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="DETALLES">
                                     <ItemTemplate>
                                         <asp:HyperLink runat="server" 
