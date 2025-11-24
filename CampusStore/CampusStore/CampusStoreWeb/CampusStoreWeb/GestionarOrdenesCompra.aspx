@@ -486,7 +486,7 @@
                     </asp:HyperLink>
                     <asp:HyperLink runat="server" NavigateUrl="~/Logout.aspx" CssClass="menu-item">
                         <i class="bi bi-box-arrow-right"></i>
-                        <span>Log out</span>
+                        <span>Cerrar Sesion</span>
                     </asp:HyperLink>
                 </div>
             </div>
