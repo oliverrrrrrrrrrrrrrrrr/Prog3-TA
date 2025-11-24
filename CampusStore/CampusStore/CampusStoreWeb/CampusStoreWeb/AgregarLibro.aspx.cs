@@ -367,8 +367,8 @@ namespace CampusStoreWeb
 
                     if (precioConDescuento > precioUnitario)
                     {
-                        string script = "alert('El precio con descuento no puede ser mayor al precio unitario.');";
-                        ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                        string scriptA = "alert('El precio con descuento no puede ser mayor al precio unitario.');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "error", scriptA, true);
                         return;
                     }
 
@@ -386,8 +386,8 @@ namespace CampusStoreWeb
                         }
                         else
                         {
-                            string script = "alert('Error: No se encontró la editorial temporal.');";
-                            ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                            string scriptA = "alert('Error: No se encontró la editorial temporal.');";
+                            ClientScript.RegisterStartupScript(this.GetType(), "error", scriptA, true);
                             return;
                         }
                     }
@@ -413,8 +413,8 @@ namespace CampusStoreWeb
                     }
                     else
                     {
-                        string script = "alert('Debe seleccionar o crear una editorial.');";
-                        ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                        string scriptA = "alert('Debe seleccionar o crear una editorial.');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "error", scriptA, true);
                         return;
                     }
 

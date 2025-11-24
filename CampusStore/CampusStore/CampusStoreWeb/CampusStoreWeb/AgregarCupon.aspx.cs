@@ -40,8 +40,8 @@ namespace CampusStoreWeb
                     DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text);
                     if (fechaCaducidad < DateTime.Now.Date)
                     {
-                        string script = "alert('La fecha de caducidad no puede ser anterior a hoy.');";
-                        ClientScript.RegisterStartupScript(this.GetType(), "errorFecha", script, true);
+                        string scriptA = "alert('La fecha de caducidad no puede ser anterior a hoy.');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "errorFecha", scriptA, true);
                         return;
                     }
 
