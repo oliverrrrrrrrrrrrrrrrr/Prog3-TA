@@ -399,7 +399,7 @@
                         </asp:HyperLink>
                     </li>
                     <li class="breadcrumb-item">
-                        <asp:HyperLink runat="server" NavigateUrl="~/UserAccount.aspx">User Account</asp:HyperLink>
+                        <asp:HyperLink runat="server" NavigateUrl="~/UserAccount.aspx">Cuenta de Administrador</asp:HyperLink>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Gestionar Empleados</li>
                 </ol>
@@ -442,7 +442,7 @@
                     </asp:HyperLink>
                     <asp:HyperLink runat="server" NavigateUrl="~/Logout.aspx" CssClass="menu-item">
                         <i class="bi bi-box-arrow-right"></i>
-                        <span>Log out</span>
+                        <span>Cerrar Sesión</span>
                     </asp:HyperLink>
                 </div>
             </div>

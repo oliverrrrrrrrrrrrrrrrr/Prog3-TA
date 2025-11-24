@@ -346,7 +346,7 @@ namespace CampusStoreWeb
             try
             {
                 // 1. Order ID
-                idOrdenGenerada = carrito.idCarrito.ToString().PadLeft(8, '0');
+                
                 lblOrderId.Text = "#" + idOrdenGenerada.PadLeft(8, '0');
                 
                 ViewState["IdOrdenActual"] = idOrdenGenerada;

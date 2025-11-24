@@ -6,10 +6,7 @@ import jakarta.jws.WebParam;
 import java.util.List;
 import pe.edu.pucp.campusstore.modelo.Cliente;
 import pe.edu.pucp.campusstore.bo.ClienteBO;
-import pe.edu.pucp.campusstore.bo.CuponBO;
 import pe.edu.pucp.campusstore.boimpl.ClienteBOImpl;
-import pe.edu.pucp.campusstore.boimpl.CuponBOImpl;
-import pe.edu.pucp.campusstore.modelo.Cupon;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
 
 @WebService(

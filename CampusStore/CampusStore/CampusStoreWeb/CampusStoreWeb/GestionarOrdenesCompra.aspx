@@ -443,7 +443,7 @@
                         </asp:HyperLink>
                     </li>
                     <li class="breadcrumb-item">
-                        <asp:HyperLink runat="server" NavigateUrl="~/UserAccount.aspx">User Account</asp:HyperLink>
+                        <asp:HyperLink runat="server" NavigateUrl="~/UserAccount.aspx">Cuenta de Administrador</asp:HyperLink>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Gestionar Pedidos</li>
                 </ol>
@@ -486,7 +486,7 @@
                     </asp:HyperLink>
                     <asp:HyperLink runat="server" NavigateUrl="~/Logout.aspx" CssClass="menu-item">
                         <i class="bi bi-box-arrow-right"></i>
-                        <span>Log out</span>
+                        <span>Cerrar Sesión</span>
                     </asp:HyperLink>
                 </div>
             </div>
@@ -512,8 +512,16 @@
                             <Columns>
                                 <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="ID" DataField="idOrdenCompra" />
                                 <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="ESTADO" DataField="estado" />
-                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="FECHA CREACIÓN" DataField="fechaCreacion" />
-                                <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="FECHA LIMITE" DataField="limitePago" />
+                                <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="FECHA CREACIÓN">
+                                    <ItemTemplate>
+                                        <span class="table-items"><%# Eval("fechaCreacion") != null ? ((DateTime)Eval("fechaCreacion")).ToString("MM/dd/yyyy") : "" %></span>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="FECHA LIMITE">
+                                    <ItemTemplate>
+                                        <span class="table-items"><%# Eval("limitePago") != null ? ((DateTime)Eval("limitePago")).ToString("MM/dd/yyyy") : "" %></span>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="TOTAL" DataField="total" />
                                 <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="DETALLES">
                                     <ItemTemplate>
