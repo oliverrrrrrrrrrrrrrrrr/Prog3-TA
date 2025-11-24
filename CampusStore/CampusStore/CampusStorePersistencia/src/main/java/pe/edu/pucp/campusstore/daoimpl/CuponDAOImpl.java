@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 import pe.edu.pucp.campusstore.dao.CuponDAO;
 import pe.edu.pucp.campusstore.modelo.Cupon;
 
@@ -113,5 +114,4 @@ public class CuponDAOImpl extends BaseDAO<Cupon> implements CuponDAO {
             return yaUsado == 1;
         });
     }
-    
 }

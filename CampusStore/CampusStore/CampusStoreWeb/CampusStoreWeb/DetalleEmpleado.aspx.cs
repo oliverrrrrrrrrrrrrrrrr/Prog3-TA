@@ -89,6 +89,7 @@ namespace CampusStoreWeb
             pnlVista.Visible = true;
             pnlFormEdicion.Visible = false;
 
+            lblEmpleadoID.Text = empleadoActual.idEmpleado.ToString();
             lblNombre.Text = empleadoActual.nombre;
             lblUsername.Text = empleadoActual.nombreUsuario;
             lblContraseña.Text = empleadoActual.contraseña;

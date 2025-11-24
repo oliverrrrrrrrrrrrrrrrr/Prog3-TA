@@ -28,12 +28,15 @@
   </message>
   <message name="eliminarCarritoResponse">
     <part name="parameters" element="tns:eliminarCarritoResponse" />
+<<<<<<< HEAD
   </message>
   <message name="listarCarritos">
     <part name="parameters" element="tns:listarCarritos" />
   </message>
   <message name="listarCarritosResponse">
     <part name="parameters" element="tns:listarCarritosResponse" />
+=======
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
   </message>
   <message name="guardarCarrito">
     <part name="parameters" element="tns:guardarCarrito" />
@@ -47,6 +50,21 @@
   <message name="obtenerCarritoResponse">
     <part name="parameters" element="tns:obtenerCarritoResponse" />
   </message>
+<<<<<<< HEAD
+=======
+  <message name="listarCarritos">
+    <part name="parameters" element="tns:listarCarritos" />
+  </message>
+  <message name="listarCarritosResponse">
+    <part name="parameters" element="tns:listarCarritosResponse" />
+  </message>
+  <message name="guardarCarrito">
+    <part name="parameters" element="tns:guardarCarrito" />
+  </message>
+  <message name="guardarCarritoResponse">
+    <part name="parameters" element="tns:guardarCarritoResponse" />
+  </message>
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
   <portType name="CarritoWS">
     <operation name="aplicarCuponACarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/aplicarCuponACarritoRequest" message="tns:aplicarCuponACarrito" />
@@ -63,10 +81,13 @@
     <operation name="eliminarCarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoRequest" message="tns:eliminarCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoResponse" message="tns:eliminarCarritoResponse" />
+<<<<<<< HEAD
     </operation>
     <operation name="listarCarritos">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosRequest" message="tns:listarCarritos" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosResponse" message="tns:listarCarritosResponse" />
+=======
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
     </operation>
     <operation name="guardarCarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoRequest" message="tns:guardarCarrito" />
@@ -76,6 +97,17 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoRequest" message="tns:obtenerCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoResponse" message="tns:obtenerCarritoResponse" />
     </operation>
+<<<<<<< HEAD
+=======
+    <operation name="listarCarritos">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosRequest" message="tns:listarCarritos" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosResponse" message="tns:listarCarritosResponse" />
+    </operation>
+    <operation name="guardarCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoRequest" message="tns:guardarCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoResponse" message="tns:guardarCarritoResponse" />
+    </operation>
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
   </portType>
   <binding name="CarritoWSPortBinding" type="tns:CarritoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -107,6 +139,7 @@
       </output>
     </operation>
     <operation name="eliminarCarrito">
+<<<<<<< HEAD
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -116,6 +149,8 @@
       </output>
     </operation>
     <operation name="listarCarritos">
+=======
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -133,7 +168,20 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< HEAD
     <operation name="obtenerCarrito">
+=======
+    <operation name="listarCarritos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="guardarCarrito">
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

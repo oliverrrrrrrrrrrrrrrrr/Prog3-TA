@@ -5,6 +5,15 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/RolWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+<<<<<<< HEAD
+=======
+  <message name="guardarNuevoRolRetornaId">
+    <part name="parameters" element="tns:guardarNuevoRolRetornaId" />
+  </message>
+  <message name="guardarNuevoRolRetornaIdResponse">
+    <part name="parameters" element="tns:guardarNuevoRolRetornaIdResponse" />
+  </message>
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
   <message name="eliminarRol">
     <part name="parameters" element="tns:eliminarRol" />
   </message>
@@ -17,11 +26,19 @@
   <message name="listarRolesResponse">
     <part name="parameters" element="tns:listarRolesResponse" />
   </message>
+<<<<<<< HEAD
   <message name="guardarNuevoRolRetornaId">
     <part name="parameters" element="tns:guardarNuevoRolRetornaId" />
   </message>
   <message name="guardarNuevoRolRetornaIdResponse">
     <part name="parameters" element="tns:guardarNuevoRolRetornaIdResponse" />
+=======
+  <message name="obtenerRol">
+    <part name="parameters" element="tns:obtenerRol" />
+  </message>
+  <message name="obtenerRolResponse">
+    <part name="parameters" element="tns:obtenerRolResponse" />
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
   </message>
   <message name="guardarRol">
     <part name="parameters" element="tns:guardarRol" />
@@ -29,6 +46,7 @@
   <message name="guardarRolResponse">
     <part name="parameters" element="tns:guardarRolResponse" />
   </message>
+<<<<<<< HEAD
   <message name="obtenerRol">
     <part name="parameters" element="tns:obtenerRol" />
   </message>
@@ -36,6 +54,13 @@
     <part name="parameters" element="tns:obtenerRolResponse" />
   </message>
   <portType name="RolWS">
+=======
+  <portType name="RolWS">
+    <operation name="guardarNuevoRolRetornaId">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarNuevoRolRetornaIdRequest" message="tns:guardarNuevoRolRetornaId" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarNuevoRolRetornaIdResponse" message="tns:guardarNuevoRolRetornaIdResponse" />
+    </operation>
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
     <operation name="eliminarRol">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/eliminarRolRequest" message="tns:eliminarRol" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/eliminarRolResponse" message="tns:eliminarRolResponse" />
@@ -44,14 +69,21 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/listarRolesRequest" message="tns:listarRoles" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/listarRolesResponse" message="tns:listarRolesResponse" />
     </operation>
+<<<<<<< HEAD
     <operation name="guardarNuevoRolRetornaId">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarNuevoRolRetornaIdRequest" message="tns:guardarNuevoRolRetornaId" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarNuevoRolRetornaIdResponse" message="tns:guardarNuevoRolRetornaIdResponse" />
+=======
+    <operation name="obtenerRol">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/obtenerRolRequest" message="tns:obtenerRol" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/obtenerRolResponse" message="tns:obtenerRolResponse" />
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
     </operation>
     <operation name="guardarRol">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarRolRequest" message="tns:guardarRol" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarRolResponse" message="tns:guardarRolResponse" />
     </operation>
+<<<<<<< HEAD
     <operation name="obtenerRol">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/obtenerRolRequest" message="tns:obtenerRol" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/obtenerRolResponse" message="tns:obtenerRolResponse" />
@@ -77,6 +109,11 @@
         <soap:body use="literal" />
       </output>
     </operation>
+=======
+  </portType>
+  <binding name="RolWSPortBinding" type="tns:RolWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
     <operation name="guardarNuevoRolRetornaId">
       <soap:operation soapAction="" />
       <input>
@@ -96,6 +133,24 @@
       </output>
     </operation>
     <operation name="obtenerRol">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerRol">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="guardarRol">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

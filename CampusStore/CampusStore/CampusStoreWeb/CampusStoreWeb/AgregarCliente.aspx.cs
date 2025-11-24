@@ -1,5 +1,6 @@
 ﻿using CampusStoreWeb.CampusStoreWS;
 using System;
+using System.Web.UI;
 
 namespace CampusStoreWeb
 {
@@ -48,16 +49,14 @@ namespace CampusStoreWeb
                     clienteWS.guardarCliente(nuevoCliente, estado.Nuevo);
 
                     // Mostrar mensaje de éxito y redirigir
-                    string successScript = @"
-                        alert('Cliente creado exitosamente');
-                        window.location.href = 'GestionarClientes.aspx';
-                    ";
-                    ClientScript.RegisterStartupScript(this.GetType(), "success", successScript, true);
+                    string script = "mostrarModalExito();";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaExito", script, true);
                 }
                 catch (Exception ex)
                 {
-                    string errorScript = $"alert('Error al guardar el cliente: {ex.Message}');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "error", errorScript, true);
+                    string mensaje = ex.Message.Replace("'", "").Replace("\n", " ");
+                    string script = $"mostrarModalError('{mensaje}');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaError", script, true);
                 }
             }
         }

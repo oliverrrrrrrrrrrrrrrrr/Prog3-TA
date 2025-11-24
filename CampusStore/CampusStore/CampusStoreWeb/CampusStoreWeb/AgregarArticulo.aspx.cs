@@ -1,12 +1,12 @@
 ﻿using CampusStoreWeb.CampusStoreWS;
+using Newtonsoft.Json;
 using System;
 using System.Configuration;
 using System.IO;
-using System.Web.UI.WebControls;
-
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace CampusStoreWeb
 {
@@ -103,16 +103,14 @@ namespace CampusStoreWeb
                     articuloWS.guardarArticulo(nuevoArticulo, estado.Nuevo);
 
                     // Mostrar mensaje de éxito y redirigir
-                    string successScript = @"
-                        alert('Artículo agregado exitosamente');
-                        window.location.href = 'GestionarArticulos.aspx';
-                    ";
-                    ClientScript.RegisterStartupScript(this.GetType(), "success", successScript, true);
+                    string script = "mostrarModalExito();";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaExito", script, true);
                 }
                 catch (Exception ex)
                 {
-                    string errorScript = $"alert('Error al guardar el artículo: {ex.Message}');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "error", errorScript, true);
+                    string mensaje = ex.Message.Replace("'", "").Replace("\n", " ");
+                    string script = $"mostrarModalError('{mensaje}');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaError", script, true);
                 }
             }
         }

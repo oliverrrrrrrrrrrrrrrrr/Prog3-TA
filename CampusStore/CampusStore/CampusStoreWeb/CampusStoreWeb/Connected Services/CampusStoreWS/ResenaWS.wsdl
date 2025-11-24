@@ -8,6 +8,15 @@
   <message name="guardarResena">
     <part name="parameters" element="tns:guardarResena" />
   </message>
+<<<<<<< HEAD
+=======
+  <message name="listarResenasPorProductoResponse">
+    <part name="parameters" element="tns:listarResenasPorProductoResponse" />
+  </message>
+  <message name="guardarResena">
+    <part name="parameters" element="tns:guardarResena" />
+  </message>
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
   <message name="guardarResenaResponse">
     <part name="parameters" element="tns:guardarResenaResponse" />
   </message>
@@ -17,12 +26,15 @@
   <message name="eliminarResenaResponse">
     <part name="parameters" element="tns:eliminarResenaResponse" />
   </message>
+<<<<<<< HEAD
   <message name="listarResenasPorProducto">
     <part name="parameters" element="tns:listarResenasPorProducto" />
   </message>
   <message name="listarResenasPorProductoResponse">
     <part name="parameters" element="tns:listarResenasPorProductoResponse" />
   </message>
+=======
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
   <message name="listarResenas">
     <part name="parameters" element="tns:listarResenas" />
   </message>
@@ -36,6 +48,13 @@
     <part name="parameters" element="tns:obtenerResenaResponse" />
   </message>
   <portType name="ResenaWS">
+<<<<<<< HEAD
+=======
+    <operation name="listarResenasPorProducto">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasPorProductoRequest" message="tns:listarResenasPorProducto" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasPorProductoResponse" message="tns:listarResenasPorProductoResponse" />
+    </operation>
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
     <operation name="guardarResena">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResenaRequest" message="tns:guardarResena" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/guardarResenaResponse" message="tns:guardarResenaResponse" />
@@ -44,10 +63,13 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/eliminarResenaRequest" message="tns:eliminarResena" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/eliminarResenaResponse" message="tns:eliminarResenaResponse" />
     </operation>
+<<<<<<< HEAD
     <operation name="listarResenasPorProducto">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasPorProductoRequest" message="tns:listarResenasPorProducto" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasPorProductoResponse" message="tns:listarResenasPorProductoResponse" />
     </operation>
+=======
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
     <operation name="listarResenas">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasRequest" message="tns:listarResenas" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasResponse" message="tns:listarResenasResponse" />
@@ -59,6 +81,18 @@
   </portType>
   <binding name="ResenaWSPortBinding" type="tns:ResenaWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+<<<<<<< HEAD
+=======
+    <operation name="listarResenasPorProducto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
     <operation name="guardarResena">
       <soap:operation soapAction="" />
       <input>
@@ -77,7 +111,11 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< HEAD
     <operation name="listarResenasPorProducto">
+=======
+    <operation name="listarResenas">
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -86,7 +124,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="listarResenas">
+    <operation name="obtenerResena">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

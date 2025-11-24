@@ -1,5 +1,6 @@
 ﻿using CampusStoreWeb.CampusStoreWS;
 using System;
+using System.Web.UI;
 
 namespace CampusStoreWeb
 {
@@ -70,16 +71,14 @@ namespace CampusStoreWeb
                     cuponWS.guardarCupon(nuevoCupon, estado.Nuevo);
 
                     // Mostrar mensaje de éxito y redirigir
-                    string successScript = @"
-                        alert('Cupón creado exitosamente');
-                        window.location.href = 'GestionarCupones.aspx';
-                    ";
-                    ClientScript.RegisterStartupScript(this.GetType(), "success", successScript, true);
+                    string script = "mostrarModalExito();";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaExito", script, true);
                 }
                 catch (Exception ex)
                 {
-                    string errorScript = $"alert('Error al guardar el cupón: {ex.Message}');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "error", errorScript, true);
+                    string mensaje = ex.Message.Replace("'", "").Replace("\n", " ");
+                    string script = $"mostrarModalError('{mensaje}');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaError", script, true);
                 }
             }
         }

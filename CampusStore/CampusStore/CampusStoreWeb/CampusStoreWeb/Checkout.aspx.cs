@@ -254,7 +254,7 @@ namespace CampusStoreWeb
 
                 lblOrderTotal.Text =  total.ToString("N2");
 
-                System.Diagnostics.Debug.WriteLine($"Labels actualizados desde orden - Total: S/.{total:N2}");
+                System.Diagnostics.Debug.WriteLine($"Labels actualizados desde orden - Total: {total:N2}");
             }
             catch (Exception ex)
             {
@@ -299,6 +299,7 @@ namespace CampusStoreWeb
                     {
                         System.Diagnostics.Debug.WriteLine("Carrito no completado, generando orden de compra...");
                         var resultado = GenerarOrdenCompra(idCliente, carrito);
+                        
                         ordenCreada = resultado.Item1;
                         ordenYaExistia = resultado.Item2;
                         
@@ -345,9 +346,9 @@ namespace CampusStoreWeb
             try
             {
                 // 1. Order ID
-
-                lblOrderId.Text = "#" + carrito.idCarrito.ToString().PadLeft(8, '0');
-                idOrdenGenerada =carrito.idCarrito.ToString().PadLeft(8, '0');
+                idOrdenGenerada = carrito.idCarrito.ToString().PadLeft(8, '0');
+                lblOrderId.Text = "#" + idOrdenGenerada.PadLeft(8, '0');
+                
                 ViewState["IdOrdenActual"] = idOrdenGenerada;
 
                 // 2. Cantidad de productos
@@ -487,7 +488,8 @@ namespace CampusStoreWeb
                 // Estado
                 ordenCompra.estado = estadoOrden.NO_PAGADO;
                 ordenCompra.estadoSpecified = true;
-
+                idOrdenGenerada = ordenCompra.idOrdenCompra.ToString().PadLeft(8, '0');
+                ViewState["IdOrdenActual"] = idOrdenGenerada;
                 // Debug detallado antes de enviar
                 System.Diagnostics.Debug.WriteLine($"=== Datos de la orden a enviar ===");
                 System.Diagnostics.Debug.WriteLine($"Cliente ID: {ordenCompra.cliente?.idCliente ?? 0}");

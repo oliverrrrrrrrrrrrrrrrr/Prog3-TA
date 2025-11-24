@@ -2,14 +2,17 @@ package pe.edu.pucp.campusstore.boimpl;
 
 import java.util.List;
 import pe.edu.pucp.campusstore.bo.ClienteBO;
+import pe.edu.pucp.campusstore.bo.CuponBO;
 import pe.edu.pucp.campusstore.dao.ClienteDAO;
 import pe.edu.pucp.campusstore.daoimpl.ClienteDAOImpl;
 import pe.edu.pucp.campusstore.modelo.Cliente;
+import pe.edu.pucp.campusstore.modelo.Cupon;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
 
 public class ClienteBOImpl implements ClienteBO{
 
     private final ClienteDAO clienteDAO;
+    
     
     public ClienteBOImpl() {
         clienteDAO = new ClienteDAOImpl();
@@ -22,7 +25,12 @@ public class ClienteBOImpl implements ClienteBO{
 
     @Override
     public Cliente obtener(int id) {
-        return this.clienteDAO.leer(id);
+        Cliente cliente =this.clienteDAO.leer(id);
+        
+        List<Cupon> cuponesAux = this.clienteDAO.obtenerCuponesPorCliente(id);
+        cliente.setCuponesUsados(cuponesAux);
+        
+        return cliente;
     }
 
     @Override
