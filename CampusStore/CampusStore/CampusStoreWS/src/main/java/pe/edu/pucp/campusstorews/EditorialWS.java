@@ -12,9 +12,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.ResourceBundle;
-import pe.edu.pucp.campusstore.bo.EditorialBO;
-import pe.edu.pucp.campusstore.boimpl.EditorialBOImpl;
-import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Editorial;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
 
