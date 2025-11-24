@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="aplicarCuponACarritoResponse" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>CampusStoreWeb.CampusStoreWS.aplicarCuponACarritoResponse</TypeInfo>
+   <TypeInfo>CampusStoreWeb.CampusStoreWS.aplicarCuponACarritoResponse, Connected Services.CampusStoreWS.Reference.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>
