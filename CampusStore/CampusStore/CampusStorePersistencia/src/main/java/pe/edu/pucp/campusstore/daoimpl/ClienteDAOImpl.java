@@ -7,8 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.campusstore.dao.ClienteDAO;
 import pe.edu.pucp.campusstore.modelo.Cliente;
+import pe.edu.pucp.campusstore.modelo.Cupon;
 
 public class ClienteDAOImpl extends BaseDAO<Cliente> implements ClienteDAO {
 
@@ -171,4 +174,42 @@ public class ClienteDAOImpl extends BaseDAO<Cliente> implements ClienteDAO {
         });
     }
     
+    private Cupon mapearCupon(ResultSet rs) throws SQLException {
+        Cupon cupon = new Cupon();
+
+        cupon.setIdCupon(rs.getInt("idCupon"));
+        cupon.setCodigo(rs.getString("codigo"));
+        cupon.setDescuento(rs.getDouble("descuento"));
+        cupon.setFechaCaducidad(rs.getTimestamp("fechaCaducidad")); 
+        cupon.setActivo(rs.getBoolean("activo"));
+        cupon.setUsosRestantes(rs.getInt("usosRestantes"));
+
+        return cupon;
+    }
+    
+    protected PreparedStatement comandoObtenerCuponesPorCliente(Connection conn, int idCliente)
+        throws SQLException {
+
+        String sql = "{call obtenerCuponesPorCliente(?)}";
+        CallableStatement cmd = conn.prepareCall(sql);
+        cmd.setInt("p_idCliente", idCliente);
+        return cmd;
+    }
+    
+    @Override
+    public List<Cupon> obtenerCuponesPorCliente(int idCliente) {
+        return ejecutarComando(conn -> {
+            try (PreparedStatement cmd = this.comandoObtenerCuponesPorCliente(conn, idCliente)) {
+                ResultSet rs = cmd.executeQuery();
+
+                List<Cupon> lista = new ArrayList<>();
+
+                while (rs.next()) {
+                    lista.add(mapearCupon(rs));
+                }
+
+                return lista;
+            }
+        });
+    }
 }

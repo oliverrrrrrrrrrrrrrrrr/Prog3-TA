@@ -159,3 +159,29 @@ BEGIN
 END //
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure obtenerCuponesPorCliente
+-- -----------------------------------------------------
+
+USE `libreria`;
+DROP PROCEDURE IF EXISTS `obtenerCuponesPorCliente`;
+
+DELIMITER //
+CREATE PROCEDURE `obtenerCuponesPorCliente`(
+    IN p_idCliente INT
+)
+BEGIN
+    SELECT 
+        c.idCupon,
+        c.codigo,
+        c.descuento,
+        c.fechaCaducidad,
+        c.activo,
+        c.usosRestantes
+    FROM cupon c
+    INNER JOIN cupon_has_cliente chc
+        ON c.idCupon = chc.cupon_idCupon
+    WHERE chc.cliente_idCliente = p_idCliente;
+END//
+DELIMITER ;

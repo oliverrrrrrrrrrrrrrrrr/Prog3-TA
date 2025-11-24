@@ -1,5 +1,6 @@
 package pe.edu.pucp.campusstore.dao;
 
+import java.util.List;
 import pe.edu.pucp.campusstore.interfaces.dao.Persistible;
 import pe.edu.pucp.campusstore.modelo.Cupon;
 

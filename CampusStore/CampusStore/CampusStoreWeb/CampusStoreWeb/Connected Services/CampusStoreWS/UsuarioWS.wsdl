@@ -11,10 +11,18 @@
   <message name="loginUsuarioResponse">
     <part name="parameters" element="tns:loginUsuarioResponse" />
   </message>
+  <message name="IOException">
+    <part name="fault" element="tns:IOException" />
+  </message>
+  <message name="InterruptedException">
+    <part name="fault" element="tns:InterruptedException" />
+  </message>
   <portType name="UsuarioWS">
     <operation name="loginUsuario">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/UsuarioWS/loginUsuarioRequest" message="tns:loginUsuario" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/UsuarioWS/loginUsuarioResponse" message="tns:loginUsuarioResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/UsuarioWS/loginUsuario/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/UsuarioWS/loginUsuario/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
   </portType>
   <binding name="UsuarioWSPortBinding" type="tns:UsuarioWS">
@@ -27,6 +35,12 @@
       <output>
         <soap:body use="literal" />
       </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
     </operation>
   </binding>
   <service name="UsuarioWS">
