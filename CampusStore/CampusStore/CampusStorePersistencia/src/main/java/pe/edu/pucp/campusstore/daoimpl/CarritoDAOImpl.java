@@ -138,4 +138,37 @@ public class CarritoDAOImpl extends TransaccionalBaseDAO<Carrito> implements Car
     public int obtenerIdCarritoPorCliente(int idCliente) {
         return ejecutarComando(conn -> obtenerIdCarritoPorCliente(idCliente, conn));
     }
+    
+    @Override
+    public boolean aplicarCuponACarrito(int idCupon, int idCliente, int idCarrito, Connection conn) {
+        try {
+            String sql = "{call aplicarCuponACarrito(?, ?, ?, ?, ?)}";
+            CallableStatement cmd = conn.prepareCall(sql);
+            cmd.setInt("p_idCupon", idCupon);
+            cmd.setInt("p_idCliente", idCliente);
+            cmd.setInt("p_idCarrito", idCarrito);
+            cmd.registerOutParameter("p_resultado", Types.TINYINT);
+            cmd.registerOutParameter("p_mensaje", Types.VARCHAR);
+            
+            cmd.execute();
+            
+            int resultado = cmd.getInt("p_resultado");
+            String mensaje = cmd.getString("p_mensaje");
+            
+            if (resultado == 0) {
+                System.err.println("Error al aplicar cupón: " + mensaje);
+                return false;
+            }
+            
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Error SQL al aplicar cupón: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+    
+    @Override
+    public boolean aplicarCuponACarrito(int idCupon, int idCliente, int idCarrito) {
+        return ejecutarComando(conn -> aplicarCuponACarrito(idCupon, idCliente, idCarrito, conn));
+    }
 }

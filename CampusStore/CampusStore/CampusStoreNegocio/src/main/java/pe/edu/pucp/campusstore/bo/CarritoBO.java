@@ -6,4 +6,5 @@ import pe.edu.pucp.campusstore.modelo.LineaCarrito;
 public interface CarritoBO extends Gestionable<Carrito>{
     Carrito obtenerCarritoPorCliente(int idCliente);
     boolean eliminarLineaCarrito(LineaCarrito lineaCarrito);
+    boolean aplicarCuponACarrito(int idCupon, int idCliente, int idCarrito);
 }

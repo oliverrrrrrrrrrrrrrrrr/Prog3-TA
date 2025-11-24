@@ -38,4 +38,14 @@ public class CuponBOImpl implements CuponBO{
             this.cuponDAO.actualizar(modelo);
         }    
     }
+    
+    @Override
+    public Cupon buscarPorCodigo(String codigo) {
+        return this.cuponDAO.buscarPorCodigo(codigo);
+    }
+    
+    @Override
+    public boolean verificarCuponUsado(int idCupon, int idCliente) {
+        return this.cuponDAO.verificarCuponUsado(idCupon, idCliente);
+    }
 }
