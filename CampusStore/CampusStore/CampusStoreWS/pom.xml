@@ -52,9 +52,20 @@
             <type>jar</type>
         </dependency>
         <dependency>
+                <groupId>net.sf.jasperreports</groupId>
+                <artifactId>jasperreports</artifactId>
+                <version>7.0.3</version>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>CampusStoreModelo</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <!-- Extensión PDF (OBLIGATORIA para exportar a PDF) -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-pdf</artifactId>
+            <version>7.0.3</version>
         </dependency>
     </dependencies>
     

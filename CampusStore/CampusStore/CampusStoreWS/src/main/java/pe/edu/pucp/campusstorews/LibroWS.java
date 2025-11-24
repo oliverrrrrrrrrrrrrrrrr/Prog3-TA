@@ -19,7 +19,6 @@ import java.util.TimeZone;
 import pe.edu.pucp.campusstore.modelo.Libro;
 import pe.edu.pucp.campusstore.bo.LibroBO;
 import pe.edu.pucp.campusstore.boimpl.LibroBOImpl;
-import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Autor;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
 
@@ -70,6 +69,33 @@ public class LibroWS {
         return modelo;
     }
 
+//    @WebMethod(operationName = "listarLibros")
+//    public List<Libro> listarLibros() throws IOException, InterruptedException {
+//        String url = this.urlBase + "/" + this.NOMBRE_RESOURCE;
+//        HttpRequest request = HttpRequest.newBuilder()
+//                .uri(URI.create(url))
+//                .GET()
+//                .build();
+//
+//        HttpResponse<String> response
+//                = client.send(request, HttpResponse.BodyHandlers.ofString());
+//
+//        int status = response.statusCode();
+//        String json = response.body();
+//
+//        if (status < 200 || status >= 300) {
+//            // Manejo básico de error, puedes refinarlo
+//            throw new RuntimeException("Error al llamar al API REST /libros. Status: "
+//                    + status + " Body: " + json);
+//        }
+//
+//        ObjectMapper mapper = crearMapperLibros();
+//        List<Libro> modelo
+//                = mapper.readValue(json, new TypeReference<List<Libro>>() {
+//                });
+//
+//        return modelo;
+//    }
     @WebMethod(operationName = "obtenerLibro")
     public Libro obtenerLibro(
             @WebParam(name = "id") int id
@@ -120,12 +146,12 @@ public class LibroWS {
     ) throws IOException, InterruptedException {
 
         ObjectMapper mapper = new ObjectMapper();
-        
+
         // Asegurarse de que el mapper no escriba fechas como timestamps numéricos
         mapper.configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
         mapper.setDateFormat(new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"));
-        
+
         String json = mapper.writeValueAsString(modelo);
 
         String url;

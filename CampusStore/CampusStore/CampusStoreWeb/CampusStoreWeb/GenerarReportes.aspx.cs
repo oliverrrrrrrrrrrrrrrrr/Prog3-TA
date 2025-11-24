@@ -1,9 +1,12 @@
-﻿using System;
+﻿using CampusStoreWeb.CampusStoreWS;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Globalization;
 
 namespace CampusStoreWeb
 {
@@ -22,32 +25,39 @@ namespace CampusStoreWeb
 
         protected void btnGenerarVentas_Click(object sender, EventArgs e)
         {
-            string fechaInicio = txtFechaInicioVentas.Text;
+            string fechaInicio = txtFechaInicioVentas.Text; // viene como yyyy-MM-dd
             string fechaFin = txtFechaFinVentas.Text;
 
-            if (string.IsNullOrWhiteSpace(fechaInicio) || string.IsNullOrWhiteSpace(fechaFin))
+            if (!DateTime.TryParse(fechaInicio, out DateTime fi) ||
+                !DateTime.TryParse(fechaFin, out DateTime ff))
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert",
                     "alert('Debe seleccionar ambas fechas.');", true);
                 return;
             }
 
-            // Validar fechas
-            DateTime fi, ff;
-            if (!DateTime.TryParse(fechaInicio, out fi) || !DateTime.TryParse(fechaFin, out ff))
+            // Si quieres asegurar formato:
+            string fechaIniParam = fi.ToString("yyyy-MM-dd");
+            string fechaFinParam = ff.ToString("yyyy-MM-dd");
+
+            var cliente = new ReporteWSClient();
+            byte[] pdfBytes = cliente.reporteVentas(fechaIniParam, fechaFinParam);
+
+            if (pdfBytes == null || pdfBytes.Length == 0)
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert",
-                    "alert('El formato de las fechas es inválido.');", true);
+                    "alert('No se pudo generar el reporte.');", true);
                 return;
             }
 
-            // Construir URL segura
-            string baseUrl = "http://localhost:8080/CampusStoreReportes/reportes/ReporteVentas";
-            string url = $"{baseUrl}?fechaInicio={fechaInicio}&fechaFin={fechaFin}";
-
-            // Abrir PDF en nueva ventana
-            Response.Redirect(url);
+            Response.Clear();
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "inline; filename=ReporteVentas.pdf");
+            Response.BinaryWrite(pdfBytes);
+            Response.End();
         }
+
+
 
 
     }

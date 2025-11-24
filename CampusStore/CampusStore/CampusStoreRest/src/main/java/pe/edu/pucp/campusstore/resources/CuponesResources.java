@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import pe.edu.pucp.campusstore.bo.CuponBO;
 import pe.edu.pucp.campusstore.boimpl.CuponBOImpl;
-import pe.edu.pucp.campusstore.modelo.Articulo;
 import pe.edu.pucp.campusstore.modelo.Cupon;
 import pe.edu.pucp.campusstore.modelo.enums.Estado;
 

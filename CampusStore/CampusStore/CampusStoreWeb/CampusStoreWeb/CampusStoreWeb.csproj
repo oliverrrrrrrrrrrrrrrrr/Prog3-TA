@@ -357,8 +357,15 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerTotalResenasResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.reporteVentasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\CampusStoreWS\FiltroWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\LibroWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\ReporteWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\ReporteWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\CampusStoreWS\RolWS.xsd">
       <SubType>Designer</SubType>
     </None>

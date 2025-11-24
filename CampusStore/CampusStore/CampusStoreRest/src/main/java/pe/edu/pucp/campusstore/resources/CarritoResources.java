@@ -90,7 +90,7 @@ public class CarritoResources {
     public Response eliminar(@PathParam("id") int id) {
         if (this.carritoBO.obtener(id) == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Articulo: " + id + ", no encontrado")
+                    .entity("Carrito: " + id + ", no encontrado")
                     .build();
         }
         this.carritoBO.eliminar(id);

@@ -22,18 +22,18 @@
     <MetadataSource Address="http://localhost:8080/CampusStoreWS/servicios.disco" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="RolWS.wsdl" MetadataType="Wsdl" ID="f8deaa34-b5af-46d9-82d2-8ef6622c5351" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/RolWS?wsdl" />
     <MetadataFile FileName="CuponWS.xsd" MetadataType="Schema" ID="31715d0a-7ff3-4321-9f3a-ad0646011496" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/CuponWS?xsd=1" />
     <MetadataFile FileName="LibroWS.xsd" MetadataType="Schema" ID="9ebda4bb-52c4-4a20-8faa-386a307f1468" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/LibroWS?xsd=1" />
     <MetadataFile FileName="CarritoWS.wsdl" MetadataType="Wsdl" ID="c47c6926-ab9d-42e0-8061-617d06c97980" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/CarritoWS?wsdl" />
     <MetadataFile FileName="OrdenCompraWS.xsd" MetadataType="Schema" ID="9158a71d-e2d5-4744-a844-d0de9cb101de" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/OrdenCompraWS?xsd=1" />
     <MetadataFile FileName="ClienteWS.xsd" MetadataType="Schema" ID="dcc6c264-f5ad-43bc-a9e1-7d421666475b" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/ClienteWS?xsd=1" />
     <MetadataFile FileName="CuponWS.wsdl" MetadataType="Wsdl" ID="ec72bffa-6cec-46e2-b46d-5031089fd191" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/CuponWS?wsdl" />
+    <MetadataFile FileName="ReporteWS.wsdl" MetadataType="Wsdl" ID="db007426-fd05-4fa8-8bbf-9a3b7b7456fd" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/ReporteWS?wsdl" />
     <MetadataFile FileName="CarritoWS.xsd" MetadataType="Schema" ID="c30681bb-fabf-4fc0-be8c-088121d2989f" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/CarritoWS?xsd=1" />
     <MetadataFile FileName="EditorialWS.wsdl" MetadataType="Wsdl" ID="2d31bf46-a2f5-450c-b763-583860e46fe3" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/EditorialWS?wsdl" />
-    <MetadataFile FileName="ArticuloWS.xsd" MetadataType="Schema" ID="31db675c-2fd3-4cbf-91e8-283062cf061d" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/ArticuloWS?xsd=1" />
+    <MetadataFile FileName="ReporteWS.xsd" MetadataType="Schema" ID="537cb9cd-9b11-4b19-a863-0a3894769251" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/ReporteWS?xsd=1" />
     <MetadataFile FileName="ArticuloWS.wsdl" MetadataType="Wsdl" ID="153c204e-71a8-4a95-b629-b0f21e4c8641" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/ArticuloWS?wsdl" />
-    <MetadataFile FileName="DescuentoWS.xsd" MetadataType="Schema" ID="40a1a1f9-fbbf-4fbf-b3a7-3358304bff7f" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/DescuentoWS?xsd=1" />
+    <MetadataFile FileName="RolWS.wsdl" MetadataType="Wsdl" ID="f8deaa34-b5af-46d9-82d2-8ef6622c5351" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/RolWS?wsdl" />
     <MetadataFile FileName="UsuarioWS.xsd" MetadataType="Schema" ID="d390a573-7d75-418e-8780-2b0b59c9b276" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/UsuarioWS?xsd=1" />
     <MetadataFile FileName="EditorialWS.xsd" MetadataType="Schema" ID="60200dc0-163e-468b-96b0-f8e3717d26e7" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/EditorialWS?xsd=1" />
     <MetadataFile FileName="EmpleadoWS.wsdl" MetadataType="Wsdl" ID="b61f1108-4af3-4cd2-a34b-e540404e8e99" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/EmpleadoWS?wsdl" />
@@ -48,9 +48,11 @@
     <MetadataFile FileName="servicios.disco" MetadataType="Disco" ID="c8a81012-21eb-4d4f-baf3-2048ebe0bd53" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/servicios.disco" />
     <MetadataFile FileName="FiltroWS.wsdl" MetadataType="Wsdl" ID="7b0b8a02-8af5-41d0-9837-12f04c9be790" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/FiltroWS?wsdl" />
     <MetadataFile FileName="RolWS.xsd" MetadataType="Schema" ID="cafb9d6c-7e3e-447f-8ea5-bc4d03784cd8" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/RolWS?xsd=1" />
+    <MetadataFile FileName="DescuentoWS.xsd" MetadataType="Schema" ID="40a1a1f9-fbbf-4fbf-b3a7-3358304bff7f" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/DescuentoWS?xsd=1" />
     <MetadataFile FileName="LibroWS.wsdl" MetadataType="Wsdl" ID="e89e12c4-5945-4bd4-b8b8-ae2b6aaa7dc4" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/LibroWS?wsdl" />
     <MetadataFile FileName="AutorWS.xsd" MetadataType="Schema" ID="09815aef-1c2f-456f-9ce5-7f2f56026e45" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/AutorWS?xsd=1" />
     <MetadataFile FileName="AutorWS.wsdl" MetadataType="Wsdl" ID="dd623874-d70d-4d3f-9a03-ea3e7e573d5d" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/AutorWS?wsdl" />
+    <MetadataFile FileName="ArticuloWS.xsd" MetadataType="Schema" ID="31db675c-2fd3-4cbf-91e8-283062cf061d" SourceId="1" SourceUrl="http://localhost:8080/CampusStoreWS/ArticuloWS?xsd=1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
