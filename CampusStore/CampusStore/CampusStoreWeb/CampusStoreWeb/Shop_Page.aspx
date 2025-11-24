@@ -269,7 +269,41 @@
 
                 <!-- PAGINACIÓN -->
                 <asp:Panel ID="pnlPaginacion" runat="server" CssClass="d-flex justify-content-center mt-4">
-                    <asp:Literal ID="litPaginacion" runat="server"></asp:Literal>
+                    <nav>
+                        <ul class="pagination">
+            
+                            <!-- Botón Anterior -->
+                            <li class="page-item">
+                                <asp:LinkButton ID="btnAnterior" runat="server" 
+                                    CssClass="page-link" 
+                                    OnClick="btnAnterior_Click" 
+                                    Visible="false">&larr;</asp:LinkButton>
+                            </li>
+
+                            <!-- Repetidor para los números de página -->
+                            <asp:Repeater ID="rptPaginacionNumeros" runat="server" OnItemCommand="rptPaginacionNumeros_ItemCommand">
+                                <ItemTemplate>
+                                    <li class='<%# Convert.ToInt32(Container.DataItem) == PaginaActual ? "page-item active" : "page-item" %>'>
+                                        <asp:LinkButton ID="lnkPagina" runat="server" 
+                                            CssClass="page-link" 
+                                            CommandName="IrPagina" 
+                                            CommandArgument='<%# Container.DataItem %>'>
+                                            <%# Container.DataItem %>
+                                        </asp:LinkButton>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+                            <!-- Botón Siguiente -->
+                            <li class="page-item">
+                                <asp:LinkButton ID="btnSiguiente" runat="server" 
+                                    CssClass="page-link" 
+                                    OnClick="btnSiguiente_Click" 
+                                    Visible="false">&rarr;</asp:LinkButton>
+                            </li>
+
+                        </ul>
+                    </nav>
                 </asp:Panel>
 
             </main>

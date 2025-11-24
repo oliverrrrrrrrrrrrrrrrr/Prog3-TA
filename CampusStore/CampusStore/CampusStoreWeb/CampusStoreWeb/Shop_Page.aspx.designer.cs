@@ -87,12 +87,30 @@ namespace CampusStoreWeb
         protected global::System.Web.UI.WebControls.Panel pnlPaginacion;
 
         /// <summary>
-        /// Control litPaginacion.
+        /// Control btnAnterior.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litPaginacion;
+        protected global::System.Web.UI.WebControls.LinkButton btnAnterior;
+
+        /// <summary>
+        /// Control rptPaginacionNumeros.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptPaginacionNumeros;
+
+        /// <summary>
+        /// Control btnSiguiente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSiguiente;
     }
 }

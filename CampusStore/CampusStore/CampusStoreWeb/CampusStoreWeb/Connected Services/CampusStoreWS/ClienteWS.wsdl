@@ -5,23 +5,23 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/ClienteWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="buscarClientePorCuenta">
-    <part name="parameters" element="tns:buscarClientePorCuenta" />
+  <message name="guardarCliente">
+    <part name="parameters" element="tns:guardarCliente" />
   </message>
-  <message name="buscarClientePorCuentaResponse">
-    <part name="parameters" element="tns:buscarClientePorCuentaResponse" />
-  </message>
-  <message name="eliminarCliente">
-    <part name="parameters" element="tns:eliminarCliente" />
-  </message>
-  <message name="eliminarClienteResponse">
-    <part name="parameters" element="tns:eliminarClienteResponse" />
+  <message name="guardarClienteResponse">
+    <part name="parameters" element="tns:guardarClienteResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
   </message>
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
+  </message>
+  <message name="eliminarCliente">
+    <part name="parameters" element="tns:eliminarCliente" />
+  </message>
+  <message name="eliminarClienteResponse">
+    <part name="parameters" element="tns:eliminarClienteResponse" />
   </message>
   <message name="listarClientes">
     <part name="parameters" element="tns:listarClientes" />
@@ -35,16 +35,18 @@
   <message name="obtenerClienteResponse">
     <part name="parameters" element="tns:obtenerClienteResponse" />
   </message>
-  <message name="guardarCliente">
-    <part name="parameters" element="tns:guardarCliente" />
+  <message name="buscarClientePorCuenta">
+    <part name="parameters" element="tns:buscarClientePorCuenta" />
   </message>
-  <message name="guardarClienteResponse">
-    <part name="parameters" element="tns:guardarClienteResponse" />
+  <message name="buscarClientePorCuentaResponse">
+    <part name="parameters" element="tns:buscarClientePorCuentaResponse" />
   </message>
   <portType name="ClienteWS">
-    <operation name="buscarClientePorCuenta">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaRequest" message="tns:buscarClientePorCuenta" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaResponse" message="tns:buscarClientePorCuentaResponse" />
+    <operation name="guardarCliente">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest" message="tns:guardarCliente" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteResponse" message="tns:guardarClienteResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarCliente/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarCliente/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="eliminarCliente">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteRequest" message="tns:eliminarCliente" />
@@ -64,16 +66,14 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerCliente/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerCliente/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-    <operation name="guardarCliente">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest" message="tns:guardarCliente" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteResponse" message="tns:guardarClienteResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarCliente/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarCliente/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="buscarClientePorCuenta">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaRequest" message="tns:buscarClientePorCuenta" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaResponse" message="tns:buscarClientePorCuentaResponse" />
     </operation>
   </portType>
   <binding name="ClienteWSPortBinding" type="tns:ClienteWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="buscarClientePorCuenta">
+    <operation name="guardarCliente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -81,6 +81,12 @@
       <output>
         <soap:body use="literal" />
       </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
     </operation>
     <operation name="eliminarCliente">
       <soap:operation soapAction="" />
@@ -127,7 +133,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="guardarCliente">
+    <operation name="buscarClientePorCuenta">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -135,12 +141,6 @@
       <output>
         <soap:body use="literal" />
       </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
     </operation>
   </binding>
   <service name="ClienteWS">
