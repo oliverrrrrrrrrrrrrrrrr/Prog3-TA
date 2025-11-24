@@ -5,19 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/AutorWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-<<<<<<< HEAD
-  <message name="listarAutores">
-    <part name="parameters" element="tns:listarAutores" />
+  <message name="eliminarAutor">
+    <part name="parameters" element="tns:eliminarAutor" />
   </message>
-  <message name="listarAutoresResponse">
-    <part name="parameters" element="tns:listarAutoresResponse" />
-=======
-  <message name="obtenerAutor">
-    <part name="parameters" element="tns:obtenerAutor" />
-  </message>
-  <message name="obtenerAutorResponse">
-    <part name="parameters" element="tns:obtenerAutorResponse" />
->>>>>>> c9ca2e07cef80bf8839cf293915658dd03b7d881
+  <message name="eliminarAutorResponse">
+    <part name="parameters" element="tns:eliminarAutorResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -25,34 +17,17 @@
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
   </message>
-<<<<<<< HEAD
   <message name="obtenerAutor">
     <part name="parameters" element="tns:obtenerAutor" />
-=======
-  <message name="guardarAutor">
-    <part name="parameters" element="tns:guardarAutor" />
   </message>
-  <message name="guardarAutorResponse">
-    <part name="parameters" element="tns:guardarAutorResponse" />
+  <message name="obtenerAutorResponse">
+    <part name="parameters" element="tns:obtenerAutorResponse" />
   </message>
   <message name="listarAutores">
     <part name="parameters" element="tns:listarAutores" />
   </message>
   <message name="listarAutoresResponse">
     <part name="parameters" element="tns:listarAutoresResponse" />
-  </message>
-  <message name="eliminarAutor">
-    <part name="parameters" element="tns:eliminarAutor" />
->>>>>>> c9ca2e07cef80bf8839cf293915658dd03b7d881
-  </message>
-  <message name="eliminarAutorResponse">
-    <part name="parameters" element="tns:eliminarAutorResponse" />
-  </message>
-  <message name="eliminarAutor">
-    <part name="parameters" element="tns:eliminarAutor" />
-  </message>
-  <message name="eliminarAutorResponse">
-    <part name="parameters" element="tns:eliminarAutorResponse" />
   </message>
   <message name="guardarAutor">
     <part name="parameters" element="tns:guardarAutor" />
@@ -61,38 +36,23 @@
     <part name="parameters" element="tns:guardarAutorResponse" />
   </message>
   <portType name="AutorWS">
-<<<<<<< HEAD
-=======
+    <operation name="eliminarAutor">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest" message="tns:eliminarAutor" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse" message="tns:eliminarAutorResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
     <operation name="obtenerAutor">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorRequest" message="tns:obtenerAutor" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorResponse" message="tns:obtenerAutorResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutor/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-    <operation name="guardarAutor">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorRequest" message="tns:guardarAutor" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorResponse" message="tns:guardarAutorResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutor/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
->>>>>>> c9ca2e07cef80bf8839cf293915658dd03b7d881
     <operation name="listarAutores">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresRequest" message="tns:listarAutores" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresResponse" message="tns:listarAutoresResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutores/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutores/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="eliminarAutor">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest" message="tns:eliminarAutor" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse" message="tns:eliminarAutorResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="eliminarAutor">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest" message="tns:eliminarAutor" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse" message="tns:eliminarAutorResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="guardarAutor">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorRequest" message="tns:guardarAutor" />
@@ -103,8 +63,21 @@
   </portType>
   <binding name="AutorWSPortBinding" type="tns:AutorWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-<<<<<<< HEAD
-=======
+    <operation name="eliminarAutor">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
     <operation name="obtenerAutor">
       <soap:operation soapAction="" />
       <input>
@@ -120,53 +93,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="guardarAutor">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
->>>>>>> c9ca2e07cef80bf8839cf293915658dd03b7d881
     <operation name="listarAutores">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="eliminarAutor">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="eliminarAutor">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

@@ -180,6 +180,7 @@ namespace CampusStoreWeb
 
             ConfigurarStockBadge(libroActual.stockReal, libroActual.stockVirtual);
 
+            CargarResenas();
         }
 
         private void ConfigurarStockBadge(int stockReal, int stockVirtual)
@@ -773,6 +774,90 @@ namespace CampusStoreWeb
                     MostrarMensajeError("Error al eliminar el libro: " + ex.Message);
                 }
             }
+        }
+
+        private void CargarResenas()
+        {
+            if (libroActual?.reseñas != null && libroActual.reseñas.Length > 0)
+            {
+                // Hay reseñas
+                pnlConResenas.Visible = true;
+                pnlSinResenas.Visible = false;
+
+                // Calcular promedio
+                double promedio = libroActual.reseñas.Average(r => r.calificacion);
+                lblPromedioRating.Text = promedio.ToString("F1");
+                lblTotalResenas.Text = $"({libroActual.reseñas.Length} {(libroActual.reseñas.Length == 1 ? "reseña" : "reseñas")})";
+
+                // Generar estrellas de promedio
+                GenerarEstrellasPromedio(promedio);
+
+                // Ordenar por fecha más reciente primero
+                //var resenasOrdenadas = articuloActual.reseñas.OrderByDescending(r => r.fechaPublicacion).ToArray();
+                var resenasOrdenadas = libroActual.reseñas.ToArray();
+
+                // Vincular al Repeater
+                rptResenas.DataSource = resenasOrdenadas;
+                rptResenas.DataBind();
+            }
+            else
+            {
+                // No hay reseñas
+                pnlConResenas.Visible = false;
+                pnlSinResenas.Visible = true;
+                lblPromedioRating.Text = "0.0";
+                lblTotalResenas.Text = "(0 reseñas)";
+                GenerarEstrellasPromedio(0);
+            }
+        }
+
+        private void GenerarEstrellasPromedio(double promedio)
+        {
+            int estrellasLlenas = (int)Math.Floor(promedio);
+            bool mediaEstrella = (promedio - estrellasLlenas) >= 0.5;
+            int estrellasVacias = 5 - estrellasLlenas - (mediaEstrella ? 1 : 0);
+
+            string html = "";
+
+            // Estrellas llenas
+            for (int i = 0; i < estrellasLlenas; i++)
+            {
+                html += "<i class='bi bi-star-fill' style='color: var(--primary-orange);'></i>";
+            }
+
+            // Media estrella
+            if (mediaEstrella)
+            {
+                html += "<i class='bi bi-star-half' style='color: var(--primary-orange);'></i>";
+            }
+
+            // Estrellas vacías
+            for (int i = 0; i < estrellasVacias; i++)
+            {
+                html += "<i class='bi bi-star' style='color: #E4E7E9;'></i>";
+            }
+
+            estrellasPromedio.InnerHtml = html;
+        }
+
+        // Método helper para el Repeater (para generar estrellas de cada reseña)
+        protected string GenerarEstrellas(int calificacion)
+        {
+            string html = "";
+
+            for (int i = 1; i <= 5; i++)
+            {
+                if (i <= calificacion)
+                {
+                    html += "<i class='bi bi-star-fill'></i>";
+                }
+                else
+                {
+                    html += "<i class='bi bi-star estrella-vacia'></i>";
+                }
+            }
+
+            return html;
         }
     }
 }

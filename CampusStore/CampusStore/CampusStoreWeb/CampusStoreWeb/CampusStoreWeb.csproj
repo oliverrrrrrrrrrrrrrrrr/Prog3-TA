@@ -104,18 +104,44 @@
     <Content Include="AgregarOrdenCompra.aspx" />
     <Content Include="Catalogo.aspx" />
     <Content Include="Checkout.aspx" />
-    <None Include="Connected Services\CampusStoreWS\ArticuloWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\AutorWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\AutorWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.aplicarCuponACarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.articulo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.autor.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.buscarClientePorCuentaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.buscarCuponPorCodigoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.cancelarOrdenesExpiradasResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.carrito.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.cliente.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.contarProductosCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.cupon.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.descuento.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.editorial.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarArticuloResponse.datasource">
@@ -130,6 +156,9 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarClienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarCuponResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarDescuentoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -142,10 +171,19 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarLibroResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarLineaDelCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarOrdenCompraResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarResenaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarRolResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.empleado.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.filtrarLibrosResponse.datasource">
@@ -166,6 +204,9 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarClienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarCuponResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarDescuentoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -178,13 +219,25 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarLibroResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarNuevoRolRetornaIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarOrdenCompraResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarResenaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarRolResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.leerAutoresPorLibroResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.libro.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.lineaCarrito.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarArticulosCarritoResponse.datasource">
@@ -200,6 +253,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarClientesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarCuponesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarDescuentosResponse.datasource">
@@ -223,7 +279,16 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarOrdenesPorClienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarResenasPorProductoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarResenasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarRolesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.loginResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.loginUsuarioResponse.datasource">
@@ -242,6 +307,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerCuponResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerDescuentoPorProductoResponse.datasource">
@@ -265,88 +333,19 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerResenaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.registrarLibroResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarLineaDelCarritoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarRolResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarRolResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarRolesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerRolResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.articulo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.autor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.carrito.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.cliente.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.descuento.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.editorial.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.empleado.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.libro.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.lineaCarrito.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.loginResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.ordenCompra.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.registrarLibroResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.reseña.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.rol.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarNuevoRolRetornaIdResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.cupon.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.eliminarCuponResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.guardarCuponResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarCuponesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerCuponResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.listarResenasPorProductoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.aplicarCuponACarritoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.buscarCuponPorCodigoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.verificarCuponUsadoResponse.datasource">
@@ -358,27 +357,8 @@
     <Content Include="Connected Services\CampusStoreWS\CampusStoreWeb.CampusStoreWS.obtenerTotalResenasResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\CampusStoreWS\CarritoWS.wsdl" />
-    <None Include="Connected Services\CampusStoreWS\CuponWS.wsdl" />
-    <None Include="Connected Services\CampusStoreWS\CuponWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\CampusStoreWS\DescuentoWS.wsdl" />
-    <None Include="Connected Services\CampusStoreWS\DescuentoWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\CampusStoreWS\EditorialWS.wsdl" />
-    <None Include="Connected Services\CampusStoreWS\EditorialWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\CampusStoreWS\EmpleadoWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\FiltroWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\LibroWS.wsdl" />
-    <None Include="Connected Services\CampusStoreWS\LibroWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\CampusStoreWS\ResenaWS.wsdl" />
-    <None Include="Connected Services\CampusStoreWS\RolWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\RolWS.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -691,9 +671,12 @@
     <Content Include="Images\libroSISOPS.webp" />
     <Content Include="Images\PythnForDummies.webp" />
     <Content Include="Images\tomatodo.webp" />
+    <Content Include="Images\merchandise_Peluche_Pokemon_totodile.webp" />
+    <None Include="Connected Services\CampusStoreWS\ArticuloWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\ArticuloWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\CampusStoreWS\CarritoWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\CarritoWS.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -701,24 +684,41 @@
     <None Include="Connected Services\CampusStoreWS\ClienteWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\CampusStoreWS\CuponWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\CuponWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CampusStoreWS\DescuentoWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\DescuentoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CampusStoreWS\EditorialWS.wsdl" />
+    <None Include="Connected Services\CampusStoreWS\EditorialWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CampusStoreWS\EmpleadoWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\EmpleadoWS.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\CampusStoreWS\FiltroWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\CampusStoreWS\LibroWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\CampusStoreWS\OrdenCompraWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\OrdenCompraWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\CampusStoreWS\ResenaWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\ResenaWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\CampusStoreWS\RolWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\UsuarioWS.wsdl" />
     <None Include="Connected Services\CampusStoreWS\UsuarioWS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Images\merchandise_Peluche_Pokemon_totodile.webp" />
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <None Include="Web.Debug.config">
