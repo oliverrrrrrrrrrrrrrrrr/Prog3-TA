@@ -7,10 +7,10 @@
     <version>1.0</version>
   </parent>
     <groupId>pe.edu.pucp</groupId>
-    <artifactId>CampusStoreWS</artifactId>
+    <artifactId>CampusStoreRest</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <name>CampusStoreWS</name>
+    <name>CampusStoreRest</name>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,22 +25,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.glassfish.metro</groupId>
-            <artifactId>webservices-rt</artifactId>
-            <version>2.3</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>CampusStorePersistencia</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>CampusStoreDBManager</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>CampusStoreModelo</artifactId>
             <version>${project.version}</version>
@@ -51,10 +35,14 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.20.0</version>
-            <type>jar</type>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CampusStorePersistencia</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CampusStoreDBManager</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     
