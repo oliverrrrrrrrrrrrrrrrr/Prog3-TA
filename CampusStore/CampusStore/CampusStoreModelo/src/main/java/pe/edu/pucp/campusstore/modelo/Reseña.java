@@ -3,7 +3,6 @@ package pe.edu.pucp.campusstore.modelo;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlElements;
 import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
 @XmlAccessorType(XmlAccessType.FIELD)

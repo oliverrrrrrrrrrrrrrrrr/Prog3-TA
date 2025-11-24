@@ -162,11 +162,21 @@ public class ResenaWS {
         String url = urlBase + "/" + NOMBRE_RESOURCE;
         String json = mapper.writeValueAsString(modelo);
 
-        HttpRequest request = HttpRequest.newBuilder()
+        HttpRequest request;
+        if (estado == Estado.Nuevo) {
+            request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .build();
+        } else {
+            url = this.urlBase + "/" + this.NOMBRE_RESOURCE + "/" + modelo.getIdReseña();
+            request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Content-Type", "application/json")
+                    .PUT(HttpRequest.BodyPublishers.ofString(json))
+                    .build();
+        }
 
         HttpResponse<String> response =
                 client.send(request, HttpResponse.BodyHandlers.ofString());
