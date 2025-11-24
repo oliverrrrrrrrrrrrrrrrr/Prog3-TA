@@ -136,11 +136,17 @@ public class DescuentoWS {
         
         // Asegurarse de que el mapper no escriba fechas como timestamps numéricos
         mapper.configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+<<<<<<< HEAD
         
+=======
+        // Opcional: Establecer el formato explícito si la anotación fallara
+>>>>>>> 310292bc17d8f5f5cbeb256e20320a04865f4766
         mapper.setDateFormat(new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"));
         
         String json = mapper.writeValueAsString(modelo);
         HttpRequest request;
+        
+        System.out.println("JSON ENVIADO: " + json); 
         
         if (estado == Estado.Nuevo) {
             request = HttpRequest.newBuilder()
