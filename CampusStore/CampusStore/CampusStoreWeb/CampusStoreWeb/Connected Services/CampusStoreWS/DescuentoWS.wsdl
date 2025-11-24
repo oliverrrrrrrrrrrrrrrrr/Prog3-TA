@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/DescuentoWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+<<<<<<< Updated upstream
   <message name="obtenerDescuentoPorProducto">
     <part name="parameters" element="tns:obtenerDescuentoPorProducto" />
   </message>
@@ -13,9 +14,13 @@
   </message>
   <message name="listarDescuentos">
     <part name="parameters" element="tns:listarDescuentos" />
+=======
+  <message name="eliminarDescuento">
+    <part name="parameters" element="tns:eliminarDescuento" />
+>>>>>>> Stashed changes
   </message>
-  <message name="listarDescuentosResponse">
-    <part name="parameters" element="tns:listarDescuentosResponse" />
+  <message name="eliminarDescuentoResponse">
+    <part name="parameters" element="tns:eliminarDescuentoResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -23,17 +28,28 @@
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
   </message>
-  <message name="eliminarDescuento">
-    <part name="parameters" element="tns:eliminarDescuento" />
-  </message>
-  <message name="eliminarDescuentoResponse">
-    <part name="parameters" element="tns:eliminarDescuentoResponse" />
-  </message>
   <message name="guardarDescuento">
     <part name="parameters" element="tns:guardarDescuento" />
   </message>
   <message name="guardarDescuentoResponse">
     <part name="parameters" element="tns:guardarDescuentoResponse" />
+  </message>
+<<<<<<< Updated upstream
+  <message name="guardarDescuento">
+    <part name="parameters" element="tns:guardarDescuento" />
+=======
+  <message name="obtenerDescuento">
+    <part name="parameters" element="tns:obtenerDescuento" />
+  </message>
+  <message name="obtenerDescuentoResponse">
+    <part name="parameters" element="tns:obtenerDescuentoResponse" />
+  </message>
+  <message name="listarDescuentos">
+    <part name="parameters" element="tns:listarDescuentos" />
+>>>>>>> Stashed changes
+  </message>
+  <message name="listarDescuentosResponse">
+    <part name="parameters" element="tns:listarDescuentosResponse" />
   </message>
   <message name="obtenerDescuento">
     <part name="parameters" element="tns:obtenerDescuento" />
@@ -42,6 +58,7 @@
     <part name="parameters" element="tns:obtenerDescuentoResponse" />
   </message>
   <portType name="DescuentoWS">
+<<<<<<< Updated upstream
     <operation name="obtenerDescuentoPorProducto">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoPorProductoRequest" message="tns:obtenerDescuentoPorProducto" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoPorProductoResponse" message="tns:obtenerDescuentoPorProductoResponse" />
@@ -52,6 +69,8 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/listarDescuentos/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/listarDescuentos/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
+=======
+>>>>>>> Stashed changes
     <operation name="eliminarDescuento">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/eliminarDescuentoRequest" message="tns:eliminarDescuento" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/eliminarDescuentoResponse" message="tns:eliminarDescuentoResponse" />
@@ -63,6 +82,21 @@
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/guardarDescuentoResponse" message="tns:guardarDescuentoResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/guardarDescuento/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/guardarDescuento/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+<<<<<<< Updated upstream
+=======
+    </operation>
+    <operation name="obtenerDescuento">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoRequest" message="tns:obtenerDescuento" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoResponse" message="tns:obtenerDescuentoResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuento/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuento/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="listarDescuentos">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/listarDescuentosRequest" message="tns:listarDescuentos" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/listarDescuentosResponse" message="tns:listarDescuentosResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/listarDescuentos/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/listarDescuentos/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+>>>>>>> Stashed changes
     </operation>
     <operation name="obtenerDescuento">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/DescuentoWS/obtenerDescuentoRequest" message="tns:obtenerDescuento" />
@@ -73,6 +107,7 @@
   </portType>
   <binding name="DescuentoWSPortBinding" type="tns:DescuentoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+<<<<<<< Updated upstream
     <operation name="obtenerDescuentoPorProducto">
       <soap:operation soapAction="" />
       <input>
@@ -83,21 +118,9 @@
       </output>
     </operation>
     <operation name="listarDescuentos">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
+=======
     <operation name="eliminarDescuento">
+>>>>>>> Stashed changes
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -113,6 +136,40 @@
       </fault>
     </operation>
     <operation name="guardarDescuento">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+<<<<<<< Updated upstream
+    <operation name="guardarDescuento">
+=======
+    <operation name="obtenerDescuento">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="listarDescuentos">
+>>>>>>> Stashed changes
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

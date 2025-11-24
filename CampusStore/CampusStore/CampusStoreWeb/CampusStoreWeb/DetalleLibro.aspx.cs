@@ -289,11 +289,29 @@ namespace CampusStoreWeb
                     if (ViewState["descuentoActual"] != null)
                         descuentoActual = (descuento)ViewState["descuentoActual"];
 
-                    descuentoActual.activo = !(descuentoActual.activo);
-                    descuentoActual.activoSpecified = true;
+                    var d = new descuento
+                    {
+                        idDescuento = descuentoActual.idDescuento,
+                        idDescuentoSpecified = true,
+
+                        valorDescuento = descuentoActual.valorDescuento,
+                        valorDescuentoSpecified = true,
+
+                        fechaCaducidad = descuentoActual.fechaCaducidad,
+                        fechaCaducidadSpecified = true,
+
+                        activo = !descuentoActual.activo,
+                        activoSpecified = true,
+
+                        tipoProducto = tipoProducto.LIBRO,
+                        tipoProductoSpecified = true,
+
+                        idProducto = descuentoActual.idProducto,
+                        idProductoSpecified = true
+                    };
 
                     // Guardar en el WS
-                    descuentoWS.guardarDescuento(descuentoActual, estado.Modificado);
+                    descuentoWS.guardarDescuento(d, estado.Modificado);
 
                     string mensaje = descuentoActual.activo ? "activado" : "desactivado";
 
@@ -793,7 +811,7 @@ namespace CampusStoreWeb
                 GenerarEstrellasPromedio(promedio);
 
                 // Ordenar por fecha más reciente primero
-                //var resenasOrdenadas = articuloActual.reseñas.OrderByDescending(r => r.fechaPublicacion).ToArray();
+                
                 var resenasOrdenadas = libroActual.reseñas.ToArray();
 
                 // Vincular al Repeater

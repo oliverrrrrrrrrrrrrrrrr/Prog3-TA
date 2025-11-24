@@ -133,23 +133,21 @@ public class DescuentoWS {
     ) throws IOException, InterruptedException {
 
         String url = urlBase + "/" + NOMBRE_RESOURCE;
-        String json = mapper.writeValueAsString(modelo);
-        HttpRequest request;
         
-        if (estado == Estado.Nuevo) {
-            request = HttpRequest.newBuilder()
+        // Asegurarse de que el mapper no escriba fechas como timestamps numéricos
+        mapper.configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        // Opcional: Establecer el formato explícito si la anotación fallara
+        mapper.setDateFormat(new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"));
+        
+        String json = mapper.writeValueAsString(modelo);
+        
+        System.out.println("JSON ENVIADO: " + json); 
+
+        HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .build();
-        } else {
-            url = this.urlBase + "/" + this.NOMBRE_RESOURCE + "/" + modelo.getIdDescuento();
-            request = HttpRequest.newBuilder()
-                    .uri(URI.create(url))
-                    .header("Content-Type", "application/json")
-                    .PUT(HttpRequest.BodyPublishers.ofString(json))
-                    .build();
-        }
 
         HttpResponse<String> response =
                 client.send(request, HttpResponse.BodyHandlers.ofString());
