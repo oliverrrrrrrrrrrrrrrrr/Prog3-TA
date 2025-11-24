@@ -8,6 +8,8 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 import jakarta.xml.ws.WebServiceException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 @WebService(
@@ -21,6 +23,9 @@ public class ReporteWS {
             @WebParam(name = "fechaFin") String fechaFin) {
 
         try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date fi = sdf.parse(fechaInicio);
+            Date ff = sdf.parse(fechaFin);
             return ReporteUtil.reporteVentas(fechaInicio, fechaFin);
         } catch (Exception ex) {
             throw new WebServiceException("Error al generar el reporte de Ventas", ex);
