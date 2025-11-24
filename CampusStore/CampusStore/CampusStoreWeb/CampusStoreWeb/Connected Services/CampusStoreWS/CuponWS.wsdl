@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/CuponWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="listarCupones">
-    <part name="parameters" element="tns:listarCupones" />
+  <message name="eliminarCupon">
+    <part name="parameters" element="tns:eliminarCupon" />
   </message>
-  <message name="listarCuponesResponse">
-    <part name="parameters" element="tns:listarCuponesResponse" />
+  <message name="eliminarCuponResponse">
+    <part name="parameters" element="tns:eliminarCuponResponse" />
   </message>
   <message name="guardarCupon">
     <part name="parameters" element="tns:guardarCupon" />
@@ -23,17 +23,11 @@
   <message name="obtenerCuponResponse">
     <part name="parameters" element="tns:obtenerCuponResponse" />
   </message>
-  <message name="eliminarCupon">
-    <part name="parameters" element="tns:eliminarCupon" />
+  <message name="listarCupones">
+    <part name="parameters" element="tns:listarCupones" />
   </message>
-  <message name="eliminarCuponResponse">
-    <part name="parameters" element="tns:eliminarCuponResponse" />
-  </message>
-  <message name="verificarCuponUsado">
-    <part name="parameters" element="tns:verificarCuponUsado" />
-  </message>
-  <message name="verificarCuponUsadoResponse">
-    <part name="parameters" element="tns:verificarCuponUsadoResponse" />
+  <message name="listarCuponesResponse">
+    <part name="parameters" element="tns:listarCuponesResponse" />
   </message>
   <message name="buscarCuponPorCodigo">
     <part name="parameters" element="tns:buscarCuponPorCodigo" />
@@ -41,10 +35,16 @@
   <message name="buscarCuponPorCodigoResponse">
     <part name="parameters" element="tns:buscarCuponPorCodigoResponse" />
   </message>
+  <message name="verificarCuponUsado">
+    <part name="parameters" element="tns:verificarCuponUsado" />
+  </message>
+  <message name="verificarCuponUsadoResponse">
+    <part name="parameters" element="tns:verificarCuponUsadoResponse" />
+  </message>
   <portType name="CuponWS">
-    <operation name="listarCupones">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/listarCuponesRequest" message="tns:listarCupones" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/listarCuponesResponse" message="tns:listarCuponesResponse" />
+    <operation name="eliminarCupon">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/eliminarCuponRequest" message="tns:eliminarCupon" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/eliminarCuponResponse" message="tns:eliminarCuponResponse" />
     </operation>
     <operation name="guardarCupon">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/guardarCuponRequest" message="tns:guardarCupon" />
@@ -54,22 +54,22 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/obtenerCuponRequest" message="tns:obtenerCupon" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/obtenerCuponResponse" message="tns:obtenerCuponResponse" />
     </operation>
-    <operation name="eliminarCupon">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/eliminarCuponRequest" message="tns:eliminarCupon" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/eliminarCuponResponse" message="tns:eliminarCuponResponse" />
-    </operation>
-    <operation name="verificarCuponUsado">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/verificarCuponUsadoRequest" message="tns:verificarCuponUsado" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/verificarCuponUsadoResponse" message="tns:verificarCuponUsadoResponse" />
+    <operation name="listarCupones">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/listarCuponesRequest" message="tns:listarCupones" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/listarCuponesResponse" message="tns:listarCuponesResponse" />
     </operation>
     <operation name="buscarCuponPorCodigo">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/buscarCuponPorCodigoRequest" message="tns:buscarCuponPorCodigo" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/buscarCuponPorCodigoResponse" message="tns:buscarCuponPorCodigoResponse" />
     </operation>
+    <operation name="verificarCuponUsado">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/verificarCuponUsadoRequest" message="tns:verificarCuponUsado" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CuponWS/verificarCuponUsadoResponse" message="tns:verificarCuponUsadoResponse" />
+    </operation>
   </portType>
   <binding name="CuponWSPortBinding" type="tns:CuponWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="listarCupones">
+    <operation name="eliminarCupon">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -96,16 +96,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="eliminarCupon">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="verificarCuponUsado">
+    <operation name="listarCupones">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -115,6 +106,15 @@
       </output>
     </operation>
     <operation name="buscarCuponPorCodigo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="verificarCuponUsado">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

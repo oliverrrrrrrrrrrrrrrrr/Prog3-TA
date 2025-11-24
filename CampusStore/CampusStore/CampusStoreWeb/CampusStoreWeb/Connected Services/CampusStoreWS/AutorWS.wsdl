@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/AutorWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="eliminarAutor">
-    <part name="parameters" element="tns:eliminarAutor" />
+  <message name="obtenerAutor">
+    <part name="parameters" element="tns:obtenerAutor" />
   </message>
-  <message name="eliminarAutorResponse">
-    <part name="parameters" element="tns:eliminarAutorResponse" />
+  <message name="obtenerAutorResponse">
+    <part name="parameters" element="tns:obtenerAutorResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -29,18 +29,18 @@
   <message name="listarAutoresResponse">
     <part name="parameters" element="tns:listarAutoresResponse" />
   </message>
-  <message name="obtenerAutor">
-    <part name="parameters" element="tns:obtenerAutor" />
+  <message name="eliminarAutor">
+    <part name="parameters" element="tns:eliminarAutor" />
   </message>
-  <message name="obtenerAutorResponse">
-    <part name="parameters" element="tns:obtenerAutorResponse" />
+  <message name="eliminarAutorResponse">
+    <part name="parameters" element="tns:eliminarAutorResponse" />
   </message>
   <portType name="AutorWS">
-    <operation name="eliminarAutor">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest" message="tns:eliminarAutor" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse" message="tns:eliminarAutorResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="obtenerAutor">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorRequest" message="tns:obtenerAutor" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorResponse" message="tns:obtenerAutorResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutor/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="guardarAutor">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorRequest" message="tns:guardarAutor" />
@@ -54,16 +54,16 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutores/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutores/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-    <operation name="obtenerAutor">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorRequest" message="tns:obtenerAutor" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorResponse" message="tns:obtenerAutorResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutor/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="eliminarAutor">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest" message="tns:eliminarAutor" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse" message="tns:eliminarAutorResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
   </portType>
   <binding name="AutorWSPortBinding" type="tns:AutorWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="eliminarAutor">
+    <operation name="obtenerAutor">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -108,7 +108,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="obtenerAutor">
+    <operation name="eliminarAutor">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

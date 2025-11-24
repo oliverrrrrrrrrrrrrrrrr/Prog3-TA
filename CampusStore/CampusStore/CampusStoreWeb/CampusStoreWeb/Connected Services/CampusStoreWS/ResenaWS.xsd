@@ -11,8 +11,12 @@
   <xs:element name="listarResenasPorProducto" type="tns:listarResenasPorProducto" />
   <xs:element name="listarResenasPorProductoResponse" type="tns:listarResenasPorProductoResponse" />
   <xs:element name="listarResenasResponse" type="tns:listarResenasResponse" />
+  <xs:element name="obtenerPromedioCalificacion" type="tns:obtenerPromedioCalificacion" />
+  <xs:element name="obtenerPromedioCalificacionResponse" type="tns:obtenerPromedioCalificacionResponse" />
   <xs:element name="obtenerResena" type="tns:obtenerResena" />
   <xs:element name="obtenerResenaResponse" type="tns:obtenerResenaResponse" />
+  <xs:element name="obtenerTotalResenas" type="tns:obtenerTotalResenas" />
+  <xs:element name="obtenerTotalResenasResponse" type="tns:obtenerTotalResenasResponse" />
   <xs:complexType name="eliminarResena">
     <xs:sequence>
       <xs:element name="idResena" type="xs:int" />
@@ -140,6 +144,17 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="obtenerTotalResenas">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="tipoProducto" type="tns:tipoProducto" />
+      <xs:element name="idProducto" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerTotalResenasResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="obtenerResena">
     <xs:sequence>
       <xs:element name="idResena" type="xs:int" />
@@ -159,6 +174,17 @@
   <xs:complexType name="listarResenasResponse">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:reseña" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPromedioCalificacion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="tipoProducto" type="tns:tipoProducto" />
+      <xs:element name="idProducto" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPromedioCalificacionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:double" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="guardarResena">

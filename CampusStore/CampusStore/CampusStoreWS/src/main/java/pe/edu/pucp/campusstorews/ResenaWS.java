@@ -79,5 +79,22 @@ public class ResenaWS {
         
         this.reseñaBO.guardar(resena, estado);
     }
+    
+    @WebMethod(operationName = "obtenerPromedioCalificacion")
+    public Double obtenerPromedioCalificacion(
+        @WebParam(name = "tipoProducto") TipoProducto tipoProducto,
+        @WebParam(name = "idProducto") int idProducto
+    ) {
+        return this.reseñaBO.obtenerPromedioCalificacion(tipoProducto, idProducto);
+    }
+    
+    @WebMethod(operationName = "obtenerTotalResenas")
+    public int obtenerTotalResenas(
+        @WebParam(name = "tipoProducto") TipoProducto tipoProducto,
+        @WebParam(name = "idProducto") int idProducto
+    ) {
+        Integer total = this.reseñaBO.obtenerTotalResenas(tipoProducto, idProducto);
+        return total != null ? total : 0;
+    }
 }
 

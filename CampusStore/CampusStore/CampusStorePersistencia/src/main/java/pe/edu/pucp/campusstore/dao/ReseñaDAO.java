@@ -7,4 +7,6 @@ import pe.edu.pucp.campusstore.modelo.enums.TipoProducto;
 
 public interface ReseñaDAO extends ModeloPersistible<Reseña, Integer>{
     List<Reseña> listarPorProducto(TipoProducto tipoProducto, Integer idProducto);
+    Double obtenerPromedioCalificacion(TipoProducto tipoProducto, Integer idProducto);
+    Integer obtenerTotalResenas(TipoProducto tipoProducto, Integer idProducto);
 }

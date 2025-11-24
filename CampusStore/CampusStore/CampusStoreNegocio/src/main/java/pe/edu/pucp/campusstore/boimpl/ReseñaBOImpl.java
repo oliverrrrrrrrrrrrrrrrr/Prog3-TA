@@ -44,4 +44,14 @@ public class ReseñaBOImpl implements ReseñaBO{
         return reseñaDAO.listarPorProducto(tipoProducto, idProducto);
     }
     
+    @Override
+    public Double obtenerPromedioCalificacion(TipoProducto tipoProducto, Integer idProducto) {
+        return reseñaDAO.obtenerPromedioCalificacion(tipoProducto, idProducto);
+    }
+    
+    @Override
+    public Integer obtenerTotalResenas(TipoProducto tipoProducto, Integer idProducto) {
+        return reseñaDAO.obtenerTotalResenas(tipoProducto, idProducto);
+    }
+    
 }

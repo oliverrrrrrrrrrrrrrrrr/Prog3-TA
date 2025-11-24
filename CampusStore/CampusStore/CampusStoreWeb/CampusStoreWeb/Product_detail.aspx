@@ -63,7 +63,7 @@
             <div class="col-lg-6">
                 <div class="product-info">
                     <div class="product-rating">
-                        <span class="stars">★★★★☆</span> 
+                        <span class="stars"><asp:Literal ID="litEstrellas" runat="server" Text="☆☆☆☆☆"></asp:Literal></span> 
                         <span class="feedback-text"><asp:Label ID="lblRating" runat="server" Text="Sin calificación"></asp:Label></span>
                     </div>
 
