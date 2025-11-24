@@ -83,4 +83,35 @@ public class CuponDAOImpl extends BaseDAO<Cupon> implements CuponDAO {
         return modelo;
     }
     
+    @Override
+    public Cupon buscarPorCodigo(String codigo) {
+        return ejecutarComando(conn -> {
+            String sql = "{call buscarCuponPorCodigo(?)}";
+            CallableStatement cmd = conn.prepareCall(sql);
+            cmd.setString("p_codigo", codigo);
+            
+            ResultSet rs = cmd.executeQuery();
+            if (rs.next()) {
+                return mapearModelo(rs);
+            }
+            return null;
+        });
+    }
+    
+    @Override
+    public boolean verificarCuponUsado(int idCupon, int idCliente) {
+        return ejecutarComando(conn -> {
+            String sql = "{call verificarCuponUsado(?, ?, ?)}";
+            CallableStatement cmd = conn.prepareCall(sql);
+            cmd.setInt("p_idCupon", idCupon);
+            cmd.setInt("p_idCliente", idCliente);
+            cmd.registerOutParameter("p_yaUsado", Types.TINYINT);
+            
+            cmd.execute();
+            
+            int yaUsado = cmd.getInt("p_yaUsado");
+            return yaUsado == 1;
+        });
+    }
+    
 }

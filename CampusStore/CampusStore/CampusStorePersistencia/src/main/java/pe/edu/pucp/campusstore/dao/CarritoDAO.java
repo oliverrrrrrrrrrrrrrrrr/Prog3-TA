@@ -8,4 +8,6 @@ import pe.edu.pucp.campusstore.modelo.Carrito;
 public interface CarritoDAO extends PersistibleTransaccional<Carrito, Integer> {
     int obtenerIdCarritoPorCliente(int idCliente);
     int obtenerIdCarritoPorCliente(int idCliente, Connection conn);
+    boolean aplicarCuponACarrito(int idCupon, int idCliente, int idCarrito);
+    boolean aplicarCuponACarrito(int idCupon, int idCliente, int idCarrito, Connection conn);
 }

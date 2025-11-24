@@ -120,4 +120,9 @@ public class CarritoBOImpl implements CarritoBO{
     public boolean eliminarLineaCarrito(LineaCarrito lineaCarrito) {
         return this.lineaCarritoDAO.eliminar(lineaCarrito);
     }
+    
+    @Override
+    public boolean aplicarCuponACarrito(int idCupon, int idCliente, int idCarrito) {
+        return this.carritoDAO.aplicarCuponACarrito(idCupon, idCliente, idCarrito);
+    }
 }
