@@ -73,8 +73,8 @@ namespace CampusStoreWeb
 
                     if (precioConDescuento > precioUnitario)
                     {
-                        string script = "alert('El precio con descuento no puede ser mayor al precio unitario.');";
-                        ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                        string scriptA = "alert('El precio con descuento no puede ser mayor al precio unitario.');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "error", scriptA, true);
                         return;
                     }
 

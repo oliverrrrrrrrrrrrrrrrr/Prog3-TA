@@ -1,5 +1,6 @@
 ﻿using CampusStoreWeb.CampusStoreWS;
 using System;
+using System.Web.UI;
 
 namespace CampusStoreWeb
 {
@@ -187,16 +188,14 @@ namespace CampusStoreWeb
                     empleadoWS.guardarEmpleado(nuevoEmpleado, estado.Nuevo);
 
                     // Mostrar mensaje de éxito y redirigir
-                    string successScript = @"
-                        alert('Empleado creado exitosamente');
-                        window.location.href = 'GestionarEmpleados.aspx';
-                    ";
-                    ClientScript.RegisterStartupScript(this.GetType(), "success", successScript, true);
+                    string scriptGuardar = "mostrarModalExito();";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaExito", scriptGuardar, true);
                 }
                 catch (Exception ex)
                 {
-                    string errorScript = $"alert('Error al guardar el empleado: {ex.Message}');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "error", errorScript, true);
+                    string mensaje = ex.Message.Replace("'", "").Replace("\n", " ");
+                    string script = $"mostrarModalError('{mensaje}');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaError", script, true);
                 }
             }
         }
