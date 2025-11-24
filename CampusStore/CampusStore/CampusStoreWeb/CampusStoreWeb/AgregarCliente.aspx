@@ -397,7 +397,7 @@
         }).then((result) => {
             // Opcional: Recargar la página al cerrar
             if (result.isConfirmed) {
-                window.location.href = window.location.href;
+                window.location.href = "GestionarClientes.aspx";;
             }
         });
     }

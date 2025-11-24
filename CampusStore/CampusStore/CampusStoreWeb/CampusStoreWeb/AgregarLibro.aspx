@@ -851,14 +851,14 @@
 
         Swal.fire({
             title: '¡Éxito!',
-            text: 'Empleado agregado con exito :D',
+            text: 'Libro agregado con exito :D',
             icon: 'success',
             confirmButtonColor: '#FA8232',
             confirmButtonText: 'Aceptar'
         }).then((result) => {
             // Opcional: Recargar la página al cerrar
             if (result.isConfirmed) {
-                window.location.href = window.location.href;
+                window.location.href = "GestionarLibros.aspx";
             }
         });
     }
