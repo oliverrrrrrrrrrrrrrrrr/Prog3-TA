@@ -210,7 +210,7 @@ namespace CampusStoreWeb
                     }
 
                     // Mezclar y tomar los primeros 5
-                    productosDestacados = productosDestacados.OrderBy(x => random.Next()).Take(5).ToList();
+                    productosDestacados = productosDestacados.OrderBy(x => random.Next()).Take(8).ToList();
                 }
                 else if (categoriaActual == "libro")
                 {

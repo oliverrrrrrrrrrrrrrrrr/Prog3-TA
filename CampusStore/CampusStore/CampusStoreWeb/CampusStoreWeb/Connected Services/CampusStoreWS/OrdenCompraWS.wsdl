@@ -59,66 +59,13 @@
   <message name="listarOrdenesCompraResponse">
     <part name="parameters" element="tns:listarOrdenesCompraResponse" />
   </message>
-<<<<<<< Updated upstream
-=======
-  <message name="obtenerOrdenCompra">
-    <part name="parameters" element="tns:obtenerOrdenCompra" />
-  </message>
-  <message name="obtenerOrdenCompraResponse">
-    <part name="parameters" element="tns:obtenerOrdenCompraResponse" />
-  </message>
-  <message name="guardarOrdenCompra">
-    <part name="parameters" element="tns:guardarOrdenCompra" />
-  </message>
-  <message name="guardarOrdenCompraResponse">
-    <part name="parameters" element="tns:guardarOrdenCompraResponse" />
-  </message>
->>>>>>> Stashed changes
   <message name="listarLibrosCarrito">
     <part name="parameters" element="tns:listarLibrosCarrito" />
   </message>
   <message name="listarLibrosCarritoResponse">
     <part name="parameters" element="tns:listarLibrosCarritoResponse" />
   </message>
-<<<<<<< Updated upstream
   <portType name="OrdenCompraWS">
-=======
-  <message name="listarArticulosCarrito">
-    <part name="parameters" element="tns:listarArticulosCarrito" />
-  </message>
-  <message name="listarArticulosCarritoResponse">
-    <part name="parameters" element="tns:listarArticulosCarritoResponse" />
-  </message>
-  <message name="cancelarOrdenesExpiradas">
-    <part name="parameters" element="tns:cancelarOrdenesExpiradas" />
-  </message>
-  <message name="cancelarOrdenesExpiradasResponse">
-    <part name="parameters" element="tns:cancelarOrdenesExpiradasResponse" />
-  </message>
-  <message name="contarProductosCarrito">
-    <part name="parameters" element="tns:contarProductosCarrito" />
-  </message>
-  <message name="contarProductosCarritoResponse">
-    <part name="parameters" element="tns:contarProductosCarritoResponse" />
-  </message>
-  <portType name="OrdenCompraWS">
-    <operation name="eliminarOrdenCompra">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/eliminarOrdenCompraRequest" message="tns:eliminarOrdenCompra" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/eliminarOrdenCompraResponse" message="tns:eliminarOrdenCompraResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/eliminarOrdenCompra/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/eliminarOrdenCompra/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="listarOrdenesPorCliente">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesPorClienteRequest" message="tns:listarOrdenesPorCliente" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesPorClienteResponse" message="tns:listarOrdenesPorClienteResponse" />
-    </operation>
-    <operation name="listarOrdenesCompra">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesCompraRequest" message="tns:listarOrdenesCompra" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesCompraResponse" message="tns:listarOrdenesCompraResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesCompra/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesCompra/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
->>>>>>> Stashed changes
     <operation name="obtenerOrdenCompra">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/obtenerOrdenCompraRequest" message="tns:obtenerOrdenCompra" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/obtenerOrdenCompraResponse" message="tns:obtenerOrdenCompraResponse" />
@@ -131,13 +78,6 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompra/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/guardarOrdenCompra/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-<<<<<<< Updated upstream
-=======
-    <operation name="listarLibrosCarrito">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarLibrosCarritoRequest" message="tns:listarLibrosCarrito" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarLibrosCarritoResponse" message="tns:listarLibrosCarritoResponse" />
-    </operation>
->>>>>>> Stashed changes
     <operation name="listarArticulosCarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarArticulosCarritoRequest" message="tns:listarArticulosCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarArticulosCarritoResponse" message="tns:listarArticulosCarritoResponse" />
@@ -146,20 +86,16 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/cancelarOrdenesExpiradasRequest" message="tns:cancelarOrdenesExpiradas" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/cancelarOrdenesExpiradasResponse" message="tns:cancelarOrdenesExpiradasResponse" />
     </operation>
-<<<<<<< Updated upstream
     <operation name="eliminarOrdenCompra">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/eliminarOrdenCompraRequest" message="tns:eliminarOrdenCompra" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/eliminarOrdenCompraResponse" message="tns:eliminarOrdenCompraResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/eliminarOrdenCompra/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/eliminarOrdenCompra/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-=======
->>>>>>> Stashed changes
     <operation name="contarProductosCarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/contarProductosCarritoRequest" message="tns:contarProductosCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/contarProductosCarritoResponse" message="tns:contarProductosCarritoResponse" />
     </operation>
-<<<<<<< Updated upstream
     <operation name="listarOrdenesPorCliente">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesPorClienteRequest" message="tns:listarOrdenesPorCliente" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesPorClienteResponse" message="tns:listarOrdenesPorClienteResponse" />
@@ -177,50 +113,6 @@
   </portType>
   <binding name="OrdenCompraWSPortBinding" type="tns:OrdenCompraWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-=======
-  </portType>
-  <binding name="OrdenCompraWSPortBinding" type="tns:OrdenCompraWS">
-    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="eliminarOrdenCompra">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="listarOrdenesPorCliente">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="listarOrdenesCompra">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
->>>>>>> Stashed changes
     <operation name="obtenerOrdenCompra">
       <soap:operation soapAction="" />
       <input>
@@ -251,18 +143,6 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-<<<<<<< Updated upstream
-=======
-    <operation name="listarLibrosCarrito">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
->>>>>>> Stashed changes
     <operation name="listarArticulosCarrito">
       <soap:operation soapAction="" />
       <input>
@@ -281,7 +161,6 @@
         <soap:body use="literal" />
       </output>
     </operation>
-<<<<<<< Updated upstream
     <operation name="eliminarOrdenCompra">
       <soap:operation soapAction="" />
       <input>
@@ -297,8 +176,6 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-=======
->>>>>>> Stashed changes
     <operation name="contarProductosCarrito">
       <soap:operation soapAction="" />
       <input>
@@ -308,7 +185,6 @@
         <soap:body use="literal" />
       </output>
     </operation>
-<<<<<<< Updated upstream
     <operation name="listarOrdenesPorCliente">
       <soap:operation soapAction="" />
       <input>
@@ -342,8 +218,6 @@
         <soap:body use="literal" />
       </output>
     </operation>
-=======
->>>>>>> Stashed changes
   </binding>
   <service name="OrdenCompraWS">
     <port name="OrdenCompraWSPort" binding="tns:OrdenCompraWSPortBinding">

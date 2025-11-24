@@ -235,47 +235,60 @@ namespace CampusStoreWeb
 
             pnlPaginacion.Visible = true;
 
-            // Generar lista de números (Ej: 1, 2, 3...)
             List<int> paginas = new List<int>();
 
-            // Lógica para mostrar un rango cercano a la página actual (Ej: 1 ... 4 5 6 ... 10)
-            // O simplemente mostrar todas si son pocas. Aquí mostramos todas para simplificar,
-            // o puedes adaptar tu lógica de rango anterior.
-
-            // Opción simple: Mostrar todas las páginas (si no son demasiadas)
-            /*
-            for (int i = 1; i <= totalPaginas; i++)
-            {
-                paginas.Add(i);
-            }
-            */
-
-            // Opción optimizada (Tu lógica anterior adaptada):
+            // Rango de visualización: Queremos mostrar la actual, 2 atrás y 2 adelante
             int inicio = Math.Max(1, PaginaActual - 2);
             int fin = Math.Min(totalPaginas, PaginaActual + 2);
 
-            // Siempre mostrar la 1
-            if (inicio > 1) paginas.Add(1);
-
-            // Rango central
-            for (int i = inicio; i <= fin; i++)
+            // Asegurar que siempre mostramos al menos 5 números si es posible
+            if (fin - inicio < 4)
             {
-                // Evitar duplicar el 1 o el final
-                if (i > 1 && i < totalPaginas) paginas.Add(i);
-                // Si usas el rango simple: paginas.Add(i);
+                if (inicio == 1)
+                {
+                    fin = Math.Min(totalPaginas, inicio + 4); // Extender hacia la derecha
+                }
+                else if (fin == totalPaginas)
+                {
+                    inicio = Math.Max(1, fin - 4); // Extender hacia la izquierda
+                }
             }
 
-            // Siempre mostrar la última
-            if (totalPaginas > 1) paginas.Add(totalPaginas);
+            // Si el inicio es mayor a 1, agregamos la página 1 siempre
+            if (inicio > 1)
+            {
+                paginas.Add(1);
+                // Si hay hueco (ej: 1 ... 4), aquí podrías manejar lógica de puntos suspensivos si quisieras,
+                // pero para simplificar y que funcione el clic, solo agregamos los números.
+            }
 
-            // Ordenar por si acaso
-            paginas = paginas.Distinct().OrderBy(x => x).ToList();
+            // Agregar el rango central
+            for (int i = inicio; i <= fin; i++)
+            {
+                // Evitamos agregar el 1 si ya lo agregamos arriba
+                if (!paginas.Contains(i))
+                {
+                    paginas.Add(i);
+                }
+            }
+
+            // Si el final es menor al total, agregamos la última página
+            if (fin < totalPaginas)
+            {
+                if (!paginas.Contains(totalPaginas))
+                {
+                    paginas.Add(totalPaginas);
+                }
+            }
+
+            // Ordenar la lista para asegurar secuencia correcta
+            paginas = paginas.OrderBy(x => x).ToList();
 
             // Enlazar al Repeater
             rptPaginacionNumeros.DataSource = paginas;
             rptPaginacionNumeros.DataBind();
 
-            // Controlar visibilidad de flechas
+            // Controlar visibilidad de flechas Anterior/Siguiente
             btnAnterior.Visible = (PaginaActual > 1);
             btnSiguiente.Visible = (PaginaActual < totalPaginas);
         }
