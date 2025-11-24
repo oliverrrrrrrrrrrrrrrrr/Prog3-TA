@@ -1,12 +1,5 @@
 ﻿using CampusStoreWeb.CampusStoreWS;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Globalization;
 
 namespace CampusStoreWeb
 {
@@ -86,7 +79,7 @@ namespace CampusStoreWeb
 
             Response.Clear();
             Response.ContentType = "application/pdf";
-            Response.AddHeader("content-disposition", "inline; filename=ReporteVentas.pdf");
+            Response.AddHeader("content-disposition", "inline; filename=ReporteBestSellers.pdf");
             Response.BinaryWrite(pdfBytes);
             Response.End();
         }
