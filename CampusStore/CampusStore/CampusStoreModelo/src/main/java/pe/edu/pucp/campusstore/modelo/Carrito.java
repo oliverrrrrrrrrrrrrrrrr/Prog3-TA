@@ -2,11 +2,19 @@ package pe.edu.pucp.campusstore.modelo;
 
 import java.util.Date;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.json.bind.annotation.JsonbDateFormat;
 
 public class Carrito {
     private Integer idCarrito;
     private Boolean completado;
+    
+    // Para Jackson (Cliente SOAP, Android, Postman, Spring Boot)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    // Para JSON-B (Tu servidor REST Glassfish/Payara)
+    @JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss")
     private Date fechaCreacion;
+    
     private Cliente cliente;
     private Cupon cupon;
     private List<LineaCarrito> lineas;

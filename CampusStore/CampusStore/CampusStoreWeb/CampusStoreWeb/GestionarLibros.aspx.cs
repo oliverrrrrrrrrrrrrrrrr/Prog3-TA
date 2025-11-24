@@ -25,13 +25,97 @@ namespace CampusStoreWeb
                 Response.Redirect("Catalogo.aspx");
                 return;
             }
+
+            if (!IsPostBack)
+            {
+                CargarLibros();
+            }
         }
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            // Solo cargar en Init si no es postback
+            if (!IsPostBack)
+            {
+                libros = new BindingList<libro>(libroWS.listarLibros());
+                // Guardar en ViewState para mantener entre postbacks
+                ViewState["LibrosOriginales"] = libros;
+                gvLibros.DataSource = libros;
+                gvLibros.DataBind();
+            }
+        }
+
+        private void CargarLibros()
+        {
             libros = new BindingList<libro>(libroWS.listarLibros());
+            ViewState["LibrosOriginales"] = libros;
             gvLibros.DataSource = libros;
             gvLibros.DataBind();
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string textoBuscar = txtBuscar.Text.Trim();
+
+            if (string.IsNullOrEmpty(textoBuscar))
+            {
+                // Si no hay texto, mostrar todos los libros
+                CargarLibros();
+                return;
+            }
+
+            // Obtener lista completa de libros
+            libros = ViewState["LibrosOriginales"] as BindingList<libro>;
+            if (libros == null)
+            {
+                libros = new BindingList<libro>(libroWS.listarLibros());
+                ViewState["LibrosOriginales"] = libros;
+            }
+
+            // Intentar buscar por ID primero
+            if (int.TryParse(textoBuscar, out int idLibro))
+            {
+                // Buscar por ID exacto
+                var librosFiltrados = libros.Where(x => x.idLibro == idLibro).ToList();
+
+                // Si no encuentra por ID, buscar por nombre
+                if (librosFiltrados.Count == 0)
+                {
+                    librosFiltrados = libros.Where(x =>
+                        x.nombre != null &&
+                        x.nombre.ToLower().Contains(textoBuscar.ToLower())
+                    ).ToList();
+                }
+
+                gvLibros.DataSource = librosFiltrados;
+                gvLibros.DataBind();
+            }
+            else
+            {
+                // Si no es número, buscar solo por nombre
+                var librosFiltrados = libros.Where(x =>
+                    x.nombre != null &&
+                    x.nombre.ToLower().Contains(textoBuscar.ToLower())
+                ).ToList();
+
+                gvLibros.DataSource = librosFiltrados;
+                gvLibros.DataBind();
+            }
+
+            // Resetear paginación
+            gvLibros.PageIndex = 0;
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            // Limpiar el campo de búsqueda
+            txtBuscar.Text = string.Empty;
+
+            // Recargar todos los libros
+            CargarLibros();
+
+            // Resetear paginación
+            gvLibros.PageIndex = 0;
         }
 
         protected void gvLibros_PageIndexChanging(object sender, GridViewPageEventArgs e)

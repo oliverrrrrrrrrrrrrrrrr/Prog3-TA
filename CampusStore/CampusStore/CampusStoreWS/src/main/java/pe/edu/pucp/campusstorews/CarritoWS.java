@@ -39,7 +39,7 @@ public class CarritoWS {
     @WebMethod(operationName = "listarCarritos")
     public List<Carrito> listarCarritos()
         throws IOException, InterruptedException{
-        String url = this.urlBase + "/" + this.NOMBRE_RESOURCE;
+        /*String url = this.urlBase + "/" + this.NOMBRE_RESOURCE;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
@@ -52,7 +52,42 @@ public class CarritoWS {
         List<Carrito> modelo = 
                 mapper.readValue(json, new TypeReference<List<Carrito>>() {});
         
-        return modelo;
+        return modelo;*/
+        String url = this.urlBase + "/" + this.NOMBRE_RESOURCE;
+
+        // 1. Imprimir la URL para verificar que es correcta en la consola del servidor
+        System.out.println("Invocando REST URL: " + url);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                // 2. IMPORTANTE: Pedir explícitamente JSON
+                .header("Accept", "application/json") 
+                .build();
+
+        HttpResponse<String> response = 
+                client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        // 3. Verificar el código de respuesta ANTES de intentar leer el JSON
+        if (response.statusCode() == 200) {
+            String json = response.body();
+            ObjectMapper mapper = new ObjectMapper();
+
+            // Configuración opcional si usas fechas sin anotaciones en el modelo
+            // mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"));
+
+            List<Carrito> modelo = 
+                    mapper.readValue(json, new TypeReference<List<Carrito>>() {});
+            return modelo;
+        } else {
+            // 4. Si hay error, imprimir el cuerpo para saber qué pasó (aquí verás el HTML)
+            System.err.println("ERROR REST: " + response.statusCode());
+            System.err.println("CUERPO RESPUESTA: " + response.body());
+
+            // Devolver una lista vacía o lanzar una excepción controlada
+            // throw new IOException("Error al listar carritos: " + response.statusCode());
+            return new java.util.ArrayList<>(); 
+        }
     }
     
     @WebMethod(operationName = "obtenerCarrito")
@@ -100,6 +135,12 @@ public class CarritoWS {
     ) throws IOException, InterruptedException {
         
         ObjectMapper mapper = new ObjectMapper();
+        
+        // Asegurarse de que el mapper no escriba fechas como timestamps numéricos
+        mapper.configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+        mapper.setDateFormat(new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"));
+        
         String json = mapper.writeValueAsString(modelo);
 
         String url;
