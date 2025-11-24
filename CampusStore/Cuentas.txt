@@ -1,15 +1,12 @@
 CUENTAS DE CLIENTE
 (También puede registrarse):
 =============================
-Correo: erichuiza@pucp.edu.pe
-Contraseña: prog320252
-
-Correo: clientefeliz@gmail.com
-Contraseña: contraseña123
+Correo: axel@correo.com
+Contraseña: contra
 
 ***************************************
 
 CUENTA DE ADMIN:
 =============================
-Correo: admin@campusstore.com
-Contraseña: Admin123abc
+Correo: admin@example.com
+Contraseña: hashAdmin
