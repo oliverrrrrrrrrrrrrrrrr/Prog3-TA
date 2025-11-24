@@ -405,8 +405,8 @@
                                         </div>
                                         <div class="product-info">
                                             <div class="product-rating">
-                                                <i class="bi bi-star-fill"></i>
-                                                <span class="rating-count">(<%# GetRandomReviews() %>)</span>
+                                                <%# GetEstrellasCalificacion((double)Eval("PromedioCalificacion"), (int)Eval("TotalResenas")) %>
+                                                <span class="rating-count">(<%# Eval("TotalResenas") %>)</span>
                                             </div>
                                             <h5 class="card-title">
                                                 <a href='<%# Eval("TipoProducto", "Product_detail.aspx?type={0}&id=") + Eval("Id") %>'><%# Eval("Nombre") %></a>

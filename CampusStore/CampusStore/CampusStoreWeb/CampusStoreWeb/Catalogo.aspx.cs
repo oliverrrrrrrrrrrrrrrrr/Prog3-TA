@@ -20,6 +20,8 @@ namespace CampusStoreWeb
         public string Autor { get; set; }
         public string Descripcion { get; set; }
         public string TipoDeProducto { get; set; }
+        public double PromedioCalificacion { get; set; }
+        public int TotalResenas { get; set; }
     }
 
     public partial class Catalogo : System.Web.UI.Page
@@ -29,11 +31,13 @@ namespace CampusStoreWeb
         private static Random random = new Random();
         private readonly CarritoWSClient carritoWS;
         private readonly ClienteWSClient clienteWS;
+        private readonly ResenaWSClient resenaWS;
 
         public Catalogo()
         {
             carritoWS = new CarritoWSClient();
             clienteWS = new ClienteWSClient();
+            resenaWS = new ResenaWSClient();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -67,10 +71,77 @@ namespace CampusStoreWeb
             }
         }
 
-        // Método para generar número aleatorio de reseñas (para mostrar)
-        protected int GetRandomReviews()
+        // Método para obtener el total de reseñas del producto
+        protected int GetTotalResenas()
         {
-            return random.Next(200, 999);
+            if (rptProductosDestacados.Items.Count > 0)
+            {
+                RepeaterItem item = rptProductosDestacados.Items[rptProductosDestacados.Items.Count - 1];
+                ProductoDestacado producto = item.DataItem as ProductoDestacado;
+                if (producto != null)
+                {
+                    return producto.TotalResenas;
+                }
+            }
+            return 0;
+        }
+
+        // Método para obtener el promedio de calificación del producto
+        protected double GetPromedioCalificacion()
+        {
+            if (rptProductosDestacados.Items.Count > 0)
+            {
+                RepeaterItem item = rptProductosDestacados.Items[rptProductosDestacados.Items.Count - 1];
+                ProductoDestacado producto = item.DataItem as ProductoDestacado;
+                if (producto != null)
+                {
+                    return producto.PromedioCalificacion;
+                }
+            }
+            return 0;
+        }
+
+        // Método para generar HTML de estrellas según la calificación
+        protected string GetEstrellasCalificacion(double promedio, int totalResenas)
+        {
+            // Solo mostrar calificación si hay al menos 3 reseñas
+            if (totalResenas < 3 || promedio <= 0)
+            {
+                return "<i class=\"bi bi-star\"></i><i class=\"bi bi-star\"></i><i class=\"bi bi-star\"></i><i class=\"bi bi-star\"></i><i class=\"bi bi-star\"></i>";
+            }
+
+            int estrellasLlenas = (int)Math.Floor(promedio);
+            double decimalPart = promedio - estrellasLlenas;
+            bool tieneMediaEstrella = decimalPart >= 0.25 && decimalPart < 0.75;
+
+            System.Text.StringBuilder html = new System.Text.StringBuilder();
+
+            // Estrellas llenas
+            for (int i = 0; i < estrellasLlenas; i++)
+            {
+                html.Append("<i class=\"bi bi-star-fill\"></i>");
+            }
+
+            // Media estrella si aplica
+            if (tieneMediaEstrella && estrellasLlenas < 5)
+            {
+                html.Append("<i class=\"bi bi-star-half\"></i>");
+                estrellasLlenas++;
+            }
+            else if (decimalPart >= 0.75 && estrellasLlenas < 5)
+            {
+                // Si es >= 0.75, redondear hacia arriba
+                html.Append("<i class=\"bi bi-star-fill\"></i>");
+                estrellasLlenas++;
+            }
+
+            // Estrellas vacías
+            for (int i = estrellasLlenas; i < 5; i++)
+            {
+                html.Append("<i class=\"bi bi-star\"></i>");
+            }
+
+            return html.ToString();
         }
 
         protected void FiltrarProductos_Click(object sender, EventArgs e)
@@ -106,14 +177,16 @@ namespace CampusStoreWeb
                     {
                         foreach (var lib in librosResult.OrderBy(l => l.idLibro))
                         {
-                            productosDestacados.Add(new ProductoDestacado
+                            var producto = new ProductoDestacado
                             {
                                 Id = lib.idLibro,
                                 Nombre = lib.nombre,
                                 Precio = (decimal)lib.precio,
                                 TipoProducto = "libro",
                                 UrlImagen = lib.imagenURL
-                            });
+                            };
+                            ObtenerCalificacionProducto(producto);
+                            productosDestacados.Add(producto);
                         }
                     }
 
@@ -123,16 +196,16 @@ namespace CampusStoreWeb
                     {
                         foreach (var art in articulosResult.OrderBy(a => a.idArticulo))
                         {
-                            string tipoParaUrl = art.tipoArticulo.ToString().ToLower();
-
-                            productosDestacados.Add(new ProductoDestacado
+                            var producto = new ProductoDestacado
                             {
                                 Id = art.idArticulo,
                                 Nombre = art.nombre,
                                 Precio = (decimal)art.precio,
                                 TipoProducto = art.tipoArticulo.ToString(),
                                 UrlImagen = art.imagenURL
-                            });
+                            };
+                            ObtenerCalificacionProducto(producto);
+                            productosDestacados.Add(producto);
                         }
                     }
 
@@ -148,14 +221,16 @@ namespace CampusStoreWeb
                     {
                         foreach (var lib in librosResult.OrderBy(l => l.idLibro).Take(5))
                         {
-                            productosDestacados.Add(new ProductoDestacado
+                            var producto = new ProductoDestacado
                             {
                                 Id = lib.idLibro,
                                 Nombre = lib.nombre,
                                 Precio = (decimal)lib.precio,
                                 TipoProducto = "libro",
                                 UrlImagen = lib.imagenURL
-                            });
+                            };
+                            ObtenerCalificacionProducto(producto);
+                            productosDestacados.Add(producto);
                         }
                     }
                 }
@@ -168,16 +243,16 @@ namespace CampusStoreWeb
                     {
                         foreach (var art in articulosResult.OrderBy(a => a.idArticulo).Take(5))
                         {
-                            string tipoParaUrl = categoriaActual.ToLower();
-
-                            productosDestacados.Add(new ProductoDestacado
+                            var producto = new ProductoDestacado
                             {
                                 Id = art.idArticulo,
                                 Nombre = art.nombre,
                                 Precio = (decimal)art.precio,
                                 TipoProducto = categoriaActual,
                                 UrlImagen = art.imagenURL
-                            });
+                            };
+                            ObtenerCalificacionProducto(producto);
+                            productosDestacados.Add(producto);
                         }
                     }
                 }
@@ -190,6 +265,28 @@ namespace CampusStoreWeb
 
             rptProductosDestacados.DataSource = productosDestacados;
             rptProductosDestacados.DataBind();
+        }
+
+        private void ObtenerCalificacionProducto(ProductoDestacado producto)
+        {
+            try
+            {
+                CampusStoreWS.tipoProducto tipoEnum = producto.TipoProducto.ToLower() == "libro" 
+                    ? CampusStoreWS.tipoProducto.LIBRO 
+                    : CampusStoreWS.tipoProducto.ARTICULO;
+
+                double promedio = resenaWS.obtenerPromedioCalificacion(tipoEnum, producto.Id);
+                int total = resenaWS.obtenerTotalResenas(tipoEnum, producto.Id);
+
+                producto.PromedioCalificacion = promedio;
+                producto.TotalResenas = total;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error al obtener calificación para producto {producto.Id}: {ex.Message}");
+                producto.PromedioCalificacion = 0;
+                producto.TotalResenas = 0;
+            }
         }
 
         protected void rptProductosDestacados_ItemCommand(object source, RepeaterCommandEventArgs e)

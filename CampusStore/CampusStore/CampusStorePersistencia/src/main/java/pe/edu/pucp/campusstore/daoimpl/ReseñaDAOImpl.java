@@ -157,4 +157,48 @@ public class ReseñaDAOImpl extends BaseModeloDAO<Reseña> implements ReseñaDAO
             }
         });
     }
+    
+    @Override
+    public Double obtenerPromedioCalificacion(TipoProducto tipoProducto, Integer idProducto) {
+        return ejecutarComando(conn -> {
+            try {
+                String sql = "{call obtenerPromedioCalificacionProducto(?, ?, ?, ?)}";
+                CallableStatement cmd = conn.prepareCall(sql);
+                cmd.setString(1, tipoProducto.toString());
+                cmd.setInt(2, idProducto);
+                cmd.registerOutParameter(3, Types.DECIMAL);
+                cmd.registerOutParameter(4, Types.INTEGER);
+                
+                cmd.execute();
+                
+                Double promedio = cmd.getDouble(3);
+                return promedio;
+            } catch (SQLException e) {
+                System.err.println("Error al obtener promedio de calificación: " + e.getMessage());
+                throw new RuntimeException(e);
+            }
+        });
+    }
+    
+    @Override
+    public Integer obtenerTotalResenas(TipoProducto tipoProducto, Integer idProducto) {
+        return ejecutarComando(conn -> {
+            try {
+                String sql = "{call obtenerPromedioCalificacionProducto(?, ?, ?, ?)}";
+                CallableStatement cmd = conn.prepareCall(sql);
+                cmd.setString(1, tipoProducto.toString());
+                cmd.setInt(2, idProducto);
+                cmd.registerOutParameter(3, Types.DECIMAL);
+                cmd.registerOutParameter(4, Types.INTEGER);
+                
+                cmd.execute();
+                
+                Integer total = cmd.getInt(4);
+                return total;
+            } catch (SQLException e) {
+                System.err.println("Error al obtener total de reseñas: " + e.getMessage());
+                throw new RuntimeException(e);
+            }
+        });
+    }
 }

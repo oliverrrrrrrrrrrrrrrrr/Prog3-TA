@@ -90,7 +90,8 @@ namespace CampusStoreWeb
                     ConfigurarDisponibilidad(p.stockReal);
                     GuardarDatosProductoEnViewState(tipo, id, p.precio, p.precioDescuentoSpecified && p.precioDescuento > 0 ? (double?)p.precioDescuento : null, p.nombre, p.imagenURL, p.stockReal);
                     
-                    // Cargar reseñas
+                    // Cargar calificación promedio y reseñas
+                    CargarCalificacionPromedio(tipoProducto.LIBRO, id);
                     CargarResenas(tipoProducto.LIBRO, id);
                 }
                 else
@@ -113,7 +114,8 @@ namespace CampusStoreWeb
                     ConfigurarDisponibilidad(p.stockReal);
                     GuardarDatosProductoEnViewState(tipo, id, p.precio, p.precioDescuentoSpecified && p.precioDescuento > 0 ? (double?)p.precioDescuento : null, p.nombre, p.imagenURL, p.stockReal);
                     
-                    // Cargar reseñas
+                    // Cargar calificación promedio y reseñas
+                    CargarCalificacionPromedio(tipoProducto.ARTICULO, id);
                     CargarResenas(tipoProducto.ARTICULO, id);
                 }
             }
@@ -425,6 +427,82 @@ namespace CampusStoreWeb
             ScriptManager.RegisterStartupScript(this, GetType(), Guid.NewGuid().ToString(), script, true);
         }
 
+        private void CargarCalificacionPromedio(tipoProducto tipo, int idProducto)
+        {
+            try
+            {
+                double promedio = resenaWS.obtenerPromedioCalificacion(tipo, idProducto);
+                int totalResenas = resenaWS.obtenerTotalResenas(tipo, idProducto);
+
+                // Solo mostrar calificación si hay al menos 3 reseñas
+                if (totalResenas >= 3)
+                {
+                    lblRating.Text = $"{promedio:F1}/5.0 ({totalResenas} {(totalResenas == 1 ? "reseña" : "reseñas")})";
+                    MostrarEstrellasCalificacion(promedio);
+                }
+                else if (totalResenas > 0)
+                {
+                    lblRating.Text = $"Calificaciones insuficientes ({totalResenas} {(totalResenas == 1 ? "reseña" : "reseñas")})";
+                    MostrarEstrellasCalificacion(0);
+                }
+                else
+                {
+                    lblRating.Text = "Sin calificaciones aún";
+                    MostrarEstrellasCalificacion(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al obtener calificación promedio: " + ex.Message);
+                lblRating.Text = "Sin calificaciones aún";
+                MostrarEstrellasCalificacion(0);
+            }
+        }
+
+        private void MostrarEstrellasCalificacion(double promedio)
+        {
+            System.Text.StringBuilder html = new System.Text.StringBuilder();
+
+            if (promedio <= 0)
+            {
+                html.Append("☆☆☆☆☆");
+            }
+            else
+            {
+                int estrellasLlenas = (int)Math.Floor(promedio);
+                double decimalPart = promedio - estrellasLlenas;
+                bool tieneMediaEstrella = decimalPart >= 0.25 && decimalPart < 0.75;
+
+                // Estrellas llenas
+                for (int i = 0; i < estrellasLlenas; i++)
+                {
+                    html.Append("★");
+                }
+
+                // Media estrella si aplica
+                if (tieneMediaEstrella && estrellasLlenas < 5)
+                {
+                    html.Append("½");
+                    estrellasLlenas++;
+                }
+                else if (decimalPart >= 0.75 && estrellasLlenas < 5)
+                {
+                    // Si es >= 0.75, redondear hacia arriba
+                    html.Append("★");
+                    estrellasLlenas++;
+                }
+
+                // Estrellas vacías
+                for (int i = estrellasLlenas; i < 5; i++)
+                {
+                    html.Append("☆");
+                }
+            }
+
+            // Actualizar el literal o usar un control Label
+            litEstrellas.Text = html.ToString();
+        }
+
         private void CargarResenas(tipoProducto tipo, int idProducto)
         {
             try
@@ -440,14 +518,11 @@ namespace CampusStoreWeb
                 System.Text.StringBuilder html = new System.Text.StringBuilder();
                 html.Append("<div class='reviews-container'>");
                 
-                // Calcular promedio de calificaciones
-                double promedio = 0;
-                if (reseñas.Length > 0)
-                {
-                    promedio = reseñas.Average(r => r.calificacion);
-                }
+                // Obtener promedio usando el método del Web Service
+                double promedio = resenaWS.obtenerPromedioCalificacion(tipo, idProducto);
+                int totalResenas = resenaWS.obtenerTotalResenas(tipo, idProducto);
                 
-                html.Append($"<div class='mb-4'><h5>Calificación promedio: {promedio:F1}/5.0</h5></div>");
+                html.Append($"<div class='mb-4'><h5>Calificación promedio: {promedio:F1}/5.0 ({totalResenas} {(totalResenas == 1 ? "reseña" : "reseñas")})</h5></div>");
                 
                 foreach (var resena in reseñas)
                 {
