@@ -591,12 +591,7 @@
                             </div>
                         </div>
 
-                        <div class ="info-row">
-                            <span class="info-label">Contraseña</span>
-                            <div>
-                                <asp:Label ID="lblContraseña" runat="server" Text="Contraseña"></asp:Label>
-                            </div>
-                        </div>
+                       
 
                         <div class ="info-row">
                             <span class="info-label">Correo</span>
