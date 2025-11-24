@@ -250,7 +250,7 @@
                                 <h5 class="card-title">
                                     <a href='<%# Eval("TipoProducto", "Product_detail.aspx?type={0}&id=") + Eval("Id") %>'><%# Eval("Nombre") %></a>
                                 </h5>
-                                <p class="card-text price"><%# Eval("Precio", "{0:C}") %></p>
+                                <p class="card-text price">S/.<%# Eval("Precio", "{0:F2}") %></p>
                             </div>
                         </div>
                     </div>
@@ -268,13 +268,9 @@
                 </div> <!-- CORRECCIÓN: Este es el cierre de la fila INTERNA de contenido -->
 
                 <!-- PAGINACIÓN -->
-                <nav class="d-flex justify-content-center mt-4">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">&larr;</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                        <li class="page-item"><a class="page-link" href="#">&rarr;</a></li>
-                    </ul>
-                </nav>
+                <asp:Panel ID="pnlPaginacion" runat="server" CssClass="d-flex justify-content-center mt-4">
+                    <asp:Literal ID="litPaginacion" runat="server"></asp:Literal>
+                </asp:Panel>
 
             </main>
           

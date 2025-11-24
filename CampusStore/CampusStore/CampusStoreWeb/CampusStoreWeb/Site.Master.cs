@@ -42,6 +42,21 @@ namespace CampusStoreWeb
                     lnkFooterUtiles.Visible = false;
                     lnkBrowseAll.Visible = false;
                     lnkPerfil.Visible = false;
+                    
+                    // Ocultar popup del carrito para admin
+                    string script = @"
+                        document.addEventListener('DOMContentLoaded', function() {
+                            var cartIcon = document.getElementById('lnkCarrito');
+                            var cartPopup = document.getElementById('shoppingCartPopup');
+                            if (cartIcon) {
+                                cartIcon.style.display = 'none';
+                            }
+                            if (cartPopup) {
+                                cartPopup.style.display = 'none';
+                            }
+                        });
+                    ";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "HideCartForAdmin", script, true);
                 }
                 else
                 {
