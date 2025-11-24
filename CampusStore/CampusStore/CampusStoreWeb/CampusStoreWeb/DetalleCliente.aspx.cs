@@ -85,7 +85,7 @@ namespace CampusStoreWeb
             lblClienteID.Text = clienteActual.idCliente.ToString();
             lblNombre.Text = clienteActual.nombre;
             lblUsername.Text = clienteActual.nombreUsuario;
-            lblContraseña.Text = clienteActual.contraseña;
+            
             lblCorreo.Text = clienteActual.correo;
             lblTelefono.Text = clienteActual.telefono;
 

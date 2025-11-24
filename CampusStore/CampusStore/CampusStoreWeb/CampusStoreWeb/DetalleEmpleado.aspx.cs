@@ -92,7 +92,7 @@ namespace CampusStoreWeb
             lblEmpleadoID.Text = empleadoActual.idEmpleado.ToString();
             lblNombre.Text = empleadoActual.nombre;
             lblUsername.Text = empleadoActual.nombreUsuario;
-            lblContraseña.Text = empleadoActual.contraseña;
+            
             lblCorreo.Text = empleadoActual.correo;
             lblTelefono.Text = empleadoActual.telefono;
             lblSueldo.Text = empleadoActual.sueldo.ToString("N2");

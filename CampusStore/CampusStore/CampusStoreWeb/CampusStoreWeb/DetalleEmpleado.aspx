@@ -575,7 +575,7 @@
                 <div class="detalle-grid">
         
                     <!-- Información -->
-                    <div class="detalle-info">
+                    
 
                         <div class ="info-row">
                             <span class="info-label">Nombre</span>
