@@ -8,6 +8,15 @@
   <message name="guardarCliente">
     <part name="parameters" element="tns:guardarCliente" />
   </message>
+<<<<<<< Updated upstream
+=======
+  <message name="buscarClientePorCuentaResponse">
+    <part name="parameters" element="tns:buscarClientePorCuentaResponse" />
+  </message>
+  <message name="guardarCliente">
+    <part name="parameters" element="tns:guardarCliente" />
+  </message>
+>>>>>>> Stashed changes
   <message name="guardarClienteResponse">
     <part name="parameters" element="tns:guardarClienteResponse" />
   </message>
@@ -35,13 +44,22 @@
   <message name="obtenerClienteResponse">
     <part name="parameters" element="tns:obtenerClienteResponse" />
   </message>
+<<<<<<< Updated upstream
   <message name="buscarClientePorCuenta">
     <part name="parameters" element="tns:buscarClientePorCuenta" />
   </message>
   <message name="buscarClientePorCuentaResponse">
     <part name="parameters" element="tns:buscarClientePorCuentaResponse" />
   </message>
+=======
+>>>>>>> Stashed changes
   <portType name="ClienteWS">
+    <operation name="guardarCliente">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest" message="tns:guardarCliente" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteResponse" message="tns:guardarClienteResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarCliente/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarCliente/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
     <operation name="guardarCliente">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest" message="tns:guardarCliente" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteResponse" message="tns:guardarClienteResponse" />
@@ -66,13 +84,31 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerCliente/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerCliente/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
+<<<<<<< Updated upstream
     <operation name="buscarClientePorCuenta">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaRequest" message="tns:buscarClientePorCuenta" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/buscarClientePorCuentaResponse" message="tns:buscarClientePorCuentaResponse" />
     </operation>
+=======
+>>>>>>> Stashed changes
   </portType>
   <binding name="ClienteWSPortBinding" type="tns:ClienteWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="guardarCliente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
     <operation name="guardarCliente">
       <soap:operation soapAction="" />
       <input>
@@ -133,6 +169,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
+<<<<<<< Updated upstream
     <operation name="buscarClientePorCuenta">
       <soap:operation soapAction="" />
       <input>
@@ -142,6 +179,8 @@
         <soap:body use="literal" />
       </output>
     </operation>
+=======
+>>>>>>> Stashed changes
   </binding>
   <service name="ClienteWS">
     <port name="ClienteWSPort" binding="tns:ClienteWSPortBinding">

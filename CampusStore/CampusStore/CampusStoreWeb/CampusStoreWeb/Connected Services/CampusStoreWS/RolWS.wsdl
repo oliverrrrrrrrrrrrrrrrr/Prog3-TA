@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/RolWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+<<<<<<< Updated upstream
   <message name="guardarRol">
     <part name="parameters" element="tns:guardarRol" />
   </message>
@@ -22,12 +23,13 @@
   </message>
   <message name="obtenerRolResponse">
     <part name="parameters" element="tns:obtenerRolResponse" />
+=======
+  <message name="guardarNuevoRolRetornaId">
+    <part name="parameters" element="tns:guardarNuevoRolRetornaId" />
   </message>
-  <message name="listarRoles">
-    <part name="parameters" element="tns:listarRoles" />
-  </message>
-  <message name="listarRolesResponse">
-    <part name="parameters" element="tns:listarRolesResponse" />
+  <message name="guardarNuevoRolRetornaIdResponse">
+    <part name="parameters" element="tns:guardarNuevoRolRetornaIdResponse" />
+>>>>>>> Stashed changes
   </message>
   <message name="eliminarRol">
     <part name="parameters" element="tns:eliminarRol" />
@@ -35,6 +37,7 @@
   <message name="eliminarRolResponse">
     <part name="parameters" element="tns:eliminarRolResponse" />
   </message>
+<<<<<<< Updated upstream
   <message name="guardarNuevoRolRetornaId">
     <part name="parameters" element="tns:guardarNuevoRolRetornaId" />
   </message>
@@ -53,12 +56,36 @@
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/obtenerRolResponse" message="tns:obtenerRolResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/obtenerRol/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/obtenerRol/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="listarRoles">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/listarRolesRequest" message="tns:listarRoles" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/listarRolesResponse" message="tns:listarRolesResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/listarRoles/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/listarRoles/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+=======
+  <message name="IOException">
+    <part name="fault" element="tns:IOException" />
+  </message>
+  <message name="InterruptedException">
+    <part name="fault" element="tns:InterruptedException" />
+  </message>
+  <message name="listarRoles">
+    <part name="parameters" element="tns:listarRoles" />
+  </message>
+  <message name="listarRolesResponse">
+    <part name="parameters" element="tns:listarRolesResponse" />
+  </message>
+  <message name="guardarRol">
+    <part name="parameters" element="tns:guardarRol" />
+  </message>
+  <message name="guardarRolResponse">
+    <part name="parameters" element="tns:guardarRolResponse" />
+  </message>
+  <message name="obtenerRol">
+    <part name="parameters" element="tns:obtenerRol" />
+  </message>
+  <message name="obtenerRolResponse">
+    <part name="parameters" element="tns:obtenerRolResponse" />
+  </message>
+  <portType name="RolWS">
+    <operation name="guardarNuevoRolRetornaId">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarNuevoRolRetornaIdRequest" message="tns:guardarNuevoRolRetornaId" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarNuevoRolRetornaIdResponse" message="tns:guardarNuevoRolRetornaIdResponse" />
+>>>>>>> Stashed changes
     </operation>
     <operation name="eliminarRol">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/eliminarRolRequest" message="tns:eliminarRol" />
@@ -66,13 +93,75 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/eliminarRol/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/eliminarRol/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
+<<<<<<< Updated upstream
     <operation name="guardarNuevoRolRetornaId">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarNuevoRolRetornaIdRequest" message="tns:guardarNuevoRolRetornaId" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarNuevoRolRetornaIdResponse" message="tns:guardarNuevoRolRetornaIdResponse" />
+=======
+    <operation name="listarRoles">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/listarRolesRequest" message="tns:listarRoles" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/listarRolesResponse" message="tns:listarRolesResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/listarRoles/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/listarRoles/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="guardarRol">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarRolRequest" message="tns:guardarRol" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarRolResponse" message="tns:guardarRolResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarRol/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarRol/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="obtenerRol">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/obtenerRolRequest" message="tns:obtenerRol" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/obtenerRolResponse" message="tns:obtenerRolResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/obtenerRol/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/obtenerRol/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+>>>>>>> Stashed changes
     </operation>
   </portType>
   <binding name="RolWSPortBinding" type="tns:RolWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+<<<<<<< Updated upstream
+=======
+    <operation name="guardarNuevoRolRetornaId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminarRol">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="listarRoles">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+>>>>>>> Stashed changes
     <operation name="guardarRol">
       <soap:operation soapAction="" />
       <input>
@@ -89,6 +178,7 @@
       </fault>
     </operation>
     <operation name="obtenerRol">
+<<<<<<< Updated upstream
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -119,6 +209,8 @@
       </fault>
     </operation>
     <operation name="eliminarRol">
+=======
+>>>>>>> Stashed changes
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
