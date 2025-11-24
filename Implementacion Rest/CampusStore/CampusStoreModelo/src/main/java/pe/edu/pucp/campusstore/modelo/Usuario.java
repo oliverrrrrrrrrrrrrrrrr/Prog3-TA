@@ -1,0 +1,97 @@
+package pe.edu.pucp.campusstore.modelo;
+
+public abstract class Usuario {
+    private String nombre;
+    private String contraseña;
+    private String nombreUsuario;
+    private String correo;
+    private String telefono;
+    
+    public Usuario() {
+        this.nombre = null;
+        this.contraseña = null;
+        this.nombreUsuario = null;
+        this.correo = null;
+        this.telefono = null;
+    }
+
+    public Usuario(String nombre, String contraseña, String nombreUsuario, String correo, String telefono) {
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+        this.nombreUsuario = nombreUsuario;
+        this.correo = correo;
+        this.telefono = telefono;
+    }
+
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the contraseña
+     */
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    /**
+     * @param contraseña the contraseña to set
+     */
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    /**
+     * @return the nombreUsuario
+     */
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    /**
+     * @param nombreUsuario the nombreUsuario to set
+     */
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    /**
+     * @return the correo
+     */
+    public String getCorreo() {
+        return correo;
+    }
+
+    /**
+     * @param correo the correo to set
+     */
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    /**
+     * @return the telefono
+     */
+    public String getTelefono() {
+        return telefono;
+    }
+
+    /**
+     * @param telefono the telefono to set
+     */
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
+}

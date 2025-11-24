@@ -1,0 +1,778 @@
+﻿using CampusStoreWeb.CampusStoreWS;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlTypes;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace CampusStoreWeb
+{
+    public partial class DetalleLibro : System.Web.UI.Page
+    {
+        private readonly LibroWSClient libroWS;
+        private readonly DescuentoWSClient descuentoWS;
+        private libro libroActual;
+        private descuento descuentoActual;
+        private int idLibroActual;
+        private List<autor> autoresEditSeleccionados;
+
+        public DetalleLibro()
+        {
+            libroWS = new LibroWSClient();
+            descuentoWS = new DescuentoWSClient();
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                CargarGeneros();
+                CargarFormatos();
+                CargarEditoriales(); // NUEVO
+                CargarAutoresDropdown(); // NUEVO
+                CargarDetalleLibro();
+            }
+            else
+            {
+                // Recuperar autores del ViewState en postbacks
+                if (ViewState["AutoresEditSeleccionados"] != null)
+                {
+                    autoresEditSeleccionados = (List<autor>)ViewState["AutoresEditSeleccionados"];
+                }
+            }
+        }
+
+        private void CargarEditoriales()
+        {
+            try
+            {
+                ddlEditorialEdit.Items.Clear();
+                var editoriales = new EditorialWSClient().listarEditoriales();
+                ddlEditorialEdit.DataSource = editoriales;
+                ddlEditorialEdit.DataTextField = "nombre";
+                ddlEditorialEdit.DataValueField = "idEditorial";
+                ddlEditorialEdit.DataBind();
+                ddlEditorialEdit.Items.Insert(0, new ListItem("-- Seleccione editorial --", "0"));
+            }
+            catch (Exception ex)
+            {
+                string script = $"alert('Error al cargar editoriales: {ex.Message}');";
+                ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+            }
+        }
+
+        private void CargarAutoresDropdown()
+        {
+            try
+            {
+                ddlAutoresEdit.Items.Clear();
+                var autores = new AutorWSClient().listarAutores();
+                ddlAutoresEdit.DataSource = autores;
+                ddlAutoresEdit.DataTextField = "nombre";
+                ddlAutoresEdit.DataValueField = "idAutor";
+                ddlAutoresEdit.DataBind();
+                ddlAutoresEdit.Items.Insert(0, new ListItem("-- Seleccione autor --", "0"));
+            }
+            catch (Exception ex)
+            {
+                string script = $"alert('Error al cargar autores: {ex.Message}');";
+                ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+            }
+        }
+
+        private void CargarGeneros()
+        {
+            ddlGenero.Items.Clear();
+            ddlGenero.DataSource = Enum.GetNames(typeof(generoLibro));
+            ddlGenero.DataBind();
+            ddlGenero.Items.Insert(0, new ListItem("Seleccione un género"));
+        }
+
+        private void CargarFormatos()
+        {
+            ddlFormato.Items.Clear();
+            ddlFormato.DataSource = Enum.GetNames(typeof(formato));
+            ddlFormato.DataBind();
+            ddlFormato.Items.Insert(0, new ListItem("Seleccione un formato"));
+        }
+
+        private void CargarDetalleLibro()
+        {
+            if (Request.QueryString["id"] != null)
+            {
+                if (int.TryParse(Request.QueryString["id"], out idLibroActual))
+                {
+                    try
+                    {
+                        libroActual = libroWS.obtenerLibro(idLibroActual);
+
+                        if (libroActual != null)
+                        {
+                            ViewState["idLibro"] = idLibroActual;
+                            MostrarDatosLibro();
+                            CargarDescuento();
+                        }
+                        else
+                        {
+                            MostrarMensajeError("No se encontró el libro solicitado.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MostrarMensajeError("Error al cargar el libro: " + ex.Message);
+                    }
+                }
+                else
+                {
+                    MostrarMensajeError("El identificador del libro no es válido.");
+                }
+            }
+            else
+            {
+                MostrarMensajeError("No se especificó un libro para mostrar.");
+            }
+        }
+
+        private void MostrarDatosLibro()
+        {
+            // Mostrar el panel de detalles
+            pnlDetalle.Visible = true;
+            pnlError.Visible = false;
+            pnlVista.Visible = true;
+            pnlFormEdicion.Visible = false;
+
+            lblLibroID.Text = libroActual.idLibro.ToString();
+            lblNombreLibro.Text = libroActual.nombre;
+            lblPrecioUnitario.Text = libroActual.precio.ToString("N2");
+            lblPrecioConDescuento.Text = libroActual.precioDescuento.ToString("N2");
+            lblStockReal.Text = libroActual.stockReal.ToString();
+            lblStockVirtual.Text = libroActual.stockVirtual.ToString();
+            lblISBN.Text = libroActual.isbn;
+            lblGenero.Text = libroActual.genero.ToString();
+            lblFechaPublicacion.Text = libroActual.fechaPublicacion.ToShortDateString();
+            lblFormato.Text = libroActual.formato.ToString();
+            lblEditorial.Text = libroActual.editorial.nombre;
+
+            libroActual.autores = libroWS.leerAutoresPorLibro(libroActual.idLibro);
+
+            if (libroActual.autores != null && libroActual.autores.Length > 0)
+            {
+                rptAutores.DataSource = libroActual.autores;
+                rptAutores.DataBind();
+                rptAutores.Visible = true;
+                lblSinAutores.Visible = false;
+            }
+            else
+            {
+                rptAutores.Visible = false;
+                lblSinAutores.Visible = true;
+            }
+
+            lblSinopsis.Text = libroActual.sinopsis ?? "Sin sinopsis disponible.";
+            lblDescripcion.Text = libroActual.descripcion ?? "Sin descripción disponible.";
+            imgLibro.ImageUrl = libroActual.imagenURL;
+
+            ConfigurarStockBadge(libroActual.stockReal, libroActual.stockVirtual);
+
+        }
+
+        private void ConfigurarStockBadge(int stockReal, int stockVirtual)
+        {
+            lblStockReal.Text = stockReal + " unidades";
+            lblStockVirtual.Text = stockVirtual + " unidades";
+
+            // Aplicar clase CSS según el stock
+            if (stockReal == 0)
+            {
+                lblStockReal.CssClass = "stock-badge stock-agotado";
+                lblStockVirtual.CssClass = "stock-badge stock-agotado";
+            }
+            else if (stockReal < 10)
+            {
+                lblStockReal.CssClass = "stock-badge stock-bajo";
+                lblStockVirtual.CssClass = "stock-badge stock-bajo";
+            }
+            else
+            {
+                lblStockReal.CssClass = "stock-badge stock-disponible";
+                lblStockVirtual.CssClass = "stock-badge stock-disponible";
+            }
+        }
+
+        private void CargarDescuento()
+        {
+            try
+            {
+                // Obtener descuento del artículo desde el WS
+                // Ajusta según tu método en el WS
+                descuentoActual = descuentoWS.obtenerDescuentoPorProducto(idLibroActual, tipoProducto.LIBRO);
+
+                if (descuentoActual != null && descuentoActual.activo)
+                {
+                    // Tiene descuento activo
+                    ViewState["idDescuento"] = descuentoActual.idDescuento;
+                    ViewState["descuentoActual"] = descuentoActual;
+                    MostrarDescuentoActivo();
+                }
+                else
+                {
+                    // No tiene descuento
+                    MostrarSinDescuento();
+                }
+            }
+            catch
+            {
+                // Si no existe descuento o hay error, mostrar sin descuento
+                MostrarSinDescuento();
+            }
+        }
+
+        private void MostrarDescuentoActivo()
+        {
+            pnlDescuentoActivo.Visible = true;
+            pnlSinDescuento.Visible = false;
+            pnlFormDescuento.Visible = false;
+
+            lblDescuentoValor.Text = descuentoActual.valorDescuento.ToString("N2");
+            lblDescuentoFecha.Text = descuentoActual.fechaCaducidad.ToString("dd/MM/yyyy");
+            lblDescuentoEstado.Text = descuentoActual.activo ? "Activo" : "Inactivo";
+        }
+
+        private void MostrarSinDescuento()
+        {
+            pnlDescuentoActivo.Visible = false;
+            pnlSinDescuento.Visible = true;
+            pnlFormDescuento.Visible = false;
+        }
+
+        // ========================================
+        // BOTÓN AGREGAR DESCUENTO
+        // ========================================
+        protected void btnAgregarDescuento_Click(object sender, EventArgs e)
+        {
+            lblTituloDescuento.Text = "Agregar Descuento";
+            ViewState.Remove("idDescuento"); // Nuevo descuento
+            LimpiarFormularioDescuento();
+            MostrarFormularioDescuento(true);
+        }
+
+        // ========================================
+        // BOTÓN EDITAR DESCUENTO
+        // ========================================
+        protected void btnEditarDescuento_Click(object sender, EventArgs e)
+        {
+            if (ViewState["idDescuento"] != null)
+            {
+                lblTituloDescuento.Text = "Editar Descuento";
+                CargarFormularioDescuento();
+                MostrarFormularioDescuento(true);
+            }
+        }
+
+        // ========================================
+        // BOTÓN ACTIVAR/DESACTIVAR DESCUENTO
+        // ========================================
+        protected void btnCambiarEstadoDescuento_Click(object sender, EventArgs e)
+        {
+            if (ViewState["idDescuento"] != null)
+            {
+                try
+                {
+                    // Cambiar el estado al contrario
+                    if (ViewState["descuentoActual"] != null)
+                        descuentoActual = (descuento)ViewState["descuentoActual"];
+
+                    descuentoActual.activo = !(descuentoActual.activo);
+                    descuentoActual.activoSpecified = true;
+
+                    // Guardar en el WS
+                    descuentoWS.guardarDescuento(descuentoActual, estado.Modificado);
+
+                    string mensaje = descuentoActual.activo ? "activado" : "desactivado";
+
+                    // NUEVO: Recargar el libro actualizado
+                    idLibroActual = (int)ViewState["idLibro"];
+                    libroActual = libroWS.obtenerLibro(idLibroActual);
+                    MostrarDatosLibro();
+
+                    // Recargar
+                    CargarDescuento();
+
+
+                    string script = $"alert('Descuento {mensaje} exitosamente');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "success", script, true);
+                }
+                catch (Exception ex)
+                {
+                    string script = $"alert('Error al cambiar estado: {ex.Message}');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                }
+            }
+        }
+
+        // ========================================
+        // BOTÓN GUARDAR DESCUENTO
+        // ========================================
+        protected void btnGuardarDescuento_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid && ViewState["idLibro"] != null)
+            {
+                try
+                {
+                    idLibroActual = (int)ViewState["idLibro"];
+
+                    descuento descuento = new descuento()
+                    {
+                        valorDescuento = double.Parse(txtDescuentoValor.Text),
+                        valorDescuentoSpecified = true,
+
+                        fechaCaducidad = DateTime.Parse(txtDescuentoFecha.Text),
+                        fechaCaducidadSpecified = true,
+
+                        activo = chkDescuentoActivo.Checked,
+                        activoSpecified = true,
+
+                        tipoProducto = tipoProducto.LIBRO,
+                        tipoProductoSpecified = true,
+
+                        idProducto = idLibroActual,
+                        idProductoSpecified = true
+                    };
+
+                    if (ViewState["idDescuento"] != null)
+                    {
+                        // ACTUALIZAR descuento existente
+                        descuento.idDescuento = (int)ViewState["idDescuento"];
+                        descuento.idDescuentoSpecified = true;
+                        descuentoWS.guardarDescuento(descuento, estado.Modificado);
+                    }
+                    else
+                    {
+                        // CREAR nuevo descuento
+                        Console.WriteLine($"TipoProducto enviado: {descuento.tipoProducto}");
+                        descuentoWS.guardarDescuento(descuento, estado.Nuevo);
+                    }
+
+                    libroActual = libroWS.obtenerLibro(idLibroActual);
+                    MostrarDatosLibro();
+
+                    // Recargar
+                    CargarDescuento();
+                    MostrarFormularioDescuento(false);
+
+                    string script = "alert('Descuento guardado exitosamente');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "success", script, true);
+                }
+                catch (Exception ex)
+                {
+                    string script = $"alert('Error al guardar descuento: {ex.Message}');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                }
+            }
+        }
+
+        // ========================================
+        // BOTÓN ELIMINAR DESCUENTO
+        // ========================================
+        protected void btnEliminarDescuento_Click(object sender, EventArgs e)
+        {
+            if (ViewState["idDescuento"] != null)
+            {
+                try
+                {
+                    int idDescuento = (int)ViewState["idDescuento"];
+                    descuentoWS.eliminarDescuento(descuentoActual);
+
+                    ViewState.Remove("idDescuento");
+
+                    // NUEVO: Recargar el libro actualizado
+                    idLibroActual = (int)ViewState["idLibro"];
+                    libroActual = libroWS.obtenerLibro(idLibroActual);
+                    MostrarDatosLibro();
+
+                    MostrarSinDescuento();
+
+                    string script = "alert('Descuento eliminado exitosamente');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "success", script, true);
+                }
+                catch (Exception ex)
+                {
+                    string script = $"alert('Error al eliminar descuento: {ex.Message}');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                }
+            }
+        }
+
+        // ========================================
+        // BOTÓN CANCELAR DESCUENTO
+        // ========================================
+        protected void btnCancelarDescuento_Click(object sender, EventArgs e)
+        {
+            MostrarFormularioDescuento(false);
+        }
+
+        private void MostrarFormularioDescuento(bool mostrar)
+        {
+            pnlFormDescuento.Visible = mostrar;
+            pnlDescuentoActivo.Visible = !mostrar && ViewState["idDescuento"] != null;
+            pnlSinDescuento.Visible = !mostrar && ViewState["idDescuento"] == null;
+        }
+
+        private void LimpiarFormularioDescuento()
+        {
+            txtDescuentoValor.Text = string.Empty;
+            txtDescuentoFecha.Text = string.Empty;
+            chkDescuentoActivo.Checked = true;
+        }
+
+        private void CargarFormularioDescuento()
+        {
+            if (descuentoActual != null)
+            {
+                txtDescuentoValor.Text = descuentoActual.valorDescuento.ToString("F2");
+                txtDescuentoFecha.Text = descuentoActual.fechaCaducidad.ToString("yyyy-MM-dd");
+                chkDescuentoActivo.Checked = descuentoActual.activo;
+            }
+        }
+
+        private void MostrarMensajeError(string mensaje)
+        {
+            pnlDetalle.Visible = false;
+            pnlError.Visible = true;
+            lblMensajeError.Text = mensaje;
+        }
+
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            // Recuperar ID del ViewState
+            if (ViewState["idLibro"] != null)
+            {
+                idLibroActual = (int)ViewState["idLibro"];
+
+                try
+                {
+                    // Recargar el artículo por si cambió
+                    libroActual = libroWS.obtenerLibro(idLibroActual);
+
+                    if (libroActual != null)
+                    {
+                        CargarFormularioEdicion();
+                        MostrarFormularioEdicion(true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MostrarMensajeError("Error al cargar datos para editar: " + ex.Message);
+                }
+            }
+        }
+
+        private void CargarFormularioEdicion()
+        {
+            
+            txtNombre.Text = libroActual.nombre;
+            txtPrecioUnitario.Text = libroActual.precio.ToString("F2");
+            txtPrecioConDescuento.Text = libroActual.precioDescuento.ToString("F2");
+            txtStockReal.Text = libroActual.stockReal.ToString();
+            txtStockVirtual.Text = libroActual.stockVirtual.ToString();
+            txtISBN.Text = libroActual.isbn;
+            ddlGenero.SelectedValue = libroActual.genero.ToString();
+            txtFechaPublicacion.Text = libroActual.fechaPublicacion.ToString("yyyy-MM-dd");
+            ddlFormato.SelectedValue = libroActual.formato.ToString();
+            if (libroActual.editorial != null)
+            {
+                ddlEditorialEdit.SelectedValue = libroActual.editorial.idEditorial.ToString();
+            }
+
+            if (libroActual.autores != null && libroActual.autores.Length > 0)
+            {
+                autoresEditSeleccionados = new List<autor>(libroActual.autores);
+                ViewState["AutoresEditSeleccionados"] = autoresEditSeleccionados;
+                ActualizarAutoresEdit();
+            }
+            else
+            {
+                autoresEditSeleccionados = new List<autor>();
+                ViewState["AutoresEditSeleccionados"] = autoresEditSeleccionados;
+                ActualizarAutoresEdit();
+            }
+
+            txtSinopsis.Text = libroActual.sinopsis;
+            txtDescripcion.Text = libroActual.descripcion;
+
+        }
+
+        private void ActualizarAutoresEdit()
+        {
+            if (autoresEditSeleccionados != null && autoresEditSeleccionados.Count > 0)
+            {
+                rptAutoresEdit.DataSource = autoresEditSeleccionados;
+                rptAutoresEdit.DataBind();
+                rptAutoresEdit.Visible = true;
+                lblNoAutoresEdit.Visible = false;
+            }
+            else
+            {
+                rptAutoresEdit.Visible = false;
+                lblNoAutoresEdit.Visible = true;
+            }
+        }
+
+        // Agregar autor a la lista de edición
+        protected void btnAgregarAutorEdit_Click(object sender, EventArgs e)
+        {
+            if (ddlAutoresEdit.SelectedValue != "0")
+            {
+                try
+                {
+                    int idAutor = int.Parse(ddlAutoresEdit.SelectedValue);
+
+                    if (ViewState["AutoresEditSeleccionados"] != null)
+                    {
+                        autoresEditSeleccionados = (List<autor>)ViewState["AutoresEditSeleccionados"];
+                    }
+                    else
+                    {
+                        autoresEditSeleccionados = new List<autor>();
+                    }
+
+                    // Verificar si ya está en la lista
+                    if (!autoresEditSeleccionados.Any(a => a.idAutor == idAutor))
+                    {
+                        var autorCompleto = new AutorWSClient().obtenerAutor(idAutor);
+                        if (autorCompleto != null)
+                        {
+                            autoresEditSeleccionados.Add(autorCompleto);
+                            ViewState["AutoresEditSeleccionados"] = autoresEditSeleccionados;
+                            ActualizarAutoresEdit();
+                            ddlAutoresEdit.SelectedIndex = 0;
+                        }
+                    }
+                    else
+                    {
+                        string script = "alert('Este autor ya está en la lista.');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "warning", script, true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string script = $"alert('Error al agregar autor: {ex.Message}');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                }
+            }
+        }
+
+        // Eliminar autor de la lista
+        protected void rptAutoresEdit_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "EliminarAutor")
+            {
+                int idAutor = int.Parse(e.CommandArgument.ToString());
+
+                if (ViewState["AutoresEditSeleccionados"] != null)
+                {
+                    autoresEditSeleccionados = (List<autor>)ViewState["AutoresEditSeleccionados"];
+                    autoresEditSeleccionados.RemoveAll(a => a.idAutor == idAutor);
+                    ViewState["AutoresEditSeleccionados"] = autoresEditSeleccionados;
+                    ActualizarAutoresEdit();
+                }
+            }
+        }
+
+        private void MostrarFormularioEdicion(bool mostrar)
+        {
+            pnlVista.Visible = !mostrar;
+            pnlFormEdicion.Visible = mostrar;
+
+            // Ocultar botones de acción cuando está editando
+            btnEditar.Visible = !mostrar;
+            btnEliminar.Visible = !mostrar;
+        }
+
+        // ========================================
+        // BOTÓN GUARDAR - Guarda los cambios
+        // ========================================
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid && ViewState["idLibro"] != null)
+            {
+                try
+                {
+                    idLibroActual = (int)ViewState["idLibro"];
+
+                    int idEditorial = int.Parse(ddlEditorialEdit.SelectedValue);
+                    editorial editorialSeleccionada = new EditorialWSClient().obtenerEditorial(idEditorial);
+
+                    if (ViewState["AutoresEditSeleccionados"] != null)
+                    {
+                        autoresEditSeleccionados = (List<autor>)ViewState["AutoresEditSeleccionados"];
+                    }
+
+                    string imagenUrlFinal;
+                    libroActual = libroWS.obtenerLibro(idLibroActual);
+
+                    if (fuPortadaEdit.HasFile)
+                    {
+                        // Si seleccionó una nueva imagen, subirla
+                        try
+                        {
+                            imagenUrlFinal = SubirImagenAImgBB(fuPortadaEdit.PostedFile);
+                        }
+                        catch (Exception imgEx)
+                        {
+                            string scriptEx = $"alert('Error al subir la imagen: {imgEx.Message}');";
+                            ClientScript.RegisterStartupScript(this.GetType(), "errorImagen", scriptEx, true);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        // Mantener la imagen actual del libro
+                        imagenUrlFinal = libroActual.imagenURL;
+                    }
+
+                    // Crear objeto con los datos del formulario
+                    libro libroEditado = new libro
+                    {
+                        idLibro = idLibroActual,
+                        idLibroSpecified = true,
+                        nombre = txtNombre.Text.Trim(),
+                        precio = double.Parse(txtPrecioUnitario.Text),
+                        precioSpecified= true,
+                        precioDescuento = double.Parse(txtPrecioConDescuento.Text),
+                        precioDescuentoSpecified= true,
+                        stockReal = int.Parse(txtStockReal.Text),
+                        stockRealSpecified= true,
+                        stockVirtual = int.Parse(txtStockVirtual.Text),
+                        stockVirtualSpecified=true,
+                        isbn = txtISBN.Text,
+                        
+                        genero = (generoLibro)Enum.Parse(typeof(generoLibro), ddlGenero.SelectedItem.Text),
+                        generoSpecified=true,
+                        fechaPublicacion = DateTime.Parse(lblFechaPublicacion.Text),
+                        fechaPublicacionSpecified=true,
+                        formato = (formato)Enum.Parse(typeof(formato), ddlFormato.SelectedItem.Text),
+                        formatoSpecified=true,
+                        sinopsis = txtSinopsis.Text,
+                        descripcion = txtDescripcion.Text,
+                        editorial = new editorial
+                        {
+                            idEditorial = editorialSeleccionada.idEditorial,
+                            idEditorialSpecified = true,
+                            nombre = editorialSeleccionada.nombre,
+                            cif = editorialSeleccionada.cif,
+                            direccion = editorialSeleccionada.direccion,
+                            telefono = editorialSeleccionada.telefono,
+                            telefonoSpecified = true,
+                            email = editorialSeleccionada.email,
+                            sitioWeb = editorialSeleccionada.sitioWeb
+                        },
+
+                        autores = autoresEditSeleccionados?.ToArray(),
+
+                        imagenURL = imagenUrlFinal
+                    };
+                    // Llamar al WS para actualizar
+                    libroWS.guardarLibro(libroEditado, estado.Modificado);
+
+                    // Recargar datos actualizados
+                    libroActual = libroWS.obtenerLibro(idLibroActual);
+
+                    // Volver a la vista de detalle
+                    MostrarDatosLibro();
+                    MostrarFormularioEdicion(false);
+
+                    // Mostrar mensaje de éxito
+                    string script = "mostrarModalExito();";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaExito", script, true);
+                }
+                catch (Exception ex)
+                {
+                    string mensaje = ex.Message.Replace("'", "").Replace("\n", " ");
+                    string script = $"mostrarModalError('{mensaje}');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaError", script, true);
+                }
+            }
+        }
+
+        private string SubirImagenAImgBB(System.Web.HttpPostedFile archivo)
+        {
+            if (archivo == null || archivo.ContentLength == 0)
+                throw new Exception("No se recibió ninguna imagen.");
+
+            // Validación simple de tipo de archivo
+            if (!archivo.ContentType.StartsWith("image/"))
+                throw new Exception("El archivo seleccionado no es una imagen válida.");
+
+            string apiKey = ConfigurationManager.AppSettings["ImgBBApiKey"];
+            if (string.IsNullOrEmpty(apiKey))
+                throw new Exception("No se ha configurado la API Key de ImgBB.");
+
+            using (var content = new MultipartFormDataContent())
+            {
+                byte[] bytes;
+                using (var br = new BinaryReader(archivo.InputStream))
+                {
+                    bytes = br.ReadBytes(archivo.ContentLength);
+                }
+
+                var fileContent = new ByteArrayContent(bytes);
+                fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse(archivo.ContentType);
+
+                content.Add(fileContent, "image", Path.GetFileName(archivo.FileName));
+
+                var url = $"https://api.imgbb.com/1/upload?key={apiKey}";
+
+                using (var httpClient = new HttpClient())
+                {
+                    var response = httpClient.PostAsync(url, content).Result;
+                    response.EnsureSuccessStatusCode();
+
+                    string json = response.Content.ReadAsStringAsync().Result;
+
+                    dynamic result = JsonConvert.DeserializeObject(json);
+                    bool success = result.success;
+
+                    if (!success)
+                    {
+                        throw new Exception("ImgBB no pudo procesar la imagen.");
+                    }
+
+                    string imageUrl = result.data.url;
+                    return imageUrl;
+                }
+            }
+        }
+
+        protected void btnCancelarEdit_Click(object sender, EventArgs e)
+        {
+            // Volver a mostrar los datos sin cambios
+            MostrarFormularioEdicion(false);
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (ViewState["idLibro"] != null)
+            {
+                try
+                {
+                    idLibroActual = (int)ViewState["idLibro"];
+                    libroWS.eliminarLibro(idLibroActual);
+
+                    // Redirigir con mensaje de éxito
+                    Response.Redirect("GestionarLibros.aspx?mensaje=eliminado");
+                }
+                catch (Exception ex)
+                {
+                    MostrarMensajeError("Error al eliminar el libro: " + ex.Message);
+                }
+            }
+        }
+    }
+}

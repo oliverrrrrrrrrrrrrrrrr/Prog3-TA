@@ -1,0 +1,363 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CampusStoreWeb.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="UTF-8-BOM">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusStore - Tu página favorita de compra</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- SweetAlert2 CSS (NECESARIO PARA EL POPUP BONITO) -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="Content/Site.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    
+    <style>
+        :root {
+            --primary-blue: #1e5a7d;
+            --dark-bg: #2b2b2b;
+            --primary-orange: #FA8232;
+        }
+        
+        /* ESTILOS EXISTENTES */
+        .top-banner { background-color: var(--primary-blue); color: white; padding: 8px 0; font-size: 14px; text-align: center; }
+        .main-header { background-color: var(--primary-blue); padding: 15px 0; }
+        .logo { color: white; font-size: 24px; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo-icon { width: 35px; height: 35px; background-color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .logo-icon-inner { width: 20px; height: 20px; background-color: var(--primary-blue); border-radius: 50%; }
+        .search-bar { flex-grow: 1; max-width: 600px; }
+        .header-icons { display: flex; gap: 20px; align-items: center; position: relative; }
+        .header-icon { color: white; font-size: 24px; position: relative; text-decoration: none; cursor:pointer; }
+        .cart-badge { position: absolute; top: -8px; right: -8px; background-color: #ff6b35; color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 11px; display: flex; align-items: center; justify-content: center; }
+        .main-footer { background-color: var(--dark-bg); color: white; padding: 50px 0 30px; margin-top: 80px; }
+        .footer-logo { color: white; font-size: 24px; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+        .footer-section h5 { color: white; font-size: 16px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; }
+        .footer-section ul { list-style: none; padding: 0; }
+        .footer-section ul li { margin-bottom: 10px; }
+        .footer-section ul li a { color: #b0b0b0; text-decoration: none; transition: color 0.3s; }
+        .footer-section ul li a:hover { color: white; }
+        
+        /* POPUP CARRITO */
+        .shopping-cart-popup {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 376px;
+            background: #FFFFFF;
+            border: 1px solid #E4E7E9;
+            box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.12);
+            border-radius: 4px;
+            z-index: 1050;
+            padding-bottom: 24px;
+            text-align: left;
+            overflow: hidden; /* Importante para contener el loading */
+        }
+
+        .cart-heading { padding: 16px 24px; box-shadow: inset 0px -1px 0px #E4E7E9; color: #191C1F; font-size: 16px; font-weight: 500; }
+        .cart-product-list { padding: 20px 24px 0; display: flex; flex-direction: column; gap: 16px; min-height: 50px; } /* Min height para que se vea el loading si se borra todo */
+        .cart-product-item { display: flex; align-items: center; gap: 16px; }
+        .cart-product-item img { width: 80px; height: 80px; border: 1px solid #E4E7E9; object-fit: cover; }
+        .cart-product-details { flex-grow: 1; }
+        .cart-product-name { font-size: 14px; color: #191C1F; margin: 0 0 8px 0; }
+        .cart-product-price .quantity { color: #5F6C72; font-size: 14px; }
+        .cart-product-price .price { font-weight: 600; font-size: 14px; color: #2DA5F3; margin-left: 4px; }
+        .cart-remove-item { background: none; border: none; color: #929FA5; font-size: 24px; cursor: pointer; line-height: 1; }
+        .cart-divider { border: none; border-top: 1px solid #E4E7E9; width: calc(100% - 48px); margin: 20px auto; }
+        .cart-subtotal { display: flex; justify-content: space-between; padding: 0 24px; font-size: 14px; margin-bottom: 20px; }
+        .cart-subtotal .total-label { color: #475156; }
+        .cart-subtotal .total-amount { color: #191C1F; font-weight: 500; }
+        .cart-actions { display: flex; flex-direction: column; gap: 12px; padding: 0 24px; }
+        .cart-actions .btn { display: flex; justify-content: center; align-items: center; height: 48px; border-radius: 2px; font-weight: 700; font-size: 14px; text-transform: uppercase; text-decoration: none; }
+        .btn-primary-cart { background-color: var(--primary-orange); color: white; }
+        .btn-secondary-cart { border: 2px solid #FFE7D6; color: var(--primary-orange); background-color: transparent; }
+
+        /* [NUEVO] ESTILOS PARA EL LOADING Y SWEETALERT */
+        .cart-loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .spinner-custom {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 10px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .swal2-confirm-btn-custom {
+            background-color: #FA8232 !important;
+            border-color: #FA8232 !important;
+            box-shadow: none !important;
+        }
+        /* Estilos Buscador */
+        .search-bar { max-width: 600px; width: 100%; }
+        .search-bar input { border-radius: 4px 0 0 4px; border: none; padding: 10px 15px; height: 44px; flex: 1; }
+        .btn-search { border-radius: 0 4px 4px 0; border: none; background-color: white; padding: 0 15px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #1e5a7d; font-size: 18px; height: 44px; min-width: 44px; }
+        .btn-search:hover { background-color: #f0f0f0; color: #1e5a7d; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" EnablePageMethods="true" />
+        
+        <div class="top-banner">
+            Bienvenido a CampusStore, tu página favorita de compra de libros y artículos
+        </div>
+        
+        <header class="main-header">
+            <div class="container">
+                <div class="row align-items:center">
+                    <div class="col-auto">
+                        <a href="Catalogo.aspx" class="logo" runat="server">
+                            <div class="logo-icon"><div class="logo-icon-inner"></div></div>
+                            CAMPUS STORE
+                        </a>
+                    </div>
+
+                    <div class="search-bar d-flex align-items-stretch">
+                        <asp:TextBox ID="txtBusqueda" runat="server" CssClass="form-control" placeholder="Busca productos, autores y más..."></asp:TextBox>
+                        <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-search" OnClick="btnBuscar_Click">
+                            <i class="bi bi-search"></i>
+                        </asp:LinkButton>
+                    </div>
+                    
+                    <div class="col-auto">
+                        <div class="header-icons">
+                            <asp:UpdatePanel ID="upIconoCarrito" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:LinkButton ID="lnkCarrito" runat="server" CssClass="header-icon" ClientIDMode="Static">
+                                        <i class="bi bi-cart3"></i>
+                                        <span class="cart-badge">
+                                            <asp:Label ID="lblCantidadCarrito" runat="server"></asp:Label>
+                                        </span>
+                                    </asp:LinkButton>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+
+                            <asp:HyperLink ID="lnkPerfil" runat="server" NavigateUrl="~/Settings.aspx" CssClass="header-icon">
+                                <i class="bi bi-person-circle"></i>
+                            </asp:HyperLink>
+
+                            <!-- ==================================================== -->
+                            <!-- ==== POPUP DEL CARRITO ==== -->
+                            <!-- ==================================================== -->
+                            <div id="shoppingCartPopup" class="shopping-cart-popup" style="display:none;">
+                                
+                                <!-- [NUEVO] ESTO MUESTRA EL LOADING CUANDO SE ELIMINA -->
+                                <asp:UpdateProgress ID="upProgressCarrito" runat="server" AssociatedUpdatePanelID="upCarrito">
+                                    <ProgressTemplate>
+                                        <div class="cart-loading-overlay">
+                                            <div class="spinner-custom"></div>
+                                            <span style="color: #FA8232; font-weight: 600; font-size: 14px;">Actualizando...</span>
+                                        </div>
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+
+                                <asp:UpdatePanel ID="upCarrito" runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
+                                        <div class="cart-heading">
+                                            Carrito de compras (<asp:Label ID="lblCantidadPopup" runat="server" Text="0"></asp:Label>)
+                                        </div>
+                                        <div class="cart-product-list">
+                                            <asp:Repeater ID="rptCarritoItems" runat="server" OnItemCommand="rptCarritoItems_ItemCommand">
+                                                <ItemTemplate>
+                                                    <div class="cart-product-item">
+                                                        <asp:Image runat="server" 
+                                                                   ImageUrl='<%# Eval("producto.imagenURL") %>' 
+                                                                   alt='<%# Eval("producto.nombre") %>' 
+                                                                   CssClass="cart-product-image" />
+                                                        <div class="cart-product-details">
+                                                            <p class="cart-product-name"><%# Eval("producto.nombre") %></p>
+                                                            <div class="cart-product-price">
+                                                                <span class="quantity"><%# Eval("cantidad") %> x</span>
+                                                                <span class="price">S/.<%# String.Format("{0:N2}", Eval("precioUnitario")) %></span>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <!-- [MODIFICADO] Botón usa función JS personalizada -->
+                                                        <asp:LinkButton runat="server" 
+                                                                        CommandName="Eliminar" 
+                                                                        CommandArgument='<%# Eval("idLineaCarrito") %>'
+                                                                        CssClass="cart-remove-item"
+                                                                        OnClientClick="return confirmarEliminacion(this);">
+                                                            &times;
+                                                        </asp:LinkButton>
+                                                    </div>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                
+                                            <asp:Panel ID="pnlCarritoVacio" runat="server" Visible="false" CssClass="cart-empty-message">
+                                                <p style="text-align: center; padding: 20px; color: #666;">
+                                                    <i class="bi bi-cart-x" style="font-size: 48px; display: block; margin-bottom: 10px;"></i>
+                                                    Tu carrito está vacío
+                                                </p>
+                                            </asp:Panel>
+                                        </div>
+                                        <hr class="cart-divider" />
+                                        <div class="cart-subtotal">
+                                            <span class="total-label">Total:</span>
+                                            <span class="total-amount">S/.<asp:Label ID="lblTotal" runat="server" Text="0.00"></asp:Label></span>
+                                        </div>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+    
+                                <div class="cart-actions">
+                                    <asp:HyperLink ID="lnkCheckout" runat="server" NavigateUrl="~/Checkout.aspx" CssClass="btn btn-primary-cart">
+                                        PROCEDER CON EL PAGO <i class="bi bi-arrow-right"></i>
+                                    </asp:HyperLink>
+                                    <asp:HyperLink ID="lnkVerCarrito" runat="server" NavigateUrl="~/Shopping_Car.aspx" CssClass="btn btn-secondary-cart">
+                                        VER CARRITO DE COMPRAS
+                                    </asp:HyperLink>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <main class="container my-5">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+        
+        <footer class="main-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <a href="~/Catalogo.aspx" class="footer-logo" runat="server">
+                            <div class="logo-icon">
+                                <div class="logo-icon-inner"></div>
+                            </div>
+                            CAMPUS STORE
+                        </a>
+                        <div class="footer-info mt-3">
+                            <p>Avenida Siempre viva 123</p>
+                            <p>Lima - Perú</p>
+                            <p>info@kinbo.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4 footer-section">
+                        <h5>Categorías Principales</h5>
+                        <ul>
+                            <li><asp:HyperLink ID="lnkFooterPeluches" runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=PELUCHE">Peluches</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterTomatelodos" runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=TOMATODO">Tomatodos</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterUtiles" runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=LAPICERO">Lapiceros</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterLibros" runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=libro">Libros</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkFooterCuadernos" runat="server" NavigateUrl="~/Shop_Page.aspx?categoria=CUADERNO">Cuadernos</asp:HyperLink></li>
+                        </ul>
+                        <asp:HyperLink ID="lnkBrowseAll" runat="server" NavigateUrl="~/Catalogo.aspx" CssClass="footer-browse-all">
+                            Ver Todos los Productos <i class="bi bi-arrow-right"></i>
+                        </asp:HyperLink>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4 footer-section">
+                        <h5>Enlaces Rápidos</h5>
+                        <ul>
+                            <li><asp:HyperLink ID="lnkShopProduct" runat="server" NavigateUrl="~/Catalogo.aspx">Productos</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="lnkShoppingCart" runat="server" NavigateUrl="~/Shopping_Car.aspx">Carrito de Compras</asp:HyperLink></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+    </form>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- SCRIPTS DE FUNCIONALIDAD -->
+    <script type="text/javascript">
+        // 1. FUNCIÓN GLOBAL DE ELIMINACIÓN
+        function confirmarEliminacion(sender) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "El producto será eliminado de tu carrito.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#FA8232',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar',
+                customClass: {
+                    confirmButton: 'swal2-confirm-btn-custom'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // TRUCO PARA EJECUTAR EL POSTBACK DEL LINKBUTTON
+                    // LinkButton usa javascript:__doPostBack(...) en su href. 
+                    // Lo extraemos y ejecutamos.
+                    var postBackRef = sender.getAttribute('href');
+                    if (postBackRef) {
+                        // Reemplazar javascript: si existe para que eval funcione limpio
+                        eval(postBackRef.replace('javascript:', ''));
+                    }
+                }
+            });
+            // Retorna false para evitar el postback inmediato
+            return false;
+        }
+
+        // 2. LÓGICA DEL POPUP
+        document.addEventListener('DOMContentLoaded', function () {
+            const cartIcon = document.getElementById('lnkCarrito');
+            const cartPopup = document.getElementById('shoppingCartPopup');
+
+            if (cartIcon && cartPopup) {
+                // Toggle del popup
+                cartIcon.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                    if (cartPopup.style.display === 'block') {
+                        cartPopup.style.display = 'none';
+                    } else {
+                        cartPopup.style.display = 'block';
+                    }
+                });
+
+                // Evitar cierre al hacer clic dentro
+                cartPopup.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                });
+
+                // Cerrar al hacer clic fuera
+                document.addEventListener('click', function (event) {
+                    if (cartPopup.style.display === 'block') {
+                        cartPopup.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+    
+</body>
+</html>
