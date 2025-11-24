@@ -5,6 +5,12 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/RolWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+  <message name="guardarNuevoRolRetornaId">
+    <part name="parameters" element="tns:guardarNuevoRolRetornaId" />
+  </message>
+  <message name="guardarNuevoRolRetornaIdResponse">
+    <part name="parameters" element="tns:guardarNuevoRolRetornaIdResponse" />
+  </message>
   <message name="guardarRol">
     <part name="parameters" element="tns:guardarRol" />
   </message>
@@ -35,13 +41,11 @@
   <message name="eliminarRolResponse">
     <part name="parameters" element="tns:eliminarRolResponse" />
   </message>
-  <message name="guardarNuevoRolRetornaId">
-    <part name="parameters" element="tns:guardarNuevoRolRetornaId" />
-  </message>
-  <message name="guardarNuevoRolRetornaIdResponse">
-    <part name="parameters" element="tns:guardarNuevoRolRetornaIdResponse" />
-  </message>
   <portType name="RolWS">
+    <operation name="guardarNuevoRolRetornaId">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarNuevoRolRetornaIdRequest" message="tns:guardarNuevoRolRetornaId" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarNuevoRolRetornaIdResponse" message="tns:guardarNuevoRolRetornaIdResponse" />
+    </operation>
     <operation name="guardarRol">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarRolRequest" message="tns:guardarRol" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarRolResponse" message="tns:guardarRolResponse" />
@@ -66,13 +70,18 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/eliminarRol/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/eliminarRol/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-    <operation name="guardarNuevoRolRetornaId">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarNuevoRolRetornaIdRequest" message="tns:guardarNuevoRolRetornaId" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/RolWS/guardarNuevoRolRetornaIdResponse" message="tns:guardarNuevoRolRetornaIdResponse" />
-    </operation>
   </portType>
   <binding name="RolWSPortBinding" type="tns:RolWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="guardarNuevoRolRetornaId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="guardarRol">
       <soap:operation soapAction="" />
       <input>
@@ -132,15 +141,6 @@
       <fault name="InterruptedException">
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
-    </operation>
-    <operation name="guardarNuevoRolRetornaId">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
     </operation>
   </binding>
   <service name="RolWS">
