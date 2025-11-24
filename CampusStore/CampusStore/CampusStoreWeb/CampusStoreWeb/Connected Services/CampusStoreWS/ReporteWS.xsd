@@ -1,62 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://services.campusstore.pucp.edu.pe/" targetNamespace="http://services.campusstore.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="ClassNotFoundException" type="tns:ClassNotFoundException" />
-  <xs:element name="IOException" type="tns:IOException" />
-  <xs:element name="SQLException" type="tns:SQLException" />
   <xs:element name="reporteVentas" type="tns:reporteVentas" />
   <xs:element name="reporteVentasResponse" type="tns:reporteVentasResponse" />
   <xs:complexType name="reporteVentas">
     <xs:sequence>
-      <xs:element minOccurs="0" name="fechaIni" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaInicio" type="xs:string" />
       <xs:element minOccurs="0" name="fechaFin" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="reporteVentasResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="SQLException">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="SQLState" type="xs:string" />
-      <xs:element name="errorCode" type="xs:int" />
-      <xs:element minOccurs="0" name="message" type="xs:string" />
-      <xs:element minOccurs="0" name="nextException" type="tns:sqlException" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="sqlException">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:exception">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="nextException" type="tns:sqlException" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="exception">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:throwable">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="throwable">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="stackTrace" nillable="true" type="tns:stackTraceElement" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="stackTraceElement" final="extension restriction">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="ClassNotFoundException">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="exception" type="tns:throwable" />
-      <xs:element minOccurs="0" name="message" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="IOException">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

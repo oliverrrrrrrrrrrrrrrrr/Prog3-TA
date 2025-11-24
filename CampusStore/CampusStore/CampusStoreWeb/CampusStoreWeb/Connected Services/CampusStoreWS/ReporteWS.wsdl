@@ -11,22 +11,10 @@
   <message name="reporteVentasResponse">
     <part name="parameters" element="tns:reporteVentasResponse" />
   </message>
-  <message name="SQLException">
-    <part name="fault" element="tns:SQLException" />
-  </message>
-  <message name="ClassNotFoundException">
-    <part name="fault" element="tns:ClassNotFoundException" />
-  </message>
-  <message name="IOException">
-    <part name="fault" element="tns:IOException" />
-  </message>
   <portType name="ReporteWS">
     <operation name="reporteVentas">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ReporteWS/reporteVentasRequest" message="tns:reporteVentas" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ReporteWS/reporteVentasResponse" message="tns:reporteVentasResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ReporteWS/reporteVentas/Fault/SQLException" name="SQLException" message="tns:SQLException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ReporteWS/reporteVentas/Fault/ClassNotFoundException" name="ClassNotFoundException" message="tns:ClassNotFoundException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/ReporteWS/reporteVentas/Fault/IOException" name="IOException" message="tns:IOException" />
     </operation>
   </portType>
   <binding name="ReporteWSPortBinding" type="tns:ReporteWS">
@@ -39,15 +27,6 @@
       <output>
         <soap:body use="literal" />
       </output>
-      <fault name="SQLException">
-        <soap:fault use="literal" name="SQLException" namespace="" />
-      </fault>
-      <fault name="ClassNotFoundException">
-        <soap:fault use="literal" name="ClassNotFoundException" namespace="" />
-      </fault>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
     </operation>
   </binding>
   <service name="ReporteWS">

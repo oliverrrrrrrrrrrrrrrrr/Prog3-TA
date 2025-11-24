@@ -13,13 +13,13 @@ public class ReporteBestSeller {
 
     @WebMethod(operationName = "reporteBestSeller")
     public byte[] reporteBestSeller(
-        @WebParam(name = "fechaInicio") String fechaInicio,
-        @WebParam(name = "fechaFin") String fechaFin
-    ) {
+            @WebParam(name = "fechaInicio") String fechaInicio,
+            @WebParam(name = "fechaFin") String fechaFin) {
+
         try {
             return ReporteUtil.reporteBestSeller(fechaInicio, fechaFin);
         } catch (Exception ex) {
-            throw new WebServiceException("Error al generar reporte BestSeller", ex);
+            throw new WebServiceException("Error al generar el reporte Best Seller", ex);
         }
     }
    
