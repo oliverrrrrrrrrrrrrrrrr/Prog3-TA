@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/EditorialWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+<<<<<<< Updated upstream
   <message name="obtenerEditorial">
     <part name="parameters" element="tns:obtenerEditorial" />
   </message>
@@ -17,6 +18,8 @@
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
   </message>
+=======
+>>>>>>> Stashed changes
   <message name="eliminarEditorial">
     <part name="parameters" element="tns:eliminarEditorial" />
   </message>
@@ -35,6 +38,7 @@
   <message name="guardarEditorialResponse">
     <part name="parameters" element="tns:guardarEditorialResponse" />
   </message>
+<<<<<<< Updated upstream
   <portType name="EditorialWS">
     <operation name="obtenerEditorial">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/obtenerEditorialRequest" message="tns:obtenerEditorial" />
@@ -47,12 +51,30 @@
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialResponse" message="tns:eliminarEditorialResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorial/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorial/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+=======
+  <message name="obtenerEditorial">
+    <part name="parameters" element="tns:obtenerEditorial" />
+  </message>
+  <message name="obtenerEditorialResponse">
+    <part name="parameters" element="tns:obtenerEditorialResponse" />
+  </message>
+  <portType name="EditorialWS">
+    <operation name="eliminarEditorial">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialRequest" message="tns:eliminarEditorial" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorialResponse" message="tns:eliminarEditorialResponse" />
+>>>>>>> Stashed changes
     </operation>
     <operation name="listarEditoriales">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesRequest" message="tns:listarEditoriales" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesResponse" message="tns:listarEditorialesResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditoriales/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditoriales/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="guardarEditorial">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialRequest" message="tns:guardarEditorial" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialResponse" message="tns:guardarEditorialResponse" />
+    </operation>
+    <operation name="obtenerEditorial">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/obtenerEditorialRequest" message="tns:obtenerEditorial" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/obtenerEditorialResponse" message="tns:obtenerEditorialResponse" />
     </operation>
     <operation name="guardarEditorial">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialRequest" message="tns:guardarEditorial" />
@@ -63,6 +85,7 @@
   </portType>
   <binding name="EditorialWSPortBinding" type="tns:EditorialWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+<<<<<<< Updated upstream
     <operation name="obtenerEditorial">
       <soap:operation soapAction="" />
       <input>
@@ -78,6 +101,8 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
+=======
+>>>>>>> Stashed changes
     <operation name="eliminarEditorial">
       <soap:operation soapAction="" />
       <input>
@@ -86,6 +111,7 @@
       <output>
         <soap:body use="literal" />
       </output>
+<<<<<<< Updated upstream
       <fault name="IOException">
         <soap:fault use="literal" name="IOException" namespace="" />
       </fault>
@@ -107,6 +133,8 @@
       <fault name="InterruptedException">
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
+=======
+>>>>>>> Stashed changes
     </operation>
     <operation name="guardarEditorial">
       <soap:operation soapAction="" />
@@ -116,12 +144,24 @@
       <output>
         <soap:body use="literal" />
       </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
+    </operation>
+    <operation name="guardarEditorial">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerEditorial">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
     </operation>
   </binding>
   <service name="EditorialWS">

@@ -226,21 +226,24 @@
                         <div class="quantity-selector">
                             <button type="button" 
                                     class="btn-qty btn-qty-minus" 
-                                    onclick="cambiarCantidad(this, -1, '<%# Eval("idLineaCarrito") %>')">
+                                    onclick="cambiarCantidad(this, -1)">
                                 -
                             </button>
+    
+                            <!-- AQUI AGREGAMOS data-stock -->
                             <input type="text" 
                                    value='<%# Eval("cantidad") %>' 
                                    class="cantidad-input" 
                                    data-id='<%# Eval("idLineaCarrito") %>'
+                                   data-stock='<%# Eval("producto.stockVirtual") %>' 
                                    readonly />
+           
                             <button type="button" 
                                     class="btn-qty btn-qty-plus" 
-                                    onclick="cambiarCantidad(this, 1, '<%# Eval("idLineaCarrito") %>')">
+                                    onclick="cambiarCantidad(this, 1)">
                                 +
                             </button>
 
-                            <!-- HIDDENFIELDS AQUÍ (dentro del quantity-selector) -->
                             <asp:HiddenField ID="hdnCantidad" runat="server" Value='<%# Eval("cantidad") %>' />
                             <asp:HiddenField ID="hdnIdLinea" runat="server" Value='<%# Eval("idLineaCarrito") %>' />
                         </div>
@@ -248,7 +251,7 @@
                     
                     <!-- Columna de Subtotal -->
                     <div class="cart-subtotal" data-title="Sub-Total">
-                        $<%# String.Format("{0:N2}", 
+                        S/.<%# String.Format("{0:N2}", 
                             (Convert.ToDouble(Eval("precioConDescuento")) > 0 
                                 ? Convert.ToDouble(Eval("precioConDescuento")) 
                                 : Convert.ToDouble(Eval("precioUnitario"))) 
@@ -373,6 +376,57 @@
             confirmButtonText: 'Ok'
         });
     }
+    function cambiarCantidad(btn, cambio) {
+        const container = btn.parentElement;
+        const input = container.querySelector('.cantidad-input');
+        const hdnCantidad = container.querySelector('input[id*="hdnCantidad"]');
+
+        // 1. Obtener el Stock Virtual desde el HTML
+        // Si por error no viene el dato, asumimos 10 por defecto
+        let stockVirtual = parseInt(input.getAttribute('data-stock')) || 10;
+
+        // 2. Definir el Techo Máximo:
+        // Es el número MENOR entre 10 y el Stock Virtual
+        // Ejemplo A: Stock 50 -> El límite es 10.
+        // Ejemplo B: Stock 4  -> El límite es 4.
+        let limiteMaximo = Math.min(10, stockVirtual);
+
+        // 3. Calcular la nueva cantidad deseada
+        let valorActual = parseInt(input.value);
+        let calculo = valorActual + cambio;
+
+        // 4. Aplicar los límites (Mínimo 1, Máximo "limiteMaximo")
+        let nueva = Math.max(1, Math.min(calculo, limiteMaximo));
+
+        // (Opcional) Alerta visual si intenta exceder el límite
+        if (calculo > limiteMaximo) {
+            // Usamos SweetAlert si está cargado, sino un console.log
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Límite alcanzado',
+                    text: `Máximo permitido: ${limiteMaximo} unidades (Stock: ${stockVirtual})`,
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        }
+
+        console.log('Cambio:', cambio, 'Nueva cantidad:', nueva);
+
+        // 5. Actualizar los valores en pantalla y ocultos
+        input.value = nueva;
+
+        if (hdnCantidad) {
+            hdnCantidad.value = nueva;
+        } else {
+            console.error('No se encontró hdnCantidad');
+        }
+    }
 </script>
+
+
 
 </asp:Content>

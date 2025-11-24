@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/CarritoWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+<<<<<<< Updated upstream
   <message name="eliminarCarrito">
     <part name="parameters" element="tns:eliminarCarrito" />
   </message>
@@ -19,13 +20,18 @@
   </message>
   <message name="listarCarritos">
     <part name="parameters" element="tns:listarCarritos" />
+=======
+  <message name="guardarCarrito">
+    <part name="parameters" element="tns:guardarCarrito" />
+>>>>>>> Stashed changes
   </message>
   <message name="listarCarritosResponse">
     <part name="parameters" element="tns:listarCarritosResponse" />
   </message>
-  <message name="obtenerCarrito">
-    <part name="parameters" element="tns:obtenerCarrito" />
+  <message name="eliminarCarrito">
+    <part name="parameters" element="tns:eliminarCarrito" />
   </message>
+<<<<<<< Updated upstream
   <message name="obtenerCarritoResponse">
     <part name="parameters" element="tns:obtenerCarritoResponse" />
   </message>
@@ -34,6 +40,10 @@
   </message>
   <message name="guardarCarritoResponse">
     <part name="parameters" element="tns:guardarCarritoResponse" />
+=======
+  <message name="eliminarCarritoResponse">
+    <part name="parameters" element="tns:eliminarCarritoResponse" />
+>>>>>>> Stashed changes
   </message>
   <message name="eliminarLineaDelCarrito">
     <part name="parameters" element="tns:eliminarLineaDelCarrito" />
@@ -47,13 +57,31 @@
   <message name="aplicarCuponACarritoResponse">
     <part name="parameters" element="tns:aplicarCuponACarritoResponse" />
   </message>
+<<<<<<< Updated upstream
   <message name="obtenerCarritoPorCliente">
     <part name="parameters" element="tns:obtenerCarritoPorCliente" />
+=======
+  <message name="listarCarritos">
+    <part name="parameters" element="tns:listarCarritos" />
+  </message>
+  <message name="listarCarritosResponse">
+    <part name="parameters" element="tns:listarCarritosResponse" />
+  </message>
+  <message name="obtenerCarrito">
+    <part name="parameters" element="tns:obtenerCarrito" />
+  </message>
+  <message name="obtenerCarritoResponse">
+    <part name="parameters" element="tns:obtenerCarritoResponse" />
+  </message>
+  <message name="eliminarLineaDelCarrito">
+    <part name="parameters" element="tns:eliminarLineaDelCarrito" />
+>>>>>>> Stashed changes
   </message>
   <message name="obtenerCarritoPorClienteResponse">
     <part name="parameters" element="tns:obtenerCarritoPorClienteResponse" />
   </message>
   <portType name="CarritoWS">
+<<<<<<< Updated upstream
     <operation name="eliminarCarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoRequest" message="tns:eliminarCarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoResponse" message="tns:eliminarCarritoResponse" />
@@ -77,6 +105,15 @@
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoResponse" message="tns:guardarCarritoResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarrito/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarrito/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+=======
+    <operation name="guardarCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoRequest" message="tns:guardarCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/guardarCarritoResponse" message="tns:guardarCarritoResponse" />
+    </operation>
+    <operation name="eliminarCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoRequest" message="tns:eliminarCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarCarritoResponse" message="tns:eliminarCarritoResponse" />
+>>>>>>> Stashed changes
     </operation>
     <operation name="eliminarLineaDelCarrito">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarLineaDelCarritoRequest" message="tns:eliminarLineaDelCarrito" />
@@ -86,13 +123,28 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/aplicarCuponACarritoRequest" message="tns:aplicarCuponACarrito" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/aplicarCuponACarritoResponse" message="tns:aplicarCuponACarritoResponse" />
     </operation>
+<<<<<<< Updated upstream
     <operation name="obtenerCarritoPorCliente">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoPorClienteRequest" message="tns:obtenerCarritoPorCliente" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoPorClienteResponse" message="tns:obtenerCarritoPorClienteResponse" />
+=======
+    <operation name="listarCarritos">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosRequest" message="tns:listarCarritos" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/listarCarritosResponse" message="tns:listarCarritosResponse" />
+    </operation>
+    <operation name="obtenerCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoRequest" message="tns:obtenerCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/obtenerCarritoResponse" message="tns:obtenerCarritoResponse" />
+    </operation>
+    <operation name="eliminarLineaDelCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarLineaDelCarritoRequest" message="tns:eliminarLineaDelCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/CarritoWS/eliminarLineaDelCarritoResponse" message="tns:eliminarLineaDelCarritoResponse" />
+>>>>>>> Stashed changes
     </operation>
   </portType>
   <binding name="CarritoWSPortBinding" type="tns:CarritoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+<<<<<<< Updated upstream
     <operation name="eliminarCarrito">
       <soap:operation soapAction="" />
       <input>
@@ -109,6 +161,9 @@
       </fault>
     </operation>
     <operation name="listarCarritos">
+=======
+    <operation name="guardarCarrito">
+>>>>>>> Stashed changes
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -116,14 +171,8 @@
       <output>
         <soap:body use="literal" />
       </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
     </operation>
-    <operation name="obtenerCarrito">
+    <operation name="eliminarCarrito">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -131,6 +180,7 @@
       <output>
         <soap:body use="literal" />
       </output>
+<<<<<<< Updated upstream
       <fault name="IOException">
         <soap:fault use="literal" name="IOException" namespace="" />
       </fault>
@@ -152,6 +202,8 @@
       <fault name="InterruptedException">
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
+=======
+>>>>>>> Stashed changes
     </operation>
     <operation name="eliminarLineaDelCarrito">
       <soap:operation soapAction="" />
@@ -171,7 +223,29 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< Updated upstream
     <operation name="obtenerCarritoPorCliente">
+=======
+    <operation name="listarCarritos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerCarrito">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminarLineaDelCarrito">
+>>>>>>> Stashed changes
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

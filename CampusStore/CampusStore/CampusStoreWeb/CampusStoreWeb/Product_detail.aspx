@@ -140,7 +140,7 @@
             let newValue = currentValue + amount;
 
             const min = parseInt(qtyInput.getAttribute('min'), 10) || 1;
-            const max = parseInt(qtyInput.getAttribute('max'), 10) || 999;
+            const max = parseInt(qtyInput.getAttribute('max'), 10) || 10;
 
             if (newValue >= min && newValue <= max) {
                 qtyInput.value = newValue;

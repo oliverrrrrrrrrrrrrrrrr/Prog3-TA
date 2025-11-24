@@ -83,7 +83,7 @@ namespace CampusStoreWeb
 
         private void CalcularResumen(dynamic carrito)
         {
-            // 1. Calcular subtotal (suma de todos los productos)
+            // 1. Calcular total (suma de todos los productos)
             decimal subtotalProductos = 0;
             foreach (var linea in carrito.lineas)
             {
@@ -107,17 +107,21 @@ namespace CampusStoreWeb
                 pnlDescuento.Visible = false;
             }
 
-            // 3. Calcular subtotal después del descuento del cupón
-            decimal subtotalConDescuento = subtotalProductos - descuentoCupon;
-            lblSubtotal.Text = subtotalConDescuento.ToString("N2");
-
-            // 4. Calcular impuesto (sobre subtotal con descuento)
-            decimal impuesto = subtotalConDescuento * PORCENTAJE_IMPUESTO;
+            // 3. Calcular impuesto (sobre subtotal)
+            decimal impuesto = subtotalProductos * PORCENTAJE_IMPUESTO;
             lblImpuesto.Text = impuesto.ToString("N2");
 
-            // 5. Calcular total final (subtotal con descuento + impuesto)
-            decimal total = subtotalConDescuento + impuesto;
-            lblTotal.Text = total.ToString("N2");  
+            // 4. Calcular subtotal
+            decimal subtotalConImpuesto = subtotalProductos - impuesto;
+            lblSubtotal.Text = subtotalConImpuesto.ToString("N2");
+            
+            // 5. Mostrar total final (subtotal con descuento)
+            decimal total = subtotalProductos;
+            lblTotal.Text = total.ToString("N2");
+
+            // 6. Calcular total después del descuento del cupón
+            decimal totalConDescuento = total - descuentoCupon;
+            lblTotal.Text = totalConDescuento.ToString("N2");
         }
 
         protected void rptCartItems_ItemCommand(object source, RepeaterCommandEventArgs e)

@@ -5,6 +5,15 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/ResenaWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+<<<<<<< Updated upstream
+=======
+  <message name="listarResenasPorProducto">
+    <part name="parameters" element="tns:listarResenasPorProducto" />
+  </message>
+  <message name="listarResenasPorProductoResponse">
+    <part name="parameters" element="tns:listarResenasPorProductoResponse" />
+  </message>
+>>>>>>> Stashed changes
   <message name="eliminarResena">
     <part name="parameters" element="tns:eliminarResena" />
   </message>
@@ -29,6 +38,7 @@
   <message name="obtenerResenaResponse">
     <part name="parameters" element="tns:obtenerResenaResponse" />
   </message>
+<<<<<<< Updated upstream
   <message name="obtenerPromedioCalificacion">
     <part name="parameters" element="tns:obtenerPromedioCalificacion" />
   </message>
@@ -48,6 +58,13 @@
     <part name="parameters" element="tns:listarResenasPorProductoResponse" />
   </message>
   <portType name="ResenaWS">
+=======
+  <portType name="ResenaWS">
+    <operation name="listarResenasPorProducto">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasPorProductoRequest" message="tns:listarResenasPorProducto" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/listarResenasPorProductoResponse" message="tns:listarResenasPorProductoResponse" />
+    </operation>
+>>>>>>> Stashed changes
     <operation name="eliminarResena">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/eliminarResenaRequest" message="tns:eliminarResena" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/eliminarResenaResponse" message="tns:eliminarResenaResponse" />
@@ -64,6 +81,7 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerResenaRequest" message="tns:obtenerResena" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerResenaResponse" message="tns:obtenerResenaResponse" />
     </operation>
+<<<<<<< Updated upstream
     <operation name="obtenerPromedioCalificacion">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerPromedioCalificacionRequest" message="tns:obtenerPromedioCalificacion" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ResenaWS/obtenerPromedioCalificacionResponse" message="tns:obtenerPromedioCalificacionResponse" />
@@ -79,6 +97,20 @@
   </portType>
   <binding name="ResenaWSPortBinding" type="tns:ResenaWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+=======
+  </portType>
+  <binding name="ResenaWSPortBinding" type="tns:ResenaWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="listarResenasPorProducto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+>>>>>>> Stashed changes
     <operation name="eliminarResena">
       <soap:operation soapAction="" />
       <input>
@@ -98,6 +130,7 @@
       </output>
     </operation>
     <operation name="listarResenas">
+<<<<<<< Updated upstream
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -107,6 +140,8 @@
       </output>
     </operation>
     <operation name="obtenerResena">
+=======
+>>>>>>> Stashed changes
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -115,6 +150,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< Updated upstream
     <operation name="obtenerPromedioCalificacion">
       <soap:operation soapAction="" />
       <input>
@@ -134,6 +170,9 @@
       </output>
     </operation>
     <operation name="listarResenasPorProducto">
+=======
+    <operation name="obtenerResena">
+>>>>>>> Stashed changes
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

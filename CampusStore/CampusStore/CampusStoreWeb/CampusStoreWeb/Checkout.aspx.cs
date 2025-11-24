@@ -230,8 +230,8 @@ namespace CampusStoreWeb
             try
             {
                 // 1. Order ID - usar el ID de la orden, NO del carrito
-                lblOrderId.Text = "#" + orden.idOrdenCompra.ToString().PadLeft(8, '0');
-                idOrdenGenerada = orden.idOrdenCompra.ToString().PadLeft(8, '0');
+                lblOrderId.Text = "#" + orden.idOrdenCompra.ToString();
+                idOrdenGenerada = orden.idOrdenCompra.ToString();
                 ViewState["IdOrdenActual"] = idOrdenGenerada;
 
 
@@ -312,6 +312,22 @@ namespace CampusStoreWeb
                         ordenYaExistia = true;
                     }
 
+                    int idOrdenReal = 0;
+                    var ordenesCliente = ordenCompraWS.listarOrdenesPorCliente(idCliente);
+
+                    if (ordenesCliente != null)
+                    {
+                        // Buscamos la orden que tenga este ID de carrito
+                        foreach (var o in ordenesCliente)
+                        {
+                            if (o.carrito != null && o.carrito.idCarrito == carrito.idCarrito)
+                            {
+                                idOrdenReal = o.idOrdenCompra;
+                                break; // Encontramos la orden, salimos del bucle
+                            }
+                        }
+                    }
+
                     // 2. Mostrar mensaje según la situación
                     MostrarMensaje(ordenCreada, ordenYaExistia);
 
@@ -322,7 +338,7 @@ namespace CampusStoreWeb
                     System.Diagnostics.Debug.WriteLine("Repeater data bound exitosamente");
 
                     // 4. Actualizar labels del resumen
-                    ActualizarLabelsResumen(carrito);
+                    ActualizarLabelsResumen(carrito, idOrdenReal);
                     string qrUrl = generarURLQR(idOrdenGenerada);
                     imgQr.ImageUrl = qrUrl;
                 }
@@ -341,14 +357,13 @@ namespace CampusStoreWeb
             }
         }
 
-        private void ActualizarLabelsResumen(dynamic carrito)
+        private void ActualizarLabelsResumen(dynamic carrito, int idOrdenReal)
         {
             try
             {
-                // 1. Order ID
-                
-                lblOrderId.Text = "#" + idOrdenGenerada.PadLeft(8, '0');
-                
+                // 1. Order 
+                lblOrderId.Text = "#" + idOrdenReal;
+                idOrdenGenerada = idOrdenReal.ToString();
                 ViewState["IdOrdenActual"] = idOrdenGenerada;
 
                 // 2. Cantidad de productos
@@ -378,10 +393,9 @@ namespace CampusStoreWeb
                 }
 
                 decimal subtotalConDescuento = subtotal - descuento;
-                decimal impuesto = subtotalConDescuento * PORCENTAJE_IMPUESTO;
-                decimal total = subtotalConDescuento + impuesto;
+                decimal total = subtotalConDescuento;
 
-                lblOrderTotal.Text = "S/." + total.ToString("N2");
+                lblOrderTotal.Text = total.ToString("N2");
 
                 System.Diagnostics.Debug.WriteLine($"Labels actualizados - Total: ${total:N2}");
             }
@@ -434,7 +448,7 @@ namespace CampusStoreWeb
                 decimal impuesto = subtotalConDescuento * PORCENTAJE_IMPUESTO;
                 
                 // Calcular total final (subtotal con descuento + impuesto)
-                decimal totalFinal = subtotalConDescuento + impuesto;
+                decimal totalFinal = subtotalConDescuento;
 
                 // Debug
                 System.Diagnostics.Debug.WriteLine($"=== Cálculo de totales ===");
@@ -465,7 +479,7 @@ namespace CampusStoreWeb
                 // Montos - ASEGURAR que sean valores válidos (no null, no NaN, no Infinity)
                 // total: subtotal sin descuentos (para referencia)
                 // totalDescontado: total final con descuentos e impuesto (el que se cobra)
-                double totalDouble = (double)subtotalSinDescuento;
+                double totalDouble = (double)subtotalConDescuento;
                 double totalDescontadoDouble = (double)totalFinal; // Este incluye descuento e impuesto
 
                 // Validar que los valores sean números válidos
@@ -488,8 +502,7 @@ namespace CampusStoreWeb
                 // Estado
                 ordenCompra.estado = estadoOrden.NO_PAGADO;
                 ordenCompra.estadoSpecified = true;
-                idOrdenGenerada = ordenCompra.idOrdenCompra.ToString().PadLeft(8, '0');
-                ViewState["IdOrdenActual"] = idOrdenGenerada;
+                
                 // Debug detallado antes de enviar
                 System.Diagnostics.Debug.WriteLine($"=== Datos de la orden a enviar ===");
                 System.Diagnostics.Debug.WriteLine($"Cliente ID: {ordenCompra.cliente?.idCliente ?? 0}");
@@ -513,6 +526,10 @@ namespace CampusStoreWeb
                     // Marcar el carrito como completado
                     carrito.completado = true;
                     carritoWS.guardarCarrito(carrito, estado.Modificado);
+
+                    idOrdenGenerada = ordenCompra.idOrdenCompra.ToString();
+                    ViewState["IdOrdenActual"] = idOrdenGenerada;
+
                     System.Diagnostics.Debug.WriteLine("Carrito marcado como completado");
                 }
                 catch (Exception exOrden)
@@ -761,9 +778,8 @@ namespace CampusStoreWeb
             string dia = fecha.Day.ToString();
             string mes = mesesAbrev[fecha.Month - 1];
             string año = fecha.Year.ToString();
-            string hora = fecha.ToString("h:mm tt");
 
-            return $"{dia} {mes}, {año} a las {hora}";
+            return $"{dia} {mes}, {año}";
         }
 
         protected void btnProceedPayment_Click(object sender, EventArgs e)

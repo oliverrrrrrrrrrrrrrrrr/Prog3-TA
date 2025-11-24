@@ -53,19 +53,14 @@ namespace CampusStoreWeb
             {
                 this.clientWS.guardarCliente(cliente, estado.Nuevo);
 
-                // Registro exitoso
-                string script = @"
-                    alert('¡Registro exitoso! Serás redirigido al inicio de sesión.');
-                    window.location.href = 'SignIn.aspx';
-                ";
-                ClientScript.RegisterStartupScript(this.GetType(), "redirigir", script, true);
+                // Mostrar mensaje de éxito
+                string script = "mostrarModalExito();";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaExito", script, true);
             }
-            catch
+            catch (Exception ex)
             {
-                // Error al guardar
-                cvSignUpError.IsValid = false;
-                cvSignUpError.ErrorMessage = "El nombre de usuario o correo ya existe.";
-                return;
+                string script = $"mostrarModalError();";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaError", script, true);
             }
         }
     }

@@ -5,11 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/LibroWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="obtenerLibro">
-    <part name="parameters" element="tns:obtenerLibro" />
+  <message name="leerAutoresPorLibro">
+    <part name="parameters" element="tns:leerAutoresPorLibro" />
   </message>
-  <message name="obtenerLibroResponse">
-    <part name="parameters" element="tns:obtenerLibroResponse" />
+  <message name="leerAutoresPorLibroResponse">
+    <part name="parameters" element="tns:leerAutoresPorLibroResponse" />
+  </message>
+  <message name="listarLibros">
+    <part name="parameters" element="tns:listarLibros" />
+  </message>
+  <message name="listarLibrosResponse">
+    <part name="parameters" element="tns:listarLibrosResponse" />
   </message>
   <message name="listarLibros">
     <part name="parameters" element="tns:listarLibros" />
@@ -35,16 +41,28 @@
   <message name="registrarLibroResponse">
     <part name="parameters" element="tns:registrarLibroResponse" />
   </message>
+<<<<<<< Updated upstream
   <message name="leerAutoresPorLibro">
     <part name="parameters" element="tns:leerAutoresPorLibro" />
   </message>
   <message name="leerAutoresPorLibroResponse">
     <part name="parameters" element="tns:leerAutoresPorLibroResponse" />
+=======
+  <message name="obtenerLibro">
+    <part name="parameters" element="tns:obtenerLibro" />
+  </message>
+  <message name="obtenerLibroResponse">
+    <part name="parameters" element="tns:obtenerLibroResponse" />
+>>>>>>> Stashed changes
   </message>
   <portType name="LibroWS">
-    <operation name="obtenerLibro">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest" message="tns:obtenerLibro" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse" message="tns:obtenerLibroResponse" />
+    <operation name="leerAutoresPorLibro">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/leerAutoresPorLibroRequest" message="tns:leerAutoresPorLibro" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/leerAutoresPorLibroResponse" message="tns:leerAutoresPorLibroResponse" />
+    </operation>
+    <operation name="listarLibros">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosRequest" message="tns:listarLibros" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosResponse" message="tns:listarLibrosResponse" />
     </operation>
     <operation name="listarLibros">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosRequest" message="tns:listarLibros" />
@@ -62,14 +80,29 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroRequest" message="tns:registrarLibro" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroResponse" message="tns:registrarLibroResponse" />
     </operation>
+<<<<<<< Updated upstream
     <operation name="leerAutoresPorLibro">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/leerAutoresPorLibroRequest" message="tns:leerAutoresPorLibro" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/leerAutoresPorLibroResponse" message="tns:leerAutoresPorLibroResponse" />
+=======
+    <operation name="obtenerLibro">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest" message="tns:obtenerLibro" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse" message="tns:obtenerLibroResponse" />
+>>>>>>> Stashed changes
     </operation>
   </portType>
   <binding name="LibroWSPortBinding" type="tns:LibroWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="obtenerLibro">
+    <operation name="leerAutoresPorLibro">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarLibros">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -105,6 +138,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< Updated upstream
     <operation name="registrarLibro">
       <soap:operation soapAction="" />
       <input>
@@ -115,6 +149,9 @@
       </output>
     </operation>
     <operation name="leerAutoresPorLibro">
+=======
+    <operation name="obtenerLibro">
+>>>>>>> Stashed changes
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

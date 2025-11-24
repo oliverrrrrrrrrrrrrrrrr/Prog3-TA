@@ -339,10 +339,6 @@
                             <h3 class="quick-view-price">${result.Precio.toLocaleString('es-PE', { style: 'currency', currency: 'PEN' })}</h3>
                             <p class="quick-view-description">${result.Descripcion || 'Sin descripción.'}</p>
                             <p class="quick-view-availability">Disponibilidad: <span class="${disponibilidadClass}">${disponibilidadTexto}</span></p>
-                            <div class="quick-view-actions">
-                                <input id="modalQty" type="number" class="form-control quick-view-qty" value="1" min="1" max="${result.Stock}" ${result.Stock === 0 ? 'disabled' : ''} />
-                                <button class="btn btn-add-to-cart" onclick="addFromModal(${result.Id}, '${result.TipoProducto}')" ${result.Stock === 0 ? 'disabled' : ''}>AGREGAR AL CARRITO</button>
-                            </div>
                         </div>
                     </div>`;
 

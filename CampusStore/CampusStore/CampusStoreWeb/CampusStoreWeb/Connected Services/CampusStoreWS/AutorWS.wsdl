@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/AutorWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="eliminarAutor">
-    <part name="parameters" element="tns:eliminarAutor" />
+  <message name="listarAutores">
+    <part name="parameters" element="tns:listarAutores" />
   </message>
-  <message name="eliminarAutorResponse">
-    <part name="parameters" element="tns:eliminarAutorResponse" />
+  <message name="listarAutoresResponse">
+    <part name="parameters" element="tns:listarAutoresResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -23,6 +23,7 @@
   <message name="obtenerAutorResponse">
     <part name="parameters" element="tns:obtenerAutorResponse" />
   </message>
+<<<<<<< Updated upstream
   <message name="listarAutores">
     <part name="parameters" element="tns:listarAutores" />
   </message>
@@ -31,16 +32,26 @@
   </message>
   <message name="guardarAutor">
     <part name="parameters" element="tns:guardarAutor" />
+=======
+  <message name="obtenerAutor">
+    <part name="parameters" element="tns:obtenerAutor" />
+>>>>>>> Stashed changes
   </message>
   <message name="guardarAutorResponse">
     <part name="parameters" element="tns:guardarAutorResponse" />
   </message>
+  <message name="eliminarAutor">
+    <part name="parameters" element="tns:eliminarAutor" />
+  </message>
+  <message name="eliminarAutorResponse">
+    <part name="parameters" element="tns:eliminarAutorResponse" />
+  </message>
   <portType name="AutorWS">
-    <operation name="eliminarAutor">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest" message="tns:eliminarAutor" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse" message="tns:eliminarAutorResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="listarAutores">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresRequest" message="tns:listarAutores" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresResponse" message="tns:listarAutoresResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutores/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutores/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="obtenerAutor">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorRequest" message="tns:obtenerAutor" />
@@ -48,6 +59,7 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutor/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
+<<<<<<< Updated upstream
     <operation name="listarAutores">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresRequest" message="tns:listarAutores" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/listarAutoresResponse" message="tns:listarAutoresResponse" />
@@ -59,11 +71,24 @@
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutorResponse" message="tns:guardarAutorResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutor/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/guardarAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+=======
+    <operation name="obtenerAutor">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorRequest" message="tns:obtenerAutor" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutorResponse" message="tns:obtenerAutorResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutor/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/obtenerAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+>>>>>>> Stashed changes
+    </operation>
+    <operation name="eliminarAutor">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorRequest" message="tns:eliminarAutor" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutorResponse" message="tns:eliminarAutorResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/AutorWS/eliminarAutor/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
   </portType>
   <binding name="AutorWSPortBinding" type="tns:AutorWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="eliminarAutor">
+    <operation name="listarAutores">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -93,7 +118,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="listarAutores">
+    <operation name="obtenerAutor">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -108,7 +133,11 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
+<<<<<<< Updated upstream
     <operation name="guardarAutor">
+=======
+    <operation name="eliminarAutor">
+>>>>>>> Stashed changes
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

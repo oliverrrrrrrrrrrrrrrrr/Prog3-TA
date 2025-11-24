@@ -35,6 +35,12 @@
   <message name="guardarEmpleadoResponse">
     <part name="parameters" element="tns:guardarEmpleadoResponse" />
   </message>
+  <message name="obtenerEmpleado">
+    <part name="parameters" element="tns:obtenerEmpleado" />
+  </message>
+  <message name="obtenerEmpleadoResponse">
+    <part name="parameters" element="tns:obtenerEmpleadoResponse" />
+  </message>
   <portType name="EmpleadoWS">
     <operation name="obtenerEmpleado">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoRequest" message="tns:obtenerEmpleado" />
@@ -51,14 +57,21 @@
     <operation name="eliminarEmpleado">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/eliminarEmpleadoRequest" message="tns:eliminarEmpleado" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/eliminarEmpleadoResponse" message="tns:eliminarEmpleadoResponse" />
+<<<<<<< Updated upstream
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/eliminarEmpleado/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/eliminarEmpleado/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+=======
+>>>>>>> Stashed changes
     </operation>
     <operation name="guardarEmpleado">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/guardarEmpleadoRequest" message="tns:guardarEmpleado" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/guardarEmpleadoResponse" message="tns:guardarEmpleadoResponse" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/guardarEmpleado/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/guardarEmpleado/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="obtenerEmpleado">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoRequest" message="tns:obtenerEmpleado" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EmpleadoWS/obtenerEmpleadoResponse" message="tns:obtenerEmpleadoResponse" />
     </operation>
   </portType>
   <binding name="EmpleadoWSPortBinding" type="tns:EmpleadoWS">
@@ -101,14 +114,26 @@
       <output>
         <soap:body use="literal" />
       </output>
+<<<<<<< Updated upstream
       <fault name="IOException">
         <soap:fault use="literal" name="IOException" namespace="" />
       </fault>
       <fault name="InterruptedException">
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
+=======
     </operation>
     <operation name="guardarEmpleado">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+>>>>>>> Stashed changes
+    </operation>
+    <operation name="obtenerEmpleado">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
