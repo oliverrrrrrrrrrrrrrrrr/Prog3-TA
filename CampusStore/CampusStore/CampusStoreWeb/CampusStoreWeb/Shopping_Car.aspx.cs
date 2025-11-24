@@ -12,12 +12,14 @@ namespace CampusStoreWeb
     {
         public CarritoWSClient carritoWS;
         public ClienteWSClient clienteWS;
+        public CuponWSClient cuponWS;
         private const decimal PORCENTAJE_IMPUESTO = 0.18m;
 
         public Shopping_Car()
         {
             carritoWS = new CarritoWSClient();
             clienteWS = new ClienteWSClient();
+            cuponWS = new CuponWSClient();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -82,24 +84,22 @@ namespace CampusStoreWeb
         private void CalcularResumen(dynamic carrito)
         {
             // 1. Calcular subtotal (suma de todos los productos)
-            decimal total = 0;
+            decimal subtotalProductos = 0;
             foreach (var linea in carrito.lineas)
             {
                 decimal precioFinal = linea.precioConDescuento > 0
                     ? (decimal)linea.precioConDescuento
                     : (decimal)linea.precioUnitario;
 
-                total += precioFinal * linea.cantidad;
+                subtotalProductos += precioFinal * linea.cantidad;
             }
 
-            lblTotal.Text = total.ToString("N2");
-
             // 2. Calcular descuento del cupón (si existe)
-            decimal descuento = 0;
+            decimal descuentoCupon = 0;
             if (carrito.cupon != null && carrito.cupon.activo)
             {
-                descuento = total * ((decimal)carrito.cupon.descuento / 100m);
-                lblDescuento.Text = descuento.ToString("N2");
+                descuentoCupon = subtotalProductos * ((decimal)carrito.cupon.descuento / 100m);
+                lblDescuento.Text = descuentoCupon.ToString("N2");
                 pnlDescuento.Visible = true;
             }
             else
@@ -107,13 +107,17 @@ namespace CampusStoreWeb
                 pnlDescuento.Visible = false;
             }
 
-            // 3. Calcular impuesto (sobre subtotal con descuento)
-            decimal impuesto = total * PORCENTAJE_IMPUESTO;
+            // 3. Calcular subtotal después del descuento del cupón
+            decimal subtotalConDescuento = subtotalProductos - descuentoCupon;
+            lblSubtotal.Text = subtotalConDescuento.ToString("N2");
+
+            // 4. Calcular impuesto (sobre subtotal con descuento)
+            decimal impuesto = subtotalConDescuento * PORCENTAJE_IMPUESTO;
             lblImpuesto.Text = impuesto.ToString("N2");
 
-            // 4. Calcular subtotal después de descuento
-            decimal subtotal = total - impuesto;
-            lblSubtotal.Text = subtotal.ToString("N2");
+            // 5. Calcular total final (subtotal con descuento + impuesto)
+            decimal total = subtotalConDescuento + impuesto;
+            lblTotal.Text = total.ToString("N2");  
         }
 
         protected void rptCartItems_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -214,6 +218,89 @@ namespace CampusStoreWeb
                 string script = $"mostrarModalError('{mensaje}');";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaError", script, true);
             }
+        }
+
+        protected void btnAplicarCupon_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string codigoCupon = txtCodigoCupon.Text.Trim();
+                
+                if (string.IsNullOrEmpty(codigoCupon))
+                {
+                    MostrarMensajeCupon("Por favor ingrese un código de cupón", false);
+                    return;
+                }
+
+                // Obtener el ID del cliente logueado
+                string cuenta = Page.User.Identity.Name;
+                cliente cliente = clienteWS.buscarClientePorCuenta(cuenta);
+                int idCliente = cliente.idCliente;
+
+                if (idCliente <= 0)
+                {
+                    MostrarMensajeCupon("Error: No se pudo identificar al cliente", false);
+                    return;
+                }
+
+                // Buscar el cupón por código
+                cupon cuponEncontrado = cuponWS.buscarCuponPorCodigo(codigoCupon);
+
+                if (cuponEncontrado == null)
+                {
+                    MostrarMensajeCupon("El cupón no existe o no está disponible", false);
+                    return;
+                }
+
+                // Verificar si el cliente ya usó este cupón
+                bool yaUsado = cuponWS.verificarCuponUsado(cuponEncontrado.idCupon, idCliente);
+
+                if (yaUsado)
+                {
+                    MostrarMensajeCupon("Ya has usado este cupón anteriormente", false);
+                    return;
+                }
+
+                // Obtener el carrito del cliente
+                var carrito = carritoWS.obtenerCarritoPorCliente(idCliente);
+
+                if (carrito == null || carrito.completado)
+                {
+                    MostrarMensajeCupon("No se encontró un carrito activo", false);
+                    return;
+                }
+
+                // Aplicar el cupón al carrito
+                bool resultado = carritoWS.aplicarCuponACarrito(
+                    cuponEncontrado.idCupon, 
+                    idCliente, 
+                    carrito.idCarrito
+                );
+
+                if (resultado)
+                {
+                    MostrarMensajeCupon("¡Cupón aplicado correctamente!", true);
+                    txtCodigoCupon.Text = "";
+                    // Recargar el carrito para mostrar el descuento
+                    CargarCarrito();
+                }
+                else
+                {
+                    MostrarMensajeCupon("No se pudo aplicar el cupón. Verifique que el cupón sea válido.", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error al aplicar cupón: {ex.Message}");
+                MostrarMensajeCupon("Error al aplicar el cupón: " + ex.Message, false);
+            }
+        }
+
+        private void MostrarMensajeCupon(string mensaje, bool esExito)
+        {
+            lblMensajeCupon.Text = mensaje;
+            lblMensajeCupon.Visible = true;
+            lblMensajeCupon.CssClass = esExito ? "coupon-message success" : "coupon-message error";
         }
     }
 }

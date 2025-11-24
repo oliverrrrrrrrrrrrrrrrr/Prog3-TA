@@ -47,4 +47,19 @@ public class CuponWS {
     ) {
         this.cuponBO.guardar(cupon, estado);
     }
+    
+    @WebMethod(operationName = "buscarCuponPorCodigo")
+    public Cupon buscarCuponPorCodigo(
+        @WebParam(name = "codigo") String codigo
+    ) {
+        return this.cuponBO.buscarPorCodigo(codigo);
+    }
+    
+    @WebMethod(operationName = "verificarCuponUsado")
+    public boolean verificarCuponUsado(
+        @WebParam(name = "idCupon") int idCupon,
+        @WebParam(name = "idCliente") int idCliente
+    ) {
+        return this.cuponBO.verificarCuponUsado(idCupon, idCliente);
+    }
 }

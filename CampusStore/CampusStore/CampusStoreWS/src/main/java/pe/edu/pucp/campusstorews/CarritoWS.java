@@ -61,4 +61,13 @@ public class CarritoWS {
     ) {
         return this.carritoBO.obtenerCarritoPorCliente(id);
     }
+    
+    @WebMethod(operationName = "aplicarCuponACarrito")
+    public boolean aplicarCuponACarrito(
+        @WebParam(name = "idCupon") int idCupon,
+        @WebParam(name = "idCliente") int idCliente,
+        @WebParam(name = "idCarrito") int idCarrito
+    ) {
+        return this.carritoBO.aplicarCuponACarrito(idCupon, idCliente, idCarrito);
+    }
 }

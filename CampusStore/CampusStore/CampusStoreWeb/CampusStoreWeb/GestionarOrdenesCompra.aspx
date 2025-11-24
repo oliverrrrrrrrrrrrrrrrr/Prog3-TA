@@ -497,9 +497,6 @@
                     <!-- Header -->
                     <div class="pedidos-header">
                         <h2>PEDIDOS</h2>
-                        <asp:HyperLink runat="server" NavigateUrl="~/VerTodosPedidos.aspx" CssClass="view-all-link">
-                            View All <i class="bi bi-arrow-right"></i>
-                        </asp:HyperLink>
                     </div>
                     
                     <!-- Barra de búsqueda -->
@@ -530,12 +527,6 @@
                             </Columns>
                         </asp:GridView>
                         
-                    </div>
-                    <div class="btn-agregar-container">
-                        <asp:LinkButton ID="btnAgregarOrdenCompra" runat="server" CssClass="btn-agregar-articulo" OnClick="btnAgregarOrdenCompra_Click" CausesValidation="false">
-                            <i class="bi bi-plus-lg"></i>
-                            Agregar Orden de Compra
-                        </asp:LinkButton>
                     </div>
                 </div>
             </div>

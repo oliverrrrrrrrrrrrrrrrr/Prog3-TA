@@ -378,10 +378,10 @@ namespace CampusStoreWeb
                 }
 
                 decimal subtotalConDescuento = subtotal - descuento;
-                //decimal impuesto = subtotalConDescuento * PORCENTAJE_IMPUESTO;
-                decimal total = subtotalConDescuento; /*+ impuesto;*/
+                decimal impuesto = subtotalConDescuento * PORCENTAJE_IMPUESTO;
+                decimal total = subtotalConDescuento + impuesto;
 
-                lblOrderTotal.Text = total.ToString("N2");
+                lblOrderTotal.Text = "S/." + total.ToString("N2");
 
                 System.Diagnostics.Debug.WriteLine($"Labels actualizados - Total: ${total:N2}");
             }
@@ -427,14 +427,23 @@ namespace CampusStoreWeb
                     descuentoCupon = subtotal * ((decimal)carrito.cupon.descuento / 100m);
                 }
 
-                decimal totalFinal = subtotal - descuentoCupon;
+                // Calcular subtotal con descuento del cupón
+                decimal subtotalConDescuento = subtotal - descuentoCupon;
+                
+                // Calcular impuesto sobre el subtotal con descuento
+                decimal impuesto = subtotalConDescuento * PORCENTAJE_IMPUESTO;
+                
+                // Calcular total final (subtotal con descuento + impuesto)
+                decimal totalFinal = subtotalConDescuento + impuesto;
 
                 // Debug
                 System.Diagnostics.Debug.WriteLine($"=== Cálculo de totales ===");
                 System.Diagnostics.Debug.WriteLine($"Subtotal sin descuento: ${subtotalSinDescuento}");
                 System.Diagnostics.Debug.WriteLine($"Subtotal con descuento productos: ${subtotal}");
                 System.Diagnostics.Debug.WriteLine($"Descuento cupón: ${descuentoCupon}");
-                System.Diagnostics.Debug.WriteLine($"Total final: ${totalFinal}");
+                System.Diagnostics.Debug.WriteLine($"Subtotal con descuento cupón: ${subtotalConDescuento}");
+                System.Diagnostics.Debug.WriteLine($"Impuesto (18%): ${impuesto}");
+                System.Diagnostics.Debug.WriteLine($"Total final (con impuesto): ${totalFinal}");
 
                 // Crear orden de compra
                 ordenCompra ordenCompra = new ordenCompra();
@@ -454,8 +463,10 @@ namespace CampusStoreWeb
                 ordenCompra.limitePagoSpecified = true;
 
                 // Montos - ASEGURAR que sean valores válidos (no null, no NaN, no Infinity)
+                // total: subtotal sin descuentos (para referencia)
+                // totalDescontado: total final con descuentos e impuesto (el que se cobra)
                 double totalDouble = (double)subtotalSinDescuento;
-                double totalDescontadoDouble = (double)totalFinal;
+                double totalDescontadoDouble = (double)totalFinal; // Este incluye descuento e impuesto
 
                 // Validar que los valores sean números válidos
                 if (double.IsNaN(totalDouble) || double.IsInfinity(totalDouble))

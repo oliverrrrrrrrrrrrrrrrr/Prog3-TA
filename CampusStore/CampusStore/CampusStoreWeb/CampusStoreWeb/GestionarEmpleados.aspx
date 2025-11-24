@@ -453,9 +453,6 @@
                     <!-- Header -->
                     <div class="empleados-header">
                         <h2>EMPLEADOS</h2>
-                        <asp:HyperLink runat="server" NavigateUrl="~/VerTodosEmpleados.aspx" CssClass="view-all-link">
-                            View All <i class="bi bi-arrow-right"></i>
-                        </asp:HyperLink>
                     </div>
                     
                     <!-- Tabla -->

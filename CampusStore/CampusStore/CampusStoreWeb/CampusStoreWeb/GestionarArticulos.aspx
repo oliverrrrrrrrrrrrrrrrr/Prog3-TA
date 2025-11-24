@@ -445,9 +445,6 @@
                     <!-- Header -->
                     <div class="articulos-header">
                         <h2>ARTÍCULOS</h2>
-                        <asp:HyperLink runat="server" NavigateUrl="~/VerTodosArticulos.aspx" CssClass="view-all-link">
-                            View All <i class="bi bi-arrow-right"></i>
-                        </asp:HyperLink>
                     </div>
                     
                     <!-- Tabla -->
@@ -459,13 +456,6 @@
                                 <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="NOMBRE" DataField="nombre" />
                                 <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="STOCK" Datafield="stockReal" />
                                 <asp:BoundField HeaderStyle-CssClass="table-header" ItemStyle-CssClass="table-items" HeaderText="PRECIO UNITARIO" Datafield="precio" />
-                                <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="EDITAR">
-                                    <ItemTemplate>
-                                        <asp:LinkButton runat="server" CssClass="btn-edit" ToolTip="Editar" OnClick="lbModificar_Click" CommandArgument='<%# Eval("idArticulo") %>'>
-                                            <i class="bi bi-pencil"></i>
-                                        </asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
                                 <asp:TemplateField HeaderStyle-CssClass="table-header" HeaderText="DETALLES">
                                     <ItemTemplate>
                                         <asp:HyperLink runat="server" 

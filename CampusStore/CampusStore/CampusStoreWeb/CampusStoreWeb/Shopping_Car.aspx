@@ -160,6 +160,24 @@
     transition: background-color 0.2s;
 }
 .btn-apply-coupon:hover { background-color: #0ba9c9; color: #fff; }
+
+.coupon-message {
+    display: block;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+.coupon-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.coupon-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
     </style>
     <div class="cart-page py-5">
     <div class="container">
@@ -293,8 +311,9 @@
                 <!-- Caja de Cupón -->
                 <div class="coupon-box">
                     <h3>Código del cupón</h3>
-                    <input type="text" class="form-control" placeholder="Ingrese el código del cupón" />
-                    <a href="#" class="btn btn-apply-coupon">APLICAR CUPÓN</a>
+                    <asp:TextBox ID="txtCodigoCupon" runat="server" CssClass="form-control" placeholder="Ingrese el código del cupón"></asp:TextBox>
+                    <asp:Label ID="lblMensajeCupon" runat="server" CssClass="coupon-message" Visible="false"></asp:Label>
+                    <asp:Button ID="btnAplicarCupon" runat="server" Text="APLICAR CUPÓN" CssClass="btn btn-apply-coupon" OnClick="btnAplicarCupon_Click" />
                 </div>
             </div>
         </div>
