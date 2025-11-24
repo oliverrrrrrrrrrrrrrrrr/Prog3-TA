@@ -11,6 +11,15 @@
   <message name="listarEditorialesResponse">
     <part name="parameters" element="tns:listarEditorialesResponse" />
   </message>
+<<<<<<< HEAD
+  <message name="guardarEditorial">
+    <part name="parameters" element="tns:guardarEditorial" />
+  </message>
+  <message name="guardarEditorialResponse">
+    <part name="parameters" element="tns:guardarEditorialResponse" />
+  </message>
+=======
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
   <message name="obtenerEditorial">
     <part name="parameters" element="tns:obtenerEditorial" />
   </message>
@@ -34,6 +43,13 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesRequest" message="tns:listarEditoriales" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesResponse" message="tns:listarEditorialesResponse" />
     </operation>
+<<<<<<< HEAD
+    <operation name="guardarEditorial">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialRequest" message="tns:guardarEditorial" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialResponse" message="tns:guardarEditorialResponse" />
+    </operation>
+=======
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
     <operation name="obtenerEditorial">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/obtenerEditorialRequest" message="tns:obtenerEditorial" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/obtenerEditorialResponse" message="tns:obtenerEditorialResponse" />
@@ -58,7 +74,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="obtenerEditorial">
+    <operation name="guardarEditorial">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -67,7 +83,11 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< HEAD
+    <operation name="obtenerEditorial">
+=======
     <operation name="eliminarEditorial">
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

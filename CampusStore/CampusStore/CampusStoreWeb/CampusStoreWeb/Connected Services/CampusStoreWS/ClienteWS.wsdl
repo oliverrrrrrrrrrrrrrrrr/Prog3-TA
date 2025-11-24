@@ -17,6 +17,21 @@
   <message name="guardarClienteResponse">
     <part name="parameters" element="tns:guardarClienteResponse" />
   </message>
+<<<<<<< HEAD
+  <message name="obtenerCliente">
+    <part name="parameters" element="tns:obtenerCliente" />
+  </message>
+  <message name="obtenerClienteResponse">
+    <part name="parameters" element="tns:obtenerClienteResponse" />
+  </message>
+  <message name="listarClientes">
+    <part name="parameters" element="tns:listarClientes" />
+  </message>
+  <message name="listarClientesResponse">
+    <part name="parameters" element="tns:listarClientesResponse" />
+  </message>
+=======
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
   <message name="eliminarCliente">
     <part name="parameters" element="tns:eliminarCliente" />
   </message>
@@ -44,6 +59,17 @@
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteRequest" message="tns:guardarCliente" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/guardarClienteResponse" message="tns:guardarClienteResponse" />
     </operation>
+<<<<<<< HEAD
+    <operation name="obtenerCliente">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerClienteRequest" message="tns:obtenerCliente" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/obtenerClienteResponse" message="tns:obtenerClienteResponse" />
+    </operation>
+    <operation name="listarClientes">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/listarClientesRequest" message="tns:listarClientes" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/listarClientesResponse" message="tns:listarClientesResponse" />
+    </operation>
+=======
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
     <operation name="eliminarCliente">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteRequest" message="tns:eliminarCliente" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/ClienteWS/eliminarClienteResponse" message="tns:eliminarClienteResponse" />
@@ -95,7 +121,11 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< HEAD
+    <operation name="eliminarCliente">
+=======
     <operation name="obtenerCliente">
+>>>>>>> 8b1511ebad46394863e79332e54cc27060aeaea6
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
