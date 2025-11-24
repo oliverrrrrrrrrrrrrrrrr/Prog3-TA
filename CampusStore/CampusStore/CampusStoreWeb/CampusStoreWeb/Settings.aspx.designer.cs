@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
-// <generado automáticamente>
-//     Este código fue generado por una herramienta.
+// <generado automï¿½ticamente>
+//     Este cï¿½digo fue generado por una herramienta.
 //
-//     Los cambios en este archivo podrían causar un comportamiento incorrecto y se perderán si
-//     se vuelve a generar el código. 
-// </generado automáticamente>
+//     Los cambios en este archivo podrï¿½an causar un comportamiento incorrecto y se perderï¿½n si
+//     se vuelve a generar el cï¿½digo. 
+// </generado automï¿½ticamente>
 //------------------------------------------------------------------------------
 
 namespace CampusStoreWeb
@@ -18,8 +18,8 @@ namespace CampusStoreWeb
         /// Control txtUsername.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtUsername;
 
@@ -27,8 +27,8 @@ namespace CampusStoreWeb
         /// Control txtFullName.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFullName;
 
@@ -36,17 +36,26 @@ namespace CampusStoreWeb
         /// Control txtEmail.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
+
+        /// <summary>
+        /// Control txtTelefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automticamente.
+        /// Para modificarlo, mueva la declaracin del campo del archivo del diseador al archivo de cdigo subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
 
         /// <summary>
         /// Control cvSignUpError.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator cvSignUpError;
 
@@ -54,8 +63,8 @@ namespace CampusStoreWeb
         /// Control btnSaveAccountChanges.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSaveAccountChanges;
 
@@ -63,8 +72,8 @@ namespace CampusStoreWeb
         /// Control txtCurrentPassword.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCurrentPassword;
 
@@ -72,8 +81,8 @@ namespace CampusStoreWeb
         /// Control txtNewPassword.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNewPassword;
 
@@ -81,8 +90,8 @@ namespace CampusStoreWeb
         /// Control txtConfirmPassword.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
 
@@ -90,8 +99,8 @@ namespace CampusStoreWeb
         /// Control btnChangePassword.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Campo generado automï¿½ticamente.
+        /// Para modificarlo, mueva la declaraciï¿½n del campo del archivo del diseï¿½ador al archivo de cï¿½digo subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnChangePassword;
     }

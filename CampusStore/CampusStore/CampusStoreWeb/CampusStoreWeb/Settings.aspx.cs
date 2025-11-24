@@ -37,6 +37,7 @@ namespace CampusStoreWeb
             txtUsername.Text = cliente.nombreUsuario;
             txtFullName.Text = cliente.nombre;
             txtEmail.Text = cliente.correo;
+            txtTelefono.Text = cliente.telefono ?? string.Empty;
 
             Session["Cliente"] = cliente;
         }
@@ -63,12 +64,6 @@ namespace CampusStoreWeb
 
             if (SaveUserSettings())
             {
-                //cliente cliente = (cliente)Session["Cliente"];
-                //cliente.nombreUsuario = txtUsername.Text;
-                //cliente.nombre = txtFullName.Text;
-                //cliente.correo = txtEmail.Text;
-                //Session["Cliente"] = cliente;
-                //Session["emaill"]= txtEmail.Text;
                 FormsAuthentication.SignOut();
                 FormsAuthentication.SetAuthCookie(txtEmail.Text, false);
                 Session["email"] = txtEmail.Text;
@@ -156,10 +151,12 @@ namespace CampusStoreWeb
             string oldEmail = cliente.correo;
             string oldUsername = cliente.nombreUsuario;
             string oldNombre = cliente.nombre;
+            string oldTelefono = cliente.telefono;
 
             cliente.nombre = txtFullName.Text;
             cliente.nombreUsuario = txtUsername.Text;
             cliente.correo = txtEmail.Text;
+            cliente.telefono = string.IsNullOrWhiteSpace(txtTelefono.Text) ? null : txtTelefono.Text.Trim();
 
             try
             {
@@ -173,11 +170,13 @@ namespace CampusStoreWeb
                 cliente.nombreUsuario = oldUsername;
                 cliente.correo = oldEmail;
                 cliente.nombre = oldNombre;
+                cliente.telefono = oldTelefono;
 
                 // Restaurar valores en los TextBox para que se vean correctamente
                 txtUsername.Text = oldUsername;
                 txtEmail.Text = oldEmail;
                 txtFullName.Text = oldNombre;
+                txtTelefono.Text = oldTelefono ?? string.Empty;
 
                 cvSignUpError.IsValid = false;
                 cvSignUpError.ErrorMessage = "El nombre de usuario o correo ya existe.";

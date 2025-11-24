@@ -276,6 +276,11 @@
                                 <label for="txtEmail">Correo electrónico</label>
                                 <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" placeholder="Email"></asp:TextBox>
                             </div>
+                            
+                            <div class="form-group-custom">
+                                <label for="txtTelefono">Teléfono</label>
+                                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" placeholder="Teléfono"></asp:TextBox>
+                            </div>
                         </div>
 
                         <asp:CustomValidator 
