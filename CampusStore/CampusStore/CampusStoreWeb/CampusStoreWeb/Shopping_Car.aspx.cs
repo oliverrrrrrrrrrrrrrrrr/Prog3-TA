@@ -113,7 +113,7 @@ namespace CampusStoreWeb
 
             // 4. Calcular subtotal después de descuento
             decimal subtotal = total - impuesto;
-            lblSubtotal.Text = subtotal.ToString("N2");  
+            lblSubtotal.Text = subtotal.ToString("N2");
         }
 
         protected void rptCartItems_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -205,12 +205,14 @@ namespace CampusStoreWeb
 
                 carritoWS.guardarCarrito(carrito, estado.Modificado);
                 Response.Redirect(Request.RawUrl);
+                string script = "mostrarModalExito();";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaExito", script, true);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error: {ex.Message}");
-                ScriptManager.RegisterStartupScript(this, GetType(), "error",
-                    "alert('Error al actualizar el carrito');", true);
+                string mensaje = ex.Message.Replace("'", "").Replace("\n", " ");
+                string script = $"mostrarModalError('{mensaje}');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaError", script, true);
             }
         }
     }
