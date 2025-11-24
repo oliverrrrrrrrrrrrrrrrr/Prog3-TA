@@ -14,4 +14,5 @@
     <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/CampusStoreWS/RolWS?wsdl"/>
     <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/CampusStoreWS/CuponWS?wsdl"/>
     <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/CampusStoreWS/ReporteWS?wsdl"/>
+<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/" ref="http://localhost:8080/CampusStoreWS/ReporteBestSeller?wsdl"/>
 </discovery>

@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/EditorialWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="obtenerEditorial">
-    <part name="parameters" element="tns:obtenerEditorial" />
+  <message name="listarEditoriales">
+    <part name="parameters" element="tns:listarEditoriales" />
   </message>
-  <message name="obtenerEditorialResponse">
-    <part name="parameters" element="tns:obtenerEditorialResponse" />
+  <message name="listarEditorialesResponse">
+    <part name="parameters" element="tns:listarEditorialesResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -17,17 +17,17 @@
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
   </message>
+  <message name="obtenerEditorial">
+    <part name="parameters" element="tns:obtenerEditorial" />
+  </message>
+  <message name="obtenerEditorialResponse">
+    <part name="parameters" element="tns:obtenerEditorialResponse" />
+  </message>
   <message name="eliminarEditorial">
     <part name="parameters" element="tns:eliminarEditorial" />
   </message>
   <message name="eliminarEditorialResponse">
     <part name="parameters" element="tns:eliminarEditorialResponse" />
-  </message>
-  <message name="listarEditoriales">
-    <part name="parameters" element="tns:listarEditoriales" />
-  </message>
-  <message name="listarEditorialesResponse">
-    <part name="parameters" element="tns:listarEditorialesResponse" />
   </message>
   <message name="guardarEditorial">
     <part name="parameters" element="tns:guardarEditorial" />
@@ -36,6 +36,12 @@
     <part name="parameters" element="tns:guardarEditorialResponse" />
   </message>
   <portType name="EditorialWS">
+    <operation name="listarEditoriales">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesRequest" message="tns:listarEditoriales" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesResponse" message="tns:listarEditorialesResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditoriales/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditoriales/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
     <operation name="obtenerEditorial">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/obtenerEditorialRequest" message="tns:obtenerEditorial" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/obtenerEditorialResponse" message="tns:obtenerEditorialResponse" />
@@ -48,12 +54,6 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorial/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/eliminarEditorial/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-    <operation name="listarEditoriales">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesRequest" message="tns:listarEditoriales" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditorialesResponse" message="tns:listarEditorialesResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditoriales/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/listarEditoriales/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
     <operation name="guardarEditorial">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialRequest" message="tns:guardarEditorial" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/EditorialWS/guardarEditorialResponse" message="tns:guardarEditorialResponse" />
@@ -63,6 +63,21 @@
   </portType>
   <binding name="EditorialWSPortBinding" type="tns:EditorialWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="listarEditoriales">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
     <operation name="obtenerEditorial">
       <soap:operation soapAction="" />
       <input>
@@ -79,21 +94,6 @@
       </fault>
     </operation>
     <operation name="eliminarEditorial">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="listarEditoriales">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

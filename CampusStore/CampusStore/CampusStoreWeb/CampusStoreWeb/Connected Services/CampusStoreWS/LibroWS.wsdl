@@ -11,23 +11,23 @@
   <message name="leerAutoresPorLibroResponse">
     <part name="parameters" element="tns:leerAutoresPorLibroResponse" />
   </message>
-  <message name="registrarLibro">
-    <part name="parameters" element="tns:registrarLibro" />
+  <message name="obtenerLibro">
+    <part name="parameters" element="tns:obtenerLibro" />
   </message>
-  <message name="registrarLibroResponse">
-    <part name="parameters" element="tns:registrarLibroResponse" />
-  </message>
-  <message name="guardarLibro">
-    <part name="parameters" element="tns:guardarLibro" />
-  </message>
-  <message name="guardarLibroResponse">
-    <part name="parameters" element="tns:guardarLibroResponse" />
+  <message name="obtenerLibroResponse">
+    <part name="parameters" element="tns:obtenerLibroResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
   </message>
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
+  </message>
+  <message name="registrarLibro">
+    <part name="parameters" element="tns:registrarLibro" />
+  </message>
+  <message name="registrarLibroResponse">
+    <part name="parameters" element="tns:registrarLibroResponse" />
   </message>
   <message name="listarLibros">
     <part name="parameters" element="tns:listarLibros" />
@@ -41,26 +41,26 @@
   <message name="eliminarLibroResponse">
     <part name="parameters" element="tns:eliminarLibroResponse" />
   </message>
-  <message name="obtenerLibro">
-    <part name="parameters" element="tns:obtenerLibro" />
+  <message name="guardarLibro">
+    <part name="parameters" element="tns:guardarLibro" />
   </message>
-  <message name="obtenerLibroResponse">
-    <part name="parameters" element="tns:obtenerLibroResponse" />
+  <message name="guardarLibroResponse">
+    <part name="parameters" element="tns:guardarLibroResponse" />
   </message>
   <portType name="LibroWS">
     <operation name="leerAutoresPorLibro">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/leerAutoresPorLibroRequest" message="tns:leerAutoresPorLibro" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/leerAutoresPorLibroResponse" message="tns:leerAutoresPorLibroResponse" />
     </operation>
+    <operation name="obtenerLibro">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest" message="tns:obtenerLibro" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse" message="tns:obtenerLibroResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibro/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibro/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
     <operation name="registrarLibro">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroRequest" message="tns:registrarLibro" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/registrarLibroResponse" message="tns:registrarLibroResponse" />
-    </operation>
-    <operation name="guardarLibro">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroRequest" message="tns:guardarLibro" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroResponse" message="tns:guardarLibroResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibro/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibro/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="listarLibros">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/listarLibrosRequest" message="tns:listarLibros" />
@@ -74,11 +74,11 @@
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibro/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/eliminarLibro/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-    <operation name="obtenerLibro">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroRequest" message="tns:obtenerLibro" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibroResponse" message="tns:obtenerLibroResponse" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibro/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/obtenerLibro/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="guardarLibro">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroRequest" message="tns:guardarLibro" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibroResponse" message="tns:guardarLibroResponse" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibro/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.campusstore.pucp.edu.pe/LibroWS/guardarLibro/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
   </portType>
   <binding name="LibroWSPortBinding" type="tns:LibroWS">
@@ -92,16 +92,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="registrarLibro">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="guardarLibro">
+    <operation name="obtenerLibro">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -115,6 +106,15 @@
       <fault name="InterruptedException">
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
+    </operation>
+    <operation name="registrarLibro">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
     </operation>
     <operation name="listarLibros">
       <soap:operation soapAction="" />
@@ -146,7 +146,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="obtenerLibro">
+    <operation name="guardarLibro">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

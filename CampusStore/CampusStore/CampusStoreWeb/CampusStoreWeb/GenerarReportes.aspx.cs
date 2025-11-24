@@ -57,7 +57,39 @@ namespace CampusStoreWeb
             Response.End();
         }
 
+        protected void btnGenerarBestSeller_Click(object sender, EventArgs e)
+        {
+            string fechaInicio = txtFechaInicioBestSellers.Text; // viene como yyyy-MM-dd
+            string fechaFin = txtFechaFinBestSellers.Text;
 
+            if (!DateTime.TryParse(fechaInicio, out DateTime fi) ||
+                !DateTime.TryParse(fechaFin, out DateTime ff))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert",
+                    "alert('Debe seleccionar ambas fechas.');", true);
+                return;
+            }
+
+            // Si quieres asegurar formato:
+            string fechaIniParam = fi.ToString("yyyy-MM-dd");
+            string fechaFinParam = ff.ToString("yyyy-MM-dd");
+
+            var cliente = new ReporteBestSellerClient();
+            byte[] pdfBytes = cliente.reporteBestSeller(fechaIniParam, fechaFinParam);
+
+            if (pdfBytes == null || pdfBytes.Length == 0)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert",
+                    "alert('No se pudo generar el reporte.');", true);
+                return;
+            }
+
+            Response.Clear();
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "inline; filename=ReporteVentas.pdf");
+            Response.BinaryWrite(pdfBytes);
+            Response.End();
+        }
 
 
     }
