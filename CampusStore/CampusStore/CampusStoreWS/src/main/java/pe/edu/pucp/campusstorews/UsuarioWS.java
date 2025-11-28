@@ -23,7 +23,7 @@ public class UsuarioWS {
         @WebParam(name = "correo") String correo, 
         @WebParam(name = "contraseña") String contraseña
     ) throws IOException, InterruptedException {
-        return this.usuarioBO.login(correo, correo);
+        return this.usuarioBO.login(correo, contraseña);
     }
     
 }

@@ -1,16 +1,9 @@
 package pe.edu.pucp.campusstorews;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URLEncoder;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import pe.edu.pucp.campusstore.modelo.Reseña;
 import pe.edu.pucp.campusstore.bo.ReseñaBO;
