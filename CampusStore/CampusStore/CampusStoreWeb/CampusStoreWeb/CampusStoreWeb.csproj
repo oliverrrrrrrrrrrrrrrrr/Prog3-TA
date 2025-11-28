@@ -421,7 +421,6 @@
     <Content Include="Shop_Page.aspx" />
     <Content Include="SignIn.aspx" />
     <Content Include="SignUp.aspx" />
-    <Content Include="testMaster.aspx" />
     <Content Include="Verify_Code.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -663,13 +662,6 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="testMaster.aspx.cs">
-      <DependentUpon>testMaster.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="testMaster.aspx.designer.cs">
-      <DependentUpon>testMaster.aspx</DependentUpon>
     </Compile>
     <Compile Include="Verify_Code.aspx.cs">
       <DependentUpon>Verify_Code.aspx</DependentUpon>
