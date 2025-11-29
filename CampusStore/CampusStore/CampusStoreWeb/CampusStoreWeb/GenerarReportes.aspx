@@ -225,9 +225,9 @@
                         <i class="bi bi-ticket-perforated"></i>
                         <span>Gestionar Cupones</span>
                     </asp:HyperLink>
-                    <asp:HyperLink runat="server" NavigateUrl="~/GestionarPedidos.aspx" CssClass="menu-item">
+                    <asp:HyperLink runat="server" NavigateUrl="~/GestionarOrdenesCompra.aspx" CssClass="menu-item">
                         <i class="bi bi-file-earmark-text"></i>
-                        <span>Gestionar Pedidos</span>
+                        <span>Gestionar Ordenes de Compra</span>
                     </asp:HyperLink>
                     <asp:HyperLink runat="server" NavigateUrl="~/GenerarReportes.aspx" CssClass="menu-item active">
                         <i class="bi bi-gear"></i>

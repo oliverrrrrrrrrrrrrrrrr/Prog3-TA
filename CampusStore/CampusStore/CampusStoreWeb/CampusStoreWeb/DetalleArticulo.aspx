@@ -1062,6 +1062,13 @@
                         <asp:DropDownList ID="ddlCategoria" runat="server"></asp:DropDownList>
                     </div>
                     <div class="form-group form-group-full">
+                        <label>Portada (imagen)</label>
+                        <asp:FileUpload ID="fuPortadaEdit" runat="server" />
+                        <span class="form-help-text">
+                            Deje vacío para mantener la imagen actual. Seleccione una nueva imagen para reemplazarla (JPG, PNG).
+                        </span>
+                    </div>
+                    <div class="form-group form-group-full">
                         <label>Descripción</label>
                         <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine"></asp:TextBox>
                     </div>
