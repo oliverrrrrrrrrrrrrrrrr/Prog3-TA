@@ -536,8 +536,10 @@
             background-color: #F9FAFB;
             border: 2px solid #E4E7E9;
             border-radius: 8px;
-            padding: 24px;
+            padding: 32px;
             margin-top: 30px;
+            overflow: visible;
+            box-sizing: border-box;
         }
 
         .resenas-header {
@@ -545,14 +547,22 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
-            padding-bottom: 20px;
+            padding: 16px 0 20px 0;
             border-bottom: 2px solid #E4E7E9;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .resenas-title-group {
             display: flex;
             align-items: center;
             gap: 12px;
+            flex: 1;
+            min-width: 200px;
+            padding-right: 16px;
+            box-sizing: border-box;
         }
 
         .resenas-title-group h3 {
@@ -563,6 +573,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
         .resenas-title-group h3 i {
@@ -580,26 +591,36 @@
             display: flex;
             align-items: center;
             gap: 20px;
+            flex-shrink: 0;
+            padding-left: 16px;
+            box-sizing: border-box;
         }
 
         .rating-promedio {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            min-width: fit-content;
+            padding: 8px;
+            box-sizing: border-box;
         }
 
         .rating-numero {
-            font-size: 36px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--primary-orange);
             line-height: 1;
+            white-space: nowrap;
         }
 
         .rating-estrellas-grande {
             display: flex;
-            gap: 4px;
-            font-size: 20px;
+            gap: 3px;
+            font-size: 16px;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Lista de reseñas */
@@ -870,6 +891,11 @@
                 gap: 16px;
             }
 
+            .resenas-rating-summary {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
             .resena-header {
                 flex-direction: column;
                 gap: 12px;
@@ -878,6 +904,7 @@
             .rating-promedio {
                 flex-direction: row;
                 gap: 12px;
+                align-items: center;
             }
         }
     </style>
