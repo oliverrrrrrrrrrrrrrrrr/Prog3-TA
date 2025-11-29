@@ -694,7 +694,7 @@ namespace CampusStoreWeb
                         },
 
                         autores = autoresEditSeleccionados?.ToArray(),
-
+                        
                         imagenURL = imagenUrlFinal
                     };
                     // Llamar al WS para actualizar

@@ -75,7 +75,6 @@ public class LibroWS {
             @WebParam(name = "libro") Libro modelo,
             @WebParam(name = "estado") Estado estado
     )  {
-
         this.libroBO.guardar(modelo, estado);
     }
 

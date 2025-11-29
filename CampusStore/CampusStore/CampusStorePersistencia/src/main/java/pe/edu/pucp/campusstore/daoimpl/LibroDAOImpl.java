@@ -218,4 +218,35 @@ public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDA
         });
     }
     
+    @Override
+    public boolean actualizar(Libro modelo) {
+        return ejecutarComando(conn -> {
+            boolean resultado = ejecutarComandoActualizar(conn, modelo);
+            if (resultado) {
+                actualizarAutores(conn, modelo);
+            }
+            return resultado;
+        });
+    }
+    
+    private void actualizarAutores(Connection conn, Libro modelo) throws SQLException {
+        if (modelo.getAutores() == null || modelo.getAutores().isEmpty()) {
+            return;
+        }
+
+        // Eliminar relaciones existentes
+        try (CallableStatement cmdEliminar = conn.prepareCall("{call eliminarAutoresLibro(?)}")) {
+            cmdEliminar.setInt(1, modelo.getIdLibro());
+            cmdEliminar.executeUpdate();
+        }
+
+        // Insertar nuevas relaciones
+        try (CallableStatement cmdInsertar = conn.prepareCall("{call actualizarAutoresLibro(?, ?)}")) {
+            for (Autor autor : modelo.getAutores()) {
+                cmdInsertar.setInt(1, modelo.getIdLibro());
+                cmdInsertar.setInt(2, autor.getIdAutor());
+                cmdInsertar.executeUpdate();
+            }
+        }
+    }
 }
