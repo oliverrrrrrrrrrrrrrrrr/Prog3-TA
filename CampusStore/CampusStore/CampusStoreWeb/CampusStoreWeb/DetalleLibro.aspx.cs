@@ -836,6 +836,11 @@ namespace CampusStoreWeb
                         libroEditado.editorial.idEditorialSpecified = true;
                     }
 
+                    foreach (var a in libroEditado.autores)
+                    {
+                        a.idAutorSpecified = true;
+                    }
+
                     bool hayTemporales = autoresEditSeleccionados.Any(a => a.idAutor == 0) ||
                                          ddlEditorialEdit.SelectedValue == "TEMP_EDITORIAL";
 
