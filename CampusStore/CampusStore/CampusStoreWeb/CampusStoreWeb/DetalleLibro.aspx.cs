@@ -729,7 +729,7 @@ namespace CampusStoreWeb
         // ========================================
         // BOTÓN GUARDAR - Guarda los cambios
         // ========================================
-        csharpprotected void btnGuardar_Click(object sender, EventArgs e)
+        protected void btnGuardar_Click(object sender, EventArgs e)
         {
             if (Page.IsValid && ViewState["idLibro"] != null)
             {
