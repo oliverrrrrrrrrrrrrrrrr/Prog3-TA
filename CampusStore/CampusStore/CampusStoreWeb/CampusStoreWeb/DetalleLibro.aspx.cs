@@ -429,9 +429,6 @@ namespace CampusStoreWeb
             }
         }
 
-        // ========================================
-        // BOTÓN CANCELAR DESCUENTO
-        // ========================================
         protected void btnCancelarDescuento_Click(object sender, EventArgs e)
         {
             MostrarFormularioDescuento(false);
@@ -654,8 +651,6 @@ namespace CampusStoreWeb
                 lblNoAutoresEdit.Visible = true;
             }
         }
-
-        // Agregar autor a la lista de edición
         protected void btnAgregarAutorEdit_Click(object sender, EventArgs e)
         {
             if (ddlAutoresEdit.SelectedValue != "0")
@@ -699,7 +694,6 @@ namespace CampusStoreWeb
             }
         }
 
-        // Eliminar autor de la lista
         protected void rptAutoresEdit_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "EliminarAutor")
@@ -721,14 +715,10 @@ namespace CampusStoreWeb
             pnlVista.Visible = !mostrar;
             pnlFormEdicion.Visible = mostrar;
 
-            // Ocultar botones de acción cuando está editando
             btnEditar.Visible = !mostrar;
             btnEliminar.Visible = !mostrar;
         }
 
-        // ========================================
-        // BOTÓN GUARDAR - Guarda los cambios
-        // ========================================
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             if (Page.IsValid && ViewState["idLibro"] != null)
@@ -737,9 +727,6 @@ namespace CampusStoreWeb
                 {
                     idLibroActual = (int)ViewState["idLibro"];
 
-                    // ========================================
-                    // MANEJAR EDITORIAL (temporal o existente)
-                    // ========================================
                     editorial editorialLibro;
 
                     if (ddlEditorialEdit.SelectedValue == "TEMP_EDITORIAL")
@@ -782,9 +769,6 @@ namespace CampusStoreWeb
                         return;
                     }
 
-                    // ========================================
-                    // RECUPERAR AUTORES (existentes o temporales)
-                    // ========================================
                     if (ViewState["AutoresEditSeleccionados"] != null)
                     {
                         autoresEditSeleccionados = (List<autor>)ViewState["AutoresEditSeleccionados"];
@@ -794,9 +778,6 @@ namespace CampusStoreWeb
                         autoresEditSeleccionados = new List<autor>();
                     }
 
-                    // ========================================
-                    // MANEJAR IMAGEN
-                    // ========================================
                     string imagenUrlFinal;
                     libroActual = libroWS.obtenerLibro(idLibroActual);
 
@@ -818,9 +799,6 @@ namespace CampusStoreWeb
                         imagenUrlFinal = libroActual.imagenURL;
                     }
 
-                    // ========================================
-                    // CREAR OBJETO LIBRO ACTUALIZADO
-                    // ========================================
                     libro libroEditado = new libro
                     {
                         idLibro = idLibroActual,
@@ -848,38 +826,36 @@ namespace CampusStoreWeb
                         imagenURL = imagenUrlFinal
                     };
 
-                    libroEditado.editorial.idEditorialSpecified = true;
+                    if (ddlEditorialEdit.SelectedValue == "TEMP_EDITORIAL")
+                    {
+                        libroEditado.editorial.idEditorial = 0;
+                        libroEditado.editorial.idEditorialSpecified = true;
+                    }
+                    else
+                    {
+                        libroEditado.editorial.idEditorialSpecified = true;
+                    }
 
-                    // ========================================
-                    // GUARDAR CON MANEJO DE TEMPORALES
-                    // ========================================
-                    // Detectar si hay elementos temporales
                     bool hayTemporales = autoresEditSeleccionados.Any(a => a.idAutor == 0) ||
                                          ddlEditorialEdit.SelectedValue == "TEMP_EDITORIAL";
 
                     if (hayTemporales)
                     {
-                        // Usar el método que maneja temporales
                         libroWS.modificarLibroConAutores(libroEditado, autoresEditSeleccionados.ToArray());
                     }
                     else
                     {
-                        // Actualización normal
                         libroWS.guardarLibro(libroEditado, estado.Modificado);
                     }
 
-                    // Recargar datos actualizados
                     libroActual = libroWS.obtenerLibro(idLibroActual);
 
-                    // Limpiar ViewState de temporales
                     ViewState.Remove("EditorialTemporal");
                     ViewState.Remove("AutoresEditSeleccionados");
 
-                    // Volver a la vista de detalle
                     MostrarDatosLibro();
                     MostrarFormularioEdicion(false);
 
-                    // Mostrar mensaje de éxito
                     string script = "mostrarModalExito();";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "AlertaExito", script, true);
                 }

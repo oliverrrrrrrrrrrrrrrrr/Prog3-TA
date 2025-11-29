@@ -5,17 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/CampusStoreWS/OrdenCompraWS?xsd=1" namespace="http://services.campusstore.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="listarLibrosCarrito">
-    <part name="parameters" element="tns:listarLibrosCarrito" />
+  <message name="listarArticulosCarrito">
+    <part name="parameters" element="tns:listarArticulosCarrito" />
   </message>
-  <message name="listarLibrosCarritoResponse">
-    <part name="parameters" element="tns:listarLibrosCarritoResponse" />
-  </message>
-  <message name="contarProductosCarrito">
-    <part name="parameters" element="tns:contarProductosCarrito" />
-  </message>
-  <message name="contarProductosCarritoResponse">
-    <part name="parameters" element="tns:contarProductosCarritoResponse" />
+  <message name="listarArticulosCarritoResponse">
+    <part name="parameters" element="tns:listarArticulosCarritoResponse" />
   </message>
   <message name="cancelarOrdenesExpiradas">
     <part name="parameters" element="tns:cancelarOrdenesExpiradas" />
@@ -23,11 +17,17 @@
   <message name="cancelarOrdenesExpiradasResponse">
     <part name="parameters" element="tns:cancelarOrdenesExpiradasResponse" />
   </message>
-  <message name="listarArticulosCarrito">
-    <part name="parameters" element="tns:listarArticulosCarrito" />
+  <message name="contarProductosCarrito">
+    <part name="parameters" element="tns:contarProductosCarrito" />
   </message>
-  <message name="listarArticulosCarritoResponse">
-    <part name="parameters" element="tns:listarArticulosCarritoResponse" />
+  <message name="contarProductosCarritoResponse">
+    <part name="parameters" element="tns:contarProductosCarritoResponse" />
+  </message>
+  <message name="listarLibrosCarrito">
+    <part name="parameters" element="tns:listarLibrosCarrito" />
+  </message>
+  <message name="listarLibrosCarritoResponse">
+    <part name="parameters" element="tns:listarLibrosCarritoResponse" />
   </message>
   <message name="listarOrdenesCompra">
     <part name="parameters" element="tns:listarOrdenesCompra" />
@@ -66,21 +66,21 @@
     <part name="parameters" element="tns:guardarOrdenCompraResponse" />
   </message>
   <portType name="OrdenCompraWS">
-    <operation name="listarLibrosCarrito">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarLibrosCarritoRequest" message="tns:listarLibrosCarrito" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarLibrosCarritoResponse" message="tns:listarLibrosCarritoResponse" />
-    </operation>
-    <operation name="contarProductosCarrito">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/contarProductosCarritoRequest" message="tns:contarProductosCarrito" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/contarProductosCarritoResponse" message="tns:contarProductosCarritoResponse" />
+    <operation name="listarArticulosCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarArticulosCarritoRequest" message="tns:listarArticulosCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarArticulosCarritoResponse" message="tns:listarArticulosCarritoResponse" />
     </operation>
     <operation name="cancelarOrdenesExpiradas">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/cancelarOrdenesExpiradasRequest" message="tns:cancelarOrdenesExpiradas" />
       <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/cancelarOrdenesExpiradasResponse" message="tns:cancelarOrdenesExpiradasResponse" />
     </operation>
-    <operation name="listarArticulosCarrito">
-      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarArticulosCarritoRequest" message="tns:listarArticulosCarrito" />
-      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarArticulosCarritoResponse" message="tns:listarArticulosCarritoResponse" />
+    <operation name="contarProductosCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/contarProductosCarritoRequest" message="tns:contarProductosCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/contarProductosCarritoResponse" message="tns:contarProductosCarritoResponse" />
+    </operation>
+    <operation name="listarLibrosCarrito">
+      <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarLibrosCarritoRequest" message="tns:listarLibrosCarrito" />
+      <output wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarLibrosCarritoResponse" message="tns:listarLibrosCarritoResponse" />
     </operation>
     <operation name="listarOrdenesCompra">
       <input wsam:Action="http://services.campusstore.pucp.edu.pe/OrdenCompraWS/listarOrdenesCompraRequest" message="tns:listarOrdenesCompra" />
@@ -113,16 +113,7 @@
   </portType>
   <binding name="OrdenCompraWSPortBinding" type="tns:OrdenCompraWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="listarLibrosCarrito">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="contarProductosCarrito">
+    <operation name="listarArticulosCarrito">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -140,7 +131,16 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="listarArticulosCarrito">
+    <operation name="contarProductosCarrito">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarLibrosCarrito">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

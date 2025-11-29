@@ -113,7 +113,12 @@ public class LibroBOImpl implements LibroBO {
         try (Connection conn = dbManager.getConnection()) {
             conn.setAutoCommit(false); 
             try {
-                if (libro.getEditorial().getIdEditorial() == 0) {
+                if (libro.getEditorial() != null) {
+                } else {
+                    throw new RuntimeException("El objeto editorial no puede ser nulo.");
+                }
+                
+                if (libro.getEditorial() != null && (libro.getEditorial().getIdEditorial() == 0 || libro.getEditorial().getIdEditorial() == null)) {
                     Integer idEditorial = this.editorialDAO.crear(libro.getEditorial(), conn);
                     if (idEditorial == null) {
                         throw new RuntimeException("No se pudo crear la editorial");
