@@ -267,8 +267,9 @@ namespace CampusStoreWeb
                 try
                 {
                     idArticuloActual = (int)ViewState["idArticulo"];
-                    
-                    descuento descuento = new descuento() {
+
+                    descuento descuento = new descuento()
+                    {
                         valorDescuento = double.Parse(txtDescuentoValor.Text),
                         valorDescuentoSpecified = true,
 
@@ -395,12 +396,12 @@ namespace CampusStoreWeb
             if (ViewState["idArticulo"] != null)
             {
                 idArticuloActual = (int)ViewState["idArticulo"];
-                
+
                 try
                 {
                     // Recargar el artículo por si cambió
                     articuloActual = articuloWS.obtenerArticulo(idArticuloActual);
-                    
+
                     if (articuloActual != null)
                     {
                         CargarFormularioEdicion();
@@ -491,7 +492,7 @@ namespace CampusStoreWeb
                     };
 
                     // Llamar al WS para actualizar
-                    articuloWS.guardarArticulo(articuloEditado,estado.Modificado);
+                    articuloWS.guardarArticulo(articuloEditado, estado.Modificado);
 
                     // Recargar datos actualizados
                     articuloActual = articuloWS.obtenerArticulo(idArticuloActual);
@@ -598,14 +599,14 @@ namespace CampusStoreWeb
                 double promedio = articuloActual.reseñas.Average(r => r.calificacion);
                 lblPromedioRating.Text = promedio.ToString("F1");
                 lblTotalResenas.Text = $"({articuloActual.reseñas.Length} {(articuloActual.reseñas.Length == 1 ? "reseña" : "reseñas")})";
-                
+
                 // Generar estrellas de promedio
                 GenerarEstrellasPromedio(promedio);
 
                 // Ordenar por fecha más reciente primero
                 //var resenasOrdenadas = articuloActual.reseñas.OrderByDescending(r => r.fechaPublicacion).ToArray();
                 var resenasOrdenadas = articuloActual.reseñas.ToArray();
-                
+
                 // Vincular al Repeater
                 rptResenas.DataSource = resenasOrdenadas;
                 rptResenas.DataBind();
