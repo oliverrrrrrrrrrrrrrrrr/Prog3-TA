@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS libreriaCampusStore2;
+USE libreriaCampusStore2;
 -- MySQL Workbench Forward Engineering
 -- SET GLOBAL event_scheduler = ON;
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;

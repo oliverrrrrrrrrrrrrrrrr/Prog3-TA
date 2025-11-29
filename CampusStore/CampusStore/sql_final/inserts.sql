@@ -1,29 +1,29 @@
 -- ==========================================================
 -- 1. LIMPIEZA (OPCIONAL: Solo si quieres reiniciar los IDs)
 -- ==========================================================
--- SET FOREIGN_KEY_CHECKS = 0;
--- TRUNCATE TABLE linea_carrito_articulo;
--- TRUNCATE TABLE linea_carrito_libro;
--- TRUNCATE TABLE reseña_articulo;
--- TRUNCATE TABLE reseña_libro;
--- TRUNCATE TABLE documento_venta;
--- TRUNCATE TABLE orden_compra;
--- TRUNCATE TABLE carrito;
--- TRUNCATE TABLE cupon_has_cliente;
--- TRUNCATE TABLE descuento_articulo;
--- TRUNCATE TABLE descuento_libro;
--- TRUNCATE TABLE libro_has_autor;
--- TRUNCATE TABLE articulo;
--- TRUNCATE TABLE libro;
--- TRUNCATE TABLE autor;
--- TRUNCATE TABLE editorial;
--- TRUNCATE TABLE cliente;
--- TRUNCATE TABLE empleado;
--- TRUNCATE TABLE rol_has_permiso;
--- TRUNCATE TABLE permiso;
--- TRUNCATE TABLE rol;
--- TRUNCATE TABLE cupon;
--- SET FOREIGN_KEY_CHECKS = 1;
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE linea_carrito_articulo;
+TRUNCATE TABLE linea_carrito_libro;
+TRUNCATE TABLE reseña_articulo;
+TRUNCATE TABLE reseña_libro;
+TRUNCATE TABLE documento_venta;
+TRUNCATE TABLE orden_compra;
+TRUNCATE TABLE carrito;
+TRUNCATE TABLE cupon_has_cliente;
+TRUNCATE TABLE descuento_articulo;
+TRUNCATE TABLE descuento_libro;
+TRUNCATE TABLE libro_has_autor;
+TRUNCATE TABLE articulo;
+TRUNCATE TABLE libro;
+TRUNCATE TABLE autor;
+TRUNCATE TABLE editorial;
+TRUNCATE TABLE cliente;
+TRUNCATE TABLE empleado;
+TRUNCATE TABLE rol_has_permiso;
+TRUNCATE TABLE permiso;
+TRUNCATE TABLE rol;
+TRUNCATE TABLE cupon;
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- =============================================
 -- 2. DATOS MAESTROS (Roles, Permisos, Staff)
@@ -39,9 +39,9 @@ INSERT INTO rol_has_permiso (ROL_idRol, PERMISO_idPermiso) VALUES
 (1,1), (1,2), (1,3), (2,2), (3,3);
 
 INSERT INTO empleado (nombre, contraseña, nombreUsuario, correo, telefono, activo, sueldo, ROL_idRol) VALUES 
-('Carlos Admin', '123456', 'admin', 'admin@lib.com', '999111001', 1, 3000, 1),
-('Lucia Venta', '123456', 'lucia', 'lucia@lib.com', '999111002', 1, 1200, 2),
-('Marcos Stock', '123456', 'marcos', 'marcos@lib.com', '999111003', 1, 1200, 3);
+('Carlos Admin', 'PWhlGewFwcXhAMvTEq+bTQ==', 'admin', 'admin@lib.com', '999111001', 1, 3000, 1),
+('Lucia Venta', 'PWhlGewFwcXhAMvTEq+bTQ==', 'lucia', 'lucia@lib.com', '999111002', 1, 1200, 2),
+('Marcos Stock', 'PWhlGewFwcXhAMvTEq+bTQ==', 'marcos', 'marcos@lib.com', '999111003', 1, 1200, 3);
 
 -- =============================================
 -- 3. EDITORIALES Y AUTORES (Base para los 50 libros)
@@ -200,16 +200,16 @@ INSERT INTO articulo (precio, precioDescuento, stockReal, stockVirtual, nombre, 
 -- =============================================
 
 INSERT INTO cliente (nombre, contraseña, nombreUsuario, correo, telefono) VALUES 
-('Juan Perez', '123456', 'jperez', 'juan@test.com', '999000001'),
-('Maria Lopez', '123456', 'mlopez', 'maria@test.com', '999000002'),
-('Pedro Gomez', '123456', 'pgomez', 'pedro@test.com', '999000003'),
-('Laura Diaz', '123456', 'ldiaz', 'laura@test.com', '999000004'),
-('Carlos Ruiz', '123456', 'cruiz', 'carlos@test.com', '999000005'),
-('Ana Torres', '123456', 'atorres', 'ana@test.com', '999000006'),
-('Luis Silva', '123456', 'lsilva', 'luis@test.com', '999000007'),
-('Sofia Vega', '123456', 'svega', 'sofia@test.com', '999000008'),
-('Diego Rios', '123456', 'drios', 'diego@test.com', '999000009'),
-('Elena Paz', '123456', 'epaz', 'elena@test.com', '999000010');
+('Juan Perez', 'PWhlGewFwcXhAMvTEq+bTQ==', 'jperez', 'juan@test.com', '999000001'),
+('Maria Lopez', 'PWhlGewFwcXhAMvTEq+bTQ==', 'mlopez', 'maria@test.com', '999000002'),
+('Pedro Gomez', 'PWhlGewFwcXhAMvTEq+bTQ==', 'pgomez', 'pedro@test.com', '999000003'),
+('Laura Diaz', 'PWhlGewFwcXhAMvTEq+bTQ==', 'ldiaz', 'laura@test.com', '999000004'),
+('Carlos Ruiz', 'PWhlGewFwcXhAMvTEq+bTQ==', 'cruiz', 'carlos@test.com', '999000005'),
+('Ana Torres', 'PWhlGewFwcXhAMvTEq+bTQ==', 'atorres', 'ana@test.com', '999000006'),
+('Luis Silva', 'PWhlGewFwcXhAMvTEq+bTQ==', 'lsilva', 'luis@test.com', '999000007'),
+('Sofia Vega', 'PWhlGewFwcXhAMvTEq+bTQ==', 'svega', 'sofia@test.com', '999000008'),
+('Diego Rios', 'PWhlGewFwcXhAMvTEq+bTQ==', 'drios', 'diego@test.com', '999000009'),
+('Elena Paz', 'PWhlGewFwcXhAMvTEq+bTQ==', 'epaz', 'elena@test.com', '999000010');
 
 -- =============================================
 -- 8. CUPONES Y TRANSACCIONES
