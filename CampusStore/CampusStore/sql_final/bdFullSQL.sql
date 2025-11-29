@@ -3224,3 +3224,26 @@ BEGIN
     WHERE chc.cliente_idCliente = p_idCliente;
 END//
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `actualizarAutoresLibro`(
+    IN p_idLibro INT,
+    IN p_idAutor INT
+)
+BEGIN
+    -- Insertar la relación libro-autor (si no existe ya)
+    INSERT IGNORE INTO libro_has_autor (LIBRO_idLibro, AUTOR_idAutor)
+    VALUES (p_idLibro, p_idAutor);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `eliminarAutoresLibro`(
+    IN p_idLibro INT
+)
+BEGIN
+    -- Eliminar todas las relaciones de autores para este libro
+    DELETE FROM libro_has_autor 
+    WHERE LIBRO_idLibro = p_idLibro;
+END$$
+DELIMITER ;

@@ -848,6 +848,8 @@ namespace CampusStoreWeb
                         imagenURL = imagenUrlFinal
                     };
 
+                    libroEditado.editorial.idEditorialSpecified = true;
+
                     // ========================================
                     // GUARDAR CON MANEJO DE TEMPORALES
                     // ========================================
