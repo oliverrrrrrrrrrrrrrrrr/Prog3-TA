@@ -1235,8 +1235,141 @@
         
         </asp:Panel>
     </div>
+
+    <asp:Panel ID="pnlModalEditorial" runat="server" CssClass="modal-panel">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="bi bi-building"></i> Nueva Editorial</h2>
+                <button type="button" class="btn-close-modal" onclick="hideModalEditorial()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-grid">
+                    <div class="form-group form-group-full">
+                        <label>Nombre <span class="required">*</span></label>
+                        <asp:TextBox ID="txtEditorialNombre" runat="server" placeholder="Nombre de la editorial"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rfvEditorialNombre" runat="server" 
+                            ControlToValidate="txtEditorialNombre" 
+                            ErrorMessage="El nombre es requerido" 
+                            CssClass="validator"
+                            Display="Dynamic" 
+                            ValidationGroup="EditorialForm" />
+                    </div>
+                    <div class="form-group">
+                        <label>CIF <span class="required">*</span></label>
+                        <asp:TextBox ID="txtEditorialCIF" runat="server" placeholder="CIF"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rfvEditorialCIF" runat="server" 
+                            ControlToValidate="txtEditorialCIF" 
+                            ErrorMessage="El CIF es requerido" 
+                            CssClass="validator"
+                            Display="Dynamic" 
+                            ValidationGroup="EditorialForm" />
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <asp:TextBox ID="txtEditorialTelefono" runat="server" TextMode="Number" placeholder="999999999"></asp:TextBox>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label>Email</label>
+                        <asp:TextBox ID="txtEditorialEmail" runat="server" TextMode="Email" placeholder="contacto@editorial.com"></asp:TextBox>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label>Dirección</label>
+                        <asp:TextBox ID="txtEditorialDireccion" runat="server" placeholder="Dirección completa"></asp:TextBox>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label>Sitio Web</label>
+                        <asp:TextBox ID="txtEditorialWeb" runat="server" placeholder="https://www.editorial.com"></asp:TextBox>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-form btn-cancelar" onclick="hideModalEditorial()">Cancelar</button>
+                <asp:Button ID="btnGuardarEditorial" runat="server" Text="Guardar Editorial" CssClass="btn-form btn-guardar" OnClick="btnGuardarEditorial_Click" ValidationGroup="EditorialForm" />
+            </div>
+        </div>
+    </asp:Panel>
+
+    <!-- MODAL: Nuevo Autor -->
+    <asp:Panel ID="pnlModalAutor" runat="server" CssClass="modal-panel">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="bi bi-person-plus"></i> Nuevo Autor</h2>
+                <button type="button" class="btn-close-modal" onclick="hideModalAutor()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nombre <span class="required">*</span></label>
+                        <asp:TextBox ID="txtAutorNombre" runat="server" placeholder="Nombre del autor"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rfvAutorNombre" runat="server" 
+                            ControlToValidate="txtAutorNombre" 
+                            ErrorMessage="El nombre es requerido" 
+                            CssClass="validator"
+                            Display="Dynamic" 
+                            ValidationGroup="AutorForm" />
+                    </div>
+                    <div class="form-group">
+                        <label>Apellidos <span class="required">*</span></label>
+                        <asp:TextBox ID="txtAutorApellidos" runat="server" placeholder="Apellidos del autor"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rfvAutorApellidos" runat="server" 
+                            ControlToValidate="txtAutorApellidos" 
+                            ErrorMessage="Los apellidos son requeridos" 
+                            CssClass="validator"
+                            Display="Dynamic" 
+                            ValidationGroup="AutorForm" />
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label>Alias / Seudónimo</label>
+                        <asp:TextBox ID="txtAutorAlias" runat="server" placeholder="Alias o seudónimo (opcional)"></asp:TextBox>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-form btn-cancelar" onclick="hideModalAutor()">Cancelar</button>
+                <asp:Button ID="btnGuardarAutor" runat="server" Text="Guardar Autor" CssClass="btn-form btn-guardar" OnClick="btnGuardarAutor_Click" ValidationGroup="AutorForm" />
+            </div>
+        </div>
+    </asp:Panel>
+
+
+    <script type="text/javascript">
+        function showModalEditorial() {
+            document.getElementById('<%= pnlModalEditorial.ClientID %>').classList.add('show');
+            return false;
+        }
+
+        function hideModalEditorial() {
+            document.getElementById('<%= pnlModalEditorial.ClientID %>').classList.remove('show');
+            return false;
+        }
+
+        function showModalAutor() {
+            document.getElementById('<%= pnlModalAutor.ClientID %>').classList.add('show');
+        return false;
+    }
+
+    function hideModalAutor() {
+        document.getElementById('<%= pnlModalAutor.ClientID %>').classList.remove('show');
+        return false;
+    }
+
+    // Cerrar modal al hacer clic fuera del contenido
+    document.addEventListener('click', function(event) {
+        var modalEditorial = document.getElementById('<%= pnlModalEditorial.ClientID %>');
+        var modalAutor = document.getElementById('<%= pnlModalAutor.ClientID %>');
+
+        if (event.target === modalEditorial) {
+            hideModalEditorial();
+        }
+        if (event.target === modalAutor) {
+            hideModalAutor();
+        }
+    });
+    </script>
+
            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
+
     function mostrarModalExito() {
         // Verifica si Swal está cargado
         if (typeof Swal === 'undefined') {

@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.campusstore.bases.dao.TransaccionalBaseDAO;
 import pe.edu.pucp.campusstore.dao.LibroDAO;
 import pe.edu.pucp.campusstore.modelo.Autor;
@@ -249,4 +251,34 @@ public class LibroDAOImpl extends TransaccionalBaseDAO<Libro> implements LibroDA
             }
         }
     }
+    
+    @Override
+    public boolean eliminarAutoresPorLibro(Integer idLibro, Connection conn) {
+        String sql = "{call eliminarAutoresLibro(?)}";
+        
+        try (CallableStatement cmd = conn.prepareCall(sql)) {
+            cmd.setInt(1, idLibro);
+            cmd.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(LibroDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean crearRelacionLibroAutor(Integer idLibro, Integer idAutor, Connection conn) {
+        String sql = "{call actualizarAutoresLibro(?, ?)}";
+        
+        try (CallableStatement cmd = conn.prepareCall(sql)) {
+            cmd.setInt(1, idLibro);
+            cmd.setInt(2, idAutor);
+            cmd.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(LibroDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
 }

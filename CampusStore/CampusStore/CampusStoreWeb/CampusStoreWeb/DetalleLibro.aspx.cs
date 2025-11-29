@@ -21,6 +21,7 @@ namespace CampusStoreWeb
         private descuento descuentoActual;
         private int idLibroActual;
         private List<autor> autoresEditSeleccionados;
+        private editorial editorialTemporal;
 
         public DetalleLibro()
         {
@@ -525,6 +526,117 @@ namespace CampusStoreWeb
             txtSinopsis.Text = libroActual.sinopsis;
             txtDescripcion.Text = libroActual.descripcion;
 
+        }
+
+        protected void btnGuardarEditorial_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                try
+                {
+                    // Crear nueva editorial temporal (igual que en AgregarLibro)
+                    editorialTemporal = new editorial
+                    {
+                        idEditorial = 0, // solo temporal
+                        idEditorialSpecified = false,
+                        nombre = txtEditorialNombre.Text.Trim(),
+                        cif = txtEditorialCIF.Text.Trim(),
+                        telefono = string.IsNullOrWhiteSpace(txtEditorialTelefono.Text) ? 0 : int.Parse(txtEditorialTelefono.Text),
+                        telefonoSpecified = !string.IsNullOrWhiteSpace(txtEditorialTelefono.Text),
+                        email = txtEditorialEmail.Text.Trim(),
+                        direccion = txtEditorialDireccion.Text.Trim(),
+                        sitioWeb = txtEditorialWeb.Text.Trim()
+                    };
+
+                    // Guardar en ViewState para mantenerla entre postbacks
+                    ViewState["EditorialTemporal"] = editorialTemporal;
+
+                    // Agregar al dropdown como opción temporal
+                    ddlEditorialEdit.Items.Insert(1, new ListItem($"[NUEVA] {editorialTemporal.nombre}", "TEMP_EDITORIAL"));
+                    ddlEditorialEdit.SelectedValue = "TEMP_EDITORIAL";
+
+                    // Limpiar campos del modal
+                    LimpiarModalEditorial();
+
+                    // Cerrar modal y mostrar mensaje
+                    string script = @"
+                hideModalEditorial();
+                alert('Editorial preparada. Se creará al guardar el libro.');
+            ";
+                    ClientScript.RegisterStartupScript(this.GetType(), "editorialSuccess", script, true);
+                }
+                catch (Exception ex)
+                {
+                    string script = $"alert('Error al preparar editorial: {ex.Message}');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                }
+            }
+        }
+
+        private void LimpiarModalEditorial()
+        {
+            txtEditorialNombre.Text = string.Empty;
+            txtEditorialCIF.Text = string.Empty;
+            txtEditorialTelefono.Text = string.Empty;
+            txtEditorialEmail.Text = string.Empty;
+            txtEditorialDireccion.Text = string.Empty;
+            txtEditorialWeb.Text = string.Empty;
+        }
+
+        protected void btnGuardarAutor_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                try
+                {
+                    // Crear nuevo autor temporal (igual que en AgregarLibro)
+                    autor nuevoAutorTemporal = new autor
+                    {
+                        idAutor = 0, // temporal, se creará al guardar el libro
+                        idAutorSpecified = false,
+                        nombre = txtAutorNombre.Text.Trim(),
+                        apellidos = txtAutorApellidos.Text.Trim(),
+                        alias = txtAutorAlias.Text.Trim()
+                    };
+
+                    // Recuperar la lista de autores en edición
+                    if (ViewState["AutoresEditSeleccionados"] != null)
+                    {
+                        autoresEditSeleccionados = (List<autor>)ViewState["AutoresEditSeleccionados"];
+                    }
+                    else
+                    {
+                        autoresEditSeleccionados = new List<autor>();
+                    }
+
+                    // Agregar directamente a la lista
+                    autoresEditSeleccionados.Add(nuevoAutorTemporal);
+                    ViewState["AutoresEditSeleccionados"] = autoresEditSeleccionados;
+                    ActualizarAutoresEdit();
+
+                    // Limpiar campos del modal
+                    LimpiarModalAutor();
+
+                    // Cerrar modal y mostrar mensaje
+                    string script = @"
+                hideModalAutor();
+                alert('Autor agregado a la lista. Se creará al guardar el libro.');
+            ";
+                    ClientScript.RegisterStartupScript(this.GetType(), "autorSuccess", script, true);
+                }
+                catch (Exception ex)
+                {
+                    string script = $"alert('Error al agregar autor: {ex.Message}');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "error", script, true);
+                }
+            }
+        }
+
+        private void LimpiarModalAutor()
+        {
+            txtAutorNombre.Text = string.Empty;
+            txtAutorApellidos.Text = string.Empty;
+            txtAutorAlias.Text = string.Empty;
         }
 
         private void ActualizarAutoresEdit()

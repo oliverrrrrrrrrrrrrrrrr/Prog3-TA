@@ -92,6 +92,12 @@ public class LibroWS {
         return this.libroBO.leerAutoresPorLibro(idLibro);
     }
 
- 
+    @WebMethod(operationName = "modificarLibroConAutores")
+    public void modificarLibroConAutores(
+        @WebParam(name = "libro") Libro libro,
+        @WebParam(name = "autores") List<Autor> autores
+    ) {
+        this.libroBO.modificarConAutores(libro, autores);
+    }
 
 }
